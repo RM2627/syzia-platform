@@ -1,0 +1,463 @@
+SYZIA 046 — AJUSTE DO SUPORTE COMPARTILHADO FLEXÍVEL
+
+Base obrigatória:
+SYZIA-045-Disponibilidade-Equipe-Assistido-Consolidado
+
+A implementação da 045 está correta e deve ser PRESERVADA.
+
+Esta rodada existe somente porque refinamos o modelo comercial do Assistido SYZIA:
+
+A EQUIPE SYZIA NÃO É UM FUNCIONÁRIO DEDICADO DA EMPRESA CLIENTE E NÃO DEVE FUNCIONAR NEM SER VENDIDA COMO COBERTURA HUMANA CONTÍNUA EM HORÁRIO COMERCIAL FIXO.
+
+Ela é um:
+
+SUPORTE COMPARTILHADO NO ATENDIMENTO, CONFORME DISPONIBILIDADE DA EQUIPE.
+
+==================================================
+1. NÃO RECONSTRUIR A 045
+==================================================
+
+Preservar:
+
+- disponibilidade dos funcionários próprios;
+- horários personalizados;
+- múltiplos intervalos;
+- indisponibilidades;
+- responsável opcional na Agenda;
+- conflitos individuais;
+- duração/buffer;
+- múltiplos períodos;
+- ciclos do Assistido;
+- consumo;
+- limite configurável;
+- auditoria;
+- regra de 1 unidade por ticket/ciclo;
+- isolamento;
+- grants/autonomia;
+- Super Admin;
+- histórico;
+- migration 045.
+
+NÃO refazer essa arquitetura.
+
+==================================================
+2. DOIS MODOS PARA O SUPORTE COMPARTILHADO
+==================================================
+
+A política global da Equipe SYZIA deve suportar:
+
+A) CONFORME DISPONIBILIDADE DA EQUIPE
+B) HORÁRIO PROGRAMADO
+
+----------------------------------------
+A) CONFORME DISPONIBILIDADE DA EQUIPE
+----------------------------------------
+
+Este será o modo utilizado no lançamento.
+
+NÃO existe uma janela comercial obrigatória.
+
+Quando ninguém da Equipe SYZIA estiver disponível:
+
+- tickets continuam entrando;
+- mensagens continuam sendo registradas;
+- cliente continua usando autoatendimento;
+- solicitações continuam;
+- empresa continua podendo atender com sua própria equipe;
+- ticket permanece aguardando apoio;
+- nada é perdido;
+- nenhuma promessa de resposta imediata é feita.
+
+----------------------------------------
+B) HORÁRIO PROGRAMADO
+----------------------------------------
+
+Preservar a infraestrutura criada na 045:
+
+- dias;
+- intervalos;
+- timezone;
+- mensagem fora do horário.
+
+Esse modo poderá ser usado futuramente caso a SYZIA tenha uma escala/cobertura programada.
+
+NÃO remover essa possibilidade.
+
+==================================================
+3. NÃO HARDCODAR HORÁRIO
+==================================================
+
+NÃO definir:
+
+08h–18h
+segunda a sexta
+sábado até meio-dia
+ou qualquer outro horário em meu nome.
+
+No modo flexível, a grade semanal NÃO é obrigatória.
+
+==================================================
+4. DISPONIBILIDADE OPERACIONAL DA EQUIPE SYZIA
+==================================================
+
+Primeiro inspecione e reutilize os mecanismos existentes de presença/disponibilidade da Central.
+
+Precisamos distinguir no mínimo:
+
+- disponível para assumir atendimento;
+- indisponível para assumir novo atendimento.
+
+Isso é DISPONIBILIDADE OPERACIONAL.
+
+NÃO criar:
+
+- ponto;
+- escala trabalhista;
+- horas trabalhadas;
+- banco de horas;
+- folha;
+- RH;
+- controle de jornada.
+
+==================================================
+5. FILA QUANDO NINGUÉM ESTIVER DISPONÍVEL
+==================================================
+
+No modo flexível, um ticket elegível ao suporte compartilhado deve conseguir entrar na fila mesmo que naquele instante ninguém esteja disponível.
+
+Ele NÃO deve:
+
+- falhar;
+- desaparecer;
+- ser encerrado;
+- ser atribuído falsamente;
+- consumir quota somente por entrar na fila.
+
+IMPORTANTE:
+
+ENTRAR NA FILA NÃO CONSOME ATENDIMENTO.
+
+==================================================
+6. QUANDO ALGUÉM ASSUMIR
+==================================================
+
+Um integrante da Equipe SYZIA que:
+
+- esteja autorizado;
+- esteja atribuído à empresa;
+- possua grants;
+- esteja disponível;
+- e a empresa ainda esteja elegível dentro do limite;
+
+pode assumir o atendimento.
+
+Nesse momento, registrar consumo conforme a regra já criada na 045.
+
+NÃO criar distribuição automática complexa.
+
+A fila compartilhada continua sendo o mecanismo principal.
+
+==================================================
+7. REGRA DE CONSUMO CONTINUA A MESMA
+==================================================
+
+Preservar exatamente:
+
+1 unidade =
+1 ticket distinto efetivamente assumido ou recebido por transferência pela Equipe SYZIA dentro do ciclo.
+
+Portanto:
+
+- 5 mensagens no mesmo ticket = 1 unidade;
+- reassumir o mesmo ticket no mesmo ciclo = não consumir novamente;
+- transferir entre integrantes compartilhados = não multiplicar;
+- ticket apenas aguardando na fila = 0;
+- mensagem do consumidor = 0.
+
+==================================================
+8. LIMITE CONTINUA VALENDO
+==================================================
+
+Preservar:
+
+- limite por ciclo;
+- threshold;
+- consumo;
+- auditoria;
+- histórico;
+- ticket já contabilizado continua atendível;
+- empresa própria continua atendendo após limite;
+- consumidor continua usando a plataforma;
+- autoatendimento continua.
+
+NÃO criar cobrança automática por excedente.
+
+NÃO escolher o número definitivo X.
+
+==================================================
+9. TERMINOLOGIA
+==================================================
+
+Revisar textos relacionados ao Assistido.
+
+Evitar qualquer texto que dê a entender:
+
+- funcionário dedicado;
+- atendente exclusivo;
+- cobertura integral;
+- atendimento 24h;
+- horário comercial garantido;
+- resposta imediata.
+
+Preferir:
+
+“Suporte compartilhado no atendimento”
+
+“Apoio da Equipe SYZIA”
+
+“Conforme disponibilidade da equipe”
+
+“A equipe compartilhada poderá auxiliar este atendimento quando houver disponibilidade.”
+
+==================================================
+10. MENSAGEM AO CONSUMIDOR
+==================================================
+
+Quando não houver humano disponível, usar algo equivalente a:
+
+“Recebemos sua mensagem. A equipe responsável responderá assim que estiver disponível.”
+
+NÃO informar prazo.
+
+NÃO prometer SLA.
+
+O consumidor não precisa saber detalhes internos da disponibilidade da Equipe SYZIA.
+
+==================================================
+11. TEXTO DO ASSISTIDO SYZIA
+==================================================
+
+Sem alterar o preço, ajustar textos que façam o plano parecer contratação de funcionário dedicado.
+
+Direção:
+
+ASSISTIDO SYZIA
+
+“Para empresas que querem contar com o apoio da equipe compartilhada da SYZIA no atendimento aos clientes.”
+
+Benefício:
+
+“Suporte compartilhado no atendimento”
+
+Descrição:
+
+“Apoio em dúvidas, triagens e acompanhamentos, conforme disponibilidade e dentro das regras definidas pela sua empresa.”
+
+Se houver limite exibido:
+
+“Até X atendimentos compartilhados por ciclo.”
+
+X vem da configuração real.
+
+NÃO hardcodar X.
+
+==================================================
+12. SUPER ADMIN
+==================================================
+
+Na política global do Assistido, permitir escolher:
+
+Modelo de disponibilidade:
+
+[ Conforme disponibilidade da equipe ]
+[ Horário programado ]
+
+Se “Conforme disponibilidade”:
+- não exigir grade semanal.
+
+Se “Horário programado”:
+- reutilizar grade/timezone/mensagem da 045.
+
+Preservar:
+
+- limite;
+- threshold;
+- consumo;
+- auditoria.
+
+==================================================
+13. ADM EMPRESARIAL
+==================================================
+
+O ADM pode:
+
+- consultar consumo;
+- consultar regras aplicáveis;
+- saber que o suporte é compartilhado;
+- saber quando o atendimento está aguardando apoio.
+
+NÃO pode:
+
+- editar disponibilidade global;
+- criar escala da Equipe SYZIA;
+- alterar limite global;
+- transformar integrante SYZIA em funcionário próprio.
+
+==================================================
+14. AUTOATENDIMENTO NÃO DEPENDE DE HUMANO
+==================================================
+
+Preservar o princípio:
+
+“O cliente resolve sozinho o que puder. A equipe entra quando realmente precisa.”
+
+Portanto:
+
+- página pública;
+- FAQ;
+- serviços;
+- solicitação;
+- acompanhamento;
+- mensagens;
+- demais fluxos automáticos
+
+NÃO podem depender de alguém da Equipe SYZIA estar online.
+
+==================================================
+15. TESTES OBRIGATÓRIOS
+==================================================
+
+Testar:
+
+1. modo flexível sem grade semanal;
+2. ticket entra na fila sem ninguém disponível;
+3. fila não consome unidade;
+4. consumidor envia mensagem;
+5. mensagem permanece;
+6. autoatendimento continua;
+7. empresa própria continua atendendo;
+8. integrante indisponível não assume novo ticket;
+9. integrante disponível + autorizado assume;
+10. assumir consome 1 unidade;
+11. mensagens seguintes não consomem novamente;
+12. transferência do mesmo ticket não multiplica;
+13. limite atingido impede novo ticket ainda não contabilizado;
+14. ticket já contabilizado continua;
+15. modo Horário programado continua funcionando;
+16. comportamento fora do horário programado da 045 continua correto;
+17. troca entre os dois modos;
+18. Super Admin configura;
+19. ADM empresarial não configura política global;
+20. plano não Assistido não recebe suporte compartilhado;
+21. isolamento A/B;
+22. grants/revogação;
+23. desktop;
+24. mobile;
+25. nenhum texto promete 24h, SLA ou horário comercial fixo.
+
+==================================================
+16. REGRESSÃO
+==================================================
+
+Executar:
+
+- testes focados desta rodada;
+- testes da 045;
+- Agenda;
+- Central;
+- Equipe SYZIA;
+- consumo/ciclo;
+- planos/capabilities;
+- UX-001;
+- Home;
+- consumidor;
+- npm run test:current-gate;
+- build/typecheck.
+
+NÃO afrouxar testes.
+
+==================================================
+17. BANCO
+==================================================
+
+Primeiro verifique se a estrutura da 045 já consegue representar os dois modos.
+
+Se precisar persistir o modo:
+
+- criar a próxima migration incremental;
+- NÃO editar a 045;
+- NÃO editar migrations históricas;
+- sem reset;
+- transacional;
+- compatível com banco populado;
+- default seguro.
+
+Não criar migration sem necessidade.
+
+==================================================
+18. NÃO FAZER
+==================================================
+
+NÃO:
+
+- integrar Mercado Pago;
+- criar checkout;
+- mudar preço;
+- mudar trial;
+- definir X definitivo;
+- criar SLA;
+- criar escala trabalhista;
+- criar ponto/RH;
+- criar distribuição automática complexa;
+- criar cobrança excedente;
+- alterar UX-002;
+- fazer deploy;
+- publicar.
+
+==================================================
+19. ENTREGA
+==================================================
+
+Entregar:
+
+1. projeto consolidado;
+2. migration somente se necessária;
+3. guia de upgrade;
+4. RELATORIO-SUPORTE-COMPARTILHADO-FLEXIVEL.md;
+5. inventário de arquivos alterados;
+6. matriz de testes;
+7. evidências;
+8. resultado do gate;
+9. documentação dos dois modos;
+10. textos finais utilizados na UI.
+
+Confirmar explicitamente:
+
+- implementação 045 preservada;
+- limite/ciclo preservados;
+- sem horário comercial hardcodado;
+- sem promessa de funcionário dedicado;
+- sem SLA;
+- sem deploy;
+- sem integração de pagamento.
+
+==================================================
+20. FEATURE FREEZE
+==================================================
+
+Se tudo passar, declarar:
+
+SYZIA — FEATURE FREEZE RESTABELECIDO
+
+Depois disso a próxima etapa será:
+
+fechamento comercial dos planos
+→ checkout/provider
+→ homologação externa
+→ lançamento.
+
+NÃO iniciar essas etapas automaticamente.
+
+Depois de implementar, testar, documentar e entregar:
+
+PARAR.

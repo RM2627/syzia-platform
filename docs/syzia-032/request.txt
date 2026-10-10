@@ -1,0 +1,1639 @@
+VIRELOQ/SYZIA — RODADA PÓS-HOMOLOGAÇÃO 031
+CORREÇÕES FUNCIONAIS + ACESSOS + AGENDA + IDENTIDADE + REBRANDING
+
+IMPORTANTE:
+
+Esta tarefa parte EXCLUSIVAMENTE do último consolidado entregue após a
+correção de presença pública, contendo migrations 001–031.
+
+A plataforma está em homologação real utilizando a MS Auto Details.
+
+Durante essa homologação foram identificadas novas lacunas funcionais,
+problemas de autorização e decisões de produto.
+
+Esta tarefa deve implementar SOMENTE o escopo abaixo.
+
+==================================================
+0. NOVA MARCA — REFERÊNCIA ANEXADA
+==================================================
+
+A plataforma será renomeada:
+
+VIRELOQ
+→
+SYZIA
+
+Marca:
+SYZIA
+
+Identidade digital:
+UseSyzia
+
+Slogan:
+Onde tudo se alinha.
+
+A imagem de identidade visual anexada a esta tarefa é a REFERÊNCIA
+VISUAL OFICIAL APROVADA.
+
+O proprietário aprovou especificamente:
+
+- o símbolo em formato de S;
+- os dois elementos curvos que formam o símbolo;
+- o gradiente violeta/lunar;
+- o lettering S Y Z I A;
+- o espaçamento entre as letras;
+- as proporções;
+- a estética minimalista;
+- a versão clara;
+- a versão escura;
+- o slogan "Onde tudo se alinha."
+
+NÃO:
+
+- criar outra proposta de logo;
+- substituir o símbolo;
+- redesenhar livremente;
+- trocar o lettering por uma interpretação diferente;
+- alterar proporções;
+- mudar a paleta arbitrariamente;
+- transformar o símbolo em lua literal;
+- adicionar estrelas, planetas ou elementos não aprovados.
+
+Utilize a referência anexada como fonte visual obrigatória.
+
+Se assets técnicos individuais ainda não existirem no pacote, produzir
+as variantes necessárias a partir da identidade aprovada e mantê-las
+consistentes entre si.
+
+==================================================
+1. PALETA OFICIAL SYZIA
+==================================================
+
+Utilizar como referência:
+
+Noite
+#0B0B14
+
+Violeta
+#6C4DFF
+
+Lunar
+#C9B8FF
+
+Luz
+#F4F5FF
+
+Grafite
+#2B2B36
+
+Essas cores representam a MARCA SYZIA.
+
+NÃO são cores obrigatórias das empresas clientes.
+
+==================================================
+2. ASSETS DA MARCA
+==================================================
+
+Preparar no projeto, conforme necessário:
+
+- logo principal para fundo escuro;
+- logo principal para fundo claro;
+- logo horizontal para fundo escuro;
+- logo horizontal para fundo claro;
+- símbolo isolado;
+- ícone quadrado;
+- favicon;
+- versão adequada para login;
+- versão adequada para cabeçalhos compactos.
+
+Usar nomes organizados, por exemplo:
+
+syzia-logo-dark
+syzia-logo-light
+syzia-horizontal-dark
+syzia-horizontal-light
+syzia-symbol
+syzia-icon
+syzia-favicon
+
+Não depender de recorte manual da prancha durante runtime.
+
+==================================================
+3. REBRANDING PÚBLICO
+==================================================
+
+Substituir a marca pública VIRELOQ por SYZIA onde aplicável.
+
+Revisar:
+
+- login;
+- primeiro acesso;
+- cabeçalhos;
+- Administração global;
+- Home;
+- Ajuda;
+- Suporte;
+- textos institucionais;
+- e-mails/templates existentes;
+- títulos;
+- metadados;
+- favicon;
+- assets;
+- documentação voltada ao usuário;
+- mensagens visíveis;
+- páginas públicas onde a plataforma é identificada;
+- telas administrativas.
+
+Exemplos:
+
+Administração VIRELOQ
+→ Administração SYZIA
+
+Suporte VIRELOQ
+→ Suporte SYZIA
+
+Equipe VIRELOQ
+→ Equipe SYZIA
+
+Atendimento compartilhado VIRELOQ
+→ Atendimento compartilhado SYZIA
+
+==================================================
+4. NÃO FAZER RENOMEAÇÃO TÉCNICA DESTRUTIVA
+==================================================
+
+Não renomear migrations históricas.
+
+Não alterar migrations 001–031.
+
+Não renomear tabelas, funções, enums, colunas ou identificadores
+internos apenas por estética quando isso introduzir risco.
+
+Identificadores técnicos históricos podem permanecer com nomenclatura
+antiga se:
+
+- não forem apresentados ao usuário;
+- a alteração não trouxer benefício funcional;
+- renomear gerar risco desnecessário.
+
+O rebranding deve priorizar a camada pública/produto.
+
+==================================================
+5. EQUIPE INTERNA SYZIA
+==================================================
+
+A SYZIA futuramente terá funcionários próprios.
+
+Criar suporte para USUÁRIOS GLOBAIS DA OPERAÇÃO SYZIA que não pertencem
+necessariamente a uma empresa cliente.
+
+Exemplos futuros:
+
+- suporte;
+- atendimento;
+- comercial;
+- financeiro interno;
+- operações.
+
+Um funcionário SYZIA:
+
+- possui identidade própria;
+- não precisa de membership empresarial artificial;
+- recebe papel/permissões globais;
+- pode existir sem vínculo com empresa;
+- pode posteriormente ser atribuído a empresas quando sua função
+  permitir.
+
+==================================================
+6. ATENDENTE COMPARTILHADO E EQUIPE SYZIA
+==================================================
+
+Um atendente compartilhado deve poder ser uma pessoa da Equipe SYZIA.
+
+Exemplo:
+
+Maria
+→ funcionária SYZIA
+→ função Atendimento
+→ atribuída à Empresa A
+→ atribuída à Empresa B
+
+Não duplicar Maria como conta diferente em cada organização.
+
+O vínculo empresarial representa a ATRIBUIÇÃO OPERACIONAL, não a
+identidade da pessoa.
+
+Continuar respeitando:
+
+- capacidade do plano;
+- autorização global;
+- permissões;
+- autonomia definida pelo ADM;
+- isolamento entre organizações.
+
+==================================================
+7. CENTRAL DE PESSOAS E ACESSOS
+==================================================
+
+A tela atual "Pessoas e papéis" é insuficiente.
+
+Evoluir para:
+
+PESSOAS E ACESSOS
+
+Ela deve ser uma central real de identidades, papéis, vínculos e
+situações.
+
+Separar claramente:
+
+PESSOA
+= identidade/conta.
+
+PAPEL GLOBAL
+= função global na SYZIA.
+
+VÍNCULO EMPRESARIAL
+= relação daquela pessoa com determinada organização.
+
+PERMISSÕES
+= ações efetivamente autorizadas.
+
+==================================================
+8. CRIAR PESSOA SEM EMPRESA
+==================================================
+
+Criar uma pessoa NÃO deve exigir criar uma empresa.
+
+Permitir:
+
+Pessoas e acessos
+→ Nova pessoa
+
+Campos conforme infraestrutura atual:
+
+- nome;
+- username;
+- e-mail;
+- telefone quando aplicável;
+- situação;
+- papel inicial permitido.
+
+A pessoa pode permanecer sem empresa.
+
+==================================================
+9. CRIAR ADMINISTRADOR EMPRESARIAL SEM EMPRESA
+==================================================
+
+Permitir criar um futuro ADM empresarial antes da empresa existir.
+
+Exemplo:
+
+João Silva
+Papel:
+Administrador empresarial
+
+Empresa:
+Nenhuma empresa atribuída
+
+Situação:
+Aguardando vínculo
+
+Depois:
+
+Empresa X
+→ Definir administrador
+→ Selecionar João Silva
+
+Não recriar a identidade.
+
+==================================================
+10. CRIAR EMPRESA SEM ADM
+==================================================
+
+Preservar o comportamento já aprovado:
+
+Empresa pode ser criada sem ADM.
+
+Nesse caso:
+
+→ Sob gestão SYZIA.
+
+Posteriormente:
+
+Definir administrador
+→ selecionar pessoa existente
+
+OU
+
+→ criar nova pessoa.
+
+==================================================
+11. FLUXOS INDEPENDENTES
+==================================================
+
+Regra obrigatória:
+
+CRIAR PESSOA
+não cria empresa.
+
+CRIAR EMPRESA
+não exige criar pessoa.
+
+VINCULAR PESSOA E EMPRESA
+é uma terceira ação independente.
+
+==================================================
+12. UMA PESSOA, MÚLTIPLAS EMPRESAS
+==================================================
+
+A arquitetura deve suportar uma pessoa administrando mais de uma
+organização quando autorizado.
+
+Exemplo:
+
+João Silva
+
+Administrador de:
+- Empresa A
+- Empresa B
+
+Sem duplicar conta.
+
+Permissões e dados continuam isolados por organização.
+
+==================================================
+13. PAPÉIS — CLAREZA
+==================================================
+
+Evitar nomenclatura ambígua como:
+
+"Administrador da plataforma"
+
+se ela puder ser confundida com ADM empresarial.
+
+Distinguir claramente:
+
+SUPER ADMIN SYZIA
+= nível máximo global.
+
+EQUIPE SYZIA
+= funcionários internos com permissões globais limitadas.
+
+ADMINISTRADOR EMPRESARIAL
+= responsável por uma ou mais organizações.
+
+ATENDENTE SYZIA
+= usuário global elegível para atendimento compartilhado.
+
+COLABORADOR/ATENDENTE PRÓPRIO
+= usuário da empresa.
+
+==================================================
+14. TELA PESSOAS E ACESSOS
+==================================================
+
+Melhorar listagem.
+
+Exemplo:
+
+Pessoa | Tipo | Vínculos | Situação | Último acesso | Ações
+
+Não usar UUID como informação principal da interface.
+
+UUID/ID técnico pode ficar em detalhes técnicos.
+
+Adicionar busca e filtros quando apropriado:
+
+- todos;
+- ativos;
+- aguardando primeiro acesso;
+- aguardando vínculo;
+- suspensos;
+- sem empresa.
+
+==================================================
+15. FICHA DA PESSOA
+==================================================
+
+Ao abrir uma pessoa, organizar:
+
+DADOS
+- nome;
+- username;
+- e-mail;
+- telefone;
+- ID técnico quando necessário.
+
+CONTA
+- ativa;
+- suspensa;
+- aguardando primeiro acesso;
+- aguardando verificação;
+- outros estados válidos existentes.
+
+PAPÉIS GLOBAIS
+
+VÍNCULOS EMPRESARIAIS
+
+PERMISSÕES
+
+SEGURANÇA
+- último acesso;
+- revogação/redefinição conforme infraestrutura existente.
+
+AUDITORIA
+- criação;
+- alteração de papel;
+- vínculo;
+- desvínculo;
+- suspensão;
+- reativação.
+
+==================================================
+16. OPERAÇÃO SOLO PELO ADM
+==================================================
+
+A plataforma deve funcionar integralmente para uma empresa que possui
+somente o ADM.
+
+Funcionário NÃO é obrigatório.
+
+Fluxo obrigatório:
+
+Consumidor
+→ solicitação
+→ empresa
+→ ADM visualiza
+→ ADM atende
+→ orçamento
+→ agenda
+→ acompanhamento
+→ conclusão
+
+O ADM deve conseguir:
+
+- visualizar novas solicitações;
+- usar Central;
+- responder;
+- criar orçamento;
+- aprovar fluxo quando aplicável;
+- agendar;
+- consultar cliente;
+- trabalhar pendências;
+- trabalhar follow-up;
+- concluir operação.
+
+Nenhuma etapa deve exigir funcionário artificial.
+
+==================================================
+17. EMPRESA COM EQUIPE
+==================================================
+
+Quando funcionários forem adicionados:
+
+- ADM mantém visão geral;
+- pode distribuir/delegar;
+- equipe opera conforme permissões.
+
+A presença de equipe amplia a operação.
+
+Não substitui o ADM.
+
+==================================================
+18. AGENDA ONLINE — BUG DE FLUXO
+==================================================
+
+Na homologação:
+
+Publicação
+→ Agenda online
+→ Configurar agenda online
+
+leva para uma página chamada:
+
+"Agenda online e solicitações"
+
+que NÃO oferece uma configuração real de agenda.
+
+Corrigir.
+
+==================================================
+19. CONFIGURAÇÃO REAL DA AGENDA ONLINE
+==================================================
+
+Antes de criar algo novo:
+
+INSPECIONAR a infraestrutura atual de agenda/disponibilidade.
+
+Reutilizar o que já existe.
+
+A configuração deve contemplar, quando suportado:
+
+- ativar/desativar agendamento online;
+- antecedência mínima;
+- horizonte de agendamento;
+- intervalo/buffer;
+- horários disponíveis;
+- duração;
+- prevenção de conflito;
+- serviços disponíveis para agendamento direto.
+
+==================================================
+20. SERVIÇOS E AGENDA
+==================================================
+
+Respeitar configuração individual do serviço.
+
+Exemplo:
+
+Lavagem simples
+→ preço fixo
+→ permitir agendamento direto
+→ consumidor pode selecionar horário.
+
+Higienização de sofá
+→ orçamento necessário
+→ consumidor solicita orçamento
+→ agenda vem posteriormente.
+
+Não transformar todo serviço em agendamento direto.
+
+==================================================
+21. SOLICITAÇÕES RECEBIDAS
+==================================================
+
+Não criar uma segunda Central.
+
+Solicitações de consumidores devem convergir para o fluxo operacional
+normal da empresa.
+
+Verificar integração entre:
+
+- página pública;
+- solicitações;
+- Central/Atendimento;
+- Home;
+- orçamento;
+- agenda.
+
+==================================================
+22. IDENTIDADE VISUAL DAS EMPRESAS
+==================================================
+
+A configuração atual de "Cor principal" altera principalmente botões.
+
+Isso é insuficiente.
+
+A partir de UMA cor principal, a SYZIA deve gerar automaticamente uma
+identidade coerente para a página pública da empresa.
+
+==================================================
+23. TOKENS DERIVADOS DA COR
+==================================================
+
+A partir da cor principal, derivar automaticamente tokens como:
+
+- primary;
+- primary-hover;
+- primary-active;
+- primary-soft;
+- primary-border;
+- accent;
+- focus;
+- text-on-primary.
+
+Aplicar de forma equilibrada a:
+
+- CTAs;
+- categorias selecionadas;
+- links;
+- ícones;
+- indicadores;
+- badges;
+- bordas de destaque;
+- estados ativos;
+- focus;
+- pequenos elementos gráficos.
+
+Não transformar toda a página na cor escolhida.
+
+==================================================
+24. REMOVER RESÍDUOS VISUAIS DA SYZIA
+==================================================
+
+Quando uma empresa personalizar sua identidade, elementos decorativos da
+página pública não devem continuar usando violeta/verde/padrão da
+plataforma sem necessidade.
+
+Exceção:
+
+elementos que representem explicitamente a própria SYZIA.
+
+Objetivo:
+
+não parecer
+
+"uma página SYZIA com botão vermelho".
+
+Deve parecer:
+
+"a página da MS Auto Details construída pela SYZIA".
+
+==================================================
+25. TEMA CLARO E ESCURO
+==================================================
+
+Adicionar:
+
+APARÊNCIA DA PÁGINA PÚBLICA
+
+- Claro
+- Escuro
+
+A escolha pertence à empresa.
+
+É independente do tema do painel administrativo.
+
+Exemplo:
+
+painel SYZIA claro
++
+página pública da MS escura
+
+é válido.
+
+==================================================
+26. TEMA CLARO
+==================================================
+
+Gerar automaticamente tokens apropriados para:
+
+- background;
+- surface;
+- text;
+- muted;
+- border;
+- accent.
+
+==================================================
+27. TEMA ESCURO
+==================================================
+
+Não simplesmente inverter cores.
+
+Criar combinação apropriada de:
+
+- fundo escuro;
+- superfícies;
+- texto claro;
+- texto secundário;
+- bordas;
+- cor principal;
+- estados ativos;
+- hover;
+- focus.
+
+==================================================
+28. ACESSIBILIDADE
+==================================================
+
+Calcular contraste.
+
+Escolher automaticamente texto claro/escuro sobre a cor principal.
+
+Preservar contraste de:
+
+- botões;
+- links;
+- badges;
+- cards;
+- focus;
+- estados ativos.
+
+Não obrigar o empresário a montar uma paleta manual.
+
+==================================================
+29. PRÉVIA DA IDENTIDADE
+==================================================
+
+A mini-prévia atual mostra basicamente um botão.
+
+Melhorar para mostrar:
+
+- fundo;
+- card;
+- título;
+- texto secundário;
+- ícone;
+- categoria selecionada;
+- link;
+- CTA.
+
+Alterar cor ou tema deve atualizar a prévia imediatamente.
+
+"Visualizar como cliente" deve refletir:
+
+Logo + Capa + Cor + Tema.
+
+==================================================
+30. BUG — UPLOAD DE MÍDIA NO AMBIENTE REAL
+==================================================
+
+Durante homologação real, ao enviar a logo apareceu:
+
+"Não foi possível concluir. Confira sua conexão e tente novamente.
+Seus dados nesta tela foram preservados."
+
+Os testes locais da 031 não homologaram Storage/Supabase real.
+
+Investigar a CAUSA REAL.
+
+Verificar:
+
+- Storage;
+- bucket;
+- policies;
+- RLS;
+- RPC;
+- gateway;
+- MIME;
+- limite de 5 MB;
+- autorização;
+- contexto empresarial;
+- contexto do Super Admin;
+- empresa sob gestão SYZIA.
+
+==================================================
+31. TESTAR TODAS AS MÍDIAS
+==================================================
+
+Depois de corrigir, testar:
+
+LOGO
+upload → leitura → troca → remoção.
+
+CAPA
+upload → leitura → troca → remoção.
+
+IMAGEM DE SERVIÇO
+upload → leitura → troca → remoção.
+
+PORTFÓLIO
+upload → leitura → troca/edição → remoção.
+
+Não corrigir somente logo.
+
+==================================================
+32. BUG — AUTORIZAÇÃO INDEVIDA
+==================================================
+
+Durante a homologação da MS Auto Details, Super Admin dentro da empresa
+sob gestão da plataforma recebeu:
+
+"Você não tem autorização para esta ação. Verifique seu acesso à
+empresa."
+
+Ao mesmo tempo:
+
+- onboarding estava visível;
+- dados estavam carregados;
+- Super Admin permanecia dentro da empresa.
+
+Investigar a causa raiz.
+
+==================================================
+33. NÃO CONTORNAR AUTORIZAÇÃO
+==================================================
+
+NÃO:
+
+- esconder simplesmente a mensagem;
+- criar membership empresarial artificial para Super Admin;
+- enfraquecer RLS;
+- conceder acesso universal;
+- ignorar erro de RPC;
+- remover validação.
+
+Descobrir qual ação está sendo recusada.
+
+==================================================
+34. DIAGNÓSTICO DO ERRO
+==================================================
+
+Verificar se a recusa vem de:
+
+- revalidação periódica;
+- RPC 030/031;
+- upload;
+- onboarding;
+- permissão granular;
+- capability;
+- membership;
+- empresa sem ADM;
+- situação comercial;
+- trial;
+- contexto global;
+- chamada secundária em background.
+
+Registrar diagnóstico técnico no relatório.
+
+==================================================
+35. 05 E 10 PODEM TER A MESMA CAUSA
+==================================================
+
+Investigar em conjunto:
+
+- falha de upload;
+- alerta de autorização.
+
+Não presumir que possuem a mesma causa.
+
+Mas verificar se ambos resultam de reconhecimento incorreto do contexto
+global do Super Admin em empresa sob gestão SYZIA.
+
+==================================================
+36. CENÁRIO OBRIGATÓRIO — SUPER ADMIN
+==================================================
+
+Reproduzir:
+
+Super Admin autenticado
+→ cria ou abre empresa sem ADM responsável ativo
+→ empresa permanece sob gestão SYZIA
+→ entra no ambiente empresarial
+→ abre Home/onboarding
+→ navega entre configurações
+→ salva alterações
+→ aguarda/reproduz revalidação periódica
+→ continua autorizado.
+
+Nenhum membership empresarial artificial deve ser necessário.
+
+Repetir o ciclo de revalidação mais de uma vez para detectar problemas
+que apareçam somente depois de refresh/focus/timer.
+
+==================================================
+37. ERROS SECUNDÁRIOS NÃO DEVEM PARECER PERDA TOTAL DE ACESSO
+==================================================
+
+Se uma chamada secundária falhar, por exemplo:
+
+- carregamento de mídia;
+- informação opcional;
+- configuração específica;
+
+não mostrar automaticamente um alerta global afirmando que o usuário
+não possui acesso à empresa.
+
+Distinguir:
+
+ERRO DA OPERAÇÃO
+de
+PERDA DE ACESSO À EMPRESA.
+
+==================================================
+38. DIAGNÓSTICO SEGURO
+==================================================
+
+Durante homologação/desenvolvimento, registrar de forma segura:
+
+- ação/RPC que falhou;
+- organização;
+- categoria da autorização;
+- motivo técnico da recusa;
+- status retornado.
+
+NÃO registrar:
+
+- tokens;
+- senha;
+- código temporário;
+- CPF/CNPJ completo;
+- segredos;
+- dados sensíveis desnecessários.
+
+A mensagem exibida ao usuário continua segura e compreensível.
+
+==================================================
+39. EMPRESA INTERNA/ISENTA
+==================================================
+
+Preservar a regra da 030:
+
+Empresa interna/isenta:
+
+- não precisa de trial;
+- não passa pela elegibilidade de trial;
+- não precisa de assinatura paga;
+- não expira por ausência de cobrança;
+- continua sujeita a sessão, autorização, RLS e auditoria.
+
+A MS Auto Details poderá ser configurada como empresa interna/isenta.
+
+Não identificar isenção pelo nome da empresa.
+
+==================================================
+40. REBRANDING E EMPRESAS INTERNAS
+==================================================
+
+Atualizar nomenclaturas públicas:
+
+Sob gestão VIRELOQ
+→ Sob gestão SYZIA
+
+Empresa interna VIRELOQ
+→ Empresa interna SYZIA
+
+Equipe VIRELOQ
+→ Equipe SYZIA
+
+Preservar os estados técnicos quando renomeá-los no banco não for
+necessário.
+
+==================================================
+41. NÃO CONFUNDIR MARCA SYZIA COM IDENTIDADE DA EMPRESA
+==================================================
+
+A identidade visual oficial da SYZIA pertence ao produto/plataforma.
+
+As empresas clientes continuam podendo configurar:
+
+- logo;
+- capa;
+- cor;
+- tema claro/escuro;
+- catálogo;
+- portfólio.
+
+A página pública da empresa NÃO deve herdar violeta SYZIA quando a
+empresa possuir identidade própria.
+
+==================================================
+42. LOGIN E PRIMEIRO ACESSO — NOVA IDENTIDADE
+==================================================
+
+Aplicar a nova identidade SYZIA de forma consistente nas telas de:
+
+- login;
+- primeiro acesso;
+- troca/criação de senha;
+- recuperação quando existente;
+- aceite legal;
+- verificação cadastral;
+- estados de ativação.
+
+Usar a versão apropriada da marca para fundo claro/escuro.
+
+Não alterar a lógica de autenticação somente por causa do rebranding.
+
+==================================================
+43. ADMINISTRAÇÃO SYZIA
+==================================================
+
+Atualizar a Administração global para a nova marca.
+
+Revisar:
+
+- cabeçalho;
+- navegação;
+- cards;
+- títulos;
+- Ajuda;
+- Pessoas e acessos;
+- Empresas;
+- Planos;
+- billing;
+- trial;
+- suporte;
+- auditoria;
+- estados comerciais.
+
+Não reconstruir módulos funcionais que não fazem parte desta tarefa.
+
+==================================================
+44. IDENTIDADE DIGITAL USESYZIA
+==================================================
+
+"UseSyzia" representa a identidade digital da marca.
+
+Não substituir o nome do produto por "UseSyzia" na interface.
+
+O produto é:
+
+SYZIA
+
+UseSyzia pode ser usado posteriormente em:
+
+- domínio;
+- redes;
+- handles;
+- endereços institucionais;
+- identificadores públicos apropriados.
+
+Não configurar domínio real nem fazer deploy nesta tarefa.
+
+==================================================
+45. DOCUMENTOS E TEXTOS LEGAIS
+==================================================
+
+Revisar referências visíveis a VIRELOQ nos documentos/modelos existentes.
+
+Substituir por SYZIA onde isso for apenas identidade de marca.
+
+ATENÇÃO:
+
+Não inventar:
+
+- razão social;
+- CNPJ;
+- endereço jurídico;
+- controlador;
+- dados legais inexistentes.
+
+Se algum documento exigir informação jurídica ainda não definida,
+registrar:
+
+DECISÃO/INFORMAÇÃO JURÍDICA PENDENTE
+
+Não preencher com dados fictícios em documento destinado à produção.
+
+==================================================
+46. E-MAILS E TEMPLATES
+==================================================
+
+Atualizar identidade visual/textual dos templates existentes para SYZIA.
+
+Preservar:
+
+- variáveis;
+- tokens;
+- links;
+- segurança;
+- fluxo de confirmação;
+- recuperação;
+- primeiro acesso.
+
+Não enviar e-mails reais.
+
+==================================================
+47. AJUDA E TERMINOLOGIA
+==================================================
+
+Revisar a linguagem da interface após o rebranding.
+
+Usar terminologia consistente:
+
+SYZIA
+Equipe SYZIA
+Suporte SYZIA
+Super Admin SYZIA
+Atendente SYZIA
+Atendimento compartilhado SYZIA
+Administrador empresarial
+
+Evitar coexistência confusa de:
+
+VIRELOQ
+SYZIA
+Administrador da plataforma
+Administrador empresarial
+
+quando representarem conceitos diferentes.
+
+==================================================
+48. PRESERVAR CORREÇÃO DE PRESENÇA 031
+==================================================
+
+NÃO desfazer as melhorias já entregues na 031:
+
+- categoria criada dentro do serviço;
+- uploads específicos;
+- logo;
+- capa;
+- imagem do serviço;
+- portfólio;
+- foto única;
+- antes/depois;
+- galeria;
+- ordenação;
+- prévia;
+- publicação;
+- formas de pagamento simplificadas.
+
+Esta rodada evolui a 031.
+
+Não a substitui.
+
+==================================================
+49. MIGRATIONS
+==================================================
+
+Migrations 001–031 devem permanecer byte a byte intactas.
+
+NÃO editar a 031.
+
+Se este escopo realmente exigir persistência nova:
+
+1. inspecionar primeiro o schema atual;
+2. documentar a necessidade;
+3. criar UMA migration incremental 032;
+4. manter compatibilidade;
+5. preservar dados existentes;
+6. não resetar banco.
+
+Não criar migration apenas para trocar texto VIRELOQ por SYZIA quando
+isso puder ser resolvido na camada de aplicação.
+
+==================================================
+50. UPGRADE
+==================================================
+
+Se houver migration 032:
+
+testar:
+
+031
+→
+032
+
+com banco populado.
+
+Preservar pelo menos:
+
+- organizações;
+- MS Auto Details fictícia/fixture equivalente;
+- memberships;
+- pessoas;
+- onboarding;
+- serviços;
+- categorias;
+- horários;
+- portfólio;
+- publicações;
+- planos;
+- capacidades;
+- trial;
+- billing;
+- financeiro;
+- métricas;
+- permissões;
+- suporte;
+- auditoria.
+
+Sem reset.
+
+==================================================
+51. TESTES — NÃO REPETIR AUDITORIA MESTRE
+==================================================
+
+Esta NÃO é uma nova auditoria completa da plataforma.
+
+O proprietário continuará a homologação manual depois da entrega.
+
+Executar:
+
+- build;
+- typecheck;
+- testes focados nas áreas alteradas;
+- isolamento multiempresa essencial;
+- autorização essencial;
+- jornadas curtas no navegador.
+
+NÃO gastar a maior parte da tarefa repetindo centenas de testes de
+módulos que não foram alterados.
+
+==================================================
+52. TESTE ESSENCIAL — PESSOAS
+==================================================
+
+Testar:
+
+A)
+Criar pessoa sem empresa.
+
+B)
+Criar futuro ADM empresarial sem empresa.
+
+C)
+Criar empresa sem ADM.
+
+D)
+Vincular pessoa existente como ADM.
+
+E)
+Pessoa administrando duas empresas autorizadas.
+
+F)
+Desvincular de uma empresa sem apagar a identidade.
+
+G)
+Suspender pessoa e bloquear novos acessos adequadamente.
+
+==================================================
+53. TESTE ESSENCIAL — EQUIPE SYZIA
+==================================================
+
+Criar funcionário global SYZIA.
+
+Confirmar:
+
+- não exige empresa;
+- não recebe membership artificial;
+- possui somente permissões globais concedidas;
+- não vira Super Admin;
+- pode ser atribuído como atendente compartilhado somente quando
+  autorizado.
+
+==================================================
+54. TESTE ESSENCIAL — ATENDIMENTO COMPARTILHADO
+==================================================
+
+Plano sem capacidade:
+
+→ atribuição recusada inclusive para Super Admin.
+
+Plano com capacidade:
+
+→ funcionário SYZIA elegível pode ser atribuído.
+
+ADM da empresa:
+
+→ pode definir autonomias dentro do teto.
+
+Remoção da capacidade:
+
+→ vínculo suspenso;
+→ histórico preservado.
+
+==================================================
+55. TESTE ESSENCIAL — OPERAÇÃO SOLO
+==================================================
+
+Empresa com:
+
+- 1 ADM;
+- 0 funcionários;
+- 0 atendentes compartilhados.
+
+Consumidor:
+
+→ envia solicitação.
+
+ADM:
+
+→ visualiza;
+→ responde;
+→ cria orçamento;
+→ agenda quando aplicável;
+→ acompanha;
+→ conclui.
+
+Nenhuma etapa pode exigir criação artificial de funcionário.
+
+==================================================
+56. TESTE ESSENCIAL — AGENDA ONLINE
+==================================================
+
+Testar pelo menos:
+
+- agenda online desativada;
+- ativação;
+- antecedência;
+- disponibilidade;
+- serviço com agendamento direto;
+- serviço somente por orçamento;
+- conflito de horário;
+- duração;
+- intervalo/buffer quando implementado;
+- solicitação chegando ao fluxo operacional correto.
+
+==================================================
+57. TESTE ESSENCIAL — IDENTIDADE DA EMPRESA
+==================================================
+
+Empresa escolhe:
+
+Cor:
+#E10909
+
+Tema:
+Claro
+
+→ página utiliza identidade derivada coerente.
+
+Depois:
+
+Tema:
+Escuro
+
+→ página muda corretamente sem perder a cor da marca.
+
+Verificar:
+
+- CTA;
+- categoria ativa;
+- ícones;
+- links;
+- badges;
+- focus;
+- contraste;
+- fundos;
+- cards.
+
+Nenhum resíduo decorativo indevido da paleta SYZIA.
+
+==================================================
+58. TESTE ESSENCIAL — MARCA SYZIA
+==================================================
+
+Verificar pelo menos:
+
+- login;
+- Administração;
+- ambiente empresarial;
+- primeiro acesso;
+- Ajuda/Suporte;
+- favicon;
+- cabeçalho;
+- versão clara;
+- versão escura.
+
+Não deve haver mistura visual indevida entre VIRELOQ e SYZIA nas áreas
+públicas revisadas.
+
+==================================================
+59. TESTE ESSENCIAL — UPLOAD REAL/ADAPTER
+==================================================
+
+No ambiente disponível ao executor:
+
+testar os caminhos de:
+
+- logo;
+- capa;
+- imagem de serviço;
+- portfólio.
+
+Se o executor NÃO possuir acesso ao Supabase real autorizado:
+
+não alegar homologação real.
+
+Mesmo assim:
+
+- revisar configuração;
+- revisar policies;
+- revisar contratos;
+- preparar diagnóstico;
+- executar testes locais possíveis.
+
+Registrar claramente o que ainda depende do ambiente real do
+proprietário.
+
+==================================================
+60. TESTE ESSENCIAL — SUPER ADMIN SOB GESTÃO SYZIA
+==================================================
+
+Super Admin
+→ empresa sem ADM
+→ sob gestão SYZIA
+→ onboarding
+→ salvar
+→ navegar
+→ upload quando possível
+→ revalidar sessão
+→ continuar autorizado.
+
+Não criar membership empresarial artificial.
+
+==================================================
+61. RESPONSIVIDADE
+==================================================
+
+Verificar as telas novas/alteradas em pelo menos:
+
+- desktop;
+- celular.
+
+Priorizar:
+
+- Pessoas e acessos;
+- agenda online;
+- identidade claro/escuro;
+- login SYZIA;
+- Administração SYZIA.
+
+Tablet pode ser verificado quando o mesmo layout tiver alteração
+relevante.
+
+==================================================
+62. ACESSIBILIDADE
+==================================================
+
+Preservar:
+
+- teclado;
+- labels;
+- focus visível;
+- contraste;
+- mensagens compreensíveis;
+- controles não dependentes exclusivamente de cor;
+- alternativas acessíveis para componentes interativos.
+
+==================================================
+63. SEGURANÇA
+==================================================
+
+Preservar:
+
+- isolamento multiempresa;
+- RLS/FORCE RLS;
+- autorização server-side;
+- grants;
+- capacidades;
+- auditoria;
+- suporte autorizado 029;
+- acesso emergencial;
+- proteção de documentos;
+- sessão.
+
+Não enfraquecer segurança para resolver UX.
+
+==================================================
+64. FORA DO ESCOPO
+==================================================
+
+NÃO implementar agora:
+
+- deploy;
+- domínio real UseSyzia;
+- compra/configuração de domínio;
+- redes sociais;
+- cobrança real;
+- gateway novo;
+- Open Finance;
+- emissão fiscal;
+- DRE completa;
+- folha;
+- estoque;
+- consulta governamental CPF/CNPJ;
+- nova auditoria mestre;
+- vídeo oficial;
+- aplicativo mobile nativo.
+
+==================================================
+65. ARQUIVOS DA MARCA
+==================================================
+
+A entrega deve manter os assets SYZIA organizados no projeto.
+
+Criar uma pasta apropriada de branding/assets.
+
+Incluir documentação curta contendo:
+
+Marca:
+SYZIA
+
+Identidade digital:
+UseSyzia
+
+Slogan:
+Onde tudo se alinha.
+
+Paleta:
+#0B0B14
+#6C4DFF
+#C9B8FF
+#F4F5FF
+#2B2B36
+
+E regras básicas:
+
+- não deformar;
+- não recolorir arbitrariamente;
+- não alterar lettering;
+- não alterar espaçamento;
+- não redesenhar o símbolo;
+- preservar contraste;
+- utilizar variante adequada ao fundo.
+
+==================================================
+66. RELATÓRIO FINAL
+==================================================
+
+Entregar relatório contendo:
+
+1. resumo do que foi implementado;
+2. diagnóstico do bug de upload;
+3. diagnóstico do erro de autorização;
+4. arquivos alterados;
+5. eventual migration 032 e justificativa;
+6. testes executados;
+7. resultados;
+8. limitações;
+9. pendências de ambiente real;
+10. decisões de produto ainda pendentes.
+
+Não transformar limitações em resultados aprovados.
+
+==================================================
+67. ENTREGA
+==================================================
+
+Entregar:
+
+- ZIP consolidado completo;
+- código atualizado;
+- assets SYZIA;
+- eventual migration 032;
+- documentação de upgrade, se necessária;
+- relatório;
+- testes focados;
+- evidências essenciais.
+
+Não entregar somente patch.
+
+Não fazer deploy.
+
+Não iniciar nova fase depois.
+
+==================================================
+68. CRITÉRIOS DE ACEITE
+==================================================
+
+A rodada somente pode ser considerada concluída quando:
+
+[ ] A marca pública é SYZIA.
+
+[ ] A identidade visual aprovada foi respeitada.
+
+[ ] UseSyzia permanece identidade digital, não nome do produto.
+
+[ ] Pessoas podem existir sem empresa.
+
+[ ] ADM empresarial pode ser criado antes da empresa.
+
+[ ] Empresa pode existir sem ADM.
+
+[ ] Pessoa e empresa podem ser vinculadas posteriormente.
+
+[ ] Uma pessoa pode possuir vínculos autorizados com mais de uma
+    empresa sem duplicar identidade.
+
+[ ] Equipe interna SYZIA existe sem membership empresarial artificial.
+
+[ ] Atendente SYZIA pode ser atribuído como compartilhado somente quando
+    o plano/capacidade permitir.
+
+[ ] Empresa com somente ADM consegue operar ponta a ponta.
+
+[ ] "Configurar agenda online" abre uma configuração real.
+
+[ ] Solicitações não criam uma segunda Central concorrente.
+
+[ ] Cor principal gera identidade visual completa.
+
+[ ] Página pública possui tema Claro/Escuro.
+
+[ ] Identidade da empresa não herda indevidamente a paleta SYZIA.
+
+[ ] Upload de mídia foi diagnosticado e corrigido quando tecnicamente
+    possível no ambiente disponível.
+
+[ ] Erro de autorização do Super Admin foi diagnosticado.
+
+[ ] Nenhum membership artificial foi criado para mascarar o problema.
+
+[ ] RLS/autorização não foram enfraquecidos.
+
+[ ] Migrations 001–031 permanecem intactas.
+
+[ ] Upgrade preserva os dados se houver 032.
+
+[ ] Build/typecheck passam.
+
+[ ] Testes essenciais passam.
+
+==================================================
+69. REGRA FINAL
+==================================================
+
+ANTES DE IMPLEMENTAR:
+
+1. inspecione a versão 031;
+2. mapeie as estruturas já existentes;
+3. identifique a causa dos bugs;
+4. reutilize infraestrutura;
+5. somente então altere.
+
+Não resolver problemas criando sistemas paralelos.
+
+Não inventar regras comerciais.
+
+Quando faltar uma decisão do proprietário:
+
+DECISÃO DE PRODUTO PENDENTE.
+
+Ao concluir:
+
+ENTREGAR
+E PARAR PARA HOMOLOGAÇÃO DO PROPRIETÁRIO.

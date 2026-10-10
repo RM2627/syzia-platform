@@ -1,0 +1,106 @@
+{
+  "status": "PASS",
+  "baseZipSHA256": "79aac3fbdc03a91af2dc533d8aba7d3dac67afc53bba6c0908a8d11d9e5596d2",
+  "originalFiles": 6329,
+  "originalMissing": [],
+  "historicalMigrations": 40,
+  "historicalMigrationsByteIdentical": true,
+  "historicalReportsByteIdentical": true,
+  "lockfileByteIdentical": true,
+  "unchangedPerformanceSources": [
+    "src/FoundationApp.tsx",
+    "src/central/Central.tsx",
+    "src/operations/Onboarding.tsx",
+    "src/company/Company.tsx",
+    "src/company/Categories.tsx",
+    "src/consumer/PresenceAdmin.tsx",
+    "src/consumer/CompanyPage.tsx",
+    "src/consumer/CompanyMedia.tsx",
+    "src/consumer/PortfolioEditor.tsx",
+    "src/consumer/company-image-request.ts",
+    "src/billing/Capabilities.tsx",
+    "src/ui/design-system.css"
+  ],
+  "originalFilesModified": [
+    {
+      "path": "AGENTS.md",
+      "before": "de75a06e10f6395f07f492a1d21002fabb79747fcf2837fd7e9c457ad8463075",
+      "after": "204318b1559796f50b5aa9007897a91ade315852df06a995495ce11483e3833e"
+    },
+    {
+      "path": "docs/testing/current-regression-gate.md",
+      "before": "c58e4ac49f9d10e9794fefa0855dad9a6f3846a6c769e14af91a506399f5ea5a",
+      "after": "2c74ebe07811b36d762947a272cbbb1561ddc4ab18b3fe709f10d4962f718ecd"
+    },
+    {
+      "path": "package.json",
+      "before": "e5a3332fc3171dfc44ebb5b63eb5d608a51b06ab40b154accbc1d4b8b1d4bf54",
+      "after": "27034fd612dc86cc7d8ac05e0478a4bb39800500c69a40732f4348793b382a97"
+    },
+    {
+      "path": "scripts/dev-consumer-demo.mjs",
+      "before": "69344857132d8bca651ea7edc1e4c60e0489a990c84908694ea3425ad81ec771",
+      "after": "01aa54132d1d886fbbae75ca57db9e9fc2176adb182346d57bdbe07a0e5ffd35"
+    },
+    {
+      "path": "scripts/syzia-044/current-gate.mjs",
+      "before": "803dd225253a98a289c0af1d671d24ed5c714316d8f22c61273d6bebe71b9930",
+      "after": "267b3ebfe25ce453825c76ee426a39ba92af466468c72874763d7d11d4083c1f"
+    },
+    {
+      "path": "scripts/syzia-044/regression.mjs",
+      "before": "1e09f86a734381176434af7d7fc00dce4ea36b45120072578b74618e61508eba",
+      "after": "96fb8a1fdee74eae0a4ed61dfd9ddfd530ce77f0f1b6f9de22462091209eda69"
+    },
+    {
+      "path": "src/api.ts",
+      "before": "87158d1717e5c01df2f9ceca93d2b2e27bd2c8c729107d0a5e9d3ac767f8af7f",
+      "after": "b40ff4ac570f06a6f18e4be6ac828113b8ce35cc2322a98bfec80e95560acc5d"
+    },
+    {
+      "path": "src/billing/Billing.tsx",
+      "before": "f6a1f58873654140899d4222c290df7794ef40a166f9cd6eb65ed4e60a5599e4",
+      "after": "f901cc1f073d8a6d831e96cbd4335b8db0539c747609a2fb94365e386411937b"
+    },
+    {
+      "path": "src/billing/PlanEditor.tsx",
+      "before": "b33f903a7934a66d5fb0b958eab7da92d6703ae61a0db19caaf89e3ae6b9ef45",
+      "after": "fd489e6c02d9a56d04f750a11bb7effea7ab7c609c1749f22c3e257e488d7439"
+    },
+    {
+      "path": "src/central/ConsumerChat.tsx",
+      "before": "97c4be6956a641cf5e6b3337c6504b9d901f0763de5a6e746ea001f851c8f6e4",
+      "after": "c804468ec78f0d45d5111b6259c706b06e3396aad804cb2b8263ec31f333aa7e"
+    },
+    {
+      "path": "src/central/model.ts",
+      "before": "8ade4da02cdbfe81f4fa62bf0ec360c1a622a72970a2bebab7cea5ccf8f0f43c",
+      "after": "36e2c0c37f15081955ad1ff2dfc966dc503d3d6d98a9911d4da3751e75145d31"
+    },
+    {
+      "path": "src/consumer/api.ts",
+      "before": "563ebd75fd33d999c2b4271867ae18a3f9679feb95434f505b661e0109ac5fff",
+      "after": "7627b09a051cc1dd7391486e6fcdd0e4854ca664cc921a7cb3b6badca564cf40"
+    },
+    {
+      "path": "src/operations/Operations.tsx",
+      "before": "7968f4d178fe93c4868af2c908f7e2d840c248a4ebdf2214a8287ff654308514",
+      "after": "245bc05acd277184f0cc3e2bc91fe7c33a29e54561a2dd01b6340f843c4a906c"
+    },
+    {
+      "path": "src/permissions/Permissions.tsx",
+      "before": "05a6cb5e9ebcc5dee13ba0729cdfd2bdda4bef45272c4eb4578ec4457b5016a9",
+      "after": "205e907b3cb786f40d2951b156b0255a3ba0b986a93c452da1814b8d017635ac"
+    },
+    {
+      "path": "tests/support/current-db.mjs",
+      "before": "cccc14d9fef9e54a7d5263be5194ff0cc8feacddbc8ef82f9adfac79cbc59261",
+      "after": "b6f8e27cb6f4530f6da7a9127fdeded6d80a4c2f8b684a91db9cb64f0485527d"
+    },
+    {
+      "path": "tests/support/current-fixture.mjs",
+      "before": "336cad5af07f300cc7d5730ef5ed36a8b9f7a5f56d379be8787154b203da6833",
+      "after": "51b4ca2a1d8855834eb59b6629cbb49f6db8a93375bcaf698aaf9f7564baa5a3"
+    }
+  ]
+}

@@ -1,0 +1,4969 @@
+{
+  "phase": "before",
+  "browser": "153.0.8010.0",
+  "latency": {
+    "apiMs": 120,
+    "chunkMs": 250
+  },
+  "results": [
+    {
+      "id": "root-open-cold",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Verificando autorização para esta empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [],
+          "t": 77
+        },
+        {
+          "statuses": [
+            "Registrando entrada na empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [],
+          "t": 210
+        },
+        {
+          "statuses": [
+            "Verificando permissões da empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [],
+          "t": 328
+        },
+        {
+          "statuses": [
+            "Carregando…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 494
+        },
+        {
+          "statuses": [
+            "Carregando sua empresa…",
+            "Carregando sua empresa…",
+            "Carregando sua empresa…",
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 796
+        },
+        {
+          "layoutShift": 0.011111111111111112,
+          "t": 797
+        },
+        {
+          "statuses": [
+            "Carregando sua empresa…",
+            "Carregando sua empresa…",
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 933
+        },
+        {
+          "statuses": [
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 947
+        },
+        {
+          "layoutShift": 0.001901773050357939,
+          "t": 949
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 963
+        },
+        {
+          "layoutShift": 0.17314658534673996,
+          "t": 981
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":true}",
+          "t": 52,
+          "end": 179,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/support_context",
+          "body": "{\"p_org\":\"db6845c3-cc8d-4ba6-a5ac-273608ff4dbd\"}",
+          "t": 66,
+          "end": 193,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/support_enter",
+          "body": "{\"p_org\":\"db6845c3-cc8d-4ba6-a5ac-273608ff4dbd\",\"p_key\":\"544faebe-be8c-476a-b2c0-b90c9a7da6a9\"}",
+          "t": 195,
+          "end": 323,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/permissions_context",
+          "body": "{\"p_org\":\"db6845c3-cc8d-4ba6-a5ac-273608ff4dbd\"}",
+          "t": 326,
+          "end": 479,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"db6845c3-cc8d-4ba6-a5ac-273608ff4dbd\",\"p_section\":\"header\"}",
+          "t": 784,
+          "end": 924,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"db6845c3-cc8d-4ba6-a5ac-273608ff4dbd\",\"p_section\":\"agenda\"}",
+          "t": 784,
+          "end": 939,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"db6845c3-cc8d-4ba6-a5ac-273608ff4dbd\",\"p_section\":\"attention\"}",
+          "t": 785,
+          "end": 946,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"db6845c3-cc8d-4ba6-a5ac-273608ff4dbd\",\"p_section\":\"updates\"}",
+          "t": 785,
+          "end": 951,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"db6845c3-cc8d-4ba6-a5ac-273608ff4dbd\"}",
+          "t": 785,
+          "end": 958,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"db6845c3-cc8d-4ba6-a5ac-273608ff4dbd\"}",
+          "t": 786,
+          "end": 964,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1703,
+      "final": {
+        "url": "/painel/db6845c3-cc8d-4ba6-a5ac-273608ff4dbd",
+        "overflow": 0,
+        "headings": [
+          "Vamos preparar sua empresa",
+          "O que fazer hoje?",
+          "Agenda de hoje",
+          "Amanhã",
+          "Precisa da sua atenção",
+          "Últimas atualizações"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": [
+        {
+          "key": "/rest/v1/rpc/onboarding_context {\"p_org\":\"db6845c3-cc8d-4ba6-a5ac-273608ff4dbd\"}",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "login-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 1
+        },
+        {
+          "statuses": [],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 40
+        },
+        {
+          "statuses": [
+            "Preparando sua experiênciaCarregando com segurança…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [
+            "Preparando sua experiência"
+          ],
+          "t": 319
+        },
+        {
+          "statuses": [],
+          "shell": false,
+          "home": false,
+          "headings": [
+            "Entrar na SYZIA"
+          ],
+          "t": 612
+        },
+        {
+          "layoutShift": 0.075,
+          "t": 615
+        },
+        {
+          "statuses": [],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 1270
+        },
+        {
+          "statuses": [
+            "Preparando sua experiênciaCarregando com segurança…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [
+            "Preparando sua experiência"
+          ],
+          "t": 1547
+        },
+        {
+          "statuses": [
+            "Verificando seu acesso…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 1856
+        },
+        {
+          "layoutShift": 0.075,
+          "t": 1857
+        },
+        {
+          "statuses": [
+            "Verificando permissões da empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [],
+          "t": 2125
+        },
+        {
+          "statuses": [
+            "Carregando…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 2291
+        },
+        {
+          "layoutShift": 0.011111111111111112,
+          "t": 2292
+        },
+        {
+          "statuses": [
+            "Carregando sua empresa…",
+            "Carregando sua empresa…",
+            "Carregando sua empresa…",
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 2594
+        },
+        {
+          "layoutShift": 0.011111111111111112,
+          "t": 2595
+        },
+        {
+          "statuses": [
+            "Carregando sua empresa…",
+            "Carregando sua empresa…",
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 2726
+        },
+        {
+          "statuses": [
+            "Carregando sua empresa…",
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 2745
+        },
+        {
+          "layoutShift": 0.0723656623746142,
+          "t": 2746
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 2774
+        },
+        {
+          "layoutShift": 0.013273143426086676,
+          "t": 2777
+        }
+      ],
+      "requests": [
+        {
+          "path": "/access/identity-login",
+          "body": "{\"identifier\":\"admin@example.invalid\",\"password\":\"FictitiousPassword123!\",\"captcha\":\"\"}",
+          "t": 681,
+          "end": 818,
+          "status": 200
+        },
+        {
+          "path": "/auth/v1/user",
+          "body": null,
+          "t": 820,
+          "end": 944,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{}",
+          "t": 947,
+          "end": 1074,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{}",
+          "t": 947,
+          "end": 1080,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":false}",
+          "t": 949,
+          "end": 1081,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/foundation_context",
+          "body": "{}",
+          "t": 1076,
+          "end": 1219,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/permissions_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 1081,
+          "end": 1255,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{}",
+          "t": 1845,
+          "end": 1972,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":false}",
+          "t": 1846,
+          "end": 1975,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/foundation_context",
+          "body": "{}",
+          "t": 1974,
+          "end": 2116,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/permissions_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 2119,
+          "end": 2277,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/support_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 2583,
+          "end": 2714,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_section\":\"header\"}",
+          "t": 2584,
+          "end": 2720,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_section\":\"agenda\"}",
+          "t": 2584,
+          "end": 2727,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_section\":\"attention\"}",
+          "t": 2584,
+          "end": 2763,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_section\":\"updates\"}",
+          "t": 2584,
+          "end": 2768,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 2585,
+          "end": 2773,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 2585,
+          "end": 2731,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 3604,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500",
+        "overflow": 0,
+        "headings": [
+          "O que fazer hoje?",
+          "Agenda de hoje",
+          "Amanhã",
+          "Precisa da sua atenção",
+          "Últimas atualizações"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": [
+        {
+          "key": "/rest/v1/rpc/access_session {}",
+          "count": 3
+        },
+        {
+          "key": "/rest/v1/rpc/access_session {\"p_activity\":false}",
+          "count": 2
+        },
+        {
+          "key": "/rest/v1/rpc/foundation_context {}",
+          "count": 2
+        },
+        {
+          "key": "/rest/v1/rpc/permissions_context {\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "count": 2
+        },
+        {
+          "key": "/rest/v1/rpc/onboarding_context {\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "open-company-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 599
+        },
+        {
+          "statuses": [
+            "Preparando sua experiênciaCarregando com segurança…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [
+            "Preparando sua experiência"
+          ],
+          "t": 876
+        },
+        {
+          "statuses": [
+            "Verificando seu acesso…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 1175
+        },
+        {
+          "layoutShift": 0.075,
+          "t": 1177
+        },
+        {
+          "statuses": [
+            "Verificando permissões da empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [],
+          "t": 1444
+        },
+        {
+          "statuses": [
+            "Carregando…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 1608
+        },
+        {
+          "layoutShift": 0.011111111111111112,
+          "t": 1609
+        },
+        {
+          "statuses": [
+            "Carregando sua empresa…",
+            "Carregando sua empresa…",
+            "Carregando sua empresa…",
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 1909
+        },
+        {
+          "layoutShift": 0.011111111111111112,
+          "t": 1910
+        },
+        {
+          "statuses": [
+            "Carregando sua empresa…",
+            "Carregando sua empresa…",
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 2042
+        },
+        {
+          "statuses": [
+            "Carregando sua empresa…",
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 2059
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 2091
+        },
+        {
+          "layoutShift": 0.04633957090861839,
+          "t": 2093
+        },
+        {
+          "layoutShift": 0.0723656623746142,
+          "t": 2110
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":true}",
+          "t": 31,
+          "end": 158,
+          "status": 200
+        },
+        {
+          "path": "/access/contexts",
+          "body": "{}",
+          "t": 32,
+          "end": 166,
+          "status": 200
+        },
+        {
+          "path": "/access/context",
+          "body": "{\"account_id\":\"f8d5c420-53b9-45d7-8a43-e1252077e8c0\"}",
+          "t": 169,
+          "end": 297,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{}",
+          "t": 299,
+          "end": 425,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/permissions_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 427,
+          "end": 583,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{}",
+          "t": 1172,
+          "end": 1298,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":false}",
+          "t": 1173,
+          "end": 1301,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/foundation_context",
+          "body": "{}",
+          "t": 1300,
+          "end": 1441,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/permissions_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 1446,
+          "end": 1602,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/support_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 1907,
+          "end": 2037,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_section\":\"header\"}",
+          "t": 1908,
+          "end": 2040,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_section\":\"agenda\"}",
+          "t": 1908,
+          "end": 2048,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_section\":\"attention\"}",
+          "t": 1908,
+          "end": 2078,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_section\":\"updates\"}",
+          "t": 1908,
+          "end": 2086,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 1908,
+          "end": 2089,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 1908,
+          "end": 2096,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 2809,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500",
+        "overflow": 0,
+        "headings": [
+          "O que fazer hoje?",
+          "Agenda de hoje",
+          "Amanhã",
+          "Precisa da sua atenção",
+          "Últimas atualizações"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": [
+        {
+          "key": "/rest/v1/rpc/access_session {}",
+          "count": 2
+        },
+        {
+          "key": "/rest/v1/rpc/permissions_context {\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "count": 2
+        },
+        {
+          "key": "/rest/v1/rpc/onboarding_context {\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "route-agenda-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Agenda"
+          ],
+          "t": 71
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Agenda"
+          ],
+          "t": 203
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":true}",
+          "t": 43,
+          "end": 170,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_agenda",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_from\":\"2026-10-01\",\"p_to\":\"2026-10-01\"}",
+          "t": 59,
+          "end": 188,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 59,
+          "end": 193,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 863,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/agenda",
+        "overflow": 0,
+        "headings": [
+          "Agenda",
+          "quinta-feira, 1 de outubro de 2026"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "agenda-week-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Agenda"
+          ],
+          "t": 62
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Agenda"
+          ],
+          "t": 179
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/operations_agenda",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_from\":\"2026-10-01\",\"p_to\":\"2026-10-07\"}",
+          "t": 36,
+          "end": 165,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 860,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/agenda",
+        "overflow": 0,
+        "headings": [
+          "Agenda",
+          "quinta-feira, 1 de outubro de 2026",
+          "sexta-feira, 2 de outubro de 2026",
+          "sábado, 3 de outubro de 2026",
+          "domingo, 4 de outubro de 2026",
+          "segunda-feira, 5 de outubro de 2026",
+          "terça-feira, 6 de outubro de 2026",
+          "quarta-feira, 7 de outubro de 2026"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "agenda-month-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Agenda"
+          ],
+          "t": 68
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Agenda"
+          ],
+          "t": 185
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/operations_agenda",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_from\":\"2026-10-01\",\"p_to\":\"2026-11-01\"}",
+          "t": 42,
+          "end": 172,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 866,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/agenda",
+        "overflow": 0,
+        "headings": [
+          "Agenda"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "route-pendencias-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Pendências da empresa"
+          ],
+          "t": 328
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_queue",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_search\":\"\",\"p_state\":null,\"p_mine\":false,\"p_offset\":0,\"p_view\":\"company\",\"p_date\":null}",
+          "t": 332,
+          "end": 465,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 332,
+          "end": 469,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/support_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 1086,
+          "end": 1215,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1896,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/pendencias",
+        "overflow": 0,
+        "headings": [
+          "Pendências da empresa",
+          "0 atendimentos",
+          "Seu próximo atendimento começa aqui."
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "route-atendimento-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "t": 71
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 57,
+          "end": 186,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 866,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/atendimento",
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "0 atendimentos",
+          "Seu próximo atendimento começa aqui."
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "ticket-1-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "t": 57
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "t": 226
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_ccbbbca25b1a44798da22027\"}",
+          "t": 49,
+          "end": 211,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/central_queue",
+          "body": "{\"p_org\":null,\"p_search\":\"\",\"p_state\":null,\"p_mine\":true,\"p_offset\":0,\"p_view\":\"all\",\"p_date\":null}",
+          "t": 49,
+          "end": 218,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 963,
+      "final": {
+        "url": "/central/t_ccbbbca25b1a44798da22027",
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "0 atendimentos",
+          "Ana • Fictícia"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "ticket-2-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{}",
+          "t": 5426,
+          "end": 5554,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/foundation_context",
+          "body": "{}",
+          "t": 5556,
+          "end": 5698,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "status": "BLOCKED",
+      "reason": "locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('a.h-ticket').nth(1)\u001b[22m\n",
+      "duplicates": []
+    },
+    {
+      "id": "route-clientes-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 28
+        },
+        {
+          "statuses": [
+            "Preparando sua experiênciaCarregando com segurança…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [
+            "Preparando sua experiência"
+          ],
+          "t": 307
+        },
+        {
+          "statuses": [
+            "Verificando seu acesso…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 602
+        },
+        {
+          "layoutShift": 0.075,
+          "t": 603
+        },
+        {
+          "statuses": [
+            "Verificando permissões da empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [],
+          "t": 887
+        },
+        {
+          "statuses": [
+            "Carregando…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 1052
+        },
+        {
+          "layoutShift": 0.011111111111111112,
+          "t": 1053
+        },
+        {
+          "statuses": [
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Clientes"
+          ],
+          "t": 1353
+        },
+        {
+          "layoutShift": 0.011111111111111112,
+          "t": 1354
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Clientes"
+          ],
+          "t": 1503
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{}",
+          "t": 600,
+          "end": 728,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":false}",
+          "t": 601,
+          "end": 732,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/foundation_context",
+          "body": "{}",
+          "t": 732,
+          "end": 874,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/permissions_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 878,
+          "end": 1036,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/support_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 1341,
+          "end": 1483,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_directory",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_search\":\"\",\"p_offset\":0}",
+          "t": 1342,
+          "end": 1489,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 1342,
+          "end": 1495,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 1342,
+          "end": 1500,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 2164,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/clientes",
+        "overflow": 0,
+        "headings": [
+          "Clientes"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": [
+        {
+          "key": "/rest/v1/rpc/onboarding_context {\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "route-comercial-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Comercial da empresa"
+          ],
+          "t": 321
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":true}",
+          "t": 40,
+          "end": 167,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/commercial_list",
+          "body": "{\"p_filters\":{\"org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"view\":\"all\"},\"p_offset\":0}",
+          "t": 313,
+          "end": 467,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 314,
+          "end": 474,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1190,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/comercial",
+        "overflow": 0,
+        "headings": [
+          "Comercial da empresa",
+          "Oportunidades",
+          "Abra uma oportunidade para continuar."
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "route-orcamentos-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Orçamentos"
+          ],
+          "t": 105
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Orçamentos"
+          ],
+          "t": 242
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/operations_requests",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_search\":\"\",\"p_offset\":0}",
+          "t": 82,
+          "end": 223,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 82,
+          "end": 234,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 914,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/orcamentos",
+        "overflow": 0,
+        "headings": [
+          "Orçamentos"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "route-metricas-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Preparando seus indicadores…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Clareza para o próximo passo."
+          ],
+          "t": 305
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Clareza para o próximo passo."
+          ],
+          "t": 478
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/analytics_company",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_from\":\"2026-09-02\",\"p_to\":\"2026-10-01\",\"p_service\":null,\"p_source\":null}",
+          "t": 301,
+          "end": 452,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/analytics_central",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_from\":\"2026-09-02\",\"p_to\":\"2026-10-01\"}",
+          "t": 301,
+          "end": 463,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 301,
+          "end": 467,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1173,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/metricas",
+        "overflow": 0,
+        "headings": [
+          "Clareza para o próximo passo.",
+          "Financeiro empresarial",
+          "Do interesse à conversão",
+          "Valores comerciais",
+          "Oportunidades ao longo do período",
+          "Serviços procurados",
+          "Como os clientes chegam",
+          "Acompanhamento comercial",
+          "Uma operação com mais atenção."
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "route-financeiro-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Financeiro"
+          ],
+          "t": 61
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/financial_reference_options",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 50,
+          "end": 182,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/financial_summary",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_from\":\"2026-10-01\",\"p_to\":\"2026-10-01\"}",
+          "t": 50,
+          "end": 191,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 50,
+          "end": 197,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/support_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 148,
+          "end": 281,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 957,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/financeiro",
+        "overflow": 0,
+        "headings": [
+          "Financeiro"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "route-assinatura-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Preparando seus indicadores…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Seu plano, sua operação."
+          ],
+          "t": 321
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Seu plano, sua operação."
+          ],
+          "t": 473
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/billing_capabilities",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 317,
+          "end": 446,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/billing_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 317,
+          "end": 456,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/billing_capabilities",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 317,
+          "end": 461,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 317,
+          "end": 464,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1175,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/assinatura",
+        "overflow": 0,
+        "headings": [
+          "Seu plano, sua operação.",
+          "Capacidades da empresa",
+          "Com equipe · demonstração",
+          "Período gratuito",
+          "Uso e capacidade",
+          "Assinar agora",
+          "Recursos para o seu momento",
+          "Cobranças",
+          "Histórico da assinatura"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": [
+        {
+          "key": "/rest/v1/rpc/billing_capabilities {\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "route-acessos-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "MS Auto Details • Fictícia"
+          ],
+          "t": 52
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":true}",
+          "t": 22,
+          "end": 149,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/permissions_team",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 42,
+          "end": 177,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/organization_invitations",
+          "body": null,
+          "t": 44,
+          "end": 186,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_team",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 44,
+          "end": 199,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/organization_members",
+          "body": null,
+          "t": 44,
+          "end": 205,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/attendant_organizations",
+          "body": null,
+          "t": 44,
+          "end": 829,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/profiles",
+          "body": null,
+          "t": 44,
+          "end": 843,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/audit_logs",
+          "body": null,
+          "t": 44,
+          "end": 822,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 44,
+          "end": 210,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1500,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/acessos",
+        "overflow": 0,
+        "headings": [
+          "MS Auto Details • Fictícia",
+          "Cadastro básico",
+          "Permissões por pessoa",
+          "Pessoas e acessos",
+          "Novo usuário",
+          "Atendentes vinculados",
+          "Histórico de acessos da empresa"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "route-pagina-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando identidade e trabalhos…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Página da empresa"
+          ],
+          "t": 386
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Página da empresa"
+          ],
+          "t": 658
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/support_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 287,
+          "end": 416,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/consumer_presence_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 383,
+          "end": 515,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/consumer_page_draft",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_show_prices\":true}",
+          "t": 383,
+          "end": 522,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 384,
+          "end": 527,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/company_categories",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 516,
+          "end": 644,
+          "status": 200
+        },
+        {
+          "path": "/company-media/m_af0937c7b77acb9357ec6529",
+          "body": null,
+          "t": 649,
+          "end": 779,
+          "status": 200
+        },
+        {
+          "path": "/company-media/m_add82e61e692527d6d79fe9a",
+          "body": null,
+          "t": 650,
+          "end": 784,
+          "status": 200
+        },
+        {
+          "path": "/company-media/m_e8cabd5cdaf1631a75f99c20",
+          "body": null,
+          "t": 650,
+          "end": 787,
+          "status": 200
+        },
+        {
+          "path": "/company-media/m_f26ff678bf23c4834c4c5031",
+          "body": null,
+          "t": 650,
+          "end": 790,
+          "status": 200
+        },
+        {
+          "path": "/company-media/m_add82e61e692527d6d79fe9a",
+          "body": null,
+          "t": 650,
+          "end": 794,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1534,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/pagina",
+        "overflow": 0,
+        "headings": [
+          "Página da empresa",
+          "A sua empresa, do seu jeito",
+          "Organize o que você oferece",
+          "Seus trabalhos",
+          "Visualizar como cliente",
+          "Pronto para receber seus clientes?"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": [
+        {
+          "key": "/company-media/m_add82e61e692527d6d79fe9a ",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "route-configuracao-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "MS Auto Details • Fictícia"
+          ],
+          "t": 335
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "MS Auto Details • Fictícia"
+          ],
+          "t": 477
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/company_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 323,
+          "end": 465,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 323,
+          "end": 469,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1189,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/configuracao",
+        "overflow": 0,
+        "headings": [
+          "MS Auto Details • Fictícia",
+          "Informações e funcionamento"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "route-servicos-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "MS Auto Details • Fictícia"
+          ],
+          "t": 65
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "MS Auto Details • Fictícia"
+          ],
+          "t": 203
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":true}",
+          "t": 37,
+          "end": 164,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/company_categories",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 55,
+          "end": 180,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/company_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 55,
+          "end": 195,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 55,
+          "end": 207,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/company_categories",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 207,
+          "end": 334,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1074,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/servicos",
+        "overflow": 0,
+        "headings": [
+          "MS Auto Details • Fictícia",
+          "Catálogo de serviços",
+          "Novo serviço"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": [
+        {
+          "key": "/rest/v1/rpc/company_categories {\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "route-manual-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "MS Auto Details • Fictícia"
+          ],
+          "t": 73
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "MS Auto Details • Fictícia"
+          ],
+          "t": 208
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/company_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 63,
+          "end": 203,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 63,
+          "end": 209,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{}",
+          "t": 171,
+          "end": 297,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/foundation_context",
+          "body": "{}",
+          "t": 298,
+          "end": 440,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/permissions_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 449,
+          "end": 610,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/support_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 911,
+          "end": 1038,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1697,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/manual",
+        "overflow": 0,
+        "headings": [
+          "MS Auto Details • Fictícia",
+          "Manual de atendimento",
+          "Manual Central A · versão 2"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "route-faq-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "MS Auto Details • Fictícia"
+          ],
+          "t": 61
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "MS Auto Details • Fictícia"
+          ],
+          "t": 194
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/company_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 50,
+          "end": 187,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 50,
+          "end": 193,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 857,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/faq",
+        "overflow": 0,
+        "headings": [
+          "MS Auto Details • Fictícia",
+          "Perguntas frequentes"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "route-respostas-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "MS Auto Details • Fictícia"
+          ],
+          "t": 73
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "MS Auto Details • Fictícia"
+          ],
+          "t": 207
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/company_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 62,
+          "end": 200,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 62,
+          "end": 204,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 866,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/respostas",
+        "overflow": 0,
+        "headings": [
+          "MS Auto Details • Fictícia",
+          "Respostas rápidas"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "route-regras-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "MS Auto Details • Fictícia"
+          ],
+          "t": 61
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "MS Auto Details • Fictícia"
+          ],
+          "t": 195
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/company_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 48,
+          "end": 186,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 49,
+          "end": 192,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 857,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/regras",
+        "overflow": 0,
+        "headings": [
+          "MS Auto Details • Fictícia",
+          "Regras empresariais"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "route-ajuda-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Ajuda para sua rotina"
+          ],
+          "t": 64
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":true}",
+          "t": 34,
+          "end": 162,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 49,
+          "end": 177,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 859,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/ajuda",
+        "overflow": 0,
+        "headings": [
+          "Sua empresa está preparada",
+          "Ajuda para sua rotina",
+          "Seu jeito de atender",
+          "Você mantém o controle",
+          "Nenhum interessado esquecido",
+          "Uma conversa, um responsável",
+          "Prepare o atendimento humano",
+          "Entenda os indicadores"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "route-home-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando sua empresa…",
+            "Carregando sua empresa…",
+            "Carregando sua empresa…",
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 57
+        },
+        {
+          "statuses": [
+            "Carregando sua empresa…",
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 191
+        },
+        {
+          "statuses": [
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 225
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 240
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/support_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 45,
+          "end": 174,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_section\":\"header\"}",
+          "t": 46,
+          "end": 178,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_section\":\"agenda\"}",
+          "t": 46,
+          "end": 183,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_section\":\"attention\"}",
+          "t": 46,
+          "end": 220,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_section\":\"updates\"}",
+          "t": 46,
+          "end": 226,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 46,
+          "end": 230,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 954,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500",
+        "overflow": 0,
+        "headings": [
+          "O que fazer hoje?",
+          "Agenda de hoje",
+          "Amanhã",
+          "Precisa da sua atenção",
+          "Últimas atualizações"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "public-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 1
+        },
+        {
+          "statuses": [],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 33
+        },
+        {
+          "statuses": [
+            "Preparando sua experiênciaCarregando com segurança…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [
+            "Preparando sua experiência"
+          ],
+          "t": 307
+        },
+        {
+          "statuses": [
+            "Preparando seu atendimento…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 604
+        },
+        {
+          "layoutShift": 0.075,
+          "t": 606
+        },
+        {
+          "statuses": [],
+          "shell": false,
+          "home": false,
+          "headings": [
+            "MS Auto Details • Fictícia Serviços que fazem a diferença."
+          ],
+          "t": 765
+        },
+        {
+          "layoutShift": 0.08978703703703704,
+          "t": 767
+        },
+        {
+          "layoutShift": 0.0009532578875171468,
+          "t": 884
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/consumer_public_page",
+          "body": "{\"p_slug\":\"ms-auto-ficticia\"}",
+          "t": 600,
+          "end": 728,
+          "status": 200
+        },
+        {
+          "path": "/media/m_af0937c7b77acb9357ec6529",
+          "body": null,
+          "t": 740,
+          "end": 868,
+          "status": 200
+        },
+        {
+          "path": "/media/m_add82e61e692527d6d79fe9a",
+          "body": null,
+          "t": 741,
+          "end": 871,
+          "status": 200
+        },
+        {
+          "path": "/media/m_e8cabd5cdaf1631a75f99c20",
+          "body": null,
+          "t": 766,
+          "end": 892,
+          "status": 200
+        },
+        {
+          "path": "/media/m_f26ff678bf23c4834c4c5031",
+          "body": null,
+          "t": 767,
+          "end": 895,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1545,
+      "final": {
+        "url": "/empresa/ms-auto-ficticia",
+        "overflow": 0,
+        "headings": [
+          "MS Auto Details • Fictícia Serviços que fazem a diferença.",
+          "Encontre o serviço que precisa.",
+          "Conheça nosso trabalho.",
+          "Do primeiro contato ao atendimento.",
+          "Antes de começar."
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "public-services-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [],
+      "requests": [],
+      "errors": [],
+      "durationMs": 157,
+      "final": {
+        "url": "/empresa/ms-auto-ficticia",
+        "overflow": 0,
+        "headings": [
+          "MS Auto Details • Fictícia Serviços que fazem a diferença.",
+          "Encontre o serviço que precisa.",
+          "Conheça nosso trabalho.",
+          "Do primeiro contato ao atendimento.",
+          "Antes de começar."
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "public-request-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [],
+      "requests": [],
+      "errors": [],
+      "durationMs": 195,
+      "final": {
+        "url": "/empresa/ms-auto-ficticia",
+        "overflow": 0,
+        "headings": [
+          "MS Auto Details • Fictícia Serviços que fazem a diferença.",
+          "Encontre o serviço que precisa.",
+          "Conheça nosso trabalho.",
+          "Do primeiro contato ao atendimento.",
+          "Antes de começar.",
+          "Vamos cuidar dos detalhes?"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "login-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 0
+        },
+        {
+          "statuses": [],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 34
+        },
+        {
+          "statuses": [
+            "Preparando sua experiênciaCarregando com segurança…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [
+            "Preparando sua experiência"
+          ],
+          "t": 324
+        },
+        {
+          "statuses": [],
+          "shell": false,
+          "home": false,
+          "headings": [
+            "Entrar na SYZIA"
+          ],
+          "t": 625
+        },
+        {
+          "layoutShift": 0.12,
+          "t": 626
+        },
+        {
+          "statuses": [],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 1267
+        },
+        {
+          "statuses": [
+            "Preparando sua experiênciaCarregando com segurança…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [
+            "Preparando sua experiência"
+          ],
+          "t": 1540
+        },
+        {
+          "statuses": [
+            "Verificando seu acesso…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 1838
+        },
+        {
+          "layoutShift": 0.12,
+          "t": 1839
+        },
+        {
+          "statuses": [
+            "Verificando permissões da empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [],
+          "t": 2121
+        },
+        {
+          "statuses": [
+            "Carregando…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 2275
+        },
+        {
+          "layoutShift": 0.017777777777777778,
+          "t": 2276
+        },
+        {
+          "statuses": [
+            "Carregando sua empresa…",
+            "Carregando sua empresa…",
+            "Carregando sua empresa…",
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 2591
+        },
+        {
+          "layoutShift": 0.017777777777777778,
+          "t": 2592
+        },
+        {
+          "statuses": [
+            "Carregando sua empresa…",
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 2728
+        },
+        {
+          "layoutShift": 0.043333333333333335,
+          "t": 2730
+        },
+        {
+          "layoutShift": 0.16310652223805003,
+          "t": 2740
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 2772
+        }
+      ],
+      "requests": [
+        {
+          "path": "/access/identity-login",
+          "body": "{\"identifier\":\"admin@example.invalid\",\"password\":\"FictitiousPassword123!\",\"captcha\":\"\"}",
+          "t": 679,
+          "end": 814,
+          "status": 200
+        },
+        {
+          "path": "/auth/v1/user",
+          "body": null,
+          "t": 816,
+          "end": 940,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{}",
+          "t": 943,
+          "end": 1070,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{}",
+          "t": 943,
+          "end": 1074,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":false}",
+          "t": 946,
+          "end": 1077,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/foundation_context",
+          "body": "{}",
+          "t": 1072,
+          "end": 1214,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/permissions_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 1076,
+          "end": 1249,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{}",
+          "t": 1837,
+          "end": 1963,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":false}",
+          "t": 1840,
+          "end": 1966,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/foundation_context",
+          "body": "{}",
+          "t": 1965,
+          "end": 2107,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/permissions_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 2111,
+          "end": 2269,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/support_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 2576,
+          "end": 2705,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_section\":\"header\"}",
+          "t": 2577,
+          "end": 2708,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_section\":\"agenda\"}",
+          "t": 2577,
+          "end": 2719,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_section\":\"attention\"}",
+          "t": 2577,
+          "end": 2753,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_section\":\"updates\"}",
+          "t": 2577,
+          "end": 2757,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 2578,
+          "end": 2760,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 2578,
+          "end": 2729,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 3592,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500",
+        "overflow": 0,
+        "headings": [
+          "O que fazer hoje?",
+          "Agenda de hoje",
+          "Amanhã",
+          "Precisa da sua atenção",
+          "Últimas atualizações"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": [
+        {
+          "key": "/rest/v1/rpc/access_session {}",
+          "count": 3
+        },
+        {
+          "key": "/rest/v1/rpc/access_session {\"p_activity\":false}",
+          "count": 2
+        },
+        {
+          "key": "/rest/v1/rpc/foundation_context {}",
+          "count": 2
+        },
+        {
+          "key": "/rest/v1/rpc/permissions_context {\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "count": 2
+        },
+        {
+          "key": "/rest/v1/rpc/onboarding_context {\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "open-company-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 618
+        },
+        {
+          "statuses": [
+            "Preparando sua experiênciaCarregando com segurança…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [
+            "Preparando sua experiência"
+          ],
+          "t": 891
+        },
+        {
+          "statuses": [
+            "Verificando seu acesso…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 1195
+        },
+        {
+          "layoutShift": 0.12,
+          "t": 1196
+        },
+        {
+          "statuses": [
+            "Verificando permissões da empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [],
+          "t": 1462
+        },
+        {
+          "statuses": [
+            "Carregando…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 1628
+        },
+        {
+          "layoutShift": 0.017777777777777778,
+          "t": 1629
+        },
+        {
+          "statuses": [
+            "Carregando sua empresa…",
+            "Carregando sua empresa…",
+            "Carregando sua empresa…",
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 1929
+        },
+        {
+          "layoutShift": 0.017777777777777778,
+          "t": 1930
+        },
+        {
+          "statuses": [
+            "Carregando sua empresa…",
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 2063
+        },
+        {
+          "layoutShift": 0.043333333333333335,
+          "t": 2065
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 2099
+        },
+        {
+          "layoutShift": 0.16310652223805003,
+          "t": 2113
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":true}",
+          "t": 35,
+          "end": 163,
+          "status": 200
+        },
+        {
+          "path": "/access/contexts",
+          "body": "{}",
+          "t": 35,
+          "end": 177,
+          "status": 200
+        },
+        {
+          "path": "/access/context",
+          "body": "{\"account_id\":\"f8d5c420-53b9-45d7-8a43-e1252077e8c0\"}",
+          "t": 180,
+          "end": 308,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{}",
+          "t": 310,
+          "end": 437,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/permissions_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 439,
+          "end": 600,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{}",
+          "t": 1189,
+          "end": 1316,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":false}",
+          "t": 1189,
+          "end": 1318,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/foundation_context",
+          "body": "{}",
+          "t": 1317,
+          "end": 1458,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/permissions_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 1461,
+          "end": 1616,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/support_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 1921,
+          "end": 2050,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_section\":\"header\"}",
+          "t": 1921,
+          "end": 2053,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_section\":\"agenda\"}",
+          "t": 1921,
+          "end": 2060,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_section\":\"attention\"}",
+          "t": 1922,
+          "end": 2090,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_section\":\"updates\"}",
+          "t": 1922,
+          "end": 2095,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 1922,
+          "end": 2101,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 1922,
+          "end": 2106,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 2819,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500",
+        "overflow": 0,
+        "headings": [
+          "O que fazer hoje?",
+          "Agenda de hoje",
+          "Amanhã",
+          "Precisa da sua atenção",
+          "Últimas atualizações"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": [
+        {
+          "key": "/rest/v1/rpc/access_session {}",
+          "count": 2
+        },
+        {
+          "key": "/rest/v1/rpc/permissions_context {\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "count": 2
+        },
+        {
+          "key": "/rest/v1/rpc/onboarding_context {\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "route-agenda-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Agenda"
+          ],
+          "t": 72
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Agenda"
+          ],
+          "t": 205
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":true}",
+          "t": 44,
+          "end": 171,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_agenda",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_from\":\"2026-10-01\",\"p_to\":\"2026-10-01\"}",
+          "t": 60,
+          "end": 188,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 60,
+          "end": 192,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 867,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/agenda",
+        "overflow": 0,
+        "headings": [
+          "Agenda",
+          "quinta-feira, 1 de outubro de 2026"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "agenda-week-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Agenda"
+          ],
+          "t": 70
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Agenda"
+          ],
+          "t": 188
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/operations_agenda",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_from\":\"2026-10-01\",\"p_to\":\"2026-10-07\"}",
+          "t": 44,
+          "end": 173,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 866,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/agenda",
+        "overflow": 0,
+        "headings": [
+          "Agenda",
+          "quinta-feira, 1 de outubro de 2026",
+          "sexta-feira, 2 de outubro de 2026",
+          "sábado, 3 de outubro de 2026",
+          "domingo, 4 de outubro de 2026",
+          "segunda-feira, 5 de outubro de 2026",
+          "terça-feira, 6 de outubro de 2026",
+          "quarta-feira, 7 de outubro de 2026"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "agenda-month-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Agenda"
+          ],
+          "t": 62
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Agenda"
+          ],
+          "t": 180
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/operations_agenda",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_from\":\"2026-10-01\",\"p_to\":\"2026-11-01\"}",
+          "t": 38,
+          "end": 168,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 860,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/agenda",
+        "overflow": 0,
+        "headings": [
+          "Agenda"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "route-pendencias-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Pendências da empresa"
+          ],
+          "t": 319
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_queue",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_search\":\"\",\"p_state\":null,\"p_mine\":false,\"p_offset\":0,\"p_view\":\"company\",\"p_date\":null}",
+          "t": 315,
+          "end": 447,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 315,
+          "end": 451,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/support_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 1172,
+          "end": 57,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1169,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/pendencias",
+        "overflow": 0,
+        "headings": [
+          "Pendências da empresa",
+          "0 atendimentos",
+          "Seu próximo atendimento começa aqui."
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "route-atendimento-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "t": 71
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 59,
+          "end": 187,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 866,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/atendimento",
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "0 atendimentos",
+          "Seu próximo atendimento começa aqui."
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "ticket-1-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "t": 56
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "t": 210
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_ccbbbca25b1a44798da22027\"}",
+          "t": 49,
+          "end": 203,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/central_queue",
+          "body": "{\"p_org\":null,\"p_search\":\"\",\"p_state\":null,\"p_mine\":true,\"p_offset\":0,\"p_view\":\"all\",\"p_date\":null}",
+          "t": 49,
+          "end": 216,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 961,
+      "final": {
+        "url": "/central/t_ccbbbca25b1a44798da22027",
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "0 atendimentos",
+          "Ana • Fictícia"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "ticket-2-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{}",
+          "t": 6329,
+          "end": 6456,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/foundation_context",
+          "body": "{}",
+          "t": 6458,
+          "end": 6600,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "status": "BLOCKED",
+      "reason": "locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('a.h-ticket').nth(1)\u001b[22m\n",
+      "duplicates": []
+    },
+    {
+      "id": "route-clientes-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 25
+        },
+        {
+          "statuses": [
+            "Preparando sua experiênciaCarregando com segurança…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [
+            "Preparando sua experiência"
+          ],
+          "t": 300
+        },
+        {
+          "statuses": [
+            "Verificando seu acesso…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 605
+        },
+        {
+          "layoutShift": 0.12,
+          "t": 606
+        },
+        {
+          "statuses": [
+            "Verificando permissões da empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [],
+          "t": 872
+        },
+        {
+          "statuses": [
+            "Carregando…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 1039
+        },
+        {
+          "layoutShift": 0.017777777777777778,
+          "t": 1039
+        },
+        {
+          "statuses": [
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Clientes"
+          ],
+          "t": 1339
+        },
+        {
+          "layoutShift": 0.017777777777777778,
+          "t": 1341
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Clientes"
+          ],
+          "t": 1489
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{}",
+          "t": 598,
+          "end": 726,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":false}",
+          "t": 599,
+          "end": 727,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/foundation_context",
+          "body": "{}",
+          "t": 729,
+          "end": 869,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/permissions_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 877,
+          "end": 1033,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/support_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 1338,
+          "end": 1466,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_directory",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_search\":\"\",\"p_offset\":0}",
+          "t": 1341,
+          "end": 1470,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 1341,
+          "end": 1475,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 1341,
+          "end": 1479,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 2148,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/clientes",
+        "overflow": 0,
+        "headings": [
+          "Clientes"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": [
+        {
+          "key": "/rest/v1/rpc/onboarding_context {\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "route-comercial-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Comercial da empresa"
+          ],
+          "t": 323
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":true}",
+          "t": 42,
+          "end": 169,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/commercial_list",
+          "body": "{\"p_filters\":{\"org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"view\":\"all\"},\"p_offset\":0}",
+          "t": 316,
+          "end": 461,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 317,
+          "end": 469,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1190,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/comercial",
+        "overflow": 0,
+        "headings": [
+          "Comercial da empresa",
+          "Oportunidades",
+          "Abra uma oportunidade para continuar."
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "route-orcamentos-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Orçamentos"
+          ],
+          "t": 63
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Orçamentos"
+          ],
+          "t": 197
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/operations_requests",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_search\":\"\",\"p_offset\":0}",
+          "t": 51,
+          "end": 181,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 51,
+          "end": 184,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 860,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/orcamentos",
+        "overflow": 0,
+        "headings": [
+          "Orçamentos"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "route-metricas-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Preparando seus indicadores…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Clareza para o próximo passo."
+          ],
+          "t": 326
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Clareza para o próximo passo."
+          ],
+          "t": 485
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/analytics_company",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_from\":\"2026-09-02\",\"p_to\":\"2026-10-01\",\"p_service\":null,\"p_source\":null}",
+          "t": 321,
+          "end": 463,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/analytics_central",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_from\":\"2026-09-02\",\"p_to\":\"2026-10-01\"}",
+          "t": 321,
+          "end": 474,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 321,
+          "end": 487,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1195,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/metricas",
+        "overflow": 0,
+        "headings": [
+          "Clareza para o próximo passo.",
+          "Financeiro empresarial",
+          "Do interesse à conversão",
+          "Valores comerciais",
+          "Oportunidades ao longo do período",
+          "Serviços procurados",
+          "Como os clientes chegam",
+          "Acompanhamento comercial",
+          "Uma operação com mais atenção."
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "route-financeiro-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Financeiro"
+          ],
+          "t": 71
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/financial_reference_options",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 60,
+          "end": 192,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/financial_summary",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_from\":\"2026-10-01\",\"p_to\":\"2026-10-01\"}",
+          "t": 60,
+          "end": 199,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 60,
+          "end": 205,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/support_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 404,
+          "end": 533,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1274,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/financeiro",
+        "overflow": 0,
+        "headings": [
+          "Financeiro"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "route-assinatura-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Preparando seus indicadores…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Seu plano, sua operação."
+          ],
+          "t": 326
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Seu plano, sua operação."
+          ],
+          "t": 478
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":true}",
+          "t": 46,
+          "end": 173,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/billing_capabilities",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 324,
+          "end": 454,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/billing_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 325,
+          "end": 459,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/billing_capabilities",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 325,
+          "end": 465,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 325,
+          "end": 468,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1183,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/assinatura",
+        "overflow": 0,
+        "headings": [
+          "Seu plano, sua operação.",
+          "Capacidades da empresa",
+          "Com equipe · demonstração",
+          "Período gratuito",
+          "Uso e capacidade",
+          "Assinar agora",
+          "Recursos para o seu momento",
+          "Cobranças",
+          "Histórico da assinatura"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": [
+        {
+          "key": "/rest/v1/rpc/billing_capabilities {\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "route-acessos-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "MS Auto Details • Fictícia"
+          ],
+          "t": 75
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/permissions_team",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 67,
+          "end": 203,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_team",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 68,
+          "end": 216,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/organization_invitations",
+          "body": null,
+          "t": 68,
+          "end": 219,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/organization_members",
+          "body": null,
+          "t": 68,
+          "end": 227,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/attendant_organizations",
+          "body": null,
+          "t": 68,
+          "end": 836,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/profiles",
+          "body": null,
+          "t": 68,
+          "end": 850,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/audit_logs",
+          "body": null,
+          "t": 68,
+          "end": 830,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 68,
+          "end": 233,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1515,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/acessos",
+        "overflow": 0,
+        "headings": [
+          "MS Auto Details • Fictícia",
+          "Cadastro básico",
+          "Permissões por pessoa",
+          "Pessoas e acessos",
+          "Novo usuário",
+          "Atendentes vinculados",
+          "Histórico de acessos da empresa"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "route-pagina-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando identidade e trabalhos…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Página da empresa"
+          ],
+          "t": 330
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Página da empresa"
+          ],
+          "t": 601
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/consumer_presence_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 324,
+          "end": 454,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/consumer_page_draft",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_show_prices\":true}",
+          "t": 325,
+          "end": 460,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 325,
+          "end": 465,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/company_categories",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 456,
+          "end": 582,
+          "status": 200
+        },
+        {
+          "path": "/company-media/m_af0937c7b77acb9357ec6529",
+          "body": null,
+          "t": 587,
+          "end": 715,
+          "status": 200
+        },
+        {
+          "path": "/company-media/m_add82e61e692527d6d79fe9a",
+          "body": null,
+          "t": 587,
+          "end": 718,
+          "status": 200
+        },
+        {
+          "path": "/company-media/m_e8cabd5cdaf1631a75f99c20",
+          "body": null,
+          "t": 587,
+          "end": 721,
+          "status": 200
+        },
+        {
+          "path": "/company-media/m_f26ff678bf23c4834c4c5031",
+          "body": null,
+          "t": 588,
+          "end": 724,
+          "status": 200
+        },
+        {
+          "path": "/company-media/m_add82e61e692527d6d79fe9a",
+          "body": null,
+          "t": 588,
+          "end": 729,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/support_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 876,
+          "end": 1003,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1699,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/pagina",
+        "overflow": 0,
+        "headings": [
+          "Página da empresa",
+          "A sua empresa, do seu jeito",
+          "Organize o que você oferece",
+          "Seus trabalhos",
+          "Visualizar como cliente",
+          "Pronto para receber seus clientes?"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": [
+        {
+          "key": "/company-media/m_add82e61e692527d6d79fe9a ",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "route-configuracao-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "MS Auto Details • Fictícia"
+          ],
+          "t": 326
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "MS Auto Details • Fictícia"
+          ],
+          "t": 478
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":true}",
+          "t": 47,
+          "end": 174,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/company_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 326,
+          "end": 464,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 326,
+          "end": 470,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1183,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/configuracao",
+        "overflow": 0,
+        "headings": [
+          "MS Auto Details • Fictícia",
+          "Informações e funcionamento"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "route-servicos-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "MS Auto Details • Fictícia"
+          ],
+          "t": 70
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "MS Auto Details • Fictícia"
+          ],
+          "t": 217
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/company_categories",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 61,
+          "end": 188,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/company_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 61,
+          "end": 202,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 61,
+          "end": 220,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/company_categories",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 221,
+          "end": 348,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1075,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/servicos",
+        "overflow": 0,
+        "headings": [
+          "MS Auto Details • Fictícia",
+          "Catálogo de serviços",
+          "Novo serviço"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": [
+        {
+          "key": "/rest/v1/rpc/company_categories {\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "route-manual-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "MS Auto Details • Fictícia"
+          ],
+          "t": 63
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "MS Auto Details • Fictícia"
+          ],
+          "t": 197
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/company_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 52,
+          "end": 189,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 53,
+          "end": 193,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{}",
+          "t": 791,
+          "end": 919,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/foundation_context",
+          "body": "{}",
+          "t": 921,
+          "end": 1063,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/permissions_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 1066,
+          "end": 1223,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/support_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 1530,
+          "end": 1659,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 2313,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/manual",
+        "overflow": 0,
+        "headings": [
+          "MS Auto Details • Fictícia",
+          "Manual de atendimento",
+          "Manual Central A · versão 2"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "route-faq-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "MS Auto Details • Fictícia"
+          ],
+          "t": 74
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "MS Auto Details • Fictícia"
+          ],
+          "t": 208
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/company_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 62,
+          "end": 199,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 62,
+          "end": 204,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 868,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/faq",
+        "overflow": 0,
+        "headings": [
+          "MS Auto Details • Fictícia",
+          "Perguntas frequentes"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "route-respostas-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "MS Auto Details • Fictícia"
+          ],
+          "t": 86
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "MS Auto Details • Fictícia"
+          ],
+          "t": 220
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":true}",
+          "t": 59,
+          "end": 186,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/company_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 73,
+          "end": 209,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 75,
+          "end": 215,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 883,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/respostas",
+        "overflow": 0,
+        "headings": [
+          "MS Auto Details • Fictícia",
+          "Respostas rápidas"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "route-regras-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "MS Auto Details • Fictícia"
+          ],
+          "t": 67
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "MS Auto Details • Fictícia"
+          ],
+          "t": 201
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/company_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 57,
+          "end": 196,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 61,
+          "end": 203,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 862,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/regras",
+        "overflow": 0,
+        "headings": [
+          "MS Auto Details • Fictícia",
+          "Regras empresariais"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "route-ajuda-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Ajuda para sua rotina"
+          ],
+          "t": 69
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 55,
+          "end": 183,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 862,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500/ajuda",
+        "overflow": 0,
+        "headings": [
+          "Sua empresa está preparada",
+          "Ajuda para sua rotina",
+          "Seu jeito de atender",
+          "Você mantém o controle",
+          "Nenhum interessado esquecido",
+          "Uma conversa, um responsável",
+          "Prepare o atendimento humano",
+          "Entenda os indicadores"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "route-home-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando sua empresa…",
+            "Carregando sua empresa…",
+            "Carregando sua empresa…",
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 71
+        },
+        {
+          "statuses": [
+            "Carregando sua empresa…",
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 205
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 237
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/support_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 59,
+          "end": 188,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_section\":\"header\"}",
+          "t": 60,
+          "end": 191,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_section\":\"agenda\"}",
+          "t": 61,
+          "end": 196,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_section\":\"attention\"}",
+          "t": 61,
+          "end": 221,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\",\"p_section\":\"updates\"}",
+          "t": 63,
+          "end": 225,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"76f52150-2de6-4956-8c0b-b6bfc080a500\"}",
+          "t": 63,
+          "end": 230,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 970,
+      "final": {
+        "url": "/painel/76f52150-2de6-4956-8c0b-b6bfc080a500",
+        "overflow": 0,
+        "headings": [
+          "O que fazer hoje?",
+          "Agenda de hoje",
+          "Amanhã",
+          "Precisa da sua atenção",
+          "Últimas atualizações"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "public-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 1
+        },
+        {
+          "statuses": [],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 37
+        },
+        {
+          "statuses": [
+            "Preparando sua experiênciaCarregando com segurança…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [
+            "Preparando sua experiência"
+          ],
+          "t": 314
+        },
+        {
+          "statuses": [
+            "Preparando seu atendimento…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 624
+        },
+        {
+          "layoutShift": 0.12,
+          "t": 626
+        },
+        {
+          "statuses": [],
+          "shell": false,
+          "home": false,
+          "headings": [
+            "MS Auto Details • Fictícia Serviços que fazem a diferença."
+          ],
+          "t": 771
+        },
+        {
+          "layoutShift": 0.16886039886039886,
+          "t": 773
+        },
+        {
+          "layoutShift": 0.05637959401709402,
+          "t": 889
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/consumer_public_page",
+          "body": "{\"p_slug\":\"ms-auto-ficticia\"}",
+          "t": 605,
+          "end": 734,
+          "status": 200
+        },
+        {
+          "path": "/media/m_af0937c7b77acb9357ec6529",
+          "body": null,
+          "t": 746,
+          "end": 873,
+          "status": 200
+        },
+        {
+          "path": "/media/m_add82e61e692527d6d79fe9a",
+          "body": null,
+          "t": 746,
+          "end": 875,
+          "status": 200
+        },
+        {
+          "path": "/media/m_e8cabd5cdaf1631a75f99c20",
+          "body": null,
+          "t": 773,
+          "end": 900,
+          "status": 200
+        },
+        {
+          "path": "/media/m_f26ff678bf23c4834c4c5031",
+          "body": null,
+          "t": 774,
+          "end": 901,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1561,
+      "final": {
+        "url": "/empresa/ms-auto-ficticia",
+        "overflow": 0,
+        "headings": [
+          "MS Auto Details • Fictícia Serviços que fazem a diferença.",
+          "Encontre o serviço que precisa.",
+          "Conheça nosso trabalho.",
+          "Do primeiro contato ao atendimento.",
+          "Antes de começar."
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    }
+  ]
+}

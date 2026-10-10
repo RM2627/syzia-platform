@@ -1,0 +1,55 @@
+-- Separate genuine consumer ownership from any staff authority for direct row reads.
+create function private.consumer_owner(p_request uuid) returns boolean language sql stable security definer set search_path='' as $$
+ select private.consumer_identity() and exists(select 1 from public.quote_requests q join public.organizations o on o.id=q.organization_id join public.customers c on c.id=q.customer_id where q.id=p_request and o.status='active' and (c.user_id=auth.uid() or exists(select 1 from public.customer_access a join public.request_access_tokens t on t.id=a.token_id where a.request_id=q.id and a.user_id=auth.uid() and t.request_id=q.id and t.revoked_at is null and t.expires_at>now())));$$;
+create function private.customer_owner(p_customer uuid) returns boolean language sql stable security definer set search_path='' as $$select private.consumer_identity() and exists(select 1 from public.customers c join public.organizations o on o.id=c.organization_id where c.id=p_customer and o.status='active' and c.user_id=auth.uid());$$;
+create or replace function private.central_staff(p_org uuid) returns boolean language sql stable security definer set search_path='' as $$select private.permission_allowed(p_org,'central.read') and (private.permission_manager(p_org) or private.central_eligible(p_org,auth.uid()) or private.permission_role(p_org,auth.uid())='colaborador_empresa');$$;
+-- Explicit defaults are stored once. Re-activation does not restore revoked grants.
+create trigger permissions_seed after insert or update of is_attendant on public.organization_members for each row execute function private.permissions_seed();
+create trigger permissions_seed after insert on public.attendant_organizations for each row execute function private.permissions_seed();
+insert into private.organization_permissions(organization_id,user_id,action,scope,granted)
+ select m.organization_id,m.user_id,c.action,'organization',true from public.organization_members m cross join private.permission_catalog c where
+ (m.is_attendant and c.action=any(array['central.read','central.reply','central.manage','quotes.read','quotes.values','quotes.manage','agenda.read','agenda.manage','followup.read','followup.manage','clients.read'])) or
+ (not m.is_attendant and c.action=any(array['services.read','settings.read'])) on conflict do nothing;
+insert into private.organization_permissions(organization_id,user_id,action,scope,granted)
+ select m.organization_id,m.user_id,c.action,'organization',true from public.attendant_organizations m cross join private.permission_catalog c where c.action=any(array['central.read','central.reply','central.manage','quotes.read','quotes.values','quotes.manage','agenda.read','agenda.manage','followup.read','followup.manage','clients.read']) on conflict do nothing;
+-- Existing unsupported shared assignments remain in history, but cease to authorize access.
+do $$declare o uuid;begin for o in select id from public.organizations loop perform private.suspend_shared(o);end loop;end;$$;
+-- Queue filtering happens before paging/aggregation, so inaccessible tenants never affect counts.
+do $$declare d text;begin
+ d=pg_get_functiondef('public.central_queue(uuid,text,text,boolean,integer,text,date)'::regprocedure);d=replace(d,'private.central_staff(', 'private.central_staff(');execute d;
+ d=pg_get_functiondef('public.commercial_list(jsonb,integer)'::regprocedure);d=replace(d,'private.central_staff(o.organization_id)','private.permission_allowed(o.organization_id,''followup.read'')');d=replace(d,'private.central_staff(id)','private.permission_allowed(id,''followup.read'')');d=replace(d,'''value'',(select total_cents from public.quote_versions where request_id=q.id order by version desc limit 1)', '''value'',case when private.permission_allowed(o.organization_id,''quotes.values'') then (select total_cents from public.quote_versions where request_id=q.id order by version desc limit 1) end');execute d;
+ d=pg_get_functiondef('public.commercial_refresh(uuid,uuid)'::regprocedure);d=replace(d,'private.central_staff(p_org)','private.permission_allowed(p_org,''followup.manage'')');d=replace(d,'private.central_staff(organization_id)','private.permission_allowed(organization_id,''followup.manage'')');execute d;
+ d=pg_get_functiondef('public.consumer_gateway_company_media(text,uuid,boolean)'::regprocedure);
+ d=replace(d,'not private.company_can_manage(m.organization_id)', 'not(case when p_write then private.permission_allowed(m.organization_id,''portfolio.manage'')or private.permission_allowed(m.organization_id,''page.manage'')else private.permission_allowed(m.organization_id,''portfolio.read'')or private.permission_allowed(m.organization_id,''page.read'')end)');execute d;
+ -- Home is a permission-aware composition of existing modules.
+ d=pg_get_functiondef('public.operations_home(uuid)'::regprocedure);d=replace(d,'not private.company_can_manage(p_org)','not private.permission_allowed(p_org,''home.read'')');d=replace(d,'agenda=public.operations_agenda(p_org,today,today+1);','agenda=case when private.permission_allowed(p_org,''agenda.read'')then public.operations_agenda(p_org,today,today+1)else jsonb_build_object(''appointments'',''[]''::jsonb,''resources'',''[]''::jsonb,''timezone'',tz)end;');
+ d=replace(d,'where a.organization_id=p_org and a.kind=', 'where private.permission_allowed(p_org,''agenda.read'') and a.organization_id=p_org and a.kind=');d=replace(d,'where e.organization_id=p_org and e.responded_at','where private.permission_allowed(p_org,''pending.read'') and e.organization_id=p_org and e.responded_at');d=replace(d,'where q.organization_id=p_org and q.state','where private.permission_allowed(p_org,''quotes.read'') and q.organization_id=p_org and q.state');d=replace(d,'where n.organization_id=p_org order by','where n.organization_id=p_org and private.permission_manager(p_org) order by');execute d;
+ -- Preserve the consumer projection and tracking rules; staff must have the module grant.
+ d=pg_get_functiondef('public.consumer_request_context(text)'::regprocedure);d=replace(d,'begin perform private.consumer_request(p_code);return private.central_request_context_core(p_code);', 'begin select * into q from public.quote_requests where public_code=p_code; if not private.consumer_owner(q.id) then perform private.permission_require(q.organization_id,''quotes.read'');end if; perform private.consumer_request(p_code); if not private.consumer_owner(q.id) and not private.permission_allowed(q.organization_id,''quotes.values'') then return private.permission_redact(private.central_request_context_core(p_code));end if;return private.central_request_context_core(p_code);');execute d;
+end;$$;
+-- Return only the granted modules; revision metadata is safe for a service-only editor.
+create or replace function public.company_context(p_org uuid)returns jsonb language plpgsql stable security definer set search_path=''as $$begin
+ if not private.company_can_read(p_org)then raise exception 'permission_denied'using errcode='42501';end if;
+ return jsonb_build_object('editable',private.permission_manager(p_org),
+ 'settings',(select case when private.permission_allowed(p_org,'settings.read')then to_jsonb(c)else jsonb_build_object('organization_id',p_org,'revision',c.revision,'published_manual_id',case when private.permission_allowed(p_org,'page.read')then c.published_manual_id end)end from public.company_settings c where organization_id=p_org),
+ 'rules',(select to_jsonb(c)from public.business_rules c where organization_id=p_org and private.permission_allowed(p_org,'settings.read')),
+ 'permissions',(select to_jsonb(c)from public.attendant_permissions c where organization_id=p_org and private.permission_allowed(p_org,'settings.read')),
+ 'checklist',case when private.permission_allowed(p_org,'settings.read')then public.company_readiness(p_org)else '{}'::jsonb end,
+ 'categories',case when private.permission_allowed(p_org,'services.read')then public.company_categories(p_org)else '[]'::jsonb end,
+ 'services',coalesce((select jsonb_agg(to_jsonb(c)order by name,id)from public.services c where organization_id=p_org and private.permission_allowed(p_org,'services.read')),'[]'::jsonb),
+ 'addons',coalesce((select jsonb_agg(to_jsonb(c)order by name,id)from public.service_addons c where organization_id=p_org and private.permission_allowed(p_org,'services.read')),'[]'::jsonb),
+ 'fields',coalesce((select jsonb_agg(to_jsonb(c)order by position,id)from public.service_intake_fields c where organization_id=p_org and private.permission_allowed(p_org,'services.read')),'[]'::jsonb),
+ 'manuals',coalesce((select jsonb_agg(to_jsonb(c)order by version desc)from public.manual_versions c where organization_id=p_org and private.permission_allowed(p_org,'settings.read')and(status='published'or private.permission_allowed(p_org,'settings.manage'))),'[]'::jsonb),
+ 'sections',coalesce((select jsonb_agg(to_jsonb(c)order by section_key)from public.manual_sections c where organization_id=p_org and private.permission_allowed(p_org,'settings.read')and(private.permission_allowed(p_org,'settings.manage')or exists(select 1 from public.manual_versions m where m.id=c.manual_id and m.status='published'))),'[]'::jsonb),
+ 'faqs',coalesce((select jsonb_agg(to_jsonb(c)order by position,id)from public.faqs c where organization_id=p_org and private.permission_allowed(p_org,'settings.read')),'[]'::jsonb),
+ 'replies',coalesce((select jsonb_agg(to_jsonb(c)order by title,id)from public.quick_replies c where organization_id=p_org and private.permission_allowed(p_org,'settings.read')),'[]'::jsonb));end;$$;
+
+-- Empty verification scaffolding must not make an otherwise empty organization undeletable.
+-- Any document, review, command, grant or business history remains protected by the existing guard.
+do $$declare d text;begin
+ d=pg_get_functiondef('private.organization_delete_blocked(uuid)'::regprocedure);
+ d=replace(d,'begin', 'begin if exists(select 1 from private.organization_verifications where organization_id=p_org and(fingerprint is not null or revision<>0 or state not in(''pending'',''legacy'')))then return true;end if;');
+ d=replace(d,'and not (n.nspname=''public'' and c.relname=''audit_logs'')','and not (n.nspname=''public'' and c.relname=''audit_logs'') and not(n.nspname=''private'' and c.relname=''organization_verifications'')');execute d;
+ d=pg_get_functiondef('public.access_delete_organization(uuid,text)'::regprocedure);d=replace(d,'delete from private.enterprise_codes where organization_id=p_org;', 'delete from private.organization_verifications where organization_id=p_org and fingerprint is null and revision=0 and state in(''pending'',''legacy''); delete from private.enterprise_codes where organization_id=p_org;');execute d;
+ d=pg_get_functiondef('public.support_context(uuid)'::regprocedure);d=replace(d,'begin','begin if global_ and exists(select 1 from public.organizations where id=p_org and status=''suspended'')then raise exception ''organization_suspended''using errcode=''42501'';end if;');execute d;
+end;$$;

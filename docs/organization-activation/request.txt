@@ -1,0 +1,1369 @@
+CORREÇÃO PÓS-HOMOLOGAÇÃO REAL — VIRELOQ
+ATIVAÇÃO DE EMPRESAS, PRIMEIRO ADMINISTRADOR, PRIMEIRO ACESSO,
+GESTÃO PELO SUPER ADMIN, AUDITORIA E CICLO DE VIDA
+
+IMPORTANTE:
+
+Esta solicitação é uma CORREÇÃO INCREMENTAL FUNCIONAL sobre a última
+versão completa da VIRELOQ, já contendo a migration 026 e o novo modelo
+de acesso empresarial.
+
+A migration 026 já foi aplicada no ambiente real de homologação.
+
+O novo acesso do Super Admin foi homologado com sucesso no Supabase real
+após criação de uma identidade Auth limpa e execução do bootstrap oficial.
+
+NÃO reconstruir a autenticação do zero.
+
+NÃO retornar ao modelo de convite por e-mail.
+
+NÃO alterar migrations 001–026 já existentes.
+
+Se alguma mudança de schema for realmente indispensável, criar migration
+027 incremental.
+
+Não acessar nem modificar o Supabase real.
+
+Não realizar deploy.
+
+Não utilizar credenciais reais.
+
+Não produzir vídeo.
+
+O vídeo continua SUSPENSO.
+
+==================================================
+1. CONTEXTO DA HOMOLOGAÇÃO REAL
+==================================================
+
+Durante a homologação real da versão com enterprise access, o fluxo de
+Super Admin funcionou.
+
+Entretanto, foram encontrados problemas e lacunas na jornada de criação
+e ativação de empresas.
+
+O objetivo desta correção é resolver esses pontos SEM modificar os
+princípios já aprovados:
+
+LOGIN NORMAL:
+
+Código da empresa
++
+Username
++
+Senha
+
+PRIMEIRO ACESSO / REDEFINIÇÃO:
+
+Código da empresa
++
+Username
++
+Código temporário
+→ definição da senha definitiva.
+
+O usuário empresarial é previamente PROVISIONADO.
+
+Primeiro acesso NÃO cria uma segunda conta.
+
+==================================================
+2. CRIAÇÃO DE EMPRESA — DOIS MODOS
+==================================================
+
+O Super Admin deve poder criar uma empresa de DUAS maneiras:
+
+A) Empresa + primeiro Administrador
+
+ou
+
+B) Empresa sem Administrador inicial.
+
+O primeiro Administrador NÃO deve ser obrigatório para a existência da
+organização.
+
+==================================================
+3. EMPRESA SEM ADMINISTRADOR
+==================================================
+
+Quando o Super Admin criar uma empresa sem Administrador:
+
+- criar normalmente a organização;
+- gerar seu código empresarial;
+- preservar trial/plano conforme regras existentes;
+- não criar usuário fictício;
+- não criar Administrador fantasma;
+- não criar membership artificial.
+
+A empresa deve ficar claramente identificada como:
+
+“Aguardando administrador”
+
+ou equivalente.
+
+Também deve ser apresentada como estando:
+
+“Sob gestão da VIRELOQ”
+
+enquanto não possuir Administrador empresarial.
+
+==================================================
+4. SUPER ADMIN PODE ABRIR EMPRESA SEM ADM
+==================================================
+
+Uma organização sem Administrador empresarial deve continuar acessível ao
+Super Admin.
+
+Na Administração VIRELOQ, o Super Admin deve poder:
+
+- visualizar a empresa;
+- abrir seu ambiente;
+- configurar o que suas permissões globais já autorizarem;
+- acompanhar seu estado;
+- posteriormente definir o primeiro Administrador.
+
+Não obrigar a criação de um ADM somente para o Super Admin conseguir
+visualizar a empresa.
+
+Não criar membership empresarial fictício para o Super Admin se o papel
+global existente já autorizar essa operação.
+
+Preservar RLS e autorização server-side.
+
+==================================================
+5. DEFINIR ADMINISTRADOR POSTERIORMENTE
+==================================================
+
+Empresa criada sem ADM deve possuir ação clara:
+
+“Definir administrador”
+
+ou equivalente.
+
+Essa ação deve permitir informar:
+
+Nome
+Sobrenome
+Username
+E-mail obrigatório
+Telefone opcional
+
+Ao concluir, deve utilizar exatamente o mesmo mecanismo seguro de
+provisionamento utilizado quando o ADM é criado junto com a empresa.
+
+==================================================
+6. SLUG / IDENTIFICADOR PÚBLICO AUTOMÁTICO
+==================================================
+
+Na criação da empresa, o campo do identificador público não deve exigir
+que o Super Admin conheça manualmente o formato esperado.
+
+Ao preencher:
+
+Nome da empresa:
+MS Auto Details
+
+a interface deve sugerir automaticamente:
+
+ms-auto-details
+
+como identificador/slug público.
+
+Mostrar visualmente a finalidade, por exemplo:
+
+Endereço público:
+ /empresa/ms-auto-details
+
+O slug sugerido deve:
+
+- ser normalizado;
+- utilizar formato compatível com URL;
+- remover/normalizar acentos quando necessário;
+- converter espaços adequadamente;
+- evitar caracteres inválidos;
+- validar conflito;
+- continuar editável pelo Super Admin antes da criação.
+
+Se o nome for alterado ANTES da criação e o slug ainda não tiver sido
+editado manualmente, atualizar a sugestão automaticamente.
+
+Depois que o Super Admin editar manualmente o slug, não sobrescrever sua
+edição automaticamente.
+
+Não confundir SLUG PÚBLICO com CÓDIGO EMPRESARIAL.
+
+==================================================
+7. CÓDIGO DA EMPRESA
+==================================================
+
+Cada empresa deve possuir o código empresarial definido na arquitetura
+da migration 026.
+
+Exemplo conceitual:
+
+MSA7K2
+
+Esse código:
+
+- é diferente do slug;
+- identifica o tenant durante o login;
+- não é uma senha;
+- não deve ser escolhido manualmente pelo cliente;
+- deve ser gerado pelo mecanismo seguro já implementado;
+- deve possuir unicidade;
+- deve ser exibido claramente ao Super Admin depois da criação.
+
+Não substituir esse código pelo slug.
+
+==================================================
+8. CRIAÇÃO DE EMPRESA + PRIMEIRO ADM
+==================================================
+
+Quando o Super Admin escolher criar empresa JÁ COM Administrador inicial,
+a operação precisa concluir toda a preparação necessária.
+
+Fluxo esperado:
+
+Super Admin
+→ cria organização
+→ código empresarial é gerado
+→ identidade do ADM é provisionada
+→ profile é criado/preparado
+→ username é reservado
+→ membership admin_empresa é criado
+→ código temporário é gerado
+→ conta fica aguardando primeiro acesso.
+
+IMPORTANTE:
+
+O usuário do ADM JÁ EXISTE antes do primeiro acesso.
+
+Primeiro acesso NÃO cria outro auth.users.
+Primeiro acesso NÃO cria outro profile.
+Primeiro acesso NÃO cria outro membership.
+
+Ele apenas ATIVA a identidade previamente provisionada.
+
+==================================================
+9. FALHA PARCIAL ENCONTRADA NA HOMOLOGAÇÃO
+==================================================
+
+Na homologação real foi observado o seguinte comportamento:
+
+- o formulário de criação foi preenchido;
+- a organização foi criada;
+- ao final a interface informou que não foi possível concluir;
+- a empresa permaneceu cadastrada;
+- não ficou claro se o primeiro ADM havia sido completamente provisionado;
+- o código temporário não foi apresentado ao Super Admin.
+
+Corrigir essa experiência.
+
+A operação não pode deixar o usuário sem saber o que aconteceu.
+
+==================================================
+10. OPERAÇÃO RETOMÁVEL / IDEMPOTENTE
+==================================================
+
+Se organização for criada, mas uma etapa posterior do provisionamento do
+ADM falhar:
+
+NÃO criar outra organização quando o Super Admin tentar novamente.
+
+NÃO duplicar profile.
+NÃO duplicar Auth user.
+NÃO duplicar membership.
+NÃO duplicar trial.
+NÃO gerar estado inconsistente.
+
+A interface deve identificar o estado real e oferecer algo como:
+
+“Configuração incompleta”
+
+“Continuar configuração”
+
+ou ação equivalente.
+
+Reutilizar a infraestrutura de retomada/idempotência já implementada na
+026 quando aplicável.
+
+==================================================
+11. ERRO PRECISA SER ESPECÍFICO E ÚTIL
+==================================================
+
+Não finalizar esse fluxo apenas com:
+
+“Não foi possível concluir.”
+
+quando o backend possui informação segura suficiente para indicar a etapa
+afetada.
+
+Sem revelar detalhes sensíveis, distinguir situações como:
+
+- organização criada, administrador pendente;
+- username em conflito;
+- e-mail administrativo inválido;
+- provisionamento temporariamente indisponível;
+- código temporário não gerado;
+- operação já concluída;
+- configuração incompleta recuperável.
+
+Não expor detalhes internos de segurança.
+
+==================================================
+12. CÓDIGO TEMPORÁRIO DO PRIMEIRO ADM
+==================================================
+
+Ao provisionar o primeiro Administrador, gerar obrigatoriamente o código
+temporário utilizando a infraestrutura segura já implementada.
+
+Preservar as regras atuais:
+
+- 48 horas por padrão;
+- cinco tentativas por padrão;
+- armazenamento somente do hash;
+- uso único;
+- novo código invalida o anterior;
+- não registrar código em claro em logs;
+- não permitir recuperação posterior do valor em claro.
+
+==================================================
+13. TELA DE SUCESSO DA ATIVAÇÃO
+==================================================
+
+Quando a empresa e seu primeiro ADM forem preparados com sucesso, mostrar
+uma confirmação clara.
+
+Exemplo conceitual:
+
+EMPRESA ATIVADA
+
+Empresa:
+MS Auto Details
+
+Código da empresa:
+MSA7K2
+
+Administrador:
+João Silva
+
+Usuário:
+joao.silva
+
+Código temporário:
+8KPX-42MD
+
+Válido até:
+[data/hora]
+
+[ Copiar instruções de acesso ]
+
+[ Abrir empresa ]
+
+Não hardcodar esses dados.
+
+O código temporário em claro deve aparecer somente conforme a política
+segura de entrega já definida.
+
+==================================================
+14. PRIMEIRO ACESSO NÃO É NOVO CADASTRO
+==================================================
+
+Este requisito é fundamental.
+
+Quando o Administrador recebe:
+
+Código da empresa
+Username
+Código temporário
+
+e realiza o primeiro acesso, ele NÃO está criando uma conta nova.
+
+A conta já foi criada/provisionada pelo Super Admin.
+
+O fluxo deve reconhecer:
+
+“Identidade existente aguardando ativação.”
+
+Depois da validação do código temporário, apresentar:
+
+Crie sua senha
+
+Nova senha
+Confirmar nova senha
+
+[ Ativar meu acesso ]
+
+Ao confirmar:
+
+- definir a senha definitiva utilizando Supabase Auth;
+- preservar o MESMO auth.users;
+- preservar o MESMO profile;
+- preservar o MESMO membership;
+- preservar o MESMO username;
+- preservar a MESMA organização;
+- invalidar definitivamente o código temporário;
+- marcar a conta como ativa;
+- registrar auditoria;
+- prosseguir para aceite legal quando aplicável;
+- liberar acesso ao painel.
+
+==================================================
+15. LOGIN DEPOIS DA ATIVAÇÃO
+==================================================
+
+Depois do primeiro acesso, o código temporário nunca mais deve funcionar.
+
+Login normal:
+
+Código da empresa
++
+Username
++
+Senha criada pelo próprio usuário.
+
+Preservar “Lembrar esta empresa” conforme implementação atual.
+
+==================================================
+16. ENVIO DAS INSTRUÇÕES POR E-MAIL
+==================================================
+
+Foi identificado um requisito omitido na revisão anterior.
+
+Todo Administrador possui e-mail obrigatório.
+
+Portanto, ao provisionar:
+- primeiro Administrador;
+- Administrador adicional;
+
+a VIRELOQ deve tentar enviar automaticamente as instruções de primeiro
+acesso ao e-mail cadastrado.
+
+O e-mail deve conter:
+
+- nome da empresa;
+- código da empresa;
+- username;
+- código temporário;
+- validade;
+- link/botão para abrir a tela oficial da VIRELOQ;
+- orientação de que a pessoa criará sua própria senha.
+
+==================================================
+17. E-MAIL NÃO VOLTA A SER A IDENTIDADE
+==================================================
+
+IMPORTANTE:
+
+Esse envio NÃO reintroduz o antigo modelo de convite por e-mail.
+
+O e-mail:
+- não é o username;
+- não substitui o código da empresa;
+- não autentica sozinho;
+- não cria a conta;
+- não deve conter link que conceda acesso sem código temporário;
+- não deve depender de magic link para provisionamento.
+
+A conta já existe.
+
+O e-mail é somente um CANAL DE ENTREGA das instruções.
+
+==================================================
+18. FALHA DE SMTP NÃO DESFAZ PROVISIONAMENTO
+==================================================
+
+Se o envio do e-mail falhar:
+
+- NÃO apagar empresa;
+- NÃO apagar ADM;
+- NÃO apagar membership;
+- NÃO gerar outro usuário;
+- NÃO considerar toda a ativação perdida.
+
+Mostrar ao Super Admin:
+
+“Administrador criado. Não foi possível enviar as instruções por e-mail.”
+
+e disponibilizar:
+
+[ Copiar instruções ]
+
+[ Reenviar instruções ]
+
+O Super Admin poderá enviar pelo WhatsApp ou outro canal.
+
+==================================================
+19. REENVIAR INSTRUÇÕES
+==================================================
+
+Adicionar ação apropriada para Administradores aguardando ativação.
+
+“Reenviar instruções”
+
+Respeitar:
+- rate limit;
+- estado atual;
+- validade;
+- segurança.
+
+Se for necessário gerar um NOVO código temporário, informar claramente
+ao Super Admin que o código anterior será invalidado.
+
+Nunca manter dois códigos válidos simultaneamente para a mesma geração de
+acesso.
+
+==================================================
+20. FUNCIONÁRIOS
+==================================================
+
+Preservar o fluxo já implementado para funcionários.
+
+Administrador empresarial:
+→ cria usuário
+→ identidade é provisionada
+→ código temporário é gerado
+→ funcionário ativa a MESMA identidade
+→ cria sua própria senha.
+
+E-mail continua opcional para usuários não administrativos.
+
+Não tornar SMTP requisito para funcionário comum.
+
+==================================================
+21. AUDITORIA GLOBAL — EXCLUSIVA DO SUPER ADMIN
+==================================================
+
+A aba/área “Auditoria” da Administração VIRELOQ deve ser EXCLUSIVA de
+usuários com papel global:
+
+super_admin ativo.
+
+Administradores empresariais NÃO devem visualizar essa opção.
+
+Colaboradores NÃO devem visualizar.
+
+Atendentes NÃO devem visualizar.
+
+Nenhum usuário empresarial deve acessar a Auditoria global.
+
+==================================================
+22. NÃO BASTA ESCONDER O MENU
+==================================================
+
+Proteger Auditoria em todas as camadas necessárias:
+
+- navegação;
+- rota;
+- RPC/API;
+- RLS/policies;
+- funções server-side.
+
+Um admin_empresa digitando a URL diretamente NÃO pode obter os dados.
+
+Uma chamada manual ao backend também NÃO pode retornar auditoria global.
+
+Não confiar apenas no React/frontend.
+
+==================================================
+23. EVENTOS CONTINUAM SENDO REGISTRADOS
+==================================================
+
+Restringir leitura não significa parar de auditar.
+
+Continuar registrando eventos relevantes, incluindo quando aplicável:
+
+- empresa criada;
+- empresa desativada;
+- empresa reativada;
+- tentativa/exclusão permitida;
+- Administrador provisionado;
+- usuário provisionado;
+- ativação;
+- redefinição;
+- mudança de papel;
+- aceite legal;
+- ações administrativas relevantes.
+
+O Super Admin continua podendo consultar a auditoria global.
+
+==================================================
+24. HISTÓRICO EMPRESARIAL É OUTRO CONCEITO
+==================================================
+
+Se existir ou futuramente existir histórico destinado ao ADM da empresa,
+não chamá-lo nem tratá-lo como Auditoria global da VIRELOQ.
+
+Ele deve ser:
+- separado;
+- limitado à própria organização;
+- autorizado server-side.
+
+Não ampliar escopo nesta correção se isso ainda não existir.
+
+==================================================
+25. CICLO DE VIDA DA EMPRESA
+==================================================
+
+O Super Admin precisa possuir ações distintas:
+
+DESATIVAR EMPRESA
+
+REATIVAR EMPRESA
+
+EXCLUIR PERMANENTEMENTE
+
+quando a exclusão for permitida.
+
+Essas ações têm significados diferentes.
+
+==================================================
+26. DESATIVAR EMPRESA
+==================================================
+
+Desativação:
+
+- NÃO apaga organização;
+- NÃO apaga histórico;
+- NÃO apaga trial;
+- NÃO apaga billing;
+- NÃO apaga auditoria;
+- bloqueia operação/acesso conforme regras existentes;
+- permite reativação posterior.
+
+Utilizar os estados/infraestrutura existentes sempre que possível.
+
+==================================================
+27. REATIVAR EMPRESA
+==================================================
+
+Super Admin deve poder reativar empresa previamente desativada quando as
+regras permitirem.
+
+Reativar:
+- não cria nova organização;
+- não cria novo trial;
+- não cria novos usuários;
+- preserva histórico.
+
+Registrar auditoria.
+
+==================================================
+28. EXCLUSÃO PERMANENTE
+==================================================
+
+Super Admin deve possuir autonomia para remover organizações criadas por
+engano, duplicadas ou exclusivamente para teste, quando for seguro.
+
+Exemplo real de homologação:
+
+Uma empresa foi criada durante teste, a preparação do ADM falhou e a
+organização permaneceu cadastrada.
+
+O Super Admin precisa conseguir limpar esse registro quando ele não possui
+histórico que obrigue preservação.
+
+==================================================
+29. EXCLUSÃO NÃO É DELETE CASCADE IRRESTRITO
+==================================================
+
+Não implementar botão que simplesmente execute DELETE CASCADE sobre
+qualquer empresa.
+
+Antes da exclusão permanente, verificar server-side:
+
+- existência de operação relevante;
+- clientes;
+- solicitações;
+- orçamentos;
+- agenda;
+- atendimentos;
+- billing;
+- trial;
+- aceites legais;
+- auditoria;
+- outros registros que precisem ser preservados.
+
+Empresas com histórico relevante devem preferencialmente ser
+desativadas/encerradas conforme regras aplicáveis.
+
+==================================================
+30. CONFIRMAÇÃO FORTE DE EXCLUSÃO
+==================================================
+
+Quando exclusão permanente for permitida, exigir confirmação explícita.
+
+Exemplo:
+
+Excluir permanentemente MS Auto Details?
+
+Esta ação não poderá ser desfeita.
+
+Para confirmar, digite:
+
+MS Auto Details
+
+[ __________________ ]
+
+[ Excluir permanentemente ]
+
+Não depender apenas de confirm() do navegador.
+
+==================================================
+31. TRIAL NÃO PODE SER REINICIADO POR EXCLUSÃO
+==================================================
+
+Este requisito é obrigatório.
+
+Excluir uma empresa NÃO pode apagar os registros mínimos necessários para
+impedir abuso de trial.
+
+Criar empresa
+→ consumir trial
+→ excluir empresa
+→ criar novamente
+
+NÃO pode resultar automaticamente em novo trial quando a elegibilidade
+existente impedir isso.
+
+Preservar:
+- fingerprints;
+- consumed keys;
+- elegibilidade;
+- evidências mínimas necessárias;
+- política existente.
+
+Não enfraquecer a proteção antifraude.
+
+==================================================
+32. EMPRESA RECÉM-CRIADA / CONFIGURAÇÃO INCOMPLETA
+==================================================
+
+Na Administração VIRELOQ, empresas sem ADM ou com provisionamento
+incompleto devem mostrar estado claro.
+
+Exemplos:
+
+“Aguardando administrador”
+
+“Configuração incompleta”
+
+“Sob gestão da VIRELOQ”
+
+Evitar mostrar simplesmente “Ativa” quando a jornada necessária ainda não
+foi concluída.
+
+Ações apropriadas:
+
+[ Abrir empresa ]
+[ Continuar configuração ]
+[ Definir administrador ]
+[ Desativar ]
+[ Excluir empresa ]
+
+Mostrar somente ações compatíveis com o estado real.
+
+==================================================
+33. LISTAGEM DE EMPRESAS
+==================================================
+
+Melhorar a listagem administrativa para permitir ao Super Admin entender
+rapidamente:
+
+- nome;
+- slug;
+- código empresarial;
+- estado operacional;
+- situação do Administrador;
+- situação de ativação;
+- plano/trial quando apropriado;
+- ações disponíveis.
+
+Não exibir informações sensíveis desnecessárias.
+
+==================================================
+34. EMPRESA COM ADM CONTINUA ACESSÍVEL AO SUPER ADMIN
+==================================================
+
+Depois que o primeiro ADM for ativado, o Super Admin NÃO perde acesso
+administrativo à organização.
+
+O papel global continua autorizando operações globais já previstas pela
+Fundação.
+
+Não criar membership artificial para isso.
+
+Preservar isolamento e auditoria.
+
+
+==================================================
+35. E-MAIL OBRIGATÓRIO PARA PAPEL ADMINISTRADOR
+==================================================
+
+Preservar a regra aprovada:
+
+Todo usuário que receber o papel Administrador da empresa deve possuir
+e-mail válido cadastrado.
+
+Isso vale para:
+- primeiro Administrador;
+- Administradores adicionados posteriormente;
+- usuário existente promovido para Administrador.
+
+Não permitir atribuir papel de Administrador empresarial sem e-mail.
+
+E-mail continua NÃO sendo a identidade principal de login.
+
+Login permanece:
+
+Código da empresa
++
+Username
++
+Senha.
+
+==================================================
+36. USERNAME DO ADMINISTRADOR
+==================================================
+
+Preservar o padrão:
+
+nome.sobrenome
+
+O sistema deve sugerir automaticamente o username com base no nome e
+sobrenome informados.
+
+Exemplo conceitual:
+
+Nome: João
+Sobrenome: Silva
+
+Sugestão:
+joao.silva
+
+O Super Admin pode editar antes da criação.
+
+Preservar:
+- normalização;
+- case-insensitive;
+- unicidade dentro da organização;
+- possibilidade do mesmo username em organizações diferentes.
+
+==================================================
+37. CRIAÇÃO DA IDENTIDADE AUTH DO ADM
+==================================================
+
+Ao conceder acesso ao Administrador, a identidade Auth necessária deve
+ser criada/provisionada automaticamente pelo backend da VIRELOQ.
+
+O Super Admin NÃO deve precisar:
+
+- entrar manualmente no Supabase;
+- criar auth.users manualmente;
+- definir senha definitiva;
+- executar SQL;
+- conhecer UUID;
+- criar profile manualmente;
+- criar membership manualmente.
+
+Toda essa preparação deve fazer parte do provisionamento da VIRELOQ.
+
+A senha definitiva será criada posteriormente pelo próprio ADM através
+do primeiro acesso.
+
+==================================================
+38. SENHA TEMPORÁRIA NÃO É SENHA DEFINITIVA
+==================================================
+
+O código temporário NÃO deve se tornar a senha permanente.
+
+Ele serve exclusivamente para comprovar que o usuário recebeu a
+credencial de ativação previamente provisionada.
+
+Depois de validado:
+
+Código da empresa
++
+Username
++
+Código temporário
+
+a interface deve abrir:
+
+Nova senha
+Confirmar nova senha
+
+[ Ativar meu acesso ]
+
+A senha definitiva deve respeitar a política de segurança configurada.
+
+==================================================
+39. PRIMEIRO LOGIN — EXPERIÊNCIA ESPERADA
+==================================================
+
+A experiência deve ser simples.
+
+Na tela de acesso:
+
+Código da empresa
+Username
+Senha ou código de primeiro acesso
+
+[ Entrar ]
+
+Se a identidade estiver ativa:
+→ tratar o terceiro campo como senha normal.
+
+Se a identidade estiver aguardando ativação:
+→ validar o terceiro campo como código temporário.
+
+Se o código temporário estiver correto:
+→ NÃO entrar diretamente no painel;
+→ abrir etapa de criação da senha.
+
+Apresentar:
+
+Crie sua senha
+
+Nova senha
+Confirmar nova senha
+
+[ Confirmar e ativar ]
+
+Depois:
+→ invalidar código temporário;
+→ ativar conta;
+→ realizar aceite legal quando pendente;
+→ iniciar sessão;
+→ abrir plataforma.
+
+Evitar exigir que o usuário descubra uma rota diferente de primeiro
+acesso se isso não for necessário.
+
+==================================================
+40. NÃO CONFUNDIR CÓDIGOS
+==================================================
+
+Existem dois códigos diferentes:
+
+A) CÓDIGO DA EMPRESA
+
+Exemplo conceitual:
+MSA7K2
+
+- estável;
+- identifica organização;
+- usado nos logins;
+- não expira com cada usuário.
+
+B) CÓDIGO TEMPORÁRIO DO USUÁRIO
+
+Exemplo conceitual:
+8KPX-42MD
+
+- pertence a uma ativação/redefinição;
+- expira;
+- uso único;
+- serve para criar nova senha.
+
+Interface, documentação e mensagens devem deixar essa diferença evidente.
+
+==================================================
+41. TERMOS E POLÍTICA NO PRIMEIRO ADM
+==================================================
+
+Preservar a implementação da migration 026.
+
+Depois que o primeiro Administrador criar sua senha e ativar a identidade,
+se existir aceite institucional pendente:
+
+→ apresentar Termos de Uso;
+→ apresentar Política de Privacidade;
+→ registrar versões e aceite;
+→ somente depois liberar operação normal.
+
+Não exigir que o código temporário seja reutilizado para essa etapa.
+
+==================================================
+42. SUPER ADMIN NÃO ACEITA TERMOS PELA EMPRESA
+==================================================
+
+Quando uma empresa estiver sem ADM e sob gestão da VIRELOQ, não inventar
+aceite institucional em nome da empresa.
+
+O Super Admin pode preparar a organização, mas o aceite institucional
+previsto para o cliente deve ocorrer pelo Administrador autorizado quando
+ele for provisionado/ativado.
+
+Preservar o estado pendente até isso acontecer.
+
+==================================================
+43. SEGURANÇA E AUTORIZAÇÃO
+==================================================
+
+Todas as novas ações devem possuir autorização server-side.
+
+Testar especialmente:
+
+- Super Admin cria empresa sem ADM;
+- Super Admin abre empresa sem ADM;
+- admin_empresa não cria organização arbitrária;
+- admin_empresa não acessa Auditoria global;
+- funcionário não acessa Auditoria;
+- usuário não muda organization_id;
+- usuário não escolhe role durante ativação;
+- código temporário não ativa outra identidade;
+- código empresarial de A não autentica usuário de B;
+- exclusão de empresa é exclusiva do Super Admin;
+- desativação bloqueia acesso;
+- reativação não cria trial;
+- primeiro acesso não cria identidade duplicada.
+
+Não reduzir RLS.
+Não remover FORCE RLS.
+Não conceder permissões amplas para fazer a interface funcionar.
+
+==================================================
+44. TESTES — CRIAÇÃO DE EMPRESA
+==================================================
+
+Adicionar testes para:
+
+A. nome gera sugestão de slug;
+B. alteração do nome atualiza slug enquanto ele não foi editado;
+C. edição manual do slug é preservada;
+D. slug inválido é recusado;
+E. conflito de slug é tratado;
+F. empresa recebe código empresarial;
+G. código empresarial é diferente do slug;
+H. empresa pode ser criada sem ADM;
+I. empresa sem ADM fica “Aguardando administrador”;
+J. Super Admin consegue abrir empresa sem ADM;
+K. empresa sem ADM não possui usuário fictício;
+L. primeiro ADM pode ser definido posteriormente.
+
+==================================================
+45. TESTES — EMPRESA + PRIMEIRO ADM
+==================================================
+
+Testar:
+
+A. criação da organização;
+B. geração do código empresarial;
+C. criação/provisionamento da identidade Auth;
+D. profile;
+E. username;
+F. membership admin_empresa;
+G. e-mail obrigatório;
+H. código temporário;
+I. validade;
+J. cinco tentativas;
+K. tela de sucesso;
+L. copiar instruções;
+M. tentativa de envio por e-mail;
+N. falha SMTP preservando o provisionamento;
+O. reenvio;
+P. retomada após falha parcial.
+
+==================================================
+46. TESTES — PRIMEIRO ACESSO
+==================================================
+
+Confirmar explicitamente que:
+
+- a identidade Auth existe ANTES do primeiro acesso;
+- o primeiro acesso utiliza a mesma identidade;
+- nenhum segundo auth.users é criado;
+- nenhum segundo profile é criado;
+- nenhum segundo membership é criado;
+- código correto libera criação da senha;
+- código errado não libera;
+- código expirado não libera;
+- código já utilizado não libera;
+- confirmação de senha divergente é recusada;
+- sucesso invalida código;
+- login posterior utiliza a nova senha.
+
+==================================================
+47. TESTES — AUDITORIA
+==================================================
+
+Testar:
+
+Super Admin:
+→ vê Auditoria;
+→ abre rota;
+→ consulta dados autorizados.
+
+admin_empresa:
+→ não vê menu;
+→ rota é recusada;
+→ RPC/API é recusada.
+
+colaborador:
+→ recusado.
+
+atendente:
+→ recusado.
+
+Testar tentativa direta, não apenas visibilidade da interface.
+
+==================================================
+48. TESTES — CICLO DE VIDA DA EMPRESA
+==================================================
+
+Testar:
+
+- desativação;
+- acesso após desativação;
+- reativação;
+- preservação de identidade;
+- preservação de trial;
+- tentativa de exclusão por admin_empresa;
+- exclusão pelo Super Admin quando permitida;
+- recusa de exclusão quando histórico exigir preservação;
+- confirmação forte;
+- organização de teste/configuração incompleta;
+- proteção contra novo trial após exclusão.
+
+==================================================
+49. REGRESSÃO
+==================================================
+
+Executar regressão sobre:
+
+- Super Admin;
+- login empresarial;
+- primeiro acesso;
+- redefinição;
+- sessão/inatividade;
+- Termos;
+- Privacidade;
+- trial;
+- billing;
+- página pública;
+- serviços;
+- portfólio;
+- clientes;
+- orçamentos;
+- agenda;
+- atendimento;
+- comercial;
+- métricas;
+- onboarding;
+- Storage;
+- imagens;
+- rascunhos;
+- RLS;
+- FORCE RLS;
+- identidade VIRELOQ.
+
+==================================================
+50. MIGRATIONS
+==================================================
+
+Migrations 001–026 já existem e a 026 já foi aplicada na homologação real.
+
+NÃO alterar nenhum arquivo 001–026.
+
+Se esta correção puder ser feita sem alteração de schema:
+
+NÃO criar migration 027.
+
+Se for realmente necessária mudança persistente de schema, função,
+constraint ou policy:
+
+criar SOMENTE migration incremental 027.
+
+Nunca pedir reset.
+
+Nunca pedir reaplicação das migrations 001–026.
+
+Documentar exatamente a necessidade da 027.
+
+==================================================
+51. AMBIENTE REAL
+==================================================
+
+Não acessar Supabase real.
+
+Não executar migration remota.
+
+Não criar usuário real.
+
+Não enviar e-mail real.
+
+Não alterar Auth real.
+
+Não modificar dados de homologação.
+
+A execução externa será feita pelo proprietário após a entrega.
+
+==================================================
+52. ENTREGA
+==================================================
+
+Entregar novamente UM ZIP COMPLETO E CONSOLIDADO da VIRELOQ.
+
+NÃO entregar apenas patch.
+
+Utilizar como base a última versão completa entregue e incorporar estas
+correções.
+
+Preservar tudo que não foi alterado.
+
+Os arquivos `.env` e `.env.server` preenchidos pertencem somente ao
+ambiente local do proprietário e não foram fornecidos.
+
+Não inventar nem incluir credenciais.
+
+==================================================
+53. RELATÓRIO
+==================================================
+
+Entregar relatório contendo:
+
+1. causa da falha parcial observada na criação empresa + ADM;
+2. correção aplicada;
+3. funcionamento da criação sem ADM;
+4. estado “Aguardando administrador”;
+5. acesso do Super Admin à empresa sem ADM;
+6. geração automática de slug;
+7. geração/exibição do código empresarial;
+8. provisionamento do primeiro ADM;
+9. confirmação de que Auth user já existe antes do primeiro acesso;
+10. geração do código temporário;
+11. criação da senha pelo próprio ADM;
+12. envio das instruções por e-mail;
+13. comportamento quando SMTP falha;
+14. reenvio;
+15. retomada de configuração incompleta;
+16. restrição da Auditoria ao Super Admin;
+17. desativação/reativação;
+18. exclusão permanente e suas proteções;
+19. proteção de trial;
+20. migrations alteradas/adicionadas;
+21. testes executados;
+22. resultados;
+23. itens ainda dependentes de homologação real.
+
+==================================================
+54. GUIA DE ATUALIZAÇÃO
+==================================================
+
+Entregar instruções específicas para atualizar a instalação que já está
+na versão 026.
+
+Se não houver migration 027:
+→ deixar isso explícito.
+
+Se houver 027:
+→ orientar executar SOMENTE 027.
+
+Não mandar reaplicar 001–026.
+
+Depois orientar:
+- preservar configurações locais;
+- atualizar arquivos;
+- build;
+- iniciar backends/frontend;
+- testar Super Admin;
+- testar criação sem ADM;
+- testar criação com ADM;
+- testar primeiro acesso;
+- testar Auditoria;
+- testar desativação/exclusão.
+
+==================================================
+55. VÍDEO
+==================================================
+
+O vídeo continua SUSPENSO.
+
+NÃO criar.
+NÃO renderizar.
+NÃO atualizar.
+NÃO retomar.
+
+O vídeo será solicitado somente depois da homologação real dessas
+correções.
+
+==================================================
+56. CRITÉRIOS FINAIS DE ACEITE
+==================================================
+
+A correção somente estará pronta para homologação quando:
+
+- empresa puder ser criada com ou sem ADM;
+- slug for sugerido automaticamente;
+- código empresarial for gerado e exibido;
+- empresa sem ADM ficar sob gestão VIRELOQ;
+- Super Admin conseguir abrir essa empresa;
+- primeiro ADM puder ser definido depois;
+- criação empresa + ADM não deixar estado silenciosamente parcial;
+- falha parcial puder ser retomada;
+- usuário Auth do ADM existir antes do primeiro acesso;
+- primeiro acesso não criar segunda identidade;
+- código temporário for apresentado;
+- ADM conseguir criar sua própria senha;
+- código temporário morrer após uso;
+- instruções puderem ser copiadas;
+- instruções forem tentadas por e-mail para ADM;
+- falha SMTP não apagar provisionamento;
+- Auditoria global aparecer somente para Super Admin;
+- acesso direto à Auditoria por usuário empresarial for bloqueado;
+- Super Admin puder desativar e reativar empresas;
+- exclusão segura existir para empresas elegíveis;
+- exclusão não reiniciar trial;
+- RLS/FORCE RLS permanecerem fortes;
+- módulos existentes não sofrerem regressão;
+- build passar;
+- testes pertinentes passarem;
+- ZIP entregue for completo;
+- vídeo continuar suspenso.
+
+==================================================
+57. REGRA FINAL
+==================================================
+
+Esta solicitação corrige problemas observados durante HOMOLOGAÇÃO REAL.
+
+Não utilizar a tarefa como autorização para redesenhar novamente toda a
+VIRELOQ.
+
+Preservar a arquitetura enterprise access da migration 026.
+
+Preservar:
+- Super Admin;
+- organizações;
+- memberships;
+- papéis;
+- autenticação empresarial;
+- sessões;
+- trial;
+- billing;
+- Termos/Privacidade;
+- página pública;
+- módulos operacionais;
+- branding;
+- segurança existente.
+
+Corrigir especificamente:
+- criação e ativação de empresas;
+- slug automático;
+- empresa sem ADM;
+- primeiro Administrador;
+- primeiro acesso;
+- entrega das instruções;
+- falhas parciais;
+- Auditoria global;
+- ciclo de vida da empresa.
+
+NÃO fazer deploy.
+NÃO acessar Supabase real.
+NÃO inventar credenciais.
+NÃO executar cobrança.
+NÃO produzir vídeo.
+
+Entregar o projeto completo consolidado e PARAR.
+
+A próxima etapa será novamente a homologação real pelo proprietário.

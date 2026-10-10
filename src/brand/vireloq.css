@@ -1,0 +1,536 @@
+/* Institutional scope only: a client's public brand remains authoritative. */
+.v-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  line-height: 1.1;
+  text-align: left;
+}
+.v-brand img {
+  flex: none;
+}
+.v-brand strong {
+  font-size: 23px;
+  letter-spacing: 0.055em;
+  font-weight: 750;
+}
+.v-brand small {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+  margin-top: 8px;
+}
+.app-shell {
+  --ink: #2b2b36;
+  --muted: #626078;
+  --line: #e4e1ee;
+  --accent: #6c4dff;
+  color: var(--ink);
+}
+.app-shell a {
+  color: #5033c4;
+}
+.app-shell aside {
+  background: #0b0b14;
+}
+.app-shell aside .brand,
+.app-shell aside a {
+  color: #e6e0fa;
+}
+.app-shell aside a.active {
+  background: #382b69;
+  color: white;
+}
+.app-shell aside .sidebar-bottom {
+  color: #eee9fb;
+}
+.app-shell .workspace {
+  background: #f4f5ff;
+}
+.app-shell .primary,
+.app-shell button.primary {
+  background: #6c4dff;
+  color: white;
+  border-color: #6c4dff;
+}
+.app-shell .company-nav a.active,
+.app-shell .company-tabs a.active {
+  color: #51309c;
+  background: #eee8ff;
+  border-color: #d6c8fa;
+}
+.app-shell :is(input, select, textarea):focus-visible,
+.app-shell :is(a, button):focus-visible {
+  outline: 3px solid #c9b8ff;
+  outline-offset: 3px;
+}
+.v-account-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  min-height: 82px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #e4e1ee;
+  padding-bottom: 16px;
+}
+.v-workspace-caption {
+  color: #726b86;
+  font-size: 13px;
+}
+.v-account {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  max-width: 65%;
+  color: #24203e;
+}
+.v-account strong {
+  display: block;
+  font-size: 14px;
+}
+.v-account small {
+  display: block;
+  margin-top: 3px;
+  font-size: 12px;
+  color: #625d77;
+  overflow-wrap: anywhere;
+}
+.v-avatar {
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #eee8ff;
+  color: #5733a8;
+  width: 42px;
+  height: 42px;
+  flex: none;
+  font-size: 14px;
+  font-weight: 700;
+}
+.public {
+  background:
+    radial-gradient(ellipse at 12% 18%, #392b72 0, transparent 48%), #0b0b14;
+  color: white;
+  max-width: none;
+  min-height: 100vh;
+  padding: 7vh max(24px, calc((100vw - 480px) / 2));
+  position: relative;
+  isolation: isolate;
+}
+.public:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 10% 12%;
+  border-left: 1px solid #8064c666;
+  border-bottom: 1px solid #8064c644;
+  border-radius: 0 0 0 80px;
+  transform: skewY(-10deg);
+  pointer-events: none;
+}
+.public > .brand {
+  margin-bottom: 28px;
+}
+.public > .card {
+  color: #27213c;
+  background: white;
+  border: 1px solid #eeebf7;
+  box-shadow: 0 18px 80px #0002;
+  padding: 32px;
+  border-radius: 20px;
+}
+.public h1 {
+  font-size: 1.85rem;
+  line-height: 1.15;
+}
+.public a {
+  color: #6c4dff;
+}
+.public .primary {
+  background: #6c4dff;
+  color: white;
+  border-color: #6c4dff;
+}
+.public .footnote {
+  color: #c5bddb;
+  font-size: 12px;
+}
+.public .auth-links {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  flex-direction: column;
+}
+.public .auth-links small {
+  color: #6b647c;
+}
+@media (max-width: 760px) {
+  .public {
+    padding: 32px 18px;
+  }
+  .public > .card {
+    padding: 25px 20px;
+  }
+  .v-account-header {
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .v-workspace-caption {
+    display: none;
+  }
+  .v-account {
+    max-width: 100%;
+    margin-left: auto;
+  }
+  .v-account strong {
+    font-size: 13px;
+  }
+  .v-account small {
+    font-size: 11px;
+  }
+  .v-brand strong {
+    font-size: 21px;
+  }
+}
+
+.v-connection-block {
+  position: fixed;
+  z-index: 500;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 520px;
+  width: 90%;
+  background: white;
+  color: #0b0b14;
+  padding: 24px;
+  border: 2px solid #7047eb;
+  border-radius: 16px;
+  box-shadow: 0 16px 80px #0b0b1466;
+}
+.v-connection-block button {
+  margin: 6px;
+}
+.public {
+  margin: 0;
+  --ink: #24213c;
+  --muted: #68627a;
+  --accent: #6c4dff;
+}
+.public > .brand {
+  color: #fff;
+}
+.public .eyebrow {
+  color: #6c4dff;
+}
+.app-shell .op-experience {
+  --op-accent: #6c4dff;
+}
+.app-shell .op-nav a {
+  color: #59516e;
+}
+.app-shell .op-nav a.active {
+  background: #6c4dff;
+  color: #fff;
+}
+.app-shell .op-nav a:hover {
+  background: #eee8ff;
+  color: #5533a8;
+}
+.app-shell .op-nav a.active:hover {
+  background: #5533a8;
+  color: #fff;
+}
+.app-shell .op-setup {
+  background: #f0ecfa;
+  border-color: #e1d6f6;
+}
+.app-shell .op-checklist a {
+  color: #342a51;
+  border-color: #e1d9ed;
+}
+.app-shell .op-setup progress {
+  accent-color: #7047eb;
+}
+.app-shell .op-section-title p {
+  color: #655d77;
+}
+.app-shell .sidebar-bottom button {
+  background: #382b69;
+  color: white;
+  border-color: #5a4787;
+}
+.app-shell .ds-metric-accent {
+  background: #5533a8;
+  border-color: #5533a8;
+}
+.app-shell .ds-metric-accent > span,
+.app-shell .ds-metric-accent > small {
+  color: #eee8ff;
+}
+.app-shell .op-tour {
+  background: #292145;
+  border-color: #c9b8ff;
+}
+.app-shell .op-tour .eyebrow {
+  color: #d6c8fa;
+}
+.app-shell .op-next {
+  background: #f0ecfa;
+  color: #29213e;
+  border: 1px solid #e1d6f6;
+}
+.app-shell .op-next a {
+  color: #5533a8;
+}
+.app-shell .op-empty {
+  background: #f4f5ff;
+  color: #686078;
+}
+.app-shell .op-quick > a.primary,
+.app-shell .op-head > a.primary {
+  background: #6c4dff;
+  color: white;
+  border-color: #6c4dff;
+}
+.app-shell > aside .sidebar-bottom button {
+  background: #382b69;
+  color: white;
+  border-color: #5a4787;
+}
+.app-shell .workspace .eyebrow {
+  color: #6d598c;
+}
+.app-shell .op-tour-invite {
+  background: #eeebf5;
+}
+.app-shell .op-tour .eyebrow {
+  color: #d6c8fa;
+}
+.v-brand .v-wordmark {
+  display: block;
+  object-fit: contain;
+  object-position: left;
+  max-width: 100%;
+}
+/* Access security feedback shares the existing light workspace design. */
+.idle-warning {
+  position: fixed;
+  z-index: 1000;
+  inset: auto 1rem 1rem auto;
+  max-width: 26rem;
+  background: #fff;
+  border: 1px solid #ddd5f0;
+  border-radius: 1rem;
+  padding: 1.4rem;
+  box-shadow: 0 12px 50px #17152a30;
+  color: #201d32;
+}
+@media (max-width: 600px) {
+  .idle-warning {
+    inset: auto 1rem 1rem;
+    max-width: none;
+  }
+}
+
+/* Enterprise access: compact checkboxes, readable legal links and clear action spacing. */
+.enterprise-access .company-invite-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  margin: 0.8rem 0;
+  font-weight: 400;
+  line-height: 1.45;
+}
+.enterprise-access .company-invite-option input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  min-height: 1rem;
+  flex: 0 0 1rem;
+  margin: 0.2rem 0 0;
+  accent-color: #6741d0;
+}
+.enterprise-access > .auth-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+}
+.enterprise-access > .auth-links a {
+  color: #d5c7ff;
+}
+.enterprise-access .card details {
+  margin: 0.85rem 0;
+}
+.enterprise-access .card summary {
+  cursor: pointer;
+  line-height: 1.5;
+}
+.enterprise-access .card form + button {
+  margin-top: 0.75rem;
+}
+
+/* Organization activation review: keep existing VIRELOQ components and compact controls. */
+.organization-admin-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.9fr) minmax(320px, 1.1fr);
+  gap: 24px;
+  align-items: start;
+}
+.organization-record {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border, #e6e2ef);
+  overflow-wrap: anywhere;
+}
+.organization-record:first-of-type {
+  padding-top: 0;
+}
+.organization-record p {
+  margin: 8px 0;
+}
+.organization-record .org-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.organization-delete-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: #15172b88;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+.organization-delete-dialog {
+  width: min(100%, 580px);
+  max-height: 90dvh;
+  overflow: auto;
+}
+@media (max-width: 900px) {
+  .organization-admin-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.access-account {
+  display: block;
+}
+.access-account > div {
+  min-width: 0;
+}
+.access-account > div + div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.access-account > div + div > p {
+  flex-basis: 100%;
+  margin: 0 0 4px;
+}
+
+/* Global authorization remains distinct from the tenant being configured. */
+.v-tenant-context {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+  border: 1px solid var(--line, #dce3ea);
+  border-left: 4px solid var(--accent, #3156a8);
+  border-radius: 12px;
+  background: var(--surface, #fff);
+}
+.v-tenant-context > div:first-child {
+  display: grid;
+  gap: 0.3rem;
+}
+.v-tenant-context strong {
+  overflow-wrap: anywhere;
+}
+.v-tenant-context .org-actions {
+  margin: 0;
+}
+
+.v-wordmark {
+  display: block;
+  width: 216px;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.enterprise-access > .v-brand {
+  padding: 0;
+  background: #0b0b14;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.app-shell aside .v-brand {
+  width: 100%;
+}
+.app-shell aside {
+  background: #0b0b14;
+}
+.app-shell aside .shell-nav-menu a.active {
+  background: #382b69;
+  color: #f4f5ff;
+  border-color: #c9b8ff;
+  box-shadow: inset 3px 0 #c9b8ff;
+}
+.app-shell aside button {
+  background: #2b2b36;
+  color: #f4f5ff;
+  border-color: #46434f;
+}
+.app-shell .workspace :is(a.button, button.primary, a.primary) {
+  background: #6c4dff;
+  color: #ffffff;
+  border-color: #6c4dff;
+}
+/* Keep the footer inside the sidebar even when navigation exceeds the viewport. */
+.app-shell > aside {
+  box-sizing: border-box;
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+}
+.app-shell > aside .shell-nav-menu {
+  min-height: 0;
+  overflow-y: auto;
+  flex: 1;
+  scrollbar-width: thin;
+}
+.app-shell > aside .sidebar-bottom {
+  flex-shrink: 0;
+  background: #0b0b14;
+  margin-top: 16px;
+  border-top: 1px solid #34303f;
+}
+.enterprise-access > .v-brand {
+  background: transparent;
+  border-radius: 0;
+  margin-bottom: 24px;
+}
+.enterprise-access > .v-brand .v-wordmark {
+  mix-blend-mode: lighten;
+}
+.public.enterprise-access {
+  background: #08090d;
+}
+.public.enterprise-access:before {
+  display: none;
+}
+@media (max-width: 760px) {
+  .app-shell > aside {
+    height: auto;
+    max-height: 100dvh;
+  }
+  .app-shell > aside .shell-nav-menu[data-open="true"] {
+    max-height: 55dvh;
+  }
+}

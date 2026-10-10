@@ -1,0 +1,1258 @@
+{
+  "phase": "after",
+  "browser": "153.0.8010.0",
+  "latency": {
+    "apiMs": 120,
+    "chunkMs": 250
+  },
+  "results": [
+    {
+      "id": "open-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": true,
+          "ticketHeading": null,
+          "t": 63
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": true,
+          "ticketHeading": "Ana • Fictícia",
+          "t": 230
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_9892a4189e26bf989613902a\"}",
+          "t": 56,
+          "end": 217,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 875,
+      "final": {
+        "url": "/painel/159ae538-4e0a-4145-893d-aa95e0f764e0/atendimento?ticket=t_9892a4189e26bf989613902a",
+        "companyNav": true,
+        "selectedTab": "Todos",
+        "queueCount": 24,
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "24 atendimentos",
+          "Ana • Fictícia"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "switch-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": true,
+          "ticketHeading": null,
+          "t": 67
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": true,
+          "ticketHeading": "Rafael · Demo 8",
+          "t": 209
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_59d4bf51de0a9ef63ba7abb3\"}",
+          "t": 46,
+          "end": 200,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 872,
+      "final": {
+        "url": "/painel/159ae538-4e0a-4145-893d-aa95e0f764e0/atendimento?ticket=t_59d4bf51de0a9ef63ba7abb3",
+        "companyNav": true,
+        "selectedTab": "Todos",
+        "queueCount": 24,
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "24 atendimentos",
+          "Rafael · Demo 8"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": [],
+      "extraClicksToRestoreQueue": 0
+    },
+    {
+      "id": "back-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": true,
+          "ticketHeading": null,
+          "t": 18
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": true,
+          "ticketHeading": "Ana • Fictícia",
+          "t": 174
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_9892a4189e26bf989613902a\"}",
+          "t": 11,
+          "end": 170,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/support_context",
+          "body": "{\"p_org\":\"159ae538-4e0a-4145-893d-aa95e0f764e0\"}",
+          "t": 725,
+          "end": 854,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1586,
+      "final": {
+        "url": "/painel/159ae538-4e0a-4145-893d-aa95e0f764e0/atendimento?ticket=t_9892a4189e26bf989613902a",
+        "companyNav": true,
+        "selectedTab": "Todos",
+        "queueCount": 24,
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "24 atendimentos",
+          "Ana • Fictícia"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "forward-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": true,
+          "ticketHeading": null,
+          "t": 22
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": true,
+          "ticketHeading": "Rafael · Demo 8",
+          "t": 173
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_59d4bf51de0a9ef63ba7abb3\"}",
+          "t": 9,
+          "end": 170,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 845,
+      "final": {
+        "url": "/painel/159ae538-4e0a-4145-893d-aa95e0f764e0/atendimento?ticket=t_59d4bf51de0a9ef63ba7abb3",
+        "companyNav": true,
+        "selectedTab": "Todos",
+        "queueCount": 24,
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "24 atendimentos",
+          "Rafael · Demo 8"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "reload-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 23
+        },
+        {
+          "statuses": [
+            "Preparando sua experiênciaCarregando com segurança…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [
+            "Preparando sua experiência"
+          ],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 296
+        },
+        {
+          "statuses": [
+            "Verificando seu acesso…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 592
+        },
+        {
+          "layoutShift": 0.075,
+          "t": 593
+        },
+        {
+          "statuses": [
+            "Verificando permissões da empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 876
+        },
+        {
+          "statuses": [
+            "Carregando esta área…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [],
+          "companyNav": true,
+          "ticketHeading": null,
+          "t": 1042
+        },
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": true,
+          "ticketHeading": null,
+          "t": 1344
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": true,
+          "ticketHeading": "Rafael · Demo 8",
+          "t": 1501
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{}",
+          "t": 582,
+          "end": 722,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":false}",
+          "t": 584,
+          "end": 735,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/foundation_context",
+          "body": "{}",
+          "t": 724,
+          "end": 865,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/permissions_context",
+          "body": "{\"p_org\":\"159ae538-4e0a-4145-893d-aa95e0f764e0\"}",
+          "t": 868,
+          "end": 1026,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/support_context",
+          "body": "{\"p_org\":\"159ae538-4e0a-4145-893d-aa95e0f764e0\"}",
+          "t": 1033,
+          "end": 1164,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"159ae538-4e0a-4145-893d-aa95e0f764e0\"}",
+          "t": 1033,
+          "end": 1168,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_59d4bf51de0a9ef63ba7abb3\"}",
+          "t": 1330,
+          "end": 1490,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/central_queue",
+          "body": "{\"p_org\":\"159ae538-4e0a-4145-893d-aa95e0f764e0\",\"p_search\":\"\",\"p_state\":null,\"p_mine\":true,\"p_offset\":0,\"p_view\":\"all\",\"p_date\":null}",
+          "t": 1331,
+          "end": 1502,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 2201,
+      "final": {
+        "url": "/painel/159ae538-4e0a-4145-893d-aa95e0f764e0/atendimento?ticket=t_59d4bf51de0a9ef63ba7abb3",
+        "companyNav": true,
+        "selectedTab": "Minha fila",
+        "queueCount": 0,
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "0 atendimentos",
+          "Rafael · Demo 8"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "open-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": true,
+          "ticketHeading": null,
+          "t": 66
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": true,
+          "ticketHeading": "Ana • Fictícia",
+          "t": 235
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_9892a4189e26bf989613902a\"}",
+          "t": 60,
+          "end": 216,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 876,
+      "final": {
+        "url": "/painel/159ae538-4e0a-4145-893d-aa95e0f764e0/atendimento?ticket=t_9892a4189e26bf989613902a",
+        "companyNav": true,
+        "selectedTab": "Todos",
+        "queueCount": 24,
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "24 atendimentos",
+          "Ana • Fictícia"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "switch-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": true,
+          "ticketHeading": null,
+          "t": 72
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": true,
+          "ticketHeading": "Rafael · Demo 8",
+          "t": 223
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_59d4bf51de0a9ef63ba7abb3\"}",
+          "t": 61,
+          "end": 213,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 884,
+      "final": {
+        "url": "/painel/159ae538-4e0a-4145-893d-aa95e0f764e0/atendimento?ticket=t_59d4bf51de0a9ef63ba7abb3",
+        "companyNav": true,
+        "selectedTab": "Todos",
+        "queueCount": 24,
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "24 atendimentos",
+          "Rafael · Demo 8"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": [],
+      "extraClicksToRestoreQueue": 0
+    },
+    {
+      "id": "back-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": true,
+          "ticketHeading": null,
+          "t": 13
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": true,
+          "ticketHeading": "Ana • Fictícia",
+          "t": 166
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_9892a4189e26bf989613902a\"}",
+          "t": 11,
+          "end": 162,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 859,
+      "final": {
+        "url": "/painel/159ae538-4e0a-4145-893d-aa95e0f764e0/atendimento?ticket=t_9892a4189e26bf989613902a",
+        "companyNav": true,
+        "selectedTab": "Todos",
+        "queueCount": 24,
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "24 atendimentos",
+          "Ana • Fictícia"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "forward-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": true,
+          "ticketHeading": null,
+          "t": 16
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": true,
+          "ticketHeading": "Rafael · Demo 8",
+          "t": 185
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_59d4bf51de0a9ef63ba7abb3\"}",
+          "t": 9,
+          "end": 171,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/support_context",
+          "body": "{\"p_org\":\"159ae538-4e0a-4145-893d-aa95e0f764e0\"}",
+          "t": 71,
+          "end": 200,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 951,
+      "final": {
+        "url": "/painel/159ae538-4e0a-4145-893d-aa95e0f764e0/atendimento?ticket=t_59d4bf51de0a9ef63ba7abb3",
+        "companyNav": true,
+        "selectedTab": "Todos",
+        "queueCount": 24,
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "24 atendimentos",
+          "Rafael · Demo 8"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "reload-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 27
+        },
+        {
+          "statuses": [
+            "Preparando sua experiênciaCarregando com segurança…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [
+            "Preparando sua experiência"
+          ],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 302
+        },
+        {
+          "statuses": [
+            "Verificando seu acesso…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 612
+        },
+        {
+          "layoutShift": 0.12,
+          "t": 612
+        },
+        {
+          "statuses": [
+            "Verificando permissões da empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 895
+        },
+        {
+          "statuses": [
+            "Carregando esta área…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [],
+          "companyNav": true,
+          "ticketHeading": null,
+          "t": 1047
+        },
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": true,
+          "ticketHeading": null,
+          "t": 1347
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": true,
+          "ticketHeading": "Rafael · Demo 8",
+          "t": 1513
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{}",
+          "t": 600,
+          "end": 732,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":false}",
+          "t": 600,
+          "end": 735,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/foundation_context",
+          "body": "{}",
+          "t": 735,
+          "end": 878,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/permissions_context",
+          "body": "{\"p_org\":\"159ae538-4e0a-4145-893d-aa95e0f764e0\"}",
+          "t": 881,
+          "end": 1039,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/support_context",
+          "body": "{\"p_org\":\"159ae538-4e0a-4145-893d-aa95e0f764e0\"}",
+          "t": 1047,
+          "end": 1176,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"159ae538-4e0a-4145-893d-aa95e0f764e0\"}",
+          "t": 1047,
+          "end": 1182,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_59d4bf51de0a9ef63ba7abb3\"}",
+          "t": 1344,
+          "end": 1495,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/central_queue",
+          "body": "{\"p_org\":\"159ae538-4e0a-4145-893d-aa95e0f764e0\",\"p_search\":\"\",\"p_state\":null,\"p_mine\":true,\"p_offset\":0,\"p_view\":\"all\",\"p_date\":null}",
+          "t": 1345,
+          "end": 1509,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 2182,
+      "final": {
+        "url": "/painel/159ae538-4e0a-4145-893d-aa95e0f764e0/atendimento?ticket=t_59d4bf51de0a9ef63ba7abb3",
+        "companyNav": true,
+        "selectedTab": "Minha fila",
+        "queueCount": 0,
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "0 atendimentos",
+          "Rafael · Demo 8"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "open-320",
+      "viewport": {
+        "width": 320,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": true,
+          "ticketHeading": null,
+          "t": 74
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": true,
+          "ticketHeading": "Ana • Fictícia",
+          "t": 260
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_9892a4189e26bf989613902a\"}",
+          "t": 72,
+          "end": 253,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1006,
+      "final": {
+        "url": "/painel/159ae538-4e0a-4145-893d-aa95e0f764e0/atendimento?ticket=t_9892a4189e26bf989613902a",
+        "companyNav": true,
+        "selectedTab": "Todos",
+        "queueCount": 24,
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "24 atendimentos",
+          "Ana • Fictícia"
+        ],
+        "alerts": [],
+        "scrollWidth": 320
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "switch-320",
+      "viewport": {
+        "width": 320,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": true,
+          "ticketHeading": null,
+          "t": 69
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": true,
+          "ticketHeading": "Rafael · Demo 8",
+          "t": 221
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_59d4bf51de0a9ef63ba7abb3\"}",
+          "t": 58,
+          "end": 212,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 922,
+      "final": {
+        "url": "/painel/159ae538-4e0a-4145-893d-aa95e0f764e0/atendimento?ticket=t_59d4bf51de0a9ef63ba7abb3",
+        "companyNav": true,
+        "selectedTab": "Todos",
+        "queueCount": 24,
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "24 atendimentos",
+          "Rafael · Demo 8"
+        ],
+        "alerts": [],
+        "scrollWidth": 320
+      },
+      "status": "RECORDED",
+      "duplicates": [],
+      "extraClicksToRestoreQueue": 0
+    },
+    {
+      "id": "back-320",
+      "viewport": {
+        "width": 320,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": true,
+          "ticketHeading": null,
+          "t": 20
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": true,
+          "ticketHeading": "Ana • Fictícia",
+          "t": 186
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_9892a4189e26bf989613902a\"}",
+          "t": 18,
+          "end": 179,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/support_context",
+          "body": "{\"p_org\":\"159ae538-4e0a-4145-893d-aa95e0f764e0\"}",
+          "t": 811,
+          "end": 943,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1630,
+      "final": {
+        "url": "/painel/159ae538-4e0a-4145-893d-aa95e0f764e0/atendimento?ticket=t_9892a4189e26bf989613902a",
+        "companyNav": true,
+        "selectedTab": "Todos",
+        "queueCount": 24,
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "24 atendimentos",
+          "Ana • Fictícia"
+        ],
+        "alerts": [],
+        "scrollWidth": 320
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "forward-320",
+      "viewport": {
+        "width": 320,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": true,
+          "ticketHeading": null,
+          "t": 11
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": true,
+          "ticketHeading": "Rafael · Demo 8",
+          "t": 190
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_59d4bf51de0a9ef63ba7abb3\"}",
+          "t": 10,
+          "end": 175,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 851,
+      "final": {
+        "url": "/painel/159ae538-4e0a-4145-893d-aa95e0f764e0/atendimento?ticket=t_59d4bf51de0a9ef63ba7abb3",
+        "companyNav": true,
+        "selectedTab": "Todos",
+        "queueCount": 24,
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "24 atendimentos",
+          "Rafael · Demo 8"
+        ],
+        "alerts": [],
+        "scrollWidth": 320
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "reload-320",
+      "viewport": {
+        "width": 320,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 28
+        },
+        {
+          "statuses": [
+            "Preparando sua experiênciaCarregando com segurança…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [
+            "Preparando sua experiência"
+          ],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 308
+        },
+        {
+          "statuses": [
+            "Verificando seu acesso…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 607
+        },
+        {
+          "layoutShift": 0.12,
+          "t": 611
+        },
+        {
+          "statuses": [
+            "Verificando permissões da empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 889
+        },
+        {
+          "statuses": [
+            "Carregando esta área…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [],
+          "companyNav": true,
+          "ticketHeading": null,
+          "t": 1072
+        },
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": true,
+          "ticketHeading": null,
+          "t": 1375
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": true,
+          "ticketHeading": "Rafael · Demo 8",
+          "t": 1523
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{}",
+          "t": 605,
+          "end": 743,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":false}",
+          "t": 605,
+          "end": 744,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/foundation_context",
+          "body": "{}",
+          "t": 743,
+          "end": 886,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/permissions_context",
+          "body": "{\"p_org\":\"159ae538-4e0a-4145-893d-aa95e0f764e0\"}",
+          "t": 892,
+          "end": 1055,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/support_context",
+          "body": "{\"p_org\":\"159ae538-4e0a-4145-893d-aa95e0f764e0\"}",
+          "t": 1062,
+          "end": 1192,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"159ae538-4e0a-4145-893d-aa95e0f764e0\"}",
+          "t": 1063,
+          "end": 1197,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_59d4bf51de0a9ef63ba7abb3\"}",
+          "t": 1360,
+          "end": 1514,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/central_queue",
+          "body": "{\"p_org\":\"159ae538-4e0a-4145-893d-aa95e0f764e0\",\"p_search\":\"\",\"p_state\":null,\"p_mine\":true,\"p_offset\":0,\"p_view\":\"all\",\"p_date\":null}",
+          "t": 1360,
+          "end": 1524,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 2187,
+      "final": {
+        "url": "/painel/159ae538-4e0a-4145-893d-aa95e0f764e0/atendimento?ticket=t_59d4bf51de0a9ef63ba7abb3",
+        "companyNav": true,
+        "selectedTab": "Minha fila",
+        "queueCount": 0,
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "0 atendimentos",
+          "Rafael · Demo 8"
+        ],
+        "alerts": [],
+        "scrollWidth": 320
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    }
+  ]
+}

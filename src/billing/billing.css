@@ -1,0 +1,453 @@
+.billing {
+  max-width: 1320px;
+  margin: auto;
+}
+.b-heading,
+.b-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 12px 0 26px;
+}
+.b-heading h1 {
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  margin: 8px 0;
+}
+.b-simulation {
+  background: #fff5de;
+  border: 1px solid #e7d6af;
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 0.86rem;
+  margin-bottom: 24px;
+  color: #665023;
+}
+.b-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 12px 0 24px;
+}
+.b-links a {
+  color: var(--ink);
+  padding: 0;
+  font-size: 0.88rem;
+}
+.b-links a:hover {
+  background: transparent;
+  text-decoration: underline;
+}
+.b-current {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  border-top: 4px solid #157a70;
+}
+.b-current h2 {
+  font-size: 1.7rem;
+  margin: 8px 0 12px;
+}
+.b-current .b-actions {
+  align-self: center;
+  max-width: 330px;
+}
+.b-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.b-admin-toolbar {
+  display: flex;
+  gap: 16px;
+  align-items: end;
+  flex-wrap: wrap;
+  margin: 22px 0;
+}
+.b-admin-toolbar label {
+  flex: 1;
+  min-width: 220px;
+}
+.b-admin-toolbar label,
+.b-form label {
+  display: grid;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.b-table {
+  overflow: auto;
+}
+.b-table td {
+  vertical-align: middle;
+  min-width: 130px;
+}
+.b-plans {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-bottom: 28px;
+}
+.b-plan {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+}
+.b-plan h3 {
+  font-size: 1.4rem;
+  margin: 0;
+}
+.b-plan-human {
+  border-color: #157a70;
+  border-top-width: 4px;
+}
+.b-price {
+  font-size: 2rem;
+  letter-spacing: -0.04em;
+  font-weight: 750;
+  margin: 6px 0;
+}
+.b-price small {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.b-features {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+  font-size: 0.86rem;
+  margin-bottom: 25px;
+  flex: 1;
+}
+.b-features li {
+  padding-left: 20px;
+  position: relative;
+}
+.b-features li:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #157a70;
+}
+.b-usage {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  margin: 22px 0 4px;
+}
+.b-usage > div {
+  display: grid;
+  gap: 10px;
+  background: #f5f8f9;
+  border: 1px solid var(--line);
+  padding: 17px;
+  border-radius: 10px;
+}
+.b-usage span {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.b-usage strong {
+  font-size: 1.6rem;
+}
+.b-usage small {
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+.b-usage meter {
+  width: 100%;
+  accent-color: #157a70;
+}
+.b-limit {
+  color: #88500f;
+  line-height: 1.5;
+}
+.b-confirm {
+  border: 2px solid #157a70;
+}
+.b-invoices {
+  display: grid;
+}
+.b-invoices article {
+  border-top: 1px solid var(--line);
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.b-invoices p {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.b-history {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 0;
+  max-height: 400px;
+  overflow: auto;
+}
+.b-history li {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.85rem;
+}
+.b-history time {
+  white-space: nowrap;
+  color: var(--muted);
+}
+.b-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #102d37aa;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  overflow: auto;
+}
+.b-editor {
+  width: min(720px, 100%);
+  max-height: 90vh;
+  overflow: auto;
+  margin: auto;
+}
+.b-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.b-wide {
+  grid-column: 1/-1;
+}
+.b-checks {
+  display: grid;
+  gap: 12px;
+  margin: 24px 0;
+}
+.b-checks label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.88rem;
+}
+.b-checks input {
+  width: auto;
+  min-height: 20px;
+}
+.b-state-active,
+.b-state-trial {
+  background: #e0f2e9;
+  color: #1a5847;
+}
+.b-state-suspended,
+.b-state-past_due {
+  background: #fbe6df;
+  color: #7e3327;
+}
+@media (max-width: 720px) {
+  .b-current,
+  .b-heading,
+  .b-invoices article {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .b-current .b-actions {
+    max-width: none;
+    align-self: stretch;
+  }
+  .b-form {
+    grid-template-columns: 1fr;
+  }
+  .b-plans {
+    grid-template-columns: 1fr;
+  }
+  .b-usage {
+    grid-template-columns: 1fr 1fr;
+  }
+  .b-section-heading {
+    align-items: start;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .b-history li {
+    flex-direction: column;
+    gap: 5px;
+  }
+  .b-overlay {
+    padding: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .billing * {
+    scroll-behavior: auto;
+  }
+}
+.b-trial-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+.b-trial-days {
+  text-align: right;
+  color: var(--accent, #137d75);
+}
+.b-trial-days strong {
+  display: block;
+  font-size: 2.5rem;
+  line-height: 1.1;
+}
+.b-trial-days small {
+  display: block;
+  color: #57707c;
+  font-size: 0.75rem;
+  margin-top: 8px;
+}
+.b-trial-explanation {
+  background: #f2f7f6;
+  padding: 16px;
+  border-radius: 10px;
+  line-height: 1.6;
+}
+.b-trial details {
+  margin-top: 20px;
+}
+.b-trial summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+@media (max-width: 600px) {
+  .b-trial-summary {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .b-trial-days {
+    text-align: left;
+  }
+}
+.b-config-dialog {
+  width: min(940px, calc(100vw - 28px));
+  max-width: 940px;
+}
+.b-config section {
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+}
+.b-config h3 {
+  margin: 0 0 16px;
+}
+.b-config small {
+  display: block;
+  font-weight: 400;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.b-core,
+.b-validation,
+.b-commercial-review {
+  background: var(--surface, #f5f6fa);
+  padding: 20px !important;
+  border-radius: 12px;
+}
+.b-resource-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 16px;
+}
+.b-resource-options label {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px;
+}
+.b-resource-options input {
+  width: 20px;
+  min-height: 20px;
+  margin: 0;
+}
+.b-resource-options small {
+  margin-top: 6px;
+}
+.b-limit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.b-limit-grid label {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.b-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.b-summary div {
+  border-bottom: 1px solid var(--line);
+  padding: 8px 0;
+}
+.b-summary dt {
+  color: var(--muted);
+}
+.b-summary dd {
+  margin: 5px 0;
+  font-weight: 650;
+}
+.b-validation li {
+  margin: 8px 0;
+}
+.b-config-actions {
+  padding: 20px 0;
+}
+.b-provider-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.b-provider-grid div {
+  border: 1px solid var(--line);
+  padding: 20px;
+  border-radius: 12px;
+}
+.b-provider-grid dt {
+  color: var(--muted);
+}
+.b-provider-grid dd {
+  margin: 8px 0 0;
+  font-size: 1.2rem;
+  font-weight: 650;
+}
+@media (max-width: 650px) {
+  .b-resource-options,
+  .b-limit-grid,
+  .b-summary,
+  .b-provider-grid {
+    grid-template-columns: 1fr;
+  }
+  .b-config-dialog {
+    padding: 16px;
+  }
+}
+.b-homologation {border:2px solid #7454cb;margin-block:24px;}
+.b-homologation form {display:grid;gap:14px;max-width:680px;}
+.b-homologation label,.b-feature-config label {display:grid;gap:6px;}
+.b-feature-config {margin-block:12px;}
+.b-feature-config small {display:block;margin-top:8px;}
+.b-homologation select,.b-homologation textarea {max-width:100%;}

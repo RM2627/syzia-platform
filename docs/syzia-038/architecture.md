@@ -1,0 +1,17 @@
+# Decisões da 038
+
+Base: ZIP 037, SHA-256 c446ea1a8f2e9b54a7f3c67d3f3adc19d306593d71a0226d1893b98e8be2d7db. Manifesto com 1.587 fontes conferido antes da edição.
+
+Inspeção: `quote_requests` era singular; `quote_versions`/`quote_items` já mantinham propostas discriminadas imutáveis. `consumer_selection` centraliza catálogo publicado, adicionais, respostas e validação de disponibilidade. Central e agenda já reutilizam engines privados e wrappers de permissão 030. O acompanhamento usa sessão anônima, proprietário ou token resgatado com escopo, expiração e revogação.
+
+A 038 acrescenta seleção original JSONB e alertas à mesma solicitação, sem tabela paralela de pedidos. `service_id`, `service_code`, adicionais e respostas singulares continuam representando o primeiro serviço para compatibilidade. Histórico antigo permanece sem backfill destrutivo. A seleção original mantém nomes, condições, perguntas/respostas e posições dos itens iniciais; preços permanecem exclusivamente em `quote_items`, com a RLS de valores existente. O contexto autorizado reconstitui os preços e aplica a redação existente quando necessário. Uma trigger impede edição da seleção original e alertas.
+
+A nova tabela `service_relations` representa configuração do catálogo, com duas FKs compostas por organização, unicidade do par, RLS, auditoria e autorização `services.manage`. `services.read` consulta. Inclusões são direcionais e transitivas, sem ciclos; as outras relações são simétricas. Não há troca silenciosa: remova explicitamente a relação antes de redefinir. A relação é parte do snapshot público e do token de revisão; alterações só atingem novas solicitações após publicar. FKs impedem apagar serviços relacionados; desativação preserva histórico.
+
+O cálculo multisserviço reutiliza `consumer_selection` por item e publica uma única estimativa/solicitação. Máximo de 10 serviços e 30 linhas com adicionais, respeitando os limites atuais de proposta. Adicionais e respostas são validados dentro do serviço e tenant. Valores sob consulta permanecem nulos. Revisão humana desabilita agendamento direto e não produz total final. Propostas finais continuam com itens fixos confirmados e versões; a nova explicação ao consumidor fica imutável com a proposta. A seleção original nunca é substituída por ela.
+
+A Central mantém autonomia publicada, vínculo, posse de ticket e descontos existentes. Remover linhas exige também autonomia `quote_items`. Valores não determinísticos continuam exigindo decisão empresarial pelo editor existente. O editor empresarial reutiliza autorização de orçamento; não concede catálogo a atendentes. Agenda usa duração combinada ou duração da proposta aprovada. Conta, senha, Central do consumidor e tokens não foram acrescentados.
+
+Inventário de senhas: login empresarial (1), ativação/redefinição pelo primeiro acesso existente (2), self-service (2). Recuperação entrega o mesmo fluxo de nova senha; não há formulário autônomo de mudança no perfil. O código temporário permanece visível como código. PasswordInput mantém o mesmo input, autocomplete e valor, estado independente, botão acessível e teclado.
+
+Tema: o `c-dialog` tinha background literal claro apesar dos tokens de texto escuros. A correção usa `brandStyle` e os tokens neutros nos overlays e estados; o wizard também funciona na prévia, com envio bloqueado. A cor empresarial permanece nos controles e destaques. Publicação mantém o token de rascunho e a exigência de revisão; só explicita os estados.

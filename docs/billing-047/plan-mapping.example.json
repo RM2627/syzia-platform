@@ -1,0 +1,5 @@
+[
+  {"code":"essencial","plan_version_id":"00000000-0000-0000-0000-000000000001","trial_plan_id":"REPLACE_ESSENCIAL_TRIAL","paid_plan_id":"REPLACE_ESSENCIAL_PAID"},
+  {"code":"profissional","plan_version_id":"00000000-0000-0000-0000-000000000002","trial_plan_id":"REPLACE_PROFISSIONAL_TRIAL","paid_plan_id":"REPLACE_PROFISSIONAL_PAID"},
+  {"code":"equipe","plan_version_id":"00000000-0000-0000-0000-000000000003","trial_plan_id":"REPLACE_EQUIPE_TRIAL","paid_plan_id":"REPLACE_EQUIPE_PAID"}
+]

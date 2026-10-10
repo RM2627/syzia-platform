@@ -1,0 +1,44 @@
+import { test, expect } from "../support/demo-test";
+import { demoLogin } from "../support/demo-login";
+import { mkdir } from "node:fs/promises";
+test("047 navegador: três ofertas, retorno sem liberação, confirmação e cancelamento com segurança", async ({ page }) => {
+  const errors: string[] = []; page.on("pageerror", e => errors.push(e.message));
+  await page.route("https://sdk.mercadopago.com/js/v2", route => route.fulfill({ contentType: "application/javascript", body: `window.MercadoPago=class { cardForm(o){const f=document.getElementById(o.form.id);const h=e=>{e.preventDefault();o.callbacks.onSubmit(e)};f.addEventListener('submit',h);queueMicrotask(()=>o.callbacks.onFormMounted());return {getCardFormData:()=>({token:'offline-browser-token-only'}),unmount:()=>f.removeEventListener('submit',h)}} };` }));
+  await demoLogin(page, "admin@example.invalid");
+  const context: any = await page.evaluate(async () => (await import("/src/api.ts")).rpc("foundation_context"));
+  const org = context.organizations.find((o: any) => o.slug === "ms-auto-ficticia").id;
+  await page.goto(`/painel/${org}/assinatura?retorno=1&status=approved`);
+  await expect(page.getByRole("heading", { name: "Sua assinatura", exact: true })).toBeVisible();
+  await expect(page.getByText("Estamos confirmando sua assinatura...", { exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Assinar Essencial", exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Assinar Profissional", exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Assinar Equipe", exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: /Assinar Assistido/ })).toHaveCount(0);
+  for (const width of [1440,390,320]) {
+    await page.setViewportSize({width,height:900});
+    expect(await page.evaluate(()=>Math.max(0,document.documentElement.scrollWidth-innerWidth))).toBe(0);
+    await mkdir("reports/billing-047/screenshots",{recursive:true});
+    await page.screenshot({path:`reports/billing-047/screenshots/ofertas-${width}.png`,fullPage:true});
+  }
+  await page.getByRole("button", { name: "Assinar Essencial", exact: true }).click();
+  await expect(page.getByText(/Hoje: R\$\s*0,00/)).toBeVisible();
+  await expect(page.getByText(/Primeira cobrança:/)).toBeVisible();
+  await page.getByRole("checkbox").check();
+  await page.getByRole("button", { name: "Confirmar meio de pagamento", exact: true }).click();
+  await expect(page.getByText("O Mercado Pago não aceitou a solicitação. Confira o meio de pagamento.")).toBeVisible();
+  await page.reload();
+  await page.getByRole("button", { name: "Continuar contratação Essencial", exact: true }).click();
+  await expect(page.getByText(/Hoje: R\$\s*0,00/)).toBeVisible();
+  await page.getByRole("checkbox").check();
+  await page.getByRole("button", { name: "Confirmar meio de pagamento", exact: true }).click();
+  await expect(page.getByText("Em período grátis", {exact:true})).toBeVisible();
+  await expect(page.getByText(/7 dias restantes de trial/)).toBeVisible();
+  await page.screenshot({path:"reports/billing-047/screenshots/trial-confirmado.png",fullPage:true});
+  await page.getByRole("button", { name: "Cancelar assinatura", exact: true }).click();
+  await page.getByRole("button", { name: "Confirmar", exact: true }).click();
+  await expect(page.getByText("Cancelamento programado", {exact:true})).toBeVisible();
+  await page.getByRole("button", { name: "Reativar assinatura", exact: true }).click();
+  await page.getByRole("button", { name: "Confirmar", exact: true }).click();
+  await expect(page.getByText("Em período grátis", {exact:true})).toBeVisible();
+  expect(errors).toEqual([]);
+});

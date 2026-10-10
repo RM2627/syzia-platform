@@ -1,0 +1,282 @@
+[
+  {
+    "rpc": "company_initialize",
+    "organization": "p_org",
+    "action": "settings.manage"
+  },
+  {
+    "rpc": "company_save",
+    "organization": "p_org",
+    "action": "case p_entity when 'service'then 'services.manage'when 'addon'then 'services.manage'when 'field'then 'services.manage'else 'settings.manage'end"
+  },
+  {
+    "rpc": "company_create_manual",
+    "organization": "p_org",
+    "action": "settings.manage"
+  },
+  {
+    "rpc": "company_discard_manual",
+    "organization": "p_org",
+    "action": "settings.manage"
+  },
+  {
+    "rpc": "company_publish_manual",
+    "organization": "p_org",
+    "action": "settings.manage"
+  },
+  {
+    "rpc": "company_set_activation",
+    "organization": "p_org",
+    "action": "settings.manage"
+  },
+  {
+    "rpc": "consumer_branding_save",
+    "organization": "p_org",
+    "action": "page.manage"
+  },
+  {
+    "rpc": "consumer_portfolio_save",
+    "organization": "p_org",
+    "action": "portfolio.manage"
+  },
+  {
+    "rpc": "consumer_presence_context",
+    "organization": "p_org",
+    "action": "case when private.permission_allowed(p_org,'portfolio.read')then 'portfolio.read'else 'page.read'end"
+  },
+  {
+    "rpc": "consumer_admin_context",
+    "organization": "p_org",
+    "action": "case when private.permission_allowed(p_org,'page.read')then 'page.read'else 'portfolio.read'end"
+  },
+  {
+    "rpc": "consumer_publish_page",
+    "organization": "p_org",
+    "action": "page.manage"
+  },
+  {
+    "rpc": "consumer_set_page_enabled",
+    "organization": "p_org",
+    "action": "page.manage"
+  },
+  {
+    "rpc": "consumer_reserve_company_media",
+    "organization": "p_org",
+    "action": "case when private.permission_allowed(p_org,'portfolio.manage')then 'portfolio.manage'else 'page.manage'end"
+  },
+  {
+    "rpc": "consumer_payment_rule_save",
+    "organization": "p_org",
+    "action": "settings.manage"
+  },
+  {
+    "rpc": "consumer_payment_rules_context",
+    "organization": "p_org",
+    "action": "settings.read"
+  },
+  {
+    "rpc": "consumer_schedule_config",
+    "organization": "p_org",
+    "action": "agenda.manage"
+  },
+  {
+    "rpc": "consumer_schedule_block",
+    "organization": "p_org",
+    "action": "agenda.manage"
+  },
+  {
+    "rpc": "consumer_remove_block",
+    "organization": "p_org",
+    "action": "agenda.manage"
+  },
+  {
+    "rpc": "operations_agenda",
+    "organization": "p_org",
+    "action": "agenda.read"
+  },
+  {
+    "rpc": "operations_detail",
+    "organization": "p_org",
+    "action": "agenda.read"
+  },
+  {
+    "rpc": "operations_appointment_act",
+    "organization": "p_org",
+    "action": "agenda.manage"
+  },
+  {
+    "rpc": "operations_customer",
+    "organization": "p_org",
+    "action": "clients.manage"
+  },
+  {
+    "rpc": "operations_directory",
+    "organization": "p_org",
+    "action": "clients.read"
+  },
+  {
+    "rpc": "operations_request",
+    "organization": "p_org",
+    "action": "quotes.manage"
+  },
+  {
+    "rpc": "operations_requests",
+    "organization": "p_org",
+    "action": "quotes.read"
+  },
+  {
+    "rpc": "operations_quote_context",
+    "organization": "p_org",
+    "action": "quotes.read"
+  },
+  {
+    "rpc": "operations_send_quote",
+    "organization": "p_org",
+    "action": "quotes.manage"
+  },
+  {
+    "rpc": "operations_schedule",
+    "organization": "p_org",
+    "action": "agenda.manage"
+  },
+  {
+    "rpc": "operations_member",
+    "organization": "p_org",
+    "action": "people.manage"
+  },
+  {
+    "rpc": "operations_set_attendant",
+    "organization": "p_org",
+    "action": "people.manage"
+  },
+  {
+    "rpc": "operations_support_mode",
+    "organization": "p_org",
+    "action": "settings.manage"
+  },
+  {
+    "rpc": "operations_read_notification",
+    "organization": "p_org",
+    "action": "home.read"
+  },
+  {
+    "rpc": "access_team",
+    "organization": "p_org",
+    "action": "people.read"
+  },
+  {
+    "rpc": "foundation_set_member",
+    "organization": "p_org",
+    "action": "people.manage"
+  },
+  {
+    "rpc": "central_settings_save",
+    "organization": "p_org",
+    "action": "settings.manage"
+  },
+  {
+    "rpc": "commercial_config",
+    "organization": "p_org",
+    "action": "followup.read"
+  },
+  {
+    "rpc": "commercial_config_save",
+    "organization": "p_org",
+    "action": "followup.manage"
+  },
+  {
+    "rpc": "commercial_rule_save",
+    "organization": "p_org",
+    "action": "followup.manage"
+  },
+  {
+    "rpc": "analytics_central",
+    "organization": "p_org",
+    "action": "analytics.operational"
+  },
+  {
+    "rpc": "analytics_company",
+    "organization": "p_org",
+    "action": "analytics.operational"
+  },
+  {
+    "rpc": "onboarding_context",
+    "organization": "p_org",
+    "action": "settings.manage"
+  },
+  {
+    "rpc": "onboarding_act",
+    "organization": "p_org",
+    "action": "settings.manage"
+  },
+  {
+    "rpc": "consumer_work_context",
+    "organization": "(select organization_id from public.quote_requests where public_code=p_code)",
+    "action": "quotes.read"
+  },
+  {
+    "rpc": "consumer_send_quote",
+    "organization": "(select organization_id from public.quote_requests where public_code=p_code)",
+    "action": "quotes.manage"
+  },
+  {
+    "rpc": "consumer_mark_review",
+    "organization": "(select organization_id from public.quote_requests where public_code=p_code)",
+    "action": "quotes.manage"
+  },
+  {
+    "rpc": "consumer_customer_context_save",
+    "organization": "(select organization_id from public.quote_requests where public_code=p_code)",
+    "action": "clients.manage"
+  },
+  {
+    "rpc": "central_context",
+    "organization": "(select organization_id from public.tickets where public_code=p_code)",
+    "action": "central.read"
+  },
+  {
+    "rpc": "central_quote",
+    "organization": "(select organization_id from public.tickets where public_code=p_code)",
+    "action": "quotes.manage"
+  },
+  {
+    "rpc": "central_booking",
+    "organization": "(select organization_id from public.tickets where public_code=p_code)",
+    "action": "agenda.manage"
+  },
+  {
+    "rpc": "central_slots",
+    "organization": "(select organization_id from public.tickets where public_code=p_code)",
+    "action": "agenda.read"
+  },
+  {
+    "rpc": "central_attachment_ticket",
+    "organization": "(select organization_id from public.tickets where public_code=p_code)",
+    "action": "central.read"
+  },
+  {
+    "rpc": "central_act",
+    "organization": "(select organization_id from public.tickets where public_code=p_code)",
+    "action": "case when p_action='message'then 'central.reply'when p_action='decision'then 'pending.manage'else 'central.manage'end"
+  },
+  {
+    "rpc": "central_open_request",
+    "organization": "(select organization_id from public.quote_requests where public_code=p_request)",
+    "action": "central.read"
+  },
+  {
+    "rpc": "commercial_context",
+    "organization": "(select organization_id from private.commercial_op where commercial_code=p_code)",
+    "action": "followup.read"
+  },
+  {
+    "rpc": "commercial_op_act",
+    "organization": "(select organization_id from private.commercial_op where commercial_code=p_code)",
+    "action": "followup.manage"
+  },
+  {
+    "rpc": "commercial_task_act",
+    "organization": "(select organization_id from public.commercial_tasks where public_code=p_code)",
+    "action": "followup.manage"
+  }
+]

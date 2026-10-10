@@ -1,0 +1,1 @@
+import {PGlite} from '../tests/support/pglite.mjs';import{readFile,readdir}from'node:fs/promises';const db=new PGlite();await db.exec(await readFile('tests/auth-fixture.sql','utf8'));for(const n of(await readdir('supabase/migrations')).sort()){await db.exec(await readFile('supabase/migrations/'+n,'utf8'));console.log(n)}await db.close();

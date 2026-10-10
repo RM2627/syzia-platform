@@ -1,0 +1,36 @@
+{
+  "testOnlyAcknowledged": false,
+  "projectRef": "REPLACE_WITH_TEST_PROJECT_REF",
+  "url": "https://REPLACE_WITH_TEST_PROJECT_REF.supabase.co",
+  "publishableKey": "sb_publishable_REPLACE_ME",
+  "organizations": {
+    "a": "10000000-0000-0000-0000-000000000001",
+    "b": "10000000-0000-0000-0000-000000000002"
+  },
+  "accounts": {
+    "root": {
+      "email": "REPLACE_WITH_CONTROLLED_TEST_EMAIL",
+      "password": "REPLACE_WITH_LOCAL_TEST_PASSWORD"
+    },
+    "adminA": {
+      "email": "REPLACE_WITH_CONTROLLED_TEST_EMAIL",
+      "password": "REPLACE_WITH_LOCAL_TEST_PASSWORD"
+    },
+    "adminB": {
+      "email": "REPLACE_WITH_CONTROLLED_TEST_EMAIL",
+      "password": "REPLACE_WITH_LOCAL_TEST_PASSWORD"
+    },
+    "worker": {
+      "email": "REPLACE_WITH_CONTROLLED_TEST_EMAIL",
+      "password": "REPLACE_WITH_LOCAL_TEST_PASSWORD"
+    },
+    "attendant": {
+      "email": "REPLACE_WITH_CONTROLLED_TEST_EMAIL",
+      "password": "REPLACE_WITH_LOCAL_TEST_PASSWORD"
+    },
+    "unlinked": {
+      "email": "REPLACE_WITH_CONTROLLED_TEST_EMAIL",
+      "password": "REPLACE_WITH_LOCAL_TEST_PASSWORD"
+    }
+  }
+}

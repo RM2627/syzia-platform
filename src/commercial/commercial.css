@@ -1,0 +1,387 @@
+.commercial {
+  --co-ink: #20343e;
+  --co-teal: #155e63;
+  color: var(--co-ink);
+  max-width: 1700px;
+  margin: auto;
+  font-size: 14px;
+}
+.commercial * {
+  box-sizing: border-box;
+}
+.commercial h1 {
+  font-size: 30px;
+  letter-spacing: -0.7px;
+  margin: 8px 0;
+}
+.commercial h2 {
+  font-size: 21px;
+  margin: 8px 0;
+}
+.commercial h3 {
+  font-size: 17px;
+  margin: 10px 0;
+}
+.commercial p {
+  line-height: 1.6;
+}
+.commercial button {
+  border: 1px solid #c9d6dc;
+  background: white;
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: var(--co-ink);
+  font: inherit;
+  cursor: pointer;
+}
+.commercial button.primary {
+  background: var(--co-teal);
+  color: #fff;
+  border-color: var(--co-teal);
+}
+.commercial button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.commercial button:hover:not(:disabled) {
+  border-color: var(--co-teal);
+}
+.commercial label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-weight: 600;
+  min-width: 0;
+  margin: 10px 0;
+}
+.commercial input,
+.commercial select,
+.commercial textarea {
+  font: inherit;
+  width: 100%;
+  min-width: 0;
+  padding: 11px;
+  border: 1px solid #c9d6dc;
+  border-radius: 7px;
+  background: white;
+  color: var(--co-ink);
+}
+.commercial textarea {
+  min-height: 95px;
+  resize: vertical;
+}
+.commercial small {
+  display: block;
+  color: #617e8b;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.co-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin: 20px 0 30px;
+}
+.co-heading p {
+  color: #637b88;
+}
+.co-eyebrow {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #4c7e87;
+}
+.co-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 16px 0 10px;
+}
+.co-summary > div {
+  background: #fff;
+  border: 1px solid #dce5e9;
+  border-radius: 12px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.co-summary b {
+  font-size: 29px;
+}
+.co-summary span {
+  font-size: 12px;
+  color: #627c87;
+}
+.co-tabs,
+.co-actions {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin: 18px 0 8px;
+  align-items: center;
+}
+.co-filters {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.co-filters > label {
+  flex: 1;
+  min-width: 150px;
+}
+.co-filters > label:first-child {
+  flex: 1.4;
+}
+.co-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.commercial details {
+  border-top: 1px solid #dce5e9;
+  padding: 16px 0;
+}
+.commercial summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+.co-layout {
+  display: grid;
+  grid-template-columns: minmax(300px, 1fr) minmax(350px, 1fr);
+  gap: 22px;
+  margin: 28px 0;
+  align-items: start;
+}
+.co-queue,
+.co-detail,
+.co-config {
+  border: 1px solid #dbe5e8;
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  min-width: 0;
+}
+.co-queue-title,
+.co-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px;
+}
+.co-opportunity {
+  display: block;
+  padding: 22px;
+  text-decoration: none;
+  color: inherit;
+  border-top: 1px solid #e2ebee;
+  border-left: 3px solid transparent;
+}
+.co-opportunity.active {
+  background: #eef6f5;
+  border-left-color: #155e63;
+}
+.co-opportunity:hover {
+  background: #f2f8f8;
+}
+.co-opportunity p {
+  margin: 8px 0;
+}
+.co-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin: 7px 0;
+}
+.co-company {
+  color: #4c7e87;
+  font-size: 12px;
+}
+.co-pill {
+  display: inline-block;
+  border-radius: 20px;
+  background: #edf3f4;
+  padding: 4px 9px;
+  font-size: 11px;
+  color: #567381;
+  line-height: 1.5;
+}
+.co-pill.late {
+  background: #fff0d9;
+  color: #915500;
+}
+.co-detail > header {
+  padding: 24px;
+  background: #f9fcfc;
+  border-bottom: 1px solid #e2ebee;
+}
+.co-detail-body {
+  padding: 22px;
+}
+.co-contact {
+  background: #eef7f4;
+  border-radius: 9px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.co-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 24px 0;
+}
+.co-links a {
+  color: #287b88;
+}
+.co-next {
+  background: #fcfaf5;
+  border: 1px solid #eee8db;
+  border-radius: 10px;
+  padding: 18px;
+  margin: 22px 0;
+}
+.co-next small {
+  margin-top: 12px;
+}
+.co-detail-body > section {
+  margin-bottom: 30px;
+}
+.co-caption {
+  font-size: 12px;
+  color: #71838d;
+}
+.co-history {
+  padding: 17px 0;
+  border-bottom: 1px solid #e3ebee;
+}
+.co-event {
+  display: flex;
+  gap: 14px;
+  padding: 14px 0;
+}
+.co-event i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #619c9c;
+  flex: none;
+  margin-top: 5px;
+}
+.co-event small {
+  margin-top: 5px;
+}
+.co-welcome,
+.co-empty {
+  padding: 35px;
+}
+.co-welcome {
+  background: #edf5f4;
+  border-radius: 12px;
+}
+.co-welcome li {
+  padding: 9px 0;
+}
+.co-error {
+  border: 1px solid #e3b8ab;
+  background: #fff5ef;
+  padding: 16px;
+  overflow-wrap: anywhere;
+}
+.co-config {
+  padding: 26px;
+  margin-top: 20px;
+}
+.commercial label.co-check {
+  flex-direction: row;
+  align-items: center;
+  font-weight: 400;
+}
+.commercial .co-check input {
+  width: auto;
+}
+.commercial fieldset {
+  border: 1px solid #dce5e9;
+  border-radius: 8px;
+  margin: 20px 0;
+  padding: 16px;
+}
+.co-hour {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.co-hour label {
+  min-width: 95px;
+}
+.co-hour input[type="time"] {
+  width: 120px;
+}
+.co-config > button {
+  margin-top: 14px;
+}
+@media (max-width: 1100px) {
+  .co-layout {
+    grid-template-columns: 1fr;
+  }
+  .has-detail .co-detail {
+    order: -1;
+  }
+  .co-welcome {
+    padding: 28px;
+  }
+}
+@media (max-width: 650px) {
+  .co-heading {
+    flex-direction: column;
+    align-items: start;
+    gap: 8px;
+  }
+  .commercial h1 {
+    font-size: 25px;
+  }
+  .co-summary {
+    grid-template-columns: 1fr 1fr;
+  }
+  .co-filters > label {
+    min-width: 130px;
+  }
+  .co-filters > label:first-child {
+    min-width: 100%;
+  }
+  .co-fields {
+    grid-template-columns: 1fr;
+  }
+  .co-opportunity {
+    padding: 16px;
+  }
+  .co-detail-body,
+  .co-config {
+    padding: 16px;
+  }
+  .co-detail > header {
+    padding: 18px;
+  }
+  .co-tabs button {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+  .co-hour {
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+  .co-hour input[type="time"] {
+    width: 100px;
+  }
+  .co-line {
+    gap: 7px;
+  }
+  .co-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+/* Override the shell's vertical navigation only inside commercial tabs. */
+.commercial .co-tabs{flex-direction:row;justify-content:flex-start;overflow:visible}

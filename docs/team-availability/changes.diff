@@ -1,0 +1,455 @@
+--- base/AGENTS.md
++++ current/AGENTS.md
+@@ -144,3 +144,7 @@
+ Escopo integral: `docs/ux001/request.md`, sobre `SYZIA-044-UX-Final-Consolidado`. Somente preservar o contexto empresarial na abertura/troca de tickets, filtros por empresa/área e links de origem, mantendo Central global. UX-002 explicitamente ADIADO_PARA_POS_LANCAMENTO: não modificar login/AuthProvider/sessão/revalidação. Migrations, backend e testes históricos intactos. Gate vigente ampliado de forma aditiva, mesmo comando `npm run test:current-gate`. Relatório desta entrega: `RELATORIO-UX001-FINAL.md`.
+ 
+ Após gate PASS e entrega: **SYZIA — FEATURE FREEZE FUNCIONAL PRÉ-LANÇAMENTO**. Não adicionar funcionalidades, redesign, arquitetura ou alteração de fluxo; não implementar UX-002 antes do lançamento. Exceções: bug sério, segurança, perda/corrupção de dados, bloqueio de lançamento ou autorização explícita do proprietário. PARAR após consolidar e entregar. Sem deploy, publicação, homologação externa ou marketing automático.
++
++## Exceção controlada ao freeze — disponibilidade e Assistido (045)
++
++Autorização integral: `docs/team-availability/request.txt`, base obrigatória `SYZIA-044-UX001-Feature-Freeze-Consolidado`. Somente disponibilidade individual integrada à Agenda e política global/configuração de consumo do Assistido. Preservar migrations 001–044 byte a byte; migration 045 incremental, transacional e sem reset. Valores comerciais e horários definitivos permanecem pendentes do proprietário. Manter UX-001, PERF-001–013 e UX-002 adiado. Gate cumulativo no mesmo comando `npm run test:current-gate`. Sem deploy, publicação, provider/checkout, preços, trial ou novas fases. Após validação e entrega, parar. Limites externos permanecem separados da validação local.
+--- base/docs/testing/current-regression-gate.md
++++ current/docs/testing/current-regression-gate.md
+@@ -54,3 +54,11 @@
+ Nenhum teste histórico foi substituído ou afrouxado. A suíte focada pode ser executada com `node node_modules/@playwright/test/cli.js test --config=playwright.ux001.config.ts`. As medições de produção estão em `scripts/ux001/`, separadas do servidor de desenvolvimento usado pelo gate. Relatório desta intervenção: `RELATORIO-UX001-FINAL.md`. UX-002 permanece adiado para pós-lançamento.
+ 
+ A fixture de UX-001 é isolada porque suítes históricas alteram deliberadamente planos e atribuições. Reutilizar aquele estado final como se ainda fosse a fixture inicial invalida a preparação dos cenários positivos de operadores. O runner mantém as negações históricas e inicia uma fixture descartável nova para as mesmas asserções UX-001, sem conceder acessos artificiais ao produto.
++
++## Exceção controlada — disponibilidade e Assistido (045)
++
++O mesmo comando oficial acrescenta `team-upgrade`, `team-availability` e `team-browser`. As etapas SQL vigentes aplicam a 045: `current-db`, `current-fixture` e o adaptador de regressão usam `SYZIA_TEAM_CURRENT=1`. As asserções históricas permanecem iguais. No adaptador 040–042, a configuração fictícia do horário/limite ocorre somente nos cenários operacionais, depois da comparação intacta de upgrade. A migration continua sem valores comerciais; a fixture local tem horários/limites exclusivamente fictícios, separados da produção.
++
++O upgrade focado compara todas as linhas/colunas anteriores de 119 tabelas da 044 populada. O teste novo cobre disponibilidade semanal, bloqueios pontuais, buffer, remarcação, múltiplos períodos, atribuição, isolamento, ciclos, consumo, excesso, mensagens e downgrade. O navegador acrescenta edição em 1440/390/320 px, política global e consulta empresarial. Relatório: `RELATORIO-DISPONIBILIDADE-EQUIPE-ASSISTIDO.md`.
++
++A saída corrente do runner continua em `reports/syzia-044/current-gate.json`. A entrega da 045 preserva a execução em `reports/team-availability/current-gate/`. Os arquivos de teste originais de 040–042/044/UX-001 não foram afrouxados. Os únicos helpers de teste alterados são os adaptadores necessários para carregar a migration atual.
+--- base/package.json
++++ current/package.json
+@@ -1,7 +1,7 @@
+ {
+   "name": "atendimento-compartilhado-fundacao",
+   "version": "0.8.0",
+-  "description": "SYZIA \u2014 produto cumulativo com identidades independentes e experi\u00eancia empresarial",
++  "description": "SYZIA — produto cumulativo com identidades independentes e experiência empresarial",
+   "scripts": {
+     "dev": "vite --host 127.0.0.1",
+     "build": "tsc --noEmit && vite build",
+@@ -114,7 +114,9 @@
+     "test:042:native": "node scripts/test-native.mjs --042",
+     "build:migration:042": "python3 scripts/syzia-042/build.py",
+     "test:044": "node tests/syzia-044-sql.test.mjs && node tests/syzia-044-upgrade.test.mjs && node --test tests/current-gate.test.mjs",
+-    "test:current-gate": "node scripts/syzia-044/current-gate.mjs"
++    "test:current-gate": "node scripts/syzia-044/current-gate.mjs",
++    "test:team-availability": "node tests/team-availability.test.mjs && node tests/team-availability-upgrade.test.mjs",
++    "test:team-availability:browser": "playwright test --config=playwright.team-availability.config.ts"
+   },
+   "keywords": [],
+   "author": "",
+--- base/scripts/dev-consumer-demo.mjs
++++ current/scripts/dev-consumer-demo.mjs
+@@ -62,6 +62,7 @@
+ await c.db.exec(await (await import("node:fs/promises")).readFile("supabase/migrations/202609260041_self_service_journeys.sql", "utf8"));
+ await c.db.exec(await (await import("node:fs/promises")).readFile("supabase/migrations/202609260042_operational_refinements.sql", "utf8"));
+ await c.db.exec(await (await import("node:fs/promises")).readFile("supabase/migrations/202609260044_approved_audit_corrections.sql", "utf8"));
++await (await import("./team-availability/fixture.mjs")).upgradeTeamFixture(c.db);
+ // Only this disposable demo publishes fictitious offers; production migration publishes none.
+ await c.db.exec(
+   "reset role;update billing_plans set site_visible=true,self_service=true,self_service_trial=true where active and available;update private.billing_runtime set mock_enabled=true",
+@@ -500,7 +501,7 @@
+         if (path.startsWith("/rest/v1/rpc/")) {
+           const name = path.split("/").pop();
+           if (
+-            !/^(acquisition|selfservice|people|permissions|financial|support|access|consumer|central|commercial|company|foundation|analytics|billing|operations|onboarding)_[a-z_]+$/.test(
++            !/^(employee|assisted|acquisition|selfservice|people|permissions|financial|support|access|consumer|central|commercial|company|foundation|analytics|billing|operations|onboarding)_[a-z_]+$/.test(
+               name,
+             ) ||
+             name.startsWith("consumer_gateway") ||
+@@ -520,7 +521,7 @@
+           data = await c.scalar(
+             `select ${name}(${names.map((n, i) => `${n}=>$${i + 1}`).join(",")})`,
+             names.map((n) =>
+-              body[n] && typeof body[n] === "object" && !Array.isArray(body[n])
++              (body[n] && typeof body[n] === "object" && !Array.isArray(body[n])) || ["p_hours", "p_blocks"].includes(n)
+                 ? JSON.stringify(body[n])
+                 : (body[n] ?? null),
+             ),
+--- base/scripts/syzia-044/current-gate.mjs
++++ current/scripts/syzia-044/current-gate.mjs
+@@ -2,12 +2,15 @@
+ import { mkdir as mk, writeFile as write } from "node:fs/promises";
+ import { createWriteStream } from "node:fs";
+ process.env.BUNDLE_REPORT_PREFIX = "reports/syzia-044/bundle";
++process.env.SYZIA_TEAM_CURRENT = "1";
+ const controlled = process.argv.includes("--inject-failure");
+ const out = "reports/syzia-044";
+ await mk(out, { recursive: true });
+ const node = process.execPath;
+ export const suites = [
+   ["gate-contracts", [node, "--test", "tests/current-gate.test.mjs"]],
++  ["team-upgrade", [node, "tests/team-availability-upgrade.test.mjs"]],
++  ["team-availability", [node, "tests/team-availability.test.mjs"]],
+   ["ux001-security", [node, "tests/ux001-security.test.mjs"]],
+   ["focused", [node, "tests/syzia-044-sql.test.mjs"]],
+   ["upgrade", [node, "tests/syzia-044-upgrade.test.mjs"]],
+@@ -28,6 +31,15 @@
+   ],
+   ["build", [node, "scripts/inspect-browser-bundle.mjs"]],
+   ["browser", [node, "scripts/syzia-044/browser.mjs"]],
++  [
++    "team-browser",
++    [
++      node,
++      "node_modules/@playwright/test/cli.js",
++      "test",
++      "--config=playwright.team-availability.config.ts",
++    ],
++  ],
+   [
+     "ux001-browser",
+     [
+--- base/scripts/syzia-044/regression.mjs
++++ current/scripts/syzia-044/regression.mjs
+@@ -21,8 +21,18 @@
+       )
+       .join("\n") +
+       "\n" +
++      (process.env.SYZIA_TEAM_CURRENT === "1"
++        ? "await (await import('../scripts/team-availability/fixture.mjs')).upgradeTeamFixture(db,{configure:false});\n"
++        : "") +
+       anchor,
+   );
++  if (process.env.SYZIA_TEAM_CURRENT === "1") {
++    // Configure only disposable operational cases, after the unchanged upgrade comparison.
++    s = s.replace(
++      'async function test(name, fn) {\n  await db.exec("begin");',
++      'async function test(name, fn) {\n  await db.exec("begin");\n  if (!name.startsWith("01 Upgrade")) await (await import("../scripts/team-availability/fixture.mjs")).configureTeamFixture(db);',
++    );
++  }
+   s = s.replaceAll(
+     `reports/syzia-${round}/sql.json`,
+     `reports/syzia-044/regression-${round}.json`,
+--- base/src/api.ts
++++ current/src/api.ts
+@@ -262,6 +262,28 @@
+     "Este horário alteraria a ordem das etapas do atendimento. Use Replanejar atendimento para reorganizar todos os períodos.",
+   appointment_duration_unavailable:
+     "A duração original desta reserva antiga não pôde ser confirmada. Use Replanejar atendimento para revisar o serviço e os períodos.",
++  professional_unavailable:
++    "Este profissional não está disponível durante todo o período selecionado.",
++  professional_conflict:
++    "Este profissional já possui um atendimento neste período.",
++  availability_company_closed:
++    "A empresa está fechada em parte do período selecionado.",
++  availability_member_denied:
++    "Esta pessoa não é um funcionário ativo desta empresa.",
++  availability_invalid:
++    "Revise os horários: use intervalos completos, sem sobreposição, e um fuso válido.",
++  availability_revision_conflict:
++    "A configuração foi atualizada. Reabra a tela antes de salvar.",
++  responsible_replan_review_required:
++    "O novo plano remove um período com responsável. Revise explicitamente a atribuição antes de replanejar.",
++  assisted_outside_hours:
++    "A Equipe SYZIA está fora do horário de atendimento compartilhado.",
++  assisted_unconfigured:
++    "O limite do Assistido SYZIA ainda está pendente de configuração pelo Super Admin.",
++  assisted_cycle_required:
++    "O ciclo do atendimento compartilhado ainda precisa ser configurado.",
++  assisted_limit_reached:
++    "O limite compartilhado deste ciclo foi atingido. A própria empresa pode continuar atendendo.",
+   slot_unavailable:
+     "Este horário está indisponível. Escolha outro; sua reserva anterior foi preservada.",
+   service_already_started:
+--- base/src/billing/Billing.tsx
++++ current/src/billing/Billing.tsx
+@@ -1,3 +1,4 @@
++import { AssistedPolicy } from "../availability/Availability";
+ import { Capabilities } from "./Capabilities";
+ import { TrialPanel, type TrialData } from "./Trial";
+ import { PlanEditor } from "./PlanEditor";
+@@ -151,6 +152,7 @@
+           : "Sem novas tentativas de follow-up"}
+       </li>
+       {units
++        .filter(([key]) => key !== "tickets")
+         .filter(
+           ([, , k]) =>
+             v.quota_semantics !== 2 ||
+@@ -168,6 +170,11 @@
+                 : label.toLowerCase()}
+           </li>
+         ))}
++      {v.human_support && (
++        <li>
++          Atendimento compartilhado sujeito ao limite configurado por ciclo.
++        </li>
++      )}
+     </ul>
+   );
+ }
+@@ -346,6 +353,7 @@
+           após a integração do provedor de cobrança.
+         </span>
+       </div>
++      <AssistedPolicy platform={platform} org={scope} />
+       {platform && scope && overview && (
+         <Homologation
+           org={scope}
+@@ -597,39 +605,42 @@
+               é receita.
+             </p>
+             <div className="b-usage">
+-              {units.map(([key, label, limit]) => {
+-                const used = Number(data.usage[key] || 0),
+-                  max = sub?.plan[limit];
+-                return (
+-                  <div key={key}>
+-                    <span>
+-                      {sub?.plan.quota_semantics === 2 && key === "tickets"
+-                        ? "Atendimentos humanos SYZIA no mês"
+-                        : sub?.plan.quota_semantics === 2 && key === "followups"
+-                          ? "Tentativas humanas SYZIA no mês"
+-                          : label}
+-                    </span>
+-                    <strong>
+-                      {used.toLocaleString("pt-BR")}{" "}
+-                      <small>/ {max ?? "Ilimitado"}</small>
+-                    </strong>
+-                    {max != null && (
+-                      <meter
+-                        aria-label={label}
+-                        min={0}
+-                        max={Math.max(max, 1)}
+-                        value={Math.min(used, Math.max(max, 1))}
+-                      />
+-                    )}
+-                    {max != null && used >= max && (
+-                      <small className="b-limit">
+-                        Limite atingido. Amplie o plano ou libere capacidade
+-                        quando aplicável.
+-                      </small>
+-                    )}
+-                  </div>
+-                );
+-              })}
++              {units
++                .filter(([key]) => key !== "tickets")
++                .map(([key, label, limit]) => {
++                  const used = Number(data.usage[key] || 0),
++                    max = sub?.plan[limit];
++                  return (
++                    <div key={key}>
++                      <span>
++                        {sub?.plan.quota_semantics === 2 && key === "tickets"
++                          ? "Atendimentos humanos SYZIA no mês"
++                          : sub?.plan.quota_semantics === 2 &&
++                              key === "followups"
++                            ? "Tentativas humanas SYZIA no mês"
++                            : label}
++                      </span>
++                      <strong>
++                        {used.toLocaleString("pt-BR")}{" "}
++                        <small>/ {max ?? "Ilimitado"}</small>
++                      </strong>
++                      {max != null && (
++                        <meter
++                          aria-label={label}
++                          min={0}
++                          max={Math.max(max, 1)}
++                          value={Math.min(used, Math.max(max, 1))}
++                        />
++                      )}
++                      {max != null && used >= max && (
++                        <small className="b-limit">
++                          Limite atingido. Amplie o plano ou libere capacidade
++                          quando aplicável.
++                        </small>
++                      )}
++                    </div>
++                  );
++                })}
+             </div>
+           </section>
+           {confirmation && (
+--- base/src/billing/PlanEditor.tsx
++++ current/src/billing/PlanEditor.tsx
+@@ -188,13 +188,6 @@
+     ["member_limit", "Membros da equipe", 1],
+     ["service_limit", "Serviços ativos", 1],
+     ["request_limit", "Solicitações por mês", 0],
+-    [
+-      "ticket_limit",
+-      d.quota_semantics === 1
+-        ? "Atendimentos por mês · contrato anterior"
+-        : "Atendimentos humanos SYZIA por mês",
+-      0,
+-    ],
+     [
+       "followup_limit",
+       d.quota_semantics === 1
+@@ -402,6 +395,11 @@
+                     </button>
+                   </div>
+                 )}
++                <p>
++                  O limite do atendimento compartilhado é configurado por versão
++                  e ciclo na seção Atendimento compartilhado, após salvar a
++                  versão.
++                </p>
+                 <div className="b-limit-grid">
+                   {limits
+                     .filter(
+--- base/src/central/ConsumerChat.tsx
++++ current/src/central/ConsumerChat.tsx
+@@ -44,6 +44,7 @@
+         solicitação.
+       </p>
+       {error && <p role="alert">{error}</p>}
++      {data?.shared_message && <p role="status">{data.shared_message}</p>}
+       {data?.state && <small>{states[data.state]}</small>}
+       {newMessages && (
+         <button
+--- base/src/central/model.ts
++++ current/src/central/model.ts
+@@ -57,6 +57,21 @@
+ }
+ export function centralError(e: any) {
+   const reason = e?.message || e?.code;
++  const assisted: Record<string, string> = {
++    assisted_outside_hours:
++      "A Equipe SYZIA está fora do horário compartilhado. O atendimento aguardará o próximo período disponível.",
++    assisted_limit_reached:
++      "Limite compartilhado atingido neste ciclo. A própria empresa pode continuar atendendo.",
++    assisted_unconfigured:
++      "O limite do atendimento compartilhado ainda precisa ser configurado pelo Super Admin.",
++    assisted_cycle_required:
++      "O ciclo do atendimento compartilhado precisa ser configurado pelo Super Admin.",
++    professional_unavailable:
++      "Este profissional não está disponível durante todo o período selecionado.",
++    professional_conflict:
++      "O profissional já possui uma reserva neste período.",
++  };
++  if (assisted[reason]) return assisted[reason];
+   if (reason === "central_claim_permission_required")
+     return "Você não possui permissão para assumir atendimentos desta empresa. Peça ao administrador para revisar suas permissões.";
+   if (reason === "central_presence_required")
+--- base/src/consumer/api.ts
++++ current/src/consumer/api.ts
+@@ -135,6 +135,14 @@
+       "Há uma versão mais recente da proposta. Atualize para revisá-la.",
+     quote_expired_or_invalid:
+       "Esta proposta expirou ou não pode mais ser aprovada.",
++    professional_unavailable:
++      "Não há disponibilidade para este horário. Escolha outra opção.",
++    professional_conflict:
++      "Não há disponibilidade para este horário. Escolha outra opção.",
++    availability_company_closed:
++      "Não há disponibilidade para este horário. Escolha outra opção.",
++    responsible_replan_review_required:
++      "Este atendimento precisa ser revisto pela empresa antes de remarcar.",
+     slot_unavailable: "Esse horário não está mais disponível. Escolha outro.",
+     cancel_not_allowed:
+       "O prazo para cancelar pelo site terminou. Entre em contato com a empresa.",
+--- base/src/operations/Operations.tsx
++++ current/src/operations/Operations.tsx
+@@ -613,6 +613,62 @@
+         <p role="status" className="op-result">
+           {notice}
+         </p>
++      )}
++      {a.kind === "booking" && (
++        <section className="card">
++          <h2>Responsável por este período</h2>
++          <p>
++            {d.responsibles?.find((m: Data) => m.id === a.responsible_id)
++              ?.name || "Sem responsável individual"}
++          </p>
++          {edit("agenda.manage") &&
++            a.state === "confirmed" &&
++            a.execution_state === "scheduled" && (
++              <form
++                onSubmit={async (e) => {
++                  e.preventDefault();
++                  const f = new FormData(e.currentTarget);
++                  setBusy(true);
++                  setErr("");
++                  try {
++                    await rpc("operations_assign_responsible", {
++                      p_org: org,
++                      p_id: id,
++                      p_user: f.get("responsible") || null,
++                      p_revision: a.revision,
++                      p_key: crypto.randomUUID(),
++                    });
++                    setNotice(
++                      "Responsável atualizado. Disponibilidade validada para o período completo.",
++                    );
++                    await s.reload();
++                  } catch (e) {
++                    setErr(errorMessage(e));
++                  } finally {
++                    setBusy(false);
++                  }
++                }}
++              >
++                <label>
++                  Funcionário responsável
++                  <select
++                    name="responsible"
++                    key={String(a.revision)}
++                    defaultValue={a.responsible_id || ""}
++                    disabled={busy}
++                  >
++                    <option value="">Sem responsável individual</option>
++                    {d.responsibles?.map((m: Data) => (
++                      <option key={m.id} value={m.id}>
++                        {m.name}
++                      </option>
++                    ))}
++                  </select>
++                </label>
++                <button disabled={busy}>Salvar responsável</button>
++              </form>
++            )}
++        </section>
+       )}
+       {d.periods?.length > 1 && (
+         <section className="card">
+--- base/src/permissions/Permissions.tsx
++++ current/src/permissions/Permissions.tsx
+@@ -1,3 +1,4 @@
++import { EmployeeAvailability } from "../availability/Availability";
+ import { useFinancialCommand } from "../finance/useFinancialCommand";
+ import {
+   createContext,
+@@ -260,6 +261,7 @@
+           <strong>{member.can_reply ? "Sim" : "Não"}</strong>
+         </p>
+       )}
++      <EmployeeAvailability org={org} data={data?.availability} />
+       {member && (
+         <form onSubmit={save}>
+           <fieldset disabled={busy} className="form-reset">
+--- base/tests/support/current-db.mjs
++++ current/tests/support/current-db.mjs
+@@ -22,6 +22,10 @@
+       "utf8",
+     ),
+   );
++if (process.env.SYZIA_TEAM_CURRENT === "1" && !process.env.SYZIA_044_BASELINE)
++  await (
++    await import("../../scripts/team-availability/fixture.mjs")
++  ).upgradeTeamFixture(db);
+ let trace = [];
+ function summarize(r) {
+   if (r == null || typeof r !== "object") return r;
+--- base/tests/support/current-fixture.mjs
++++ current/tests/support/current-fixture.mjs
+@@ -11,5 +11,9 @@
+       "utf8",
+     ),
+   );
++  if (process.env.SYZIA_TEAM_CURRENT === "1")
++    await (
++      await import("../../scripts/team-availability/fixture.mjs")
++    ).upgradeTeamFixture(c.db);
+   return c;
+ }

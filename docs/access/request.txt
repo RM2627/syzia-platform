@@ -1,0 +1,1954 @@
+REVISÃO FINAL DE AUTENTICAÇÃO E ACESSO — VIRELOQ
+LOGIN EMPRESARIAL POR CÓDIGO + USERNAME, PRIMEIRO ACESSO,
+RECUPERAÇÃO ADMINISTRATIVA, SESSÃO E TERMOS
+
+LEIA TODA ESTA SOLICITAÇÃO ANTES DE ALTERAR O PROJETO.
+
+Esta solicitação substitui o modelo anterior de primeiro acesso baseado
+em convites por e-mail.
+
+O modelo definitivo da VIRELOQ será empresarial e provisionado.
+
+NÃO manter dois sistemas concorrentes de primeiro acesso.
+NÃO manter autocadastro público.
+NÃO depender de SMTP/e-mail para criar ou recuperar usuários.
+NÃO reconstruir módulos que não têm relação com esta alteração.
+NÃO alterar trial, billing, página pública ou regras comerciais sem necessidade.
+NÃO fazer deploy.
+NÃO acessar/modificar Supabase real.
+NÃO inserir credenciais.
+NÃO produzir vídeo nesta tarefa.
+
+Antes de implementar:
+1. audite Auth, profiles, memberships, organizations, roles, RLS,
+   FORCE RLS, sessão e migration 025;
+2. determine quais estruturas podem ser reaproveitadas;
+3. projete a adaptação segura ao novo modelo;
+4. somente depois implemente.
+
+==================================================
+1. PRINCÍPIO DO NOVO MODELO
+==================================================
+
+A VIRELOQ NÃO terá cadastro administrativo público.
+
+Ninguém deve conseguir entrar na plataforma, clicar em “Criar conta”
+e criar livremente um usuário ou organização.
+
+O provisionamento seguirá esta hierarquia:
+
+SUPER ADMIN VIRELOQ
+→ cria/ativa a empresa
+→ cria/provisiona o primeiro Administrador da empresa
+
+ADMINISTRADOR DA EMPRESA
+→ cria/provisiona os usuários da própria organização
+
+USUÁRIO
+→ somente ativa um acesso que já foi previamente provisionado.
+
+O usuário não escolhe livremente:
+- organização;
+- papel;
+- permissões;
+- trial;
+- plano.
+
+Esses dados já devem existir antes da ativação da conta.
+
+==================================================
+2. IDENTIDADE DE LOGIN
+==================================================
+
+O login empresarial será composto por:
+
+CÓDIGO DA EMPRESA
++
+USERNAME
++
+SENHA
+
+Exemplo conceitual:
+
+Código da empresa:
+MSA7K2
+
+Usuário:
+rodrigo.santos
+
+Senha:
+••••••••••••
+
+[ Entrar ]
+
+[ ] Lembrar esta empresa neste dispositivo
+
+Não hardcodar esses exemplos.
+
+==================================================
+3. CÓDIGO DA EMPRESA
+==================================================
+
+Cada organização deve possuir um código de acesso empresarial próprio.
+
+Esse código:
+- identifica o tenant durante autenticação;
+- NÃO é uma senha;
+- NÃO concede acesso sozinho;
+- deve ser diferente do organization_id interno;
+- deve ser diferente do slug público sempre que apropriado;
+- deve ser estável;
+- deve ser fácil de informar ao funcionário;
+- deve ser suficientemente distintivo para evitar colisões.
+
+Exemplo conceitual:
+
+MS Auto Details
+Código VIRELOQ: MSA7K2
+
+A geração deve ocorrer server-side.
+
+Garantir unicidade no banco.
+
+Não utilizar sequência previsível que exponha quantidade de empresas ou
+informações internas desnecessárias.
+
+==================================================
+4. USERNAME
+==================================================
+
+Cada usuário deve possuir username operacional.
+
+Padrão sugerido automaticamente:
+
+nome.sobrenome
+
+Exemplo:
+
+Rodrigo Santos
+→ rodrigo.santos
+
+O username deve ser:
+- normalizado;
+- case-insensitive;
+- validado;
+- editável pelo administrador antes da criação;
+- único DENTRO DA ORGANIZAÇÃO.
+
+Não exigir unicidade global.
+
+Deve ser permitido:
+
+Empresa A + rodrigo.santos
+Empresa B + rodrigo.santos
+
+Mas NÃO:
+
+Empresa A + rodrigo.santos
+Empresa A + rodrigo.santos
+
+A identidade operacional deve resolver de forma inequívoca:
+
+organization + username → usuário autorizado.
+
+Adicionar constraint/índice adequado no banco.
+
+==================================================
+5. TELA ÚNICA DE LOGIN
+==================================================
+
+Manter uma única entrada oficial da VIRELOQ.
+
+Exemplo:
+
+/entrar
+
+Não criar uma URL de login diferente como requisito para cada empresa.
+
+Tela:
+
+VIRELOQ
+
+Código da empresa
+Username
+Senha
+
+[ Lembrar esta empresa neste dispositivo ]
+
+[ Entrar ]
+
+Se o dispositivo tiver uma empresa lembrada, apresentar de maneira
+simplificada:
+
+MS Auto Details
+
+Usuário
+Senha
+
+[ Entrar ]
+
+Trocar empresa
+
+“Lembrar esta empresa” pode armazenar SOMENTE informação não secreta
+necessária para identificar a organização.
+
+NUNCA armazenar senha ou código temporário para implementar essa conveniência.
+
+==================================================
+6. NÃO REVELAR QUAL CAMPO ESTÁ ERRADO
+==================================================
+
+Em falha de autenticação, não informar publicamente:
+
+“empresa existe, usuário não existe”
+ou
+“usuário existe, senha está errada”.
+
+Utilizar mensagem genérica apropriada:
+
+“Não foi possível entrar com os dados informados.”
+
+Evitar enumeração de:
+- empresas;
+- usernames;
+- contas.
+
+Aplicar rate limiting e proteção contra brute force.
+
+==================================================
+7. CRIAÇÃO DA EMPRESA PELO SUPER ADMIN
+==================================================
+
+A criação/ativação de empresa deve ocorrer pelo Super Admin.
+
+A experiência deve ser profissional e tratada como:
+
+ATIVAÇÃO DA EMPRESA
+
+e não como cadastro público.
+
+Na criação da organização, permitir informar os dados necessários da
+empresa e o primeiro administrador.
+
+Exemplo conceitual:
+
+Nova empresa
+
+Nome da empresa
+Identificador/slug
+Plano/trial conforme modelo existente
+
+Administrador inicial
+
+Nome
+Sobrenome
+Username sugerido
+Telefone opcional
+E-mail obrigatório
+
+[ Criar e ativar empresa ]
+
+Não obrigar e-mail para autenticação.
+
+Preservar e reutilizar as regras existentes de:
+- organização;
+- trial;
+- plano;
+- autorização;
+- auditoria.
+
+A criação da empresa NÃO deve conceder trial duplicado nem contornar
+trial_eligibility.
+
+==================================================
+8. PRIMEIRO ADMINISTRADOR
+==================================================
+
+Ao criar/ativar a empresa, o Super Admin provisiona o primeiro
+Administrador.
+
+A VIRELOQ gera um CÓDIGO TEMPORÁRIO DE ATIVAÇÃO.
+
+O Super Admin NÃO escolhe a senha definitiva do usuário.
+
+Após a criação, mostrar uma tela semelhante a:
+
+Empresa criada
+
+MS Auto Details
+
+Administrador:
+João Silva
+
+Código da empresa:
+MSA7K2
+
+Usuário:
+joao.silva
+
+Código temporário:
+7KPX-42MD
+
+[ Copiar instruções de acesso ]
+
+A credencial temporária deve ser exibida de forma segura e controlada.
+
+O administrador da VIRELOQ pode então enviar as instruções por:
+- WhatsApp;
+- mensagem;
+- presencialmente;
+- outro canal externo.
+
+A VIRELOQ não depende de e-mail para isso.
+
+==================================================
+8.1. E-MAIL OBRIGATÓRIO DO ADMINISTRADOR
+==================================================
+
+Todo Administrador de empresa deve possuir um e-mail cadastrado.
+
+Para o PRIMEIRO Administrador, provisionado pelo Super Admin, o e-mail é
+OBRIGATÓRIO.
+
+Para qualquer novo usuário que receba posteriormente o papel
+Administrador, também deve existir e-mail válido cadastrado antes da
+concessão desse papel.
+
+O e-mail NÃO substitui o username como identidade operacional de login.
+
+O login normal permanece:
+
+Código da empresa
++
+Username
++
+Senha
+
+O primeiro acesso permanece:
+
+Código da empresa
++
+Username
++
+Código temporário
+→ definição da senha definitiva.
+
+Portanto, o primeiro acesso NÃO deve depender da entrega de um e-mail.
+
+O e-mail do Administrador deverá ser utilizado como canal adicional para:
+- comunicação administrativa;
+- alertas importantes de segurança;
+- notificações relevantes da VIRELOQ;
+- recuperação de acesso, quando essa funcionalidade estiver disponível e
+  devidamente configurada.
+
+Quando uma funcionalidade depender da propriedade do endereço de e-mail,
+exigir verificação adequada do endereço antes de confiar nele.
+
+O Super Admin deve continuar possuindo mecanismo administrativo seguro
+para redefinir o acesso de um Administrador caso a recuperação por e-mail
+não esteja disponível.
+
+Para usuários não administrativos:
+- e-mail permanece opcional;
+- telefone permanece opcional;
+- username continua obrigatório.
+
+Não voltar a transformar e-mail em requisito para criação ou primeiro
+acesso de funcionários comuns.
+
+==================================================
+9. CÓDIGO TEMPORÁRIO
+==================================================
+
+O código temporário NÃO é a senha permanente.
+
+Requisitos:
+
+- gerado criptograficamente;
+- aleatório;
+- uso único;
+- validade limitada;
+- número limitado de tentativas;
+- revogável;
+- novo código invalida o anterior;
+- não armazenar em texto puro recuperável no banco;
+- não registrar o valor em logs;
+- não enviar o valor para clientes não autorizados;
+- não permitir reutilização depois da ativação.
+
+Definir uma validade inicial adequada, preferencialmente configurável.
+Sugestão inicial: 48 horas.
+
+Documentar a decisão.
+
+==================================================
+10. PRIMEIRO ACESSO
+==================================================
+
+O usuário acessa a VIRELOQ.
+
+Fornece:
+
+Código da empresa
+Username
+Código temporário
+
+A plataforma valida server-side.
+
+Se válido, somente então liberar:
+
+Crie sua senha
+
+Nova senha
+Confirmar nova senha
+
+[ Ativar minha conta ]
+
+Após sucesso:
+
+- invalidar definitivamente o código temporário;
+- ativar o usuário;
+- preservar organização e papel previamente provisionados;
+- iniciar sessão conforme arquitetura segura;
+- registrar auditoria.
+
+O usuário NÃO pode alterar organização ou papel durante essa etapa.
+
+==================================================
+11. SENHA
+==================================================
+
+A senha definitiva deve continuar protegida por mecanismo de autenticação
+adequado.
+
+IMPORTANTE:
+
+NÃO implementar armazenamento caseiro de senha em texto puro.
+NÃO criar coluna password.
+NÃO criar hash artesanal se houver mecanismo de Auth apropriado.
+NÃO expor credenciais ao frontend.
+NÃO criar e-mail falso previsível como gambiarra sem análise de segurança.
+
+A VIRELOQ atualmente utiliza Supabase Auth.
+
+Auditar como integrar com segurança:
+
+organization_code + username + password
+
+ao sistema existente.
+
+Se o Supabase Auth exigir um identificador interno diferente, esse detalhe
+deve permanecer interno e não ser utilizado como identidade pública do
+usuário.
+
+Documentar claramente a arquitetura escolhida.
+
+==================================================
+12. FUNCIONÁRIOS
+==================================================
+
+Depois de ativado, o Administrador da empresa poderá acessar:
+
+Pessoas e acessos
+
+e criar usuários somente da própria organização.
+
+Fluxo:
+
+Novo usuário
+
+Nome
+Sobrenome
+Username sugerido
+Papel
+Telefone opcional
+E-mail opcional
+
+[ Criar usuário ]
+
+Papéis devem reutilizar o modelo existente sempre que possível, incluindo:
+
+Administrador
+Colaborador
+Atendente próprio
+
+Não criar novos papéis desnecessariamente.
+
+Após criar:
+
+Usuário criado
+
+Código da empresa
+Username
+Código temporário
+
+[ Copiar instruções de acesso ]
+
+O administrador NÃO define a senha definitiva do funcionário.
+
+==================================================
+13. PERMISSÕES
+==================================================
+
+O Administrador da empresa pode provisionar usuários apenas dentro da
+própria organização e somente com papéis que esteja autorizado a conceder.
+
+Colaborador e Atendente NÃO ganham automaticamente capacidade de criar
+usuários.
+
+Super Admin continua global.
+
+Nenhum fluxo pode permitir:
+- organization_id arbitrário;
+- role arbitrário;
+- elevação para Super Admin;
+- acesso cross-tenant.
+
+Aplicar proteção server-side/RPC/RLS.
+
+Não confiar somente no frontend.
+
+==================================================
+14. RECUPERAÇÃO DE ACESSO SEM E-MAIL
+==================================================
+
+A autenticação principal não deve depender de e-mail.
+
+Funcionário esqueceu a senha:
+
+Administrador autorizado
+→ Pessoas e acessos
+→ usuário
+→ Redefinir acesso
+
+A VIRELOQ gera novo código temporário.
+
+O usuário utiliza:
+
+Código da empresa
+Username
+Novo código temporário
+
+e define uma nova senha.
+
+O código anterior é invalidado.
+
+Para o primeiro Administrador da organização, o Super Admin da VIRELOQ
+deve poder executar a recuperação administrativa.
+
+Registrar auditoria.
+
+Não permitir que o administrador visualize a senha atual.
+
+==================================================
+15. E-MAIL E TELEFONE
+==================================================
+
+E-mail e telefone podem permanecer como informações opcionais do perfil.
+
+Podem ser utilizados futuramente para:
+- notificações;
+- comunicação;
+- recuperação adicional;
+- alertas.
+
+Mas NÃO são obrigatórios para autenticação neste modelo.
+
+Não remover infraestrutura de e-mail que possa ser útil em outras
+funcionalidades sem necessidade.
+
+O fluxo de convite por e-mail deixa de ser o mecanismo de criação/ativação
+de usuários.
+
+==================================================
+16. MIGRATION 025 / CONVITES ANTIGOS
+==================================================
+
+Auditar a migration 025 e as estruturas de convite existentes.
+
+NÃO editar migrations 001–025 já aplicadas.
+
+Não apagar histórico.
+
+Não destruir dados existentes.
+
+Se o novo modelo exigir schema adicional ou mudanças de autorização,
+criar migration incremental 026.
+
+A migration deve:
+- preservar instalações existentes;
+- ser segura para atualização;
+- manter histórico de convites;
+- não resetar Auth;
+- não resetar organizações;
+- não resetar trial;
+- não resetar memberships.
+
+As estruturas antigas de convite podem ser descontinuadas do fluxo ativo,
+mas não devem ser apagadas sem necessidade.
+
+Documentar claramente o que ficou legado.
+
+==================================================
+17. USUÁRIOS EXISTENTES
+==================================================
+
+Criar estratégia segura para usuários já existentes.
+
+Não exigir reset destrutivo.
+
+Super Admin atual deve continuar funcionando.
+
+Organizações e memberships existentes devem ser preservados.
+
+Se usuários existentes precisarem receber:
+- username;
+- código empresarial;
+- estado de ativação;
+
+fornecer backfill/migração segura.
+
+Não inventar usernames conflitantes silenciosamente.
+
+Documentar conflitos e estratégia de resolução.
+
+==================================================
+18. LOGOUT AUTOMÁTICO POR INATIVIDADE
+==================================================
+
+Implementar política de sessão por inatividade.
+
+Valor inicial:
+
+30 minutos de INATIVIDADE.
+
+Não significa 30 minutos desde o login.
+
+Interações legítimas do usuário reiniciam o contador.
+
+Não considerar como atividade:
+- polling;
+- refresh automático;
+- atualização de sessão;
+- chamadas de background;
+- eventos internos sem interação humana.
+
+Antes do logout, mostrar aviso, por exemplo:
+
+“Sua sessão está prestes a expirar.”
+
+“Por segurança, você será desconectado em 60 segundos.”
+
+[ Continuar conectado ]
+
+Se não houver interação:
+
+- encerrar sessão;
+- limpar estado sensível;
+- retornar para login;
+- não deixar dados de outra pessoa acessíveis.
+
+==================================================
+19. CONFIGURAÇÃO DA POLÍTICA DE SESSÃO
+==================================================
+
+Não hardcodar desnecessariamente 30 minutos.
+
+Criar configuração apropriada para permitir alteração administrativa
+futura da política de inatividade.
+
+O padrão inicial é 30 minutos.
+
+Não permitir que uma empresa desabilite proteções globais de segurança
+sem regra explícita.
+
+==================================================
+20. RASCUNHOS E LOGOUT
+==================================================
+
+Preservar a correção anterior de formulários.
+
+Polling/focus não pode apagar rascunhos.
+
+Entretanto, após logout real por inatividade:
+- não reaproveitar rascunho sensível para outro usuário;
+- não vazar estado entre organizações;
+- limpar dados autenticados adequadamente.
+
+==================================================
+21. TERMOS DE USO E POLÍTICA DE PRIVACIDADE
+==================================================
+
+Adicionar infraestrutura para:
+
+TERMOS DE USO
+POLÍTICA DE PRIVACIDADE
+
+IMPORTANTE:
+
+Não inventar afirmações jurídicas específicas que não estejam confirmadas
+pelo proprietário.
+
+Criar páginas/estrutura/versionamento e conteúdo inicial claramente
+identificável como minuta quando necessário.
+
+Os documentos finais serão revisados antes do lançamento comercial.
+
+==================================================
+22. ACEITE DA EMPRESA
+==================================================
+
+O primeiro Administrador autorizado da organização deve realizar o aceite
+institucional aplicável no primeiro acesso.
+
+Após ativar sua credencial e antes de iniciar a operação, apresentar:
+
+Antes de começar
+
+[ ] Li e aceito os Termos de Uso
+[ ] Li e estou ciente da Política de Privacidade
+
+[ Continuar ]
+
+Registrar server-side:
+
+- organization_id;
+- user_id;
+- versão dos Termos;
+- versão da Política;
+- data/hora;
+- informações técnicas mínimas necessárias à auditoria, respeitando
+  privacidade.
+
+O aceite deve ser auditável.
+
+Não confiar apenas em localStorage.
+
+==================================================
+23. FUNCIONÁRIOS E DOCUMENTOS LEGAIS
+==================================================
+
+Não obrigar cada funcionário a aceitar novamente o contrato comercial da
+assinatura como se fosse contratante da VIRELOQ.
+
+O primeiro administrador autorizado representa a organização no aceite
+institucional, conforme modelo definido.
+
+Quando necessário, funcionários podem receber ciência de regras de uso e
+privacidade apropriadas.
+
+Não presumir representação jurídica além do que estiver definido nos
+Termos finais.
+
+==================================================
+24. NOVAS VERSÕES DOS TERMOS
+==================================================
+
+Versionar os documentos.
+
+Permitir saber:
+- versão atual;
+- versão aceita pela organização;
+- data;
+- responsável.
+
+Alterações materiais futuras podem exigir novo aceite.
+
+Não exigir novo aceite por simples correção tipográfica sem regra
+definida.
+
+==================================================
+25. ÁREA LEGAL
+==================================================
+
+Adicionar localização adequada, por exemplo:
+
+Configurações
+→ Legal e privacidade
+
+Exibir:
+- Termos de Uso;
+- Política de Privacidade;
+- versão atual;
+- versão aceita;
+- data do aceite;
+- responsável quando apropriado.
+
+Também disponibilizar links institucionais no login/rodapé quando fizer
+sentido.
+
+==================================================
+26. TRIAL
+==================================================
+
+PRESERVAR o sistema de trial existente.
+
+A mudança de autenticação NÃO pode:
+- reiniciar trial;
+- conceder novo trial por username;
+- conceder trial por código temporário;
+- conceder trial por redefinição de acesso;
+- permitir nova empresa equivalente para contornar elegibilidade.
+
+Trial continua pertencendo à organização elegível.
+
+==================================================
+27. ASSINATURA/BILLING
+==================================================
+
+PRESERVAR a infraestrutura atual.
+
+Não reconstruir billing nesta tarefa.
+
+Não fingir que cobrança real está pronta.
+
+Plano e assinatura continuam acessíveis conforme implementação atual.
+
+A futura integração com gateway será tratada separadamente.
+
+==================================================
+28. BRANDING
+==================================================
+
+Preservar integralmente:
+
+VIRELOQ
+
+Onde caminhos se conectam.
+
+Preservar:
+- identidade;
+- cores;
+- layouts;
+- logo;
+- painel claro das empresas;
+- Administração VIRELOQ;
+- identificação do usuário logado.
+
+Adaptar somente telas relacionadas ao novo fluxo de autenticação.
+
+==================================================
+29. LOGIN E IDENTIDADE VISUAL
+==================================================
+
+A nova tela de login deve utilizar a identidade institucional VIRELOQ.
+
+Mostrar claramente:
+- VIRELOQ;
+- slogan quando apropriado;
+- Código da empresa;
+- Usuário;
+- Senha;
+- Lembrar esta empresa;
+- Entrar.
+
+Não mostrar:
+- Criar conta;
+- Cadastre-se;
+- Solicitar empresa;
+- autocadastro.
+
+Primeiro acesso deve ser uma jornada separada/estado específico e não um
+cadastro público.
+
+==================================================
+30. SEGURANÇA
+==================================================
+
+Auditar obrigatoriamente:
+
+- brute force;
+- enumeração de empresas;
+- enumeração de usernames;
+- reutilização de código temporário;
+- replay;
+- corrida de ativação;
+- reset concorrente;
+- troca de organização;
+- username case-insensitive;
+- username Unicode/confusables quando relevante;
+- role escalation;
+- acesso cross-tenant;
+- sessão revogada;
+- usuário desativado;
+- organização suspensa;
+- trial expirado;
+- logout por inatividade;
+- CSRF/origem quando aplicável;
+- logs sem senha/código temporário;
+- frontend sem segredo;
+- service_role exclusivamente server-side.
+
+==================================================
+31. NÃO IMPLEMENTAR AUTENTICAÇÃO INSEGURA PARA CUMPRIR O PEDIDO
+==================================================
+
+Se houver incompatibilidade técnica entre Supabase Auth e o modelo
+empresa + username + senha, NÃO improvisar.
+
+Antes de enfraquecer Auth ou armazenar credenciais de maneira própria,
+PARE e documente a incompatibilidade encontrada.
+
+Apresente no relatório:
+- limitação técnica encontrada;
+- alternativas seguras avaliadas;
+- impacto de cada alternativa;
+- solução escolhida;
+- motivo técnico e de segurança da escolha.
+
+A experiência pública desejada continua sendo:
+
+Código da empresa + Username + Senha
+
+Porém a implementação interna pode utilizar identificadores técnicos
+diferentes, desde que:
+- sejam invisíveis ao usuário;
+- não dependam de e-mail real;
+- não permitam colisão entre organizações;
+- mantenham autenticação segura;
+- mantenham compatibilidade com autorização/RLS;
+- não armazenem senha fora do mecanismo seguro de autenticação.
+
+A interface não deve expor detalhes técnicos utilizados internamente para
+adaptar o modelo ao provedor de Auth.
+
+==================================================
+32. DESATIVAÇÃO DE USUÁRIO
+==================================================
+
+O Administrador da organização deve poder desativar usuários da própria
+empresa conforme suas permissões.
+
+Usuário desativado:
+- não consegue realizar novo login;
+- perde acesso às áreas autenticadas;
+- não recupera acesso utilizando código temporário antigo;
+- não mantém sessão válida indefinidamente;
+- não é apagado automaticamente;
+- mantém histórico/auditoria necessários.
+
+O Administrador não pode desativar usuários de outra organização.
+
+Proteger situações em que um administrador tente remover o último
+administrador necessário da organização.
+
+Super Admin mantém capacidade de intervenção administrativa.
+
+==================================================
+33. ALTERAÇÃO DE PAPEL
+==================================================
+
+Preservar o modelo de papéis existente.
+
+Quando um administrador autorizado alterar o papel de um usuário:
+- validar server-side;
+- registrar auditoria;
+- atualizar autorização;
+- refletir a alteração em sessão/revalidação conforme arquitetura atual.
+
+Nunca permitir que um administrador empresarial conceda Super Admin.
+
+Mudança de papel não cria novo usuário, novo trial ou nova identidade.
+
+==================================================
+34. TROCA/ALTERAÇÃO DE USERNAME
+==================================================
+
+Permitir alteração de username somente por usuário autorizado.
+
+Ao alterar:
+- preservar identidade interna;
+- preservar histórico;
+- preservar memberships;
+- preservar auditoria;
+- validar unicidade dentro da organização;
+- normalizar case;
+- invalidar caches/estado antigo quando necessário.
+
+Não tratar alteração de username como nova conta.
+
+==================================================
+35. CÓDIGO DA EMPRESA E CICLO DE VIDA
+==================================================
+
+O código empresarial deve ser estável.
+
+Não permitir alteração casual pelo Administrador da empresa.
+
+Se houver necessidade administrativa excepcional de regeneração/troca:
+- somente Super Admin ou mecanismo explicitamente autorizado;
+- registrar auditoria;
+- invalidar identificação anterior quando necessário;
+- não alterar organization_id;
+- não criar nova organização;
+- não conceder novo trial.
+
+Não utilizar código da empresa como segredo principal.
+
+==================================================
+36. “LEMBRAR ESTA EMPRESA”
+==================================================
+
+A opção deve guardar somente identificador não sensível suficiente para
+pré-selecionar a empresa naquele dispositivo.
+
+Ao retornar ao login, mostrar:
+
+MS Auto Details
+
+Usuário
+Senha
+
+Entrar
+
+Trocar empresa
+
+“Trocar empresa” remove a seleção local e retorna à entrada com código da
+empresa.
+
+Não armazenar:
+- senha;
+- código temporário;
+- token de ativação;
+- service role;
+- credencial privilegiada.
+
+==================================================
+37. SUPER ADMIN — GESTÃO DE EMPRESAS E PRIMEIRO ADM
+==================================================
+
+Evoluir a experiência existente de Super Admin para tornar a ativação
+clara.
+
+Fluxo esperado:
+
+Empresas
+→ Nova empresa
+→ dados da organização
+→ primeiro administrador
+→ ativar
+
+Depois apresentar:
+
+Empresa ativada com sucesso
+
+Código VIRELOQ da empresa
+Nome do Administrador
+Username
+Código temporário
+Validade
+
+[ Copiar instruções ]
+
+A ação “Copiar instruções” deve gerar texto adequado para compartilhamento,
+sem incluir dados internos.
+
+Exemplo conceitual:
+
+“Seu acesso à VIRELOQ foi preparado.
+
+Empresa: MS Auto Details
+Código da empresa: MSA7K2
+Usuário: joao.silva
+Código temporário: 7KPX-42MD
+
+Acesse a VIRELOQ e utilize esses dados para criar sua senha pessoal.
+
+O código temporário expira em XX/XX/XXXX.”
+
+Não hardcodar dados do exemplo.
+
+==================================================
+38. ADMINISTRADOR DA EMPRESA — CRIAÇÃO DA EQUIPE
+==================================================
+
+Em Pessoas e acessos, substituir o fluxo principal de convite por e-mail
+por provisionamento direto.
+
+Apresentar:
+
+Novo usuário
+
+Nome
+Sobrenome
+Username
+Papel
+E-mail opcional
+Telefone opcional
+
+Criar usuário
+
+Após criação, mostrar credencial temporária uma única vez e permitir
+“Copiar instruções”.
+
+A listagem deve mostrar pelo menos:
+- nome;
+- username;
+- papel;
+- situação;
+- ativado/aguardando ativação;
+- última atividade quando isso já puder ser obtido de forma segura;
+- ações permitidas.
+
+Não mostrar senha.
+
+==================================================
+39. REDEFINIR ACESSO
+==================================================
+
+Para usuário existente:
+
+Pessoas e acessos
+→ usuário
+→ Redefinir acesso
+
+Exigir confirmação da ação.
+
+Gerar novo código temporário.
+
+Invalidar qualquer código temporário anterior.
+
+Não alterar:
+- username;
+- organização;
+- papel;
+- trial;
+- plano.
+
+Registrar:
+- quem solicitou;
+- qual usuário foi afetado;
+- data/hora;
+- resultado.
+
+Não registrar o código em log persistente.
+
+==================================================
+40. PRIMEIRO ACESSO X REDEFINIÇÃO
+==================================================
+
+O mesmo mecanismo seguro de código temporário pode atender:
+- primeira ativação;
+- redefinição administrativa de acesso.
+
+A interface deve distinguir o contexto para o usuário, mas não criar dois
+sistemas de credenciais diferentes sem necessidade.
+
+Em ambos:
+
+empresa + username + código temporário
+→ validação
+→ nova senha + confirmação
+→ código invalidado.
+
+==================================================
+41. EXPERIÊNCIA DO PRIMEIRO ADMINISTRADOR
+==================================================
+
+Após definir a senha:
+
+1. validar/registrar aceite legal aplicável;
+2. concluir ativação;
+3. entrar no ambiente da empresa;
+4. apresentar onboarding existente;
+5. permitir configurar a organização.
+
+Não exigir convite por e-mail.
+
+Não exigir que o Super Admin conheça a senha definitiva.
+
+==================================================
+42. TERMOS DE USO — CONTEÚDO E ESTRUTURA
+==================================================
+
+Criar uma MINUTA inicial coerente com a VIRELOQ, claramente marcada para
+revisão jurídica antes do lançamento.
+
+A minuta deve contemplar, em linguagem clara, tópicos como:
+
+- identificação da plataforma;
+- objeto do serviço;
+- contas empresariais;
+- responsabilidade do Administrador pelos usuários da organização;
+- credenciais e segurança;
+- uso permitido;
+- uso proibido;
+- trial;
+- planos;
+- cobrança quando efetivamente implementada;
+- inadimplência;
+- cancelamento;
+- suspensão;
+- disponibilidade;
+- manutenção;
+- dados inseridos pelas empresas;
+- responsabilidade da empresa pelos dados que cadastra;
+- propriedade intelectual da VIRELOQ;
+- propriedade/conteúdo da empresa cliente;
+- limitações de responsabilidade compatíveis com legislação aplicável;
+- encerramento;
+- alterações dos Termos;
+- contato;
+- legislação/foro somente quando juridicamente apropriado e sujeito a
+  revisão.
+
+Não inventar CNPJ, endereço comercial ou dados jurídicos que não foram
+fornecidos.
+
+Utilizar placeholders claramente identificados quando informação jurídica
+real ainda não estiver definida.
+
+==================================================
+43. POLÍTICA DE PRIVACIDADE — CONTEÚDO E ESTRUTURA
+==================================================
+
+Criar MINUTA para revisão jurídica, considerando LGPD e o funcionamento
+real da VIRELOQ.
+
+Descrever somente tratamentos efetivamente suportados ou planejados pelo
+produto.
+
+Cobrir, quando aplicável:
+
+- dados de administradores e funcionários;
+- dados dos clientes cadastrados pelas empresas;
+- dados de autenticação;
+- registros de segurança/auditoria;
+- dados técnicos de sessão;
+- finalidades;
+- compartilhamentos necessários com infraestrutura/provedores;
+- armazenamento;
+- segurança;
+- retenção;
+- exclusão;
+- direitos dos titulares;
+- contato;
+- cookies/local storage realmente utilizados;
+- papel da VIRELOQ e da empresa cliente no tratamento de dados, sem
+  inventar qualificação jurídica definitiva quando depender de análise.
+
+Não declarar certificações ou garantias inexistentes.
+
+==================================================
+44. ACEITE NÃO PODE SER CONTORNADO
+==================================================
+
+Se houver aceite obrigatório pendente para o primeiro Administrador:
+- bloquear server-side operações que dependam desse aceite quando
+  apropriado;
+- não confiar somente em redirect/frontend;
+- permitir acesso aos próprios documentos legais;
+- permitir logout;
+- não permitir simplesmente navegar diretamente para outra rota e ignorar
+  o aceite.
+
+Registrar versão exata aceita.
+
+==================================================
+45. DOCUMENTOS PÚBLICOS
+==================================================
+
+Termos e Política de Privacidade devem poder ser consultados sem login em
+rotas institucionais adequadas.
+
+Exemplos conceituais:
+
+/termos
+/privacidade
+
+Também disponibilizar links na tela de login.
+
+Não expor informações administrativas privadas nessas páginas.
+
+==================================================
+46. SESSÃO E AVISO DE INATIVIDADE
+==================================================
+
+Implementar aviso antes do encerramento automático.
+
+Padrão inicial:
+
+30 minutos de inatividade total.
+
+Aviso:
+60 segundos antes.
+
+Exemplo:
+
+“Sua sessão está prestes a expirar por inatividade.”
+
+[ Continuar conectado ]
+
+Se houver interação legítima:
+- revalidar sessão quando necessário;
+- reiniciar contador.
+
+Se não:
+- logout seguro.
+
+Testar múltiplas abas.
+
+Definir comportamento consistente quando o usuário estiver ativo em uma
+aba e inativo em outra.
+
+Evitar que cada aba execute logout conflitante de maneira insegura.
+
+==================================================
+47. AÇÕES QUE NÃO CONTAM COMO ATIVIDADE
+==================================================
+
+Não reiniciar contador por:
+- polling;
+- refresh de sessão;
+- refresh de permissões;
+- websocket/realtime;
+- timers;
+- re-render;
+- recebimento de dados;
+- focus automático sem interação humana;
+- requests em background.
+
+Atividade deve representar ação real do usuário, como:
+- clique;
+- teclado;
+- toque;
+- interação relevante.
+
+Evitar listeners excessivos que prejudiquem desempenho.
+
+==================================================
+48. LOGOUT MANUAL
+==================================================
+
+Preservar botão Sair no menu do usuário.
+
+Logout manual deve:
+- encerrar sessão;
+- limpar dados autenticados;
+- limpar rascunhos sensíveis daquele escopo;
+- preservar somente preferências explicitamente não sensíveis, como
+  empresa lembrada, se a política permitir;
+- retornar à tela de login.
+
+==================================================
+49. AUDITORIA
+==================================================
+
+Registrar eventos relevantes sem armazenar segredos:
+
+- empresa provisionada;
+- primeiro administrador provisionado;
+- usuário provisionado;
+- usuário ativado;
+- código temporário regenerado;
+- redefinição solicitada;
+- papel alterado;
+- usuário desativado/reativado;
+- aceite legal;
+- logout administrativo quando já houver infraestrutura apropriada;
+- mudanças de segurança relevantes.
+
+NUNCA registrar:
+- senha;
+- hash reutilizável de senha;
+- código temporário em claro;
+- service role;
+- token de sessão;
+- segredo do Auth.
+
+==================================================
+50. CONCORRÊNCIA E IDEMPOTÊNCIA
+==================================================
+
+Testar:
+- dois administradores tentando criar mesmo username simultaneamente;
+- dois cliques em Criar usuário;
+- duas ativações simultâneas;
+- código temporário usado duas vezes;
+- redefinição enquanto ativação anterior está em andamento;
+- alteração de papel concorrente;
+- desativação durante sessão ativa.
+
+Utilizar constraints/transações/locks apropriados.
+
+Não resolver concorrência apenas desabilitando botão no frontend.
+
+==================================================
+51. RATE LIMIT E BLOQUEIO
+==================================================
+
+Aplicar limites adequados em:
+- login;
+- validação de código temporário;
+- redefinição;
+- primeiro acesso.
+
+Evitar brute force de:
+- código empresarial;
+- username;
+- código temporário;
+- senha.
+
+Após tentativas excessivas, aplicar resposta segura e temporária.
+
+Não bloquear permanentemente organização inteira por poucas tentativas de
+um usuário sem regra explícita.
+
+==================================================
+52. SUPER ADMIN EXISTENTE
+==================================================
+
+A conta Super Admin já existente deve continuar acessível após o upgrade.
+
+Criar estratégia explícita de compatibilidade.
+
+Se o Super Admin não pertencer a uma organização empresarial comum,
+fornecer login administrativo apropriado sem forçá-lo a possuir código de
+empresa fictício.
+
+Pode existir uma entrada administrativa protegida dentro da mesma
+experiência, desde que:
+- não seja autocadastro;
+- não enfraqueça segurança;
+- não exponha existência de Super Admin;
+- preserve autenticação existente.
+
+Documentar como o proprietário entra após a migration.
+
+==================================================
+53. TRANSIÇÃO DOS USUÁRIOS EXISTENTES
+==================================================
+
+Como já existem usuários Auth reais no ambiente de homologação, fornecer
+plano de migração.
+
+Não apagar essas contas.
+
+Definir como cada membership existente receberá username.
+
+Quando houver nome e sobrenome:
+sugerir nome.sobrenome.
+
+Quando houver conflito:
+não decidir silenciosamente.
+
+Criar regra determinística segura OU sinalizar para resolução pelo Super
+Admin.
+
+Usuários existentes podem precisar passar por redefinição/ativação
+administrativa para aderir ao novo login.
+
+Documentar passo a passo.
+
+==================================================
+54. CONVITES POR E-MAIL LEGADOS
+==================================================
+
+O novo modelo substitui convites por e-mail como mecanismo normal de
+provisionamento.
+
+Não apagar tabelas/histórico da migration 025.
+
+A interface principal não deve continuar oferecendo dois caminhos
+concorrentes:
+
+“Convidar por e-mail”
+e
+“Criar usuário”
+
+O fluxo ativo deve ser o novo provisionamento.
+
+Convites pendentes antigos devem receber tratamento definido:
+- preservar como histórico;
+- permitir revogação administrativa;
+- impedir que um convite legado crie estado incoerente com o novo modelo.
+
+Documentar a estratégia.
+
+==================================================
+55. SMTP
+==================================================
+
+SMTP deixa de ser dependência do provisionamento de usuários.
+
+Preservar infraestrutura de e-mail para usos futuros/atuais legítimos.
+
+Não exigir Custom SMTP para:
+- criar primeiro Administrador;
+- criar funcionário;
+- redefinir senha pelo fluxo administrativo novo.
+
+Não remover templates ou infraestrutura sem necessidade.
+
+==================================================
+56. TESTES OBRIGATÓRIOS — AUTENTICAÇÃO
+==================================================
+
+Criar testes para:
+
+A. Super Admin continua entrando.
+B. visitante não consegue criar conta.
+C. código empresarial inválido não revela existência.
+D. username inválido não revela existência.
+E. senha inválida usa erro genérico.
+F. empresa A + username X autentica A.
+G. empresa B + mesmo username X autentica B.
+H. mesmo username duplicado na mesma empresa é recusado.
+I. comparação de username é case-insensitive conforme regra.
+J. organização suspensa não autentica normalmente.
+K. usuário desativado não autentica.
+L. usuário de A nunca acessa B.
+M. administrador empresarial nunca vira Super Admin.
+
+==================================================
+57. TESTES — PRIMEIRO ACESSO
+==================================================
+
+Testar:
+
+A. provisionar empresa + primeiro ADM;
+B. gerar código temporário;
+C. código correto;
+D. código errado;
+E. código expirado;
+F. código revogado;
+G. limite de tentativas;
+H. uso único;
+I. dois usos simultâneos;
+J. definição de senha;
+K. confirmação divergente;
+L. ativação;
+M. login posterior com senha;
+N. código antigo deixa de funcionar.
+
+==================================================
+58. TESTES — EQUIPE
+==================================================
+
+Testar:
+
+- ADM cria funcionário;
+- username sugerido;
+- edição antes da criação;
+- conflito dentro da empresa;
+- mesmo username em outra empresa;
+- Colaborador não cria usuário quando não autorizado;
+- Atendente não cria usuário quando não autorizado;
+- ADM não cria Super Admin;
+- desativação;
+- reativação;
+- alteração de papel;
+- redefinição de acesso;
+- histórico preservado.
+
+==================================================
+59. TESTES — SESSÃO
+==================================================
+
+Testar com tempo controlado e também integração real quando apropriado:
+
+- 29 minutos de inatividade → sessão continua;
+- aviso antes do limite;
+- continuar conectado;
+- 30 minutos → logout;
+- polling não reinicia contador;
+- refresh Auth não reinicia;
+- clique/teclado reinicia;
+- múltiplas abas;
+- logout manual;
+- troca de identidade;
+- rascunho não vaza para usuário seguinte.
+
+Não esperar 30 minutos reais em toda a suíte se relógio controlado puder
+validar a lógica corretamente.
+
+==================================================
+60. TESTES — LEGAL
+==================================================
+
+Testar:
+
+- Termos públicos;
+- Privacidade pública;
+- primeiro ADM sem aceite;
+- tentativa de contornar por URL;
+- aceite;
+- versão registrada;
+- data;
+- usuário;
+- organização;
+- acesso liberado após aceite;
+- nova versão material exigindo novo aceite quando configurada;
+- funcionário não tratado indevidamente como contratante.
+
+==================================================
+61. TESTES — REGRESSÃO
+==================================================
+
+Além dos testes novos, executar regressão sobre:
+
+- página pública;
+- serviços;
+- portfólio;
+- clientes;
+- orçamentos;
+- agenda;
+- atendimento;
+- comercial;
+- pendências;
+- métricas;
+- onboarding;
+- trial;
+- assinatura;
+- billing existente;
+- Super Admin;
+- RLS;
+- FORCE RLS;
+- Storage;
+- correção de rascunhos;
+- branding VIRELOQ.
+
+A mudança de autenticação não pode quebrar o restante do produto.
+
+==================================================
+62. MIGRATIONS
+==================================================
+
+Migrations 001–025 já foram aplicadas no ambiente de homologação.
+
+NÃO alterá-las.
+
+Se necessário, criar:
+
+026
+
+e migrations posteriores somente se indispensáveis.
+
+Toda migration deve ser:
+- incremental;
+- compatível com instalação existente;
+- sem reset;
+- preservando dados;
+- revisável;
+- documentada.
+
+Entregar instruções explícitas de quais novas migrations devem ser
+executadas e em qual ordem.
+
+==================================================
+63. ARQUIVOS DE AMBIENTE
+==================================================
+
+Os arquivos `.env` e `.env.server` preenchidos utilizados pelo
+proprietário durante homologação NÃO foram fornecidos ao Work.
+
+Não inventar valores.
+Não inferir credenciais.
+Não incluir segredos.
+
+Preservar arquivos de exemplo necessários e documentar somente novas
+variáveis, se forem indispensáveis.
+
+==================================================
+64. ENTREGA — PROJETO COMPLETO
+==================================================
+
+IMPORTANTE:
+
+NÃO entregar somente patch incremental desta vez.
+
+Utilize como base a última versão COMPLETA consolidada da VIRELOQ e
+incorpore integralmente esta revisão.
+
+Entregar UM ÚNICO ZIP COMPLETO E AUTOSSUFICIENTE do código da plataforma.
+
+Preservar tudo que não foi alterado.
+
+Não exigir que o proprietário faça mesclagem manual de patches.
+
+A entrega deve já conter todas as alterações consolidadas sobre a última
+versão completa da VIRELOQ.
+
+Os arquivos locais `.env` e `.env.server` preenchidos não fazem parte da
+entrega e serão copiados posteriormente pelo proprietário.
+
+==================================================
+65. BUILD E VALIDAÇÃO DA ENTREGA COMPLETA
+==================================================
+
+Antes de empacotar o ZIP final:
+
+- executar typecheck;
+- executar build de produção;
+- executar os testes novos desta revisão;
+- executar regressão pertinente do produto;
+- verificar bundle;
+- verificar ausência de segredos;
+- verificar integridade das migrations históricas;
+- verificar que arquivos necessários não ficaram somente em patches
+  anteriores;
+- confirmar que o ZIP consegue ser utilizado como projeto completo.
+
+Não declarar teste executado quando ele não tiver sido realmente
+executado.
+
+Distinguir claramente:
+- testes locais;
+- testes simulados;
+- testes com adapters;
+- testes que dependem de Supabase real;
+- itens que ainda exigem homologação externa.
+
+==================================================
+66. GUIA DE ATUALIZAÇÃO DO AMBIENTE EXISTENTE
+==================================================
+
+Entregar um guia curto e específico para atualizar nossa instalação de
+homologação atual.
+
+O ambiente atual já possui migrations 001–025 aplicadas.
+
+Portanto, informar exatamente:
+
+1. quais novas migrations precisam ser executadas;
+2. em qual ordem;
+3. quais arquivos locais de ambiente precisam ser preservados/copiedos;
+4. quais processos precisam ser iniciados;
+5. como validar o Super Admin existente;
+6. como migrar/provisionar usernames dos usuários existentes;
+7. como obter/visualizar o novo código empresarial;
+8. como testar o primeiro acesso;
+9. como testar login normal;
+10. como testar logout por inatividade.
+
+NÃO mandar executar migrations 001–025 novamente.
+
+NÃO mandar resetar banco.
+
+==================================================
+67. DOCUMENTAÇÃO DO NOVO MODELO
+==================================================
+
+Atualizar a documentação técnica e funcional para refletir que o modelo
+oficial de acesso da VIRELOQ passa a ser:
+
+Código da empresa
++
+Username
++
+Senha
+
+e que o primeiro acesso/redefinição utiliza:
+
+Código da empresa
++
+Username
++
+Código temporário
+→ criação de nova senha.
+
+Documentar claramente:
+
+- quem cria a empresa;
+- quem cria o primeiro ADM;
+- quem cria funcionários;
+- como usernames são resolvidos;
+- como conflitos são tratados;
+- como códigos temporários funcionam;
+- como recuperação funciona;
+- como sessão/inatividade funciona;
+- como os Termos são aceitos;
+- como usuários legados são migrados.
+
+Remover da documentação operacional qualquer instrução que trate convite
+por e-mail como mecanismo principal atual.
+
+Preservar documentação histórica quando necessário, identificando-a como
+legada.
+
+==================================================
+68. TEXTO DE ATIVAÇÃO COMERCIAL
+==================================================
+
+Preparar também um texto curto reutilizável para explicar ao cliente o
+processo de ativação sem transmitir a impressão de limitação técnica.
+
+Utilizar conceito semelhante a:
+
+“Após a contratação, a VIRELOQ prepara o ambiente exclusivo da sua
+empresa e libera o primeiro acesso administrativo.
+
+O responsável recebe o código da empresa, seu usuário e um código
+temporário de ativação. No primeiro acesso, ele cria sua senha pessoal.
+
+Depois disso, o administrador pode cadastrar e gerenciar os acessos da
+própria equipe.”
+
+Não apresentar como:
+
+“Você não pode se cadastrar porque o proprietário precisa criar sua
+conta.”
+
+A experiência deve ser comunicada como PROVISIONAMENTO/ATIVAÇÃO
+EMPRESARIAL.
+
+==================================================
+69. NÃO IMPLEMENTAR CHECKOUT REAL NESTA TAREFA
+==================================================
+
+A integração financeira real permanece uma tarefa separada.
+
+Preservar:
+- Plano e assinatura;
+- trial;
+- billing existente;
+- contrato preparado para provider;
+- estados existentes.
+
+Não selecionar gateway automaticamente.
+Não contratar serviço.
+Não inserir credenciais.
+Não simular cobrança real como concluída.
+
+==================================================
+70. VÍDEO — CONTINUA SUSPENSO
+==================================================
+
+NÃO produzir, editar, renderizar ou retomar o vídeo definitivo nesta
+tarefa.
+
+O vídeo anterior permanece cancelado/suspenso porque a autenticação e o
+primeiro acesso mudarão significativamente.
+
+Preservar roteiros/materiais anteriores que ainda possam ser úteis, mas
+não utilizar tempo para atualizar ou gravar o vídeo agora.
+
+A produção do vídeo somente será autorizada por uma NOVA solicitação
+explícita após:
+
+1. entrega desta revisão;
+2. atualização do Supabase de homologação;
+3. homologação real do novo login;
+4. homologação do primeiro acesso;
+5. homologação da gestão de usuários;
+6. homologação do logout por inatividade;
+7. validação dos Termos/Privacidade;
+8. correção de eventuais bugs encontrados.
+
+==================================================
+71. RELATÓRIO FINAL OBRIGATÓRIO
+==================================================
+
+Entregar relatório técnico contendo:
+
+1. arquitetura escolhida para autenticação por código + username;
+2. como Supabase Auth foi preservado/adaptado;
+3. por que a solução não exige e-mail real;
+4. schema novo;
+5. migrations novas;
+6. estratégia para usuários existentes;
+7. geração e unicidade do código empresarial;
+8. normalização/unicidade de username;
+9. funcionamento do código temporário;
+10. armazenamento seguro do código;
+11. primeiro acesso;
+12. login normal;
+13. recuperação administrativa;
+14. desativação/reativação;
+15. alteração de papel;
+16. logout automático;
+17. comportamento em múltiplas abas;
+18. Termos de Uso;
+19. Política de Privacidade;
+20. versionamento/aceite;
+21. estruturas legadas de convite;
+22. arquivos alterados;
+23. testes executados;
+24. resultados;
+25. itens não testados externamente;
+26. instruções de atualização da nossa instalação;
+27. confirmação de preservação do trial;
+28. confirmação de preservação do billing;
+29. confirmação de preservação da identidade VIRELOQ;
+30. confirmação de que o vídeo NÃO foi produzido.
+
+==================================================
+72. CRITÉRIOS DE ACEITE DA ENTREGA
+==================================================
+
+A revisão somente pode ser considerada pronta para nossa homologação se:
+
+- não houver autocadastro público;
+- Super Admin existente continuar acessível;
+- Super Admin conseguir ativar uma empresa e seu primeiro ADM;
+- cada empresa possuir código próprio;
+- username for único dentro da organização;
+- usernames iguais funcionarem em organizações diferentes;
+- primeiro acesso não depender de e-mail;
+- código temporário for seguro e de uso único;
+- ADM conseguir criar usuários da própria empresa;
+- funcionário conseguir ativar sua conta sem e-mail;
+- recuperação administrativa funcionar sem revelar senha;
+- usuário desativado perder acesso;
+- isolamento multiempresa continuar efetivo;
+- trial não for reiniciado;
+- billing não for quebrado;
+- logout automático funcionar;
+- polling não contar como atividade;
+- rascunhos não vazarem após logout;
+- Termos/Privacidade estiverem acessíveis;
+- aceite institucional estiver versionado/auditável;
+- migrations históricas permanecerem intactas;
+- build passar;
+- testes pertinentes passarem;
+- nenhuma credencial real estiver incluída;
+- ZIP entregue for COMPLETO, não patch;
+- vídeo continuar suspenso.
+
+==================================================
+73. REGRA FINAL
+==================================================
+
+Esta é uma alteração estrutural de autenticação, não autorização para
+reescrever a VIRELOQ.
+
+PRESERVAR o produto existente.
+
+Reutilizar:
+- organizações;
+- memberships;
+- papéis;
+- RLS/FORCE RLS;
+- auditoria;
+- trial;
+- billing;
+- página pública;
+- serviços;
+- portfólio;
+- clientes;
+- orçamentos;
+- agenda;
+- atendimento;
+- comercial;
+- pendências;
+- métricas;
+- onboarding;
+- identidade VIRELOQ;
+- correção de rascunhos;
+- demais funcionalidades já homologadas.
+
+Alterar somente o necessário para implementar de forma segura e coerente
+o novo modelo de autenticação, provisionamento, recuperação, sessão e
+aceite legal.
+
+NÃO fazer deploy.
+NÃO acessar ou modificar o Supabase real.
+NÃO inventar credenciais.
+NÃO executar cobrança.
+NÃO produzir vídeo.
+
+Entregar o projeto completo consolidado e PARAR.
+
+A próxima etapa será executada pelo proprietário no ambiente de
+homologação real.

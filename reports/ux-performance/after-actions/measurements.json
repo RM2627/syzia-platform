@@ -1,0 +1,784 @@
+{
+  "phase": "after-actions",
+  "browser": "153.0.8010.0",
+  "latency": {
+    "apiMs": 120,
+    "chunkMs": 250
+  },
+  "results": [
+    {
+      "id": "ticket-open-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "t": 81
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "t": 262
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_ae8286fcdfb5924ba38f0160\"}",
+          "t": 75,
+          "end": 251,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/central_queue",
+          "body": "{\"p_org\":null,\"p_search\":\"\",\"p_state\":null,\"p_mine\":true,\"p_offset\":0,\"p_view\":\"all\",\"p_date\":null}",
+          "t": 79,
+          "end": 264,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1000,
+      "final": {
+        "url": "/central/t_ae8286fcdfb5924ba38f0160",
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "0 atendimentos",
+          "Ana • Fictícia"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "claim-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_act",
+          "body": "{\"p_code\":\"t_ae8286fcdfb5924ba38f0160\",\"p_revision\":2,\"p_action\":\"claim\",\"p_data\":{},\"p_key\":\"28b53b1b-45fd-4dc1-bec4-5d4f424693cd\"}",
+          "t": 36,
+          "end": 174,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_ae8286fcdfb5924ba38f0160\"}",
+          "t": 177,
+          "end": 344,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/central_queue",
+          "body": "{\"p_org\":null,\"p_search\":\"\",\"p_state\":null,\"p_mine\":false,\"p_offset\":0,\"p_view\":\"all\",\"p_date\":null}",
+          "t": 177,
+          "end": 401,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1088,
+      "final": {
+        "url": "/central/t_ae8286fcdfb5924ba38f0160",
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "24 atendimentos",
+          "Ana • Fictícia"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "send-message-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":true}",
+          "t": 73,
+          "end": 200,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/central_act",
+          "body": "{\"p_code\":\"t_ae8286fcdfb5924ba38f0160\",\"p_revision\":3,\"p_action\":\"message\",\"p_data\":{\"body\":\"Mensagem sintética da auditoria de desempenho.\"},\"p_key\":\"8e6050d6-6328-44db-9349-ed3e0bc22ccb\"}",
+          "t": 73,
+          "end": 215,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_ae8286fcdfb5924ba38f0160\"}",
+          "t": 217,
+          "end": 373,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/central_queue",
+          "body": "{\"p_org\":null,\"p_search\":\"\",\"p_state\":null,\"p_mine\":false,\"p_offset\":0,\"p_view\":\"all\",\"p_date\":null}",
+          "t": 217,
+          "end": 416,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1143,
+      "final": {
+        "url": "/central/t_ae8286fcdfb5924ba38f0160",
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "24 atendimentos",
+          "Ana • Fictícia"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "ticket-switch-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "t": 81
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "t": 241
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_461c3238e167e043ee89466f\"}",
+          "t": 64,
+          "end": 236,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 901,
+      "final": {
+        "url": "/central/t_461c3238e167e043ee89466f",
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "24 atendimentos",
+          "Pedro · Demo 12"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "client-context-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [],
+      "requests": [],
+      "errors": [],
+      "durationMs": 160,
+      "final": {
+        "url": "/central/t_461c3238e167e043ee89466f",
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "24 atendimentos",
+          "Pedro · Demo 12"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "quote-open-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [],
+          "t": 77
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Proposta para Rafael • Fictício"
+          ],
+          "t": 213
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":true}",
+          "t": 54,
+          "end": 181,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_quote_context",
+          "body": "{\"p_org\":\"5c8fdf0d-9403-4a68-960c-21b0af2e5601\",\"p_code\":\"r_44185a5835aefbfdfec7e513\"}",
+          "t": 67,
+          "end": 202,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_quote_catalog",
+          "body": "{\"p_org\":\"5c8fdf0d-9403-4a68-960c-21b0af2e5601\"}",
+          "t": 209,
+          "end": 342,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1091,
+      "final": {
+        "url": "/painel/5c8fdf0d-9403-4a68-960c-21b0af2e5601/orcamentos?pedido=r_44185a5835aefbfdfec7e513",
+        "overflow": 0,
+        "headings": [
+          "Proposta para Rafael • Fictício",
+          "Preparar proposta",
+          "Versões enviadas"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "page-preview-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Página da empresa",
+            "MS Auto Details • Fictícia Serviços que fazem a diferença."
+          ],
+          "t": 355
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":true}",
+          "t": 50,
+          "end": 178,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/consumer_page_draft",
+          "body": "{\"p_org\":\"5c8fdf0d-9403-4a68-960c-21b0af2e5601\",\"p_show_prices\":true}",
+          "t": 50,
+          "end": 183,
+          "status": 200
+        },
+        {
+          "path": "/company-media/m_69bf1b3fb52119c41c8120b8",
+          "body": null,
+          "t": 189,
+          "end": 319,
+          "status": 200
+        },
+        {
+          "path": "/company-media/m_5224bcb7681435551fdef13f",
+          "body": null,
+          "t": 189,
+          "end": 323,
+          "status": 200
+        },
+        {
+          "path": "/company-media/m_6dd7508bac546138d6c5c54d",
+          "body": null,
+          "t": 190,
+          "end": 327,
+          "status": 200
+        },
+        {
+          "path": "/company-media/m_59bed87a739c840bfb558494",
+          "body": null,
+          "t": 190,
+          "end": 330,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1012,
+      "final": {
+        "url": "/painel/5c8fdf0d-9403-4a68-960c-21b0af2e5601/pagina",
+        "overflow": 0,
+        "headings": [
+          "Página da empresa",
+          "A sua empresa, do seu jeito",
+          "Organize o que você oferece",
+          "Seus trabalhos",
+          "Visualizar como cliente",
+          "MS Auto Details • Fictícia Serviços que fazem a diferença.",
+          "Encontre o serviço que precisa.",
+          "Conheça nosso trabalho.",
+          "Do primeiro contato ao atendimento.",
+          "Antes de começar.",
+          "Pronto para receber seus clientes?"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "ticket-open-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "t": 68
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "t": 238
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_461c3238e167e043ee89466f\"}",
+          "t": 62,
+          "end": 221,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/central_queue",
+          "body": "{\"p_org\":null,\"p_search\":\"\",\"p_state\":null,\"p_mine\":true,\"p_offset\":0,\"p_view\":\"all\",\"p_date\":null}",
+          "t": 63,
+          "end": 229,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 975,
+      "final": {
+        "url": "/central/t_461c3238e167e043ee89466f",
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "1 atendimentos",
+          "Pedro · Demo 12"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "claim-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_act",
+          "body": "{\"p_code\":\"t_461c3238e167e043ee89466f\",\"p_revision\":2,\"p_action\":\"claim\",\"p_data\":{},\"p_key\":\"222b44e7-db90-4e75-9a62-6dcbec2fc6af\"}",
+          "t": 35,
+          "end": 171,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_461c3238e167e043ee89466f\"}",
+          "t": 174,
+          "end": 330,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/central_queue",
+          "body": "{\"p_org\":null,\"p_search\":\"\",\"p_state\":null,\"p_mine\":false,\"p_offset\":0,\"p_view\":\"all\",\"p_date\":null}",
+          "t": 174,
+          "end": 368,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1091,
+      "final": {
+        "url": "/central/t_461c3238e167e043ee89466f",
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "24 atendimentos",
+          "Pedro · Demo 12"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "send-message-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":true}",
+          "t": 43,
+          "end": 171,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/central_act",
+          "body": "{\"p_code\":\"t_461c3238e167e043ee89466f\",\"p_revision\":3,\"p_action\":\"message\",\"p_data\":{\"body\":\"Mensagem sintética da auditoria de desempenho.\"},\"p_key\":\"e9bc7fa0-5e71-4b6f-afba-82ccb3e504de\"}",
+          "t": 44,
+          "end": 181,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_461c3238e167e043ee89466f\"}",
+          "t": 184,
+          "end": 336,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/central_queue",
+          "body": "{\"p_org\":null,\"p_search\":\"\",\"p_state\":null,\"p_mine\":false,\"p_offset\":0,\"p_view\":\"all\",\"p_date\":null}",
+          "t": 184,
+          "end": 371,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1101,
+      "final": {
+        "url": "/central/t_461c3238e167e043ee89466f",
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "24 atendimentos",
+          "Pedro · Demo 12"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "ticket-switch-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "t": 63
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "t": 214
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_63fbb292dd7b7cd6e1462d46\"}",
+          "t": 51,
+          "end": 203,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 879,
+      "final": {
+        "url": "/central/t_63fbb292dd7b7cd6e1462d46",
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "24 atendimentos",
+          "Rafael · Demo 8"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "client-context-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [],
+      "requests": [],
+      "errors": [],
+      "durationMs": 158,
+      "final": {
+        "url": "/central/t_63fbb292dd7b7cd6e1462d46",
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "24 atendimentos",
+          "Rafael · Demo 8"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "quote-open-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [],
+          "t": 90
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Proposta para Rafael • Fictício"
+          ],
+          "t": 223
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":true}",
+          "t": 62,
+          "end": 190,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_quote_context",
+          "body": "{\"p_org\":\"5c8fdf0d-9403-4a68-960c-21b0af2e5601\",\"p_code\":\"r_44185a5835aefbfdfec7e513\"}",
+          "t": 76,
+          "end": 210,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_quote_catalog",
+          "body": "{\"p_org\":\"5c8fdf0d-9403-4a68-960c-21b0af2e5601\"}",
+          "t": 215,
+          "end": 343,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 998,
+      "final": {
+        "url": "/painel/5c8fdf0d-9403-4a68-960c-21b0af2e5601/orcamentos?pedido=r_44185a5835aefbfdfec7e513",
+        "overflow": 0,
+        "headings": [
+          "Proposta para Rafael • Fictício",
+          "Preparar proposta",
+          "Versões enviadas"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "page-preview-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Página da empresa",
+            "MS Auto Details • Fictícia Serviços que fazem a diferença."
+          ],
+          "t": 350
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":true}",
+          "t": 42,
+          "end": 168,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/consumer_page_draft",
+          "body": "{\"p_org\":\"5c8fdf0d-9403-4a68-960c-21b0af2e5601\",\"p_show_prices\":true}",
+          "t": 42,
+          "end": 175,
+          "status": 200
+        },
+        {
+          "path": "/company-media/m_69bf1b3fb52119c41c8120b8",
+          "body": null,
+          "t": 178,
+          "end": 306,
+          "status": 200
+        },
+        {
+          "path": "/company-media/m_5224bcb7681435551fdef13f",
+          "body": null,
+          "t": 179,
+          "end": 309,
+          "status": 200
+        },
+        {
+          "path": "/company-media/m_6dd7508bac546138d6c5c54d",
+          "body": null,
+          "t": 179,
+          "end": 314,
+          "status": 200
+        },
+        {
+          "path": "/company-media/m_59bed87a739c840bfb558494",
+          "body": null,
+          "t": 179,
+          "end": 317,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 997,
+      "final": {
+        "url": "/painel/5c8fdf0d-9403-4a68-960c-21b0af2e5601/pagina",
+        "overflow": 0,
+        "headings": [
+          "Página da empresa",
+          "A sua empresa, do seu jeito",
+          "Organize o que você oferece",
+          "Seus trabalhos",
+          "Visualizar como cliente",
+          "MS Auto Details • Fictícia Serviços que fazem a diferença.",
+          "Encontre o serviço que precisa.",
+          "Conheça nosso trabalho.",
+          "Do primeiro contato ao atendimento.",
+          "Antes de começar.",
+          "Pronto para receber seus clientes?"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    }
+  ]
+}

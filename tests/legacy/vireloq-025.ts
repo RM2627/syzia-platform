@@ -1,0 +1,30 @@
+import {test,expect} from '@playwright/test';
+async function login(page:any,email:string){await page.goto('/entrar');await page.getByLabel('E-mail',{exact:true}).fill(email);await page.getByLabel('Senha',{exact:true}).fill('FictitiousPassword123!');await page.getByRole('button',{name:'Entrar',exact:true}).click();await expect(page.getByRole('heading',{name:'Minhas empresas'})).toBeVisible();}
+for(const [device,width,height] of [['desktop',1440,1000],['mobile',390,844]] as const){
+ test('VIRELOQ: identidade, empresa e assinatura '+device,async({page})=>{
+ await page.setViewportSize({width,height});await page.goto('/entrar');await expect(page.getByRole('heading',{name:'Entre na VIRELOQ'})).toBeVisible();await page.screenshot({path:'reports/vireloq/login-'+device+'.png',fullPage:true});
+ await login(page,'admin@example.invalid');await page.getByRole('link',{name:/MS Auto Details/}).first().click();
+ await expect(page.getByLabel('Usuário conectado')).toContainText('Administrador');await expect(page.getByRole('heading',{name:'O que precisa ser feito hoje?'})).toBeVisible();await page.screenshot({path:'reports/vireloq/painel-'+device+'.png',fullPage:true});
+ await page.getByRole('link',{name:'Plano e assinatura',exact:true}).click();await expect(page).toHaveURL(/\/assinatura$/);await expect(page.getByRole('region',{name:'Contratação'})).toBeVisible();await expect(page.getByText('Ativa',{exact:true}).first()).toBeVisible();
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await page.screenshot({path:'reports/vireloq/assinatura-'+device+'.png',fullPage:true});
+ });
+ test('VIRELOQ: convite e primeiro acesso pessoal '+device,async({page,browser})=>{
+ await page.setViewportSize({width,height});await login(page,'root@example.invalid');await page.goto('/admin/empresas');const suffix=Date.now().toString();
+ await page.getByLabel('Nome da empresa',{exact:true}).fill('Empresa Convite '+suffix);await page.getByLabel('Identificador no endereço').fill('convite-'+suffix);await page.getByLabel('Nome do primeiro administrador').fill('Gestora Fictícia');await page.getByLabel('E-mail do primeiro administrador').fill('gestora-'+suffix+'@example.invalid');await page.getByRole('button',{name:'Criar empresa',exact:true}).click();
+ const link=page.getByRole('link',{name:'Simular primeiro acesso'});await expect(link).toBeVisible();const url=await link.getAttribute('href');
+ const separate=await browser.newContext({viewport:{width,height}});const recipient=await separate.newPage();await recipient.goto(url!);await recipient.getByRole('button',{name:'Continuar com este convite ou recuperação'}).click();await recipient.getByLabel('Nova senha (mínimo 12 caracteres)').fill('FictitiousPassword123!');await recipient.getByLabel('Confirmar senha').fill('FictitiousPassword123!');await recipient.getByRole('button',{name:'Salvar senha'}).click();await expect(recipient).toHaveURL(/\/painel\//);await expect(recipient.getByRole('heading',{name:'Vamos preparar sua empresa'})).toBeVisible();
+ await recipient.getByRole('link',{name:'Pessoas e acessos',exact:true}).first().click();await recipient.getByLabel('Nome da pessoa').fill('Funcionária Fictícia');await recipient.getByLabel('E-mail do convite').fill('equipe-'+suffix+'@example.invalid');await recipient.getByRole('button',{name:'Enviar convite',exact:true}).click();const employeeLink=recipient.getByRole('link',{name:'Simular primeiro acesso'});await expect(employeeLink).toBeVisible();await expect(recipient.getByText("Funcionária Fictícia",{exact:true})).toBeVisible();await expect(recipient.getByText("Não foi possível atualizar a lista.",{exact:false})).toHaveCount(0);
+ const staff=await browser.newContext({viewport:{width,height}});const employee=await staff.newPage();await employee.goto((await employeeLink.getAttribute('href'))!);await employee.getByRole('button',{name:'Continuar com este convite ou recuperação'}).click();await employee.getByLabel('Nova senha (mínimo 12 caracteres)').fill('StaffFictitious123!');await employee.getByLabel('Confirmar senha').fill('StaffFictitious123!');await employee.getByRole('button',{name:'Salvar senha'}).click();await expect(employee).toHaveURL(/\/painel\//);await expect(employee.getByLabel('Usuário conectado')).toContainText('Colaborador');await expect(employee.getByRole('button',{name:'Enviar convite',exact:true})).toHaveCount(0);await employee.goto('/admin/empresas');await expect(employee.getByRole('heading',{name:'Acesso restrito'})).toBeVisible();await staff.close();await separate.close();
+ });
+}
+test('VIRELOQ: rascunhos em módulos após foco e refresh periódico',async({page})=>{
+ test.setTimeout(180000);await login(page,'admin@example.invalid');await page.getByRole('link',{name:/MS Auto Details/}).first().click();const base=page.url();
+ for(const [route,label] of [['configuracao','Descrição do negócio'],['servicos','Nome do serviço'],['pagina','Título'],['clientes','Nome'],['novo-orcamento','Observações'],['novo-agendamento','Observações']] as const){
+  await page.goto(base+'/'+route);let field=page.getByLabel(label,{exact:true});
+  if(route==='pagina'){await page.getByRole('link',{name:/Portfólio/}).first().click();}
+  if(route==='clientes'){await page.getByRole('button',{name:'+ Novo cliente',exact:true}).click();}
+  await expect(field).toBeVisible();await field.fill('Rascunho fictício preservado');await page.evaluate(()=>window.dispatchEvent(new Event('focus')));await expect(field).toHaveValue('Rascunho fictício preservado');await page.waitForTimeout(16000);await expect(field).toHaveValue('Rascunho fictício preservado');
+ }
+});
+
+test('VIRELOQ: trial real persistido exibe prazo e contratação',async({page})=>{await login(page,'adminb@example.invalid');await page.getByRole('link',{name:/Estúdio Horizonte/}).first().click();await page.getByRole('link',{name:'Plano e assinatura',exact:true}).click();await expect(page.getByText(/dias restantes/).first()).toBeVisible();await expect(page.getByRole('link',{name:'Assinar agora · ver planos'})).toBeVisible();});

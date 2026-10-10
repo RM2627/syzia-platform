@@ -1,0 +1,80 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { randomUUID } from 'node:crypto';
+import { fixture } from './fixture.mjs';
+const c=await fixture();
+test.after(()=>c.db.close());
+let aid;
+test('047-27 Rejeição definitiva permite novo token; timeout depois de criar recupera sem segundo POST',async()=>{
+  const transport=c.gateway.fetchImpl;
+  c.gateway.fetchImpl=async(url,init)=>new URL(url).pathname==='/preapproval'&&init.method==='POST'?new Response('{}',{status:400}):transport(url,init);
+  await assert.rejects(c.command(),/billing_provider_rejected/);
+  aid=(await c.view()).subscription.id;
+  assert.equal((await c.service('billing047_service',{p_action:'get',p_id:aid,p_data:{}})).create_started,false);
+  c.gateway.fetchImpl=async(url,init)=>{const result=await transport(url,init);if(new URL(url).pathname==='/preapproval'&&init.method==='POST')throw Error('lost-response');return result;};
+  await assert.rejects(c.command(),/billing_provider_unavailable/);
+  assert.equal(c.fake.subscriptions.size,1);assert.equal((await c.view()).subscription.state,'reconciliation');
+  c.gateway.fetchImpl=transport;
+  await c.engine.process(aid);
+  assert.equal((await c.view()).subscription.state,'trialing');
+  assert.equal(c.fake.calls.filter(x=>x.method==='POST').length,1);
+});
+test('047-28 Cancelamento durante leitura não perde intenção; cancelamento incerto só é anunciado após confirmação',async()=>{
+  const lease=await c.service('billing047_service',{p_action:'lease',p_id:aid,p_data:{}});
+  await assert.rejects(c.command('cancel'),/billing_operation_pending/);
+  await c.service('billing047_service',{p_action:'release',p_id:aid,p_data:{lease:lease.lease}});
+  const transport=c.gateway.fetchImpl;
+  c.gateway.fetchImpl=async(url,init)=>init.method==='PUT'?new Response('{}',{status:503}):transport(url,init);
+  await assert.rejects(c.command('cancel'),/billing_provider_unavailable/);
+  assert.equal((await c.view()).subscription.cancel_confirmed,false);
+  assert.equal((await c.view()).subscription.state,'trialing');
+  c.gateway.fetchImpl=transport;await c.engine.process(aid);
+  assert.equal((await c.view()).subscription.cancel_confirmed,true);
+  await c.command('resume');
+});
+test('047-29 Snapshot antigo com versão positiva não regride estado; nova leitura restaura conferência',async()=>{
+  const p=[...c.fake.subscriptions.values()][0],version=p.version;
+  assert.ok(version>0);p.version=version-1;
+  await assert.rejects(c.engine.process(aid),/billing_stale_snapshot/);
+  assert.equal((await c.view()).subscription.state,'trialing');p.version=version;await c.engine.process(aid);
+});
+test('047-30 Evento payment exige consulta oficial e não usa dados de pagamento adulterados do evento',async()=>{
+  const p=[...c.fake.subscriptions.values()][0],iid=c.fake.charge(p.id);
+  await c.engine.webhook(Buffer.from(JSON.stringify({type:'payment',data:{id:'payment-'+iid},status:'rejected',amount:1})),{},new URLSearchParams());
+  assert.equal((await c.view()).subscription.state,'active');
+});
+test('047-31 Downgrade próximo ciclo revalida membros sem apagar; decisão explícita do administrador permite concluir',async()=>{
+  const b=await c.command('checkout','equipe','B'),p=[...c.fake.subscriptions.values()].find(x=>x.external_reference===b.subscription.id);
+  const before=(await c.rawSQL('select count(*)::int n from organization_members where organization_id=$1',[c.orgs.B])).rows[0].n;
+  await c.command('change','essencial','B');assert.equal((await c.view('B')).subscription.code,'equipe');
+  await c.rawSQL("update organization_members set status='active'where organization_id=$1 and user_id=$2",[c.orgs.B,c.users.worker]);
+  await c.rawSQL("update private.billing047_contracts set target_effective_at=now()-interval '1 minute',target_requested_at=now()-interval '2 minutes'where id=$1",[b.subscription.id]);
+  c.fake.charge(p.id);await c.engine.process(b.subscription.id);
+  assert.equal((await c.view('B')).subscription.state,'restricted');
+  assert.equal((await c.rawSQL('select count(*)::int n from organization_members where organization_id=$1',[c.orgs.B])).rows[0].n,before);
+  await c.rawSQL("update organization_members set status='suspended'where organization_id=$1 and user_id=$2",[c.orgs.B,c.users.worker]);
+  await c.engine.process(b.subscription.id);
+  assert.equal((await c.view('B')).subscription.code,'essencial');assert.equal((await c.view('B')).subscription.state,'active');
+});
+test('047-32 Onboarding novo prepara empresa restrita; responsável/CPF histórico impede segundo trial em outra empresa',async()=>{
+  await c.rawSQL("update auth.users set email='billing047@example.invalid'where id=$1",[c.users.adminA]);
+  await c.service('access_selfservice_identity',{p_user:c.users.adminA,p_name:'Titular Billing',p_username:'titular.billing047'});
+  const plan=(await c.rawSQL('select plan_id from billing_plan_versions where id=$1',[c.versions.essencial])).rows[0].plan_id;
+  const draft=await c.asUser('adminA','selfservice_save',{p_id:null,p_revision:0,p_name:'Empresa Billing 047',p_slug:'billing-047-'+randomUUID().slice(0,8),p_phone:'11999990000',p_kind:'CPF',p_document:'52998224725',p_plan:plan,p_key:randomUUID()});
+  const args={p_id:draft.id,p_revision:draft.revision,p_consent:true,p_conditions:'billing-047'};
+  const done=await c.asUser('adminA','selfservice_complete',args);
+  assert.equal(done.state,'completed');assert.ok(done.organization_id);
+  assert.equal((await c.asUser('adminA','selfservice_complete',args)).organization_id,done.organization_id);
+  assert.equal((await c.asUser('adminA','billing_capabilities',{p_org:done.organization_id})).software,false);
+  const base={organization_id:done.organization_id,action:'checkout',plan_version_id:c.versions.essencial,request_key:randomUUID(),card_token:'offline-test-card-token',trial_expected:true};
+  await assert.rejects(c.engine.user('command',base,'adminA'),/billing_trial_changed/);
+  const next=await c.engine.user('command',{...base,request_key:randomUUID(),trial_expected:false},'adminA');
+  assert.equal(next.subscription.state,'payment_pending');
+  assert.equal([...c.fake.subscriptions.values()].find(p=>p.external_reference===next.subscription.id).preapproval_plan_id,'essencial-paid');
+  assert.equal((await c.rawSQL('select count(*)::int n from private.trial_grants where organization_id=$1',[done.organization_id])).rows[0].n,0);
+});
+test('047-33 RPC antiga não libera trial sem cartão em runtime real; histórico/reservas são imutáveis',async()=>{
+  await assert.rejects(c.asUser('adminA','billing_subscription_action',{p_org:c.orgs.A,p_action:'trial',p_plan:null,p_revision:0,p_key:randomUUID()}),/billing_payment_method_required/);
+  await assert.rejects(c.rawSQL('delete from private.billing047_trial_reservations'),/immutable|denied/);
+  assert.ok((await c.rawSQL('select count(*)::int n from private.billing047_trial_reservations')).rows[0].n>0);
+});

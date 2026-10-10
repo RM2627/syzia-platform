@@ -1,0 +1,95 @@
+{
+  "source": "approved-reference.png",
+  "method": "Exact source pixels; no new lettering, shapes or gradients",
+  "limitations": "Source is a flattened 1536×1024 board. Exported assets retain its background and original pixel resolution; no vector/high-resolution master was supplied.",
+  "assets": [
+    {
+      "path": "public/brand/syzia/syzia-logo-dark.png",
+      "width": 325,
+      "height": 337,
+      "sourceRect": {
+        "left": 18,
+        "top": 17,
+        "width": 325,
+        "height": 337
+      }
+    },
+    {
+      "path": "public/brand/syzia/syzia-logo-light.png",
+      "width": 310,
+      "height": 336,
+      "sourceRect": {
+        "left": 370,
+        "top": 18,
+        "width": 310,
+        "height": 336
+      }
+    },
+    {
+      "path": "public/brand/syzia/syzia-horizontal-dark.png",
+      "width": 360,
+      "height": 163,
+      "sourceRect": {
+        "left": 719,
+        "top": 119,
+        "width": 360,
+        "height": 163
+      }
+    },
+    {
+      "path": "public/brand/syzia/syzia-horizontal-light.png",
+      "width": 371,
+      "height": 166,
+      "sourceRect": {
+        "left": 1131,
+        "top": 113,
+        "width": 371,
+        "height": 166
+      }
+    },
+    {
+      "path": "public/brand/syzia/syzia-symbol-dark.png",
+      "width": 207,
+      "height": 208,
+      "sourceRect": {
+        "left": 28,
+        "top": 461,
+        "width": 207,
+        "height": 208
+      }
+    },
+    {
+      "path": "public/brand/syzia/syzia-symbol-light.png",
+      "width": 208,
+      "height": 210,
+      "sourceRect": {
+        "left": 283,
+        "top": 459,
+        "width": 208,
+        "height": 210
+      }
+    },
+    {
+      "path": "public/brand/syzia/syzia-icon-dark.png",
+      "width": 183,
+      "height": 192,
+      "sourceRect": {
+        "left": 550,
+        "top": 469,
+        "width": 183,
+        "height": 192
+      }
+    },
+    {
+      "path": "public/brand/syzia/syzia-icon-light.png",
+      "width": 184,
+      "height": 192,
+      "sourceRect": {
+        "left": 794,
+        "top": 469,
+        "width": 184,
+        "height": 192
+      }
+    }
+  ]
+}

@@ -1,0 +1,927 @@
+CORREÇÃO PÓS-HOMOLOGAÇÃO — VIRELOQ 030
+CATEGORIAS + IDENTIDADE VISUAL + CATÁLOGO + PORTFÓLIO + PUBLICAÇÃO
+
+IMPORTANTE:
+
+Esta tarefa parte EXCLUSIVAMENTE da versão consolidada 030 já entregue.
+
+Ela NÃO é uma nova auditoria completa da VIRELOQ.
+
+Durante a homologação real com a MS Auto Details foram identificados
+problemas de experiência de uso na configuração dos serviços e da
+presença pública da empresa.
+
+O objetivo desta tarefa é corrigir SOMENTE os pontos descritos abaixo.
+
+==================================================
+1. LIMITES DA TAREFA
+==================================================
+
+NÃO:
+
+- refazer a implementação 030;
+- reconstruir módulos não relacionados;
+- alterar migrations 001–030;
+- criar migration 031 sem necessidade comprovada;
+- resetar banco;
+- modificar RLS sem necessidade;
+- alterar autenticação;
+- alterar Financeiro;
+- alterar Métricas;
+- alterar trial;
+- alterar billing;
+- alterar primeiro acesso;
+- alterar CPF/CNPJ;
+- alterar suporte autorizado;
+- alterar regras de atendimento;
+- alterar funcionalidades não relacionadas;
+- fazer deploy;
+- acessar Supabase real.
+
+ANTES de criar qualquer alteração de banco:
+
+1. inspecione a implementação 030;
+2. verifique se o schema/RPC/backend atual já suporta a operação;
+3. reutilize a infraestrutura existente.
+
+Estas correções parecem predominantemente de UX/frontend e integração
+com recursos já existentes.
+
+==================================================
+2. TESTES — IMPORTANTE
+==================================================
+
+NÃO repetir a auditoria mestre completa nem executar uma bateria
+desnecessariamente extensa de testes.
+
+O proprietário fará a homologação funcional posteriormente.
+
+Executar somente os testes ESSENCIAIS para garantir que estas correções
+não quebraram o fluxo diretamente afetado.
+
+Obrigatório:
+
+- build;
+- typecheck, se separado;
+- testes diretamente relacionados às alterações;
+- teste básico de isolamento entre empresas nas operações alteradas;
+- uma jornada curta no navegador cobrindo os fluxos corrigidos.
+
+Não gastar grande parte da tarefa reexecutando centenas de testes de
+módulos que não foram alterados.
+
+Se alguma alteração tocar inesperadamente uma camada sensível, executar
+os testes adicionais estritamente necessários para aquela camada.
+
+Documentar exatamente o que foi testado.
+
+==================================================
+3. PROBLEMA 1 — CATEGORIA NO CADASTRO DE SERVIÇO
+==================================================
+
+A implementação 030 já possui categorias persistentes por organização.
+
+Na homologação foi confirmado que as categorias existentes aparecem
+corretamente no select.
+
+Exemplo real da MS Auto Details:
+
+- Higienização automotiva;
+- Higienização de estofados;
+- Lavagem automotiva.
+
+Portanto, a reutilização funciona.
+
+O problema é:
+
+NO FORMULÁRIO DE NOVO SERVIÇO NÃO EXISTE UMA FORMA CLARA DE CRIAR UMA
+NOVA CATEGORIA.
+
+Hoje o usuário encontra apenas um select contendo:
+
+- Sem categoria;
+- categorias existentes.
+
+Isso não cumpre completamente a experiência aprovada.
+
+==================================================
+4. NOVO COMPORTAMENTO DA CATEGORIA
+==================================================
+
+No cadastro e edição de serviço, permitir:
+
+A) selecionar categoria existente;
+
+OU
+
+B) criar uma nova categoria sem sair do formulário.
+
+Experiência sugerida:
+
+Categoria
+
+[ Selecione uma categoria ]
+
+- Sem categoria
+- Higienização automotiva
+- Higienização de estofados
+- Lavagem automotiva
+----------------------------
++ Criar nova categoria
+
+Ao selecionar:
+
++ Criar nova categoria
+
+mostrar:
+
+Nome da categoria
+[________________]
+
+[ Criar categoria ]
+
+Depois de criar:
+
+1. persistir na organização atual;
+2. selecionar automaticamente a categoria no serviço atual;
+3. disponibilizá-la imediatamente nos próximos serviços.
+
+Se a infraestrutura existente permitir um combobox pesquisável com:
+
+Criar “Polimento”
+
+também é aceitável.
+
+Priorizar clareza.
+
+==================================================
+5. NÃO DUPLICAR CATEGORIAS
+==================================================
+
+Preservar as regras da 030:
+
+- categoria pertence à organização;
+- reutilização;
+- renomeação;
+- ordenação;
+- desativação;
+- exclusão segura;
+- isolamento multiempresa.
+
+Não criar um segundo sistema de categorias.
+
+==================================================
+6. EXPERIÊNCIA DO CONSUMIDOR — PROBLEMA ATUAL
+==================================================
+
+Durante a configuração real da MS Auto Details, a área atual de
+“Experiência do consumidor” mostrou-se confusa.
+
+Atualmente estão misturados na mesma experiência:
+
+- publicação;
+- upload genérico de imagem empresarial;
+- logo;
+- capa;
+- cor;
+- ordem de categorias;
+- ordem dos serviços;
+- portfólio;
+- preparação futura de pagamentos;
+- solicitações.
+
+O proprietário, mesmo conhecendo o produto, teve dificuldade para
+entender como adicionar as fotos de cada trabalho.
+
+Portanto, reorganizar essa experiência.
+
+==================================================
+7. OBJETIVO DA NOVA EXPERIÊNCIA
+==================================================
+
+Um novo cliente deve conseguir, sem treinamento prévio:
+
+1. adicionar logo;
+2. adicionar capa;
+3. escolher a cor da marca;
+4. organizar categorias;
+5. organizar serviços;
+6. adicionar imagem a um serviço;
+7. cadastrar trabalho no portfólio;
+8. adicionar fotos desse trabalho;
+9. visualizar como o consumidor verá;
+10. publicar.
+
+A interface deve explicar isso sozinha.
+
+==================================================
+8. ORGANIZAÇÃO RECOMENDADA
+==================================================
+
+Organizar conceitualmente:
+
+IDENTIDADE VISUAL
+↓
+CATÁLOGO
+↓
+PORTFÓLIO
+↓
+PRÉVIA
+↓
+PUBLICAÇÃO
+
+Formas de pagamento devem ficar em local mais apropriado.
+
+Não é obrigatório criar várias rotas se uma boa organização em seções
+resolver o problema.
+
+Priorizar simplicidade.
+
+==================================================
+9. LOGO
+==================================================
+
+O fluxo atual de:
+
+“Enviar imagem empresarial”
++
+depois escolher “Logo”
+
+é confuso.
+
+Substituir por uma experiência direta:
+
+LOGO DA EMPRESA
+
+[ Enviar logo ]
+
+[ prévia ]
+
+Trocar
+Remover
+
+Quando não houver:
+
+Usar padrão da plataforma
+
+de forma clara.
+
+Reutilizar Storage/infraestrutura atual.
+
+==================================================
+10. CAPA
+==================================================
+
+Criar experiência equivalente:
+
+CAPA DA PÁGINA
+
+[ Enviar capa ]
+
+[ prévia horizontal ]
+
+Trocar
+Remover
+
+Deixar claro que essa imagem será utilizada como capa da página pública.
+
+==================================================
+11. COR PRINCIPAL — MELHORAR
+==================================================
+
+O select atual com opções fechadas como:
+
+Verde
+Roxo
+Azul
+
+é limitado.
+
+Criar um seletor visual de cor.
+
+Experiência desejada:
+
+COR PRINCIPAL DA SUA MARCA
+
+[ cores sugeridas ]
+
+[ + Escolher outra cor ]
+
+Permitir seletor visual nativo ou componente equivalente.
+
+Permitir HEX opcional para quem já possui identidade definida.
+
+Exemplo:
+
+#6C3FE8
+
+O usuário NÃO deve precisar conhecer HEX.
+
+==================================================
+12. PRÉVIA DA COR
+==================================================
+
+Ao escolher uma cor, mostrar prévia imediata.
+
+Exemplo:
+
+PRÉVIA
+
+[ Solicitar orçamento ]
+
+Serviço
+A partir de R$ 80
+
+A prévia deve atualizar antes da publicação.
+
+==================================================
+13. CONTRASTE E ACESSIBILIDADE
+==================================================
+
+A personalização não pode tornar a página ilegível.
+
+Avaliar contraste da cor escolhida.
+
+Quando possível:
+
+- escolher automaticamente texto claro/escuro;
+- derivar estados coerentes;
+- preservar focus/hover;
+- manter legibilidade.
+
+Se uma cor produzir contraste inadequado, avisar o usuário ou ajustar a
+aplicação de maneira segura.
+
+==================================================
+14. RESTAURAR PADRÃO
+==================================================
+
+Adicionar opção clara:
+
+Restaurar padrão VIRELOQ
+
+para a identidade visual quando aplicável.
+
+==================================================
+15. CATÁLOGO — ORDEM DAS CATEGORIAS
+==================================================
+
+Hoje existe:
+
+“Ordem das categorias (uma por linha)”
+
+Isso não é adequado agora que categorias são entidades reais.
+
+Substituir por uma lista das categorias existentes.
+
+Exemplo:
+
+ORGANIZE SUAS CATEGORIAS
+
+☰ Higienização de estofados
+☰ Higienização automotiva
+☰ Lavagem automotiva
+
+Preferencialmente drag-and-drop.
+
+IMPORTANTE:
+
+Também fornecer alternativa acessível por botões ↑/↓ ou equivalente.
+
+Não depender exclusivamente de drag-and-drop.
+
+==================================================
+16. CATÁLOGO — ORDEM DOS SERVIÇOS
+==================================================
+
+Hoje existem diversos botões:
+
+“Mover para cima”
+
+Melhorar para uma lista visual ordenável.
+
+Exemplo:
+
+☰ Higienização de sofá
+☰ Higienização de colchão
+☰ Lavagem simples
+
+Drag-and-drop pode ser usado, mantendo alternativa acessível.
+
+==================================================
+17. IMAGEM DO SERVIÇO
+==================================================
+
+Hoje o cadastro do serviço solicita:
+
+“URL HTTPS da imagem (opcional)”
+
+Para o cliente comum isso não é uma boa experiência.
+
+Substituir por:
+
+IMAGEM DO SERVIÇO
+
+[ Enviar imagem ]
+
+[ prévia ]
+
+Trocar
+Remover
+
+Utilizar a infraestrutura de imagens/Storage existente.
+
+O usuário não deve precisar hospedar a imagem externamente e copiar uma
+URL.
+
+Se a URL continuar necessária internamente, ocultar essa complexidade do
+fluxo normal.
+
+==================================================
+18. DIFERENCIAR TIPOS DE IMAGEM
+==================================================
+
+A UX deve deixar claro:
+
+LOGO
+= identidade da empresa.
+
+CAPA
+= apresentação da página.
+
+IMAGEM DO SERVIÇO
+= representação daquele serviço no catálogo.
+
+PORTFÓLIO
+= trabalhos/projetos/resultados realizados.
+
+Não misturar esses conceitos.
+
+==================================================
+19. PORTFÓLIO — REFORMULAR
+==================================================
+
+Criar uma experiência clara:
+
+PORTFÓLIO
+
+Seus trabalhos
+
+[ + Adicionar trabalho ]
+
+Ao clicar, abrir formulário dedicado.
+
+==================================================
+20. NOVO TRABALHO
+==================================================
+
+Campos:
+
+Título
+
+Descrição curta
+
+Serviço relacionado
+
+Formato:
+
+- Foto única
+- Antes e depois
+- Galeria
+
+Ordem
+
+Ativo na próxima publicação
+
+==================================================
+21. FOTO ÚNICA
+==================================================
+
+Quando o formato for Foto única:
+
+FOTO DO TRABALHO
+
+[ + Enviar foto ]
+
+Mostrar prévia.
+
+==================================================
+22. ANTES E DEPOIS
+==================================================
+
+Quando selecionar Antes e depois:
+
+ANTES
+
+[ + Enviar foto ]
+
+[ prévia ]
+
+DEPOIS
+
+[ + Enviar foto ]
+
+[ prévia ]
+
+Mostrar claramente qual imagem representa cada estado.
+
+Não exigir que o usuário saiba que:
+
+“a primeira imagem é Antes”.
+
+==================================================
+23. GALERIA
+==================================================
+
+Quando selecionar Galeria:
+
+[ + Adicionar fotos ]
+
+Depois mostrar miniaturas.
+
+Permitir:
+
+- adicionar;
+- remover;
+- visualizar;
+- ordenar.
+
+==================================================
+24. TRABALHOS JÁ CADASTRADOS
+==================================================
+
+Mostrar cards/lista clara.
+
+Exemplo:
+
+Higienização de sofá
+
+[ Antes ] [ Depois ]
+
+Serviço relacionado:
+Higienização de sofá
+
+Publicado ✓
+
+Editar
+Ocultar
+Reordenar
+Excluir
+
+Não depender de um formulário gigante permanentemente aberto.
+
+==================================================
+25. MULTISSEGMENTO
+==================================================
+
+Não transformar Portfólio em recurso exclusivo de estética automotiva.
+
+A entidade principal continua sendo:
+
+TRABALHO
+
+que pode assumir:
+
+- foto única;
+- antes/depois;
+- galeria.
+
+Isso deve funcionar para:
+
+- estética;
+- limpeza;
+- design;
+- arquitetura;
+- fotografia;
+- beleza;
+- outros prestadores.
+
+==================================================
+26. PRÉVIA DA PÁGINA
+==================================================
+
+Adicionar ação clara:
+
+VISUALIZAR COMO CLIENTE
+
+A prévia deve permitir revisar as alterações antes da publicação.
+
+Mostrar, conforme configuração:
+
+- logo;
+- capa;
+- cor;
+- descrição;
+- categorias;
+- serviços;
+- preços;
+- imagens;
+- portfólio;
+- FAQ;
+- demais dados públicos.
+
+Deixar claro quando a prévia contém alterações ainda não publicadas.
+
+==================================================
+27. RASCUNHO X PUBLICADO
+==================================================
+
+Melhorar a comunicação visual.
+
+RASCUNHO
+
+Alterações ainda não visíveis aos consumidores.
+
+PUBLICADO
+
+Versão atualmente disponível aos visitantes.
+
+O usuário deve conseguir entender rapidamente qual estado está vendo.
+
+==================================================
+28. PRONTIDÃO DA PÁGINA
+==================================================
+
+Antes de publicar, mostrar checklist claro.
+
+Exemplo:
+
+✓ Dados da empresa
+✓ Serviços
+✓ Preços
+✓ Horários
+✓ Logo
+✓ Portfólio
+⚠ Agenda online não configurada
+
+Itens opcionais NÃO devem bloquear publicação.
+
+Itens realmente obrigatórios devem informar exatamente o que falta.
+
+==================================================
+29. PUBLICAÇÃO
+==================================================
+
+Ação principal:
+
+[ Visualizar como cliente ]
+
+[ Publicar alterações ]
+
+Evitar botões desabilitados sem explicação.
+
+Quando publicação estiver bloqueada, explicar o requisito faltante.
+
+==================================================
+30. FORMAS DE PAGAMENTO
+==================================================
+
+A seção atual possui linguagem como:
+
+“Planejamento para uma fase futura”
+“não ativa gateway”
+“futura confirmação manual”
+
+Isso é linguagem técnica/de desenvolvimento.
+
+Não deve ocupar destaque na experiência normal do cliente.
+
+Mover a configuração das formas de pagamento para local mais apropriado,
+preferencialmente:
+
+Configuração → Pagamentos
+
+ou
+
+Financeiro → Configurações
+
+conforme a arquitetura atual indicar.
+
+==================================================
+31. EXPERIÊNCIA DE PAGAMENTOS ATUAL
+==================================================
+
+Enquanto não existir gateway utilizável, mostrar somente o necessário:
+
+FORMAS DE PAGAMENTO ACEITAS
+
+☑ Pix
+☑ Dinheiro
+☑ Cartão presencial
+☐ Transferência
+☐ Outro
+
+Preservar internamente a infraestrutura futura correta.
+
+Remover complexidade da UX NÃO significa apagar preparação técnica
+existente.
+
+==================================================
+32. NÃO ALTERAR O FINANCEIRO 030
+==================================================
+
+Esta tarefa NÃO autoriza reescrever:
+
+- contas a receber;
+- recebimentos;
+- despesas;
+- caixa;
+- métricas financeiras;
+- permissões financeiras.
+
+Apenas reposicionar/melhorar a configuração visual das formas de
+pagamento quando necessário.
+
+==================================================
+33. RESPONSIVIDADE
+==================================================
+
+Testar as telas alteradas em:
+
+- desktop;
+- tablet;
+- celular.
+
+Dar atenção especial a:
+
+- seletor de cor;
+- uploads;
+- antes/depois;
+- galeria;
+- listas ordenáveis;
+- prévia.
+
+==================================================
+34. ACESSIBILIDADE
+==================================================
+
+Preservar:
+
+- navegação por teclado;
+- labels;
+- focus visível;
+- contraste;
+- alternativa ao drag-and-drop;
+- feedback de upload;
+- mensagens de erro compreensíveis.
+
+==================================================
+35. TESTES ESSENCIAIS
+==================================================
+
+NÃO executar novamente toda a auditoria da VIRELOQ.
+
+Executar no mínimo:
+
+TESTE 1
+Empresa com categorias existentes
+→ Novo serviço
+→ categorias aparecem.
+
+TESTE 2
+Novo serviço
+→ criar nova categoria
+→ categoria é selecionada
+→ salvar
+→ abrir outro serviço
+→ categoria aparece para reutilização.
+
+TESTE 3
+Empresa A cria categoria
+→ Empresa B não recebe a categoria.
+
+TESTE 4
+Enviar logo
+→ prévia
+→ salvar
+→ recarregar
+→ logo permanece.
+
+TESTE 5
+Enviar capa
+→ prévia
+→ salvar
+→ recarregar.
+
+TESTE 6
+Selecionar cor personalizada
+→ prévia atualiza
+→ salvar
+→ recarregar.
+
+TESTE 7
+Imagem de serviço
+→ upload
+→ prévia
+→ salvar
+→ catálogo utiliza corretamente.
+
+TESTE 8
+Portfólio foto única.
+
+TESTE 9
+Portfólio antes/depois.
+
+TESTE 10
+Portfólio galeria.
+
+TESTE 11
+Ordenar categorias/serviços/trabalhos
+→ salvar
+→ recarregar
+→ ordem permanece.
+
+TESTE 12
+Visualizar como cliente
+→ rascunho é apresentado corretamente.
+
+TESTE 13
+Publicar
+→ versão pública recebe somente conteúdo publicado.
+
+TESTE 14
+Responsividade básica desktop/mobile.
+
+Executar build/typecheck.
+
+Se esses testes passarem, PARAR.
+
+Não gastar tempo executando centenas de testes de Financeiro, Auth,
+trial, billing e demais módulos que não foram alterados, salvo se alguma
+mudança realmente tocar essas áreas.
+
+==================================================
+36. MIGRATIONS
+==================================================
+
+Preservar migrations 001–030 byte a byte.
+
+NÃO criar migration 031 por padrão.
+
+Primeiro verificar se a 030 já possui todas as estruturas necessárias.
+
+Somente se existir uma necessidade persistente REAL não suportada pelo
+schema atual:
+
+- documentar;
+- justificar;
+- criar migration incremental mínima.
+
+Não alterar migration 030 já aplicada.
+
+==================================================
+37. DADOS EXISTENTES
+==================================================
+
+Preservar:
+
+- categorias existentes;
+- serviços existentes;
+- identidade existente;
+- imagens existentes;
+- portfólio existente;
+- publicação existente;
+- configurações existentes.
+
+Não exigir que empresas refaçam seus dados.
+
+==================================================
+38. CRITÉRIO DE ACEITE PRINCIPAL
+==================================================
+
+Um novo cliente deve conseguir, SEM treinamento prévio:
+
+1. criar/selecionar categoria;
+2. cadastrar serviço;
+3. adicionar imagem ao serviço;
+4. enviar logo;
+5. enviar capa;
+6. escolher cor;
+7. organizar catálogo;
+8. adicionar trabalho ao portfólio;
+9. enviar fotos;
+10. visualizar como cliente;
+11. publicar.
+
+Se isso ainda exigir conhecimento prévio da arquitetura interna da
+VIRELOQ, a correção não está concluída.
+
+==================================================
+39. ENTREGA
+==================================================
+
+Entregar:
+
+- projeto completo consolidado;
+- lista dos arquivos alterados;
+- resumo das correções;
+- testes essenciais executados;
+- resultado do build/typecheck;
+- screenshots das principais telas corrigidas, se o executor permitir;
+- eventuais limitações encontradas.
+
+Não fazer deploy.
+Não acessar ambiente real.
+Não iniciar outra fase.
+
+Depois da entrega, PARAR para homologação do proprietário.

@@ -1,0 +1,118 @@
+[
+  {
+    "path": "202609150001_foundation.sql",
+    "sha256": "4f2e833b6151b5580f7dd46a1b95caa2caf1d621d85b89ede35e3b49becf9ef3"
+  },
+  {
+    "path": "202609150002_authorization.sql",
+    "sha256": "217e52bc476605c3b575528414436ce908e42865711469c6d9d501cdd50f6270"
+  },
+  {
+    "path": "202609150003_commands.sql",
+    "sha256": "a66ffd26946218889cca1cddf15f0f0b393b18da9e5af66d3d86227fc0811912"
+  },
+  {
+    "path": "202609150004_company_schema.sql",
+    "sha256": "16c111b6224558bc840c7d6beffa4cede9ffe49eb402f419db15253659ed1b08"
+  },
+  {
+    "path": "202609150005_company_commands.sql",
+    "sha256": "e762e5beb74733211ed6acc5def47b25c9381a036f27ae4cb949d54db0bbe13e"
+  },
+  {
+    "path": "202609160006_consumer_schema.sql",
+    "sha256": "2cd6029ae44c18ab0fd8fceeaa107ac86118c37afb2326b86f0f23673528c252"
+  },
+  {
+    "path": "202609160007_consumer_commands.sql",
+    "sha256": "0657e6cc16237776505f7283955cea4af473e2d982cad39f83fd4be040f8fc2a"
+  },
+  {
+    "path": "202609160008_consumer_attachments.sql",
+    "sha256": "4e15d053c3ccbb67cb7b226bedf91f6e715814e45784b44baaaa5ea8d525669e"
+  },
+  {
+    "path": "202609160009_consumer_presence.sql",
+    "sha256": "813c7ab681235cdc203a14737f511b423a6f2bd708d2d3ff04da570e3cdd7ced"
+  },
+  {
+    "path": "202609160010_payment_preparation.sql",
+    "sha256": "4cb1902fa898a93620533d8421ea97cb8b0f44d61a2f17315773f5b1a7e6baec"
+  },
+  {
+    "path": "202609160011_central_schema.sql",
+    "sha256": "4ce37512bfb408f4aa8145a8b02220611445231a6c9c2976e9adda62fce7a5c8"
+  },
+  {
+    "path": "202609160012_central_commands.sql",
+    "sha256": "9b19ae61e416e190015862020217bc78568b118eb98f97107e1ae871627f43eb"
+  },
+  {
+    "path": "202609160013_central_integration.sql",
+    "sha256": "4e809b0ee6890e304a41031148b01847553584c16ffd866c8af9ba3a333fa0d9"
+  },
+  {
+    "path": "202609160014_commercial_schema.sql",
+    "sha256": "7a44a149ab9fcb125d6d952fc0fe9182160f55a8c929dea9552c597ac257121d"
+  },
+  {
+    "path": "202609160015_commercial_engine.sql",
+    "sha256": "ce87ca80282bcb9e62762d2716bb0126df162fc672bca95abda08c6d7ef43983"
+  },
+  {
+    "path": "202609160016_commercial_commands.sql",
+    "sha256": "be0f410b8437e5f437ba2add91cbcf23487186670ddf37f72f9475f48606f880"
+  },
+  {
+    "path": "202609170017_analytics.sql",
+    "sha256": "f43bb4e23531d3e6474e2593921ac298dc482abb0f82f45c7a53b18190a9cf01"
+  },
+  {
+    "path": "202609180018_billing_schema.sql",
+    "sha256": "a315cc702938e222af849cec18b00292b68e996d2a86bfbaba2a5dc0d42b2873"
+  },
+  {
+    "path": "202609180019_billing_commands.sql",
+    "sha256": "fcd860c74e3cbdfce5ea3460a7d8f971accceb2b3bfe43fda7884affd1e53d33"
+  },
+  {
+    "path": "202609180020_billing_limits.sql",
+    "sha256": "e7c7c6358c4b098784d7336b8f43a80648c4b2e48ad6120665f5bf14702521c3"
+  },
+  {
+    "path": "202609180021_trial_eligibility.sql",
+    "sha256": "6b40a30dc4ad3f024ba2c67022bad2c538e9f7f971f76c38231515a695a8b384"
+  },
+  {
+    "path": "202609180022_operational_authorization.sql",
+    "sha256": "38544ff9922c970b2b497f8e5c3e4e4c45ecdd7247c8cf05e150673e8654acd7"
+  },
+  {
+    "path": "202609180023_daily_operations.sql",
+    "sha256": "ed905d1b04646a4822a8a4ed40cacd9f21738c55454417b0592138a139104035"
+  },
+  {
+    "path": "202609180024_company_onboarding.sql",
+    "sha256": "099e7c37892d29fcc32d1096e1c01175d8bea6a5d3f48071ba8c9d425aa78899"
+  },
+  {
+    "path": "202609180025_b2b_invitations.sql",
+    "sha256": "67094474daab53d7a8618509c9607cc828cd578f0cdd1c62d543c8077d0a9f6a"
+  },
+  {
+    "path": "202609190026_enterprise_access.sql",
+    "sha256": "5adc0c188f315b588bcd32bba4b70f240cf1c9af82048385977209217a666583"
+  },
+  {
+    "path": "202609200027_organization_activation.sql",
+    "sha256": "7737bff46fe71ba55f6d9ed26ba1834f509dea0e752e8656beeb3812a754576a"
+  },
+  {
+    "path": "202609200028_company_workspace_authorization.sql",
+    "sha256": "2346a8795f7f47ba1b54093303e9bca9d5ad21d50bfd34e635080569d8a5fada"
+  },
+  {
+    "path": "202609200029_authorized_support.sql",
+    "sha256": "40e334ec69b7648fda9b721a0a8b5fed39633e84017ee3631bc1c05a8c00f9ce"
+  }
+]

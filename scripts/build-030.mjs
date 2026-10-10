@@ -1,0 +1,2 @@
+import{readFile,readdir,writeFile}from'node:fs/promises';
+const dir='scripts/implementation-030';const files=(await readdir(dir)).filter(f=>/^\d.*\.sql$/.test(f)).sort();let sql='';for(const f of files){let v=await readFile(dir+'/'+f,'utf8');if(f==='01-schema.sql')v=v.replace('begin;','begin;\ncreate temporary table migration030_existing_functions on commit drop as select oid from pg_proc;');sql+='\n-- Source: '+f+'\n'+v;}await writeFile('supabase/migrations/202609210030_business_finance_permissions.sql',sql);console.log('Migration 030 assembled:',files.length,'fragments');

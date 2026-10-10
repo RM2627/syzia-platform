@@ -1,0 +1,432 @@
+[
+  {
+    "path": ".env.example",
+    "status": "Alterado",
+    "sha256": "b5c4a64d917c2468118b7836b59facf25a6b90795979fbbf12165cb9cbb3ebb3"
+  },
+  {
+    "path": "AGENTS.md",
+    "status": "Alterado",
+    "sha256": "bef8bd63fc84e1ce1e563d359908c56d42da29c3a7af4cddf269e2eb4f746451"
+  },
+  {
+    "path": "README.md",
+    "status": "Alterado",
+    "sha256": "9757b46c1d14ab5e9c3304fb9c09e2398dfa55ff983548eb4647b7c93fb306d6"
+  },
+  {
+    "path": "docs/syzia-033/architecture.md",
+    "status": "Novo",
+    "sha256": "f63b2ee0f1b52ddc15371aadd7bdec108e03244e9b784d34dabaa308dc80850f"
+  },
+  {
+    "path": "docs/syzia-033/inspection/032-functions.json",
+    "status": "Novo",
+    "sha256": "c0286e6ff68efad4bb1e99025cb580af28c725394616e8f66d0e2d6d6857de60"
+  },
+  {
+    "path": "docs/syzia-033/migrations-001-032.json",
+    "status": "Novo",
+    "sha256": "7e06d99eeb3883ef219da28d84d5b8fb97b76c34ef4834d406a53a05fb3ef7ad"
+  },
+  {
+    "path": "docs/syzia-033/payment-contract.md",
+    "status": "Novo",
+    "sha256": "3a69f0d51419026501f72054be68078fc5dc1c4ff49ac56added28300d169711"
+  },
+  {
+    "path": "docs/syzia-033/report.md",
+    "status": "Novo",
+    "sha256": "fb6d1dbb61cae1f33df251b49f3316bf2db564038f620315706d06c5b0317be5"
+  },
+  {
+    "path": "docs/syzia-033/request.md",
+    "status": "Novo",
+    "sha256": "8c8486675408b7f58cae39a888d7104c14cf9effdc2259973bdb4d5f9a5aa355"
+  },
+  {
+    "path": "docs/syzia-033/upgrade.md",
+    "status": "Novo",
+    "sha256": "b5f5f2c6b123b4937b84db0cecb7e4d8c660259e3ae11b534aee91fd36506f07"
+  },
+  {
+    "path": "index.html",
+    "status": "Alterado",
+    "sha256": "8fbfe6b83684a6c4449a0592e48239fe24ae0d9faa90edd781c88b545825dcbb"
+  },
+  {
+    "path": "package.json",
+    "status": "Alterado",
+    "sha256": "15528a98c70dbe0b82515889e3330a64d6eb7348fb5502af39c6beac46fcfdd5"
+  },
+  {
+    "path": "playwright.syzia033.config.ts",
+    "status": "Novo",
+    "sha256": "4ae6309e7e8723223d69b0ba7cda2fbddc5c3611f4ea1c9c3338ac92bae454b6"
+  },
+  {
+    "path": "reports/syzia-033/aquisicao.png",
+    "status": "Novo",
+    "sha256": "09b9ddf7b180c346436418b698d05f1dc7f929a5dee51a2a968d31739c03276e"
+  },
+  {
+    "path": "reports/syzia-033/backend.log",
+    "status": "Novo",
+    "sha256": "f7490460e625721507b622fd6402ec852a9a08754415d1809d23384644b1fcb7"
+  },
+  {
+    "path": "reports/syzia-033/browser-evidence.json",
+    "status": "Novo",
+    "sha256": "5f16a553c463172ec52d8c5dbf4df3e9a791278405bd6696f843b9683e2d4ab9"
+  },
+  {
+    "path": "reports/syzia-033/browser-evidence.log",
+    "status": "Novo",
+    "sha256": "dc2faa50356e7eaed95d4ad56cce889034baa1e458c8c3a8a303375cd62ae497"
+  },
+  {
+    "path": "reports/syzia-033/browser-final.log",
+    "status": "Novo",
+    "sha256": "07273199672cdcc37261230ce0590997283c4ff94b384856d6fa8f432ecfe070"
+  },
+  {
+    "path": "reports/syzia-033/browser.json",
+    "status": "Novo",
+    "sha256": "46b7f7f6922ac3a7b5472f51f9266e860351d127141802af4ec5c5888d383cfa"
+  },
+  {
+    "path": "reports/syzia-033/build.log",
+    "status": "Novo",
+    "sha256": "e6b2dbf7600447fd1d7f7fe14ca53e2183df0207d3fd6551cb4e1ee7c3cdffa2"
+  },
+  {
+    "path": "reports/syzia-033/bundle-scan.json",
+    "status": "Novo",
+    "sha256": "4148f797a2cd35610b346ccc531337adfbfab1ee47cd65254b2e9763ae85b6ad"
+  },
+  {
+    "path": "reports/syzia-033/bundle.log",
+    "status": "Novo",
+    "sha256": "5b6896635549fce8b6f5b16c33b86f3957d66fc3929f0d2727e2dbe603bf0cf0"
+  },
+  {
+    "path": "reports/syzia-033/consentimento-local.png",
+    "status": "Novo",
+    "sha256": "fba95c6cfa6593f18909617e0b56f2e9a257576dbb89f2b178e20b70a9a5cc40"
+  },
+  {
+    "path": "reports/syzia-033/cor-amarelo-dark.png",
+    "status": "Novo",
+    "sha256": "520dbc4ab75442ce22f44f5925dac0718ac25eb1da07c61aede910ad7587c6ab"
+  },
+  {
+    "path": "reports/syzia-033/cor-amarelo-light.png",
+    "status": "Novo",
+    "sha256": "6380c896c8b701d465a356b8289ce69b15fe4c4b09d63777f9fa8d6239d490b7"
+  },
+  {
+    "path": "reports/syzia-033/cor-azul-dark.png",
+    "status": "Novo",
+    "sha256": "0d41d34ae21a7fb5096ec809506481036ead2ffbb36103155d09a12ed4b90ebb"
+  },
+  {
+    "path": "reports/syzia-033/cor-azul-light.png",
+    "status": "Novo",
+    "sha256": "c2e5c002c28bdc8a7c04d852dcadf8b8a5d2d2bb9783a4102f2a6235f226a140"
+  },
+  {
+    "path": "reports/syzia-033/cor-magenta-dark.png",
+    "status": "Novo",
+    "sha256": "b308eeec7399b98cdfd8d3cbbeb6e67f87c54f09a46184996d757b03ee277739"
+  },
+  {
+    "path": "reports/syzia-033/cor-magenta-light.png",
+    "status": "Novo",
+    "sha256": "dc8785ac61dd65d536fcef5a9110d228b762507eaf3d31ec8bf728494a07871f"
+  },
+  {
+    "path": "reports/syzia-033/cor-vermelho-dark.png",
+    "status": "Novo",
+    "sha256": "8e58d9e2030ddb2826e3477ea42e4eefd8769eb1729e188ee92f4c297011e230"
+  },
+  {
+    "path": "reports/syzia-033/cor-vermelho-light.png",
+    "status": "Novo",
+    "sha256": "1afa5940220dd3c8a2a5045efe78e8ab79ff5ea42180a2281de4d0b0eff54eb6"
+  },
+  {
+    "path": "reports/syzia-033/equipe-sidebar.png",
+    "status": "Novo",
+    "sha256": "327a9e0e6b4a3967c573ddd3a5863d26b1ead8ca1b2fa25cdb83019fd8c83a38"
+  },
+  {
+    "path": "reports/syzia-033/escolha-contexto.png",
+    "status": "Novo",
+    "sha256": "bb2be8c06c10c076362905daa2ae52a414c20dc5d3322c5bf0ddafb69ee5a155"
+  },
+  {
+    "path": "reports/syzia-033/integrity.json",
+    "status": "Novo",
+    "sha256": "56b50531871512f81afeae2f74c28c484721db12cff421fb47c33bb878df7c02"
+  },
+  {
+    "path": "reports/syzia-033/local-diagnostic.log",
+    "status": "Novo",
+    "sha256": "768cfe44d1d66e1b81ce3393d89fea74203ee755f62514f94320d534cb91259c"
+  },
+  {
+    "path": "reports/syzia-033/login-mobile.png",
+    "status": "Novo",
+    "sha256": "7edd5e37993d631fbb022d6a3d5f6ceec281c7ca736e2ccfeaa7c8aaa1961dda"
+  },
+  {
+    "path": "reports/syzia-033/media-identity-desktop.png",
+    "status": "Novo",
+    "sha256": "e6ab35ef9527a94f7cfb99ad07af952de9af36c7253368377d736c12708fa474"
+  },
+  {
+    "path": "reports/syzia-033/media-portfolio-desktop.png",
+    "status": "Novo",
+    "sha256": "004ee3eae76c55fe38c58879aacc8dd0bcc759abcc4974fd386ae1c4a6fec972"
+  },
+  {
+    "path": "reports/syzia-033/media-portfolio-editor-desktop.png",
+    "status": "Novo",
+    "sha256": "c1f0b769d06a7edc7b8621542e769e726c398e9d0c2c8d178d01043206221072"
+  },
+  {
+    "path": "reports/syzia-033/media-preview-desktop.png",
+    "status": "Novo",
+    "sha256": "bcbff8ad057c0a7a225efd8ff2892e9726de49d12740bc1fc6676269000bf7af"
+  },
+  {
+    "path": "reports/syzia-033/media-service-desktop.png",
+    "status": "Novo",
+    "sha256": "2ba1e8acf7a17820978bf5fd1257d0dfeb1f2ac5e1a8ac2387c04fb38fdecaf3"
+  },
+  {
+    "path": "reports/syzia-033/onboarding-existente.png",
+    "status": "Novo",
+    "sha256": "7c84bb23d5d4d502837c6dabe9e0da7f47ea5ba4d8ed74f2dba09977c2d97409"
+  },
+  {
+    "path": "reports/syzia-033/recorrencia-paga.png",
+    "status": "Novo",
+    "sha256": "2db9e12d12d9f25a6e9cdc4a27df967f88a9185729d006508d0180b0ad15c719"
+  },
+  {
+    "path": "reports/syzia-033/recorrencia-prevista.png",
+    "status": "Novo",
+    "sha256": "683289a39f27e76b03e97c5dfc1070cf2e0cfb78fd0ca93c73d4d10312666662"
+  },
+  {
+    "path": "reports/syzia-033/site-desktop.png",
+    "status": "Novo",
+    "sha256": "27bce28b2f90cb272fb6a8d38ca5ad4550dd322b21769280c08422a0485d071e"
+  },
+  {
+    "path": "reports/syzia-033/sql.json",
+    "status": "Novo",
+    "sha256": "79fbde83fa01b28109ac62bc3b726f43d96ac8e8275b780c885e8924526351e0"
+  },
+  {
+    "path": "reports/syzia-033/sql.log",
+    "status": "Novo",
+    "sha256": "6c9a9674faad31a2638ef50a4c4801086b1e29c23187e3ba62fad9ac73176fdf"
+  },
+  {
+    "path": "reports/syzia-033/upgrade-tables.json",
+    "status": "Novo",
+    "sha256": "7d5f44a560a5376acf89e4dcab7d8b2ae6ddca666d08ad3fcbef3bd82c28f4eb"
+  },
+  {
+    "path": "reports/syzia-033/validation.json",
+    "status": "Novo",
+    "sha256": "670acc964287b968192fdfc5d93cdf2c9ea2aaed1bc3719ac940541a3e948c02"
+  },
+  {
+    "path": "scripts/dev-consumer-demo.mjs",
+    "status": "Alterado",
+    "sha256": "7731acc9b60776e6024716d0772758cb57f01884c284f7a158bea2acd721d436"
+  },
+  {
+    "path": "scripts/package-project.py",
+    "status": "Alterado",
+    "sha256": "c8244cdfa7ff24e02b95b4372bf88040927c9b49be8ee5b9769a16265a2b78de"
+  },
+  {
+    "path": "scripts/syzia-033/acquisition.sql",
+    "status": "Novo",
+    "sha256": "6f7147b84c50da23ab4f1af449b6bd086d0098a86bb8c9b1ea749ec6f4a858ea"
+  },
+  {
+    "path": "scripts/syzia-033/build.py",
+    "status": "Novo",
+    "sha256": "21d102be1ecc177f2df07c9b3ea119b16d285d16a0868bff636f0a16b3ac2b1f"
+  },
+  {
+    "path": "scripts/syzia-033/diagnose-local.mjs",
+    "status": "Novo",
+    "sha256": "d2b5f3795f05ad3f984ddeb2d0343cf7cd5074fcf466ee0bdce45f72fbd18da7"
+  },
+  {
+    "path": "scripts/syzia-033/finance.sql",
+    "status": "Novo",
+    "sha256": "338201e8bbefac6137ab36599d38aa859e76f5f75657a4f57ce9289a878cdd4e"
+  },
+  {
+    "path": "scripts/syzia-033/identity.sql",
+    "status": "Novo",
+    "sha256": "a531b576a52b14bc1287b3bc474e8c6c74029a4714a51cac0a5e7ecdcf8d5f03"
+  },
+  {
+    "path": "scripts/syzia-033/release-inventory.py",
+    "status": "Novo",
+    "sha256": "cd7774c1fdc3424099aae814aa281fe437bafa43f6d93d798090d1614f701e6d"
+  },
+  {
+    "path": "scripts/syzia-033/selfservice.sql",
+    "status": "Novo",
+    "sha256": "4befa154ce8fa2d5464b05f04c27b395b0d3c75dc1df5cc648343ce0132277af"
+  },
+  {
+    "path": "server/attachments.mjs",
+    "status": "Alterado",
+    "sha256": "0243b01e4a14cb4558d6f7912363ade856c0c70caeeaf5f87b746b03ea9ece69"
+  },
+  {
+    "path": "server/enterprise-access.mjs",
+    "status": "Alterado",
+    "sha256": "843a999a5ff8d9982f33ca8b1a019d492e04e9107960a15b93f5d8c018677d57"
+  },
+  {
+    "path": "server/platform.mjs",
+    "status": "Alterado",
+    "sha256": "8eaabfab935ae1596466dad8f454f1d1d8e3ef39c8630b145fb91c2aff5308bf"
+  },
+  {
+    "path": "src/FoundationApp.tsx",
+    "status": "Alterado",
+    "sha256": "3207146aca2ce9ed15a7d5cfb2d66a08218aa2cae1042b927a19df87b12881e8"
+  },
+  {
+    "path": "src/access/ContextChooser.tsx",
+    "status": "Novo",
+    "sha256": "8b94fa8c80c4c5541fd38d293271369513b0a728896bab31506a44c82343b705"
+  },
+  {
+    "path": "src/access/EnterpriseAccess.tsx",
+    "status": "Alterado",
+    "sha256": "8bb13c75584d199c8b900634cc2a409fdf97a005bc43cc9f6b2bcb62f13150ef"
+  },
+  {
+    "path": "src/access/PeopleAccess.tsx",
+    "status": "Alterado",
+    "sha256": "dafc83b41ae0d16874251be37ff5ccea4894f13f9a80180de890c18d1a6a17d5"
+  },
+  {
+    "path": "src/acquisition/Acquisition.tsx",
+    "status": "Novo",
+    "sha256": "741a0a805d36afd4fda38b115d40988e13b109cfc92c2115bc1583951b4b3423"
+  },
+  {
+    "path": "src/acquisition/PublicSite.tsx",
+    "status": "Novo",
+    "sha256": "920342a9e29c4bbf0b81da99a5df89748fd2865c17495210e09ab647c342ae8b"
+  },
+  {
+    "path": "src/acquisition/SelfService.tsx",
+    "status": "Novo",
+    "sha256": "2000256ceb39c5547190f547a835d0b95dc7ed744c4fa874688581cbc42b295b"
+  },
+  {
+    "path": "src/acquisition/acquisition.css",
+    "status": "Novo",
+    "sha256": "14161df7d2b65e2c7eeb5067483e12fda8e8c7faa847f90be13f16d04acb4d6e"
+  },
+  {
+    "path": "src/api.ts",
+    "status": "Alterado",
+    "sha256": "3aab9f2cd1ed8ae29f1a16c2a8c755a5ba4bfc6b5721a4dd8c1aacd66afdb53c"
+  },
+  {
+    "path": "src/billing/Billing.tsx",
+    "status": "Alterado",
+    "sha256": "4a314f3474eef50ba301076b2fc5c3bfbfe3b864b2a124963b832cb176ea08aa"
+  },
+  {
+    "path": "src/brand/vireloq.css",
+    "status": "Alterado",
+    "sha256": "84250d4d802af3354726364c530d0cacdba6f8d187ad01b217601393e1c6b292"
+  },
+  {
+    "path": "src/consumer/Consumer.tsx",
+    "status": "Alterado",
+    "sha256": "1c7b9ee7bc5cda84c1c5bcc53b6e4112b7c05bf40ebbb9320a5752723cf2594d"
+  },
+  {
+    "path": "src/consumer/consumer.css",
+    "status": "Alterado",
+    "sha256": "9c0477932abe0acb9f6b65e07a06fa7f5492af43072da4059def2587e17b6948"
+  },
+  {
+    "path": "src/finance/Finance.tsx",
+    "status": "Alterado",
+    "sha256": "bb9448bff451a9349e87c5b696d85e64129d9afd5049d77b586e213d848a47ab"
+  },
+  {
+    "path": "src/finance/Recurrences.tsx",
+    "status": "Novo",
+    "sha256": "7b61a78b38fa529c9b058235376f9fa6ec19ae8bb01ebb9c2dd527ec1dad7e89"
+  },
+  {
+    "path": "src/main.tsx",
+    "status": "Alterado",
+    "sha256": "24dbd7fc7e8e5140b4ba056174f836e80bd71349fed98a8879d74ef2b3988b5d"
+  },
+  {
+    "path": "src/permissions/Permissions.tsx",
+    "status": "Alterado",
+    "sha256": "0be605003aa47962b1d553483fd267977741ff6075b5083d2cde74847ea888ee"
+  },
+  {
+    "path": "supabase/migrations/202609240033_acquisition_selfservice_finance.sql",
+    "status": "Novo",
+    "sha256": "14323b3a158b7e42b9d5104705c0ec7f1b35c18467263ac4df7e75253963fc06"
+  },
+  {
+    "path": "tests/demo-browser/syzia-033-media.spec.ts",
+    "status": "Novo",
+    "sha256": "c7a16eeb3821bfcd821b90683cdf90b445064747eb16e7a1a05d651372de05af"
+  },
+  {
+    "path": "tests/demo-browser/syzia-033.spec.ts",
+    "status": "Novo",
+    "sha256": "fd62fb498d95784e9e6264be3bc99d4f0b9a5244c7d03c04fdfe21a9e69e366d"
+  },
+  {
+    "path": "tests/organization-activation-server.test.mjs",
+    "status": "Alterado",
+    "sha256": "02f3dc01ba160c54e9292a6a6b7970251eb47f77aecf5965eb069637e11452fe"
+  },
+  {
+    "path": "tests/support/consumer-db.mjs",
+    "status": "Alterado",
+    "sha256": "807bd0681f81b7ff950061ea5fd7112b597327b9ba34da0996baeb5d7668b99c"
+  },
+  {
+    "path": "tests/support/demo-login.ts",
+    "status": "Alterado",
+    "sha256": "62f66e625da0220179db83ff0f0ffe3749c1175cd45c217ea1b834f276d0461b"
+  },
+  {
+    "path": "tests/syzia-033-server.test.mjs",
+    "status": "Novo",
+    "sha256": "9d35d6f8e66525f1d97ba33a62af99bf719cea76e5bc29e59f7e7ebb92d5eb40"
+  },
+  {
+    "path": "tests/syzia-033.test.mjs",
+    "status": "Novo",
+    "sha256": "51929e33f6e14092491e3fecfaed4f996174e859f1d9496ec73d7a7e6e6ccc27"
+  }
+]

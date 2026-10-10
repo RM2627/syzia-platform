@@ -1,0 +1,1 @@
+import {defineConfig}from'@playwright/test';import demo from'./playwright.demo.config';export default defineConfig({...demo,testMatch:['syzia-032.spec.ts','presence-correction.spec.ts'],timeout:120000,outputDir:'test-results-syzia',reporter:[['list'],['json',{outputFile:'reports/syzia-032/browser.json'}]]});

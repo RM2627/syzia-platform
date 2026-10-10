@@ -1,0 +1,11 @@
+{
+  "testOnlyAcknowledged": false,
+  "realCustomerData": false,
+  "projectRef": "REPLACE_WITH_DEDICATED_PROJECT",
+  "url": "https://REPLACE_WITH_DEDICATED_PROJECT.supabase.co",
+  "publishableKey": "REPLACE_WITH_PUBLIC_KEY",
+  "tokens": {"agentA":"REPLACE","backup":"REPLACE","agentB":"REPLACE","adminA":"REPLACE","consumerA":"REPLACE","consumerB":"REPLACE"},
+  "organizations":{"a":"REPLACE_UUID_A","b":"REPLACE_UUID_B"},
+  "tickets":{"a":"REPLACE_FICTITIOUS_UNASSIGNED_TICKET_A","b":"REPLACE_FICTITIOUS_TICKET_B"},
+  "requestA":"REPLACE_FICTITIOUS_REQUEST_CODE"
+}

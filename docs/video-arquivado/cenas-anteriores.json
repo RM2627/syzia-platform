@@ -1,0 +1,443 @@
+[
+  {
+    "id": 1,
+    "chapter": "01 • Visão geral",
+    "title": "Sua empresa online em um só lugar",
+    "key": "manager",
+    "text": "Sua empresa online em um só lugar. A página apresenta o negócio; as solicitações alimentam orçamento, agenda, atendimento e acompanhamento comercial. Vamos configurar e operar pela própria interface. Todos os exemplos deste treinamento são fictícios.",
+    "actions": "Abrir a Home da empresa e percorrer agenda e decisões do dia.",
+    "seconds": 21
+  },
+  {
+    "id": 2,
+    "chapter": "02 • Primeiro acesso",
+    "title": "Comece pela preparação",
+    "key": "new",
+    "text": "Na primeira entrada, a checklist mostra o que ainda falta na sua empresa. Abra cada item para configurar. O progresso depende do que foi realmente salvo: assistir ao tutorial não conclui a configuração.",
+    "actions": "Entrar no Ateliê Inicial e abrir Dados da empresa.",
+    "seconds": 20
+  },
+  {
+    "id": 3,
+    "chapter": "02 • Primeiro acesso",
+    "title": "Dados e horários",
+    "key": "new",
+    "text": "Preencha descrição, contato público, regiões e meios de pagamento. Separe o contato interno para exceções. Os horários precisam refletir a operação real. Salvar mantém a preparação disponível para a próxima entrada.",
+    "actions": "Preencher descrição, regiões e formas de pagamento; salvar configuração.",
+    "seconds": 23
+  },
+  {
+    "id": 4,
+    "chapter": "02 • Primeiro acesso",
+    "title": "Tutorial que você pode refazer",
+    "key": "manager",
+    "text": "Em Ajuda, use Refazer tutorial. Próximo apresenta a rotina; Anterior permite rever. Você pode Pular ou Concluir. O tutorial é opcional, e pode ser retomado pela Ajuda quando precisar.",
+    "actions": "Abrir Ajuda; iniciar tour, avançar, voltar, pular; iniciar novamente e concluir.",
+    "seconds": 24
+  },
+  {
+    "id": 5,
+    "chapter": "03 • Página da empresa",
+    "title": "Seu ponto central de apresentação",
+    "key": "manager",
+    "text": "Página da empresa reúne o que o cliente vê: identidade, serviços, fotos, informações e publicação. Confira o status antes de compartilhar. Este é o ponto de partida para editar e visualizar sua presença pública.",
+    "actions": "Abrir Página da empresa pela navegação e observar status e atalhos.",
+    "seconds": 18
+  },
+  {
+    "id": 6,
+    "chapter": "03 • Página da empresa",
+    "title": "Copiar e compartilhar o link",
+    "key": "manager",
+    "text": "Clique em Copiar link e aguarde a confirmação. Use esse endereço na bio do Instagram, em mensagens ou como destino de um QR Code criado fora da plataforma. Nesta gravação, o endereço é apenas da demo local.",
+    "actions": "Copiar link; conferir confirmação e abrir Ver página pública em nova aba.",
+    "seconds": 20
+  },
+  {
+    "id": 7,
+    "chapter": "04 • Identidade e portfólio",
+    "title": "Sua identidade visual",
+    "key": "manager",
+    "text": "Escolha logo, capa e cor principal entre suas imagens autorizadas. A identidade reforça o reconhecimento da empresa. Salvar prepara o rascunho; a página vista pelo cliente só é atualizada quando os dados aprovados são publicados.",
+    "actions": "Abrir identidade, selecionar cor e salvar o rascunho.",
+    "seconds": 19
+  },
+  {
+    "id": 8,
+    "chapter": "04 • Identidade e portfólio",
+    "title": "Imagem, galeria ou antes e depois",
+    "key": "manager",
+    "text": "O portfólio é opcional. Use uma imagem, uma galeria de até quatro fotos ou duas imagens para antes e depois. Escolha um título claro, descrição, ordem e, quando útil, o serviço relacionado.",
+    "actions": "Preencher um trabalho de galeria com imagem existente, salvar e observar resultado.",
+    "seconds": 24
+  },
+  {
+    "id": 9,
+    "chapter": "04 • Identidade e portfólio",
+    "title": "Prévia e publicação são diferentes",
+    "key": "manager",
+    "text": "A prévia publicada mostra o conteúdo que está no ar na demo. Um trabalho salvo em rascunho ainda não aparece ali. Revise antes de publicar: isso evita que uma edição incompleta altere sua apresentação ao cliente.",
+    "actions": "Abrir prévia publicada; publicar dados aprovados e atualizar prévia.",
+    "seconds": 20
+  },
+  {
+    "id": 10,
+    "chapter": "05 • Serviços e preços",
+    "title": "Configure o que sua empresa oferece",
+    "key": "manager",
+    "text": "Em Serviços, selecione um item para revisar nome, categoria, descrição e duração. Preço fixo informa um valor definido. A partir de é uma estimativa. Sob consulta exige uma proposta após avaliação.",
+    "actions": "Abrir catálogo e editar serviço existente, preenchendo descrição e salvando.",
+    "seconds": 23
+  },
+  {
+    "id": 11,
+    "chapter": "05 • Serviços e preços",
+    "title": "Adicionais e perguntas necessárias",
+    "key": "manager",
+    "text": "Adicionais complementam valor e duração. Perguntas por serviço ajudam a receber as informações certas antes de responder. Peça apenas o necessário: por exemplo, modalidade de atendimento ou características do serviço solicitado.",
+    "actions": "Percorrer adicionais e perguntas do serviço e mostrar seus campos.",
+    "seconds": 20
+  },
+  {
+    "id": 12,
+    "chapter": "06 • Manual e prontidão",
+    "title": "Você define como sua empresa atende",
+    "key": "manager",
+    "text": "Para atendimento compartilhado, prepare as orientações da empresa. O manual reúne funcionamento, prazos, políticas e exceções. A equipe consulta a versão aprovada. Rascunhos permitem revisar sem trocar silenciosamente as orientações em uso.",
+    "actions": "Abrir manual publicado, expandir orientações e conteúdo aprovado.",
+    "seconds": 22
+  },
+  {
+    "id": 13,
+    "chapter": "06 • Manual e prontidão",
+    "title": "Atualizar por uma nova versão",
+    "key": "manager",
+    "text": "Uma versão publicada é preservada. Crie um rascunho, confira os tópicos e revise antes de publicar. Nesta demonstração, vamos criar uma revisão. Só marque a confirmação depois de verificar todo o conteúdo.",
+    "actions": "Criar rascunho do manual e abrir um tópico; mostrar confirmação de publicação sem aprovar conteúdo não revisado.",
+    "seconds": 20
+  },
+  {
+    "id": 14,
+    "chapter": "06 • Manual e prontidão",
+    "title": "FAQ e respostas rápidas",
+    "key": "manager",
+    "text": "A FAQ responde dúvidas que podem ser públicas. Respostas rápidas padronizam mensagens da equipe. Revise linguagem, regras e publicação para que o cliente receba orientações consistentes, sem expor notas internas.",
+    "actions": "Abrir FAQ; depois Respostas rápidas e seus campos.",
+    "seconds": 21
+  },
+  {
+    "id": 15,
+    "chapter": "06 • Manual e prontidão",
+    "title": "Regras, autonomia e revisão final",
+    "key": "manager",
+    "text": "Autonomia define o que a equipe pode fazer, como informar preços, agendar ou conceder descontos. Fora desses limites, a decisão volta para você. Confira a prontidão antes de ativar o atendimento compartilhado.",
+    "actions": "Abrir Regras, Autonomia e Prontidão, mostrando controles e checklist existente.",
+    "seconds": 25
+  },
+  {
+    "id": 16,
+    "chapter": "07 • Disponibilidade",
+    "title": "Horários que o cliente pode escolher",
+    "key": "manager",
+    "text": "A agenda considera horários, duração e bloqueios. Configure antecedência, intervalo e prazo para cancelar ou remarcar. Há um recurso de agenda nesta versão. Revise as regras antes de liberar agendamento direto.",
+    "actions": "Abrir disponibilidade e salvar regras da agenda sem modificar os valores existentes.",
+    "seconds": 20
+  },
+  {
+    "id": 17,
+    "chapter": "08 • Diferentes negócios",
+    "title": "Projetos sem comparação obrigatória",
+    "key": "designer",
+    "text": "A mesma página atende outros prestadores. Neste estúdio fictício, o portfólio apresenta projetos com imagens comuns. Não é preciso ter fotos de antes e depois. Os serviços continuam ligados a pedidos e orçamentos.",
+    "actions": "Abrir página do Estúdio Horizonte e percorrer serviços e portfólio.",
+    "seconds": 20
+  },
+  {
+    "id": 18,
+    "chapter": "08 • Diferentes negócios",
+    "title": "Atendimentos e consultas",
+    "key": "nutrition",
+    "text": "Este perfil fictício oferece consultas e agendamento sem depender de portfólio. A estrutura serve à apresentação e à organização administrativa. Não é um prontuário e não deve ser usada para registrar informações clínicas.",
+    "actions": "Abrir página de Clara Nutrição e mostrar serviço, modalidade e informações públicas.",
+    "seconds": 20
+  },
+  {
+    "id": 19,
+    "chapter": "09 • A experiência do cliente",
+    "title": "Conhecer, escolher e solicitar",
+    "key": "consumer",
+    "text": "Agora vamos agir como cliente, no celular. A pessoa conhece a empresa, vê o trabalho e escolhe o serviço. A página conecta apresentação e operação: Solicitar orçamento abre o fluxo relacionado ao serviço escolhido.",
+    "actions": "Abrir página pública mobile, percorrer portfólio e voltar ao serviço; solicitar orçamento.",
+    "seconds": 22
+  },
+  {
+    "id": 20,
+    "chapter": "09 • A experiência do cliente",
+    "title": "Informações para preparar o atendimento",
+    "key": "consumer",
+    "text": "O cliente escolhe adicionais quando necessário e responde às perguntas do serviço. Depois informa os dados de contato e lê a finalidade de uso. O telefone informado não permite acessar solicitações de outras pessoas.",
+    "actions": "Avançar adicionais; responder pergunta; preencher nome e telefone fictícios e consentimento.",
+    "seconds": 26
+  },
+  {
+    "id": 21,
+    "chapter": "09 • A experiência do cliente",
+    "title": "Revisar antes de enviar",
+    "key": "consumer",
+    "text": "Na revisão, confira serviço e dados antes de enviar. Uma solicitação não é pagamento nem proposta final aprovada. Depois do envio, o cliente acompanha o próprio pedido por uma área de acesso restrito.",
+    "actions": "Revisar, enviar solicitação e confirmar abertura do acompanhamento.",
+    "seconds": 21
+  },
+  {
+    "id": 22,
+    "chapter": "10 • Receber e responder",
+    "title": "A solicitação chega em Orçamentos",
+    "key": "manager",
+    "text": "Na visão da empresa, abra Orçamentos e selecione a solicitação recebida. Confira o serviço e as respostas. Essa continuidade evita redigitar o pedido e mantém o contexto do cliente junto da proposta.",
+    "actions": "Abrir Orçamentos e selecionar Marina Treinamento.",
+    "seconds": 20
+  },
+  {
+    "id": 23,
+    "chapter": "10 • Receber e responder",
+    "title": "Enviar uma proposta final",
+    "key": "manager",
+    "text": "Revise os valores, a duração e a validade. Ao enviar, a proposta fica registrada para o cliente aprovar. Se precisar alterá-la depois, uma nova versão será criada; não trate a estimativa como aprovação definitiva.",
+    "actions": "Preencher validade e duração; enviar proposta final e conferir mensagem e versão.",
+    "seconds": 20
+  },
+  {
+    "id": 24,
+    "chapter": "11 • Aprovação e agendamento",
+    "title": "O cliente decide pelo acompanhamento",
+    "key": "consumer",
+    "text": "O cliente consulta a proposta e aprova a versão apresentada. A aprovação fica no histórico. Quando houver agendamento permitido, ele consulta a disponibilidade para escolher um horário compatível com o serviço.",
+    "actions": "Atualizar acompanhamento, aprovar proposta, escolher data e consultar horários.",
+    "seconds": 23
+  },
+  {
+    "id": 25,
+    "chapter": "11 • Aprovação e agendamento",
+    "title": "Confirmar e acompanhar",
+    "key": "consumer",
+    "text": "Escolha um horário disponível e confirme. Só a confirmação conclui a reserva. O acompanhamento reúne orçamento e agendamento; cancelar ou remarcar depende das regras e dos prazos configurados pela empresa.",
+    "actions": "Selecionar 08:00, confirmar e observar confirmação e histórico.",
+    "seconds": 21
+  },
+  {
+    "id": 26,
+    "chapter": "12 • Atendimento humano",
+    "title": "Quando o cliente precisa de ajuda",
+    "key": "consumer",
+    "text": "O que é simples, o cliente resolve sozinho. Se precisar de ajuda, envia uma mensagem no próprio acompanhamento. A equipe recebe o contexto, incluindo a solicitação e as etapas já realizadas.",
+    "actions": "Enviar pergunta sobre preparação do serviço.",
+    "seconds": 20
+  },
+  {
+    "id": 27,
+    "chapter": "12 • Atendimento humano",
+    "title": "Assumir e consultar o contexto",
+    "key": "agent",
+    "text": "Na Central, a equipe encontra a conversa e assume o atendimento. O responsável confere o contexto e consulta as orientações aprovadas antes de responder. Aqui mostramos somente a operação ligada à empresa fictícia.",
+    "actions": "Abrir fila geral, buscar Marina Treinamento, assumir e consultar Manual.",
+    "seconds": 23
+  },
+  {
+    "id": 28,
+    "chapter": "12 • Atendimento humano",
+    "title": "Responder sem inventar condições",
+    "key": "agent",
+    "text": "A equipe responde com base no manual e na autonomia concedida. Mensagem pública vai para o cliente; nota interna fica com a operação. Nunca registre uma promessa de desconto ou condição que não esteja autorizada.",
+    "actions": "Voltar a Mensagens e enviar resposta pública; registrar nota interna.",
+    "seconds": 26
+  },
+  {
+    "id": 29,
+    "chapter": "13 • Pendências e decisões",
+    "title": "Quando a equipe precisa da empresa",
+    "key": "agent",
+    "text": "Se faltar informação ou autonomia, encaminhe a questão. Descreva o motivo, o contexto e a decisão necessária. A empresa recebe uma pendência e pode responder sem depender de uma conversa paralela desconectada do cliente.",
+    "actions": "Encaminhar pergunta à empresa pelo atendimento.",
+    "seconds": 26
+  },
+  {
+    "id": 30,
+    "chapter": "13 • Pendências e decisões",
+    "title": "Registrar a decisão e continuar",
+    "key": "manager",
+    "text": "Em Pendências, abra a conversa, avalie o pedido e registre a decisão. A resposta fica associada ao atendimento, para a equipe continuar com a informação aprovada pela empresa.",
+    "actions": "Abrir pendência de Marina, responder e registrar decisão.",
+    "seconds": 23
+  },
+  {
+    "id": 31,
+    "chapter": "14 • Concluir a conversa",
+    "title": "Resposta final e encerramento",
+    "key": "agent",
+    "text": "Após a decisão, a equipe informa o cliente, resolve e encerra a conversa. Isso encerra o atendimento humano; não marca automaticamente o serviço como executado nem registra pagamento. O agendamento continua com seu próprio estado.",
+    "actions": "Atualizar atendimento, responder com decisão; Resolver e Encerrar.",
+    "seconds": 26
+  },
+  {
+    "id": 32,
+    "chapter": "14 • Concluir a conversa",
+    "title": "Cliente informado, operação registrada",
+    "key": "consumer",
+    "text": "O cliente vê a orientação no mesmo acompanhamento em que aprovou o orçamento e reservou o horário. Essa é a jornada conectada: apresentação, solicitação, proposta, aprovação, agenda e ajuda humana com contexto.",
+    "actions": "Atualizar acompanhamento e mostrar resposta final da equipe.",
+    "seconds": 20
+  },
+  {
+    "id": 33,
+    "chapter": "15 • Agenda no dia a dia",
+    "title": "Visões e ficha do atendimento",
+    "key": "manager",
+    "text": "A Agenda organiza compromissos do dia, semana ou mês. Abra uma reserva para conferir cliente, serviço e histórico. Os horários exibidos seguem Recife nesta versão; confirme esse contexto ao planejar a operação.",
+    "actions": "Abrir Agenda, alternar Semana e Dia e abrir serviço já concluído da fixture.",
+    "seconds": 21
+  },
+  {
+    "id": 34,
+    "chapter": "15 • Agenda no dia a dia",
+    "title": "Registrar uma reserva recebida por fora",
+    "key": "manager",
+    "text": "Também é possível registrar um atendimento combinado fora da página. Informe o cliente, confirme a autorização, selecione serviço, respostas, data e horário. A reserva participa da mesma disponibilidade dos pedidos feitos online.",
+    "actions": "Criar agendamento manual com cliente fictício Nina, serviço e horário futuro.",
+    "seconds": 28
+  },
+  {
+    "id": 35,
+    "chapter": "15 • Agenda no dia a dia",
+    "title": "Remarcar com confirmação",
+    "key": "manager",
+    "text": "Abra a ficha e escolha Reagendar. Informe o novo horário e confirme. Confira o resultado e o histórico antes de comunicar ao cliente. Se o novo horário não puder ser reservado, a reserva anterior é preservada.",
+    "actions": "Reagendar Nina para 12:00 e conferir registro no histórico.",
+    "seconds": 20
+  },
+  {
+    "id": 36,
+    "chapter": "15 • Agenda no dia a dia",
+    "title": "Cancelar e bloquear indisponibilidade",
+    "key": "manager",
+    "text": "Cancelar uma reserva exige confirmação e deixa histórico. Bloqueios representam períodos em que você não atende. Eles também afetam o que o cliente pode reservar; use um motivo claro para a equipe entender.",
+    "actions": "Cancelar Nina; abrir Agenda e criar bloqueio no mesmo dia, de 12:00 a 14:00.",
+    "seconds": 26
+  },
+  {
+    "id": 37,
+    "chapter": "16 • Clientes e operação manual",
+    "title": "Organizar os contatos",
+    "key": "manager",
+    "text": "Clientes reúne os cadastros da empresa. Pesquise antes de criar, mas não presuma que telefones iguais representam a mesma pessoa. Registre apenas o necessário para atender e mantenha a finalidade de contato clara.",
+    "actions": "Abrir Clientes, pesquisar Marina e mostrar vínculo com solicitações existentes.",
+    "seconds": 20
+  },
+  {
+    "id": 38,
+    "chapter": "16 • Clientes e operação manual",
+    "title": "Orçamento iniciado pela empresa",
+    "key": "manager",
+    "text": "Novo orçamento permite registrar um pedido recebido manualmente. O processo usa serviço, perguntas e identificação, como no fluxo público. Depois revise e envie a proposta; o consumidor continua aprovando pelo próprio acompanhamento.",
+    "actions": "Abrir Novo orçamento e mostrar identificação, serviço e campos obrigatórios sem criar pedido incompleto.",
+    "seconds": 19
+  },
+  {
+    "id": 39,
+    "chapter": "17 • Comercial e retornos",
+    "title": "Interessados não precisam ser esquecidos",
+    "key": "manager",
+    "text": "Comercial organiza oportunidades e próximos contatos. Use os filtros para localizar quem precisa de acompanhamento. Consulte o histórico antes de agir. A plataforma organiza o trabalho humano; não envia mensagens automáticas de WhatsApp.",
+    "actions": "Abrir Comercial, mostrar filtros e abrir uma oportunidade existente.",
+    "seconds": 21
+  },
+  {
+    "id": 40,
+    "chapter": "17 • Comercial e retornos",
+    "title": "Prazo e tentativas configuráveis",
+    "key": "manager",
+    "text": "Configure o intervalo e o limite de tentativas da empresa. Regras específicas podem ajustar o retorno por serviço ou situação. Respeite autorização de contato e registre o resultado verdadeiro; conversão comercial não é receita.",
+    "actions": "Abrir Configurar recuperação; preencher intervalo de 24 horas em minutos e limite de duas tentativas; salvar.",
+    "seconds": 21
+  },
+  {
+    "id": 41,
+    "chapter": "18 • Métricas",
+    "title": "Decisões baseadas no movimento real",
+    "key": "manager",
+    "text": "Métricas reúne solicitações, propostas, aprovações, agendamentos e acompanhamento comercial. Selecione o período e filtros disponíveis. O funil ajuda a entender onde as pessoas avançam ou param, sem carregar planilhas para fazer a conta.",
+    "actions": "Abrir Métricas, conferir filtros e percorrer funil.",
+    "seconds": 21
+  },
+  {
+    "id": 42,
+    "chapter": "18 • Métricas",
+    "title": "Orçado, aprovado e recebido não são iguais",
+    "key": "manager",
+    "text": "Valor orçado é o que foi proposto. Valor aprovado é o que o cliente aceitou. Sem comprovação financeira, nenhum deles deve ser chamado de receita. Use os indicadores para acompanhar a operação, não como extrato de recebimentos.",
+    "actions": "Mostrar Valores comerciais e aviso de receita não disponível.",
+    "seconds": 20
+  },
+  {
+    "id": 43,
+    "chapter": "18 • Métricas",
+    "title": "Indicadores do atendimento",
+    "key": "manager",
+    "text": "Os indicadores operacionais ajudam a observar volume, fila, respostas e resoluções dentro do escopo disponível. Analise períodos e contexto. A finalidade é melhorar o atendimento, sem transformar o painel em vigilância de funcionários.",
+    "actions": "Abrir indicadores de atendimento e percorrer os resultados disponíveis.",
+    "seconds": 19
+  },
+  {
+    "id": 44,
+    "chapter": "19 • Pessoas e acessos",
+    "title": "Cada pessoa com a permissão adequada",
+    "key": "manager",
+    "text": "Em Pessoas e acessos, o gestor administra os vínculos autorizados. Administrador, colaborador e atendente próprio têm responsabilidades diferentes. Não conceda acesso administrativo apenas para permitir que alguém responda clientes.",
+    "actions": "Abrir Pessoas e acessos, mostrar papel e situação, sem conceder novas permissões.",
+    "seconds": 20
+  },
+  {
+    "id": 45,
+    "chapter": "20 • Plano e utilização",
+    "title": "O que sua assinatura habilita",
+    "key": "manager",
+    "text": "Em Plano e utilização, confira recursos, limites e situação da assinatura. Nesta demo, planos e cobrança são fictícios. Não há pagamento real nem confirmação financeira por meio desta gravação.",
+    "actions": "Abrir Assinatura e mostrar plano e utilização.",
+    "seconds": 20
+  },
+  {
+    "id": 46,
+    "chapter": "20 • Plano e utilização",
+    "title": "Período de teste e encerramento",
+    "key": "trial",
+    "text": "No teste gratuito, confira plano, dias restantes e data final. A demo usa quinze dias; a concessão depende da elegibilidade. Ao terminar sem assinatura ativa, as regras de acesso mudam, mas os dados não são apagados automaticamente.",
+    "actions": "Abrir assinatura do Estúdio Horizonte e mostrar período gratuito.",
+    "seconds": 21
+  },
+  {
+    "id": 47,
+    "chapter": "20 • Plano e utilização",
+    "title": "Pagamentos: preparação opcional",
+    "key": "manager",
+    "text": "A área de preparação de pagamentos organiza condições e meios externos aceitos. Ela não processa cobrança, não guarda dinheiro e não comprova recebimento. Não é necessário ativar essa preparação para apresentar serviços e organizar atendimentos.",
+    "actions": "Abrir preparação de pagamentos opcionais e mostrar campos, sem ativar cobrança.",
+    "seconds": 20
+  },
+  {
+    "id": 48,
+    "chapter": "21 • Benefícios na prática",
+    "title": "O que minha empresa ganha ao assinar?",
+    "key": "manager",
+    "text": "Uma presença própria ligada à operação. Pedidos com contexto, propostas registradas, agenda organizada e equipe orientada. Retornos ajudam a não esquecer interessados; métricas mostram o movimento. Os recursos disponíveis dependem do plano e da preparação da empresa.",
+    "actions": "Voltar à Home e rever agenda, decisões e atualizações que conectam a rotina.",
+    "seconds": 23
+  },
+  {
+    "id": 49,
+    "chapter": "21 • Benefícios na prática",
+    "title": "Seu primeiro dia de operação",
+    "key": "manager",
+    "text": "Prepare e revise a página; compartilhe o link correto; acompanhe solicitações; responda às pendências; confira a agenda e os retornos. Use Ajuda para rever o tutorial. Sua empresa online em um só lugar, com uma rotina conectada.",
+    "actions": "Abrir Ajuda, mostrar Refazer tutorial e concluir treinamento.",
+    "seconds": 23
+  }
+]

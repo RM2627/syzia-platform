@@ -1,0 +1,2666 @@
+[
+  {
+    "id": "LEG-07-001",
+    "historicalStatus": "BLOCKED",
+    "historicalCase": "Preparação da suíte interrompida antes dos cenários",
+    "historicalEvidence": "evidencias/suites-existentes/tests__billing.test.log",
+    "historicalObserved": "Falha registrada no log; não reclassificada como aprovação",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Fixture de plano antigo interrompeu preparação com billing_plan_inconsistent. Regras de coerência são atuais e não foram relaxadas.",
+    "approvedScope": "docs/syzia-044/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "02–11, 15, 27–31"
+      },
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "01, 02, 07"
+      }
+    ]
+  },
+  {
+    "id": "LEG-09-005",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Central: frontend não importa segredos nem decide preço final ou confirma pagamentos",
+    "historicalEvidence": "evidencias/suites-existentes/tests__central-tools.test.log",
+    "historicalObserved": "Falha registrada no log; não reclassificada como aprovação",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Regex procura central_quote; o fluxo aprovado usa calculadora server-side. Linhas failing tests e repetição do título são diagnósticos do mesmo caso, não três requisitos.",
+    "approvedScope": "docs/syzia-044/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-041-sql.test.mjs",
+        "cases": "20–24, 32: cálculo/versões/teto no servidor"
+      },
+      {
+        "file": "scripts/inspect-browser-bundle.mjs",
+        "cases": "canário server-only ausente e typecheck/build"
+      }
+    ]
+  },
+  {
+    "id": "LEG-09-006",
+    "historicalStatus": "FAIL",
+    "historicalCase": "failing tests:",
+    "historicalEvidence": "evidencias/suites-existentes/tests__central-tools.test.log",
+    "historicalObserved": "Falha registrada no log; não reclassificada como aprovação",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Regex procura central_quote; o fluxo aprovado usa calculadora server-side. Linhas failing tests e repetição do título são diagnósticos do mesmo caso, não três requisitos.",
+    "approvedScope": "docs/syzia-044/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-041-sql.test.mjs",
+        "cases": "20–24, 32: cálculo/versões/teto no servidor"
+      },
+      {
+        "file": "scripts/inspect-browser-bundle.mjs",
+        "cases": "canário server-only ausente e typecheck/build"
+      }
+    ]
+  },
+  {
+    "id": "LEG-09-007",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Central: frontend não importa segredos nem decide preço final ou confirma pagamentos",
+    "historicalEvidence": "evidencias/suites-existentes/tests__central-tools.test.log",
+    "historicalObserved": "Falha registrada no log; não reclassificada como aprovação",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Regex procura central_quote; o fluxo aprovado usa calculadora server-side. Linhas failing tests e repetição do título são diagnósticos do mesmo caso, não três requisitos.",
+    "approvedScope": "docs/syzia-044/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-041-sql.test.mjs",
+        "cases": "20–24, 32: cálculo/versões/teto no servidor"
+      },
+      {
+        "file": "scripts/inspect-browser-bundle.mjs",
+        "cases": "canário server-only ausente e typecheck/build"
+      }
+    ]
+  },
+  {
+    "id": "LEG-10-017",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Encaminhamento guarda motivo/contexto e resposta autorizada retorna ao fluxo: central_access_denied",
+    "historicalEvidence": "evidencias/suites-existentes/tests__central.test.log",
+    "historicalObserved": "Falha registrada no log; não reclassificada como aprovação",
+    "decision": "Ator/roteamento substituído na 041; conversa preservada",
+    "reason": "Roteamento da avaliação foi limitado à equipe empresarial na 041; compartilhado não abre esse ticket. Atendimento, contexto e resposta continuam para ator autorizado.",
+    "approvedScope": "docs/syzia-041/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-041-sql.test.mjs",
+        "cases": "04–09, 18–19, 29–30"
+      },
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "12–14, 19–20"
+      }
+    ]
+  },
+  {
+    "id": "LEG-10-032",
+    "historicalStatus": "FAIL",
+    "historicalCase": "75 tabelas mantêm FORCE RLS, somente SELECT, helpers e motores privados inacessíveis: Expected values to be strictly equal:",
+    "historicalEvidence": "evidencias/suites-existentes/tests__central.test.log",
+    "historicalObserved": "Falha registrada no log; não reclassificada como aprovação",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Contagem fixa de 75 tabelas é obsoleta. O contrato vigente confere RLS/FORCE e DML proibido em todas as tabelas atuais, sem apagar a asserção histórica. Linhas de resumo repetidas apontam para o mesmo caso.",
+    "approvedScope": "docs/syzia-044/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-044-sql.test.mjs",
+        "cases": "SEC-grants; A1-tenant"
+      },
+      {
+        "file": "tests/syzia-044-upgrade.test.mjs",
+        "cases": "catálogo de segurança idêntico antes/depois"
+      }
+    ]
+  },
+  {
+    "id": "LEG-10-037",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Suspensão de membro administrador revoga a fila empresarial em claims existentes: permission_denied",
+    "historicalEvidence": "evidencias/suites-existentes/tests__central.test.log",
+    "historicalObserved": "Falha registrada no log; não reclassificada como aprovação",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Revogação mantém negação, agora com permission_denied em vez da causa antiga.",
+    "approvedScope": "docs/syzia-044/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "13, 15, 23, 26"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "13"
+      }
+    ]
+  },
+  {
+    "id": "LEG-13-036",
+    "historicalStatus": "FAIL",
+    "historicalCase": "36 75 tabelas mantêm RLS FORCE e nenhuma escrita direta: Expected values to be strictly equal:",
+    "historicalEvidence": "evidencias/suites-existentes/tests__commercial.test.log",
+    "historicalObserved": "Falha registrada no log; não reclassificada como aprovação",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Contagem fixa de 75 tabelas é obsoleta. O contrato vigente confere RLS/FORCE e DML proibido em todas as tabelas atuais, sem apagar a asserção histórica. Linhas de resumo repetidas apontam para o mesmo caso.",
+    "approvedScope": "docs/syzia-044/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-044-sql.test.mjs",
+        "cases": "SEC-grants; A1-tenant"
+      },
+      {
+        "file": "tests/syzia-044-upgrade.test.mjs",
+        "cases": "catálogo de segurança idêntico antes/depois"
+      }
+    ]
+  },
+  {
+    "id": "LEG-15-005",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Inventário SQL da Empresa é somente leitura e confere as 75 tabelas",
+    "historicalEvidence": "evidencias/suites-existentes/tests__company-tools.test.log",
+    "historicalObserved": "Falha registrada no log; não reclassificada como aprovação",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Contagem fixa de 75 tabelas é obsoleta. O contrato vigente confere RLS/FORCE e DML proibido em todas as tabelas atuais, sem apagar a asserção histórica. Linhas de resumo repetidas apontam para o mesmo caso.",
+    "approvedScope": "docs/syzia-044/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-044-sql.test.mjs",
+        "cases": "SEC-grants; A1-tenant"
+      },
+      {
+        "file": "tests/syzia-044-upgrade.test.mjs",
+        "cases": "catálogo de segurança idêntico antes/depois"
+      }
+    ]
+  },
+  {
+    "id": "LEG-15-006",
+    "historicalStatus": "FAIL",
+    "historicalCase": "failing tests:",
+    "historicalEvidence": "evidencias/suites-existentes/tests__company-tools.test.log",
+    "historicalObserved": "Falha registrada no log; não reclassificada como aprovação",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Contagem fixa de 75 tabelas é obsoleta. O contrato vigente confere RLS/FORCE e DML proibido em todas as tabelas atuais, sem apagar a asserção histórica. Linhas de resumo repetidas apontam para o mesmo caso.",
+    "approvedScope": "docs/syzia-044/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-044-sql.test.mjs",
+        "cases": "SEC-grants; A1-tenant"
+      },
+      {
+        "file": "tests/syzia-044-upgrade.test.mjs",
+        "cases": "catálogo de segurança idêntico antes/depois"
+      }
+    ]
+  },
+  {
+    "id": "LEG-15-007",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Inventário SQL da Empresa é somente leitura e confere as 75 tabelas",
+    "historicalEvidence": "evidencias/suites-existentes/tests__company-tools.test.log",
+    "historicalObserved": "Falha registrada no log; não reclassificada como aprovação",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Contagem fixa de 75 tabelas é obsoleta. O contrato vigente confere RLS/FORCE e DML proibido em todas as tabelas atuais, sem apagar a asserção histórica. Linhas de resumo repetidas apontam para o mesmo caso.",
+    "approvedScope": "docs/syzia-044/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-044-sql.test.mjs",
+        "cases": "SEC-grants; A1-tenant"
+      },
+      {
+        "file": "tests/syzia-044-upgrade.test.mjs",
+        "cases": "catálogo de segurança idêntico antes/depois"
+      }
+    ]
+  },
+  {
+    "id": "LEG-17-001",
+    "historicalStatus": "BLOCKED",
+    "historicalCase": "Preparação da suíte interrompida antes dos cenários",
+    "historicalEvidence": "evidencias/suites-existentes/tests__company.test.log",
+    "historicalObserved": "Falha registrada no log; não reclassificada como aprovação",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Loader histórico aplica 031 sem aplicar previamente 030. O gate usa cadeia explícita até 042 e só então 044; não altera o loader arquivado.",
+    "approvedScope": "docs/syzia-044/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-044-upgrade.test.mjs",
+        "cases": "cadeia ordenada, banco populado, rollback e integridade"
+      },
+      {
+        "file": "tests/syzia-044-sql.test.mjs",
+        "cases": "SEC-grants; A1-tenant"
+      },
+      {
+        "file": "tests/syzia-041-sql.test.mjs",
+        "cases": "25, 31"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "43"
+      }
+    ]
+  },
+  {
+    "id": "LEG-20-034",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Todas as tabelas preservam FORCE RLS e nenhuma escrita direta do consumidor: Expected values to be strictly equal:",
+    "historicalEvidence": "evidencias/suites-existentes/tests__consumer.test.log",
+    "historicalObserved": "Falha registrada no log; não reclassificada como aprovação",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Contagem fixa de 75 tabelas é obsoleta. O contrato vigente confere RLS/FORCE e DML proibido em todas as tabelas atuais, sem apagar a asserção histórica. Linhas de resumo repetidas apontam para o mesmo caso.",
+    "approvedScope": "docs/syzia-044/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-044-sql.test.mjs",
+        "cases": "SEC-grants; A1-tenant"
+      },
+      {
+        "file": "tests/syzia-044-upgrade.test.mjs",
+        "cases": "catálogo de segurança idêntico antes/depois"
+      }
+    ]
+  },
+  {
+    "id": "LEG-24-010",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Preparação fictícia e inspeção SQL funcionam sem alterar proteções",
+    "historicalEvidence": "evidencias/suites-existentes/tests__homologation__tooling.test.log",
+    "historicalObserved": "Falha registrada no log; não reclassificada como aprovação",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Contagem fixa de 75 tabelas é obsoleta. O contrato vigente confere RLS/FORCE e DML proibido em todas as tabelas atuais, sem apagar a asserção histórica. Linhas de resumo repetidas apontam para o mesmo caso.",
+    "approvedScope": "docs/syzia-044/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-044-sql.test.mjs",
+        "cases": "SEC-grants; A1-tenant"
+      },
+      {
+        "file": "tests/syzia-044-upgrade.test.mjs",
+        "cases": "catálogo de segurança idêntico antes/depois"
+      }
+    ]
+  },
+  {
+    "id": "LEG-24-011",
+    "historicalStatus": "FAIL",
+    "historicalCase": "failing tests:",
+    "historicalEvidence": "evidencias/suites-existentes/tests__homologation__tooling.test.log",
+    "historicalObserved": "Falha registrada no log; não reclassificada como aprovação",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Contagem fixa de 75 tabelas é obsoleta. O contrato vigente confere RLS/FORCE e DML proibido em todas as tabelas atuais, sem apagar a asserção histórica. Linhas de resumo repetidas apontam para o mesmo caso.",
+    "approvedScope": "docs/syzia-044/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-044-sql.test.mjs",
+        "cases": "SEC-grants; A1-tenant"
+      },
+      {
+        "file": "tests/syzia-044-upgrade.test.mjs",
+        "cases": "catálogo de segurança idêntico antes/depois"
+      }
+    ]
+  },
+  {
+    "id": "LEG-24-012",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Preparação fictícia e inspeção SQL funcionam sem alterar proteções",
+    "historicalEvidence": "evidencias/suites-existentes/tests__homologation__tooling.test.log",
+    "historicalObserved": "Falha registrada no log; não reclassificada como aprovação",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Contagem fixa de 75 tabelas é obsoleta. O contrato vigente confere RLS/FORCE e DML proibido em todas as tabelas atuais, sem apagar a asserção histórica. Linhas de resumo repetidas apontam para o mesmo caso.",
+    "approvedScope": "docs/syzia-044/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-044-sql.test.mjs",
+        "cases": "SEC-grants; A1-tenant"
+      },
+      {
+        "file": "tests/syzia-044-upgrade.test.mjs",
+        "cases": "catálogo de segurança idêntico antes/depois"
+      }
+    ]
+  },
+  {
+    "id": "LEG-34-010",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Atendente próprio atua só na empresa e nunca consulta métricas de gestão: AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+    "historicalEvidence": "evidencias/suites-existentes/tests__operations.test.log",
+    "historicalObserved": "Falha registrada no log; não reclassificada como aprovação",
+    "decision": "Expectativa de negação por papel substituída por grant explícito",
+    "reason": "Desmarcar atendimento próprio não apaga grants explícitos do colaborador aprovados na 040. O papel não substitui o grant.",
+    "approvedScope": "docs/syzia-040/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "12–13, 19, 24, 31"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "21, 43"
+      }
+    ]
+  },
+  {
+    "id": "LEG-39-026",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Schema não contém PAN/CVV/carteira/saldo e preserva FORCE RLS: Expected values to be strictly equal:",
+    "historicalEvidence": "evidencias/suites-existentes/tests__presence-payments.test.log",
+    "historicalObserved": "Falha registrada no log; não reclassificada como aprovação",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Contagem fixa de 75 tabelas é obsoleta. O contrato vigente confere RLS/FORCE e DML proibido em todas as tabelas atuais, sem apagar a asserção histórica. Linhas de resumo repetidas apontam para o mesmo caso.",
+    "approvedScope": "docs/syzia-044/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-044-sql.test.mjs",
+        "cases": "SEC-grants; A1-tenant"
+      },
+      {
+        "file": "tests/syzia-044-upgrade.test.mjs",
+        "cases": "catálogo de segurança idêntico antes/depois"
+      }
+    ]
+  },
+  {
+    "id": "LEG-40-001",
+    "historicalStatus": "BLOCKED",
+    "historicalCase": "Preparação da suíte interrompida antes dos cenários",
+    "historicalEvidence": "evidencias/suites-existentes/tests__security.test.log",
+    "historicalObserved": "Falha registrada no log; não reclassificada como aprovação",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Loader histórico aplica 031 sem aplicar previamente 030. O gate usa cadeia explícita até 042 e só então 044; não altera o loader arquivado.",
+    "approvedScope": "docs/syzia-044/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-044-upgrade.test.mjs",
+        "cases": "cadeia ordenada, banco populado, rollback e integridade"
+      },
+      {
+        "file": "tests/syzia-044-sql.test.mjs",
+        "cases": "SEC-grants; A1-tenant"
+      },
+      {
+        "file": "tests/syzia-041-sql.test.mjs",
+        "cases": "25, 31"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "43"
+      }
+    ]
+  },
+  {
+    "id": "LEG-61-005",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Outra organização da mesma conta não ganha novo teste Expected values to be strictly equal:",
+    "historicalEvidence": "evidencias/suites-existentes/tests__trial.test.log",
+    "historicalObserved": "Falha registrada no log; não reclassificada como aprovação",
+    "decision": "Expectativa substituída legitimamente; prevenção de reuso preservada",
+    "reason": "Elegibilidade e causa esperadas pertencem ao trial anterior. A decisão 040 exige documento, bloqueia uso conclusivo sem abrir análise e conserva fallback manual auditado.",
+    "approvedScope": "docs/syzia-040/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "02–06, 29–30: duração configurável, documento/identidade, reuso e extensão"
+      }
+    ]
+  },
+  {
+    "id": "LEG-61-006",
+    "historicalStatus": "FAIL",
+    "historicalCase": "E-mail alterado não apaga consumo ligado à conta Expected values to be strictly equal:",
+    "historicalEvidence": "evidencias/suites-existentes/tests__trial.test.log",
+    "historicalObserved": "Falha registrada no log; não reclassificada como aprovação",
+    "decision": "Expectativa substituída legitimamente; prevenção de reuso preservada",
+    "reason": "Elegibilidade e causa esperadas pertencem ao trial anterior. A decisão 040 exige documento, bloqueia uso conclusivo sem abrir análise e conserva fallback manual auditado.",
+    "approvedScope": "docs/syzia-040/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "02–06, 29–30: duração configurável, documento/identidade, reuso e extensão"
+      }
+    ]
+  },
+  {
+    "id": "LEG-61-007",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Conta e e-mail diferentes com mesma empresa exigem análise Expected values to be strictly equal:",
+    "historicalEvidence": "evidencias/suites-existentes/tests__trial.test.log",
+    "historicalObserved": "Falha registrada no log; não reclassificada como aprovação",
+    "decision": "Expectativa substituída legitimamente; prevenção de reuso preservada",
+    "reason": "Elegibilidade e causa esperadas pertencem ao trial anterior. A decisão 040 exige documento, bloqueia uso conclusivo sem abrir análise e conserva fallback manual auditado.",
+    "approvedScope": "docs/syzia-040/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "02–06, 29–30: duração configurável, documento/identidade, reuso e extensão"
+      }
+    ]
+  },
+  {
+    "id": "LEG-61-008",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Responsável verificado reaparece em outra empresa/conta Expected values to be strictly equal:",
+    "historicalEvidence": "evidencias/suites-existentes/tests__trial.test.log",
+    "historicalObserved": "Falha registrada no log; não reclassificada como aprovação",
+    "decision": "Expectativa substituída legitimamente; prevenção de reuso preservada",
+    "reason": "Elegibilidade e causa esperadas pertencem ao trial anterior. A decisão 040 exige documento, bloqueia uso conclusivo sem abrir análise e conserva fallback manual auditado.",
+    "approvedScope": "docs/syzia-040/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "02–06, 29–30: duração configurável, documento/identidade, reuso e extensão"
+      }
+    ]
+  },
+  {
+    "id": "LEG-61-010",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Telefone verificado coincidente encaminha à revisão, não recusa definitiva Expected values to be strictly equal:",
+    "historicalEvidence": "evidencias/suites-existentes/tests__trial.test.log",
+    "historicalObserved": "Falha registrada no log; não reclassificada como aprovação",
+    "decision": "Expectativa substituída legitimamente; prevenção de reuso preservada",
+    "reason": "Elegibilidade e causa esperadas pertencem ao trial anterior. A decisão 040 exige documento, bloqueia uso conclusivo sem abrir análise e conserva fallback manual auditado.",
+    "approvedScope": "docs/syzia-040/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "02–06, 29–30: duração configurável, documento/identidade, reuso e extensão"
+      }
+    ]
+  },
+  {
+    "id": "LEG-61-013",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Cancelamento e recriação não apagam elegibilidade Expected values to be strictly equal:",
+    "historicalEvidence": "evidencias/suites-existentes/tests__trial.test.log",
+    "historicalObserved": "Falha registrada no log; não reclassificada como aprovação",
+    "decision": "Expectativa substituída legitimamente; prevenção de reuso preservada",
+    "reason": "Elegibilidade e causa esperadas pertencem ao trial anterior. A decisão 040 exige documento, bloqueia uso conclusivo sem abrir análise e conserva fallback manual auditado.",
+    "approvedScope": "docs/syzia-040/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "02–06, 29–30: duração configurável, documento/identidade, reuso e extensão"
+      }
+    ]
+  },
+  {
+    "id": "LEG-61-014",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Suspensão da empresa não libera identidade anterior Expected values to be strictly equal:",
+    "historicalEvidence": "evidencias/suites-existentes/tests__trial.test.log",
+    "historicalObserved": "Falha registrada no log; não reclassificada como aprovação",
+    "decision": "Expectativa substituída legitimamente; prevenção de reuso preservada",
+    "reason": "Elegibilidade e causa esperadas pertencem ao trial anterior. A decisão 040 exige documento, bloqueia uso conclusivo sem abrir análise e conserva fallback manual auditado.",
+    "approvedScope": "docs/syzia-040/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "02–06, 29–30: duração configurável, documento/identidade, reuso e extensão"
+      }
+    ]
+  },
+  {
+    "id": "LEG-61-016",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Registry tombstone identifica empresa recriada após remoção Expected values to be strictly equal:",
+    "historicalEvidence": "evidencias/suites-existentes/tests__trial.test.log",
+    "historicalObserved": "Falha registrada no log; não reclassificada como aprovação",
+    "decision": "Expectativa substituída legitimamente; prevenção de reuso preservada",
+    "reason": "Elegibilidade e causa esperadas pertencem ao trial anterior. A decisão 040 exige documento, bloqueia uso conclusivo sem abrir análise e conserva fallback manual auditado.",
+    "approvedScope": "docs/syzia-040/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "02–06, 29–30: duração configurável, documento/identidade, reuso e extensão"
+      }
+    ]
+  },
+  {
+    "id": "LEG-61-037",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Verificação posterior associa identidade a trial já concedido Expected values to be strictly equal:",
+    "historicalEvidence": "evidencias/suites-existentes/tests__trial.test.log",
+    "historicalObserved": "Falha registrada no log; não reclassificada como aprovação",
+    "decision": "Expectativa substituída legitimamente; prevenção de reuso preservada",
+    "reason": "Elegibilidade e causa esperadas pertencem ao trial anterior. A decisão 040 exige documento, bloqueia uso conclusivo sem abrir análise e conserva fallback manual auditado.",
+    "approvedScope": "docs/syzia-040/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "02–06, 29–30: duração configurável, documento/identidade, reuso e extensão"
+      }
+    ]
+  },
+  {
+    "id": "LEG-61-039",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Duas solicitações serializadas com identidade igual dão um único grant Expected values to be strictly equal:",
+    "historicalEvidence": "evidencias/suites-existentes/tests__trial.test.log",
+    "historicalObserved": "Falha registrada no log; não reclassificada como aprovação",
+    "decision": "Expectativa substituída legitimamente; prevenção de reuso preservada",
+    "reason": "Elegibilidade e causa esperadas pertencem ao trial anterior. A decisão 040 exige documento, bloqueia uso conclusivo sem abrir análise e conserva fallback manual auditado.",
+    "approvedScope": "docs/syzia-040/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "02–06, 29–30: duração configurável, documento/identidade, reuso e extensão"
+      }
+    ]
+  },
+  {
+    "id": "REG-038-001",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Upgrade populado preserva todas as linhas antigas, tokens e itens byte a byte Expected values to be strictly deep-equal:",
+    "historicalEvidence": "evidencias/regressao-atual-038.log",
+    "historicalObserved": "Asserção executada; resultado bruto preservado",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Snapshot de linha inteira passa a incluir colunas aditivas de 041/042/044. Comparação vigente projeta todas as colunas anteriores e exige igualdade de cada linha/valor; novas colunas são verificadas separadamente.",
+    "approvedScope": "docs/syzia-044/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-044-upgrade.test.mjs",
+        "cases": "119 tabelas; colunas anteriores; valores/revisões/auditoria; rollback"
+      },
+      {
+        "file": "scripts/syzia-044/regression.mjs",
+        "cases": "projeção de catálogo 040; asserções 041/042 intactas"
+      }
+    ]
+  },
+  {
+    "id": "REG-038-017",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Central recebe todos os itens e conversa existente continua; revisão respeita autonomia publicada central_access_denied",
+    "historicalEvidence": "evidencias/regressao-atual-038.log",
+    "historicalObserved": "Asserção executada; resultado bruto preservado",
+    "decision": "Ator/roteamento substituído na 041; conversa preservada",
+    "reason": "Roteamento da avaliação foi limitado à equipe empresarial na 041; compartilhado não abre esse ticket. Atendimento, contexto e resposta continuam para ator autorizado.",
+    "approvedScope": "docs/syzia-041/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-041-sql.test.mjs",
+        "cases": "04–09, 18–19, 29–30"
+      },
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "12–14, 19–20"
+      }
+    ]
+  },
+  {
+    "id": "REG-039-001",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Upgrade populado preserva planos, versões, assinaturas, trial, uso e histórico Expected values to be strictly deep-equal:",
+    "historicalEvidence": "evidencias/regressao-atual-039.log",
+    "historicalObserved": "Asserção executada; resultado bruto preservado",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Snapshot de linha inteira passa a incluir colunas aditivas de 041/042/044. Comparação vigente projeta todas as colunas anteriores e exige igualdade de cada linha/valor; novas colunas são verificadas separadamente.",
+    "approvedScope": "docs/syzia-044/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-044-upgrade.test.mjs",
+        "cases": "119 tabelas; colunas anteriores; valores/revisões/auditoria; rollback"
+      },
+      {
+        "file": "scripts/syzia-044/regression.mjs",
+        "cases": "projeção de catálogo 040; asserções 041/042 intactas"
+      }
+    ]
+  },
+  {
+    "id": "REG-039-008",
+    "historicalStatus": "FAIL",
+    "historicalCase": "3 membros permitidos; quarto bloqueado; compartilhados e Super Admin não ocupam vagas shared_identity_requires_superadmin",
+    "historicalEvidence": "evidencias/regressao-atual-039.log",
+    "historicalObserved": "Asserção executada; resultado bruto preservado",
+    "decision": "Membership compartilhado substituído por atribuição",
+    "reason": "A inclusão de identidade global como membro empresarial tornou-se proibida na 040/042. Limite de membros próprios permanece; Equipe SYZIA usa atribuição independente.",
+    "approvedScope": "docs/syzia-042/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "10, 21–24"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "02–07, 12–13"
+      }
+    ]
+  },
+  {
+    "id": "REG-040-001",
+    "historicalStatus": "FAIL",
+    "historicalCase": "01 Upgrade 039→040 preserva todas as linhas anteriores em banco populado Expected values to be strictly deep-equal:",
+    "historicalEvidence": "evidencias/regressao-atual-040.log",
+    "historicalObserved": "Asserção executada; resultado bruto preservado",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Snapshot de linha inteira passa a incluir colunas aditivas de 041/042/044. Comparação vigente projeta todas as colunas anteriores e exige igualdade de cada linha/valor; novas colunas são verificadas separadamente.",
+    "approvedScope": "docs/syzia-044/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-044-upgrade.test.mjs",
+        "cases": "119 tabelas; colunas anteriores; valores/revisões/auditoria; rollback"
+      },
+      {
+        "file": "scripts/syzia-044/regression.mjs",
+        "cases": "projeção de catálogo 040; asserções 041/042 intactas"
+      }
+    ]
+  },
+  {
+    "id": "REG-040-035",
+    "historicalStatus": "FAIL",
+    "historicalCase": "32 Reemissão de credencial global exclusiva SuperAdmin invalida hash/link e preserva histórico The input did not match the regular expression /access_denied/. Input:",
+    "historicalEvidence": "evidencias/regressao-atual-040.log",
+    "historicalObserved": "Asserção executada; resultado bruto preservado",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Negação da identidade global ganhou causa shared_identity_requires_superadmin na 042. O adaptador aceita essa causa específica mantendo a exigência de negação.",
+    "approvedScope": "docs/syzia-044/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "32"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "03–06"
+      }
+    ]
+  },
+  {
+    "id": "NEG-001",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Remarcar parte 2 para antes da parte 1",
+    "historicalEvidence": "evidencias/casos-novos/NEG-001.json",
+    "historicalObserved": "Parte 2 foi aceita antes da Parte 1",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "AUD-003: inversão cronológica confirmada e corrigida.",
+    "approvedScope": "docs/syzia-044/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-044-sql.test.mjs",
+        "cases": "A3-second, A3-first, A3-middle, A3-valid"
+      }
+    ]
+  },
+  {
+    "id": "NEG-002",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Reserva empresarial de pedido sob avaliação ainda sem aprovação",
+    "historicalEvidence": "evidencias/casos-novos/NEG-002.json",
+    "historicalObserved": "Expected rejection",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "AUD-001: reserva pública sem aprovação confirmada e corrigida.",
+    "approvedScope": "docs/syzia-044/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-044-sql.test.mjs",
+        "cases": "A1-absent/sent/declined/approved/legacy/boundary/origin"
+      }
+    ]
+  },
+  {
+    "id": "NEG-003",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Alterar buffer depois da reserva e remarcar parte",
+    "historicalEvidence": "evidencias/casos-novos/NEG-003.json",
+    "historicalObserved": "Expected values to be strictly equal:\n\n180 !== 210\n",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "AUD-002: buffer não recalculado confirmado e corrigido.",
+    "approvedScope": "docs/syzia-044/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-044-sql.test.mjs",
+        "cases": "A2-history, A2-buffer-0-30, A2-buffer-30-0, A2-conflict"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-001",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Página da empresa: navegar, copiar, prévia e portfólio desktop",
+    "historicalEvidence": "evidencias/browser/company-page.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByRole('link', { name: /^Portfólio/ })\n\n\n  47 |         fullPage: false,\n  48 |       });\n> 49 |       await page.getByRole(\"link\", { name: /^Portfólio/ }).click();\n     |                                                            ^\n  50 |       await expect(\n  51 |         page.getByRole(\"heading\", { name: \"Portfólio\", exact: true }),\n  52 |       ).toBeInViewport();\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/company-page.spec.ts:49:60",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Seletores de editor, upload, portfólio ou categoria foram substituídos na revisão de mídia/presença. A cobertura vigente exerce salvar, ordenar, prévia, publicar, formatos, recarga e enquadramento reais.",
+    "approvedScope": "docs/syzia-034/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-033-media.spec.ts",
+        "cases": "Jornada desktop; Portfólio três formatos"
+      },
+      {
+        "file": "tests/demo-browser/syzia-034-media.spec.ts",
+        "cases": "Logo/capa; Serviço; Portfólio e galeria"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-002",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Página da empresa: navegar, copiar, prévia e portfólio tablet",
+    "historicalEvidence": "evidencias/browser/company-page.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByRole('link', { name: /^Portfólio/ })\n\n\n  47 |         fullPage: false,\n  48 |       });\n> 49 |       await page.getByRole(\"link\", { name: /^Portfólio/ }).click();\n     |                                                            ^\n  50 |       await expect(\n  51 |         page.getByRole(\"heading\", { name: \"Portfólio\", exact: true }),\n  52 |       ).toBeInViewport();\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/company-page.spec.ts:49:60",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Seletores de editor, upload, portfólio ou categoria foram substituídos na revisão de mídia/presença. A cobertura vigente exerce salvar, ordenar, prévia, publicar, formatos, recarga e enquadramento reais.",
+    "approvedScope": "docs/syzia-034/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-033-media.spec.ts",
+        "cases": "Jornada desktop; Portfólio três formatos"
+      },
+      {
+        "file": "tests/demo-browser/syzia-034-media.spec.ts",
+        "cases": "Logo/capa; Serviço; Portfólio e galeria"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-003",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Página da empresa: navegar, copiar, prévia e portfólio mobile",
+    "historicalEvidence": "evidencias/browser/company-page.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByRole('link', { name: /^Portfólio/ })\n\n\n  47 |         fullPage: false,\n  48 |       });\n> 49 |       await page.getByRole(\"link\", { name: /^Portfólio/ }).click();\n     |                                                            ^\n  50 |       await expect(\n  51 |         page.getByRole(\"heading\", { name: \"Portfólio\", exact: true }),\n  52 |       ).toBeInViewport();\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/company-page.spec.ts:49:60",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Seletores de editor, upload, portfólio ou categoria foram substituídos na revisão de mídia/presença. A cobertura vigente exerce salvar, ordenar, prévia, publicar, formatos, recarga e enquadramento reais.",
+    "approvedScope": "docs/syzia-034/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-033-media.spec.ts",
+        "cases": "Jornada desktop; Portfólio três formatos"
+      },
+      {
+        "file": "tests/demo-browser/syzia-034-media.spec.ts",
+        "cases": "Logo/capa; Serviço; Portfólio e galeria"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-005",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Central da página não concede gestão a own@example.invalid",
+    "historicalEvidence": "evidencias/browser/company-page.spec.ts.json",
+    "historicalObserved": "Test timeout of 90000ms exceeded.",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Página não é negada indistintamente por papel: autorização granular atual decide o módulo e a organização. A negação A/B e a ausência de grants continuam obrigatórias.",
+    "approvedScope": "docs/syzia-040/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "09, 24, 31"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "07, 21, 43"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-006",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Central da página não concede gestão a agenta@example.invalid",
+    "historicalEvidence": "evidencias/browser/company-page.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByRole('heading', { name: /Empresa indisponível|Seu acesso à empresa|Acesso não disponível/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByRole('heading', { name: /Empresa indisponível|Seu acesso à empresa|Acesso não disponível/ }) with timeout 5000ms\n  - waiting for getByRole('heading', { name: /Empresa indisponível|Seu acesso à empresa|Acesso não disponível/ })\n\n\n  134 |             name: /Empresa indisponível|Seu acesso à empresa|Acesso não disponível/,\n  135 |           }),\n> 136 |         ).toBeVisible();\n      |           ^\n  137 |         await expect(\n  138 |           actor.getByRole(\"button\", {\n  139 |             name: \"Publicar dados aprovados\",\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/company-page.spec.ts:136:11",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Página não é negada indistintamente por papel: autorização granular atual decide o módulo e a organização. A negação A/B e a ausência de grants continuam obrigatórias.",
+    "approvedScope": "docs/syzia-040/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "09, 24, 31"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "07, 21, 43"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-007",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Central da página não concede gestão a adminb@example.invalid",
+    "historicalEvidence": "evidencias/browser/company-page.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByRole('heading', { name: /Empresa indisponível|Seu acesso à empresa|Acesso não disponível/ })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByRole('heading', { name: /Empresa indisponível|Seu acesso à empresa|Acesso não disponível/ }) with timeout 5000ms\n  - waiting for getByRole('heading', { name: /Empresa indisponível|Seu acesso à empresa|Acesso não disponível/ })\n\n\n  134 |             name: /Empresa indisponível|Seu acesso à empresa|Acesso não disponível/,\n  135 |           }),\n> 136 |         ).toBeVisible();\n      |           ^\n  137 |         await expect(\n  138 |           actor.getByRole(\"button\", {\n  139 |             name: \"Publicar dados aprovados\",\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/company-page.spec.ts:136:11",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Página não é negada indistintamente por papel: autorização granular atual decide o módulo e a organização. A negação A/B e a ausência de grants continuam obrigatórias.",
+    "approvedScope": "docs/syzia-040/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "09, 24, 31"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "07, 21, 43"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-008",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Portfólio: enviar imagem, incluir, ordenar, publicar e remover sem vazar rascunho",
+    "historicalEvidence": "evidencias/browser/company-page.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.setInputFiles: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByLabel('Enviar imagem empresarial')\n\n\n  168 |     .png()\n  169 |     .toBuffer();\n> 170 |   await page.getByLabel(\"Enviar imagem empresarial\").setInputFiles({\n      |   ^\n  171 |     name: \"trabalho-ficticio.png\",\n  172 |     mimeType: \"image/png\",\n  173 |     buffer: png,\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/company-page.spec.ts:170:3",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Seletores de editor, upload, portfólio ou categoria foram substituídos na revisão de mídia/presença. A cobertura vigente exerce salvar, ordenar, prévia, publicar, formatos, recarga e enquadramento reais.",
+    "approvedScope": "docs/syzia-034/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-033-media.spec.ts",
+        "cases": "Jornada desktop; Portfólio três formatos"
+      },
+      {
+        "file": "tests/demo-browser/syzia-034-media.spec.ts",
+        "cases": "Logo/capa; Serviço; Portfólio e galeria"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-009",
+    "historicalStatus": "FAIL",
+    "historicalCase": "A–F/H: abrir empresa sem ADM, pendente e ativo; ações separadas desktop",
+    "historicalEvidence": "evidencias/browser/company-workspace.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByRole('heading', { name: 'O que precisa ser feito hoje?', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByRole('heading', { name: 'O que precisa ser feito hoje?', exact: true }) with timeout 5000ms\n  - waiting for getByRole('heading', { name: 'O que precisa ser feito hoje?', exact: true })\n\n\n  53 |             exact: true,\n  54 |           }),\n> 55 |         ).toBeVisible();\n     |           ^\n  56 |         await expect(\n  57 |           page.getByRole(\"heading\", {\n  58 |             name: \"Definir administrador\",\n    at workspace (/workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/company-workspace.spec.ts:55:11)\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/company-workspace.spec.ts:73:7",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Home/tutoriais mudaram rótulos e posição; abrir empresa permanece distinto de provisionar. Acesso global a empresa com ADM requer suporte conforme 029; sem ADM usa autorização global.",
+    "approvedScope": "docs/master-audit/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/onboarding.test.mjs",
+        "cases": "suíte completa sobre current-fixture 044"
+      },
+      {
+        "file": "tests/syzia-044-sql.test.mjs",
+        "cases": "WORKSPACE-no-admin"
+      },
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "07: onboarding existente"
+      },
+      {
+        "file": "tests/demo-browser/syzia-042.spec.ts",
+        "cases": "01: Home e links"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-010",
+    "historicalStatus": "FAIL",
+    "historicalCase": "G/H: empresa configurada abre painel normal e mantém módulos desktop",
+    "historicalEvidence": "evidencias/browser/company-workspace.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByRole('heading', { name: 'O que precisa ser feito hoje?', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByRole('heading', { name: 'O que precisa ser feito hoje?', exact: true }) with timeout 5000ms\n  - waiting for getByRole('heading', { name: 'O que precisa ser feito hoje?', exact: true })\n\n\n  252 |           exact: true,\n  253 |         }),\n> 254 |       ).toBeVisible();\n      |         ^\n  255 |       await expect(\n  256 |         page.getByRole(\"heading\", {\n  257 |           name: \"Vamos preparar sua empresa\",\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/company-workspace.spec.ts:254:9",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Home/tutoriais mudaram rótulos e posição; abrir empresa permanece distinto de provisionar. Acesso global a empresa com ADM requer suporte conforme 029; sem ADM usa autorização global.",
+    "approvedScope": "docs/master-audit/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/onboarding.test.mjs",
+        "cases": "suíte completa sobre current-fixture 044"
+      },
+      {
+        "file": "tests/syzia-044-sql.test.mjs",
+        "cases": "WORKSPACE-no-admin"
+      },
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "07: onboarding existente"
+      },
+      {
+        "file": "tests/demo-browser/syzia-042.spec.ts",
+        "cases": "01: Home e links"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-011",
+    "historicalStatus": "FAIL",
+    "historicalCase": "A–F/H: abrir empresa sem ADM, pendente e ativo; ações separadas mobile",
+    "historicalEvidence": "evidencias/browser/company-workspace.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByRole('heading', { name: 'O que precisa ser feito hoje?', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByRole('heading', { name: 'O que precisa ser feito hoje?', exact: true }) with timeout 5000ms\n  - waiting for getByRole('heading', { name: 'O que precisa ser feito hoje?', exact: true })\n\n\n  53 |             exact: true,\n  54 |           }),\n> 55 |         ).toBeVisible();\n     |           ^\n  56 |         await expect(\n  57 |           page.getByRole(\"heading\", {\n  58 |             name: \"Definir administrador\",\n    at workspace (/workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/company-workspace.spec.ts:55:11)\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/company-workspace.spec.ts:73:7",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Home/tutoriais mudaram rótulos e posição; abrir empresa permanece distinto de provisionar. Acesso global a empresa com ADM requer suporte conforme 029; sem ADM usa autorização global.",
+    "approvedScope": "docs/master-audit/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/onboarding.test.mjs",
+        "cases": "suíte completa sobre current-fixture 044"
+      },
+      {
+        "file": "tests/syzia-044-sql.test.mjs",
+        "cases": "WORKSPACE-no-admin"
+      },
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "07: onboarding existente"
+      },
+      {
+        "file": "tests/demo-browser/syzia-042.spec.ts",
+        "cases": "01: Home e links"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-012",
+    "historicalStatus": "FAIL",
+    "historicalCase": "G/H: empresa configurada abre painel normal e mantém módulos mobile",
+    "historicalEvidence": "evidencias/browser/company-workspace.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByLabel('Motivo do acesso')\n\n\n  238 |       await page\n  239 |         .getByLabel(\"Motivo do acesso\")\n> 240 |         .fill(\"Validar painel configurado com autorização do ADM\");\n      |          ^\n  241 |       await page\n  242 |         .getByRole(\"button\", { name: \"Solicitar autorização ao ADM\" })\n  243 |         .click();\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/company-workspace.spec.ts:240:10",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Home/tutoriais mudaram rótulos e posição; abrir empresa permanece distinto de provisionar. Acesso global a empresa com ADM requer suporte conforme 029; sem ADM usa autorização global.",
+    "approvedScope": "docs/master-audit/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/onboarding.test.mjs",
+        "cases": "suíte completa sobre current-fixture 044"
+      },
+      {
+        "file": "tests/syzia-044-sql.test.mjs",
+        "cases": "WORKSPACE-no-admin"
+      },
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "07: onboarding existente"
+      },
+      {
+        "file": "tests/demo-browser/syzia-042.spec.ts",
+        "cases": "01: Home e links"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-014",
+    "historicalStatus": "FAIL",
+    "historicalCase": "demo HTTP pública A/B desktop",
+    "historicalEvidence": "evidencias/browser/demo.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).toHaveClass(expected) failed\n\nLocator: locator('.consumer')\nExpected pattern: /c-theme-earth/\nReceived string:  \"consumer c-custom-brand\"\nTimeout: 5000ms\n\nCall log:\n  - Expect \"toHaveClass\" locator('.consumer') with timeout 5000ms\n  - waiting for locator('.consumer')\n    14 × locator resolved to <div class=\"consumer c-custom-brand\">…</div>\n       - unexpected value \"consumer c-custom-brand\"\n\n\n  36 |       });\n  37 |     }\n> 38 |     await expect(p.locator(\".consumer\")).toHaveClass(/c-theme-earth/);\n     |                                          ^\n  39 |     expect(errors).toEqual([]);\n  40 |   });\n  41 | test(\"demo HTTP fluxo público sem Supabase real\", async ({ page: p }) => {\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/demo.spec.ts:38:42",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Marca VIRELOQ/classes de temas antigos substituídas por SYZIA e identidade pública customizável. Continua obrigatório preservar identidade, responsividade e navegação.",
+    "approvedScope": "docs/syzia-032/request.txt",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "04, 06"
+      },
+      {
+        "file": "tests/demo-browser/syzia-036.spec.ts",
+        "cases": "Login e primeiro acesso responsivos"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-015",
+    "historicalStatus": "FAIL",
+    "historicalCase": "demo HTTP pública A/B tablet",
+    "historicalEvidence": "evidencias/browser/demo.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).toHaveClass(expected) failed\n\nLocator: locator('.consumer')\nExpected pattern: /c-theme-earth/\nReceived string:  \"consumer c-custom-brand\"\nTimeout: 5000ms\n\nCall log:\n  - Expect \"toHaveClass\" locator('.consumer') with timeout 5000ms\n  - waiting for locator('.consumer')\n    14 × locator resolved to <div class=\"consumer c-custom-brand\">…</div>\n       - unexpected value \"consumer c-custom-brand\"\n\n\n  36 |       });\n  37 |     }\n> 38 |     await expect(p.locator(\".consumer\")).toHaveClass(/c-theme-earth/);\n     |                                          ^\n  39 |     expect(errors).toEqual([]);\n  40 |   });\n  41 | test(\"demo HTTP fluxo público sem Supabase real\", async ({ page: p }) => {\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/demo.spec.ts:38:42",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Marca VIRELOQ/classes de temas antigos substituídas por SYZIA e identidade pública customizável. Continua obrigatório preservar identidade, responsividade e navegação.",
+    "approvedScope": "docs/syzia-032/request.txt",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "04, 06"
+      },
+      {
+        "file": "tests/demo-browser/syzia-036.spec.ts",
+        "cases": "Login e primeiro acesso responsivos"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-016",
+    "historicalStatus": "FAIL",
+    "historicalCase": "demo HTTP pública A/B mobile",
+    "historicalEvidence": "evidencias/browser/demo.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).toHaveClass(expected) failed\n\nLocator: locator('.consumer')\nExpected pattern: /c-theme-earth/\nReceived string:  \"consumer c-custom-brand\"\nTimeout: 5000ms\n\nCall log:\n  - Expect \"toHaveClass\" locator('.consumer') with timeout 5000ms\n  - waiting for locator('.consumer')\n    14 × locator resolved to <div class=\"consumer c-custom-brand\">…</div>\n       - unexpected value \"consumer c-custom-brand\"\n\n\n  36 |       });\n  37 |     }\n> 38 |     await expect(p.locator(\".consumer\")).toHaveClass(/c-theme-earth/);\n     |                                          ^\n  39 |     expect(errors).toEqual([]);\n  40 |   });\n  41 | test(\"demo HTTP fluxo público sem Supabase real\", async ({ page: p }) => {\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/demo.spec.ts:38:42",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Marca VIRELOQ/classes de temas antigos substituídas por SYZIA e identidade pública customizável. Continua obrigatório preservar identidade, responsividade e navegação.",
+    "approvedScope": "docs/syzia-032/request.txt",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "04, 06"
+      },
+      {
+        "file": "tests/demo-browser/syzia-036.spec.ts",
+        "cases": "Login e primeiro acesso responsivos"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-017",
+    "historicalStatus": "FAIL",
+    "historicalCase": "demo HTTP fluxo público sem Supabase real",
+    "historicalEvidence": "evidencias/browser/demo.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByRole('article').filter({ has: getByRole('heading', { name: 'Lavagem de cuidado' }) }).getByRole('button', { name: 'Solicitar orçamento' })\n\n\n  46 |     .filter({ has: p.getByRole(\"heading\", { name: \"Lavagem de cuidado\" }) })\n  47 |     .getByRole(\"button\", { name: \"Solicitar orçamento\" })\n> 48 |     .click();\n     |      ^\n  49 |   await p.getByRole(\"button\", { name: \"Continuar →\" }).click();\n  50 |   await p.getByLabel(\"Qual é o modelo do carro? *\").fill(\"Veículo fictício\");\n  51 |   await p.getByRole(\"button\", { name: \"Continuar →\" }).click();\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/demo.spec.ts:48:6",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Formulário, cálculo de proposta e escolha de períodos evoluíram nas 041/042. Jornada equivalente usa pedido→avaliação/proposta→aprovação→reserva ou contratação direta, com multisserviço e disponibilidade reais.",
+    "approvedScope": "docs/syzia-042/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-041-sql.test.mjs",
+        "cases": "02–27, 33–35"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "25–47"
+      },
+      {
+        "file": "tests/demo-browser/syzia-042.spec.ts",
+        "cases": "04–06"
+      },
+      {
+        "file": "tests/demo-browser/syzia-044.spec.ts",
+        "cases": "HTTP aprovação; ficha/buffer/ordem"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-022",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Fase 8: administração de planos, editor acessível e escopo",
+    "historicalEvidence": "evidencias/browser/demo.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByLabel('Preço fictício (R$)')\n\n\n  226 |   await expect(p.getByRole(\"dialog\")).toBeVisible();\n  227 |   await p.getByLabel(\"Nome\", { exact: true }).fill(\"Oferta fictícia de teste\");\n> 228 |   await p.getByLabel(\"Preço fictício (R$)\").fill(\"149.90\");\n      |                                             ^\n  229 |   await p.getByRole(\"button\", { name: \"Salvar versão\" }).click();\n  230 |   await expect(p.getByRole(\"dialog\")).toHaveCount(0);\n  231 |   await expect(\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/demo.spec.ts:228:45",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Trial e oferta são configurados; 15 dias e labels antigos deixaram de ser universais. Mantidos elegibilidade, consentimento, prazo efetivo, extensão e ausência de pagamento presumido.",
+    "approvedScope": "docs/syzia-040/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "02–11, 27–31"
+      },
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "01, 02, 07"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-025",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Fase 8: jornada completa pública → Central → proposta → aprovação → agenda → Analytics",
+    "historicalEvidence": "evidencias/browser/demo.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByRole('article').filter({ has: getByRole('heading', { name: 'Lavagem de cuidado' }) }).getByRole('button', { name: 'Solicitar orçamento' })\n\n\n  318 |     .filter({ has: p.getByRole(\"heading\", { name: \"Lavagem de cuidado\" }) })\n  319 |     .getByRole(\"button\", { name: \"Solicitar orçamento\" })\n> 320 |     .click();\n      |      ^\n  321 |   await p.getByRole(\"button\", { name: \"Continuar →\" }).click();\n  322 |   await p\n  323 |     .getByLabel(\"Qual é o modelo do carro? *\")\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/demo.spec.ts:320:6",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Formulário, cálculo de proposta e escolha de períodos evoluíram nas 041/042. Jornada equivalente usa pedido→avaliação/proposta→aprovação→reserva ou contratação direta, com multisserviço e disponibilidade reais.",
+    "approvedScope": "docs/syzia-042/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-041-sql.test.mjs",
+        "cases": "02–27, 33–35"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "25–47"
+      },
+      {
+        "file": "tests/demo-browser/syzia-042.spec.ts",
+        "cases": "04–06"
+      },
+      {
+        "file": "tests/demo-browser/syzia-044.spec.ts",
+        "cases": "HTTP aprovação; ficha/buffer/ordem"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-026",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Provisionamento, ativação, legal, equipe e recuperação desktop",
+    "historicalEvidence": "evidencias/browser/enterprise-access.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: 'Acesso da operação VIRELOQ' })\n\n\n   6 |   await page\n   7 |     .getByRole(\"button\", { name: \"Acesso da operação VIRELOQ\" })\n>  8 |     .click();\n     |      ^\n   9 |   await page.getByLabel(\"E-mail\", { exact: true }).fill(\"root@example.invalid\");\n  10 |   await page\n  11 |     .getByLabel(\"Senha\", { exact: true })\n    at globalLogin (/workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/enterprise-access.spec.ts:8:6)\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/enterprise-access.spec.ts:24:7",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Login e provisionamento globais foram substituídos nas 036/040/042: identidade única, Equipe SYZIA separada, link/código temporário manual. Não se exige entrega email_not_configured nem Nova pessoa no local antigo. Ativação, reemissão, privacidade e permissões continuam.",
+    "approvedScope": "docs/syzia-042/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-036.spec.ts",
+        "cases": "Empresa: falha Auth/retomada/ativação; login; primeiro acesso"
+      },
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "03"
+      },
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "21–26, 32"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "02–07"
+      },
+      {
+        "file": "tests/syzia-036-http.test.mjs",
+        "cases": "diagnósticos sanitizados e link opaco"
+      },
+      {
+        "file": "tests/syzia-035-server.test.mjs",
+        "cases": "erros Auth e retomada"
+      },
+      {
+        "file": "tests/syzia-034-utils.test.mjs",
+        "cases": "mensagem/link seguro"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-027",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Provisionamento, ativação, legal, equipe e recuperação mobile",
+    "historicalEvidence": "evidencias/browser/enterprise-access.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: 'Acesso da operação VIRELOQ' })\n\n\n   6 |   await page\n   7 |     .getByRole(\"button\", { name: \"Acesso da operação VIRELOQ\" })\n>  8 |     .click();\n     |      ^\n   9 |   await page.getByLabel(\"E-mail\", { exact: true }).fill(\"root@example.invalid\");\n  10 |   await page\n  11 |     .getByLabel(\"Senha\", { exact: true })\n    at globalLogin (/workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/enterprise-access.spec.ts:8:6)\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/enterprise-access.spec.ts:24:7",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Login e provisionamento globais foram substituídos nas 036/040/042: identidade única, Equipe SYZIA separada, link/código temporário manual. Não se exige entrega email_not_configured nem Nova pessoa no local antigo. Ativação, reemissão, privacidade e permissões continuam.",
+    "approvedScope": "docs/syzia-042/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-036.spec.ts",
+        "cases": "Empresa: falha Auth/retomada/ativação; login; primeiro acesso"
+      },
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "03"
+      },
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "21–26, 32"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "02–07"
+      },
+      {
+        "file": "tests/syzia-036-http.test.mjs",
+        "cases": "diagnósticos sanitizados e link opaco"
+      },
+      {
+        "file": "tests/syzia-035-server.test.mjs",
+        "cases": "erros Auth e retomada"
+      },
+      {
+        "file": "tests/syzia-034-utils.test.mjs",
+        "cases": "mensagem/link seguro"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-028",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Login genérico, empresa lembrada, logout e páginas legais",
+    "historicalEvidence": "evidencias/browser/enterprise-access.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByLabel('Código da empresa', { exact: true })\n\n\n  175 |   await page\n  176 |     .getByLabel(\"Código da empresa\", { exact: true })\n> 177 |     .fill(\"A1B2C3D4E5F6\");\n      |      ^\n  178 |   await page.getByLabel(\"Usuário\", { exact: true }).fill(\"inexistente.usuario\");\n  179 |   await page\n  180 |     .getByLabel(\"Senha ou código de primeiro acesso\", { exact: true })\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/enterprise-access.spec.ts:177:6",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Login e provisionamento globais foram substituídos nas 036/040/042: identidade única, Equipe SYZIA separada, link/código temporário manual. Não se exige entrega email_not_configured nem Nova pessoa no local antigo. Ativação, reemissão, privacidade e permissões continuam.",
+    "approvedScope": "docs/syzia-042/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-036.spec.ts",
+        "cases": "Empresa: falha Auth/retomada/ativação; login; primeiro acesso"
+      },
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "03"
+      },
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "21–26, 32"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "02–07"
+      },
+      {
+        "file": "tests/syzia-036-http.test.mjs",
+        "cases": "diagnósticos sanitizados e link opaco"
+      },
+      {
+        "file": "tests/syzia-035-server.test.mjs",
+        "cases": "erros Auth e retomada"
+      },
+      {
+        "file": "tests/syzia-034-utils.test.mjs",
+        "cases": "mensagem/link seguro"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-029",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Inatividade: polling não renova, aviso aos 29 minutos e logout aos 30",
+    "historicalEvidence": "evidencias/browser/enterprise-access.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: 'Acesso da operação VIRELOQ' })\n\n\n   6 |   await page\n   7 |     .getByRole(\"button\", { name: \"Acesso da operação VIRELOQ\" })\n>  8 |     .click();\n     |      ^\n   9 |   await page.getByLabel(\"E-mail\", { exact: true }).fill(\"root@example.invalid\");\n  10 |   await page\n  11 |     .getByLabel(\"Senha\", { exact: true })\n    at globalLogin (/workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/enterprise-access.spec.ts:8:6)\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/enterprise-access.spec.ts:217:3",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Pré-condição de login antiga impediu cenários de sessão. As mesmas asserções são reutilizadas com login/rota atuais; timeout, atividade explícita e logout entre abas permanecem.",
+    "approvedScope": "docs/syzia-036/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/current-session.spec.ts",
+        "cases": "Inatividade; Sessão compartilhada; Aviso permite continuar"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-030",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Sessão compartilhada: logout em uma aba limpa a outra e mantém somente empresa lembrada",
+    "historicalEvidence": "evidencias/browser/enterprise-access.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: 'Acesso da operação VIRELOQ' })\n\n\n   6 |   await page\n   7 |     .getByRole(\"button\", { name: \"Acesso da operação VIRELOQ\" })\n>  8 |     .click();\n     |      ^\n   9 |   await page.getByLabel(\"E-mail\", { exact: true }).fill(\"root@example.invalid\");\n  10 |   await page\n  11 |     .getByLabel(\"Senha\", { exact: true })\n    at globalLogin (/workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/enterprise-access.spec.ts:8:6)\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/enterprise-access.spec.ts:232:3",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Pré-condição de login antiga impediu cenários de sessão. As mesmas asserções são reutilizadas com login/rota atuais; timeout, atividade explícita e logout entre abas permanecem.",
+    "approvedScope": "docs/syzia-036/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/current-session.spec.ts",
+        "cases": "Inatividade; Sessão compartilhada; Aviso permite continuar"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-031",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Aviso permite continuar; teclado/toque contam, refresh e polling não",
+    "historicalEvidence": "evidencias/browser/enterprise-access.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: 'Acesso da operação VIRELOQ' })\n\n\n   6 |   await page\n   7 |     .getByRole(\"button\", { name: \"Acesso da operação VIRELOQ\" })\n>  8 |     .click();\n     |      ^\n   9 |   await page.getByLabel(\"E-mail\", { exact: true }).fill(\"root@example.invalid\");\n  10 |   await page\n  11 |     .getByLabel(\"Senha\", { exact: true })\n    at globalLogin (/workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/enterprise-access.spec.ts:8:6)\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/enterprise-access.spec.ts:249:3",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Pré-condição de login antiga impediu cenários de sessão. As mesmas asserções são reutilizadas com login/rota atuais; timeout, atividade explícita e logout entre abas permanecem.",
+    "approvedScope": "docs/syzia-036/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/current-session.spec.ts",
+        "cases": "Inatividade; Sessão compartilhada; Aviso permite continuar"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-033",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Logout e outra identidade não recuperam rascunho empresarial anterior",
+    "historicalEvidence": "evidencias/browser/enterprise-access.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByLabel('Descrição do negócio', { exact: true })\n\n\n  305 |   await page\n  306 |     .getByLabel(\"Descrição do negócio\", { exact: true })\n> 307 |     .fill(\"RASCUNHO PRIVADO DA EMPRESA A\");\n      |      ^\n  308 |   await page.getByRole(\"button\", { name: \"Sair\", exact: true }).first().click();\n  309 |   await demoLogin(page, \"adminb@example.invalid\");\n  310 |   await page\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/enterprise-access.spec.ts:307:6",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Navegação/label antigo bloqueou acesso ao formulário. Rascunho no foco e isolamento após logout/troca de identidade têm cenário atual.",
+    "approvedScope": "docs/syzia-040/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/current-session.spec.ts",
+        "cases": "Rascunho empresarial"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-037",
+    "historicalStatus": "FAIL",
+    "historicalCase": "030 Categorias reutilizáveis e permissões por módulos",
+    "historicalEvidence": "evidencias/browser/implementation-030.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByText('Categorias de serviços', { exact: true })\n\n\n  60 |   const base = page.url().replace(/\\/$/, \"\");\n  61 |   await page.goto(base + \"/servicos\");\n> 62 |   await page.getByText(\"Categorias de serviços\", { exact: true }).click();\n     |                                                                   ^\n  63 |   await page\n  64 |     .getByLabel(\"Nova categoria\", { exact: true })\n  65 |     .fill(\"Categoria fictícia 030\");\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/implementation-030.spec.ts:62:67",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Seletores de editor, upload, portfólio ou categoria foram substituídos na revisão de mídia/presença. A cobertura vigente exerce salvar, ordenar, prévia, publicar, formatos, recarga e enquadramento reais.",
+    "approvedScope": "docs/syzia-034/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-033-media.spec.ts",
+        "cases": "Jornada desktop; Portfólio três formatos"
+      },
+      {
+        "file": "tests/demo-browser/syzia-034-media.spec.ts",
+        "cases": "Logo/capa; Serviço; Portfólio e galeria"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-038",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Dia completo 01–34: nova empresa, onboarding, identidades, consumidor, operação, suporte e isolamento",
+    "historicalEvidence": "evidencias/browser/master-day.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByRole('heading', { name: 'Como a VIRELOQ está indo?' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByRole('heading', { name: 'Como a VIRELOQ está indo?' }) with timeout 5000ms\n  - waiting for getByRole('heading', { name: 'Como a VIRELOQ está indo?' })\n\n\n  85 |       await expect(\n  86 |         page.getByRole(\"heading\", { name: \"Como a VIRELOQ está indo?\" }),\n> 87 |       ).toBeVisible();\n     |         ^\n  88 |       foreign = (await page\n  89 |         .getByRole(\"link\", { name: /Estúdio Horizonte/ })\n  90 |         .first()\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/master-day.spec.ts:87:9\n    at step (/workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/master-day.spec.ts:62:5)\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/master-day.spec.ts:83:5",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Rótulos de Home/contexto e marca foram substituídos. Cobertura atual usa Home, login por identidade, contexto empresarial/global e autorização atuais.",
+    "approvedScope": "docs/syzia-040/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-042.spec.ts",
+        "cases": "01–03, 07"
+      },
+      {
+        "file": "tests/demo-browser/syzia-036.spec.ts",
+        "cases": "Login mostra somente identidade"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-040",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Versatilidade design desktop",
+    "historicalEvidence": "evidencias/browser/multisegment.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).toHaveCount(expected) failed\n\nLocator:  locator('.c-gallery-grid img')\nExpected: 1\nReceived: 0\nTimeout:  5000ms\n\nCall log:\n  - Expect \"toHaveCount\" locator('.c-gallery-grid img') with timeout 5000ms\n  - waiting for locator('.c-gallery-grid img')\n    14 × locator resolved to 0 elements\n       - unexpected value \"0\"\n\n\n  40 |       }\n  41 |       if (key === \"design\") {\n> 42 |         await expect(page.locator(\".c-gallery-grid img\")).toHaveCount(1);\n     |                                                           ^\n  43 |         await expect(page.locator(\".c-before-after\")).toHaveCount(0);\n  44 |         await expect(\n  45 |           page.getByText(\"Sob consulta\", { exact: true }),\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/multisegment.spec.ts:42:59",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Seletores de editor, upload, portfólio ou categoria foram substituídos na revisão de mídia/presença. A cobertura vigente exerce salvar, ordenar, prévia, publicar, formatos, recarga e enquadramento reais.",
+    "approvedScope": "docs/syzia-034/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-033-media.spec.ts",
+        "cases": "Jornada desktop; Portfólio três formatos"
+      },
+      {
+        "file": "tests/demo-browser/syzia-034-media.spec.ts",
+        "cases": "Logo/capa; Serviço; Portfólio e galeria"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-043",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Versatilidade design mobile",
+    "historicalEvidence": "evidencias/browser/multisegment.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).toHaveCount(expected) failed\n\nLocator:  locator('.c-gallery-grid img')\nExpected: 1\nReceived: 0\nTimeout:  5000ms\n\nCall log:\n  - Expect \"toHaveCount\" locator('.c-gallery-grid img') with timeout 5000ms\n  - waiting for locator('.c-gallery-grid img')\n    14 × locator resolved to 0 elements\n       - unexpected value \"0\"\n\n\n  40 |       }\n  41 |       if (key === \"design\") {\n> 42 |         await expect(page.locator(\".c-gallery-grid img\")).toHaveCount(1);\n     |                                                           ^\n  43 |         await expect(page.locator(\".c-before-after\")).toHaveCount(0);\n  44 |         await expect(\n  45 |           page.getByText(\"Sob consulta\", { exact: true }),\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/multisegment.spec.ts:42:59",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Seletores de editor, upload, portfólio ou categoria foram substituídos na revisão de mídia/presença. A cobertura vigente exerce salvar, ordenar, prévia, publicar, formatos, recarga e enquadramento reais.",
+    "approvedScope": "docs/syzia-034/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-033-media.spec.ts",
+        "cases": "Jornada desktop; Portfólio três formatos"
+      },
+      {
+        "file": "tests/demo-browser/syzia-034-media.spec.ts",
+        "cases": "Logo/capa; Serviço; Portfólio e galeria"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-045",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Consumidor nutri: solicitação administrativa",
+    "historicalEvidence": "evidencias/browser/multisegment.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByRole('article').filter({ has: getByRole('heading', { name: 'Consulta de nutrição', exact: true }) }).getByRole('button', { name: 'Solicitar orçamento' })\n\n\n  82 |       })\n  83 |       .getByRole(\"button\", { name: \"Solicitar orçamento\" })\n> 84 |       .click();\n     |        ^\n  85 |     await page.getByRole(\"button\", { name: \"Continuar →\" }).click();\n  86 |     if (key === \"nutri\")\n  87 |       await page\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/multisegment.spec.ts:84:8",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Formulário, cálculo de proposta e escolha de períodos evoluíram nas 041/042. Jornada equivalente usa pedido→avaliação/proposta→aprovação→reserva ou contratação direta, com multisserviço e disponibilidade reais.",
+    "approvedScope": "docs/syzia-042/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-041-sql.test.mjs",
+        "cases": "02–27, 33–35"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "25–47"
+      },
+      {
+        "file": "tests/demo-browser/syzia-042.spec.ts",
+        "cases": "04–06"
+      },
+      {
+        "file": "tests/demo-browser/syzia-044.spec.ts",
+        "cases": "HTTP aprovação; ficha/buffer/ordem"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-046",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Consumidor design: solicitação administrativa",
+    "historicalEvidence": "evidencias/browser/multisegment.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByRole('article').filter({ has: getByRole('heading', { name: 'Transformação completa', exact: true }) }).getByRole('button', { name: 'Solicitar orçamento' })\n\n\n  82 |       })\n  83 |       .getByRole(\"button\", { name: \"Solicitar orçamento\" })\n> 84 |       .click();\n     |        ^\n  85 |     await page.getByRole(\"button\", { name: \"Continuar →\" }).click();\n  86 |     if (key === \"nutri\")\n  87 |       await page\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/multisegment.spec.ts:84:8",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Formulário, cálculo de proposta e escolha de períodos evoluíram nas 041/042. Jornada equivalente usa pedido→avaliação/proposta→aprovação→reserva ou contratação direta, com multisserviço e disponibilidade reais.",
+    "approvedScope": "docs/syzia-042/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-041-sql.test.mjs",
+        "cases": "02–27, 33–35"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "25–47"
+      },
+      {
+        "file": "tests/demo-browser/syzia-042.spec.ts",
+        "cases": "04–06"
+      },
+      {
+        "file": "tests/demo-browser/syzia-044.spec.ts",
+        "cases": "HTTP aprovação; ficha/buffer/ordem"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-047",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Gestora C: página existente e onboarding sem portfólio obrigatório",
+    "historicalEvidence": "evidencias/browser/multisegment.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).toHaveValue(expected) failed\n\nLocator: getByRole('combobox', { name: 'Formato', exact: true })\nExpected: \"gallery\"\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toHaveValue\" getByRole('combobox', { name: 'Formato', exact: true }) with timeout 5000ms\n  - waiting for getByRole('combobox', { name: 'Formato', exact: true })\n\n\n  137 |   await expect(\n  138 |     page.getByRole(\"combobox\", { name: \"Formato\", exact: true }),\n> 139 |   ).toHaveValue(\"gallery\");\n      |     ^\n  140 |   await page.getByRole(\"button\", { name: \"Mostrar prévia publicada\" }).click();\n  141 |   await expect(\n  142 |     page.getByText(\"Nenhum trabalho publicado ainda.\"),\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/multisegment.spec.ts:139:5",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Seletores de editor, upload, portfólio ou categoria foram substituídos na revisão de mídia/presença. A cobertura vigente exerce salvar, ordenar, prévia, publicar, formatos, recarga e enquadramento reais.",
+    "approvedScope": "docs/syzia-034/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-033-media.spec.ts",
+        "cases": "Jornada desktop; Portfólio três formatos"
+      },
+      {
+        "file": "tests/demo-browser/syzia-034-media.spec.ts",
+        "cases": "Logo/capa; Serviço; Portfólio e galeria"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-048",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Onboarding real HTTP: primeira entrada, retomada, pular e refazer desktop",
+    "historicalEvidence": "evidencias/browser/operations.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: 'Refazer tutorial' })\n\n\n  31 |       ).toBeVisible();\n  32 |       await page.goto(base + \"/ajuda\");\n> 33 |       await page.getByRole(\"button\", { name: \"Refazer tutorial\" }).click();\n     |                                                                    ^\n  34 |       let tour = page.getByRole(\"region\", { name: \"Tutorial guiado\" });\n  35 |       await expect(tour.getByText(\"PASSO 1 DE 5\")).toBeVisible();\n  36 |       await tour.getByRole(\"button\", { name: \"Próximo\" }).click();\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/operations.spec.ts:33:68",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Home/tutoriais mudaram rótulos e posição; abrir empresa permanece distinto de provisionar. Acesso global a empresa com ADM requer suporte conforme 029; sem ADM usa autorização global.",
+    "approvedScope": "docs/master-audit/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/onboarding.test.mjs",
+        "cases": "suíte completa sobre current-fixture 044"
+      },
+      {
+        "file": "tests/syzia-044-sql.test.mjs",
+        "cases": "WORKSPACE-no-admin"
+      },
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "07: onboarding existente"
+      },
+      {
+        "file": "tests/demo-browser/syzia-042.spec.ts",
+        "cases": "01: Home e links"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-049",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Rotina empresarial: Home, agenda e ficha desktop",
+    "historicalEvidence": "evidencias/browser/operations.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByRole('heading', { name: 'O que precisa ser feito hoje?' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByRole('heading', { name: 'O que precisa ser feito hoje?' }) with timeout 5000ms\n  - waiting for getByRole('heading', { name: 'O que precisa ser feito hoje?' })\n\n\n  78 |       await expect(\n  79 |         page.getByRole(\"heading\", { name: \"O que precisa ser feito hoje?\" }),\n> 80 |       ).toBeVisible();\n     |         ^\n  81 |       await expect(\n  82 |         page.getByText(\"Marina • Fictícia\", { exact: true }).first(),\n  83 |       ).toBeVisible();\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/operations.spec.ts:80:9",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Rótulos de Home/contexto e marca foram substituídos. Cobertura atual usa Home, login por identidade, contexto empresarial/global e autorização atuais.",
+    "approvedScope": "docs/syzia-040/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-042.spec.ts",
+        "cases": "01–03, 07"
+      },
+      {
+        "file": "tests/demo-browser/syzia-036.spec.ts",
+        "cases": "Login mostra somente identidade"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-050",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Onboarding real HTTP: primeira entrada, retomada, pular e refazer mobile",
+    "historicalEvidence": "evidencias/browser/operations.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: 'Refazer tutorial' })\n\n\n  31 |       ).toBeVisible();\n  32 |       await page.goto(base + \"/ajuda\");\n> 33 |       await page.getByRole(\"button\", { name: \"Refazer tutorial\" }).click();\n     |                                                                    ^\n  34 |       let tour = page.getByRole(\"region\", { name: \"Tutorial guiado\" });\n  35 |       await expect(tour.getByText(\"PASSO 1 DE 5\")).toBeVisible();\n  36 |       await tour.getByRole(\"button\", { name: \"Próximo\" }).click();\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/operations.spec.ts:33:68",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Home/tutoriais mudaram rótulos e posição; abrir empresa permanece distinto de provisionar. Acesso global a empresa com ADM requer suporte conforme 029; sem ADM usa autorização global.",
+    "approvedScope": "docs/master-audit/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/onboarding.test.mjs",
+        "cases": "suíte completa sobre current-fixture 044"
+      },
+      {
+        "file": "tests/syzia-044-sql.test.mjs",
+        "cases": "WORKSPACE-no-admin"
+      },
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "07: onboarding existente"
+      },
+      {
+        "file": "tests/demo-browser/syzia-042.spec.ts",
+        "cases": "01: Home e links"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-051",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Rotina empresarial: Home, agenda e ficha mobile",
+    "historicalEvidence": "evidencias/browser/operations.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByRole('heading', { name: 'O que precisa ser feito hoje?' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByRole('heading', { name: 'O que precisa ser feito hoje?' }) with timeout 5000ms\n  - waiting for getByRole('heading', { name: 'O que precisa ser feito hoje?' })\n\n\n  78 |       await expect(\n  79 |         page.getByRole(\"heading\", { name: \"O que precisa ser feito hoje?\" }),\n> 80 |       ).toBeVisible();\n     |         ^\n  81 |       await expect(\n  82 |         page.getByText(\"Marina • Fictícia\", { exact: true }).first(),\n  83 |       ).toBeVisible();\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/operations.spec.ts:80:9",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Rótulos de Home/contexto e marca foram substituídos. Cobertura atual usa Home, login por identidade, contexto empresarial/global e autorização atuais.",
+    "approvedScope": "docs/syzia-040/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-042.spec.ts",
+        "cases": "01–03, 07"
+      },
+      {
+        "file": "tests/demo-browser/syzia-036.spec.ts",
+        "cases": "Login mostra somente identidade"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-052",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Rotina manual: cadastrar, agendar, remarcar, cancelar e bloquear pela interface",
+    "historicalEvidence": "evidencias/browser/operations.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: 'Cancelar', exact: true })\n\n\n  122 | }\n  123 | test('Rotina manual: cadastrar, agendar, remarcar, cancelar e bloquear pela interface',async({page})=>{\n> 124 |  await login(page,'admin@example.invalid');await page.getByRole('link',{name:/MS Auto Details/}).first().click();const base=page.url();await page.getByRole('link',{name:'+ Novo agendamento',exact:true}).click();await page.getByLabel('Nome',{exact:true}).fill('Nina • Teste manual fictício');await page.getByLabel('WhatsApp com DDD',{exact:true}).fill('81999990200');await page.getByLabel(/Confirmei com o cliente/).check();const service=page.getByRole('combobox',{name:'Serviço',exact:true});await service.selectOption({index:1});await page.getByLabel('Qual é o modelo do carro? *').fill('Veículo fictício');const day=new Date(Date.now()+25*86400000).toISOString().slice(0,10);await page.getByLabel('Dia',{exact:true}).fill(day);await page.getByLabel('Horário',{exact:true}).fill('10:00');await page.getByRole('button',{name:'Confirmar agendamento',exact:true}).click();await expect(page.getByRole('heading',{name:'Nina • Teste manual fictício',exact:true})).toBeVisible();await page.getByRole('button',{name:'Reagendar',exact:true}).click();let dialog=page.getByRole('dialog');await dialog.getByLabel('Horário',{exact:true}).fill('12:00');await dialog.getByRole('button',{name:'Confirmar',exact:true}).click();await expect(dialog).toHaveCount(0);await expect(page.getByText('Reagendado',{exact:true})).toBeVisible();await page.getByRole('button',{name:'Cancelar',exact:true}).click();await page.getByRole('dialog').getByRole('button',{name:'Confirmar',exact:true}).click();await expect(page.getByText('Cancelado',{exact:true}).first()).toBeVisible();await page.goto(base+'/agenda');await page.getByRole('button',{name:'Bloquear período',exact:true}).click();dialog=page.getByRole('dialog');await dialog.getByLabel('Dia',{exact:true}).fill(day);await dialog.getByLabel('Início',{exact:true}).fill('12:00');await dialog.getByLabel('Fim',{exact:true}).fill('14:00');await dialog.getByLabel('Motivo',{exact:true}).fill('Compromisso fictício');await dialog.getByRole('button',{name:'Confirmar bloqueio',exact:true}).click();await expect(dialog).toHaveCount(0);await page.getByLabel('Data da agenda').fill(day);await expect(page.getByText('Compromisso fictício',{exact:true})).toBeVisible();await page.getByRole('button',{name:'Semana',exact:true}).click();await expect(page.locator('.op-day-label')).toHaveCount(7);await page.screenshot({path:'reports/visual-operations/agenda-week-desktop.png',fullPage:true});\n      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ^\n  125 | });\n  126 |\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/operations.spec.ts:124:1378",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Ação Cancelar mudou para Cancelar atendimento completo quando há execução agrupada. Comandos manuais, remarcação/cancelamento e histórico permanecem.",
+    "approvedScope": "docs/syzia-040/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-044-sql.test.mjs",
+        "cases": "A1-manual-*, A2-buffer-*, A2A3-replan"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "32–36"
+      },
+      {
+        "file": "tests/demo-browser/syzia-042.spec.ts",
+        "cases": "05"
+      },
+      {
+        "file": "tests/demo-browser/syzia-044.spec.ts",
+        "cases": "ficha/buffer/ordem"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-053",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Criação sem ADM, definição posterior, primeiro login e auditoria desktop",
+    "historicalEvidence": "evidencias/browser/organization-activation.spec.ts.json",
+    "historicalObserved": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: \"email_not_configured\"\nReceived: \"manual\"\n\n  78 |         .click();\n  79 |       const data = await (await prepared).json();\n> 80 |       expect(data.delivery).toBe(\"email_not_configured\");\n     |                             ^\n  81 |       await expect(page.getByLabel(\"Instruções de acesso\")).toContainText(\n  82 |         \"Administrador criado. Não foi possível enviar as instruções por e-mail.\",\n  83 |       );\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/organization-activation.spec.ts:80:29",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Login e provisionamento globais foram substituídos nas 036/040/042: identidade única, Equipe SYZIA separada, link/código temporário manual. Não se exige entrega email_not_configured nem Nova pessoa no local antigo. Ativação, reemissão, privacidade e permissões continuam.",
+    "approvedScope": "docs/syzia-042/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-036.spec.ts",
+        "cases": "Empresa: falha Auth/retomada/ativação; login; primeiro acesso"
+      },
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "03"
+      },
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "21–26, 32"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "02–07"
+      },
+      {
+        "file": "tests/syzia-036-http.test.mjs",
+        "cases": "diagnósticos sanitizados e link opaco"
+      },
+      {
+        "file": "tests/syzia-035-server.test.mjs",
+        "cases": "erros Auth e retomada"
+      },
+      {
+        "file": "tests/syzia-034-utils.test.mjs",
+        "cases": "mensagem/link seguro"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-054",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Criação sem ADM, definição posterior, primeiro login e auditoria mobile",
+    "historicalEvidence": "evidencias/browser/organization-activation.spec.ts.json",
+    "historicalObserved": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: \"email_not_configured\"\nReceived: undefined\n\n  78 |         .click();\n  79 |       const data = await (await prepared).json();\n> 80 |       expect(data.delivery).toBe(\"email_not_configured\");\n     |                             ^\n  81 |       await expect(page.getByLabel(\"Instruções de acesso\")).toContainText(\n  82 |         \"Administrador criado. Não foi possível enviar as instruções por e-mail.\",\n  83 |       );\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/organization-activation.spec.ts:80:29",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Login e provisionamento globais foram substituídos nas 036/040/042: identidade única, Equipe SYZIA separada, link/código temporário manual. Não se exige entrega email_not_configured nem Nova pessoa no local antigo. Ativação, reemissão, privacidade e permissões continuam.",
+    "approvedScope": "docs/syzia-042/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-036.spec.ts",
+        "cases": "Empresa: falha Auth/retomada/ativação; login; primeiro acesso"
+      },
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "03"
+      },
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "21–26, 32"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "02–07"
+      },
+      {
+        "file": "tests/syzia-036-http.test.mjs",
+        "cases": "diagnósticos sanitizados e link opaco"
+      },
+      {
+        "file": "tests/syzia-035-server.test.mjs",
+        "cases": "erros Auth e retomada"
+      },
+      {
+        "file": "tests/syzia-034-utils.test.mjs",
+        "cases": "mensagem/link seguro"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-057",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Jornada desktop: categoria, imagens, identidade, catálogo, prévia e publicação",
+    "historicalEvidence": "evidencias/browser/presence-correction.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByLabel('Nome do serviço', { exact: true })\n\n\n  34 |   await page\n  35 |     .getByLabel(\"Nome do serviço\", { exact: true })\n> 36 |     .fill(\"Projeto de interiores fictício\");\n     |      ^\n  37 |   await page\n  38 |     .getByLabel(\"Descrição do serviço\", { exact: true })\n  39 |     .fill(\"Descrição preservada ao criar categoria.\");\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/presence-correction.spec.ts:36:6",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Seletores de editor, upload, portfólio ou categoria foram substituídos na revisão de mídia/presença. A cobertura vigente exerce salvar, ordenar, prévia, publicar, formatos, recarga e enquadramento reais.",
+    "approvedScope": "docs/syzia-034/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-033-media.spec.ts",
+        "cases": "Jornada desktop; Portfólio três formatos"
+      },
+      {
+        "file": "tests/demo-browser/syzia-034-media.spec.ts",
+        "cases": "Logo/capa; Serviço; Portfólio e galeria"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-058",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Portfólio: três formatos, fotos, ordem, edição, ocultação e exclusão; pagamentos",
+    "historicalEvidence": "evidencias/browser/presence-correction.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByRole('heading', { name: 'A sua empresa, do seu jeito' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByRole('heading', { name: 'A sua empresa, do seu jeito' }) with timeout 5000ms\n  - waiting for getByRole('heading', { name: 'A sua empresa, do seu jeito' })\n\n\n  16 |   await expect(\n  17 |     page.getByRole(\"heading\", { name: \"A sua empresa, do seu jeito\" }),\n> 18 |   ).toBeVisible();\n     |     ^\n  19 | }\n  20 | async function noOverflow(page: Page) {\n  21 |   expect(\n    at pageEditor (/workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/presence-correction.spec.ts:18:5)\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/presence-correction.spec.ts:217:3",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Seletores de editor, upload, portfólio ou categoria foram substituídos na revisão de mídia/presença. A cobertura vigente exerce salvar, ordenar, prévia, publicar, formatos, recarga e enquadramento reais.",
+    "approvedScope": "docs/syzia-034/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-033-media.spec.ts",
+        "cases": "Jornada desktop; Portfólio três formatos"
+      },
+      {
+        "file": "tests/demo-browser/syzia-034-media.spec.ts",
+        "cases": "Logo/capa; Serviço; Portfólio e galeria"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-059",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Edição responsiva e teclado — tablet",
+    "historicalEvidence": "evidencias/browser/presence-correction.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByRole('heading', { name: 'A sua empresa, do seu jeito' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByRole('heading', { name: 'A sua empresa, do seu jeito' }) with timeout 5000ms\n  - waiting for getByRole('heading', { name: 'A sua empresa, do seu jeito' })\n\n\n  16 |   await expect(\n  17 |     page.getByRole(\"heading\", { name: \"A sua empresa, do seu jeito\" }),\n> 18 |   ).toBeVisible();\n     |     ^\n  19 | }\n  20 | async function noOverflow(page: Page) {\n  21 |   expect(\n    at pageEditor (/workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/presence-correction.spec.ts:18:5)\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/presence-correction.spec.ts:375:5",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Seletores de editor, upload, portfólio ou categoria foram substituídos na revisão de mídia/presença. A cobertura vigente exerce salvar, ordenar, prévia, publicar, formatos, recarga e enquadramento reais.",
+    "approvedScope": "docs/syzia-034/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-033-media.spec.ts",
+        "cases": "Jornada desktop; Portfólio três formatos"
+      },
+      {
+        "file": "tests/demo-browser/syzia-034-media.spec.ts",
+        "cases": "Logo/capa; Serviço; Portfólio e galeria"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-060",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Edição responsiva e teclado — mobile",
+    "historicalEvidence": "evidencias/browser/presence-correction.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByRole('heading', { name: 'A sua empresa, do seu jeito' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByRole('heading', { name: 'A sua empresa, do seu jeito' }) with timeout 5000ms\n  - waiting for getByRole('heading', { name: 'A sua empresa, do seu jeito' })\n\n\n  16 |   await expect(\n  17 |     page.getByRole(\"heading\", { name: \"A sua empresa, do seu jeito\" }),\n> 18 |   ).toBeVisible();\n     |     ^\n  19 | }\n  20 | async function noOverflow(page: Page) {\n  21 |   expect(\n    at pageEditor (/workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/presence-correction.spec.ts:18:5)\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/presence-correction.spec.ts:375:5",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Seletores de editor, upload, portfólio ou categoria foram substituídos na revisão de mídia/presença. A cobertura vigente exerce salvar, ordenar, prévia, publicar, formatos, recarga e enquadramento reais.",
+    "approvedScope": "docs/syzia-034/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-033-media.spec.ts",
+        "cases": "Jornada desktop; Portfólio três formatos"
+      },
+      {
+        "file": "tests/demo-browser/syzia-034-media.spec.ts",
+        "cases": "Logo/capa; Serviço; Portfólio e galeria"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-061",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Desktop: personal identity, company without ADM, existing onboarding, agenda and repeated validation",
+    "historicalEvidence": "evidencias/browser/syzia-032.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: 'Nova pessoa', exact: true })\n\n\n  23 |   await demoLogin(page, \"root@example.invalid\");\n  24 |   await page.goto(\"/admin/equipe\");\n> 25 |   await page.getByRole(\"button\", { name: \"Nova pessoa\", exact: true }).click();\n     |                                                                        ^\n  26 |   await page\n  27 |     .getByLabel(\"Nome completo\", { exact: true })\n  28 |     .fill(\"Pessoa Fictícia SYZIA\");\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/syzia-032.spec.ts:25:72",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Login e provisionamento globais foram substituídos nas 036/040/042: identidade única, Equipe SYZIA separada, link/código temporário manual. Não se exige entrega email_not_configured nem Nova pessoa no local antigo. Ativação, reemissão, privacidade e permissões continuam.",
+    "approvedScope": "docs/syzia-042/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-036.spec.ts",
+        "cases": "Empresa: falha Auth/retomada/ativação; login; primeiro acesso"
+      },
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "03"
+      },
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "21–26, 32"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "02–07"
+      },
+      {
+        "file": "tests/syzia-036-http.test.mjs",
+        "cases": "diagnósticos sanitizados e link opaco"
+      },
+      {
+        "file": "tests/syzia-035-server.test.mjs",
+        "cases": "erros Auth e retomada"
+      },
+      {
+        "file": "tests/syzia-034-utils.test.mjs",
+        "cases": "mensagem/link seguro"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-062",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Mobile: SYZIA login, company identity light/dark preview and agenda",
+    "historicalEvidence": "evidencias/browser/syzia-032.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByLabel('HEX (opcional)')\n\n\n  124 |   const org = new URL(page.url()).pathname.split(\"/\")[2];\n  125 |   await page.goto(\"/painel/\" + org + \"/pagina\");\n> 126 |   await page.getByLabel(\"HEX (opcional)\").fill(\"#E10909\");\n      |                                           ^\n  127 |   await page.getByLabel(\"Aparência da página pública\").selectOption(\"dark\");\n  128 |   const sample = page.getByLabel(\"Prévia da identidade\");\n  129 |   await expect(sample).toHaveCSS(\"color-scheme\", \"dark\");\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/syzia-032.spec.ts:126:43",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Seletores de editor, upload, portfólio ou categoria foram substituídos na revisão de mídia/presença. A cobertura vigente exerce salvar, ordenar, prévia, publicar, formatos, recarga e enquadramento reais.",
+    "approvedScope": "docs/syzia-034/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-033-media.spec.ts",
+        "cases": "Jornada desktop; Portfólio três formatos"
+      },
+      {
+        "file": "tests/demo-browser/syzia-034-media.spec.ts",
+        "cases": "Logo/capa; Serviço; Portfólio e galeria"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-063",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Mobile: global people directory and role controls remain usable",
+    "historicalEvidence": "evidencias/browser/syzia-032.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByRole('heading', { name: 'Pessoas e acessos' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByRole('heading', { name: 'Pessoas e acessos' }) with timeout 5000ms\n  - waiting for getByRole('heading', { name: 'Pessoas e acessos' })\n\n\n  196 |   await expect(\n  197 |     page.getByRole(\"heading\", { name: \"Pessoas e acessos\" }),\n> 198 |   ).toBeVisible();\n      |     ^\n  199 |   await page.getByLabel(\"Buscar pessoa\").fill(\"Pessoa Fictícia SYZIA\");\n  200 |   await page.getByRole(\"button\", { name: \"Abrir ficha\" }).first().click();\n  201 |   await fit(page);\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/syzia-032.spec.ts:198:5",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Login e provisionamento globais foram substituídos nas 036/040/042: identidade única, Equipe SYZIA separada, link/código temporário manual. Não se exige entrega email_not_configured nem Nova pessoa no local antigo. Ativação, reemissão, privacidade e permissões continuam.",
+    "approvedScope": "docs/syzia-042/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-036.spec.ts",
+        "cases": "Empresa: falha Auth/retomada/ativação; login; primeiro acesso"
+      },
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "03"
+      },
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "21–26, 32"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "02–07"
+      },
+      {
+        "file": "tests/syzia-036-http.test.mjs",
+        "cases": "diagnósticos sanitizados e link opaco"
+      },
+      {
+        "file": "tests/syzia-035-server.test.mjs",
+        "cases": "erros Auth e retomada"
+      },
+      {
+        "file": "tests/syzia-034-utils.test.mjs",
+        "cases": "mensagem/link seguro"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-066",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Site → plano → identidade → retomada → pagamento fictício → consentimento → onboarding existente",
+    "historicalEvidence": "evidencias/browser/syzia-033.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByText(/Grátis até/)\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByText(/Grátis até/) with timeout 5000ms\n  - waiting for getByText(/Grátis até/)\n\n\n  67 |   ).toBeVisible();\n  68 |   expect((await rpc(page, \"selfservice_context\")).id).toBe(first.id);\n> 69 |   await expect(page.getByText(/Grátis até/)).toBeVisible();\n     |                                              ^\n  70 |   await page.getByRole(\"button\", { name: \"Continuar para pagamento\" }).click();\n  71 |   await expect(\n  72 |     page.getByRole(\"status\").filter({ hasText: \"Forma de pagamento fictícia\" }),\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/syzia-033.spec.ts:69:46",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Trial e oferta são configurados; 15 dias e labels antigos deixaram de ser universais. Mantidos elegibilidade, consentimento, prazo efetivo, extensão e ausência de pagamento presumido.",
+    "approvedScope": "docs/syzia-040/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "02–11, 27–31"
+      },
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "01, 02, 07"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-067",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Contato cria lead e Aquisição fica no ambiente global; sidebar integrada e username editável",
+    "historicalEvidence": "evidencias/browser/syzia-033.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: 'Nova pessoa', exact: true })\n\n\n  153 |     await fit(page);\n  154 |   }\n> 155 |   await page.getByRole(\"button\", { name: \"Nova pessoa\", exact: true }).click();\n      |                                                                        ^\n  156 |   await page.getByLabel(\"Nome completo\", { exact: true }).fill(\"João da Silva\");\n  157 |   await expect(page.getByLabel(\"Username\", { exact: true })).toHaveValue(\n  158 |     \"joao.silva\",\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/syzia-033.spec.ts:155:72",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Login e provisionamento globais foram substituídos nas 036/040/042: identidade única, Equipe SYZIA separada, link/código temporário manual. Não se exige entrega email_not_configured nem Nova pessoa no local antigo. Ativação, reemissão, privacidade e permissões continuam.",
+    "approvedScope": "docs/syzia-042/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-036.spec.ts",
+        "cases": "Empresa: falha Auth/retomada/ativação; login; primeiro acesso"
+      },
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "03"
+      },
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "21–26, 32"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "02–07"
+      },
+      {
+        "file": "tests/syzia-036-http.test.mjs",
+        "cases": "diagnósticos sanitizados e link opaco"
+      },
+      {
+        "file": "tests/syzia-035-server.test.mjs",
+        "cases": "erros Auth e retomada"
+      },
+      {
+        "file": "tests/syzia-034-utils.test.mjs",
+        "cases": "mensagem/link seguro"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-070",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Login por identidade: uma empresa entra, múltiplos vínculos escolhem o contexto",
+    "historicalEvidence": "evidencias/browser/syzia-033.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByRole('heading', { name: 'O que precisa ser feito hoje?', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByRole('heading', { name: 'O que precisa ser feito hoje?', exact: true }) with timeout 5000ms\n  - waiting for getByRole('heading', { name: 'O que precisa ser feito hoje?', exact: true })\n\n\n  391 |         exact: true,\n  392 |       }),\n> 393 |     ).toBeVisible();\n      |       ^\n  394 |     await page.getByRole(\"button\", { name: \"Sair\", exact: true }).click();\n  395 |     await page.waitForURL(/\\/entrar/);\n  396 |   }\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/syzia-033.spec.ts:393:7",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Rótulos de Home/contexto e marca foram substituídos. Cobertura atual usa Home, login por identidade, contexto empresarial/global e autorização atuais.",
+    "approvedScope": "docs/syzia-040/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-042.spec.ts",
+        "cases": "01–03, 07"
+      },
+      {
+        "file": "tests/demo-browser/syzia-036.spec.ts",
+        "cases": "Login mostra somente identidade"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-075",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Site → plano → identidade → retomada → pagamento fictício → consentimento → onboarding existente",
+    "historicalEvidence": "evidencias/browser/syzia-034-selfservice.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByText(/Grátis até/)\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByText(/Grátis até/) with timeout 5000ms\n  - waiting for getByText(/Grátis até/)\n\n\n  67 |   ).toBeVisible();\n  68 |   expect((await rpc(page, \"selfservice_context\")).id).toBe(first.id);\n> 69 |   await expect(page.getByText(/Grátis até/)).toBeVisible();\n     |                                              ^\n  70 |   await page.getByRole(\"button\", { name: \"Continuar para pagamento\" }).click();\n  71 |   await expect(\n  72 |     page.getByRole(\"status\").filter({ hasText: \"Forma de pagamento fictícia\" }),\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/syzia-034-selfservice.spec.ts:69:46",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Trial e oferta são configurados; 15 dias e labels antigos deixaram de ser universais. Mantidos elegibilidade, consentimento, prazo efetivo, extensão e ausência de pagamento presumido.",
+    "approvedScope": "docs/syzia-040/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "02–11, 27–31"
+      },
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "01, 02, 07"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-076",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Landing preserva marca, conteúdo real, FAQ dinâmico, navegação e três tamanhos",
+    "historicalEvidence": "evidencias/browser/syzia-034-site.spec.ts.json",
+    "historicalObserved": "Error: expect(received).toMatch(expected)\n\nExpected pattern: /dias de avaliação/\nReceived string:  \"Essencial · demonstração·\nOferta fictícia para demonstrar recursos. Preço editável; não há cobrança real.·\n15 dias grátis\nPara empresas elegíveis, após confirmação dos dados.\nR$ 99,00\n/mês\nPágina pública, serviços e portfólio\nAtendimento, orçamento e agenda\nFinanceiro conforme permissões\nMétricas conforme permissões\nFollow-up e recuperação\n10 · membros da equipe\nEscolher plano\nCom equipe · demonstração·\nOferta fictícia para demonstrar recursos. Preço editável; não há cobrança real.·\n15 dias grátis\nPara empresas elegíveis, após confirmação dos dados.\nR$ 299,00\n/mês\nPágina pública, serviços e portfólio\nAtendimento, orçamento e agenda\nFinanceiro conforme permissões\nMétricas conforme permissões\nFollow-up e recuperação\n25 · membros da equipe\nAtendimento compartilhado\nEscolher plano\"\n\n  40 |     );\n  41 |     const durations = await page.locator(\".sy-plan-grid\").innerText();\n> 42 |     expect(durations).toMatch(/dias de avaliação/);\n     |                       ^\n  43 |     const summary = page\n  44 |       .locator(\"summary\")\n  45 |       .filter({ hasText: \"Meus funcionários veem todo o financeiro?\" });\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/syzia-034-site.spec.ts:42:23",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Trial e oferta são configurados; 15 dias e labels antigos deixaram de ser universais. Mantidos elegibilidade, consentimento, prazo efetivo, extensão e ausência de pagamento presumido.",
+    "approvedScope": "docs/syzia-040/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "02–11, 27–31"
+      },
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "01, 02, 07"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-080",
+    "historicalStatus": "FAIL",
+    "historicalCase": "035: falha Auth distinta de sessão expirada, reautenticação e mesma preparação",
+    "historicalEvidence": "evidencias/browser/syzia-035.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: 'Nova pessoa', exact: true })\n\n\n  168 |   await demoLogin(page, \"root@example.invalid\");\n  169 |   await page.goto(\"/admin/equipe\");\n> 170 |   await page.getByRole(\"button\", { name: \"Nova pessoa\", exact: true }).click();\n      |                                                                        ^\n  171 |   await page\n  172 |     .getByLabel(\"Nome completo\", { exact: true })\n  173 |     .fill(\"Pessoa Retomada\");\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/syzia-035.spec.ts:170:72",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Login e provisionamento globais foram substituídos nas 036/040/042: identidade única, Equipe SYZIA separada, link/código temporário manual. Não se exige entrega email_not_configured nem Nova pessoa no local antigo. Ativação, reemissão, privacidade e permissões continuam.",
+    "approvedScope": "docs/syzia-042/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-036.spec.ts",
+        "cases": "Empresa: falha Auth/retomada/ativação; login; primeiro acesso"
+      },
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "03"
+      },
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "21–26, 32"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "02–07"
+      },
+      {
+        "file": "tests/syzia-036-http.test.mjs",
+        "cases": "diagnósticos sanitizados e link opaco"
+      },
+      {
+        "file": "tests/syzia-035-server.test.mjs",
+        "cases": "erros Auth e retomada"
+      },
+      {
+        "file": "tests/syzia-034-utils.test.mjs",
+        "cases": "mensagem/link seguro"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-081",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Pessoa sem empresa: falha Auth, retomada, três cópias, reemissão e ativação",
+    "historicalEvidence": "evidencias/browser/syzia-036.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: 'Nova pessoa', exact: true })\n\n\n  60 |       await page\n  61 |         .getByRole(\"button\", { name: \"Nova pessoa\", exact: true })\n> 62 |         .click();\n     |          ^\n  63 |       await page.getByLabel(\"Nome completo\", { exact: true }).fill(name);\n  64 |       await page\n  65 |         .getByLabel(\"E-mail de contato\", { exact: true })\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/syzia-036.spec.ts:62:10",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Login e provisionamento globais foram substituídos nas 036/040/042: identidade única, Equipe SYZIA separada, link/código temporário manual. Não se exige entrega email_not_configured nem Nova pessoa no local antigo. Ativação, reemissão, privacidade e permissões continuam.",
+    "approvedScope": "docs/syzia-042/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-036.spec.ts",
+        "cases": "Empresa: falha Auth/retomada/ativação; login; primeiro acesso"
+      },
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "03"
+      },
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "21–26, 32"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "02–07"
+      },
+      {
+        "file": "tests/syzia-036-http.test.mjs",
+        "cases": "diagnósticos sanitizados e link opaco"
+      },
+      {
+        "file": "tests/syzia-035-server.test.mjs",
+        "cases": "erros Auth e retomada"
+      },
+      {
+        "file": "tests/syzia-034-utils.test.mjs",
+        "cases": "mensagem/link seguro"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-085",
+    "historicalStatus": "FAIL",
+    "historicalCase": "037 desktop: emissão, reemissão, foco, três cópias, isolamento, reload e ativação",
+    "historicalEvidence": "evidencias/browser/syzia-037.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: 'Nova pessoa', exact: true })\n\n\n  19 | }\n  20 | async function create(page: Page, username: string, name: string) {\n> 21 |   await page.getByRole(\"button\", { name: \"Nova pessoa\", exact: true }).click();\n     |                                                                        ^\n  22 |   await page.getByLabel(\"Nome completo\", { exact: true }).fill(name);\n  23 |   await page.getByLabel(\"Username\", { exact: true }).fill(username);\n  24 |   await page\n    at create (/workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/syzia-037.spec.ts:21:72)\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/syzia-037.spec.ts:115:25",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Login e provisionamento globais foram substituídos nas 036/040/042: identidade única, Equipe SYZIA separada, link/código temporário manual. Não se exige entrega email_not_configured nem Nova pessoa no local antigo. Ativação, reemissão, privacidade e permissões continuam.",
+    "approvedScope": "docs/syzia-042/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-036.spec.ts",
+        "cases": "Empresa: falha Auth/retomada/ativação; login; primeiro acesso"
+      },
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "03"
+      },
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "21–26, 32"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "02–07"
+      },
+      {
+        "file": "tests/syzia-036-http.test.mjs",
+        "cases": "diagnósticos sanitizados e link opaco"
+      },
+      {
+        "file": "tests/syzia-035-server.test.mjs",
+        "cases": "erros Auth e retomada"
+      },
+      {
+        "file": "tests/syzia-034-utils.test.mjs",
+        "cases": "mensagem/link seguro"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-086",
+    "historicalStatus": "FAIL",
+    "historicalCase": "037 celular: emissão, reemissão, foco, três cópias, isolamento, reload e ativação",
+    "historicalEvidence": "evidencias/browser/syzia-037.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: 'Nova pessoa', exact: true })\n\n\n  19 | }\n  20 | async function create(page: Page, username: string, name: string) {\n> 21 |   await page.getByRole(\"button\", { name: \"Nova pessoa\", exact: true }).click();\n     |                                                                        ^\n  22 |   await page.getByLabel(\"Nome completo\", { exact: true }).fill(name);\n  23 |   await page.getByLabel(\"Username\", { exact: true }).fill(username);\n  24 |   await page\n    at create (/workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/syzia-037.spec.ts:21:72)\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/syzia-037.spec.ts:115:25",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Login e provisionamento globais foram substituídos nas 036/040/042: identidade única, Equipe SYZIA separada, link/código temporário manual. Não se exige entrega email_not_configured nem Nova pessoa no local antigo. Ativação, reemissão, privacidade e permissões continuam.",
+    "approvedScope": "docs/syzia-042/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-036.spec.ts",
+        "cases": "Empresa: falha Auth/retomada/ativação; login; primeiro acesso"
+      },
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "03"
+      },
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "21–26, 32"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "02–07"
+      },
+      {
+        "file": "tests/syzia-036-http.test.mjs",
+        "cases": "diagnósticos sanitizados e link opaco"
+      },
+      {
+        "file": "tests/syzia-035-server.test.mjs",
+        "cases": "erros Auth e retomada"
+      },
+      {
+        "file": "tests/syzia-034-utils.test.mjs",
+        "cases": "mensagem/link seguro"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-087",
+    "historicalStatus": "FAIL",
+    "historicalCase": "037: falha na reemissão remove a apresentação anterior e não mostra sucesso nem novo segredo",
+    "historicalEvidence": "evidencias/browser/syzia-037.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: 'Nova pessoa', exact: true })\n\n\n  19 | }\n  20 | async function create(page: Page, username: string, name: string) {\n> 21 |   await page.getByRole(\"button\", { name: \"Nova pessoa\", exact: true }).click();\n     |                                                                        ^\n  22 |   await page.getByLabel(\"Nome completo\", { exact: true }).fill(name);\n  23 |   await page.getByLabel(\"Username\", { exact: true }).fill(username);\n  24 |   await page\n    at create (/workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/syzia-037.spec.ts:21:72)\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/syzia-037.spec.ts:233:23",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Login e provisionamento globais foram substituídos nas 036/040/042: identidade única, Equipe SYZIA separada, link/código temporário manual. Não se exige entrega email_not_configured nem Nova pessoa no local antigo. Ativação, reemissão, privacidade e permissões continuam.",
+    "approvedScope": "docs/syzia-042/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-036.spec.ts",
+        "cases": "Empresa: falha Auth/retomada/ativação; login; primeiro acesso"
+      },
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "03"
+      },
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "21–26, 32"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "02–07"
+      },
+      {
+        "file": "tests/syzia-036-http.test.mjs",
+        "cases": "diagnósticos sanitizados e link opaco"
+      },
+      {
+        "file": "tests/syzia-035-server.test.mjs",
+        "cases": "erros Auth e retomada"
+      },
+      {
+        "file": "tests/syzia-034-utils.test.mjs",
+        "cases": "mensagem/link seguro"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-089",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Publicação: revisão, edição posterior, prévia navegável e publicação · desktop",
+    "historicalEvidence": "evidencias/browser/syzia-038.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).toBeDisabled() failed\n\nLocator: getByRole('dialog', { name: 'Seu pedido', exact: true }).getByRole('button', { name: 'Enviar solicitação' })\nExpected: disabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeDisabled\" getByRole('dialog', { name: 'Seu pedido', exact: true }).getByRole('button', { name: 'Enviar solicitação' }) with timeout 5000ms\n  - waiting for getByRole('dialog', { name: 'Seu pedido', exact: true }).getByRole('button', { name: 'Enviar solicitação' })\n\n\n  267 |     await expect(\n  268 |       d.getByRole(\"button\", { name: \"Enviar solicitação\" }),\n> 269 |     ).toBeDisabled();\n      |       ^\n  270 |     await d.getByRole(\"button\", { name: \"Fechar solicitação\" }).click();\n  271 |     await page.getByLabel(\"HEX (opcional)\").fill(\"#183C62\");\n  272 |     await expect(pub).toBeDisabled();\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/syzia-038.spec.ts:269:7",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Formulário, cálculo de proposta e escolha de períodos evoluíram nas 041/042. Jornada equivalente usa pedido→avaliação/proposta→aprovação→reserva ou contratação direta, com multisserviço e disponibilidade reais.",
+    "approvedScope": "docs/syzia-042/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-041-sql.test.mjs",
+        "cases": "02–27, 33–35"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "25–47"
+      },
+      {
+        "file": "tests/demo-browser/syzia-042.spec.ts",
+        "cases": "04–06"
+      },
+      {
+        "file": "tests/demo-browser/syzia-044.spec.ts",
+        "cases": "HTTP aprovação; ficha/buffer/ordem"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-091",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Publicação: revisão, edição posterior, prévia navegável e publicação · celular",
+    "historicalEvidence": "evidencias/browser/syzia-038.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).toBeDisabled() failed\n\nLocator: getByRole('dialog', { name: 'Seu pedido', exact: true }).getByRole('button', { name: 'Enviar solicitação' })\nExpected: disabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeDisabled\" getByRole('dialog', { name: 'Seu pedido', exact: true }).getByRole('button', { name: 'Enviar solicitação' }) with timeout 5000ms\n  - waiting for getByRole('dialog', { name: 'Seu pedido', exact: true }).getByRole('button', { name: 'Enviar solicitação' })\n\n\n  267 |     await expect(\n  268 |       d.getByRole(\"button\", { name: \"Enviar solicitação\" }),\n> 269 |     ).toBeDisabled();\n      |       ^\n  270 |     await d.getByRole(\"button\", { name: \"Fechar solicitação\" }).click();\n  271 |     await page.getByLabel(\"HEX (opcional)\").fill(\"#183C62\");\n  272 |     await expect(pub).toBeDisabled();\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/syzia-038.spec.ts:269:7",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Formulário, cálculo de proposta e escolha de períodos evoluíram nas 041/042. Jornada equivalente usa pedido→avaliação/proposta→aprovação→reserva ou contratação direta, com multisserviço e disponibilidade reais.",
+    "approvedScope": "docs/syzia-042/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-041-sql.test.mjs",
+        "cases": "02–27, 33–35"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "25–47"
+      },
+      {
+        "file": "tests/demo-browser/syzia-042.spec.ts",
+        "cases": "04–06"
+      },
+      {
+        "file": "tests/demo-browser/syzia-044.spec.ts",
+        "cases": "HTTP aprovação; ficha/buffer/ordem"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-092",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Quatro etapas e overlays, marcas clara/escura/saturada · light · desktop",
+    "historicalEvidence": "evidencias/browser/syzia-038.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).not.toHaveCount(expected) failed\n\nLocator:  getByRole('dialog', { name: 'Seu pedido', exact: true }).getByText(/item sob consulta/)\nExpected: not 0\nReceived: 0\nTimeout:  5000ms\n\nCall log:\n  - Expect \"not toHaveCount\" getByRole('dialog', { name: 'Seu pedido', exact: true }).getByText(/item sob consulta/) with timeout 5000ms\n  - waiting for getByRole('dialog', { name: 'Seu pedido', exact: true }).getByText(/item sob consulta/)\n    14 × locator resolved to 0 elements\n       - unexpected value \"0\"\n\n\n  329 |         await d.getByRole(\"button\", { name: \"Continuar →\" }).click();\n  330 |         measurements.push({ color, step: 3, ...(await themeCheck(d, theme)) });\n> 331 |         await expect(d.getByText(/item sob consulta/)).not.toHaveCount(0);\n      |                                                            ^\n  332 |         await expect(d.getByText(\"Valor final\", { exact: true })).toHaveCount(\n  333 |           0,\n  334 |         );\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/syzia-038.spec.ts:331:60",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Formulário, cálculo de proposta e escolha de períodos evoluíram nas 041/042. Jornada equivalente usa pedido→avaliação/proposta→aprovação→reserva ou contratação direta, com multisserviço e disponibilidade reais.",
+    "approvedScope": "docs/syzia-042/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-041-sql.test.mjs",
+        "cases": "02–27, 33–35"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "25–47"
+      },
+      {
+        "file": "tests/demo-browser/syzia-042.spec.ts",
+        "cases": "04–06"
+      },
+      {
+        "file": "tests/demo-browser/syzia-044.spec.ts",
+        "cases": "HTTP aprovação; ficha/buffer/ordem"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-093",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Quatro etapas e overlays, marcas clara/escura/saturada · dark · desktop",
+    "historicalEvidence": "evidencias/browser/syzia-038.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).not.toHaveCount(expected) failed\n\nLocator:  getByRole('dialog', { name: 'Seu pedido', exact: true }).getByText(/item sob consulta/)\nExpected: not 0\nReceived: 0\nTimeout:  5000ms\n\nCall log:\n  - Expect \"not toHaveCount\" getByRole('dialog', { name: 'Seu pedido', exact: true }).getByText(/item sob consulta/) with timeout 5000ms\n  - waiting for getByRole('dialog', { name: 'Seu pedido', exact: true }).getByText(/item sob consulta/)\n    14 × locator resolved to 0 elements\n       - unexpected value \"0\"\n\n\n  329 |         await d.getByRole(\"button\", { name: \"Continuar →\" }).click();\n  330 |         measurements.push({ color, step: 3, ...(await themeCheck(d, theme)) });\n> 331 |         await expect(d.getByText(/item sob consulta/)).not.toHaveCount(0);\n      |                                                            ^\n  332 |         await expect(d.getByText(\"Valor final\", { exact: true })).toHaveCount(\n  333 |           0,\n  334 |         );\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/syzia-038.spec.ts:331:60",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Formulário, cálculo de proposta e escolha de períodos evoluíram nas 041/042. Jornada equivalente usa pedido→avaliação/proposta→aprovação→reserva ou contratação direta, com multisserviço e disponibilidade reais.",
+    "approvedScope": "docs/syzia-042/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-041-sql.test.mjs",
+        "cases": "02–27, 33–35"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "25–47"
+      },
+      {
+        "file": "tests/demo-browser/syzia-042.spec.ts",
+        "cases": "04–06"
+      },
+      {
+        "file": "tests/demo-browser/syzia-044.spec.ts",
+        "cases": "HTTP aprovação; ficha/buffer/ordem"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-094",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Quatro etapas e overlays, marcas clara/escura/saturada · light · celular",
+    "historicalEvidence": "evidencias/browser/syzia-038.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).not.toHaveCount(expected) failed\n\nLocator:  getByRole('dialog', { name: 'Seu pedido', exact: true }).getByText(/item sob consulta/)\nExpected: not 0\nReceived: 0\nTimeout:  5000ms\n\nCall log:\n  - Expect \"not toHaveCount\" getByRole('dialog', { name: 'Seu pedido', exact: true }).getByText(/item sob consulta/) with timeout 5000ms\n  - waiting for getByRole('dialog', { name: 'Seu pedido', exact: true }).getByText(/item sob consulta/)\n    14 × locator resolved to 0 elements\n       - unexpected value \"0\"\n\n\n  329 |         await d.getByRole(\"button\", { name: \"Continuar →\" }).click();\n  330 |         measurements.push({ color, step: 3, ...(await themeCheck(d, theme)) });\n> 331 |         await expect(d.getByText(/item sob consulta/)).not.toHaveCount(0);\n      |                                                            ^\n  332 |         await expect(d.getByText(\"Valor final\", { exact: true })).toHaveCount(\n  333 |           0,\n  334 |         );\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/syzia-038.spec.ts:331:60",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Formulário, cálculo de proposta e escolha de períodos evoluíram nas 041/042. Jornada equivalente usa pedido→avaliação/proposta→aprovação→reserva ou contratação direta, com multisserviço e disponibilidade reais.",
+    "approvedScope": "docs/syzia-042/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-041-sql.test.mjs",
+        "cases": "02–27, 33–35"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "25–47"
+      },
+      {
+        "file": "tests/demo-browser/syzia-042.spec.ts",
+        "cases": "04–06"
+      },
+      {
+        "file": "tests/demo-browser/syzia-044.spec.ts",
+        "cases": "HTTP aprovação; ficha/buffer/ordem"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-095",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Quatro etapas e overlays, marcas clara/escura/saturada · dark · celular",
+    "historicalEvidence": "evidencias/browser/syzia-038.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).not.toHaveCount(expected) failed\n\nLocator:  getByRole('dialog', { name: 'Seu pedido', exact: true }).getByText(/item sob consulta/)\nExpected: not 0\nReceived: 0\nTimeout:  5000ms\n\nCall log:\n  - Expect \"not toHaveCount\" getByRole('dialog', { name: 'Seu pedido', exact: true }).getByText(/item sob consulta/) with timeout 5000ms\n  - waiting for getByRole('dialog', { name: 'Seu pedido', exact: true }).getByText(/item sob consulta/)\n    14 × locator resolved to 0 elements\n       - unexpected value \"0\"\n\n\n  329 |         await d.getByRole(\"button\", { name: \"Continuar →\" }).click();\n  330 |         measurements.push({ color, step: 3, ...(await themeCheck(d, theme)) });\n> 331 |         await expect(d.getByText(/item sob consulta/)).not.toHaveCount(0);\n      |                                                            ^\n  332 |         await expect(d.getByText(\"Valor final\", { exact: true })).toHaveCount(\n  333 |           0,\n  334 |         );\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/syzia-038.spec.ts:331:60",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Formulário, cálculo de proposta e escolha de períodos evoluíram nas 041/042. Jornada equivalente usa pedido→avaliação/proposta→aprovação→reserva ou contratação direta, com multisserviço e disponibilidade reais.",
+    "approvedScope": "docs/syzia-042/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-041-sql.test.mjs",
+        "cases": "02–27, 33–35"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "25–47"
+      },
+      {
+        "file": "tests/demo-browser/syzia-042.spec.ts",
+        "cases": "04–06"
+      },
+      {
+        "file": "tests/demo-browser/syzia-044.spec.ts",
+        "cases": "HTTP aprovação; ficha/buffer/ordem"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-096",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Relações pela interface e pedido único → ajuste empresarial → recusa e aprovação pelo acompanhamento",
+    "historicalEvidence": "evidencias/browser/syzia-038.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByRole('dialog', { name: 'Seu pedido', exact: true }).getByRole('button', { name: 'Enviar solicitação', exact: true })\n\n\n  459 |   await d\n  460 |     .getByRole(\"button\", { name: \"Enviar solicitação\", exact: true })\n> 461 |     .click();\n      |      ^\n  462 |   await visitor.waitForURL(/\\/acompanhar\\//);\n  463 |   expect(requests).toBe(1);\n  464 |   const code = new URL(visitor.url()).pathname.split(\"/\")[2];\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/syzia-038.spec.ts:461:6",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Formulário, cálculo de proposta e escolha de períodos evoluíram nas 041/042. Jornada equivalente usa pedido→avaliação/proposta→aprovação→reserva ou contratação direta, com multisserviço e disponibilidade reais.",
+    "approvedScope": "docs/syzia-042/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-041-sql.test.mjs",
+        "cases": "02–27, 33–35"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "25–47"
+      },
+      {
+        "file": "tests/demo-browser/syzia-042.spec.ts",
+        "cases": "04–06"
+      },
+      {
+        "file": "tests/demo-browser/syzia-044.spec.ts",
+        "cases": "HTTP aprovação; ficha/buffer/ordem"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-108",
+    "historicalStatus": "FAIL",
+    "historicalCase": "05 Proposta aprovada: agenda retorna sem horários/erro/opções e confirma/remarca/cancela",
+    "historicalEvidence": "evidencias/browser/syzia-040.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByRole('button', { name: 'Consultar horários' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByRole('button', { name: 'Consultar horários' }) with timeout 5000ms\n  - waiting for getByRole('button', { name: 'Consultar horários' })\n\n\n  372 |   await expect(\n  373 |     visitor.getByRole(\"button\", { name: \"Consultar horários\" }),\n> 374 |   ).toBeVisible();\n      |     ^\n  375 |   await visitor\n  376 |     .getByLabel(\"Escolha um dia\", { exact: true })\n  377 |     .fill(\"2100-01-01\");\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/syzia-040.spec.ts:374:5",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Formulário, cálculo de proposta e escolha de períodos evoluíram nas 041/042. Jornada equivalente usa pedido→avaliação/proposta→aprovação→reserva ou contratação direta, com multisserviço e disponibilidade reais.",
+    "approvedScope": "docs/syzia-042/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-041-sql.test.mjs",
+        "cases": "02–27, 33–35"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "25–47"
+      },
+      {
+        "file": "tests/demo-browser/syzia-042.spec.ts",
+        "cases": "04–06"
+      },
+      {
+        "file": "tests/demo-browser/syzia-044.spec.ts",
+        "cases": "HTTP aprovação; ficha/buffer/ordem"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-114",
+    "historicalStatus": "FAIL",
+    "historicalCase": "02 Fluxo B: horário pretendido, proposta com prévia e aprovação com reserva",
+    "historicalEvidence": "evidencias/browser/syzia-041.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByLabel('Explicação da proposta para o cliente', { exact: true })\n\n\n  125 |   await page\n  126 |     .getByLabel(\"Explicação da proposta para o cliente\", { exact: true })\n> 127 |     .fill(\"Valor final confirmado após avaliação.\");\n      |      ^\n  128 |   await page\n  129 |     .getByRole(\"button\", { name: \"Visualizar como cliente\", exact: true })\n  130 |     .click();\n    at proposal (/workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/syzia-041.spec.ts:127:6)\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/syzia-041.spec.ts:212:3",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Formulário, cálculo de proposta e escolha de períodos evoluíram nas 041/042. Jornada equivalente usa pedido→avaliação/proposta→aprovação→reserva ou contratação direta, com multisserviço e disponibilidade reais.",
+    "approvedScope": "docs/syzia-042/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-041-sql.test.mjs",
+        "cases": "02–27, 33–35"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "25–47"
+      },
+      {
+        "file": "tests/demo-browser/syzia-042.spec.ts",
+        "cases": "04–06"
+      },
+      {
+        "file": "tests/demo-browser/syzia-044.spec.ts",
+        "cases": "HTTP aprovação; ficha/buffer/ordem"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-119",
+    "historicalStatus": "FAIL",
+    "historicalCase": "07 Aprovação com horário ocupado oferece novas opções e mantém a mesma proposta",
+    "historicalEvidence": "evidencias/browser/syzia-041.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByLabel('Explicação da proposta para o cliente', { exact: true })\n\n\n  125 |   await page\n  126 |     .getByLabel(\"Explicação da proposta para o cliente\", { exact: true })\n> 127 |     .fill(\"Valor final confirmado após avaliação.\");\n      |      ^\n  128 |   await page\n  129 |     .getByRole(\"button\", { name: \"Visualizar como cliente\", exact: true })\n  130 |     .click();\n    at proposal (/workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/syzia-041.spec.ts:127:6)\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/syzia-041.spec.ts:488:3",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Formulário, cálculo de proposta e escolha de períodos evoluíram nas 041/042. Jornada equivalente usa pedido→avaliação/proposta→aprovação→reserva ou contratação direta, com multisserviço e disponibilidade reais.",
+    "approvedScope": "docs/syzia-042/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-041-sql.test.mjs",
+        "cases": "02–27, 33–35"
+      },
+      {
+        "file": "tests/syzia-042-sql.test.mjs",
+        "cases": "25–47"
+      },
+      {
+        "file": "tests/demo-browser/syzia-042.spec.ts",
+        "cases": "04–06"
+      },
+      {
+        "file": "tests/demo-browser/syzia-044.spec.ts",
+        "cases": "HTTP aprovação; ficha/buffer/ordem"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-127",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Trial demo: 15 dias, prazo explícito, preservação e sem poderes administrativos",
+    "historicalEvidence": "evidencias/browser/trial.spec.ts.json",
+    "historicalObserved": "Error: expect(received).toBeTruthy()\n\nReceived: undefined\n\n  13 |     .click();\n  14 |   const org = p.url().match(/painel\\/([^/]+)/)?.[1];\n> 15 |   expect(org).toBeTruthy();\n     |               ^\n  16 |   await p.goto(\"/painel/\" + org + \"/assinatura\");\n  17 |   const panel = p.getByRole(\"region\", { name: \"Período gratuito\" });\n  18 |   await expect(panel.getByText(\"15\", { exact: true })).toBeVisible();\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/trial.spec.ts:15:15",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Trial e oferta são configurados; 15 dias e labels antigos deixaram de ser universais. Mantidos elegibilidade, consentimento, prazo efetivo, extensão e ausência de pagamento presumido.",
+    "approvedScope": "docs/syzia-040/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "02–11, 27–31"
+      },
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "01, 02, 07"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-128",
+    "historicalStatus": "FAIL",
+    "historicalCase": "Trial demo: análise, exceção, verificação, extensão e política auditadas pela interface",
+    "historicalEvidence": "evidencias/browser/trial.spec.ts.json",
+    "historicalObserved": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByLabel('Código da empresa', { exact: true })\n\n\n  75 |   await p\n  76 |     .getByLabel(\"Código da empresa\", { exact: true })\n> 77 |     .fill(credentials.company_code);\n     |      ^\n  78 |   await p.getByLabel(\"Usuário\", { exact: true }).fill(credentials.username);\n  79 |   await p\n  80 |     .getByLabel(\"Código temporário\", { exact: true })\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/trial.spec.ts:77:6",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Trial e oferta são configurados; 15 dias e labels antigos deixaram de ser universais. Mantidos elegibilidade, consentimento, prazo efetivo, extensão e ausência de pagamento presumido.",
+    "approvedScope": "docs/syzia-040/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/syzia-040-sql.test.mjs",
+        "cases": "02–11, 27–31"
+      },
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "01, 02, 07"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-129",
+    "historicalStatus": "FAIL",
+    "historicalCase": "VIRELOQ: identidade, empresa e assinatura desktop",
+    "historicalEvidence": "evidencias/browser/vireloq.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByRole('heading', { name: 'Entre na VIRELOQ' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByRole('heading', { name: 'Entre na VIRELOQ' }) with timeout 5000ms\n  - waiting for getByRole('heading', { name: 'Entre na VIRELOQ' })\n\n\n  4 | for(const [device,width,height] of [['desktop',1440,1000],['mobile',390,844]] as const){\n  5 |  test('VIRELOQ: identidade, empresa e assinatura '+device,async({page})=>{\n> 6 |  await page.setViewportSize({width,height});await page.goto('/entrar');await expect(page.getByRole('heading',{name:'Entre na VIRELOQ'})).toBeVisible();await page.screenshot({path:'reports/vireloq/login-'+device+'.png',fullPage:true});\n    |                                                                                                                                          ^\n  7 |  await login(page,'admin@example.invalid');await page.getByRole('link',{name:/MS Auto Details/}).first().click();\n  8 |  await expect(page.getByLabel('Usuário conectado')).toContainText('Administrador');await expect(page.getByRole('heading',{name:'O que precisa ser feito hoje?'})).toBeVisible();await page.screenshot({path:'reports/vireloq/painel-'+device+'.png',fullPage:true});\n  9 |  await page.getByRole('link',{name:'Plano e assinatura',exact:true}).click();await expect(page).toHaveURL(/\\/assinatura$/);await expect(page.getByRole('region',{name:'Contratação'})).toBeVisible();await expect(page.getByText('Ativa',{exact:true}).first()).toBeVisible();\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/vireloq.spec.ts:6:138",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Marca VIRELOQ/classes de temas antigos substituídas por SYZIA e identidade pública customizável. Continua obrigatório preservar identidade, responsividade e navegação.",
+    "approvedScope": "docs/syzia-032/request.txt",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "04, 06"
+      },
+      {
+        "file": "tests/demo-browser/syzia-036.spec.ts",
+        "cases": "Login e primeiro acesso responsivos"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-130",
+    "historicalStatus": "FAIL",
+    "historicalCase": "VIRELOQ: identidade, empresa e assinatura mobile",
+    "historicalEvidence": "evidencias/browser/vireloq.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByRole('heading', { name: 'Entre na VIRELOQ' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByRole('heading', { name: 'Entre na VIRELOQ' }) with timeout 5000ms\n  - waiting for getByRole('heading', { name: 'Entre na VIRELOQ' })\n\n\n  4 | for(const [device,width,height] of [['desktop',1440,1000],['mobile',390,844]] as const){\n  5 |  test('VIRELOQ: identidade, empresa e assinatura '+device,async({page})=>{\n> 6 |  await page.setViewportSize({width,height});await page.goto('/entrar');await expect(page.getByRole('heading',{name:'Entre na VIRELOQ'})).toBeVisible();await page.screenshot({path:'reports/vireloq/login-'+device+'.png',fullPage:true});\n    |                                                                                                                                          ^\n  7 |  await login(page,'admin@example.invalid');await page.getByRole('link',{name:/MS Auto Details/}).first().click();\n  8 |  await expect(page.getByLabel('Usuário conectado')).toContainText('Administrador');await expect(page.getByRole('heading',{name:'O que precisa ser feito hoje?'})).toBeVisible();await page.screenshot({path:'reports/vireloq/painel-'+device+'.png',fullPage:true});\n  9 |  await page.getByRole('link',{name:'Plano e assinatura',exact:true}).click();await expect(page).toHaveURL(/\\/assinatura$/);await expect(page.getByRole('region',{name:'Contratação'})).toBeVisible();await expect(page.getByText('Ativa',{exact:true}).first()).toBeVisible();\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/vireloq.spec.ts:6:138",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Marca VIRELOQ/classes de temas antigos substituídas por SYZIA e identidade pública customizável. Continua obrigatório preservar identidade, responsividade e navegação.",
+    "approvedScope": "docs/syzia-032/request.txt",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/syzia-040.spec.ts",
+        "cases": "04, 06"
+      },
+      {
+        "file": "tests/demo-browser/syzia-036.spec.ts",
+        "cases": "Login e primeiro acesso responsivos"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  },
+  {
+    "id": "BROWSER-131",
+    "historicalStatus": "FAIL",
+    "historicalCase": "VIRELOQ: rascunhos em módulos após foco e refresh periódico",
+    "historicalEvidence": "evidencias/browser/vireloq.spec.ts.json",
+    "historicalObserved": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByLabel('Descrição do negócio', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByLabel('Descrição do negócio', { exact: true }) with timeout 5000ms\n  - waiting for getByLabel('Descrição do negócio', { exact: true })\n\n\n  18 |   if(route==='pagina'){await page.getByRole('link',{name:/Portfólio/}).first().click();}\n  19 |   if(route==='clientes'){await page.getByRole('button',{name:'+ Novo cliente',exact:true}).click();}\n> 20 |   await expect(field).toBeVisible();await field.fill('Rascunho fictício preservado');await page.evaluate(()=>window.dispatchEvent(new Event('focus')));await expect(field).toHaveValue('Rascunho fictício preservado');await page.waitForTimeout(16000);await expect(field).toHaveValue('Rascunho fictício preservado');\n     |                       ^\n  21 |  }\n  22 | });\n  23 |\n    at /workspace/scratch/a267575cc4b3/auditoria-043/runtime/foundation/tests/demo-browser/vireloq.spec.ts:20:23",
+    "decision": "Requisito preservado; cobertura atual equivalente",
+    "reason": "Navegação/label antigo bloqueou acesso ao formulário. Rascunho no foco e isolamento após logout/troca de identidade têm cenário atual.",
+    "approvedScope": "docs/syzia-040/request.md",
+    "currentCoverage": [
+      {
+        "file": "tests/demo-browser/current-session.spec.ts",
+        "cases": "Rascunho empresarial"
+      },
+      {
+        "file": "tests/demo-browser/current-navigation.spec.ts",
+        "cases": "rotas atuais desktop/celular, temas, A/B, logout"
+      }
+    ]
+  }
+]

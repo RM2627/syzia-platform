@@ -1,0 +1,435 @@
+/* Presentation only. Authorization and published snapshots remain in the existing RPCs. */
+:root {
+  --ds-radius: 14px;
+  --ds-shadow: 0 3px 18px #163c4705;
+  --ds-space: 8px;
+  --ink: #143d47;
+  --muted: #536a75;
+  --line: #dfe7ea;
+  --accent: #157a70;
+  background: #f4f6f8;
+}
+body {
+  font-feature-settings: "cv11", "ss01";
+}
+.module-loading {
+  min-height: 12rem;
+  padding: 1.5rem;
+  color: var(--muted);
+}
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+textarea {
+  font: inherit;
+}
+.ds-panel {
+  padding: 26px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: var(--ds-radius);
+  box-shadow: var(--ds-shadow);
+  margin-bottom: 22px;
+}
+.ds-panel h2 {
+  font-size: 1.05rem;
+  letter-spacing: -0.025em;
+}
+.ds-metric {
+  padding: 21px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+.ds-metric > span {
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+.ds-metric > strong {
+  font-size: 2.1rem;
+  line-height: 1.1;
+  letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+}
+.ds-metric > small {
+  font-size: 0.72rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.ds-metric-accent {
+  background: #163e39;
+  color: #fff;
+  border-color: #163e39;
+}
+.ds-metric-accent > span,
+.ds-metric-accent > small {
+  color: #c8e5db;
+}
+.ds-empty {
+  text-align: center;
+  padding: 36px 20px;
+  color: var(--muted);
+}
+.ds-empty > span {
+  font-size: 2rem;
+  color: var(--accent);
+}
+.ds-empty h3 {
+  margin: 12px 0;
+  color: var(--ink);
+}
+.ds-empty p {
+  font-size: 0.9rem;
+  max-width: 480px;
+  margin: auto;
+}
+.ds-skeleton {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 24px 0;
+}
+.ds-skeleton > span {
+  height: 140px;
+  border-radius: 12px;
+  background: linear-gradient(100deg, #e6ecef, #f7f9fa, #e6ecef);
+  background-size: 200% 100%;
+  animation: ds-loading 1.5s infinite;
+}
+.ds-skeleton p {
+  grid-column: 1/-1;
+  color: var(--muted);
+}
+@keyframes ds-loading {
+  to {
+    background-position: -200% 0;
+  }
+}
+.app-shell > aside {
+  background: #102f35;
+  color: #e5f1ee;
+  border: 0;
+}
+.app-shell > aside .brand {
+  color: #fff;
+  letter-spacing: -0.03em;
+}
+.app-shell > aside nav a {
+  color: #bdcfcd;
+  border-radius: 9px;
+  font-size: 0.86rem;
+  line-height: 1.4;
+  padding: 12px 15px;
+}
+.app-shell > aside nav a:hover {
+  background: #1c4449;
+  color: #fff;
+  text-decoration: none;
+}
+.app-shell > aside nav a.active {
+  background: #26544f;
+  color: #fff;
+  box-shadow: inset 3px 0 #afe0c6;
+}
+.app-shell > aside .sidebar-bottom {
+  border-color: #365254;
+  color: #d9e6e4;
+}
+.app-shell > aside .sidebar-bottom button {
+  background: #1a4147;
+  border-color: #3b5e63;
+  color: #fff;
+}
+.workspace {
+  max-width: 1600px;
+  min-width: 0;
+}
+.topline {
+  padding-bottom: 20px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+}
+.card,
+.org-card {
+  border-radius: var(--ds-radius);
+  box-shadow: var(--ds-shadow);
+}
+.org-card {
+  transition:
+    transform 0.18s,
+    border-color 0.18s;
+}
+.org-card:hover {
+  transform: translateY(-2px);
+  border-color: #81a99f;
+  text-decoration: none;
+}
+.org-avatar {
+  background: #e3eee9;
+  color: #1c5448;
+}
+.workspace h1 {
+  font-weight: 650;
+}
+.workspace .tabs {
+  gap: 5px;
+}
+.workspace .tabs a,
+.workspace .tabs button {
+  font-size: 0.82rem;
+}
+.workspace table {
+  font-size: 0.85rem;
+}
+.workspace th {
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+}
+.workspace td {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.workspace input:focus,
+.workspace select:focus,
+.workspace textarea:focus {
+  outline: 2px solid #288f82;
+  outline-offset: 2px;
+}
+.workspace .notice {
+  border-radius: 10px;
+}
+.workspace .eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.13em;
+}
+.workspace .badge {
+  font-size: 0.7rem;
+}
+.co-detail,
+.ct-detail {
+  border-radius: 14px;
+}
+.co-board,
+.ct-queue {
+  border-radius: 14px;
+}
+button:focus-visible,
+a:focus-visible,
+summary:focus-visible {
+  outline: 3px solid #318b83;
+  outline-offset: 3px;
+}
+@media (max-width: 700px) {
+  .ds-panel {
+    padding: 19px;
+  }
+  .ds-metric {
+    padding: 16px;
+  }
+  .ds-metric > strong {
+    font-size: 1.8rem;
+  }
+  .ds-skeleton {
+    grid-template-columns: 1fr 1fr;
+  }
+  .app-shell > aside nav a {
+    padding: 10px 12px;
+  }
+  .topline {
+    margin-bottom: 18px;
+  }
+  .workspace {
+    padding: 22px 16px;
+  }
+  .a-heading h1 {
+    font-size: 2rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *:before,
+  *:after {
+    animation: none !important;
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
+.org-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+.org-actions a {
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: white;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.org-actions a:hover {
+  border-color: var(--accent);
+}
+/* Phase 8 shared finish: modal, route loading and dense operational readability. */
+.ds-dialog {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 24px;
+  width: min(760px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  color: var(--ink);
+  box-shadow: 0 24px 80px #102d3740;
+  background: #fff;
+  overflow: auto;
+}
+.ds-dialog::backdrop {
+  background: #0b222ccc;
+  backdrop-filter: blur(4px);
+}
+.ds-dialog-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 14px;
+  margin-bottom: 20px;
+}
+.ds-dialog-top button {
+  min-width: 44px;
+}
+.app-loading {
+  max-width: 620px;
+  margin: 12vh auto;
+  padding: 36px;
+  text-align: center;
+}
+.app-loading .mark {
+  margin: auto;
+}
+.app-loading h1 {
+  font-size: 1.5rem;
+}
+.app-shell h1 {
+  letter-spacing: -0.035em;
+}
+.app-shell .card {
+  box-shadow: 0 4px 20px #143d4705;
+}
+.app-shell td {
+  line-height: 1.55;
+}
+.app-shell .notice {
+  border-radius: 12px;
+}
+.public .card {
+  border-radius: 20px;
+  box-shadow: 0 12px 40px #143d4710;
+}
+.public h1 {
+  letter-spacing: -0.035em;
+}
+.app-shell button:focus-visible,
+.consumer button:focus-visible,
+.ds-dialog button:focus-visible {
+  outline: 3px solid #329c8d;
+  outline-offset: 3px;
+}
+@media (max-width: 600px) {
+  .ds-dialog {
+    padding: 16px;
+    border-radius: 14px;
+  }
+  .public {
+    padding: 24px 16px;
+  }
+  .app-shell h1 {
+    overflow-wrap: anywhere;
+  }
+}
+.mobile-menu {
+  display: none;
+}
+@media (max-width: 760px) {
+  .app-shell > aside {
+    position: relative;
+    padding-top: 18px;
+  }
+  .app-shell > aside .brand {
+    padding-right: 100px;
+  }
+  .mobile-menu {
+    display: block;
+    position: absolute;
+    right: 18px;
+    top: 16px;
+    background: #244a51;
+    color: white;
+    border-color: #457078;
+    min-height: 42px;
+  }
+  .app-shell > aside .shell-nav-menu {
+    display: none;
+  }
+  .app-shell > aside .shell-nav-menu[data-open="true"] {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 20px;
+    overflow: visible;
+  }
+  .app-shell > aside .shell-nav-menu a {
+    white-space: normal;
+    line-height: 1.4;
+  }
+  .app-shell > aside .sidebar-bottom {
+    padding-bottom: 0;
+    gap: 12px;
+    font-size: 0.85rem;
+  }
+}
+
+/* Selection controls keep their native keyboard behavior and compact geometry.
+   The label, rather than the square, provides the comfortable touch target. */
+.app-shell input:is([type="checkbox"], [type="radio"]) {
+  width: 18px;
+  min-width: 18px;
+  max-width: 18px;
+  height: 18px;
+  min-height: 18px;
+  max-height: 18px;
+  padding: 0;
+  margin: 3px 0 0;
+  flex: 0 0 18px;
+  align-self: flex-start;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+.app-shell label:has(> input:is([type="checkbox"], [type="radio"])) {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 10px;
+  min-height: 44px;
+  line-height: 1.5;
+  padding-block: 10px;
+  cursor: pointer;
+}
+.app-shell input:is([type="checkbox"], [type="radio"]):disabled {
+  cursor: not-allowed;
+}
+.company-invite-option {
+  margin: 4px 0 12px;
+  font-size: 0.9rem;
+}

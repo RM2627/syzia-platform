@@ -1,0 +1,1186 @@
+{
+  "phase": "before",
+  "browser": "153.0.8010.0",
+  "latency": {
+    "apiMs": 120,
+    "chunkMs": 250
+  },
+  "results": [
+    {
+      "id": "open-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 68
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": false,
+          "ticketHeading": "Ana • Fictícia",
+          "t": 254
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_afc7afbe91edba4accc583ca\"}",
+          "t": 62,
+          "end": 239,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/central_queue",
+          "body": "{\"p_org\":null,\"p_search\":\"\",\"p_state\":null,\"p_mine\":true,\"p_offset\":0,\"p_view\":\"all\",\"p_date\":null}",
+          "t": 68,
+          "end": 250,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 981,
+      "final": {
+        "url": "/central/t_afc7afbe91edba4accc583ca",
+        "companyNav": false,
+        "selectedTab": "Minha fila",
+        "queueCount": 0,
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "0 atendimentos",
+          "Ana • Fictícia"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "switch-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 72
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": false,
+          "ticketHeading": "Pedro · Demo 12",
+          "t": 224
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_1a15eabc1bfa00d9360bf84e\"}",
+          "t": 60,
+          "end": 221,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 886,
+      "final": {
+        "url": "/central/t_1a15eabc1bfa00d9360bf84e",
+        "companyNav": false,
+        "selectedTab": "Todos",
+        "queueCount": 24,
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "24 atendimentos",
+          "Pedro · Demo 12"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": [],
+      "extraClicksToRestoreQueue": 1
+    },
+    {
+      "id": "back-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 18
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": false,
+          "ticketHeading": "Ana • Fictícia",
+          "t": 179
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_afc7afbe91edba4accc583ca\"}",
+          "t": 10,
+          "end": 164,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 857,
+      "final": {
+        "url": "/central/t_afc7afbe91edba4accc583ca",
+        "companyNav": false,
+        "selectedTab": "Todos",
+        "queueCount": 24,
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "24 atendimentos",
+          "Ana • Fictícia"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "forward-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 19
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": false,
+          "ticketHeading": "Pedro · Demo 12",
+          "t": 169
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_1a15eabc1bfa00d9360bf84e\"}",
+          "t": 9,
+          "end": 165,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 846,
+      "final": {
+        "url": "/central/t_1a15eabc1bfa00d9360bf84e",
+        "companyNav": false,
+        "selectedTab": "Todos",
+        "queueCount": 24,
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "24 atendimentos",
+          "Pedro · Demo 12"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "reload-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 23
+        },
+        {
+          "statuses": [
+            "Preparando sua experiênciaCarregando com segurança…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [
+            "Preparando sua experiência"
+          ],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 296
+        },
+        {
+          "statuses": [
+            "Verificando seu acesso…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 609
+        },
+        {
+          "layoutShift": 0.075,
+          "t": 609
+        },
+        {
+          "statuses": [
+            "Carregando…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 883
+        },
+        {
+          "layoutShift": 0.011111111111111112,
+          "t": 884
+        },
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 1186
+        },
+        {
+          "layoutShift": 0.011111111111111112,
+          "t": 1187
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": false,
+          "ticketHeading": "Pedro · Demo 12",
+          "t": 1335
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{}",
+          "t": 593,
+          "end": 722,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":false}",
+          "t": 594,
+          "end": 725,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/foundation_context",
+          "body": "{}",
+          "t": 724,
+          "end": 868,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_1a15eabc1bfa00d9360bf84e\"}",
+          "t": 1173,
+          "end": 1329,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/central_queue",
+          "body": "{\"p_org\":null,\"p_search\":\"\",\"p_state\":null,\"p_mine\":true,\"p_offset\":0,\"p_view\":\"all\",\"p_date\":null}",
+          "t": 1174,
+          "end": 1337,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 2061,
+      "final": {
+        "url": "/central/t_1a15eabc1bfa00d9360bf84e",
+        "companyNav": false,
+        "selectedTab": "Minha fila",
+        "queueCount": 0,
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "0 atendimentos",
+          "Pedro · Demo 12"
+        ],
+        "alerts": [],
+        "scrollWidth": 1440
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "open-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 67
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": false,
+          "ticketHeading": "Ana • Fictícia",
+          "t": 221
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_afc7afbe91edba4accc583ca\"}",
+          "t": 60,
+          "end": 214,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/central_queue",
+          "body": "{\"p_org\":null,\"p_search\":\"\",\"p_state\":null,\"p_mine\":true,\"p_offset\":0,\"p_view\":\"all\",\"p_date\":null}",
+          "t": 61,
+          "end": 222,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 972,
+      "final": {
+        "url": "/central/t_afc7afbe91edba4accc583ca",
+        "companyNav": false,
+        "selectedTab": "Minha fila",
+        "queueCount": 0,
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "0 atendimentos",
+          "Ana • Fictícia"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "switch-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 73
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": false,
+          "ticketHeading": "Pedro · Demo 12",
+          "t": 223
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_1a15eabc1bfa00d9360bf84e\"}",
+          "t": 60,
+          "end": 214,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 882,
+      "final": {
+        "url": "/central/t_1a15eabc1bfa00d9360bf84e",
+        "companyNav": false,
+        "selectedTab": "Todos",
+        "queueCount": 24,
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "24 atendimentos",
+          "Pedro · Demo 12"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": [],
+      "extraClicksToRestoreQueue": 1
+    },
+    {
+      "id": "back-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 15
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": false,
+          "ticketHeading": "Ana • Fictícia",
+          "t": 166
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_afc7afbe91edba4accc583ca\"}",
+          "t": 10,
+          "end": 163,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 846,
+      "final": {
+        "url": "/central/t_afc7afbe91edba4accc583ca",
+        "companyNav": false,
+        "selectedTab": "Todos",
+        "queueCount": 24,
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "24 atendimentos",
+          "Ana • Fictícia"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "forward-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 18
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": false,
+          "ticketHeading": "Pedro · Demo 12",
+          "t": 169
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_1a15eabc1bfa00d9360bf84e\"}",
+          "t": 13,
+          "end": 163,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 847,
+      "final": {
+        "url": "/central/t_1a15eabc1bfa00d9360bf84e",
+        "companyNav": false,
+        "selectedTab": "Todos",
+        "queueCount": 24,
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "24 atendimentos",
+          "Pedro · Demo 12"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "reload-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 25
+        },
+        {
+          "statuses": [
+            "Preparando sua experiênciaCarregando com segurança…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [
+            "Preparando sua experiência"
+          ],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 301
+        },
+        {
+          "statuses": [
+            "Verificando seu acesso…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 599
+        },
+        {
+          "layoutShift": 0.12,
+          "t": 600
+        },
+        {
+          "statuses": [
+            "Carregando…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 882
+        },
+        {
+          "layoutShift": 0.017777777777777778,
+          "t": 883
+        },
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 1185
+        },
+        {
+          "layoutShift": 0.017777777777777778,
+          "t": 1185
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": false,
+          "ticketHeading": "Pedro · Demo 12",
+          "t": 1334
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{}",
+          "t": 598,
+          "end": 726,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":false}",
+          "t": 599,
+          "end": 729,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/foundation_context",
+          "body": "{}",
+          "t": 728,
+          "end": 870,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_1a15eabc1bfa00d9360bf84e\"}",
+          "t": 1176,
+          "end": 1328,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/central_queue",
+          "body": "{\"p_org\":null,\"p_search\":\"\",\"p_state\":null,\"p_mine\":true,\"p_offset\":0,\"p_view\":\"all\",\"p_date\":null}",
+          "t": 1176,
+          "end": 1335,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 2050,
+      "final": {
+        "url": "/central/t_1a15eabc1bfa00d9360bf84e",
+        "companyNav": false,
+        "selectedTab": "Minha fila",
+        "queueCount": 0,
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "0 atendimentos",
+          "Pedro · Demo 12"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "open-320",
+      "viewport": {
+        "width": 320,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 65
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": false,
+          "ticketHeading": "Ana • Fictícia",
+          "t": 220
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_afc7afbe91edba4accc583ca\"}",
+          "t": 60,
+          "end": 212,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/central_queue",
+          "body": "{\"p_org\":null,\"p_search\":\"\",\"p_state\":null,\"p_mine\":true,\"p_offset\":0,\"p_view\":\"all\",\"p_date\":null}",
+          "t": 60,
+          "end": 221,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 974,
+      "final": {
+        "url": "/central/t_afc7afbe91edba4accc583ca",
+        "companyNav": false,
+        "selectedTab": "Minha fila",
+        "queueCount": 0,
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "0 atendimentos",
+          "Ana • Fictícia"
+        ],
+        "alerts": [],
+        "scrollWidth": 320
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "switch-320",
+      "viewport": {
+        "width": 320,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 59
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": false,
+          "ticketHeading": "Pedro · Demo 12",
+          "t": 210
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_1a15eabc1bfa00d9360bf84e\"}",
+          "t": 48,
+          "end": 200,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 871,
+      "final": {
+        "url": "/central/t_1a15eabc1bfa00d9360bf84e",
+        "companyNav": false,
+        "selectedTab": "Todos",
+        "queueCount": 24,
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "24 atendimentos",
+          "Pedro · Demo 12"
+        ],
+        "alerts": [],
+        "scrollWidth": 320
+      },
+      "status": "RECORDED",
+      "duplicates": [],
+      "extraClicksToRestoreQueue": 1
+    },
+    {
+      "id": "back-320",
+      "viewport": {
+        "width": 320,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 28
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": false,
+          "ticketHeading": "Ana • Fictícia",
+          "t": 171
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_afc7afbe91edba4accc583ca\"}",
+          "t": 10,
+          "end": 163,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 860,
+      "final": {
+        "url": "/central/t_afc7afbe91edba4accc583ca",
+        "companyNav": false,
+        "selectedTab": "Todos",
+        "queueCount": 24,
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "24 atendimentos",
+          "Ana • Fictícia"
+        ],
+        "alerts": [],
+        "scrollWidth": 320
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "forward-320",
+      "viewport": {
+        "width": 320,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 20
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": false,
+          "ticketHeading": "Pedro · Demo 12",
+          "t": 171
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_1a15eabc1bfa00d9360bf84e\"}",
+          "t": 10,
+          "end": 161,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 846,
+      "final": {
+        "url": "/central/t_1a15eabc1bfa00d9360bf84e",
+        "companyNav": false,
+        "selectedTab": "Todos",
+        "queueCount": 24,
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "24 atendimentos",
+          "Pedro · Demo 12"
+        ],
+        "alerts": [],
+        "scrollWidth": 320
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "reload-320",
+      "viewport": {
+        "width": 320,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 20
+        },
+        {
+          "statuses": [
+            "Preparando sua experiênciaCarregando com segurança…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [
+            "Preparando sua experiência"
+          ],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 300
+        },
+        {
+          "statuses": [
+            "Verificando seu acesso…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 601
+        },
+        {
+          "layoutShift": 0.12,
+          "t": 602
+        },
+        {
+          "statuses": [
+            "Carregando…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 866
+        },
+        {
+          "layoutShift": 0.017777777777777778,
+          "t": 872
+        },
+        {
+          "statuses": [
+            "Abrindo contexto autorizado…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": false,
+          "ticketHeading": null,
+          "t": 1169
+        },
+        {
+          "layoutShift": 0.017777777777777778,
+          "t": 1170
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "companyNav": false,
+          "ticketHeading": "Pedro · Demo 12",
+          "t": 1335
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{}",
+          "t": 586,
+          "end": 714,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":false}",
+          "t": 587,
+          "end": 717,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/foundation_context",
+          "body": "{}",
+          "t": 716,
+          "end": 857,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/central_context",
+          "body": "{\"p_code\":\"t_1a15eabc1bfa00d9360bf84e\"}",
+          "t": 1162,
+          "end": 1329,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/central_queue",
+          "body": "{\"p_org\":null,\"p_search\":\"\",\"p_state\":null,\"p_mine\":true,\"p_offset\":0,\"p_view\":\"all\",\"p_date\":null}",
+          "t": 1162,
+          "end": 1336,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 2055,
+      "final": {
+        "url": "/central/t_1a15eabc1bfa00d9360bf84e",
+        "companyNav": false,
+        "selectedTab": "Minha fila",
+        "queueCount": 0,
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "0 atendimentos",
+          "Pedro · Demo 12"
+        ],
+        "alerts": [],
+        "scrollWidth": 320
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    }
+  ]
+}

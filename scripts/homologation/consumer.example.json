@@ -1,0 +1,9 @@
+{
+  "testOnlyAcknowledged": false,
+  "realCustomerData": false,
+  "projectRef": "REPLACE_TEST_PROJECT_REF",
+  "url": "https://REPLACE_TEST_PROJECT_REF.supabase.co",
+  "publishableKey": "sb_publishable_REPLACE_ME",
+  "tokens": { "alice": "REPLACE_VALID_CONSUMER_JWT", "bob": "REPLACE_OTHER_CONSUMER_JWT", "adminA": "REPLACE_ADMIN_A_JWT" },
+  "slugs": { "a": "ms-auto-ficticia", "b": "horizonte-ficticio" }
+}

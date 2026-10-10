@@ -1,0 +1,1040 @@
+{
+  "phase": "after-guards",
+  "browser": "153.0.8010.0",
+  "latency": {
+    "apiMs": 120,
+    "chunkMs": 250
+  },
+  "results": [
+    {
+      "id": "home-isolated-block-failure",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 18
+        },
+        {
+          "statuses": [
+            "Preparando sua experiênciaCarregando com segurança…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [
+            "Preparando sua experiência"
+          ],
+          "t": 301
+        },
+        {
+          "statuses": [
+            "Verificando seu acesso…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 603
+        },
+        {
+          "layoutShift": 0.12,
+          "t": 604
+        },
+        {
+          "statuses": [
+            "Verificando permissões da empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [],
+          "t": 889
+        },
+        {
+          "statuses": [
+            "Carregando esta área…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [],
+          "t": 1053
+        },
+        {
+          "layoutShift": 0.1290215170940171,
+          "t": 1186
+        },
+        {
+          "statuses": [
+            "Carregando sua empresa…",
+            "Carregando sua empresa…",
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 1361
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 1486
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{}",
+          "t": 592,
+          "end": 725,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":false}",
+          "t": 593,
+          "end": 728,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/foundation_context",
+          "body": "{}",
+          "t": 726,
+          "end": 877,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/permissions_context",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\"}",
+          "t": 882,
+          "end": 1037,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/support_context",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\"}",
+          "t": 1044,
+          "end": 1173,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\"}",
+          "t": 1044,
+          "end": 1179,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\",\"p_section\":\"header\"}",
+          "t": 1341,
+          "end": 1470,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\",\"p_section\":\"agenda\"}",
+          "t": 1342,
+          "end": 1475,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\",\"p_section\":\"attention\"}",
+          "t": 1342,
+          "end": 1345,
+          "status": 403
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\",\"p_section\":\"updates\"}",
+          "t": 1344,
+          "end": 1481,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 2302,
+      "final": {
+        "url": "/painel/19d133e8-c0af-4a6f-810d-741f2812b93b",
+        "overflow": 0,
+        "headings": [
+          "O que fazer hoje?",
+          "Agenda de hoje",
+          "Amanhã",
+          "Precisa da sua atenção",
+          "Últimas atualizações"
+        ],
+        "alerts": [
+          "Seu acesso a este bloco não está autorizado. Revise as permissões desta empresa. Tentar novamente"
+        ],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "home-block-retry",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":true}",
+          "t": 44,
+          "end": 175,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\",\"p_section\":\"attention\"}",
+          "t": 46,
+          "end": 197,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 987,
+      "final": {
+        "url": "/painel/19d133e8-c0af-4a6f-810d-741f2812b93b",
+        "overflow": 0,
+        "headings": [
+          "O que fazer hoje?",
+          "Agenda de hoje",
+          "Amanhã",
+          "Precisa da sua atenção",
+          "Últimas atualizações"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "category-save-refresh",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/company_category_save",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\",\"p_id\":null,\"p_revision\":0,\"p_data\":{\"name\":\"Categoria sintética UX\",\"position\":0},\"p_key\":\"672f6760-ed9f-458a-879e-b7e3e4c7f568\"}",
+          "t": 42,
+          "end": 172,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/company_context",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\"}",
+          "t": 174,
+          "end": 312,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1083,
+      "final": {
+        "url": "/painel/19d133e8-c0af-4a6f-810d-741f2812b93b/servicos",
+        "overflow": 0,
+        "headings": [
+          "MS Auto Details • Fictícia",
+          "Catálogo de serviços",
+          "Novo serviço"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "configuration-reuse",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\"}",
+          "t": 50,
+          "end": 183,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\"}",
+          "t": 917,
+          "end": 1048,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1839,
+      "final": {
+        "url": "/painel/19d133e8-c0af-4a6f-810d-741f2812b93b/servicos",
+        "overflow": 0,
+        "headings": [
+          "MS Auto Details • Fictícia",
+          "Catálogo de serviços",
+          "Novo serviço"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": [
+        {
+          "key": "/rest/v1/rpc/onboarding_context {\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\"}",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "open-double-click",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Abrindo empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Minhas empresas"
+          ],
+          "t": 65
+        },
+        {
+          "statuses": [],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 624
+        },
+        {
+          "statuses": [
+            "Preparando sua experiênciaCarregando com segurança…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [
+            "Preparando sua experiência"
+          ],
+          "t": 906
+        },
+        {
+          "statuses": [
+            "Verificando seu acesso…"
+          ],
+          "shell": false,
+          "home": false,
+          "headings": [],
+          "t": 1209
+        },
+        {
+          "layoutShift": 0.12,
+          "t": 1209
+        },
+        {
+          "statuses": [
+            "Verificando permissões da empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [],
+          "t": 1493
+        },
+        {
+          "statuses": [
+            "Carregando esta área…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [],
+          "t": 1643
+        },
+        {
+          "layoutShift": 0.19582905982905982,
+          "t": 1797
+        },
+        {
+          "statuses": [
+            "Carregando sua empresa…",
+            "Carregando sua empresa…",
+            "Carregando sua empresa…",
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 1942
+        },
+        {
+          "statuses": [
+            "Carregando sua empresa…",
+            "Carregando sua empresa…",
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 2075
+        },
+        {
+          "statuses": [
+            "Carregando sua empresa…",
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 2093
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": true,
+          "headings": [
+            "O que fazer hoje?"
+          ],
+          "t": 2110
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":true}",
+          "t": 50,
+          "end": 178,
+          "status": 200
+        },
+        {
+          "path": "/access/contexts",
+          "body": "{}",
+          "t": 50,
+          "end": 185,
+          "status": 200
+        },
+        {
+          "path": "/access/context",
+          "body": "{\"account_id\":\"3b166880-586a-4896-a2b7-a18479057bbd\"}",
+          "t": 187,
+          "end": 318,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{}",
+          "t": 319,
+          "end": 446,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/permissions_context",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\"}",
+          "t": 448,
+          "end": 607,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{}",
+          "t": 1201,
+          "end": 1328,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":false}",
+          "t": 1202,
+          "end": 1335,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/foundation_context",
+          "body": "{}",
+          "t": 1335,
+          "end": 1475,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/permissions_context",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\"}",
+          "t": 1480,
+          "end": 1636,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/support_context",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\"}",
+          "t": 1647,
+          "end": 1775,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\"}",
+          "t": 1647,
+          "end": 1781,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\",\"p_section\":\"header\"}",
+          "t": 1941,
+          "end": 2069,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\",\"p_section\":\"agenda\"}",
+          "t": 1942,
+          "end": 2076,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\",\"p_section\":\"attention\"}",
+          "t": 1942,
+          "end": 2102,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_home_section",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\",\"p_section\":\"updates\"}",
+          "t": 1944,
+          "end": 2106,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 2964,
+      "final": {
+        "url": "/painel/19d133e8-c0af-4a6f-810d-741f2812b93b",
+        "overflow": 0,
+        "headings": [
+          "Vamos preparar sua empresa",
+          "O que fazer hoje?",
+          "Agenda de hoje",
+          "Amanhã",
+          "Precisa da sua atenção",
+          "Últimas atualizações"
+        ],
+        "alerts": [],
+        "scrollWidth": 390
+      },
+      "status": "RECORDED",
+      "duplicates": [
+        {
+          "key": "/rest/v1/rpc/access_session {}",
+          "count": 2
+        },
+        {
+          "key": "/rest/v1/rpc/permissions_context {\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\"}",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "responsive-agenda-320",
+      "viewport": {
+        "width": 320,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Agenda"
+          ],
+          "t": 69
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Agenda"
+          ],
+          "t": 202
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":true}",
+          "t": 41,
+          "end": 170,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_agenda",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\",\"p_from\":\"2026-10-01\",\"p_to\":\"2026-10-01\"}",
+          "t": 58,
+          "end": 186,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\"}",
+          "t": 58,
+          "end": 193,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 986,
+      "final": {
+        "url": "/painel/19d133e8-c0af-4a6f-810d-741f2812b93b/agenda",
+        "overflow": 0,
+        "headings": [
+          "Agenda",
+          "quinta-feira, 1 de outubro de 2026"
+        ],
+        "alerts": [],
+        "scrollWidth": 320
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "responsive-clientes-320",
+      "viewport": {
+        "width": 320,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Clientes"
+          ],
+          "t": 87
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Clientes"
+          ],
+          "t": 221
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/operations_directory",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\",\"p_search\":\"\",\"p_offset\":0}",
+          "t": 76,
+          "end": 210,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\"}",
+          "t": 76,
+          "end": 216,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1002,
+      "final": {
+        "url": "/painel/19d133e8-c0af-4a6f-810d-741f2812b93b/clientes",
+        "overflow": 0,
+        "headings": [
+          "Clientes"
+        ],
+        "alerts": [],
+        "scrollWidth": 320
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "responsive-atendimento-320",
+      "viewport": {
+        "width": 320,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "t": 348
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_queue",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\",\"p_search\":\"\",\"p_state\":null,\"p_mine\":true,\"p_offset\":0,\"p_view\":\"all\",\"p_date\":null}",
+          "t": 333,
+          "end": 472,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\"}",
+          "t": 333,
+          "end": 480,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1296,
+      "final": {
+        "url": "/painel/19d133e8-c0af-4a6f-810d-741f2812b93b/atendimento",
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "0 atendimentos",
+          "Seu próximo atendimento começa aqui."
+        ],
+        "alerts": [],
+        "scrollWidth": 320
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "responsive-orcamentos-320",
+      "viewport": {
+        "width": 320,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Orçamentos"
+          ],
+          "t": 68
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Orçamentos"
+          ],
+          "t": 202
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/support_context",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\"}",
+          "t": 33,
+          "end": 162,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_requests",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\",\"p_search\":\"\",\"p_offset\":0}",
+          "t": 56,
+          "end": 185,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\"}",
+          "t": 57,
+          "end": 192,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 975,
+      "final": {
+        "url": "/painel/19d133e8-c0af-4a6f-810d-741f2812b93b/orcamentos",
+        "overflow": 0,
+        "headings": [
+          "Orçamentos"
+        ],
+        "alerts": [],
+        "scrollWidth": 320
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "responsive-agenda-768",
+      "viewport": {
+        "width": 768,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Agenda"
+          ],
+          "t": 60
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Agenda"
+          ],
+          "t": 192
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/operations_agenda",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\",\"p_from\":\"2026-10-01\",\"p_to\":\"2026-10-01\"}",
+          "t": 47,
+          "end": 178,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\"}",
+          "t": 47,
+          "end": 182,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 959,
+      "final": {
+        "url": "/painel/19d133e8-c0af-4a6f-810d-741f2812b93b/agenda",
+        "overflow": 0,
+        "headings": [
+          "Agenda",
+          "quinta-feira, 1 de outubro de 2026"
+        ],
+        "alerts": [],
+        "scrollWidth": 768
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "responsive-clientes-768",
+      "viewport": {
+        "width": 768,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Clientes"
+          ],
+          "t": 67
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Clientes"
+          ],
+          "t": 189
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/access_session",
+          "body": "{\"p_activity\":true}",
+          "t": 39,
+          "end": 166,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/operations_directory",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\",\"p_search\":\"\",\"p_offset\":0}",
+          "t": 54,
+          "end": 182,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\"}",
+          "t": 55,
+          "end": 191,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 971,
+      "final": {
+        "url": "/painel/19d133e8-c0af-4a6f-810d-741f2812b93b/clientes",
+        "overflow": 0,
+        "headings": [
+          "Clientes"
+        ],
+        "alerts": [],
+        "scrollWidth": 768
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "responsive-atendimento-768",
+      "viewport": {
+        "width": 768,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Central de atendimento"
+          ],
+          "t": 70
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/central_queue",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\",\"p_search\":\"\",\"p_state\":null,\"p_mine\":true,\"p_offset\":0,\"p_view\":\"all\",\"p_date\":null}",
+          "t": 58,
+          "end": 190,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\"}",
+          "t": 58,
+          "end": 194,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 972,
+      "final": {
+        "url": "/painel/19d133e8-c0af-4a6f-810d-741f2812b93b/atendimento",
+        "overflow": 0,
+        "headings": [
+          "Central de atendimento",
+          "0 atendimentos",
+          "Seu próximo atendimento começa aqui."
+        ],
+        "alerts": [],
+        "scrollWidth": 768
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    },
+    {
+      "id": "responsive-orcamentos-768",
+      "viewport": {
+        "width": 768,
+        "height": 900
+      },
+      "frames": [
+        {
+          "statuses": [
+            "Carregando sua empresa…"
+          ],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Orçamentos"
+          ],
+          "t": 65
+        },
+        {
+          "statuses": [],
+          "shell": true,
+          "home": false,
+          "headings": [
+            "Orçamentos"
+          ],
+          "t": 199
+        }
+      ],
+      "requests": [
+        {
+          "path": "/rest/v1/rpc/operations_requests",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\",\"p_search\":\"\",\"p_offset\":0}",
+          "t": 57,
+          "end": 190,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/onboarding_context",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\"}",
+          "t": 57,
+          "end": 195,
+          "status": 200
+        },
+        {
+          "path": "/rest/v1/rpc/support_context",
+          "body": "{\"p_org\":\"19d133e8-c0af-4a6f-810d-741f2812b93b\"}",
+          "t": 701,
+          "end": 831,
+          "status": 200
+        }
+      ],
+      "errors": [],
+      "durationMs": 1594,
+      "final": {
+        "url": "/painel/19d133e8-c0af-4a6f-810d-741f2812b93b/orcamentos",
+        "overflow": 0,
+        "headings": [
+          "Orçamentos"
+        ],
+        "alerts": [],
+        "scrollWidth": 768
+      },
+      "status": "RECORDED",
+      "duplicates": []
+    }
+  ]
+}

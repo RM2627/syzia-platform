@@ -1,0 +1,646 @@
+[
+  {
+    "action": "home.read",
+    "module": "home",
+    "label": "Ver Home",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa",
+      "own_attendant"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "setup",
+    "delegates_management": true
+  },
+  {
+    "action": "clients.read",
+    "module": "clients",
+    "label": "Ver Clientes",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa",
+      "own_attendant",
+      "shared_attendant"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "software",
+    "delegates_management": true
+  },
+  {
+    "action": "clients.manage",
+    "module": "clients",
+    "label": "Gerenciar Clientes",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa",
+      "own_attendant",
+      "shared_attendant"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "software",
+    "delegates_management": true
+  },
+  {
+    "action": "central.read",
+    "module": "central",
+    "label": "Ver Atendimento",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa",
+      "own_attendant",
+      "shared_attendant"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "software",
+    "delegates_management": true
+  },
+  {
+    "action": "central.manage",
+    "module": "central",
+    "label": "Gerenciar Atendimento",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa",
+      "own_attendant",
+      "shared_attendant"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "software",
+    "delegates_management": true
+  },
+  {
+    "action": "quotes.read",
+    "module": "quotes",
+    "label": "Ver Orçamentos",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa",
+      "own_attendant",
+      "shared_attendant"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "software",
+    "delegates_management": true
+  },
+  {
+    "action": "quotes.manage",
+    "module": "quotes",
+    "label": "Gerenciar Orçamentos",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa",
+      "own_attendant",
+      "shared_attendant"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "software",
+    "delegates_management": true
+  },
+  {
+    "action": "agenda.read",
+    "module": "agenda",
+    "label": "Ver Agenda",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa",
+      "own_attendant",
+      "shared_attendant"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "setup",
+    "delegates_management": true
+  },
+  {
+    "action": "agenda.manage",
+    "module": "agenda",
+    "label": "Gerenciar Agenda",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa",
+      "own_attendant",
+      "shared_attendant"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "setup",
+    "delegates_management": true
+  },
+  {
+    "action": "pending.read",
+    "module": "pending",
+    "label": "Ver Pendências",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa",
+      "own_attendant",
+      "shared_attendant"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "software",
+    "delegates_management": true
+  },
+  {
+    "action": "pending.manage",
+    "module": "pending",
+    "label": "Gerenciar Pendências",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa",
+      "own_attendant",
+      "shared_attendant"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "software",
+    "delegates_management": true
+  },
+  {
+    "action": "followup.read",
+    "module": "followup",
+    "label": "Ver Retornos",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa",
+      "own_attendant",
+      "shared_attendant"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "commercial_followups",
+    "delegates_management": true
+  },
+  {
+    "action": "followup.manage",
+    "module": "followup",
+    "label": "Gerenciar Retornos",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa",
+      "own_attendant",
+      "shared_attendant"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "commercial_followups",
+    "delegates_management": true
+  },
+  {
+    "action": "services.read",
+    "module": "services",
+    "label": "Ver Serviços",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "setup",
+    "delegates_management": true
+  },
+  {
+    "action": "services.manage",
+    "module": "services",
+    "label": "Gerenciar Serviços",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "setup",
+    "delegates_management": true
+  },
+  {
+    "action": "portfolio.read",
+    "module": "portfolio",
+    "label": "Ver Portfólio",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "setup",
+    "delegates_management": true
+  },
+  {
+    "action": "portfolio.manage",
+    "module": "portfolio",
+    "label": "Gerenciar Portfólio",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "setup",
+    "delegates_management": true
+  },
+  {
+    "action": "page.read",
+    "module": "page",
+    "label": "Ver Página pública",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "setup",
+    "delegates_management": true
+  },
+  {
+    "action": "page.manage",
+    "module": "page",
+    "label": "Gerenciar Página pública",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "setup",
+    "delegates_management": true
+  },
+  {
+    "action": "settings.read",
+    "module": "settings",
+    "label": "Ver Configurações",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "setup",
+    "delegates_management": true
+  },
+  {
+    "action": "settings.manage",
+    "module": "settings",
+    "label": "Gerenciar Configurações",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "setup",
+    "delegates_management": true
+  },
+  {
+    "action": "people.read",
+    "module": "people",
+    "label": "Ver Pessoas e acessos",
+    "roles": [
+      "super_admin",
+      "admin_empresa"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "setup",
+    "delegates_management": true
+  },
+  {
+    "action": "people.manage",
+    "module": "people",
+    "label": "Gerenciar Pessoas e acessos",
+    "roles": [
+      "super_admin",
+      "admin_empresa"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "setup",
+    "delegates_management": true
+  },
+  {
+    "action": "central.reply",
+    "module": "central",
+    "label": "Responder ao cliente",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa",
+      "own_attendant",
+      "shared_attendant"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "software",
+    "delegates_management": true
+  },
+  {
+    "action": "quotes.values",
+    "module": "quotes",
+    "label": "Ver valores dos orçamentos",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa",
+      "own_attendant",
+      "shared_attendant"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "software",
+    "delegates_management": true
+  },
+  {
+    "action": "analytics.operational",
+    "module": "analytics",
+    "label": "Ver métricas operacionais",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa",
+      "own_attendant"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "software",
+    "delegates_management": true
+  },
+  {
+    "action": "analytics.financial",
+    "module": "analytics",
+    "label": "Ver métricas financeiras consolidadas",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa",
+      "own_attendant"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "software",
+    "delegates_management": true
+  },
+  {
+    "action": "billing.manage",
+    "module": "billing",
+    "label": "Administrar plano e assinatura",
+    "roles": [
+      "super_admin",
+      "admin_empresa"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "setup",
+    "delegates_management": true
+  },
+  {
+    "action": "finance.accounts.read",
+    "module": "finance",
+    "label": "Ver contas a receber",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa",
+      "own_attendant",
+      "shared_attendant"
+    ],
+    "scopes": [
+      "organization",
+      "assigned"
+    ],
+    "capability": "software",
+    "delegates_management": true
+  },
+  {
+    "action": "finance.history.read",
+    "module": "finance",
+    "label": "Ver histórico financeiro autorizado",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa",
+      "own_attendant",
+      "shared_attendant"
+    ],
+    "scopes": [
+      "organization",
+      "assigned"
+    ],
+    "capability": "software",
+    "delegates_management": true
+  },
+  {
+    "action": "finance.receipts.record",
+    "module": "finance",
+    "label": "Registrar recebimento",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa",
+      "own_attendant",
+      "shared_attendant"
+    ],
+    "scopes": [
+      "organization",
+      "assigned"
+    ],
+    "capability": "software",
+    "delegates_management": true
+  },
+  {
+    "action": "finance.accounts.manage",
+    "module": "finance",
+    "label": "Criar e gerenciar contas",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa",
+      "own_attendant"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "software",
+    "delegates_management": true
+  },
+  {
+    "action": "finance.expenses.read",
+    "module": "finance",
+    "label": "Ver despesas",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa",
+      "own_attendant"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "software",
+    "delegates_management": true
+  },
+  {
+    "action": "finance.expenses.record",
+    "module": "finance",
+    "label": "Registrar despesas",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa",
+      "own_attendant"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "software",
+    "delegates_management": true
+  },
+  {
+    "action": "finance.expenses.manage",
+    "module": "finance",
+    "label": "Gerenciar despesas",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa",
+      "own_attendant"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "software",
+    "delegates_management": true
+  },
+  {
+    "action": "finance.cash.read",
+    "module": "finance",
+    "label": "Ver caixa consolidado",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa",
+      "own_attendant"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "software",
+    "delegates_management": true
+  },
+  {
+    "action": "finance.receipts.summary",
+    "module": "finance",
+    "label": "Ver recebimentos consolidados",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa",
+      "own_attendant"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "software",
+    "delegates_management": true
+  },
+  {
+    "action": "finance.result.read",
+    "module": "finance",
+    "label": "Ver resultado do período",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa",
+      "own_attendant"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "software",
+    "delegates_management": true
+  },
+  {
+    "action": "finance.calculators",
+    "module": "finance",
+    "label": "Usar calculadoras",
+    "roles": [
+      "super_admin",
+      "admin_empresa",
+      "colaborador_empresa",
+      "own_attendant"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "software",
+    "delegates_management": true
+  },
+  {
+    "action": "finance.receipts.reverse",
+    "module": "finance",
+    "label": "Estornar recebimento confirmado",
+    "roles": [
+      "super_admin",
+      "admin_empresa"
+    ],
+    "scopes": [
+      "organization"
+    ],
+    "capability": "software",
+    "delegates_management": true
+  }
+]

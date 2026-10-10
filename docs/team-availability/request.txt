@@ -1,0 +1,578 @@
+EXCEÇÃO CONTROLADA AO FEATURE FREEZE — SYZIA
+DISPONIBILIDADE DA EQUIPE + LIMITES DO ASSISTIDO SYZIA
+
+Base obrigatória:
+SYZIA-044-UX001-Feature-Freeze-Consolidado
+
+A SYZIA está em FEATURE FREEZE FUNCIONAL PRÉ-LANÇAMENTO.
+
+Estou autorizando uma exceção pontual ao freeze para implementar DUAS lacunas que identifiquei antes da comercialização:
+
+1. disponibilidade/horário operacional individual dos funcionários da empresa;
+2. horário, escopo e limite configurável do atendimento compartilhado do Assistido SYZIA.
+
+NÃO reabra desenvolvimento geral.
+NÃO faça redesign.
+NÃO altere funcionalidades fora deste escopo.
+NÃO faça deploy.
+NÃO integre pagamento nesta rodada.
+
+==================================================
+1. DISPONIBILIDADE DO FUNCIONÁRIO
+==================================================
+
+Isto NÃO é controle de ponto.
+
+Não criar:
+- ponto eletrônico;
+- folha;
+- banco de horas;
+- hora extra;
+- controle trabalhista;
+- salário;
+- módulo de RH.
+
+A funcionalidade deve ser apresentada como:
+
+“Disponibilidade para atendimentos”
+
+O objetivo é a Agenda saber quando determinado funcionário pode receber/executar um atendimento.
+
+Na gestão do funcionário próprio da empresa, preferencialmente em:
+
+Pessoas e acessos → funcionário → Disponibilidade para atendimentos
+
+adicionar:
+
+[ ] Usar horário geral da empresa
+
+Essa opção deve vir ATIVA por padrão.
+
+Se estiver ativa:
+o funcionário herda a disponibilidade geral da empresa.
+
+Se estiver desativada:
+permitir configurar horário próprio por dia da semana.
+
+Exemplo:
+
+Segunda
+08:00–12:00
+13:00–17:00
+
+Terça
+08:00–12:00
+
+Quarta
+Não atende
+
+Permitir mais de um intervalo no mesmo dia para representar almoço/pausas sem transformar isso em controle de ponto.
+
+==================================================
+2. INTEGRAÇÃO COM A AGENDA
+==================================================
+
+Quando houver responsável/funcionário aplicável ao atendimento, um horário só pode ser válido se couber integralmente na interseção de:
+
+horário da empresa
+∩ disponibilidade do funcionário
+∩ bloqueios existentes
+∩ capacidade/recursos
+∩ duração do serviço
+∩ buffer
+∩ conflitos/agendamentos existentes.
+
+NÃO criar outro motor de disponibilidade.
+
+Integrar a disponibilidade individual ao motor atual da Agenda.
+
+IMPORTANTE:
+
+Não tornar funcionário obrigatório em fluxos que atualmente podem ser agendados sem responsável individual.
+
+Preserve a semântica atual.
+
+==================================================
+3. VALIDAÇÃO REAL
+==================================================
+
+Não implementar somente no frontend.
+
+A disponibilidade deve ser revalidada server-side ao:
+
+- criar agendamento;
+- atribuir responsável;
+- trocar responsável;
+- remarcar;
+- replanejar;
+- confirmar horário;
+- confirmar reserva.
+
+Se não couber:
+
+“Este profissional não está disponível durante todo o período selecionado.”
+
+ou mensagem equivalente.
+
+A operação deve falhar atomicamente e preservar o estado anterior.
+
+==================================================
+4. CONFLITO DO FUNCIONÁRIO
+==================================================
+
+Um mesmo funcionário não pode ficar reservado simultaneamente em dois atendimentos incompatíveis apenas porque a empresa possui capacidade geral para dois clientes.
+
+Preservar qualquer exceção somente se ela já existir explicitamente no modelo atual.
+
+==================================================
+5. SERVIÇOS EM MÚLTIPLOS PERÍODOS
+==================================================
+
+Preservar completamente:
+
+- serviços divisíveis;
+- atomicidade;
+- duração;
+- buffer;
+- ordem das partes;
+- replanejamento;
+- histórico;
+- AUD-002;
+- AUD-003.
+
+Cada período deve respeitar a disponibilidade do responsável conforme o modelo atual.
+
+Não inventar uma nova arquitetura de responsáveis entre partes.
+
+==================================================
+6. ALTERAÇÃO DO HORÁRIO DO FUNCIONÁRIO
+==================================================
+
+Se o ADM alterar o horário de um funcionário que já possui agendamentos futuros:
+
+NÃO mover;
+NÃO cancelar;
+NÃO apagar;
+NÃO modificar silenciosamente.
+
+Preservar os agendamentos existentes e avisar que existem compromissos fora da nova disponibilidade.
+
+Qualquer remarcação deve ser decisão explícita.
+
+==================================================
+7. INDISPONIBILIDADE PONTUAL
+==================================================
+
+Primeiro verifique se os bloqueios existentes da Agenda podem ser reutilizados para um funcionário/responsável específico.
+
+Se sim, reutilize.
+
+Se não, implemente somente o mínimo necessário para:
+
+- indisponível o dia inteiro;
+- indisponível em determinado intervalo/data.
+
+NÃO criar férias, atestado ou módulo de RH.
+
+==================================================
+8. PERMISSÕES
+==================================================
+
+ADM/gestor autorizado pode configurar disponibilidade de FUNCIONÁRIOS PRÓPRIOS conforme os grants existentes.
+
+O ADM da empresa NÃO pode editar horário global da Equipe SYZIA.
+
+Preservar:
+
+Funcionário próprio da empresa ≠ Equipe SYZIA global.
+
+==================================================
+9. HORÁRIO DA EQUIPE SYZIA
+==================================================
+
+O atendimento compartilhado também precisa ter disponibilidade própria.
+
+Criar configuração global, administrada pelo Super Admin, para:
+
+- dias atendidos;
+- um ou mais intervalos por dia;
+- timezone;
+- ativo/inativo;
+- estado/mensagem fora do horário.
+
+NÃO hardcodar horário no frontend.
+
+Fora do horário humano:
+
+- página pública continua;
+- FAQ continua;
+- autoatendimento continua;
+- cliente pode continuar enviando solicitação;
+- mensagens podem continuar sendo registradas;
+- NÃO indicar falsamente que há atendente humano disponível naquele instante.
+
+O atendimento compartilhado deve aguardar o próximo período disponível conforme as regras existentes.
+
+Não prometer atendimento humano 24 horas.
+
+==================================================
+10. ESCOPO DO ASSISTIDO SYZIA
+==================================================
+
+A Equipe SYZIA continua atuando somente dentro das permissões/autonomia concedidas.
+
+Pode atuar em:
+
+- dúvidas;
+- informações;
+- triagem;
+- acompanhamento;
+- respostas autorizadas;
+- organização do atendimento;
+- ações explicitamente concedidas.
+
+Continua PROIBIDO arbitrar preço técnico de serviço “a partir de” ou “sob consulta” quando a decisão pertence à empresa.
+
+==================================================
+11. LIMITE DO ATENDIMENTO COMPARTILHADO
+==================================================
+
+Não quero vender “atendimento humano ilimitado”.
+
+Porém, EU AINDA NÃO DEFINI o número comercial definitivo.
+
+Portanto:
+
+NÃO escolha 20, 40, 50, 100 ou qualquer outro número em meu nome.
+
+Implemente a CAPACIDADE DE CONFIGURAR o limite sem nova alteração de código.
+
+O limite deve ser:
+
+- configurável por versão/plano Assistido;
+- configurável somente pelo Super Admin autorizado;
+- por ciclo;
+- auditável;
+- consultável;
+- com aviso de aproximação;
+- com estado de limite atingido.
+
+==================================================
+12. O QUE CONTA COMO ATENDIMENTO
+==================================================
+
+NÃO contar mensagem individual.
+
+Cinco mensagens dentro da mesma conversa NÃO podem consumir cinco unidades.
+
+Inspecione o modelo atual e utilize preferencialmente algo equivalente a:
+
+“1 ticket/atendimento compartilhado assumido pela Equipe SYZIA dentro do ciclo”
+
+ou entidade equivalente já existente.
+
+Documente EXATAMENTE o que conta como 1 unidade.
+
+==================================================
+13. QUANDO O LIMITE FOR ATINGIDO
+==================================================
+
+O limite NÃO pode:
+
+- bloquear a página pública;
+- impedir solicitação;
+- apagar ticket;
+- apagar mensagem;
+- bloquear autoatendimento;
+- impedir a própria empresa de atender seus clientes.
+
+O limite restringe somente NOVA ATUAÇÃO HUMANA COMPARTILHADA DA EQUIPE SYZIA.
+
+A empresa continua podendo atender normalmente com sua própria equipe.
+
+Não criar cobrança automática por excedente nesta rodada.
+
+==================================================
+14. CONSUMO
+==================================================
+
+Preparar visualização interna equivalente a:
+
+“Atendimento compartilhado
+32 de 40 utilizados neste ciclo”
+
+ATENÇÃO:
+32/40 é apenas EXEMPLO VISUAL.
+
+40 NÃO é o limite aprovado.
+
+Permitir também aviso de aproximação do limite.
+
+==================================================
+15. CICLO
+==================================================
+
+O consumo deve ser modelado para funcionar futuramente com o ciclo da assinatura.
+
+Ainda NÃO integrar Mercado Pago.
+
+Não acoplar esta implementação a um provider específico.
+
+A futura integração de checkout/webhook deverá conseguir informar/iniciar o ciclo sem exigir reconstrução dessa funcionalidade.
+
+==================================================
+16. PLANOS
+==================================================
+
+NÃO alterar nesta rodada:
+
+- Essencial;
+- Profissional;
+- Equipe;
+- Assistido SYZIA;
+- preços;
+- trial.
+
+Não criar plano novo.
+
+Não inventar novo bloqueio comercial para a disponibilidade individual.
+
+Ela deve funcionar para os membros que a empresa já pode possuir conforme sua configuração atual.
+
+==================================================
+17. SUPER ADMIN
+==================================================
+
+No local global apropriado, permitir configurar para o Assistido SYZIA:
+
+- atendimento compartilhado ativo/inativo;
+- disponibilidade semanal;
+- timezone;
+- limite por ciclo;
+- unidade utilizada;
+- aviso/threshold;
+- consumo por empresa;
+- auditoria necessária.
+
+ADM empresarial NÃO altera essas configurações globais.
+
+==================================================
+18. UX DA AGENDA
+==================================================
+
+Para a empresa, quando possível, diferenciar:
+
+- empresa fechada;
+- profissional indisponível;
+- conflito;
+- duração não cabe;
+- bloqueio.
+
+Para o consumidor, não expor detalhes internos desnecessários.
+
+Mensagem pública pode continuar simples:
+
+“Não há disponibilidade para este horário. Escolha outra opção.”
+
+==================================================
+19. PERFORMANCE
+==================================================
+
+Preservar integralmente:
+
+- PERF-001 a PERF-013;
+- UX-001;
+- shell estável;
+- gate cumulativo vigente.
+
+NÃO fazer uma request sequencial por funcionário para montar disponibilidade.
+
+Preferir consulta agregada/server-side compatível com a arquitetura atual.
+
+==================================================
+20. SEGURANÇA
+==================================================
+
+Testar obrigatoriamente:
+
+- Empresa A não vê disponibilidade B;
+- Empresa A não edita funcionário B;
+- ADM empresarial não altera horário global SYZIA;
+- sem grant não altera disponibilidade;
+- vínculo revogado bloqueia;
+- URL direta não contorna;
+- RPC direta não contorna;
+- Super Admin autorizado configura política global;
+- sem vazamento cross-tenant.
+
+==================================================
+21. MIGRATION
+==================================================
+
+Se precisar alterar banco:
+
+- usar a próxima migration incremental disponível;
+- não renumerar migrations;
+- não alterar migrations históricas;
+- transacional;
+- compatível com banco populado;
+- sem reset;
+- defaults seguros.
+
+Não criar migration apenas para numerar esta rodada.
+
+==================================================
+22. TESTES OBRIGATÓRIOS — FUNCIONÁRIOS
+==================================================
+
+Testar:
+
+1. funcionário herdando horário da empresa;
+2. horário personalizado;
+3. dia sem atendimento;
+4. dois intervalos;
+5. serviço cabe no primeiro;
+6. serviço atravessa intervalo e é negado;
+7. serviço cabe no segundo;
+8. conflito com atendimento existente;
+9. empresa fechada;
+10. funcionário disponível + empresa fechada;
+11. empresa aberta + funcionário indisponível;
+12. duração + buffer;
+13. remarcação;
+14. troca de responsável;
+15. múltiplos períodos;
+16. mudança de horário não move reserva existente;
+17. indisponibilidade pontual, se implementada;
+18. atendimento sem responsável continua funcionando conforme regra atual;
+19. isolamento A/B;
+20. revogação/grants;
+21. desktop;
+22. mobile.
+
+==================================================
+23. TESTES OBRIGATÓRIOS — ASSISTIDO
+==================================================
+
+Testar:
+
+- horário global configurado por Super Admin;
+- ADM não edita horário global;
+- autoatendimento fora do horário;
+- não indicar humano disponível fora do horário;
+- atuação dentro do horário;
+- um atendimento compartilhado consome uma unidade;
+- várias mensagens do mesmo atendimento não multiplicam consumo;
+- consumo por empresa;
+- consumo por ciclo;
+- aviso de aproximação;
+- limite atingido;
+- empresa própria continua atendendo;
+- consumidor continua enviando solicitação/mensagem;
+- Equipe SYZIA não assume novo atendimento acima do limite;
+- nenhuma cobrança excedente automática;
+- plano sem Assistido não recebe atendimento compartilhado;
+- downgrade preserva histórico;
+- isolamento A/B;
+- auditoria do consumo.
+
+==================================================
+24. REGRESSÃO
+==================================================
+
+Depois execute:
+
+- testes focados;
+- Agenda;
+- contratação direta;
+- avaliação;
+- proposta;
+- aprovação;
+- múltiplos períodos;
+- remarcação;
+- UX-001;
+- Equipe SYZIA;
+- autonomia/grants;
+- planos/capabilities;
+- Home;
+- mobile;
+- npm run test:current-gate;
+- build/typecheck.
+
+Não afrouxar testes para obter verde.
+
+==================================================
+25. NÃO FAZER
+==================================================
+
+NÃO:
+
+- integrar Mercado Pago;
+- criar checkout;
+- mudar preços;
+- mudar trial;
+- criar ponto;
+- criar RH;
+- criar folha;
+- criar cobrança excedente;
+- criar plano novo;
+- alterar UX-002;
+- fazer deploy;
+- publicar.
+
+==================================================
+26. ENTREGA
+==================================================
+
+Entregar:
+
+- projeto consolidado;
+- migration incremental somente se necessária;
+- guia de atualização sem reset;
+- RELATORIO-DISPONIBILIDADE-EQUIPE-ASSISTIDO.md;
+- inventário de arquivos alterados;
+- matriz de testes;
+- evidências desktop/mobile;
+- resultado do gate;
+- definição exata da unidade de consumo;
+- guia para configurar disponibilidade e limite.
+
+No relatório, destacar:
+
+PENDENTE DO PROPRIETÁRIO:
+1. quantidade incluída de atendimentos compartilhados por ciclo;
+2. horário comercial definitivo da Equipe SYZIA;
+3. eventual política futura de excedente.
+
+NÃO decida esses três valores em meu nome.
+
+==================================================
+27. RETORNO AO FEATURE FREEZE
+==================================================
+
+Se:
+
+- disponibilidade individual funcionar;
+- Agenda respeitar a disponibilidade;
+- horário global do atendimento compartilhado funcionar;
+- limite for configurável;
+- segurança/isolamento passarem;
+- gate cumulativo passar;
+- não surgir crítico/alto novo;
+
+declarar:
+
+SYZIA — FEATURE FREEZE RESTABELECIDO
+
+Depois disso a próxima etapa será, separadamente:
+
+fechamento comercial dos planos
+→ provider/checkout
+→ homologação externa
+→ lançamento.
+
+NÃO iniciar essas etapas automaticamente.
+
+Depois de implementar, testar, documentar e entregar:
+
+PARAR.
