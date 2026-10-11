@@ -136,7 +136,11 @@ export function SelfService() {
     );
     if (!a) throw Error("access_denied");
     await accessApi("/access/context", { account_id: a.id });
-    window.location.assign("/painel/" + draft.organization_id + (choices.some(p => p.billing047) ? "/assinatura" : ""));
+    window.location.assign(
+      "/painel/" +
+        draft.organization_id +
+        (choices.some((p) => p.billing047) ? "/assinatura" : ""),
+    );
   }
   return (
     <SiteFrame title="Criar minha empresa — SYZIA">
@@ -241,7 +245,13 @@ export function SelfService() {
                 />
               </label>
               <Captcha onToken={setCaptcha} />
+              <p className="sy-signup-next" id="signup-next">
+                Depois, você cadastra sua empresa, escolhe o plano e configura
+                serviços, horários e identidade visual. Se for solicitada
+                confirmação por e-mail, confirme o endereço para continuar.
+              </p>
               <button
+                aria-describedby="signup-next"
                 className="sy-button sy-primary"
                 disabled={busy || (captchaConfigured && !captcha)}
               >
@@ -433,7 +443,13 @@ export function SelfService() {
                   ? "/mês"
                   : `a cada ${draft.plan.interval_months} meses`}
               </p>
-              {["review", "ineligible"].includes(draft.state) && !(choices.some(p => p.billing047) && ["previous_identity", "previous_grant"].includes(draft.eligibility)) ? (
+              {["review", "ineligible"].includes(draft.state) &&
+              !(
+                choices.some((p) => p.billing047) &&
+                ["previous_identity", "previous_grant"].includes(
+                  draft.eligibility,
+                )
+              ) ? (
                 <p>
                   {[
                     "previous_identity",
@@ -449,16 +465,26 @@ export function SelfService() {
               ) : (
                 <>
                   <p>
-                    {["previous_identity", "previous_grant"].includes(draft.eligibility)
-                      ? "O período gratuito já foi utilizado. A próxima etapa mostrará a contratação mensal sem novo trial."
-                      : <><strong>{draft.plan.trial_days} dias grátis</strong> a partir da confirmação, para empresas elegíveis. A elegibilidade será conferida novamente ao concluir.</>}
+                    {["previous_identity", "previous_grant"].includes(
+                      draft.eligibility,
+                    ) ? (
+                      "O período gratuito já foi utilizado. A próxima etapa mostrará a contratação mensal sem novo trial."
+                    ) : (
+                      <>
+                        <strong>{draft.plan.trial_days} dias grátis</strong> a
+                        partir da confirmação, para empresas elegíveis. A
+                        elegibilidade será conferida novamente ao concluir.
+                      </>
+                    )}
                   </p>
                   <p>
                     Plano {draft.plan.name}: {brl(draft.plan.price_cents)}
                     {draft.plan.interval_months === 1
                       ? "/mês"
                       : ` a cada ${draft.plan.interval_months} meses`}{" "}
-                    {choices.some(p => p.billing047) ? "com meio de pagamento vinculado desde o início. Sua assinatura e eventual período gratuito serão confirmados na próxima etapa." : "na contratação após o período gratuito. Esta confirmação não registra pagamento."}
+                    {choices.some((p) => p.billing047)
+                      ? "com meio de pagamento vinculado desde o início. Sua assinatura e eventual período gratuito serão confirmados na próxima etapa."
+                      : "na contratação após o período gratuito. Esta confirmação não registra pagamento."}
                   </p>
                   <form
                     onSubmit={(e) => {
@@ -469,7 +495,9 @@ export function SelfService() {
                             p_id: draft.id,
                             p_revision: draft.revision,
                             p_consent: true,
-                            p_conditions: choices.some(p => p.billing047) ? "billing-047" : "selfservice-040",
+                            p_conditions: choices.some((p) => p.billing047)
+                              ? "billing-047"
+                              : "selfservice-040",
                           }),
                         ),
                       );
@@ -483,7 +511,9 @@ export function SelfService() {
                       </span>
                     </label>
                     <button className="sy-button sy-primary" disabled={busy}>
-                      {choices.some(p => p.billing047) ? "Preparar empresa e vincular meio de pagamento" : "Ativar período grátis e preparar empresa"}
+                      {choices.some((p) => p.billing047)
+                        ? "Preparar empresa e vincular meio de pagamento"
+                        : "Ativar período grátis e preparar empresa"}
                     </button>
                   </form>
                 </>

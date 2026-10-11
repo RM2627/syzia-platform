@@ -1,3 +1,7 @@
+import {
+  ServiceChecklistEditor,
+  type ServiceChecklistModel,
+} from "./ServiceChecklistEditor";
 import { ServiceRelations } from "./ServiceRelations";
 import { ImageUpload } from "../consumer/CompanyMedia";
 import { PaymentMethods } from "./PaymentMethods";
@@ -540,7 +544,13 @@ function Progress() {
   return (
     <div className="progress-card">
       <div>
-        <strong>{data.settings?.support_configured && data.settings.support_mode !== "own" ? "Suporte compartilhado" : "Configuração"} {percent}% concluída</strong>
+        <strong>
+          {data.settings?.support_configured &&
+          data.settings.support_mode !== "own"
+            ? "Suporte compartilhado"
+            : "Configuração"}{" "}
+          {percent}% concluída
+        </strong>
         <span>
           {done} de {entries.length} verificações atendidas
         </span>
@@ -576,7 +586,7 @@ function RecordForm({
   fields: Descriptor[];
   defaults?: Record<string, unknown>;
   extra?: Record<string, unknown>;
-  onDone?: () => void;
+  onDone?: (id?: string) => void;
 }) {
   const { data, busy, save, org, reload } = useCompany();
   const draft = useDraft<Record<string, unknown>>(
@@ -605,6 +615,35 @@ function RecordForm({
   const values = draft.value,
     setValues = draft.set;
   const [err, setErr] = useState("");
+  const [model, setModel] = useState<ServiceChecklistModel>();
+  const [modelError, setModelError] = useState("");
+  const [modelReload, setModelReload] = useState(0);
+  const [serviceBusy, setServiceBusy] = useState(false);
+  const servicePending = useRef<any>(undefined),
+    serviceRunning = useRef(false);
+  useEffect(() => {
+    if (entity !== "service") return;
+    let gone = false;
+    setModel(undefined);
+    setModelError("");
+    if (!row?.id) {
+      setModel({ revision: 0, items: [] });
+      return;
+    }
+    void rpc<ServiceChecklistModel>("company_service_checklist", {
+      p_org: org.id,
+      p_service: row.id,
+    })
+      .then((value) => {
+        if (!gone) setModel(value);
+      })
+      .catch((error) => {
+        if (!gone) setModelError(errorMessage(error));
+      });
+    return () => {
+      gone = true;
+    };
+  }, [entity, org.id, row?.id, modelReload]);
   const [newCategory, setNewCategory] = useState(false),
     [categoryName, setCategoryName] = useState(""),
     [categoryBusy, setCategoryBusy] = useState(false),
@@ -658,6 +697,7 @@ function RecordForm({
     setValues((current) => ({ ...current, [k]: v }));
   async function submit(e: FormEvent) {
     e.preventDefault();
+    if (serviceRunning.current) return;
     setErr("");
     try {
       const payload: Record<string, unknown> = { ...extra };
@@ -721,6 +761,44 @@ function RecordForm({
         setErr("Informe pelo menos duas opções diferentes.");
         return;
       }
+      if (entity === "service") {
+        if (!model) return;
+        serviceRunning.current = true;
+        setServiceBusy(true);
+        const args = servicePending.current || {
+          p_org: org.id,
+          p_id: row?.id || null,
+          p_expected_revision: revision,
+          p_data: payload,
+          p_checklist_revision: model.revision,
+          p_items: model.items,
+          p_key: crypto.randomUUID(),
+        };
+        servicePending.current = args;
+        try {
+          const result = await rpc<{
+            id: string;
+            checklist: ServiceChecklistModel;
+          }>("company_service_save_with_checklist", args);
+          servicePending.current = undefined;
+          setModel(result.checklist);
+          draft.saved();
+          await reload();
+          onDone?.(result.id);
+        } catch (error) {
+          if ((error as any).code) servicePending.current = undefined;
+          if ((error as any).code === "40001") await reload();
+          setErr(
+            (error as any).code === "40001"
+              ? "O serviço ou o modelo mudou em outra sessão. Seu rascunho foi preservado; carregue a atualização antes de salvar."
+              : errorMessage(error),
+          );
+        } finally {
+          serviceRunning.current = false;
+          setServiceBusy(false);
+        }
+        return;
+      }
       if (await save(entity, row?.id || null, payload, revision)) {
         draft.saved();
         onDone?.();
@@ -731,7 +809,13 @@ function RecordForm({
   }
   return (
     <form onSubmit={submit}>
-      <DraftConflict conflict={draft.conflict} discard={draft.discard} />
+      <DraftConflict
+        conflict={draft.conflict}
+        discard={() => {
+          draft.discard();
+          setModelReload((n) => n + 1);
+        }}
+      />
       {err && (
         <p className="notice error" role="alert">
           {err}
@@ -739,7 +823,13 @@ function RecordForm({
       )}
       <fieldset
         className="form-reset"
-        disabled={!data.editable || busy || categoryBusy}
+        disabled={
+          !data.editable ||
+          busy ||
+          categoryBusy ||
+          serviceBusy ||
+          !!servicePending.current
+        }
       >
         <div className="form-grid">
           {fields.map((f) => {
@@ -899,11 +989,15 @@ function RecordForm({
                     inputMode={f.type === "money" ? "decimal" : undefined}
                     required={
                       f.type === "money"
-                        ? values.price_mode !== "quote"
+                        ? f.key !== "price_max_cents" &&
+                          values.price_mode !== "quote"
                         : f.required
                     }
                     disabled={
-                      f.type === "money" && values.price_mode === "quote"
+                      f.type === "money" &&
+                      (values.price_mode === "quote" ||
+                        (f.key === "price_max_cents" &&
+                          values.price_mode !== "from"))
                     }
                     min={f.min ?? 0}
                     max={f.type === "number" ? f.max : undefined}
@@ -917,15 +1011,45 @@ function RecordForm({
             );
           })}
         </div>
+        {entity === "service" && (
+          <ServiceChecklistEditor
+            model={model}
+            error={modelError}
+            retry={() => setModelReload((n) => n + 1)}
+            change={(value) => {
+              setModel(value);
+              draft.set((current) => ({ ...current }));
+            }}
+          />
+        )}
+        {servicePending.current && !serviceBusy && (
+          <p role="status">
+            A confirmação está pendente. Salve novamente para consultar o
+            resultado da mesma alteração antes de fazer outra.
+          </p>
+        )}
         {data.editable && (
           <button
             className="primary"
-            disabled={imageBusy || categoryBusy || newCategory}
+            disabled={
+              imageBusy ||
+              categoryBusy ||
+              newCategory ||
+              (entity === "service" && !model)
+            }
           >
             {row ? "Salvar alterações" : "Adicionar"}
           </button>
         )}
       </fieldset>
+      {servicePending.current && !serviceBusy && (
+        <button
+          type="button"
+          onClick={() => void submit({ preventDefault() {} } as FormEvent)}
+        >
+          Confirmar salvamento anterior
+        </button>
+      )}
     </form>
   );
 }
@@ -1056,6 +1180,9 @@ function Catalog() {
           <RecordForm
             key={selected}
             entity="service"
+            onDone={(id) => {
+              if (id) setSelected(id);
+            }}
             row={row}
             fields={serviceFields.map((f) =>
               f.key === "category_id"
@@ -1431,9 +1558,10 @@ function PermissionsForm() {
       <h2>Autonomia da equipe de atendimento</h2>
       <p>
         Este é o teto da empresa. Cada pessoa também precisa das permissões
-        individuais, do vínculo ativo e das capacidades do plano. Para sua equipe
-        própria, os limites salvos valem sem publicação do Manual. A Equipe SYZIA
-        compartilhada também depende das orientações publicadas; revogações valem imediatamente.
+        individuais, do vínculo ativo e das capacidades do plano. Para sua
+        equipe própria, os limites salvos valem sem publicação do Manual. A
+        Equipe SYZIA compartilhada também depende das orientações publicadas;
+        revogações valem imediatamente.
       </p>
       <p>
         Faixas precisam de limite superior cadastrado e publicado. Condições são
@@ -1442,7 +1570,8 @@ function PermissionsForm() {
       </p>
       <p className="muted">
         Somente ações concedidas ficam autorizadas. Novas permissões da Equipe
-        SYZIA compartilhada exigem uma nova publicação do Manual e revisão de prontidão.
+        SYZIA compartilhada exigem uma nova publicação do Manual e revisão de
+        prontidão.
       </p>
       <DraftConflict conflict={draft.conflict} discard={draft.discard} />
       <form
@@ -1540,11 +1669,15 @@ function ManualEditor() {
     <>
       <section className="card">
         <h2>Manual da empresa — Opcional</h2>
-        <p>Organize informações e orientações para sua equipe consultar quando necessário.</p>
+        <p>
+          Organize informações e orientações para sua equipe consultar quando
+          necessário.
+        </p>
         <p className="muted">
           Versões publicadas são preservadas. Crie uma revisão para atualizar
           orientações. O Manual não impede a operação da equipe própria. Para
-          habilitar o suporte compartilhado SYZIA, publique as orientações necessárias.
+          habilitar o suporte compartilhado SYZIA, publique as orientações
+          necessárias.
         </p>
         <div className="record-list">
           {data.manuals.map((v) => (
@@ -1790,12 +1923,21 @@ function Readiness() {
     <>
       <Progress />
       <section className="card">
-        <h2>{shared ? "Prontidão do suporte compartilhado SYZIA" : "Configuração da equipe própria"}</h2>
-        <p>O Manual é opcional para a equipe própria. As exigências de orientação publicada se aplicam somente à atuação da Equipe SYZIA compartilhada.</p>
+        <h2>
+          {shared
+            ? "Prontidão do suporte compartilhado SYZIA"
+            : "Configuração da equipe própria"}
+        </h2>
+        <p>
+          O Manual é opcional para a equipe própria. As exigências de orientação
+          publicada se aplicam somente à atuação da Equipe SYZIA compartilhada.
+        </p>
         <p className={ready ? "notice" : "notice error"}>
           {ready
             ? "A empresa atende aos requisitos de configuração."
-            : shared ? "O suporte compartilhado ainda precisa de configuração. Sua empresa pode continuar operando com a própria equipe." : "Revise os dados mínimos, serviços e horários da empresa."}
+            : shared
+              ? "O suporte compartilhado ainda precisa de configuração. Sua empresa pode continuar operando com a própria equipe."
+              : "Revise os dados mínimos, serviços e horários da empresa."}
         </p>
         <ul className="checklist">
           {Object.entries(data.checklist).map(([key, ok]) => {
@@ -1859,8 +2001,8 @@ function Readiness() {
         )}
         <p className="muted">
           A FAQ pode permanecer disponível sem equipe vinculada. O atendimento
-          compartilhado exige todos os itens acima; o servidor verifica os requisitos
-          novamente ao salvar.
+          compartilhado exige todos os itens acima; o servidor verifica os
+          requisitos novamente ao salvar.
         </p>
       </section>
     </>

@@ -1,21 +1,15 @@
+import { quoteContactMessage, trackingContactMessage } from "./contactMessages";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { rpc, supabase as client, errorMessage } from "../api";
 import { crpc, gateway } from "../consumer/api";
-import { whatsappHref } from "../consumer/phone";
+import { whatsappHref, formatPhone } from "../consumer/phone";
 import { DocumentButton } from "../documents/DocumentButton";
 import { Dialog } from "../ui/Dialog";
 import { useVisiblePolling } from "../ui/useVisiblePolling";
 import "./booking-extras.css";
 const at = (v: string) =>
   new Date(v).toLocaleString("pt-BR", { timeZone: "America/Recife" });
-const money = (v: number | null) =>
-  v == null
-    ? "sob consulta"
-    : new Intl.NumberFormat("pt-BR", {
-        style: "currency",
-        currency: "BRL",
-      }).format(v / 100);
 export function AttendanceBadge({ attendance }: { attendance?: any }) {
   return attendance?.confirmed ? (
     <p className="attendance-confirmed">
@@ -102,46 +96,118 @@ export function RequestContact({
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   const [share, setShare] = useState<string>();
+  const [tracking, setTracking] = useState<{ url: string; expires: string }>();
+  const [confirmLink, setConfirmLink] = useState(false),
+    [copied, setCopied] = useState(false);
+  const running = useRef(false),
+    generation = useRef(0);
   useEffect(() => {
-    let gone = false;
+    const g = ++generation.current;
     setData(undefined);
     setShare(undefined);
+    setTracking(undefined);
+    setCopied(false);
+    setError("");
     void rpc("operations_request_contact", { p_org: org, p_code: request })
       .then((v) => {
-        if (!gone) setData(v);
+        if (g === generation.current) setData(v);
       })
       .catch(() => {});
     return () => {
-      gone = true;
+      generation.current++;
     };
   }, [org, request, version?.code]);
   const href = whatsappHref(data?.phone || "");
   async function prepare() {
+    if (running.current) return;
+    running.current = true;
     setBusy(true);
     setError("");
+    const g = generation.current;
     try {
       const d: any = await rpc("consumer_document", {
         p_code: request,
         p_kind: "quote",
         p_reference: version.code,
       });
-      setShare(
-        whatsappHref(
-          data.phone,
-          `${d.company.name} — solicitação ${d.request}. ${d.status}, versão ${d.content.version}. Valor ${d.content.price_mode === "from" ? "a partir de " : ""}${money(d.content.total_cents)}. Segue o orçamento em PDF para sua consulta.`,
-        ) || undefined,
+      if (g === generation.current) setShare(quoteContactMessage(d));
+    } catch (e) {
+      if (g === generation.current) setError(errorMessage(e));
+    } finally {
+      running.current = false;
+      setBusy(false);
+    }
+  }
+  async function copy(url: string) {
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+    } catch {
+      setCopied(false);
+      setError(
+        "Selecione e copie o link no campo abaixo. Seu navegador não permitiu a cópia automática.",
       );
+    }
+  }
+  async function issue() {
+    if (running.current) return;
+    running.current = true;
+    setBusy(true);
+    setError("");
+    const g = generation.current;
+    try {
+      const r: any = await rpc("operations_tracking_link", {
+        p_org: org,
+        p_code: request,
+        p_action: "issue",
+      });
+      if (g !== generation.current) return;
+      const url = `${location.origin}/acompanhar/${encodeURIComponent(r.code)}#secret=${encodeURIComponent(r.secret)}`;
+      setTracking({ url, expires: r.expires_at });
+      setConfirmLink(false);
+      await copy(url);
+    } catch (e) {
+      if (g === generation.current) setError(errorMessage(e));
+    } finally {
+      running.current = false;
+      setBusy(false);
+    }
+  }
+  async function revoke() {
+    if (running.current) return;
+    running.current = true;
+    setBusy(true);
+    setError("");
+    try {
+      await rpc("operations_tracking_link", {
+        p_org: org,
+        p_code: request,
+        p_action: "revoke",
+      });
+      setTracking(undefined);
+      setCopied(false);
     } catch (e) {
       setError(errorMessage(e));
     } finally {
+      running.current = false;
       setBusy(false);
     }
   }
   return (
-    <div className="request-contact">
+    <section className="request-contact" aria-label="Contato com o cliente">
+      <h2>Contato com o cliente</h2>
       {href ? (
         <>
-          <a href={href} target="_blank" rel="noopener noreferrer">
+          <p>
+            {data.name && <strong>{data.name} · </strong>}
+            {formatPhone(data.phone)}
+          </p>
+          <a
+            className="whatsapp-button"
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Conversar pelo WhatsApp
           </a>
           {version && (
@@ -155,35 +221,136 @@ export function RequestContact({
           )}
         </>
       ) : (
-        <small>
-          WhatsApp indisponível: contato ausente, inválido ou sem autorização
-          para este acesso.
-        </small>
+        <p>
+          <small>
+            WhatsApp indisponível: contato ausente, inválido ou sem autorização
+            para este acesso.
+          </small>
+        </p>
       )}
-      {share && (
+      {share && href && (
         <div>
+          <p className="share-message">{share}</p>
           <p>
-            Revise o texto no WhatsApp e confirme o envio. Baixe o PDF e anexe-o
-            manualmente.
+            Revise o texto e confirme o envio no WhatsApp. Se desejar enviar o
+            PDF, baixe-o e anexe-o manualmente.
           </p>
-          <a href={share} target="_blank" rel="noopener noreferrer">
+          <a
+            href={whatsappHref(data.phone, share)!}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Revisar mensagem no WhatsApp
           </a>
           <DocumentButton company request={request} reference={version.code} />
         </div>
       )}
+      {data?.can_share_tracking && (
+        <div>
+          <h3>Acompanhamento da solicitação</h3>
+          <p>
+            A mesma página do cliente, com conversa, orçamento e agendamento.
+            Envie somente ao cliente correto.
+          </p>
+          <div className="tracking-actions">
+            <button
+              type="button"
+              disabled={busy}
+              onClick={() =>
+                tracking ? void copy(tracking.url) : setConfirmLink(true)
+              }
+            >
+              Copiar link de acompanhamento
+            </button>
+            {tracking && href && (
+              <a
+                className="whatsapp-button"
+                href={whatsappHref(
+                  data.phone,
+                  trackingContactMessage(data.company, tracking.url),
+                )!}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Enviar pelo WhatsApp
+              </a>
+            )}
+            {tracking && (
+              <button
+                type="button"
+                disabled={busy}
+                onClick={() => void revoke()}
+              >
+                Revogar link de acompanhamento
+              </button>
+            )}
+          </div>
+          {tracking && (
+            <>
+              <label>
+                Link pessoal de acompanhamento
+                <input
+                  readOnly
+                  value={tracking.url}
+                  onFocus={(e) => e.target.select()}
+                />
+              </label>
+              <p>
+                Válido até {at(tracking.expires)}. Vinculado ao primeiro
+                navegador que o utilizar. Não abra o link do cliente para
+                testá-lo. Para outro navegador, será necessário gerar um novo
+                link.
+              </p>
+              {copied && (
+                <p role="status">
+                  Link copiado. Nenhuma mensagem foi enviada automaticamente.
+                </p>
+              )}
+            </>
+          )}
+        </div>
+      )}
+      {busy && <p role="status">Preparando acesso…</p>}
       {error && <p role="alert">{error}</p>}
-    </div>
+      {confirmLink && (
+        <Dialog
+          title="Gerar acesso para o cliente"
+          close={() => {
+            if (!busy) setConfirmLink(false);
+          }}
+        >
+          <p>
+            Esta ação mantém a solicitação original e substitui os links de
+            acesso emitidos anteriormente para ela. A sessão original do cliente
+            permanece válida.
+          </p>
+          <p>
+            O novo link é pessoal, expira em 7 dias e fica vinculado ao primeiro
+            navegador que o utilizar. Confirme o destinatário antes de
+            compartilhar.
+          </p>
+          <button type="button" disabled={busy} onClick={() => void issue()}>
+            Gerar e copiar link
+          </button>
+        </Dialog>
+      )}
+    </section>
   );
 }
 export function UnreadSummary({ org }: { org: string }) {
-  const [items, setItems] = useState<any[]>([]);
+  const [unread, setUnread] = useState<{ org: string; items: any[] }>({
+    org,
+    items: [],
+  });
+  const currentOrg = useRef(org);
+  currentOrg.current = org;
+  const items = unread.org === org ? unread.items : [];
   const load = useCallback(async () => {
     try {
       const r: any = await rpc("central_unread", { p_org: org });
-      setItems(r.items);
+      if (currentOrg.current === org) setUnread({ org, items: r.items });
     } catch {
-      setItems([]);
+      if (currentOrg.current === org) setUnread({ org, items: [] });
     }
   }, [org]);
   useVisiblePolling(load, 30000);
@@ -192,7 +359,8 @@ export function UnreadSummary({ org }: { org: string }) {
       <h2>Mensagens não lidas</h2>
       {items.map((i) => (
         <Link key={i.code} to={`/painel/${org}/atendimento?ticket=${i.code}`}>
-          {i.code}{" "}
+          <strong>{i.customer?.trim() || "Conversa com cliente"}</strong>{" "}
+          {i.service && <span className="unread-service">{i.service}</span>}
           <span className="unread-count">
             {i.unread_count} {i.unread_count === 1 ? "mensagem" : "mensagens"}
           </span>
@@ -397,42 +565,58 @@ function Checklist({
             {data.items.length} etapas
           </p>
           {!data.items.length && <p>Nenhuma etapa adicionada.</p>}
-          <ul>
-            {data.items.map((i: any) => (
-              <li key={i.id}>
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={i.done}
-                    disabled={!enabled || busy || !!pending.current}
-                    onChange={() => void act("toggle", i)}
-                  />
-                  <span>
-                    {i.title}
-                    <small>
-                      {i.updated_name} · {at(i.updated_at)}
-                    </small>
-                  </span>
-                </label>
-                {enabled && (
-                  <span>
-                    <button
-                      disabled={busy || !!pending.current}
-                      onClick={() => setEdit(i)}
-                    >
-                      Editar
-                    </button>
-                    <button
-                      disabled={busy || !!pending.current}
-                      onClick={() => void act("remove", i)}
-                    >
-                      Remover
-                    </button>
-                  </span>
-                )}
-              </li>
-            ))}
-          </ul>
+          {Array.from(
+            new Set<string>(
+              data.items.map((i: any) => i.service_id || "extras"),
+            ),
+          ).map((group) => (
+            <div key={group}>
+              <h3>
+                {group === "extras"
+                  ? "Etapas adicionais deste atendimento"
+                  : data.items.find((i: any) => i.service_id === group)
+                      ?.service_name}
+              </h3>
+              <ul>
+                {data.items
+                  .filter((i: any) => (i.service_id || "extras") === group)
+                  .map((i: any) => (
+                    <li key={i.id}>
+                      <label>
+                        <input
+                          type="checkbox"
+                          checked={i.done}
+                          disabled={!enabled || busy || !!pending.current}
+                          onChange={() => void act("toggle", i)}
+                        />
+                        <span>
+                          {i.title}
+                          <small>
+                            {i.updated_name} · {at(i.updated_at)}
+                          </small>
+                        </span>
+                      </label>
+                      {enabled && (
+                        <span>
+                          <button
+                            disabled={busy || !!pending.current}
+                            onClick={() => setEdit(i)}
+                          >
+                            Editar
+                          </button>
+                          <button
+                            disabled={busy || !!pending.current}
+                            onClick={() => void act("remove", i)}
+                          >
+                            Remover
+                          </button>
+                        </span>
+                      )}
+                    </li>
+                  ))}
+              </ul>
+            </div>
+          ))}
           {enabled && (
             <form
               onSubmit={(e) => {

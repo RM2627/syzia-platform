@@ -14,6 +14,7 @@ await mk(out, { recursive: true });
 await mk("reports/team-availability", { recursive: true });
 const node = process.execPath;
 export const suites = [
+ ["hotfix-049", [node,"--experimental-strip-types","--test","--test-concurrency=1","tests/hotfix-049/operation.test.mjs","tests/hotfix-049/messages.test.mjs","tests/hotfix-049/integrity.test.mjs"]],
  ["focused-049", [node,"--experimental-strip-types","--test","--test-concurrency=1","tests/syzia-049/financial.test.mjs","tests/syzia-049/http.test.mjs","tests/syzia-049/operation.test.mjs","tests/syzia-049/ui-utils.test.mjs","tests/syzia-049/integrity.test.mjs","tests/syzia-049/upgrade.test.mjs"]],
   ["focused-048", [node, "--test", "--test-concurrency=1", "tests/syzia-048/unified.test.mjs", "tests/syzia-048/manual.test.mjs", "tests/syzia-048/integrity.test.mjs"]],
   ["billing-047", [node, "--test", "--test-concurrency=1", "tests/billing-047/edge-cases.test.mjs", "tests/billing-047/gateway.test.mjs", "tests/billing-047/lifecycle.test.mjs", "tests/billing-047/subscriptions.test.mjs", "tests/billing-047/upgrade.test.mjs"]],
@@ -60,6 +61,7 @@ export const suites = [
       "--config=playwright.ux001.config.ts",
     ],
   ],
+  ["browser-hotfix-049", [node, "node_modules/@playwright/test/cli.js", "test", "--config=playwright.hotfix049.config.ts"]],
   ["browser-049", [node, "node_modules/@playwright/test/cli.js", "test", "--config=playwright.syzia049.config.ts"]],
   ["browser-048", [node, "node_modules/@playwright/test/cli.js", "test", "--config=playwright.syzia048.config.ts"]],
   ["billing-browser", [node, "node_modules/@playwright/test/cli.js", "test", "--config=playwright.billing047.config.ts"]],

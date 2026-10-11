@@ -105,3 +105,89 @@
   padding: 3px 9px;
   margin: 4px;
 }
+.service-checklist-editor {
+  border-top: 1px solid #8885;
+  padding: 20px 0;
+  margin-top: 16px;
+}
+.service-checklist-editor li {
+  display: flex;
+  gap: 12px;
+  align-items: end;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.service-checklist-editor li label {
+  flex: 1;
+  min-width: 180px;
+}
+.service-checklist-editor small {
+  display: block;
+  margin: 8px 0;
+}
+.checklist-order-actions {
+  display: flex;
+  gap: 6px;
+}
+.request-contact {
+  padding: 20px;
+  border: 1px solid #81739466;
+  border-radius: 14px;
+  background: var(--card, #fff);
+}
+.request-contact > h2,
+.request-contact > p {
+  flex-basis: 100%;
+  margin: 0;
+}
+.request-contact .whatsapp-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 16px;
+  background: #165f45;
+  color: #fff;
+  border-radius: 9px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.request-contact .whatsapp-button:hover {
+  background: #104b35;
+}
+.request-contact a:focus-visible {
+  outline: 3px solid #7856cc;
+  outline-offset: 4px;
+}
+.request-contact input {
+  width: 100%;
+  min-width: 0;
+}
+.request-contact .tracking-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.request-contact .share-message {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  padding: 12px;
+  background: #8881;
+  border-radius: 8px;
+}
+.unread-summary .unread-service {
+  display: block;
+  font-size: 0.9rem;
+}
+@media (max-width: 600px) {
+  .request-contact .whatsapp-button {
+    width: 100%;
+  }
+  .service-checklist-editor ol {
+    padding-left: 20px;
+  }
+  .request-contact {
+    padding: 16px;
+  }
+}

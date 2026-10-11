@@ -131,7 +131,10 @@
     "test:048:browser": "playwright test --config=playwright.syzia048.config.ts",
     "test:049": "node --experimental-strip-types --test --test-concurrency=1 tests/syzia-049/*.test.mjs",
     "test:049:browser": "node scripts/syzia-049/browser.mjs",
-    "homologation:billing:isolated": "node scripts/syzia-049/billing-isolated.mjs"
+    "homologation:billing:isolated": "node scripts/syzia-049/billing-isolated.mjs",
+    "test:hotfix:049": "node --experimental-strip-types --test --test-concurrency=1 tests/hotfix-049/*.test.mjs",
+    "test:hotfix:049:browser": "node scripts/hotfix-049/browser.mjs",
+    "test:hotfix:049:native": "node scripts/hotfix-049/native.mjs"
   },
   "keywords": [],
   "author": "",

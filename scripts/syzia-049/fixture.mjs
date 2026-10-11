@@ -7,8 +7,13 @@ export async function upgradeOperationFixture(db) {
       "utf8",
     ),
   );
+  if (process.env.SYZIA_HOTFIX_049_BASELINE !== "1")
+    await db.exec(await readFile("supabase/migrations/202610110050_service_checklists_contact.sql", "utf8"));
 }
 const names = new Set([
+  "company_service_checklist",
+  "company_service_save_with_checklist",
+  "operations_tracking_link",
   "central_mark_read",
   "central_unread",
   "consumer_confirm_attendance",

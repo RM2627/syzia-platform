@@ -1,3 +1,4 @@
+import { RequestContact } from "../operations/BookingExtras";
 import { MessageThread, composerEnter } from "./MessageThread";
 import { useVisiblePolling } from "../ui/useVisiblePolling";
 import {
@@ -739,6 +740,7 @@ function Ticket({
           )}
         </div>
       </header>
+      {permitted("quotes.read") && <RequestContact key={q.code} org={ctx.organization.id} request={q.code} version={permitted("quotes.values") ? q.versions.find((v:any) => v.code === q.current_version) || q.versions[0] : undefined}/>}
       {error && (
         <p role="alert" className="h-alert">
           {error}

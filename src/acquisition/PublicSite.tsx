@@ -1,5 +1,10 @@
+import { ProductPreviews } from "./ProductPreviews";
 import { memberLimitLabel } from "../billing/plan-copy";
-import { supportBenefit, supportDescription, supportPlanDescription } from "../availability/support-copy";
+import {
+  supportBenefit,
+  supportDescription,
+  supportPlanDescription,
+} from "../availability/support-copy";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { rpc } from "../api";
@@ -144,7 +149,7 @@ const features = [
   ],
   [
     "Equipe e permissões",
-    "Trabalhe sozinho ou com equipe. Apoio compartilhado conforme disponibilidade, plano e autorizações.",
+    "Trabalhe sozinho ou com sua equipe. Defina responsabilidades, acessos e autonomia para cada pessoa.",
   ],
 ];
 export function PublicSite() {
@@ -158,14 +163,14 @@ export function PublicSite() {
           </p>
           <p className="sy-brand-line">SYZIA — Onde tudo se alinha.</p>
           <h1>
-            Sua empresa pode crescer.
+            Sua página, seus clientes,
             <br />
-            <span>Sua operação precisa acompanhar.</span>
+            <span>sua agenda. Tudo conectado.</span>
           </h1>
           <p className="sy-lead">
-            O cliente chama por um lugar. O orçamento fica em outro. A agenda
-            está separada. E os retornos dependem de você lembrar. A SYZIA
-            conecta esses caminhos em uma única operação.
+            Apresente seus serviços, converse com clientes, prepare orçamentos e
+            organize os agendamentos. Uma operação conectada para você trabalhar
+            sozinho ou com sua equipe.
           </p>
           <div className="sy-actions">
             <Link className="sy-button sy-primary" to="/cadastrar">
@@ -191,38 +196,7 @@ export function PublicSite() {
           ))}
         </div>
       </section>
-      <section className="sy-section sy-surface sy-problem">
-        <p className="sy-kicker">MENOS COISAS SOLTAS NO SEU DIA</p>
-        <h2>Seu negócio não deveria depender da sua memória.</h2>
-        <p className="sy-lead">
-          Um orçamento sem retorno. Um horário combinado na conversa. Um
-          pagamento pendente. Informações espalhadas tornam mais difícil saber o
-          próximo passo.
-        </p>
-        <div className="sy-value-grid">
-          <article>
-            <h3>Menos ferramentas soltas</h3>
-            <p>
-              Cliente, atendimento, orçamento e agenda participam da mesma
-              jornada.
-            </p>
-          </article>
-          <article>
-            <h3>Menos coisas para lembrar</h3>
-            <p>
-              Pendências e retornos ajudam a mostrar quem atender e o que
-              precisa ser feito.
-            </p>
-          </article>
-          <article>
-            <h3>Mais controle</h3>
-            <p>
-              Regras, autonomia e permissões acompanham a forma de trabalhar da
-              sua empresa.
-            </p>
-          </article>
-        </div>
-      </section>
+      <ProductPreviews />
       <section id="como-funciona" className="sy-section">
         <p className="sy-kicker">UMA EXPERIÊNCIA CONTÍNUA</p>
         <h2>Um dia de trabalho dentro da SYZIA.</h2>
@@ -315,9 +289,9 @@ export function PublicSite() {
             <span className="sy-number">03 · PRECISO DE APOIO</span>
             <h3>Atendimento com permissão.</h3>
             <p>
-              Quando disponível no plano e nas condições contratadas, o
-              atendimento compartilhado pode apoiar sua empresa dentro das
-              autorizações definidas.
+              A Equipe SYZIA compartilhada não está disponível para contratação
+              neste lançamento. Sua empresa pode operar com equipe própria,
+              dentro das permissões e dos recursos do plano.
             </p>
           </article>
         </div>
@@ -410,6 +384,43 @@ export function PublicSite() {
             <span key={t}>{t}</span>
           ))}
         </div>
+      </section>
+      <section className="sy-section sy-start" aria-label="Como começar">
+        <p className="sy-kicker">DO CADASTRO À SUA ROTINA</p>
+        <h2>Começar tem três passos.</h2>
+        <ol className="sy-start-steps">
+          <li>
+            <span>01</span>
+            <h3>Crie sua identidade</h3>
+            <p>
+              Preencha seus dados. Se houver confirmação por e-mail, conclua
+              essa etapa para continuar.
+            </p>
+          </li>
+          <li>
+            <span>02</span>
+            <h3>Cadastre a empresa e escolha o plano</h3>
+            <p>
+              Confira a oferta, a elegibilidade e as condições apresentadas
+              antes da confirmação.
+            </p>
+          </li>
+          <li>
+            <span>03</span>
+            <h3>Prepare sua operação</h3>
+            <p>
+              Configure serviços, horários e identidade visual. Publique sua
+              página e organize os acessos da equipe.
+            </p>
+          </li>
+        </ol>
+        <p className="sy-subtle">
+          A contratação depende da disponibilidade do checkout no ambiente. Se
+          ele ainda não estiver habilitado, fale com a SYZIA.
+        </p>
+        <Link className="sy-button sy-primary" to="/cadastrar">
+          Começar
+        </Link>
       </section>
       <section className="sy-section sy-surface">
         <p className="sy-kicker">PLANOS</p>
@@ -520,7 +531,16 @@ function PlanList({ offer }: { offer: ReturnType<typeof usePlans> }) {
               <h3>{p.name}</h3>
               <p>{p.description}</p>
               {p.version.human_support && <p>{supportPlanDescription}</p>}
-              {p.trial_eligible && p.version.trial_days > 0 && <div className="sy-trial-offer"><strong>{p.version.trial_days} dias grátis</strong><small>{p.billing047 ? `Depois, ${brl(p.version.price_cents)}/mês. Para empresas elegíveis, com meio de pagamento vinculado.` : "Para empresas elegíveis, após confirmação dos dados."}</small></div>}
+              {p.trial_eligible && p.version.trial_days > 0 && (
+                <div className="sy-trial-offer">
+                  <strong>{p.version.trial_days} dias grátis</strong>
+                  <small>
+                    {p.billing047
+                      ? `Depois, ${brl(p.version.price_cents)}/mês. Para empresas elegíveis, com meio de pagamento vinculado.`
+                      : "Para empresas elegíveis, após confirmação dos dados."}
+                  </small>
+                </div>
+              )}
               <strong className="sy-price">{brl(p.version.price_cents)}</strong>
               <span>
                 {p.version.interval_months === 1
@@ -539,10 +559,12 @@ function PlanList({ offer }: { offer: ReturnType<typeof usePlans> }) {
                 {p.version.commercial_followups && (
                   <li>Follow-up e recuperação</li>
                 )}
-                <li>
-                  {memberLimitLabel(p.version.member_limit)}
-                </li>
-                {p.version.human_support && <li>{supportBenefit}. {supportDescription}</li>}
+                <li>{memberLimitLabel(p.version.member_limit)}</li>
+                {p.version.human_support && (
+                  <li>
+                    {supportBenefit}. {supportDescription}
+                  </li>
+                )}
               </ul>
               <Link
                 className="sy-button sy-primary"

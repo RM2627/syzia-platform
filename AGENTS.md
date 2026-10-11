@@ -1,3 +1,7 @@
+# Continuidade do hotfix consolidado 049 + Sharp
+
+Escopo e contratos: `docs/hotfix-049/README.md`. Atualização por sobreposição; migration incremental 050. Preservar byte a byte 001–049 e Sharp 0.35.5. Novos testes: `test:hotfix:049`, `test:hotfix:049:browser` e concorrência local opcional `test:hotfix:049:native`; o gate vigente continua obrigatório. Não ampliar a emissão de credenciais de acompanhamento para funcionários limitados. A aplicação no Supabase real, Auth Hook, SMTP, Mercado Pago e MP-01 dependem do proprietário. Sem commit/push/deploy/DNS/produção. As instruções históricas abaixo não autorizam outra rodada nem substituem a entrega incremental solicitada.
+
 # Continuidade da base 049
 
 Escopo autorizado e concluído nesta rodada: `docs/syzia-049/request.md`. Entrega por sobreposição na raiz de foundation; ver `SYZIA-049-INSTALACAO.md` e os dez relatórios 049. Não ampliar funcionalidades. Preservar migrations 001–048 byte a byte e a nova 049. Banco/credenciais reais e MP-01 continuam sob homologação externa do proprietário. Não repetir configuração dos seis planos, não ativar billing no Render, não publicar/push/DNS/deploy. Validar base limpa e PARAR. Instruções anteriores abaixo são históricas e não autorizam nova rodada.

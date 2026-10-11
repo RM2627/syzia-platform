@@ -1624,7 +1624,8 @@ export function Tracking() {
     [selectedPeriods, setSelectedPeriods] = useState<Period[]>([]),
     [photo, setPhoto] = useState(""),
     [captcha, setCaptcha] = useState(""),
-    [needsCaptcha, setNeedsCaptcha] = useState(false);
+    [needsCaptcha, setNeedsCaptcha] = useState(false),
+    [accessRetry, setAccessRetry] = useState(0);
   const secret = useRef(
     new URLSearchParams(location.hash.slice(1)).get("secret"),
   );
@@ -1637,35 +1638,29 @@ export function Tracking() {
   async function load() {
     setData(await crpc("consumer_request_context", { p_code: code }));
   }
+  const accessBoot = useRef<{code:string;attempt:number;promise:Promise<boolean>}>(undefined);
   useEffect(() => {
     let active = true;
-    (async () => {
-      try {
+    // React may replay this effect before anonymous authentication settles.
+    // Share the same attempt so a one-use link cannot bind to a discarded session.
+    if (!accessBoot.current || accessBoot.current.code !== code || accessBoot.current.attempt !== accessRetry) {
+      if (secret.current) history.replaceState(null, "", location.pathname + location.search);
+      accessBoot.current = {code,attempt:accessRetry,promise:(async () => {
         if (secret.current) {
-          history.replaceState(null, "", location.pathname + location.search);
-          if (
-            captchaConfigured &&
-            !(await consumerClient!.auth.getSession()).data.session
-          ) {
-            setNeedsCaptcha(true);
-            return;
+          if (captchaConfigured && !(await consumerClient!.auth.getSession()).data.session) {
+            setNeedsCaptcha(true); return false;
           }
           await ensureConsumer();
-          await crpc("consumer_redeem_tracking_link", {
-            p_code: code,
-            p_secret: secret.current,
-          });
+          await crpc("consumer_redeem_tracking_link", {p_code:code,p_secret:secret.current});
           secret.current = null;
         }
-        if (active) await load();
-      } catch (e) {
-        if (active) setError(message(e));
-      }
-    })();
-    return () => {
-      active = false;
-    };
-  }, [code]);
+        return true;
+      })()};
+    }
+    void accessBoot.current.promise.then(async ready => {if(active && ready)await load();})
+      .catch(e => {if(active)setError(message(e));});
+    return () => {active = false;};
+  }, [code, accessRetry]);
   useEffect(
     () => () => {
       if (photo) URL.revokeObjectURL(photo);
@@ -1732,9 +1727,10 @@ export function Tracking() {
         )}
         <ErrorBox error={error} />
         {error && (
-          <button onClick={() => action(load)} disabled={busy}>
-            Tentar novamente
-          </button>
+          <div>
+            <p>Use o navegador em que você abriu este acompanhamento. Se o link expirou, foi revogado ou você precisa trocar de dispositivo, solicite um novo acesso à empresa.</p>
+            <button onClick={() => {setError("");setAccessRetry(n => n + 1);}} disabled={busy}>Tentar novamente</button>
+          </div>
         )}
         {data && (
           <>
@@ -1961,6 +1957,7 @@ export function Tracking() {
                           rescheduled: "Horário remarcado",
                           contact_revoked: "Contato revogado",
                           link_revoked: "Link revogado",
+                          tracking_link_reissued: "Novo acesso de acompanhamento gerado",
                         }[e.event as string] || "Solicitação atualizada"}
                       </span>
                       <small>{date(e.at)}</small>

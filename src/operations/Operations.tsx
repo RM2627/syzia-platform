@@ -612,7 +612,7 @@ function Detail({ org, id }: { org: string; id: string }) {
         </div>
         <span className={"op-status " + state}>{label[state]}</span>
       </header>
-      {a.kind === "booking" && <><BookingExtras key={id} org={org} id={id} detail={d}/>{can("quotes.read") && <RequestContact key={d.request?.public_code} org={org} request={d.request.public_code}/>}</>}
+      {a.kind === "booking" && <>{can("quotes.read") && <RequestContact key={d.request?.public_code} org={org} request={d.request.public_code}/>}<BookingExtras key={id} org={org} id={id} detail={d}/></>}
       {notice && (
         <p role="status" className="op-result">
           {notice}
