@@ -1,3 +1,5 @@
+import { AttendanceBadge, BookingExtras, RequestContact, UnreadSummary } from "./BookingExtras";
+import { DocumentButton } from "../documents/DocumentButton";
 import { ExecutionBooking } from "./ExecutionBooking";
 import { duration, Periods } from "../scheduling/ExecutionSchedule";
 import { QuoteCalculator } from "./QuoteCalculator";
@@ -138,7 +140,7 @@ function Appointment({ a, base }: { a: Data; base: string }) {
         <strong>
           {a.kind === "block" ? a.note || "Período bloqueado" : a.customer}
         </strong>
-        <p>{a.kind === "block" ? "Indisponível para reservas" : a.service}</p>
+        <p>{a.kind === "block" ? "Indisponível para reservas" : a.service}</p><AttendanceBadge attendance={a.attendance}/>
         <small>
           Até{" "}
           {date(
@@ -247,6 +249,7 @@ function Daily({ org }: { org: string }) {
           </HomeBlock>
         </div>
       </header>
+      {can("central.read") && <UnreadSummary org={org}/>}
       <div className="op-quick">
         {edit("agenda.manage") && (
           <Link className="primary" to={base + "/novo-agendamento"}>
@@ -609,6 +612,7 @@ function Detail({ org, id }: { org: string; id: string }) {
         </div>
         <span className={"op-status " + state}>{label[state]}</span>
       </header>
+      {a.kind === "booking" && <><BookingExtras key={id} org={org} id={id} detail={d}/>{can("quotes.read") && <RequestContact key={d.request?.public_code} org={org} request={d.request.public_code}/>}</>}
       {notice && (
         <p role="status" className="op-result">
           {notice}
@@ -1454,7 +1458,7 @@ function QuoteEditor({ org, code }: { org: string; code: string }) {
   return (
     <>
       <Link to={"/painel/" + org + "/orcamentos"}>← Orçamentos</Link>
-      <h1>Proposta para {d.name}</h1>
+      <h1>Proposta para {d.name}</h1><RequestContact key={code} org={org} request={code} version={can("quotes.values") ? (d.versions.find((v:any)=>v.code===d.current_version) || d.versions.at(-1)) : undefined}/>
       <details>
         <summary>Ver pedido original</summary>
         <RequestedItems data={d} />
@@ -1493,6 +1497,7 @@ function QuoteEditor({ org, code }: { org: string; code: string }) {
         <h2>Versões enviadas</h2>
         {d.versions.map((v: Data) => (
           <article key={v.code}>
+            {can("quotes.values") && <DocumentButton company request={code} reference={v.code}/>}
             <h3>
               {v.kind === "estimate"
                 ? "Solicitação inicial"

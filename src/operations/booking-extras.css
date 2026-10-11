@@ -1,0 +1,107 @@
+.request-contact,
+.presence-control,
+.document-action {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 12px 0;
+  min-width: 0;
+}
+.request-contact > div,
+.presence-control > small {
+  flex-basis: 100%;
+}
+.request-contact a {
+  overflow-wrap: anywhere;
+}
+.presence-control {
+  padding: 12px 0;
+  border-top: 1px solid #8885;
+}
+.presence-control > p {
+  width: 100%;
+}
+.booking-photos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.booking-photos figure {
+  margin: 0;
+  max-width: 200px;
+}
+.booking-photos img {
+  object-fit: cover;
+  display: block;
+}
+.booking-photos figcaption {
+  font-size: 0.8rem;
+  overflow-wrap: anywhere;
+}
+.booking-photo-full {
+  display: block;
+  max-width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  margin: auto;
+}
+.execution-checklist ul {
+  list-style: none;
+  padding: 0;
+}
+.execution-checklist li {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 12px 0;
+  border-bottom: 1px solid #8884;
+}
+.execution-checklist li label {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  flex: 1;
+  min-width: 180px;
+}
+.execution-checklist li input {
+  width: auto;
+  flex: none;
+}
+.execution-checklist li small {
+  display: block;
+}
+.execution-checklist li span {
+  overflow-wrap: anywhere;
+}
+.execution-checklist form {
+  display: flex;
+  align-items: end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.execution-checklist form label {
+  flex: 1;
+  min-width: 160px;
+}
+.unread-summary a {
+  display: block;
+  margin: 8px 0;
+}
+.attendance-confirmed {
+  font-size: 0.9rem;
+  color: #236640;
+  background: #edf9f0;
+  padding: 10px;
+  border-radius: 8px;
+}
+.unread-count {
+  display: inline-block;
+  border-radius: 14px;
+  background: #48328a;
+  color: #fff;
+  font-size: 0.8rem;
+  padding: 3px 9px;
+  margin: 4px;
+}

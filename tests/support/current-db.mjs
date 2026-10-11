@@ -31,6 +31,7 @@ if (process.env.SYZIA_FLEXIBLE_CURRENT === "1" && process.env.SYZIA_TEAM_CURRENT
   await (await import("../../scripts/flexible-support/fixture.mjs")).upgradeFlexibleFixture(db);
 if (process.env.SYZIA_BILLING_CURRENT === "1" && process.env.SYZIA_FLEXIBLE_CURRENT === "1" && process.env.SYZIA_TEAM_CURRENT === "1" && !process.env.SYZIA_044_BASELINE)
   await (await import("../../scripts/billing-047/fixture.mjs")).upgradeBillingFixture(db);
+if(process.env.SYZIA_OPERATION_CURRENT === "1") (await import("../../scripts/syzia-049/fixture.mjs")).attachOperationRPC(c);
 function summarize(r) {
   if (r == null || typeof r !== "object") return r;
   if (Array.isArray(r)) return { array_length: r.length };

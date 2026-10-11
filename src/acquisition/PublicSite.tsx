@@ -1,3 +1,4 @@
+import { memberLimitLabel } from "../billing/plan-copy";
 import { supportBenefit, supportDescription, supportPlanDescription } from "../availability/support-copy";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -539,7 +540,7 @@ function PlanList({ offer }: { offer: ReturnType<typeof usePlans> }) {
                   <li>Follow-up e recuperação</li>
                 )}
                 <li>
-                  {p.version.member_limit ?? "Ilimitado"} · membros da equipe
+                  {memberLimitLabel(p.version.member_limit)}
                 </li>
                 {p.version.human_support && <li>{supportBenefit}. {supportDescription}</li>}
               </ul>

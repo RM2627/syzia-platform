@@ -1,0 +1,107 @@
+.message-thread-wrap {
+  min-width: 0;
+  position: relative;
+}
+.message-thread {
+  max-height: min(60vh, 620px);
+  min-height: 100px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 14px;
+  scrollbar-gutter: stable;
+  border: 1px solid #85859b55;
+  border-radius: 12px;
+  background: #8881;
+}
+.message-thread .thread-message {
+  max-width: 90%;
+  width: fit-content;
+  margin: 14px auto 0 0;
+  padding: 12px 14px;
+  background: var(--c-surface, var(--surface, #fff));
+  color: var(--c-ink, #222);
+  border: 1px solid #85859b55;
+  border-radius: 12px;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+.thread-message.mine {
+  margin-left: auto;
+  margin-right: 0;
+  border-color: #7964d4;
+  background: var(--c-surface, var(--surface, #fff));
+  color: var(--c-ink, #222);
+}
+.thread-message.grouped {
+  margin-top: 5px;
+}
+.thread-message header {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 0.78rem;
+}
+.thread-message header span,
+.thread-message time {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+.thread-message p {
+  white-space: pre-wrap;
+  line-height: 1.55;
+  margin: 8px 0;
+}
+.thread-message time {
+  display: block;
+  text-align: right;
+}
+.thread-end {
+  height: 1px;
+}
+.new-message-notice {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: block;
+  margin: 4px auto 8px;
+  background: #48328a;
+  color: #fff;
+  padding: 9px 14px;
+  border-radius: 20px;
+}
+.h-composer textarea,
+.c-chat textarea {
+  min-height: 110px;
+  font-size: 1rem;
+  line-height: 1.5;
+  resize: vertical;
+}
+.message-thread:focus-visible {
+  outline: 3px solid #8872db;
+  outline-offset: 2px;
+}
+.unread-count {
+  display: inline-block;
+  border-radius: 14px;
+  background: #48328a;
+  color: #fff;
+  font-size: 0.8rem;
+  padding: 3px 9px;
+  margin: 4px;
+}
+.attendance-confirmed {
+  font-size: 0.9rem;
+  color: #236640;
+  background: #edf9f0;
+  padding: 10px;
+  border-radius: 8px;
+}
+@media (max-width: 600px) {
+  .message-thread .thread-message {
+    max-width: 96%;
+  }
+  .message-thread {
+    padding: 8px;
+    max-height: 55vh;
+  }
+}

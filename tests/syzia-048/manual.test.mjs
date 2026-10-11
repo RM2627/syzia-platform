@@ -12,6 +12,7 @@ await db.exec('commit;reset role');const before=await snapshot();
 await db.exec('begin');await h.grantWorker(h.allGrants);await h.autonomy(['price_list','quote_create','quote_send','schedule','discount','follow_up'],10,false);await db.exec('reset role');await db.query('update company_settings set published_manual_id=null where organization_id=$1',[orgs.A]);await as('worker');const beforePermission=await rpc('company_attendant_permission',{p_org:orgs.A,p_action:'quote_send',p_discount:0});await db.exec('rollback;reset role');
 await db.exec(await readFile('supabase/migrations/202610090048_unified_backend_optional_manual.sql','utf8'));
 const after=await snapshot();
+if(process.env.SYZIA_OPERATION_CURRENT === "1")await(await import("../../scripts/syzia-049/fixture.mjs")).upgradeOperationFixture(db);
 test.beforeEach(async()=>db.exec('begin'));
 test.afterEach(async()=>db.exec('rollback;reset role'));
 test.after(async()=>db.close());

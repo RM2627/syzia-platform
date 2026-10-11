@@ -1,7 +1,7 @@
 {
   "name": "atendimento-compartilhado-fundacao",
   "version": "0.8.0",
-  "description": "SYZIA \u2014 produto cumulativo com identidades independentes e experi\u00eancia empresarial",
+  "description": "SYZIA — produto cumulativo com identidades independentes e experiência empresarial",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "tsc --noEmit && vite build",
@@ -21,6 +21,7 @@
     "homologation:company:mutations": "node scripts/homologation/company-http.mjs --mutations",
     "test:consumer": "node tests/consumer.test.mjs",
     "test:images": "node --test tests/images.test.mjs",
+    "test:sharp": "node --test --test-concurrency=1 tests/sharp-security.test.mjs",
     "attachments:dev": "node --env-file=.env.server server/attachments.mjs",
     "homologation:consumer:read": "node scripts/homologation/consumer-http.mjs --read-only",
     "homologation:consumer:mutations": "node scripts/homologation/consumer-http.mjs --mutations",
@@ -127,19 +128,24 @@
     "start": "node server/unified.mjs",
     "api:dev": "node --env-file=.env.server server/unified.mjs",
     "test:048": "node --test --test-concurrency=1 tests/syzia-048/*.test.mjs",
-    "test:048:browser": "playwright test --config=playwright.syzia048.config.ts"
+    "test:048:browser": "playwright test --config=playwright.syzia048.config.ts",
+    "test:049": "node --experimental-strip-types --test --test-concurrency=1 tests/syzia-049/*.test.mjs",
+    "test:049:browser": "node scripts/syzia-049/browser.mjs",
+    "homologation:billing:isolated": "node scripts/syzia-049/billing-isolated.mjs"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "@pdf-lib/fontkit": "^1.1.1",
     "@supabase/supabase-js": "^2.116.0",
     "nodemailer": "10.0.10",
+    "pdf-lib": "^1.17.1",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "react-router-dom": "^7.18.3",
-    "sharp": "^0.34.5"
+    "sharp": "0.35.5"
   },
   "devDependencies": {
     "@electric-sql/pglite": "^0.5.8",

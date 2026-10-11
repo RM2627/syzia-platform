@@ -1,3 +1,7 @@
+# Complemento do gate 049
+
+O runner mantém as suítes existentes e acrescenta `focused-049` e `browser-049`. Fixtures correntes sobem até 049; testes históricos específicos continuam testando suas transições originais. `tests/syzia-049/upgrade.test.mjs` compara o banco populado antes/depois da 049. PDF adiciona dependências autorizadas: lockfile tem hash próprio 049; migrations/core billing/unified mantêm hashes 048. 048-H08 continua estrito em Linux; somente Windows recebe skip explícito por `child.kill(SIGTERM)` abrupto, com drenagem portátil adicional 049-H01. Execução em Windows: PENDENTE externa. Nenhuma asserção de produção foi removida para obter PASS.
+
 # Gate vigente 048
 
 O mesmo comando `npm run test:current-gate` mantém as 17 etapas da 047 e acrescenta `focused-048` e `browser-048` (19 etapas). `SYZIA_OPTIONAL_MANUAL_CURRENT=1` aplica a 048 após a 047 nas fixtures operacionais; snapshots de upgrade históricos continuam testando seus pontos de origem. O teste 048-M01 aplica a 048 sobre a 047 populada e compara dados/RLS. O teste 048-I01 confere 43 migrations anteriores, lockfile e núcleo do billing por SHA-256.

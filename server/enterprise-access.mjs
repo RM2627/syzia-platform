@@ -16,6 +16,7 @@ export const accessErrors = new Set([
   "organization_confirmation_required",
   "organization_history_requires_preservation",
   "access_invalid",
+  "access_signup_in_progress",
   "access_rate_limited",
   "access_change_unavailable",
   "administrator_email_required",
@@ -285,7 +286,10 @@ export function enterpriseAccess({
       if (await service("access_identity_exists", { p_email: email }))
         fail("existing_identity_requires_login");
       if (!signUp) fail("access_unavailable");
-      const result = await signUp({
+      const authorization = randomBytes(32).toString("hex");
+      await service("access_signup_authorize", { p_email: email, p_username: clean(body.username), p_hash: digest(authorization) });
+      let result;
+      try { result = await signUp({
         email,
         password: body.password,
         options: {
@@ -293,9 +297,13 @@ export function enterpriseAccess({
           data: {
             display_name: clean(body.name, 120),
             syzia_username: clean(body.username),
+            syzia_signup_authorization: authorization,
           },
         },
-      });
+      }); } finally {
+        // Only the digest crosses the service RPC. Never expose/log the nonce.
+        await service("access_signup_release", { p_hash: digest(authorization) }).catch(() => {});
+      }
       if (result.error)
         throw Object.assign(Error("access_unavailable"), {
           code: "access_unavailable",

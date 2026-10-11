@@ -1,3 +1,7 @@
+# SYZIA 049 — atualização sobre 048
+
+Comece por `SYZIA-049-INSTALACAO.md`. ZIP completo com caminhos relativos a esta pasta, preservando seus arquivos locais de ambiente. Migrations anteriores intactas; nova migration 049. Gate: `npm run test:current-gate`; focados: `npm run test:049` e `npm run test:049:browser`. Ensaio financeiro somente local e explícito: `npm run homologation:billing:isolated -- --offline`. MP-01 e Auth/SMTP hospedados seguem pendentes de homologação externa. Nada foi publicado ou aplicado ao banco real.
+
 # Base consolidada limpa SYZIA 048
 
 Backend único e Manual opcional para a equipe própria, a partir da base limpa 047. Consulte [relatório 048](RELATORIO-SYZIA-048.md), [porta única](GUIA-HOSPEDAGEM-PORTA-UNICA.md), [upgrade incremental](GUIA-UPGRADE-048.md), [testes](MATRIZ-TESTES-SYZIA-048.md) e [pendências externas](PENDENCIAS-HOMOLOGACAO-048.md).
@@ -566,5 +570,3 @@ O gate oficial permanece `npm run test:current-gate`. As evidências desta rodad
 Entrega sobre o consolidado final de usabilidade da 044. Relatório vigente desta intervenção: [RELATORIO-UX001-FINAL.md](RELATORIO-UX001-FINAL.md), [matriz antes × depois](MATRIZ-ANTES-DEPOIS-UX001.md) e [inventário](ARQUIVOS-ALTERADOS-UX001.md). Evidências em `reports/ux001/`. Nenhuma migration nova; nenhuma publicação executada. UX-002 permanece adiado para pós-lançamento.
 
 Gate oficial: `npm run test:current-gate`, com cobertura UX-001 aditiva. Os relatórios anteriores continuam como registros históricos. Após os critérios de encerramento documentados no relatório: **SYZIA — FEATURE FREEZE FUNCIONAL PRÉ-LANÇAMENTO**. Nenhuma próxima atividade automática está autorizada.
-#   s y z i a - p l a t f o r m  
- 

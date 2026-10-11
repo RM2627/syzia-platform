@@ -1,0 +1,29 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
+test("049-I01 44 migrations anteriores, entrada unificada e núcleo financeiro 047 intactos", async () => {
+  const manifest = JSON.parse(
+    await readFile("docs/syzia-049/preserved-048-sha256.json", "utf8"),
+  );
+  assert.equal(
+    Object.keys(manifest).filter((x) => x.startsWith("supabase/")).length,
+    44,
+  );
+  for (const [path, hash] of Object.entries(manifest))
+    assert.equal(
+      createHash("sha256")
+        .update(await readFile(path))
+        .digest("hex"),
+      hash,
+      path,
+    );
+});
+test("049-I02 lockfile atualizado explicitamente para dependências PDF", async () => {
+  assert.equal(
+    createHash("sha256")
+      .update(await readFile("package-lock.json"))
+      .digest("hex"),
+    (await readFile("docs/syzia-049/lockfile-sha256.txt", "utf8")).trim(),
+  );
+});

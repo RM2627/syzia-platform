@@ -1,3 +1,7 @@
+# Continuidade da base 049
+
+Escopo autorizado e concluído nesta rodada: `docs/syzia-049/request.md`. Entrega por sobreposição na raiz de foundation; ver `SYZIA-049-INSTALACAO.md` e os dez relatórios 049. Não ampliar funcionalidades. Preservar migrations 001–048 byte a byte e a nova 049. Banco/credenciais reais e MP-01 continuam sob homologação externa do proprietário. Não repetir configuração dos seis planos, não ativar billing no Render, não publicar/push/DNS/deploy. Validar base limpa e PARAR. Instruções anteriores abaixo são históricas e não autorizam nova rodada.
+
 # Continuidade da base 048
 
 Exceção autorizada: backend único (`server/unified.mjs`, `PORT`, um Node/uma porta) e Manual opcional para a equipe própria. Fonte atual: `docs/syzia-048/escopo.md`, `GUIA-UPGRADE-048.md` e `GUIA-HOSPEDAGEM-PORTA-UNICA.md`. Preservar migrations 001–047 byte a byte e a nova 048. Equipe SYZIA compartilhada conserva exigência de orientação publicada, grants, autonomia, disponibilidade e consumo. Billing 047 e MP-01 permanecem preservados. Não comercializar Assistido, não reabrir UX-002, não fazer deploy, DNS, SQL no Supabase real ou cobrança real. Validar a extração limpa; entregar e PARAR. As autorizações anteriores abaixo são históricas e não ampliam o escopo atual.

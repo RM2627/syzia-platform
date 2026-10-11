@@ -65,9 +65,11 @@ await c.db.exec(await (await import("node:fs/promises")).readFile("supabase/migr
 await (await import("./team-availability/fixture.mjs")).upgradeTeamFixture(c.db);
 await (await import("./flexible-support/fixture.mjs")).upgradeFlexibleFixture(c.db);
 process.env.SYZIA_OPTIONAL_MANUAL_CURRENT = "1";
+process.env.SYZIA_OPERATION_CURRENT = "1";
 await (await import("./billing-047/fixture.mjs")).upgradeBillingFixture(c.db);
 if (process.env.DEMO_NO_MANUAL_048 === "true") await (await import("./syzia-048/fixture.mjs")).seedNoManualBrowser(c);
 (await import("./billing-047/fixture.mjs")).attachBillingRPC(c);
+(await import("./syzia-049/fixture.mjs")).attachOperationRPC(c);
 // Only this disposable demo publishes fictitious offers; production migration publishes none.
 await c.db.exec(
   "reset role;update billing_plans set site_visible=true,self_service=true,self_service_trial=true where active and available;update private.billing_runtime set mock_enabled=true",

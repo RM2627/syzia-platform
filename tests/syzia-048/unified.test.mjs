@@ -8,7 +8,7 @@ import { fixture } from '../billing-047/fixture.mjs';
 import { randomUUID } from 'node:crypto';
 process.env.SYZIA_OPTIONAL_MANUAL_CURRENT='0';
 const origin='https://app.example.invalid';
-const c=await fixture({afterUpgrade:async c=>c.db.exec(await (await import('node:fs/promises')).readFile('supabase/migrations/202610090048_unified_backend_optional_manual.sql','utf8'))});
+const c=await fixture({afterUpgrade:async c=>c.db.exec(await (await import('node:fs/promises')).readFile('supabase/migrations/202610090048_unified_backend_optional_manual.sql','utf8')).then(async()=>{if(process.env.SYZIA_OPERATION_CURRENT==='1')await(await import('../../scripts/syzia-049/fixture.mjs')).upgradeOperationFixture(c.db);})});
 const logs=[],stored=new Map(),records=new Map();
 const sid='session-fixture-048',jwt='x.'+Buffer.from(JSON.stringify({session_id:sid})).toString('base64url')+'.x';
 const bytes=await sharp({create:{width:48,height:48,channels:3,background:'#32465a'}}).png().toBuffer();
@@ -82,7 +82,7 @@ test('048-H07 encerramento drena requisição em andamento sem truncar resposta'
  const request=fetch('http://127.0.0.1:'+local.server.address().port+'/access/login',{method:'POST',headers:{origin},body:'{"delay":true}'});
  while(!delayResolve)await new Promise(r=>setTimeout(r,5));const closing=local.stop();delayResolve();assert.equal((await request).status,200);assert.equal((await closing).forced,false);assert.equal(local.server.listening,false);
 });
-test('048-H08 entrada de produção usa PORT, um Node, e responde a SIGTERM',async()=>{
+test('048-H08 entrada de produção usa PORT, um Node, e responde a SIGTERM',{skip:process.platform==='win32'?'Windows força encerramento via child.kill; drenagem portátil coberta pela 049-H01':false},async()=>{
  const child=spawn(process.execPath,['server/unified.mjs'],{env:{...process.env,NODE_ENV:'test',PORT:'0',HOST:'127.0.0.1',PLATFORM_APP_ORIGIN:origin,CONSUMER_ORIGIN:origin,SUPABASE_URL:'https://fixture.invalid',SUPABASE_PUBLISHABLE_KEY:'offline-public',SUPABASE_SERVICE_ROLE_KEY:'offline-service',MERCADO_PAGO_ENABLED:'false'},stdio:['ignore','pipe','pipe']});
  let output='';child.stdout.on('data',x=>output+=x);const exited=once(child,'exit');
  try {for(let n=0;n<200&&!output.includes('api_ready');n++)await new Promise(r=>setTimeout(r,10));const ready=output.split('\n').filter(Boolean).map(x=>JSON.parse(x)).find(x=>x.event==='api_ready');assert.ok(ready,output);assert.equal((await fetch('http://127.0.0.1:'+ready.port+'/health')).status,200);child.kill('SIGTERM');const [code]=await exited;assert.equal(code,0);assert.match(output,/api_stopped/);assert.ok(!output.includes('offline-service'));}finally{if(child.exitCode===null)child.kill('SIGKILL');}

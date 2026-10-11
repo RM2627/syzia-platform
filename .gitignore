@@ -26,3 +26,5 @@ test-results-syzia041/
 test-results-*/
 *.temporary.mjs
 *.047-temporary.mjs
+
+syzia-plan-mapping.local.json

@@ -1,3 +1,5 @@
+import { MessageThread, composerEnter } from "./MessageThread";
+import { useVisiblePolling } from "../ui/useVisiblePolling";
 import {
   ExecutionSchedule,
   Periods,
@@ -10,7 +12,7 @@ import { sections as manualLabels, priceLabel } from "../company/model";
 import { RequestedItems, OrderPrices } from "../consumer/RequestedItems";
 import { AccountDetail } from "../finance/Finance";
 import { useDraft, DraftConflict } from "../ui/useDraft";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, useId } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { rpc, supabase } from "../api";
 import { gateway } from "../consumer/api";
@@ -64,19 +66,13 @@ export function Central({
       }
     } catch (e) {
       if (g === generation.current) {
-        setData(undefined);
+        if ((e as any).code === "42501") setData(undefined);
         setError(centralError(e));
       }
     }
   }, [companyOrg, org, search, status, tab, offset, entryDate]);
-  useEffect(() => {
-    void load();
-    const id = setInterval(() => void load(), 15000);
-    return () => {
-      generation.current++;
-      clearInterval(id);
-    };
-  }, [load]);
+  useVisiblePolling(load, 15000);
+  useEffect(() => () => { generation.current++; }, [load]);
   async function presence(value: string) {
     try {
       await rpc("central_presence", { p_state: value });
@@ -333,6 +329,7 @@ export function Central({
                 </span>
               </div>
               <h3>{x.customer}</h3>
+              {x.unread_count > 0 && <span className="unread-count">{x.unread_count} não lida{x.unread_count === 1 ? "" : "s"}</span>}
               <p>
                 {x.service} · {sourceLabels[x.source] || "Origem informada"}
               </p>
@@ -421,6 +418,7 @@ function Ticket({
   queuePath: string;
   onChange: () => Promise<void>;
 }) {
+  const composerId=useId();
   const [ctx, setCtx] = useState<any>(),
     [error, setError] = useState(""),
     [busy, setBusy] = useState(false),
@@ -480,32 +478,29 @@ function Ticket({
       setCtx(x);
     } catch (e) {
       if (g === gen.current) {
-        setCtx(undefined);
+        if ((e as any).code === "42501") setCtx(undefined);
         setError(centralError(e));
       }
     }
   }, [code, companyOrg]);
-  useEffect(() => {
-    void load();
-    const i = setInterval(() => void load(), 12000);
-    return () => {
-      gen.current++;
-      clearInterval(i);
-    };
-  }, [load]);
+  useVisiblePolling(load, 12000);
+  useEffect(() => () => { gen.current++; }, [load]);
   useEffect(
     () => () => {
       if (photo) URL.revokeObjectURL(photo);
     },
     [photo],
   );
+  const submitting = useRef(false);
   async function operation(name: string, args: any, recovering = false) {
+    if (submitting.current) throw Error("operation_in_progress");
     if (uncertain && !recovering) {
       setError(
         "Confirme o resultado do envio anterior antes de realizar outra ação.",
       );
       throw Error("previous_result_unknown");
     }
+    submitting.current = true;
     setBusy(true);
     setError("");
     const payload = JSON.stringify({ name, args });
@@ -534,6 +529,7 @@ function Ticket({
       await load();
       throw e;
     } finally {
+      submitting.current = false;
       setBusy(false);
     }
   }
@@ -751,28 +747,9 @@ function Ticket({
       <div className="h-work-body">
         <section className="h-conversation">
           <h3>Conversa com o cliente</h3>
-          <div className="h-messages" aria-live="polite">
-            {ctx.messages.map((m: any, i: number) => (
-              <article key={i} className={"h-message " + m.kind}>
-                <small>
-                  {m.name} ·{" "}
-                  {m.kind === "customer"
-                    ? "Cliente"
-                    : m.kind === "company"
-                      ? "Empresa"
-                      : "Atendimento compartilhado"}{" "}
-                  · {date(m.at)}
-                </small>
-                <p>{m.body}</p>
-              </article>
-            ))}
-            {!ctx.messages.length && (
-              <p className="h-small">
-                Nenhuma mensagem enviada. Consulte o contexto antes de
-                responder.
-              </p>
-            )}
-          </div>
+          <MessageThread key={code} messages={ctx.messages} onRead={async id => {
+            await rpc("central_mark_read", {p_code:code,p_message:id}); await onChange();
+          }} />
           <div className={"h-composer " + (mode === "note" ? "internal" : "")}>
             <div className="h-tabs">
               <button
@@ -798,11 +775,13 @@ function Ticket({
                 Nota interna
               </button>
             </div>
-            <label>
+            <label htmlFor={composerId}>
               {mode === "message"
                 ? "Resposta pública ao cliente"
                 : "Nota interna · nunca enviada ao cliente"}
-              <textarea
+            </label>
+              <textarea id={composerId}
+                onKeyDown={e => composerEnter(e, () => safe(send), !busy && !uncertain && canReply && Boolean(text.trim()) && !stale)}
                 maxLength={mode === "message" ? 4000 : 2000}
                 disabled={
                   !canReply ||
@@ -821,7 +800,6 @@ function Ticket({
                     : "Registre somente contexto operacional necessário."
                 }
               />
-            </label>
             {reply !== null && (
               <p className="h-small">
                 Resposta de {ctx.organization.name}.{" "}

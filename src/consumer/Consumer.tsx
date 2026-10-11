@@ -1,3 +1,7 @@
+import { DocumentButton } from "../documents/DocumentButton";
+import { PresenceControl } from "../operations/BookingExtras";
+import { PhoneField } from "./PhoneField";
+import { normalizePhone } from "./phone";
 import {
   ExecutionSchedule,
   Periods,
@@ -914,7 +918,7 @@ function RequestWizard({
           p_items: selection,
           p_customer: {
             name,
-            whatsapp: phone.replace(/\D/g, ""),
+            whatsapp: normalizePhone(phone) ?? phone,
             email: email || null,
             accepted_notice: notice,
             notice_version: company.notice_version,
@@ -937,7 +941,7 @@ function RequestWizard({
           p_key: key.current,
           p_customer: {
             name,
-            whatsapp: phone.replace(/\D/g, ""),
+            whatsapp: normalizePhone(phone) ?? phone,
             email: email || null,
             accepted_notice: notice,
             notice_version: company.notice_version,
@@ -1299,17 +1303,7 @@ function RequestWizard({
                   onChange={(e) => setName(e.target.value)}
                 />
               </label>
-              <label>
-                WhatsApp com DDD
-                <input
-                  type="tel"
-                  autoComplete="tel"
-                  required
-                  pattern="[+0-9 ()-]{10,22}"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                />
-              </label>
+              <PhoneField label="WhatsApp com DDD" value={phone} onChange={setPhone} />
               <label>
                 E-mail (opcional)
                 <input
@@ -1790,7 +1784,7 @@ export function Tracking() {
                           : "Histórico"}
                       </small>
                     </div>
-                    {v.kind === "final" ? (
+                    <DocumentButton request={code} reference={v.code}/>{v.kind === "final" ? (
                       <QuoteSummary quote={v} />
                     ) : (
                       <>
@@ -2010,6 +2004,7 @@ export function Tracking() {
                             }))}
                         />
                       )}
+                      {data.appointments.filter((a:any)=>a.state === "confirmed").map((a:any)=><PresenceControl key={a.code} request={code} appointment={a} manage={data.can_manage} reload={load}/>)}
                       {data.can_manage && (
                         <button
                           disabled={busy}

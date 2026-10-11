@@ -6,6 +6,7 @@ process.env.SYZIA_TEAM_CURRENT = "1";
 process.env.SYZIA_FLEXIBLE_CURRENT = "1";
 process.env.SYZIA_BILLING_CURRENT = "1";
 process.env.SYZIA_OPTIONAL_MANUAL_CURRENT = "1";
+process.env.SYZIA_OPERATION_CURRENT = "1";
 const controlled = process.argv.includes("--inject-failure");
 if (!controlled) await (await import("../billing-047/browser-runtime.mjs")).prepareGateBrowser();
 const out = "reports/syzia-044";
@@ -13,6 +14,7 @@ await mk(out, { recursive: true });
 await mk("reports/team-availability", { recursive: true });
 const node = process.execPath;
 export const suites = [
+ ["focused-049", [node,"--experimental-strip-types","--test","--test-concurrency=1","tests/syzia-049/financial.test.mjs","tests/syzia-049/http.test.mjs","tests/syzia-049/operation.test.mjs","tests/syzia-049/ui-utils.test.mjs","tests/syzia-049/integrity.test.mjs","tests/syzia-049/upgrade.test.mjs"]],
   ["focused-048", [node, "--test", "--test-concurrency=1", "tests/syzia-048/unified.test.mjs", "tests/syzia-048/manual.test.mjs", "tests/syzia-048/integrity.test.mjs"]],
   ["billing-047", [node, "--test", "--test-concurrency=1", "tests/billing-047/edge-cases.test.mjs", "tests/billing-047/gateway.test.mjs", "tests/billing-047/lifecycle.test.mjs", "tests/billing-047/subscriptions.test.mjs", "tests/billing-047/upgrade.test.mjs"]],
   ["gate-contracts", [node, "--test", "tests/current-gate.test.mjs"]],
@@ -58,6 +60,7 @@ export const suites = [
       "--config=playwright.ux001.config.ts",
     ],
   ],
+  ["browser-049", [node, "node_modules/@playwright/test/cli.js", "test", "--config=playwright.syzia049.config.ts"]],
   ["browser-048", [node, "node_modules/@playwright/test/cli.js", "test", "--config=playwright.syzia048.config.ts"]],
   ["billing-browser", [node, "node_modules/@playwright/test/cli.js", "test", "--config=playwright.billing047.config.ts"]],
   ["flexible-browser", [node, "node_modules/@playwright/test/cli.js", "test", "--config=playwright.flexible-support.config.ts"]],
@@ -66,7 +69,7 @@ const steps = controlled
   ? [["controlled-failure", [node, "-e", "process.exit(42)"]]]
   : suites;
 const report = {
-  version: "048",
+  version: "049",
   engine:
     "Local PGlite + HTTP fixtures + Chromium; external homologation pending",
   startedAt: new Date().toISOString(),

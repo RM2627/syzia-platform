@@ -19,5 +19,6 @@ export async function consumerDB() {
     await (await import("../../scripts/flexible-support/fixture.mjs")).upgradeFlexibleFixture(c.db);
   if (process.env.SYZIA_BILLING_CURRENT === "1" && process.env.SYZIA_FLEXIBLE_CURRENT === "1" && process.env.SYZIA_TEAM_CURRENT === "1")
     await (await import("../../scripts/billing-047/fixture.mjs")).upgradeBillingFixture(c.db);
+if(process.env.SYZIA_OPERATION_CURRENT === "1") (await import("../../scripts/syzia-049/fixture.mjs")).attachOperationRPC(c);
   return c;
 }

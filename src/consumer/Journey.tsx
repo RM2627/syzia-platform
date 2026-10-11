@@ -1,3 +1,5 @@
+import { PhoneField } from "./PhoneField";
+import { normalizePhone } from "./phone";
 import {
   ExecutionSchedule,
   type Period,
@@ -148,14 +150,7 @@ export function ServiceHelp({
                 maxLength={120}
               />
             </label>
-            <label>
-              WhatsApp para atendimento
-              <input
-                value={phone}
-                onChange={(e) => onPhone(e.target.value)}
-                inputMode="tel"
-              />
-            </label>
+            <PhoneField label="WhatsApp para atendimento" value={phone} onChange={onPhone} />
             <label className="c-check">
               <input
                 type="checkbox"
@@ -172,7 +167,7 @@ export function ServiceHelp({
                 preview ||
                 !consent ||
                 name.trim().length < 2 ||
-                phone.replace(/\D/g, "").length < 10
+                !normalizePhone(phone)
               }
               onClick={async () => {
                 setBusy(true);
@@ -188,7 +183,7 @@ export function ServiceHelp({
                     p_items: items,
                     p_customer: {
                       name,
-                      whatsapp: phone.replace(/\D/g, ""),
+                      whatsapp: normalizePhone(phone) ?? phone,
                       email: null,
                       accepted_notice: true,
                       notice_version: company.notice_version,
