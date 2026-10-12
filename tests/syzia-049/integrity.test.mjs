@@ -1,8 +1,9 @@
+import { mp01ExpectedHash } from "../support/mp01-integrity.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
-test("049-I01 44 migrations anteriores, entrada unificada e núcleo financeiro 047 intactos", async () => {
+test("049-I01 44 migrations anteriores, entrada unificada e núcleo financeiro preservado, exceto adaptador MP-01 autorizado", async () => {
   const manifest = JSON.parse(
     await readFile("docs/syzia-049/preserved-048-sha256.json", "utf8"),
   );
@@ -15,7 +16,7 @@ test("049-I01 44 migrations anteriores, entrada unificada e núcleo financeiro 0
       createHash("sha256")
         .update(await readFile(path))
         .digest("hex"),
-      hash,
+      mp01ExpectedHash(path, hash),
       path,
     );
 });

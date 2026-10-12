@@ -17,7 +17,7 @@ export const suites = [
  ["hotfix-049", [node,"--experimental-strip-types","--test","--test-concurrency=1","tests/hotfix-049/operation.test.mjs","tests/hotfix-049/messages.test.mjs","tests/hotfix-049/integrity.test.mjs"]],
  ["focused-049", [node,"--experimental-strip-types","--test","--test-concurrency=1","tests/syzia-049/financial.test.mjs","tests/syzia-049/http.test.mjs","tests/syzia-049/operation.test.mjs","tests/syzia-049/ui-utils.test.mjs","tests/syzia-049/integrity.test.mjs","tests/syzia-049/upgrade.test.mjs"]],
   ["focused-048", [node, "--test", "--test-concurrency=1", "tests/syzia-048/unified.test.mjs", "tests/syzia-048/manual.test.mjs", "tests/syzia-048/integrity.test.mjs"]],
-  ["billing-047", [node, "--test", "--test-concurrency=1", "tests/billing-047/edge-cases.test.mjs", "tests/billing-047/gateway.test.mjs", "tests/billing-047/lifecycle.test.mjs", "tests/billing-047/subscriptions.test.mjs", "tests/billing-047/upgrade.test.mjs"]],
+  ["billing-047", [node, "--test", "--test-concurrency=1", "tests/billing-047/edge-cases.test.mjs", "tests/billing-047/gateway.test.mjs", "tests/billing-047/lifecycle.test.mjs", "tests/billing-047/subscriptions.test.mjs", "tests/billing-047/upgrade.test.mjs", "tests/billing-047/mp01.test.mjs"]],
   ["gate-contracts", [node, "--test", "tests/current-gate.test.mjs"]],
   ["flexible-upgrade", [node, "tests/flexible-support-upgrade.test.mjs"]],
   ["flexible-support", [node, "scripts/billing-047/flexible-regression.mjs"]],

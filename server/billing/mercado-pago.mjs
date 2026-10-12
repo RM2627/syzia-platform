@@ -89,6 +89,8 @@ export class MercadoPagoSubscriptions {
       payer_email: email, card_token_id: cardToken, status: "authorized",
       reason: "SYZIA " + binding.code,
       back_url: this.appOrigin + "/painel/" + binding.organization_id + "/assinatura?retorno=1",
+      // MP-01 remains unverified: the published preapproval contract does not
+      // establish delivery through this field. See docs/billing-mp01/README.md.
       notification_url: this.notificationUrl,
     }, binding.id);
   }
@@ -116,7 +118,8 @@ export class MercadoPagoSubscriptions {
     const id = identifier(p?.data?.id);
     if (query.get("data.id") && query.get("data.id") !== id) fail("billing_webhook_invalid", 400);
     if (p.user_id != null && String(p.user_id) !== this.collectorId) fail("billing_binding_mismatch", 400);
-    if (this.notificationAuth === "hmac" || (this.webhookSecret && headers["x-signature"])) {
+    // A configured secret must never be bypassed by stripping x-signature.
+    if (this.notificationAuth === "hmac" || this.webhookSecret) {
       if (!this.webhookSecret) fail("billing_webhook_invalid", 401);
       const parts = Object.fromEntries(String(headers["x-signature"] || "").split(",").map(x => x.trim().split("=")));
       const requestId = headers["x-request-id"];
@@ -125,6 +128,7 @@ export class MercadoPagoSubscriptions {
       const expected = createHmac("sha256", this.webhookSecret).update(manifest).digest();
       if (!timingSafeEqual(expected, Buffer.from(parts.v1, "hex"))) fail("billing_webhook_invalid", 401);
     }
+    // resource_lookup without a secret does NOT authenticate the POST's origin.
     // Subscription resource notifications are hints, including validly signed hints.
     // Neither this payload nor the browser redirect can grant access.
     return { type, id };
