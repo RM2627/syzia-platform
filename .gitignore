@@ -27,4 +27,8 @@ test-results-*/
 *.temporary.mjs
 *.047-temporary.mjs
 
-syzia-plan-mapping.local.json
+# Legal owner data must remain OUTSIDE the checkout (defense in depth).
+/legal-private/
+*.legal-private.json
+
+/syzia-plan-mapping.local.json

@@ -1,0 +1,19 @@
+{
+  "version": "2026-10-13-050",
+  "acceptance_version": "material-050-2026-10-13",
+  "public_identity": {
+    "operator_name": "",
+    "support_email": "",
+    "privacy_email": "",
+    "professional_address": "",
+    "professional_address_approved": false
+  },
+  "publication_review": {
+    "owner_approved": false,
+    "identification_review_resolved": false,
+    "required_information_complete": false,
+    "no_personal_data_disclosure_pending": false,
+    "facts_confirmed": false,
+    "review_reference": ""
+  }
+}

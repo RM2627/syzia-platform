@@ -70,6 +70,7 @@ await (await import("./billing-047/fixture.mjs")).upgradeBillingFixture(c.db);
 if (process.env.DEMO_NO_MANUAL_048 === "true") await (await import("./syzia-048/fixture.mjs")).seedNoManualBrowser(c);
 (await import("./billing-047/fixture.mjs")).attachBillingRPC(c);
 (await import("./syzia-049/fixture.mjs")).attachOperationRPC(c);
+if (process.env.DEMO_TEST_MODE === 'true' && process.env.DEMO_LEGAL_050 === 'true') await (await import('./legal-050/browser-fixture.mjs')).publishLocalLegal(c);
 // Only this disposable demo publishes fictitious offers; production migration publishes none.
 await c.db.exec(
   "reset role;update billing_plans set site_visible=true,self_service=true,self_service_trial=true where active and available;update private.billing_runtime set mock_enabled=true",
@@ -389,6 +390,13 @@ const server = http.createServer(async (req, res) => {
       queue = job.catch(() => {});
       await job;
       send(200, { reset: true });
+      return;
+    }
+    if (path === "/__test/legal-050/publish" && process.env.DEMO_TEST_MODE === "true" && process.env.DEMO_LEGAL_050 === "true" && req.method === "POST") {
+      const execute = async () => (await import("./legal-050/browser-fixture.mjs")).publishLocalLegal(c);
+      const job = queue.then(execute, execute);
+      queue = job.catch(() => {});
+      send(200, await job);
       return;
     }
     if (path === "/__test/fail-next-provision" && process.env.DEMO_TEST_MODE === "true" && req.method === "POST") {

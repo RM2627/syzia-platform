@@ -14,6 +14,9 @@ await mk(out, { recursive: true });
 await mk("reports/team-availability", { recursive: true });
 const node = process.execPath;
 export const suites = [
+ ["legal-versioning-050",[node,"--test","--test-concurrency=1","tests/legal-050/versioning.test.mjs","tests/legal-050/tooling.test.mjs"]],
+ ["legal-historical-050",[node,"scripts/hotfix-050/legal-regression.mjs"]],
+ ["hotfix-050", [node,"--experimental-strip-types","--test","--test-concurrency=1","tests/hotfix-050/notifications.test.mjs","tests/hotfix-050/integrity.test.mjs"]],
  ["hotfix-049", [node,"--experimental-strip-types","--test","--test-concurrency=1","tests/hotfix-049/operation.test.mjs","tests/hotfix-049/messages.test.mjs","tests/hotfix-049/integrity.test.mjs"]],
  ["focused-049", [node,"--experimental-strip-types","--test","--test-concurrency=1","tests/syzia-049/financial.test.mjs","tests/syzia-049/http.test.mjs","tests/syzia-049/operation.test.mjs","tests/syzia-049/ui-utils.test.mjs","tests/syzia-049/integrity.test.mjs","tests/syzia-049/upgrade.test.mjs"]],
   ["focused-048", [node, "--test", "--test-concurrency=1", "tests/syzia-048/unified.test.mjs", "tests/syzia-048/manual.test.mjs", "tests/syzia-048/integrity.test.mjs"]],
@@ -66,12 +69,14 @@ export const suites = [
   ["browser-048", [node, "node_modules/@playwright/test/cli.js", "test", "--config=playwright.syzia048.config.ts"]],
   ["billing-browser", [node, "node_modules/@playwright/test/cli.js", "test", "--config=playwright.billing047.config.ts"]],
   ["flexible-browser", [node, "node_modules/@playwright/test/cli.js", "test", "--config=playwright.flexible-support.config.ts"]],
+  ["browser-legal-050",[node,"node_modules/@playwright/test/cli.js","test","--config=playwright.legal050.config.ts"]],
+  ["browser-hotfix-050", [node, "node_modules/@playwright/test/cli.js", "test", "--config=playwright.hotfix050.config.ts"]],
 ];
 const steps = controlled
   ? [["controlled-failure", [node, "-e", "process.exit(42)"]]]
   : suites;
 const report = {
-  version: "049",
+  version: "050",
   engine:
     "Local PGlite + HTTP fixtures + Chromium; external homologation pending",
   startedAt: new Date().toISOString(),

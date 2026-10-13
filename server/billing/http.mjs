@@ -22,6 +22,8 @@ export function createBillingHandler({ origin, billing, log = entry => console.w
       const raw = Buffer.concat(chunks);
       const result = hook ? await billing.webhook(raw, req.headers, url.searchParams)
         : await billing.user(url.pathname.split("/").at(-1), JSON.parse(raw.toString("utf8")), (req.headers.authorization || "").match(/^Bearer ([^\s]+)$/)?.[1]);
+      if (hook && result?.mode === "observe")
+        log({ event: "billing_notification_observed", mode: "observe", applied: false, request_id: requestId });
       send(200, result);
     } catch (e) {
       const safeSQL = /^billing_[a-z_]{1,70}$|^trial_review_required$|^access_denied$/;

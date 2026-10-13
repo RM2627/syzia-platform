@@ -1,4 +1,5 @@
 import { mp01ExpectedHash } from "../support/mp01-integrity.mjs";
+import { hotfix050ExpectedHash } from "../support/hotfix050-integrity.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
@@ -16,7 +17,7 @@ test("049-I01 44 migrations anteriores, entrada unificada e núcleo financeiro p
       createHash("sha256")
         .update(await readFile(path))
         .digest("hex"),
-      mp01ExpectedHash(path, hash),
+      hotfix050ExpectedHash(path, mp01ExpectedHash(path, hash)),
       path,
     );
 });

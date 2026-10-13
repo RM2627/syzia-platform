@@ -17,11 +17,7 @@ export async function documents() {
     .select("*")
     .eq("current", true);
   if (error) throw error;
-  return (data as Document[]).map((d) => ({
-    ...d,
-    title: d.title.replaceAll("VIRELOQ", "SYZIA"),
-    body: d.body.replaceAll("VIRELOQ", "SYZIA"),
-  }));
+  return data as Document[];
 }
 export function LegalDocument({ kind }: { kind: string }) {
   const [doc, setDoc] = useState<Document>(),
@@ -42,7 +38,9 @@ export function LegalDocument({ kind }: { kind: string }) {
             Versão {doc.version}{" "}
             {doc.is_draft && "· MINUTA PARA REVISÃO ANTES DO LANÇAMENTO"}
           </p>
-          <div style={{ whiteSpace: "pre-wrap" }}>{doc.body}</div>
+          <div style={{ whiteSpace: "pre-wrap", overflowWrap: "anywhere" }}>
+            {doc.body}
+          </div>
         </>
       ) : (
         <p role="status">{error || "Carregando documento…"}</p>
@@ -62,7 +60,8 @@ export function LegalGate({
 }) {
   const [docs, setDocs] = useState<Document[]>([]),
     [error, setError] = useState(""),
-    [busy, setBusy] = useState(false);
+    [busy, setBusy] = useState(false),
+    [changed, setChanged] = useState(false);
   useEffect(() => {
     documents()
       .then(setDocs)
@@ -74,19 +73,22 @@ export function LegalGate({
       {canAccept ? (
         <>
           <p>
-            Revise os documentos da SYZIA em nome da empresa. Nesta versão de
-            homologação, são minutas; a revisão final ainda depende do
-            proprietário.
+            Leia os Termos de Uso e a Política de Privacidade antes de
+            continuar. O aceite em nome da empresa deve ser feito pelo
+            administrador responsável.
           </p>
           {docs.map((d) => (
             <details key={d.kind}>
               <summary>
                 {d.title} · {d.version}
               </summary>
-              <div style={{ whiteSpace: "pre-wrap" }}>{d.body}</div>
+              <div style={{ whiteSpace: "pre-wrap", overflowWrap: "anywhere" }}>
+                {d.body}
+              </div>
             </details>
           ))}
           <form
+            key={docs.map((d) => `${d.kind}:${d.version}`).join("|")}
             onSubmit={async (e) => {
               e.preventDefault();
               setBusy(true);
@@ -97,7 +99,16 @@ export function LegalGate({
                 });
                 onDone();
               } catch (e) {
-                setError(accessMessage(e));
+                if (
+                  String((e as { message?: string })?.message).includes(
+                    "legal_version_changed",
+                  )
+                ) {
+                  setChanged(true);
+                  setError(
+                    "Os documentos foram atualizados. Carregue as versões vigentes e revise antes de aceitar.",
+                  );
+                } else setError(accessMessage(e));
               } finally {
                 setBusy(false);
               }
@@ -111,7 +122,10 @@ export function LegalGate({
               <input type="checkbox" required />
               <span>Li e estou ciente da Política de Privacidade</span>
             </label>
-            <button className="primary" disabled={busy || docs.length !== 2}>
+            <button
+              className="primary"
+              disabled={busy || changed || docs.length !== 2}
+            >
               Continuar
             </button>
           </form>
@@ -123,6 +137,27 @@ export function LegalGate({
         </p>
       )}
       {error && <p role="alert">{error}</p>}
+      {changed && (
+        <button
+          disabled={busy}
+          onClick={async () => {
+            setBusy(true);
+            try {
+              setDocs(await documents());
+              setChanged(false);
+              setError("");
+            } catch {
+              setError(
+                "Não foi possível carregar os documentos. Tente novamente.",
+              );
+            } finally {
+              setBusy(false);
+            }
+          }}
+        >
+          Carregar documentos atualizados
+        </button>
+      )}
       <button onClick={onLogout}>Sair</button>
     </AccessFrame>
   );

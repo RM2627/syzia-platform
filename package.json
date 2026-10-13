@@ -115,6 +115,9 @@
     "test:042:native": "node scripts/test-native.mjs --042",
     "build:migration:042": "python3 scripts/syzia-042/build.py",
     "test:044": "node tests/syzia-044-sql.test.mjs && node tests/syzia-044-upgrade.test.mjs && node --test tests/current-gate.test.mjs",
+    "test:hotfix:050": "node --experimental-strip-types --test --test-concurrency=1 tests/hotfix-050/*.test.mjs",
+    "test:hotfix:050:legal": "node scripts/hotfix-050/legal-regression.mjs",
+    "test:hotfix:050:browser": "playwright test --config=playwright.hotfix050.config.ts",
     "test:current-gate": "node scripts/syzia-044/current-gate.mjs",
     "test:team-availability": "node tests/team-availability.test.mjs && node tests/team-availability-upgrade.test.mjs",
     "test:team-availability:browser": "playwright test --config=playwright.team-availability.config.ts",
@@ -134,7 +137,11 @@
     "homologation:billing:isolated": "node scripts/syzia-049/billing-isolated.mjs",
     "test:hotfix:049": "node --experimental-strip-types --test --test-concurrency=1 tests/hotfix-049/*.test.mjs",
     "test:hotfix:049:browser": "node scripts/hotfix-049/browser.mjs",
-    "test:hotfix:049:native": "node scripts/hotfix-049/native.mjs"
+    "test:hotfix:049:native": "node scripts/hotfix-049/native.mjs",
+    "legal:prepare": "node scripts/legal-050/prepare.mjs",
+    "test:legal:050": "node --test --test-concurrency=1 tests/legal-050/*.test.mjs",
+    "test:legal:050:browser": "playwright test --config=playwright.legal050.config.ts",
+    "test:legal:050:native": "node scripts/legal-050/native.mjs"
   },
   "keywords": [],
   "author": "",
