@@ -8,7 +8,7 @@ let aid;
 test('047-27 Rejeição definitiva permite novo token; timeout depois de criar recupera sem segundo POST',async()=>{
   const transport=c.gateway.fetchImpl;
   c.gateway.fetchImpl=async(url,init)=>new URL(url).pathname==='/preapproval'&&init.method==='POST'?new Response('{}',{status:400}):transport(url,init);
-  await assert.rejects(c.command(),/billing_provider_rejected/);
+  await assert.rejects(c.command(),e=>e.code==='billing_provider_invalid_request'&&e.providerStatus===400&&e.providerStage==='create');
   aid=(await c.view()).subscription.id;
   assert.equal((await c.service('billing047_service',{p_action:'get',p_id:aid,p_data:{}})).create_started,false);
   c.gateway.fetchImpl=async(url,init)=>{const result=await transport(url,init);if(new URL(url).pathname==='/preapproval'&&init.method==='POST')throw Error('lost-response');return result;};

@@ -69,8 +69,15 @@ export function subscriptions({ gateway, service, asUser, auth }) {
       return await sql("apply", id, { ...snapshot, lease, operation_done: operationDone, source });
     } catch (e) {
       const code = e instanceof BillingError ? e.code : /^billing_[a-z_]{1,70}$/.test(e?.message || "") ? e.message : "billing_reconciliation_required";
-      await sql("error", id, { lease, code }).catch(() => {});
-      throw new BillingError(code, e instanceof BillingError ? e.status : 503);
+      await service("billing051_failure", { p_id: id, p_lease: lease, p_code: code,
+        p_http_status: e instanceof BillingError ? e.providerStatus ?? null : null,
+        p_stage: e instanceof BillingError ? e.providerStage ?? null : null }).catch(() => {});
+      const safe = new BillingError(code, e instanceof BillingError ? e.status : 503);
+      if (e instanceof BillingError) {
+        safe.providerStatus = e.providerStatus;
+        safe.providerStage = e.providerStage;
+      }
+      throw safe;
     }
   }
   async function user(path, body, token) {

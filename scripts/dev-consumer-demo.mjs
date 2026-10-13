@@ -521,7 +521,7 @@ const server = http.createServer(async (req, res) => {
         if (path.startsWith("/rest/v1/rpc/")) {
           const name = path.split("/").pop();
           if (
-            !/^(employee|assisted|acquisition|selfservice|people|permissions|financial|support|access|consumer|central|commercial|company|foundation|analytics|billing|billing047|operations|onboarding)_[a-z_]+$/.test(
+            !/^(employee|assisted|acquisition|selfservice|people|permissions|financial|support|access|consumer|central|commercial|company|foundation|analytics|billing|billing047|billing051|operations|onboarding)_[a-z_]+$/.test(
               name,
             ) ||
             name.startsWith("consumer_gateway") ||

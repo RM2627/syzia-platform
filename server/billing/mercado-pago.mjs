@@ -1,5 +1,6 @@
 // SaaS subscriptions only. Raw card fields never enter this adapter.
 import { createHmac, timingSafeEqual } from "node:crypto";
+import { providerFailure } from "./diagnostics.mjs";
 const ID = /^[a-zA-Z0-9_-]{1,160}$/;
 export const commercialPrices = Object.freeze({ essencial: 4990, profissional: 8990, equipe: 14990 });
 export class BillingError extends Error {
@@ -54,9 +55,12 @@ export class MercadoPagoSubscriptions {
         ...(body ? { body: JSON.stringify(body) } : {}),
       });
       if (!r.ok) {
-        const error = new BillingError(r.status === 404 ? "billing_resource_missing" : r.status >= 500 ? "billing_provider_unavailable" : "billing_provider_rejected", 502);
-        // Only an explicit validation/auth rejection establishes that POST did not create.
-        error.definitiveRejection = [400, 401, 403, 422].includes(r.status);
+        const diagnostic = providerFailure(r.status, path, method);
+        const error = new BillingError(diagnostic.code, 502);
+        Object.assign(error, diagnostic);
+        // Never parse or retain an error body: /preapproval only documents broad
+        // HTTP categories. Payment/Orders error codes are not this API's contract.
+        await r.body?.cancel().catch(() => {});
         throw error;
       }
       const raw = await r.text();

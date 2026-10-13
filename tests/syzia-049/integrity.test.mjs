@@ -1,3 +1,4 @@
+import { hotfix051ExpectedHash } from "../support/hotfix051-integrity.mjs";
 import { mp01ExpectedHash } from "../support/mp01-integrity.mjs";
 import { hotfix050ExpectedHash } from "../support/hotfix050-integrity.mjs";
 import test from "node:test";
@@ -17,7 +18,7 @@ test("049-I01 44 migrations anteriores, entrada unificada e núcleo financeiro p
       createHash("sha256")
         .update(await readFile(path))
         .digest("hex"),
-      hotfix050ExpectedHash(path, mp01ExpectedHash(path, hash)),
+      hotfix051ExpectedHash(path, hotfix050ExpectedHash(path, mp01ExpectedHash(path, hash))),
       path,
     );
 });
@@ -26,6 +27,6 @@ test("049-I02 lockfile atualizado explicitamente para dependências PDF", async 
     createHash("sha256")
       .update(await readFile("package-lock.json"))
       .digest("hex"),
-    (await readFile("docs/syzia-049/lockfile-sha256.txt", "utf8")).trim(),
+    hotfix051ExpectedHash("package-lock.json", (await readFile("docs/syzia-049/lockfile-sha256.txt", "utf8")).trim()),
   );
 });

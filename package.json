@@ -141,7 +141,9 @@
     "legal:prepare": "node scripts/legal-050/prepare.mjs",
     "test:legal:050": "node --test --test-concurrency=1 tests/legal-050/*.test.mjs",
     "test:legal:050:browser": "playwright test --config=playwright.legal050.config.ts",
-    "test:legal:050:native": "node scripts/legal-050/native.mjs"
+    "test:legal:050:native": "node scripts/legal-050/native.mjs",
+    "test:051": "node --experimental-strip-types --test --test-concurrency=1 tests/syzia-051/*.test.mjs",
+    "test:051:browser": "playwright test --config=playwright.syzia051.config.ts"
   },
   "keywords": [],
   "author": "",

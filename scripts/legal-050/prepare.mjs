@@ -1,6 +1,6 @@
 // Offline owner tool. Never sends data, connects to a database or loads environment secrets.
 import { readFile, writeFile, mkdir, realpath } from "node:fs/promises";
-import { resolve, relative, dirname, sep, isAbsolute } from "node:path";
+import nodePath, { resolve } from "node:path";
 import { pathToFileURL, fileURLToPath } from "node:url";
 import { createHash } from "node:crypto";
 import { inspectSQL, publicationSQL, rollbackSQL } from "./sql.mjs";
@@ -164,6 +164,30 @@ export function compile(config, snapshot, prepared, approvalHash) {
     rollback: rollbackSQL(snapshot, prepared.documents, prepared.reviewHash),
   };
 }
+// Resolve existing ancestors before appending the new directory's leaf. Never
+// split on a literal separator: an absolute Windows path would discard the real parent.
+// The injectable filesystem/path adapters allow the same guard to be tested with win32.
+export async function privateFilePaths(
+  configPath, snapshotPath, outPath,
+  { paths = nodePath, canonicalize = realpath } = {},
+) {
+  const canonicalRoot = await canonicalize(root);
+  const absoluteOutput = paths.resolve(outPath);
+  const files = {
+    config: await canonicalize(configPath),
+    snapshot: await canonicalize(snapshotPath),
+    output: paths.resolve(
+      await canonicalize(paths.dirname(absoluteOutput)),
+      paths.basename(absoluteOutput),
+    ),
+  };
+  for (const file of Object.values(files)) {
+    const rel = paths.relative(canonicalRoot, file);
+    if (!(rel === ".." || rel.startsWith(".." + paths.sep) || paths.isAbsolute(rel)))
+      fail("legal_private_files_must_be_outside_project");
+  }
+  return files;
+}
 async function main() {
   const [mode, configPath, snapshotPath, outPath, approvalHash] =
     process.argv.slice(2);
@@ -175,44 +199,32 @@ async function main() {
   )
     fail("usage: preview|compile CONFIG SNAPSHOT OUTPUT [REVIEW_SHA256]");
   // Owner inputs and outputs must stay outside this source checkout.
-  const canonicalRoot = await realpath(root);
-  for (const path of [
-    await realpath(configPath),
-    await realpath(snapshotPath),
-    resolve(
-      await realpath(dirname(resolve(outPath))),
-      ".",
-      resolve(outPath).split("/").at(-1),
-    ),
-  ]) {
-    const rel = relative(canonicalRoot, path);
-    if (!(rel === ".." || rel.startsWith(".." + sep) || isAbsolute(rel)))
-      fail("legal_private_files_must_be_outside_project");
-  }
-  const config = JSON.parse(await readFile(configPath, "utf8")),
-    snapshot = JSON.parse(await readFile(snapshotPath, "utf8"));
+  const files = await privateFilePaths(configPath, snapshotPath, outPath);
+  const config = JSON.parse(await readFile(files.config, "utf8")),
+    snapshot = JSON.parse(await readFile(files.snapshot, "utf8"));
   const p = await prepare(config, snapshot);
   const compiled =
     mode === "compile" ? compile(config, snapshot, p, approvalHash) : null;
-  // Exclusive creation prevents reusing an old approved file accidentally.
-  await mkdir(outPath, { mode: 0o700 });
+  // Exclusive creation also rejects any pre-existing leaf symlink or junction.
+  // Read/write through the checked canonical paths, not through the original aliases.
+  await mkdir(files.output, { mode: 0o700 });
   await writeFile(
-    resolve(outPath, "REVISAO-PARA-APROVACAO.json"),
+    resolve(files.output, "REVISAO-PARA-APROVACAO.json"),
     JSON.stringify({ ...p.review, review_sha256: p.reviewHash }, null, 2),
     { flag: "wx", mode: 0o600 },
   );
   for (const d of p.documents)
     await writeFile(
-      resolve(outPath, d.kind === "terms" ? "TERMOS.md" : "PRIVACIDADE.md"),
+      resolve(files.output, d.kind === "terms" ? "TERMOS.md" : "PRIVACIDADE.md"),
       `# ${d.title}\n\nVersão ${d.version}\n\n${d.body}\n`,
       { flag: "wx", mode: 0o600 },
     );
   if (compiled) {
-    await writeFile(resolve(outPath, "APLICAR.sql"), compiled.apply, {
+    await writeFile(resolve(files.output, "APLICAR.sql"), compiled.apply, {
       flag: "wx",
       mode: 0o600,
     });
-    await writeFile(resolve(outPath, "ROLLBACK.sql"), compiled.rollback, {
+    await writeFile(resolve(files.output, "ROLLBACK.sql"), compiled.rollback, {
       flag: "wx",
       mode: 0o600,
     });

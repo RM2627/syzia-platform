@@ -1,9 +1,10 @@
+import { mockCheckoutSDK, fillCheckout } from "../support/checkout051-sdk";
 import { test, expect } from "../support/demo-test";
 import { demoLogin } from "../support/demo-login";
 import { mkdir } from "node:fs/promises";
 test("047 navegador: três ofertas, retorno sem liberação, confirmação e cancelamento com segurança", async ({ page }) => {
   const errors: string[] = []; page.on("pageerror", e => errors.push(e.message));
-  await page.route("https://sdk.mercadopago.com/js/v2", route => route.fulfill({ contentType: "application/javascript", body: `window.MercadoPago=class { cardForm(o){const f=document.getElementById(o.form.id);const h=e=>{e.preventDefault();o.callbacks.onSubmit(e)};f.addEventListener('submit',h);queueMicrotask(()=>o.callbacks.onFormMounted());return {getCardFormData:()=>({token:'offline-browser-token-only'}),unmount:()=>f.removeEventListener('submit',h)}} };` }));
+  await mockCheckoutSDK(page);
   await demoLogin(page, "admin@example.invalid");
   const context: any = await page.evaluate(async () => (await import("/src/api.ts")).rpc("foundation_context"));
   const org = context.organizations.find((o: any) => o.slug === "ms-auto-ficticia").id;
@@ -21,15 +22,17 @@ test("047 navegador: três ofertas, retorno sem liberação, confirmação e can
     await page.screenshot({path:`reports/billing-047/screenshots/ofertas-${width}.png`,fullPage:true});
   }
   await page.getByRole("button", { name: "Assinar Essencial", exact: true }).click();
-  await expect(page.getByText(/Hoje: R\$\s*0,00/)).toBeVisible();
-  await expect(page.getByText(/Primeira cobrança:/)).toBeVisible();
-  await page.getByRole("checkbox").check();
+  await expect(page.getByText("A confirmar", {exact:true})).toHaveCount(2);
+  await expect(page.getByText(/Hoje: R\$\s*0,00/)).toHaveCount(0);
+  await expect(page.getByText("Primeira cobrança", {exact:true})).toBeVisible();
+  await fillCheckout(page);
   await page.getByRole("button", { name: "Confirmar meio de pagamento", exact: true }).click();
-  await expect(page.getByText("O Mercado Pago não aceitou a solicitação. Confira o meio de pagamento.")).toBeVisible();
+  await expect(page.getByText("O Mercado Pago não aceitou os dados da solicitação. Revise o formulário. Se o problema continuar, entre em contato com o suporte.")).toBeVisible();
   await page.reload();
   await page.getByRole("button", { name: "Continuar contratação Essencial", exact: true }).click();
-  await expect(page.getByText(/Hoje: R\$\s*0,00/)).toBeVisible();
-  await page.getByRole("checkbox").check();
+  await expect(page.getByText("A confirmar", {exact:true})).toHaveCount(2);
+  await expect(page.getByText(/Hoje: R\$\s*0,00/)).toHaveCount(0);
+  await fillCheckout(page);
   await page.getByRole("button", { name: "Confirmar meio de pagamento", exact: true }).click();
   await expect(page.getByText("Em período grátis", {exact:true})).toBeVisible();
   await expect(page.getByText(/7 dias restantes de trial/)).toBeVisible();

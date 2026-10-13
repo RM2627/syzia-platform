@@ -1,3 +1,4 @@
+import { hotfix051ExpectedHash } from "../support/hotfix051-integrity.mjs";
 import { mp01ExpectedHash } from "../support/mp01-integrity.mjs";
 import { hotfix050ExpectedHash } from "../support/hotfix050-integrity.mjs";
 import test from 'node:test';
@@ -7,5 +8,5 @@ import {createHash} from 'node:crypto';
 test('048-I01 migrations 001–047, billing preservado com exceção explícita do adaptador MP-01',async()=>{
  const manifest=JSON.parse(await readFile('docs/syzia-048/preserved-047-sha256.json','utf8'));assert.equal(Object.keys(manifest).filter(x=>x.startsWith('supabase/migrations/')).length,43);
  // 049 intentionally adds PDF dependencies. Its lockfile hash has a separate gate.
- for(const [path,hash]of Object.entries(manifest).filter(([path])=>path!=='package-lock.json'))assert.equal(createHash('sha256').update(await readFile(path)).digest('hex'),hotfix050ExpectedHash(path,mp01ExpectedHash(path,hash)),path);
+ for(const [path,hash]of Object.entries(manifest).filter(([path])=>path!=='package-lock.json'))assert.equal(createHash('sha256').update(await readFile(path)).digest('hex'),hotfix051ExpectedHash(path,hotfix050ExpectedHash(path,mp01ExpectedHash(path,hash))),path);
 });

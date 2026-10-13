@@ -1,3 +1,4 @@
+import { hotfix051ExpectedHash } from "../support/hotfix051-integrity.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile, stat } from "node:fs/promises";
@@ -16,7 +17,7 @@ test("HF-I01 migrations até 049, lockfile Sharp e backend protegido intactos", 
       createHash("sha256")
         .update(await readFile(p))
         .digest("hex"),
-      hash,
+      hotfix051ExpectedHash(p, hash),
       p,
     );
   const pkg = JSON.parse(await readFile("package.json", "utf8"));

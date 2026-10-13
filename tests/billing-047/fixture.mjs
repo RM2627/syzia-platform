@@ -3,7 +3,7 @@ import { randomUUID } from "node:crypto";
 import { MercadoPagoSubscriptions } from "../../server/billing/mercado-pago.mjs";
 import { subscriptions } from "../../server/billing/subscriptions.mjs";
 import { fakeMercadoPago } from "./fake-provider.mjs";
-export async function fixture({ beforeUpgrade, afterUpgrade } = {}) {
+export async function fixture({ beforeUpgrade, afterUpgrade, checkoutDiagnostics = true } = {}) {
   process.env.SYZIA_BILLING_CURRENT = "0";
   process.env.SYZIA_TEAM_CURRENT = "1"; process.env.SYZIA_FLEXIBLE_CURRENT = "1";
   const { consumerDB, users } = await import("../support/current-fixture.mjs");
@@ -11,6 +11,7 @@ export async function fixture({ beforeUpgrade, afterUpgrade } = {}) {
   await c.db.exec("commit;reset role");
   if (beforeUpgrade) await beforeUpgrade(c);
   await c.db.exec(await readFile("supabase/migrations/202610050047_mercado_pago_subscriptions.sql", "utf8"));
+  if (checkoutDiagnostics) await c.db.exec(await readFile("supabase/migrations/202610130051_checkout_diagnostics.sql", "utf8"));
   if (process.env.SYZIA_OPTIONAL_MANUAL_CURRENT === "1") await (await import("../../scripts/syzia-048/fixture.mjs")).upgradeOptionalManualFixture(c.db);
   if (afterUpgrade) await afterUpgrade(c);
   await c.db.exec("begin;update private.billing_runtime set mock_enabled=false;update organization_members set status='suspended'where role='colaborador_empresa'");

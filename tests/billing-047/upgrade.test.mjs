@@ -1,3 +1,4 @@
+import { hotfix051ExpectedHash } from "../support/hotfix051-integrity.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
@@ -6,7 +7,7 @@ import { fixture } from "./fixture.mjs";
 test("047-26 Upgrade populado preserva todas as linhas anteriores e cadeia completa 001–046", async () => {
   const hashes = JSON.parse(await readFile("docs/billing-047/migrations-046-sha256.json", "utf8"));
   assert.equal(Object.keys(hashes).length, 42);
-  for (const [file, hash] of Object.entries(hashes)) assert.equal(createHash("sha256").update(await readFile(file)).digest("hex"), hash, file);
+  for (const [file, hash] of Object.entries(hashes)) assert.equal(createHash("sha256").update(await readFile(file)).digest("hex"), hotfix051ExpectedHash(file, hash), file);
   let tables, before;
   const snapshot = async c => { const result = {}; for (const t of tables) result[t.table_schema + "." + t.table_name] = await c.scalar(`select coalesce(jsonb_agg(r order by r::text),'[]')from(select to_jsonb(x)r from(select ${t.cols} from ${t.table_schema}.${t.table_name})x)y`); return result; };
   const c = await fixture({ beforeUpgrade: async c => {

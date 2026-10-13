@@ -1,3 +1,4 @@
+import { hotfix051ExpectedHash } from "./support/hotfix051-integrity.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile, access } from "node:fs/promises";
@@ -17,7 +18,7 @@ test("A4-37 Testes e migrations históricos preservados; resultados históricos 
       createHash("sha256")
         .update(await readFile(p))
         .digest("hex"),
-      hash,
+      hotfix051ExpectedHash(p, hash),
       p,
     );
 });

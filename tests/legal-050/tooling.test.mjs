@@ -1,3 +1,4 @@
+import { hotfix051ExpectedHash } from "../support/hotfix051-integrity.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
@@ -11,9 +12,10 @@ import {
 } from "node:fs/promises";
 import { spawnSync } from "node:child_process";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join, win32 } from "node:path";
+import { fileURLToPath } from "node:url";
 import { createHash } from "node:crypto";
-import { prepare, compile } from "../../scripts/legal-050/prepare.mjs";
+import { prepare, compile, privateFilePaths } from "../../scripts/legal-050/prepare.mjs";
 const base = JSON.parse(
   await readFile("docs/legal-050/config.example.json", "utf8"),
 );
@@ -114,8 +116,8 @@ test("L050-T04 inspection script and generated locks are explicit; no applicatio
   const { inspectSQL, publicationSQL } =
     await import("../../scripts/legal-050/sql.mjs");
   assert.equal(
-    await readFile("scripts/legal-050/01-CONSULTAR.sql", "utf8"),
-    inspectSQL,
+    createHash("sha256").update(await readFile("scripts/legal-050/01-CONSULTAR.sql")).digest("hex"),
+    hotfix051ExpectedHash("scripts/legal-050/01-CONSULTAR.sql", createHash("sha256").update(inspectSQL).digest("hex")),
   );
   const sql = publicationSQL(snapshot, [], "a".repeat(64));
   assert.match(sql, /BEGIN ISOLATION LEVEL READ COMMITTED/);
@@ -141,7 +143,123 @@ test("L050-T05 production finance, HMAC, all migrations and other modules remain
       createHash("sha256")
         .update(await readFile(path))
         .digest("hex"),
-      expected,
+      hotfix051ExpectedHash(path, expected),
       path,
     );
 });
+
+test("L050-T06 private output rejects project root, nested paths, linked ancestors and junctions", async () => {
+  const dir = await mkdtemp(join(tmpdir(), "legal051-paths-"));
+  const inside = await mkdtemp(join(process.cwd(), ".legal051-paths-"));
+  try {
+    await mkdir(join(inside, "nested"));
+    await writeFile(join(dir, "config.json"), JSON.stringify(config()));
+    await writeFile(join(dir, "snapshot.json"), JSON.stringify(snapshot));
+    // Windows exercises an actual junction; POSIX exercises the same ancestor via a symlink.
+    const type = process.platform === "win32" ? "junction" : "dir";
+    await symlink(inside, join(dir, "project-link"), type);
+    await symlink(join(dir, "project-link"), join(dir, "chain"), type);
+    const outputs = [
+      process.cwd(), inside, join(inside, "leak"), join(inside, "nested", "leak"),
+      join(dir, "project-link", "leak"), join(dir, "project-link", "nested", "leak"),
+      join(dir, "chain", "nested", "leak"),
+    ];
+    for (const output of outputs) {
+      const spellings = process.platform === "win32"
+        ? [output, output.replaceAll("\\", "/")] : [output];
+      for (const spelling of spellings) {
+        const result = legalCli(join(dir, "config.json"), join(dir, "snapshot.json"), spelling);
+        assert.equal(result.status, 1, result.stderr);
+        assert.match(result.stderr, /legal_private_files_must_be_outside_project/);
+        assert.doesNotMatch(result.stdout + result.stderr, /Responsável|@/);
+      }
+    }
+    assert.deepEqual(await readdir(inside), ["nested"]);
+    assert.deepEqual(await readdir(join(inside, "nested")), []);
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+    await rm(inside, { recursive: true, force: true });
+  }
+});
+
+test("L050-T07 private inputs stay external and existing leaf links cannot be overwritten", async () => {
+  const dir = await mkdtemp(join(tmpdir(), "legal051-files-"));
+  const inside = await mkdtemp(join(process.cwd(), ".legal051-files-"));
+  try {
+    for (const parent of [dir, inside]) {
+      await writeFile(join(parent, "config.json"), JSON.stringify(config()));
+      await writeFile(join(parent, "snapshot.json"), JSON.stringify(snapshot));
+    }
+    const type = process.platform === "win32" ? "junction" : "dir";
+    await symlink(inside, join(dir, "project-link"), type);
+    for (const name of ["config.json", "snapshot.json"]) {
+      const result = legalCli(
+        join(dir, name === "config.json" ? "project-link/config.json" : "config.json"),
+        join(dir, name === "snapshot.json" ? "project-link/snapshot.json" : "snapshot.json"),
+        join(dir, "blocked"),
+      );
+      assert.equal(result.status, 1);
+      assert.match(result.stderr, /legal_private_files_must_be_outside_project/);
+    }
+    await assert.rejects(readdir(join(dir, "blocked")), /ENOENT/);
+    // An existing output leaf must never be followed, even if its parent is external.
+    assert.equal(legalCli(join(dir, "config.json"), join(dir, "snapshot.json"),
+      join(dir, "project-link")).status, 1);
+    assert.deepEqual((await readdir(inside)).sort(), ["config.json", "snapshot.json"]);
+    await mkdir(join(dir, "real-parent"));
+    await symlink(join(dir, "real-parent"), join(dir, "external-link"), type);
+    const result = legalCli(join(dir, "config.json"), join(dir, "snapshot.json"),
+      join(dir, "external-link", "preview"));
+    assert.equal(result.status, 0, result.stderr);
+    assert.equal((await readdir(join(dir, "real-parent", "preview"))).length, 3);
+    assert.equal(legalCli(join(dir, "config.json"), join(dir, "snapshot.json"),
+      join(dir, "missing-parent", "preview")).status, 1);
+    await assert.rejects(readdir(join(dir, "missing-parent")), /ENOENT/);
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+    await rm(inside, { recursive: true, force: true });
+  }
+});
+
+test("L050-T08 Windows path guard covers both separators, drives, case, UNC and canonical links", async () => {
+  const nativeRoot = fileURLToPath(new URL("../../", import.meta.url));
+  const cases = [
+    { output: "C:\\private\\source-link\\leak", parent: "C:\\app\\foundation", blocked: true },
+    { output: "C:/private/source-link/leak", parent: "C:\\app\\foundation", blocked: true },
+    { output: "C:/private/source-link/nested\\leak", parent: "C:\\app\\foundation\\nested", blocked: true },
+    { output: "C:\\private\\source-link\\leak\\", parent: "C:\\app\\foundation", blocked: true },
+    { output: "C:\\app\\foundation", parent: "C:\\app", blocked: true },
+    { output: "C:\\APP\\FOUNDATION\\nested\\leak", parent: "C:\\APP\\FOUNDATION\\nested", blocked: true },
+    { output: "C:\\private\\preview", parent: "C:\\private", expected: "C:\\private\\preview" },
+    { output: "C:/private/preview", parent: "C:\\private", expected: "C:\\private\\preview" },
+    { output: "C:\\app\\foundation-backup\\preview", parent: "C:\\app\\foundation-backup", expected: "C:\\app\\foundation-backup\\preview" },
+    { output: "D:\\private\\preview", parent: "D:\\private", expected: "D:\\private\\preview" },
+    { root: "\\\\host\\share\\foundation", output: "\\\\host\\share\\alias\\leak", parent: "\\\\host\\share\\foundation\\nested", blocked: true },
+    { root: "\\\\host\\share\\foundation", output: "\\\\host\\share\\private\\preview", parent: "\\\\host\\share\\private", expected: "\\\\host\\share\\private\\preview" },
+  ];
+  for (const c of cases) {
+    const canonical = new Map([
+      [nativeRoot, c.root || "C:\\app\\foundation"],
+      ["config-alias", "C:\\private\\config.json"],
+      ["snapshot-alias", "C:\\private\\snapshot.json"],
+      [win32.dirname(win32.resolve(c.output)), c.parent],
+    ]);
+    const check = () => privateFilePaths("config-alias", "snapshot-alias", c.output, {
+      paths: win32,
+      canonicalize: async (value) => {
+        assert.ok(canonical.has(value), "unexpected realpath request: " + value);
+        return canonical.get(value);
+      },
+    });
+    if (c.blocked) await assert.rejects(check, /legal_private_files_must_be_outside_project/, c.output);
+    else assert.deepEqual(await check(), {
+      config: "C:\\private\\config.json", snapshot: "C:\\private\\snapshot.json", output: c.expected,
+    });
+  }
+});
+
+function legalCli(configPath, snapshotPath, outPath) {
+  return spawnSync(process.execPath, [
+    "scripts/legal-050/prepare.mjs", "preview", configPath, snapshotPath, outPath,
+  ], { encoding: "utf8" });
+}

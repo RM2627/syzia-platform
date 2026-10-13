@@ -1,3 +1,4 @@
+import { hotfix051ExpectedHash } from "../support/hotfix051-integrity.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile, readdir } from "node:fs/promises";
@@ -5,8 +6,8 @@ import { createHash } from "node:crypto";
 test("050-I01 all 46 migrations, finance policies, HMAC adapter, lockfile and other product modules unchanged", async () => {
   const files = JSON.parse(await readFile("docs/hotfix-050/preserved-sha256.json", "utf8"));
   assert.equal(Object.keys(files).filter(x => x.startsWith("supabase/migrations/")).length, 46);
-  assert.equal((await readdir("supabase/migrations")).filter(x => x.endsWith(".sql")).length, 46);
-  for (const [path, hash] of Object.entries(files)) assert.equal(createHash("sha256").update(await readFile(path)).digest("hex"), hash, path);
+  assert.equal((await readdir("supabase/migrations")).filter(x => x.endsWith(".sql") && x !== "202610130051_checkout_diagnostics.sql").length, 46);
+  for (const [path, hash] of Object.entries(files)) assert.equal(createHash("sha256").update(await readFile(path)).digest("hex"), hotfix051ExpectedHash(path, hash), path);
 });
 test("050-I02 existing HMAC correction, legal persistence and acceptance stay authoritative", async () => {
   const runtime = await readFile("server/billing/runtime.mjs", "utf8");

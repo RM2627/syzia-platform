@@ -1,3 +1,7 @@
+# SYZIA 051 — autorização atual
+
+Somente diagnóstico/recuperação financeira seguros e redesign do checkout. Escopo integral em `docs/syzia-051/request.md`. Preservar 001–050 byte a byte, HMAC, verificação estrita do trial, preços, elegibilidade, regras financeiras e complemento jurídico. Migration 051 incremental; nenhuma execução real. Gate cumulativo ampliado sem exclusão de etapas. Não inferir causa de cartão/comprador por HTTP genérico, não repetir POST incerto, não tratar retorno como confirmação. Sem deploy, push, dados reais, credenciais, cobranças ou serviços externos. Entregar incremental e parar.
+
 # Complemento jurídico 050 — autorização atual
 
 Preparar versionamento e novo aceite sobre a 050, sem refazer o hotfix financeiro. Contrato em `docs/legal-050/README.md`. Operador inicial pessoa física: não inserir CPF completo, residência ou dados pessoais reais; configuração preenchida/saídas ficam fora do checkout. Identificação e contatos dependem de avaliação e aprovação expressa. Sem execução no Supabase real, publicação, deploy, push, credenciais ou cobrança. Preservar versões, aceites, trigger, RLS/FORCE RLS, todas as migrations e `server/`. Testes `test:legal:050`, `test:legal:050:browser`, gate completo; concorrência nativa tem comando separado e bloqueio ambiental deve ser declarado. Entrega incremental complementar, depois parar. A autorização atual substitui somente a pendência de preparar o versionamento registrada abaixo, não autoriza publicação.

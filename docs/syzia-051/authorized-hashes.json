@@ -1,0 +1,90 @@
+{
+  "package.json": {
+    "before": "956e73059149355d63de40c673ed8f855006325077581e2d9ac48ff785596dce",
+    "after": "658644aa87dfccbeed1544878955e36713c10a58078e2043c648922b192dc491"
+  },
+  "AGENTS.md": {
+    "before": "7873b81ce87996a21d8ff7c4d8ce60fd717a9dbb027f54154563bd2843103c87",
+    "after": "1db24343361f9f71f23acf8dd5c508453717357038940e5e8f371b53484b4f2a"
+  },
+  "scripts/dev-consumer-demo.mjs": {
+    "before": "8443ea92accef2087b9c95bdf8d6bf502430054a86a6e2c828bd9aa9b1a66f03",
+    "after": "491ed596a8e948d99fdd1314344b4ad3ef02bffba86af22e0ce154615fec9af9"
+  },
+  "src/billing/MercadoPago.tsx": {
+    "before": "c9b4f57a35e88613986667263af24a0af5181c0283d9559ba45abc83dab51ada",
+    "after": "fb5cdf34d8ae974a1ae726b405ce5eedd4f85d273f7f0874d24095e0f1b025af"
+  },
+  "src/billing/mercado-pago.css": {
+    "before": "a4d46248122c716f9854916a285f669530f666fb7b35f3f55e31edf11e4bbe50",
+    "after": "153f7636ffac4a289c5ca21b99f3725563163bf95e8f420ea681eeb9f55998bc"
+  },
+  "server/billing/mercado-pago.mjs": {
+    "before": "b0fba9108556761043b35092bb9c2fe634636cdef44e7fb5777e980ab072015d",
+    "after": "f4472e6e6726a86caa6b08a6bf0c649d1e1adecb92270b4221505f96c785f352"
+  },
+  "server/billing/http.mjs": {
+    "before": "2278839f1dc2558cc2823d83eb72612aa236c03a868bc3c0395ddafa80b08499",
+    "after": "39732f1b5b7f7ba9a138a32853603911769035205e4896637d62a060716ae534"
+  },
+  "server/billing/subscriptions.mjs": {
+    "before": "50e2afb40ae59d22425b82d6de9ed8aa78ef6d4ffa5ba48283c8afe73fedd202",
+    "after": "a1ef1928eef19ff2b4afc462d7e74bdc5ab06e6324e58fcfcc778a1ce8f041c7"
+  },
+  "tests/hotfix-050/integrity.test.mjs": {
+    "before": "6bc81dcd7353ca909fbe3c3c9e7968a649a5f19cab3caa990c43f4fda96ab623",
+    "after": "56df46b21395206ba8e62d2e11f40cdffd40aed7c4fc955e851626f1ae84e399"
+  },
+  "tests/billing-047/lifecycle.test.mjs": {
+    "before": "ce2cd917af8c841efc55dc6f85bb78497b08a0bfc67b9349c3f3f0cc94bdee64",
+    "after": "0ef01bc5017599506284b68d9abb0129c0a819615b733e56e31ecaf255b9c4cc"
+  },
+  "tests/billing-047/fixture.mjs": {
+    "before": "a70a0d174d8128d91e7e80a7f08822fb36428d1584e8b3afba292cc6181d31c0",
+    "after": "78dc723edd7b82ee23d4bb3e3827cde49558a4d2b0f431388267e50980dd8614"
+  },
+  "tests/hotfix-049/integrity.test.mjs": {
+    "before": "7c84e13a56aa581b95ca0459fb090f27407bfc1f21c230776e17f35a4f8f7c1c",
+    "after": "bf74b0c541a950b32a23dea0f0347a4a1edb4414d90bf7e2a4d795a093802146"
+  },
+  "tests/legal-050/tooling.test.mjs": {
+    "before": "4943c4d3df7a8a79db1bd4ed87c0034807488b3ccc6c1672e8c285803442275e",
+    "after": "320dff1f82c1bc57ecb8fc2ecd66d6a6044690861a8eaf99516c21199efd07d6"
+  },
+  "tests/demo-browser/billing047.spec.ts": {
+    "before": "9c732366766e2907d790dcda00c323af870fa1d99d01282d572e111589b80b45",
+    "after": "cb21f4a8a73f1c0383a52193024a9bf5ea39afa79ff144fef800a3b7160ff042"
+  },
+  "tests/syzia-048/integrity.test.mjs": {
+    "before": "b162c1741f7ad101bf45507bfdc2d2cb136ecb095677ef663ada6a84c0d86671",
+    "after": "2b2b464f0727597e070887ae16eed3283794bb3a7490d9ccf31ad6fba4a68bf6"
+  },
+  "tests/syzia-049/integrity.test.mjs": {
+    "before": "10e30bc20cc99b5e5014d7145ba4ddc69e75a513ff7b07c33fee744a2710f1e5",
+    "after": "a18fc6ff1a7a8ea5b85ab755e10ea8ce205d082200af1d8ee73f9a617c982348"
+  },
+  "scripts/billing-047/fixture.mjs": {
+    "before": "7bcd6eb6a9fe0555dd56efc58051d946a78e067fe85bb95a1ad6103319b3b523",
+    "after": "f46fd5eda24c06f5c23a768168859957b88597ec497fce69761aa61cc084709a"
+  },
+  "scripts/syzia-044/current-gate.mjs": {
+    "before": "0f369442ef9ae9482fb2810c2ab838319dd4c968eee8a2a84ba8c3eaab3e20c1",
+    "after": "d53b1050d9ac893fac872c5c9bb55a12541abd4312eaaea663416d911badb19f"
+  },
+  "tests/current-gate.test.mjs": {
+    "before": "c49fbbb137ec12858c7690b36d1d58ac11c27133dc910552922eb902d413a12a",
+    "after": "2207b93a0632224afd22ccebc7d9cdc9cc79ade91c9e55103b6d66a60e2c96fd"
+  },
+  "tests/billing-047/upgrade.test.mjs": {
+    "before": "1d4256132b2bed2173142f2412655650a1cfc3e774e23af64fc13d7d61960c20",
+    "after": "c9917af067c825b532f7ce4544bf97d0d79f3ef58bd69e081fcba0a878f20340"
+  },
+  "scripts/syzia-044/regression.mjs": {
+    "before": "daa9a3f493faa8e5ee1bc9ada5fb6cdd6fea3ab5f7ba080fc0aceac351c8722f",
+    "after": "b119f2153118aac9d42b9447e3a0678a4e5d54af3f1e559db0cfe258f4307bb1"
+  },
+  "scripts/legal-050/prepare.mjs": {
+    "before": "feda35374514987ebb25973f97d43db11c25da8fb2059c89c202ed1ff7dd1d31",
+    "after": "55f22911281fc872f26668594cb030b21f756e30a7e7d05d312bc2a86b2fbf7f"
+  }
+}

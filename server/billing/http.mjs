@@ -1,5 +1,6 @@
 import http from "node:http";
 import { randomUUID } from "node:crypto";
+import { safeDiagnostic } from "./diagnostics.mjs";
 import { BillingError } from "./mercado-pago.mjs";
 export function createBillingHandler({ origin, billing, log = entry => console.warn(JSON.stringify(entry)) }) {
   const limits = new Map();
@@ -30,7 +31,7 @@ export function createBillingHandler({ origin, billing, log = entry => console.w
       const code = e instanceof BillingError ? e.code : safeSQL.test(e?.message || "") ? e.message : "billing_request_failed";
       const status = e instanceof BillingError ? e.status : code === "access_denied" ? 403 : 409;
       // No body, auth header, card token, provider exception, URL query or personal data.
-      log({ event: "billing_failed", code, request_id: requestId });
+      log({ event: "billing_failed", code, ...safeDiagnostic(e), request_id: requestId });
       send(status, { error: code, request_id: requestId });
     }
   };

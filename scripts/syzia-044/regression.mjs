@@ -32,10 +32,11 @@ for (const round of ["040", "041", "042"]) {
   );
   if (process.env.SYZIA_TEAM_CURRENT === "1") {
     // Configure only disposable operational cases, after the unchanged upgrade comparison.
-    s = s.replace(
-      'async function test(name, fn) {\n  await db.exec("begin");',
-      'async function test(name, fn) {\n  await db.exec("begin");\n  if (!name.startsWith("01 Upgrade")) await (await import("../scripts/team-availability/fixture.mjs")).configureTeamFixture(db);',
-    );
+    const configureAnchor = /async function test\(name, fn\) \{\r?\n  await db\.exec\("begin"\);/g;
+    if ([...s.matchAll(configureAnchor)].length !== 1)
+      throw Error("Missing unique team fixture configuration anchor");
+    s = s.replace(configureAnchor, (matched) => matched +
+      '\n  if (!name.startsWith("01 Upgrade")) await (await import("../scripts/team-availability/fixture.mjs")).configureTeamFixture(db);');
   }
   s = s.replaceAll(
     `reports/syzia-${round}/sql.json`,

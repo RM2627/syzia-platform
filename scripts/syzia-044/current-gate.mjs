@@ -14,6 +14,7 @@ await mk(out, { recursive: true });
 await mk("reports/team-availability", { recursive: true });
 const node = process.execPath;
 export const suites = [
+ ["checkout-financial-051",[node,"--experimental-strip-types","--test","--test-concurrency=1","tests/syzia-051/financial.test.mjs","tests/syzia-051/fields.test.mjs","tests/syzia-051/upgrade.test.mjs","tests/syzia-051/integrity.test.mjs"]],
  ["legal-versioning-050",[node,"--test","--test-concurrency=1","tests/legal-050/versioning.test.mjs","tests/legal-050/tooling.test.mjs"]],
  ["legal-historical-050",[node,"scripts/hotfix-050/legal-regression.mjs"]],
  ["hotfix-050", [node,"--experimental-strip-types","--test","--test-concurrency=1","tests/hotfix-050/notifications.test.mjs","tests/hotfix-050/integrity.test.mjs"]],
@@ -69,6 +70,7 @@ export const suites = [
   ["browser-048", [node, "node_modules/@playwright/test/cli.js", "test", "--config=playwright.syzia048.config.ts"]],
   ["billing-browser", [node, "node_modules/@playwright/test/cli.js", "test", "--config=playwright.billing047.config.ts"]],
   ["flexible-browser", [node, "node_modules/@playwright/test/cli.js", "test", "--config=playwright.flexible-support.config.ts"]],
+  ["checkout-browser-051",[node,"node_modules/@playwright/test/cli.js","test","--config=playwright.syzia051.config.ts"]],
   ["browser-legal-050",[node,"node_modules/@playwright/test/cli.js","test","--config=playwright.legal050.config.ts"]],
   ["browser-hotfix-050", [node, "node_modules/@playwright/test/cli.js", "test", "--config=playwright.hotfix050.config.ts"]],
 ];
@@ -76,7 +78,7 @@ const steps = controlled
   ? [["controlled-failure", [node, "-e", "process.exit(42)"]]]
   : suites;
 const report = {
-  version: "050",
+  version: "051",
   engine:
     "Local PGlite + HTTP fixtures + Chromium; external homologation pending",
   startedAt: new Date().toISOString(),
