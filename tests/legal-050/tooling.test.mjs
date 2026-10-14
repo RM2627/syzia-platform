@@ -1,4 +1,4 @@
-import { hotfix051ExpectedHash } from "../support/hotfix051-integrity.mjs";
+import { assertHotfix051File } from "../support/hotfix051-integrity.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
@@ -115,10 +115,9 @@ test("L050-T04 inspection script and generated locks are explicit; no applicatio
   );
   const { inspectSQL, publicationSQL } =
     await import("../../scripts/legal-050/sql.mjs");
-  assert.equal(
-    createHash("sha256").update(await readFile("scripts/legal-050/01-CONSULTAR.sql")).digest("hex"),
-    hotfix051ExpectedHash("scripts/legal-050/01-CONSULTAR.sql", createHash("sha256").update(inspectSQL).digest("hex")),
-  );
+  assertHotfix051File("scripts/legal-050/01-CONSULTAR.sql",
+    await readFile("scripts/legal-050/01-CONSULTAR.sql"),
+    createHash("sha256").update(inspectSQL).digest("hex"));
   const sql = publicationSQL(snapshot, [], "a".repeat(64));
   assert.match(sql, /BEGIN ISOLATION LEVEL READ COMMITTED/);
   assert.match(sql, /pg_advisory_xact_lock\(734921501\)/);
@@ -129,7 +128,7 @@ test("L050-T04 inspection script and generated locks are explicit; no applicatio
     /DISABLE|DROP|DELETE FROM|UPDATE private\.legal_acceptances/i,
   );
 });
-test("L050-T05 production finance, HMAC, all migrations and other modules remain byte-identical", async () => {
+test("L050-T05 production finance, HMAC, all migrations and other modules remain intact except proven LF/CRLF", async () => {
   const hashes = JSON.parse(
     await readFile("docs/legal-050/preserved-sha256.json", "utf8"),
   );
@@ -139,13 +138,7 @@ test("L050-T05 production finance, HMAC, all migrations and other modules remain
     46,
   );
   for (const [path, expected] of Object.entries(hashes))
-    assert.equal(
-      createHash("sha256")
-        .update(await readFile(path))
-        .digest("hex"),
-      hotfix051ExpectedHash(path, expected),
-      path,
-    );
+    assertHotfix051File(path, await readFile(path), expected);
 });
 
 test("L050-T06 private output rejects project root, nested paths, linked ancestors and junctions", async () => {

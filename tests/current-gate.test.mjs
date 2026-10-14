@@ -1,8 +1,8 @@
-import { hotfix051ExpectedHash } from "./support/hotfix051-integrity.mjs";
+import "./integrity-eol.test.mjs";
+import { assertHotfix051File } from "./support/hotfix051-integrity.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile, access } from "node:fs/promises";
-import { createHash } from "node:crypto";
 import { spawnSync } from "node:child_process";
 test("A4-37 Testes e migrations históricos preservados; resultados históricos externos ao pacote limpo", async () => {
   const baseline = JSON.parse(
@@ -14,13 +14,7 @@ test("A4-37 Testes e migrations históricos preservados; resultados históricos 
   const inputs = Object.entries(baseline).filter(([p]) => !p.startsWith("reports/"));
   assert.equal(inputs.length, 165);
   for (const [p, hash] of inputs)
-    assert.equal(
-      createHash("sha256")
-        .update(await readFile(p))
-        .digest("hex"),
-      hotfix051ExpectedHash(p, hash),
-      p,
-    );
+    assertHotfix051File(p, await readFile(p), hash);
 });
 test("A4-35 Falha controlada do runner oficial retorna não-zero e relatório FAIL", async () => {
   const r = spawnSync(

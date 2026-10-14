@@ -33,7 +33,7 @@
   },
   "tests/hotfix-050/integrity.test.mjs": {
     "before": "6bc81dcd7353ca909fbe3c3c9e7968a649a5f19cab3caa990c43f4fda96ab623",
-    "after": "56df46b21395206ba8e62d2e11f40cdffd40aed7c4fc955e851626f1ae84e399"
+    "after": "8116f0999cf405b5044e85443536ac7c70e2426a94c3a646ebd2559cd98c98ea"
   },
   "tests/billing-047/lifecycle.test.mjs": {
     "before": "ce2cd917af8c841efc55dc6f85bb78497b08a0bfc67b9349c3f3f0cc94bdee64",
@@ -45,11 +45,11 @@
   },
   "tests/hotfix-049/integrity.test.mjs": {
     "before": "7c84e13a56aa581b95ca0459fb090f27407bfc1f21c230776e17f35a4f8f7c1c",
-    "after": "bf74b0c541a950b32a23dea0f0347a4a1edb4414d90bf7e2a4d795a093802146"
+    "after": "5bf27236729a1808ea2c08cbd9c7619b194189e2da01116e8c7cfa68c77bbde6"
   },
   "tests/legal-050/tooling.test.mjs": {
     "before": "4943c4d3df7a8a79db1bd4ed87c0034807488b3ccc6c1672e8c285803442275e",
-    "after": "320dff1f82c1bc57ecb8fc2ecd66d6a6044690861a8eaf99516c21199efd07d6"
+    "after": "0fb5a5a628eb05e4726f3da73c57ba0c9341aadeefa1f0ccfc5ff6e663cbbef6"
   },
   "tests/demo-browser/billing047.spec.ts": {
     "before": "9c732366766e2907d790dcda00c323af870fa1d99d01282d572e111589b80b45",
@@ -57,11 +57,11 @@
   },
   "tests/syzia-048/integrity.test.mjs": {
     "before": "b162c1741f7ad101bf45507bfdc2d2cb136ecb095677ef663ada6a84c0d86671",
-    "after": "2b2b464f0727597e070887ae16eed3283794bb3a7490d9ccf31ad6fba4a68bf6"
+    "after": "e75c6be20920ef22f82ea28dc1f5e0b788689320b5996a0bc58693098b0e928f"
   },
   "tests/syzia-049/integrity.test.mjs": {
     "before": "10e30bc20cc99b5e5014d7145ba4ddc69e75a513ff7b07c33fee744a2710f1e5",
-    "after": "a18fc6ff1a7a8ea5b85ab755e10ea8ce205d082200af1d8ee73f9a617c982348"
+    "after": "78acff113a349c731f370f858c1568d73a4e1bb8b9bf07c71987235a838b38d4"
   },
   "scripts/billing-047/fixture.mjs": {
     "before": "7bcd6eb6a9fe0555dd56efc58051d946a78e067fe85bb95a1ad6103319b3b523",
@@ -73,11 +73,11 @@
   },
   "tests/current-gate.test.mjs": {
     "before": "c49fbbb137ec12858c7690b36d1d58ac11c27133dc910552922eb902d413a12a",
-    "after": "2207b93a0632224afd22ccebc7d9cdc9cc79ade91c9e55103b6d66a60e2c96fd"
+    "after": "f145fb52294c83ef9baa901aea44ddeeab5b9b2d37d085d181a41e10c6b2bdd5"
   },
   "tests/billing-047/upgrade.test.mjs": {
     "before": "1d4256132b2bed2173142f2412655650a1cfc3e774e23af64fc13d7d61960c20",
-    "after": "c9917af067c825b532f7ce4544bf97d0d79f3ef58bd69e081fcba0a878f20340"
+    "after": "ef8b38ca5bc447a1088b0a61268e19d300590ccaa3f723e0f673b60122a9dcfe"
   },
   "scripts/syzia-044/regression.mjs": {
     "before": "daa9a3f493faa8e5ee1bc9ada5fb6cdd6fea3ab5f7ba080fc0aceac351c8722f",
@@ -86,5 +86,21 @@
   "scripts/legal-050/prepare.mjs": {
     "before": "feda35374514987ebb25973f97d43db11c25da8fb2059c89c202ed1ff7dd1d31",
     "after": "55f22911281fc872f26668594cb030b21f756e30a7e7d05d312bc2a86b2fbf7f"
+  },
+  "tests/implementation-030.test.mjs": {
+    "before": "9276335d29f7746a8a5c107bcbb0572a115bfb7d5f4113e64c82a06226f6f1d4",
+    "after": "e8917e7b64974335547380333e56f8ccab275b67670799d1a0165c77d528afd6"
+  },
+  "scripts/commercial-inventory.mjs": {
+    "before": "71a2d0830dc11e310fbfb623ce54a16a8dce92fe7562cda6068da87d741737c9",
+    "after": "b4131f7ddf6a23635cc429299c19a38dc730a3ca9fcfe3661eb24dfac75689c9"
+  },
+  "scripts/verify-historical-migrations.mjs": {
+    "before": "7daffdefb11a6943bf0a7e4b75c4aadbd031d140bb32ea272519d71aa714d6e1",
+    "after": "ffbde95aaba78b4190d8410d890788e738c57ce198dc3f5120c1f51713c19ad0"
+  },
+  "scripts/verify-activation-migrations.mjs": {
+    "before": "09a94704accd012db4140b67a8d80b852b15f973c885f5c13779ba2f4018ad03",
+    "after": "c05405e99dfa4d5618691f3e53c0498daaa428cfa6e00a66913af074a4f53938"
   }
 }

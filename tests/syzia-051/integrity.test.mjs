@@ -1,19 +1,14 @@
+import { assertFileHash } from "../support/portable-integrity.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile, readdir } from "node:fs/promises";
-import { createHash } from "node:crypto";
-import { hotfix051ExpectedHash } from "../support/hotfix051-integrity.mjs";
-const hash = (s) => createHash("sha256").update(s).digest("hex");
-test("051-I exact consolidated 050 preservation except explicitly authorized 051 files; 46 old migrations untouched", async () => {
+import { assertHotfix051File } from "../support/hotfix051-integrity.mjs";
+test("051-I consolidated 050 preservation except authorized files and proven LF/CRLF; 46 old migrations intact", async () => {
   const base = JSON.parse(
     await readFile("docs/syzia-051/base-050-sha256.json", "utf8"),
   );
   for (const [path, expected] of Object.entries(base))
-    assert.equal(
-      hash(await readFile(path)),
-      hotfix051ExpectedHash(path, expected),
-      path,
-    );
+    assertHotfix051File(path, await readFile(path), expected);
   assert.equal(
     Object.keys(base).filter((p) => p.startsWith("supabase/migrations/"))
       .length,
@@ -25,13 +20,13 @@ test("051-I exact consolidated 050 preservation except explicitly authorized 051
     47,
   );
 });
-test("051-I HMAC and verified snapshot (trial/tenant/payment) byte-exact, credentials/runtime/legal unmodified", async () => {
+test("051-I HMAC and verified snapshot preserved except LF/CRLF; credentials/runtime/legal unmodified", async () => {
   const source = await readFile("server/billing/mercado-pago.mjs", "utf8");
   const anchors = JSON.parse(
     await readFile("docs/syzia-051/security-anchors.json", "utf8"),
   );
-  assert.equal(
-    hash(source.slice(source.indexOf("  notification(raw,"))),
+  assertFileHash("server/billing/mercado-pago.mjs",
+    Buffer.from(source.slice(source.indexOf("  notification(raw,")), "utf8"),
     anchors.notification_and_snapshot,
   );
   const form = await readFile("src/billing/SecureCardForm.tsx", "utf8");

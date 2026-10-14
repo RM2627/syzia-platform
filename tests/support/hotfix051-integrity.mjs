@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
+import {assertFileHash} from './portable-integrity.mjs';
 const changes=JSON.parse(readFileSync(new URL('../../docs/syzia-051/authorized-hashes.json',import.meta.url),'utf8'));
 const publication=JSON.parse(readFileSync(new URL('../../docs/syzia-051/reconciliation-b30c991.json',import.meta.url),'utf8'));
 assert.equal(publication.commit, 'b30c9910ca939289a14af8ae8729768f8766f03c');
@@ -12,4 +13,7 @@ export function hotfix051ExpectedHash(path,historical){
  const reference=row && historical===row.old_sha256 ? row.official_sha256 : historical;
  const change=changes[path];if(!change)return reference;
  assert.equal(reference,change.before,'051 unexpected historical input: '+path);return change.after;
+}
+export function assertHotfix051File(path,bytes,historical){
+ return assertFileHash(path,bytes,hotfix051ExpectedHash(path,historical));
 }

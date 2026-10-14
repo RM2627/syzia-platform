@@ -1,8 +1,7 @@
-import { hotfix051ExpectedHash } from "../support/hotfix051-integrity.mjs";
+import { assertHotfix051File } from "../support/hotfix051-integrity.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile, stat } from "node:fs/promises";
-import { createHash } from "node:crypto";
 import sharp from "sharp";
 test("HF-I01 migrations até 049, lockfile Sharp e backend protegido intactos", async () => {
   const hashes = JSON.parse(
@@ -13,13 +12,7 @@ test("HF-I01 migrations até 049, lockfile Sharp e backend protegido intactos", 
     45,
   );
   for (const [p, hash] of Object.entries(hashes))
-    assert.equal(
-      createHash("sha256")
-        .update(await readFile(p))
-        .digest("hex"),
-      hotfix051ExpectedHash(p, hash),
-      p,
-    );
+    assertHotfix051File(p, await readFile(p), hash);
   const pkg = JSON.parse(await readFile("package.json", "utf8"));
   assert.equal(pkg.dependencies.sharp, "0.35.5");
 });

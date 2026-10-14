@@ -1,3 +1,4 @@
+import {assertFileHash} from "../tests/support/portable-integrity.mjs";
 // Disposable local catalog only. Never connects to Supabase.
 import { consumerDB } from "../tests/support/consumer-db.mjs";
 import { writeFile, readFile } from "node:fs/promises";
@@ -34,10 +35,5 @@ const old = JSON.parse(
   await readFile("reports/phase-6-migration-integrity.json", "utf8"),
 );
 for (const p of old.previous_migrations)
-  if (
-    createHash("sha256")
-      .update(await readFile(p.path))
-      .digest("hex") !== p.sha256
-  )
-    throw Error("Migration alterada: " + p.path);
+  assertFileHash(p.path, await readFile(p.path), p.sha256);
 console.log("Inventário local e integridade das migrations 001–013: PASS");

@@ -3,6 +3,7 @@ import { readFile, readdir } from "node:fs/promises";
 import { resolve, relative, dirname } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { createHash } from "node:crypto";
+import { referenceFileBytes } from "../../tests/support/portable-integrity.mjs";
 
 const sha = (value) => createHash("sha256").update(value).digest("hex");
 const project = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
@@ -16,7 +17,7 @@ if (base === project) throw Error("Use a extração original da 050, sem sobrepo
 const data = JSON.parse(await readFile(resolve(project, "docs/syzia-051/reconciliation-b30c991.json"), "utf8"));
 const baseline = JSON.parse(await readFile(resolve(project, "docs/syzia-051/base-050-sha256.json"), "utf8"));
 const changes = JSON.parse(await readFile(resolve(project, "docs/syzia-051/authorized-hashes.json"), "utf8"));
-const { hotfix051ExpectedHash } = await import(pathToFileURL(resolve(project, "tests/support/hotfix051-integrity.mjs")).href);
+const { hotfix051ExpectedHash, assertHotfix051File } = await import(pathToFileURL(resolve(project, "tests/support/hotfix051-integrity.mjs")).href);
 const errors = [];
 const check = (ok, message) => { if (!ok) errors.push(message); };
 const commit = "b30c9910ca939289a14af8ae8729768f8766f03c";
@@ -26,14 +27,14 @@ check(data.zip_sha256 === archiveSha, "referencia_zip_divergente");
 check(sha(await readFile(resolve(zipArgument))) === archiveSha, "zip_oficial_divergente");
 check(data.rows.length === 890 && new Set(data.rows.map(r => r.path)).size === 890, "contagem_890_divergente");
 check(Object.keys(baseline).length === 890, "manifesto_890_divergente");
-check(Object.keys(changes).length === 22, "transicoes_051_divergentes");
+check(Object.keys(changes).length === 26, "transicoes_051_divergentes");
 const counts = {};
 for (const row of data.rows) {
   const path = row.path;
   counts[row.classification] = (counts[row.classification] || 0) + 1;
   check(baseline[path] === row.official_sha256, "manifesto_vs_auditoria: " + path);
   try {
-    const bytes = await readFile(resolve(base, path));
+    const bytes = referenceFileBytes(path, await readFile(resolve(base, path)), row.official_sha256);
     check(sha(bytes) === row.official_sha256, "base_oficial: " + path);
     // Reconstruct only the two reviewed edits, or the exact Windows line-ending conversion.
     let predecessor = bytes;
@@ -54,7 +55,7 @@ for (const row of data.rows) {
     check(sha(predecessor) === row.old_sha256, "prova_predecessor: " + path);
     const expected = hotfix051ExpectedHash(path, row.official_sha256);
     check(hotfix051ExpectedHash(path, row.old_sha256) === expected, "cadeia_historica: " + path);
-    check(sha(await readFile(resolve(project, path))) === expected, "projeto_051: " + path);
+    assertHotfix051File(path, await readFile(resolve(project, path)), row.official_sha256);
   } catch (error) { errors.push("arquivo: " + path + ": " + error.message); }
 }
 check(counts.byte_identical === 40 && counts.eol_only === 848 && counts.content_changed === 2, "categorias_divergentes");

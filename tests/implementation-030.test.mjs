@@ -1,3 +1,4 @@
+import {assertFileHash} from "./support/portable-integrity.mjs";
 import assert from "node:assert/strict";
 import { randomUUID, createHash } from "node:crypto";
 import { readFile, writeFile } from "node:fs/promises";
@@ -92,13 +93,8 @@ const hashes = JSON.parse(
   await readFile("docs/implementation-030/migrations-001-029.json", "utf8"),
 );
 for (const h of hashes)
-  assert.equal(
-    createHash("sha256")
-      .update(await readFile("supabase/migrations/" + h.path))
-      .digest("hex"),
-    h.sha256,
-    h.path,
-  );
+  assertFileHash("supabase/migrations/" + h.path,
+    await readFile("supabase/migrations/" + h.path), h.sha256);
 await writeFile(
   "reports/implementation-030/upgrade.json",
   JSON.stringify(
