@@ -48,7 +48,7 @@ export async function fixture({ beforeUpgrade, afterUpgrade, checkoutDiagnostics
     appOrigin: "https://syzia.example.invalid", notificationUrl: "https://billing.example.invalid/billing/notifications", fetchImpl: fake.fetchImpl });
   const engine = subscriptions({ gateway, service, asUser, auth: async name => users[name] ? { id: users[name], email: name + "@example.invalid" } : null });
   const view = (k = "A") => asUser("admin" + k, "billing047_context", { p_org: c.orgs[k] });
-  const command = (action = "checkout", code = "essencial", k = "A", extra = {}) => engine.user("command", { organization_id: c.orgs[k], action, request_key: randomUUID(), ...(action === "checkout" ? { trial_expected: true } : {}), ...(["checkout", "change"].includes(action) ? { plan_version_id: versions[code] } : {}), ...(["checkout", "method"].includes(action) ? { card_token: "offline-token-for-tests-only" } : {}), ...extra }, "admin" + k);
+  const command = (action = "checkout", code = "essencial", k = "A", extra = {}) => engine.user("command", { organization_id: c.orgs[k], action, request_key: randomUUID(), ...(action === "checkout" ? { trial_expected: true, payer_email: 'admin' + k + '@example.invalid' } : {}), ...(["checkout", "change"].includes(action) ? { plan_version_id: versions[code] } : {}), ...(["checkout", "method"].includes(action) ? { card_token: "offline-token-for-tests-only" } : {}), ...extra }, "admin" + k);
   const rawSQL = (query, args = []) => tx("service", async () => { await c.db.exec("reset role"); return c.db.query(query, args); });
   return { ...c, users, rpc, tx, service, asUser, fake, gateway, engine, view, command, versions, rawSQL };
 }

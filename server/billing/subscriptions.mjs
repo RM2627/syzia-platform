@@ -1,4 +1,5 @@
 import { BillingError, fail, identifier, verifiedSnapshot } from "./mercado-pago.mjs";
+import { normalizePayerEmail } from "../../shared/billing-payer-email.mjs";
 const UUID = /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i;
 export function exactBody(body, required, optional = []) {
   if (!body || typeof body !== "object" || Array.isArray(body) || required.some(k => !(k in body)) || Object.keys(body).some(k => ![...required, ...optional].includes(k))) fail("billing_payload_invalid", 400);
@@ -85,8 +86,12 @@ export function subscriptions({ gateway, service, asUser, auth }) {
     const actor = await auth(token);
     if (!actor?.id || actor.is_anonymous) fail("access_denied", 403);
     await asUser(token, "access_session", { p_activity: false, p_logout: false });
-    if (path === "config") { exactBody(body, []); return { public_key: gateway.publicKey }; }
-    exactBody(body, ["organization_id"], path === "status" ? [] : ["action", "plan_version_id", "request_key", "card_token", "trial_expected"]);
+    if (path === "config") {
+      exactBody(body, []);
+      const suggestion = normalizePayerEmail(actor.email);
+      return { public_key: gateway.publicKey, payer_email_suggestion: suggestion && !suggestion.endsWith("@access.vireloq.invalid") ? suggestion : "" };
+    }
+    exactBody(body, ["organization_id"], path === "status" ? [] : ["action", "plan_version_id", "request_key", "card_token", "trial_expected", "payer_email"]);
     if (!UUID.test(body.organization_id)) fail("billing_payload_invalid", 400);
     if (path === "status") {
       const view = await asUser(token, "billing047_context", { p_org: body.organization_id });
@@ -101,8 +106,14 @@ export function subscriptions({ gateway, service, asUser, auth }) {
     if (["checkout", "method"].includes(body.action) && !/^[a-zA-Z0-9_-]{16,200}$/.test(body.card_token || "")) fail("billing_payment_method_required", 400);
     if (!["checkout", "method"].includes(body.action) && body.card_token != null) fail("billing_payload_invalid", 400);
     if (body.action === "checkout" && typeof body.trial_expected !== "boolean") fail("billing_payload_invalid", 400);
+    const payerEmail = body.action === "checkout" ? normalizePayerEmail(body.payer_email) : null;
+    if (body.action === "checkout" && !payerEmail) fail("billing_payer_email_invalid", 400);
+    if (body.action !== "checkout" && Object.hasOwn(body, "payer_email")) fail("billing_payload_invalid", 400);
     const id = await asUser(token, "billing047_prepare", { p_org: body.organization_id, p_action: body.action, p_version: body.plan_version_id || null, p_key: body.request_key, p_trial: body.action === "checkout" ? body.trial_expected : null });
-    await process(id, { token: body.card_token, email: actor.email, source: "command" });
+    // Only the leased, never-started checkout can consume this transient email.
+    // Existing/uncertain subscriptions follow the original binding/reconciliation
+    // path above; a submitted email never selects, transfers or modifies one.
+    await process(id, { token: body.card_token, email: payerEmail, source: "command" });
     return asUser(token, "billing047_context", { p_org: body.organization_id });
   }
   async function webhook(raw, headers, query) {

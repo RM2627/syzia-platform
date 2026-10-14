@@ -4,6 +4,7 @@ import { randomUUID } from "node:crypto";
 import { fixture } from "../billing-047/fixture.mjs";
 import { MercadoPagoSubscriptions } from "../../server/billing/mercado-pago.mjs";
 import { createBillingServer } from "../../server/billing/http.mjs";
+import "./payer-email-cases.mjs";
 const opts = {
   accessToken: "offline-051-only",
   collectorId: 101,

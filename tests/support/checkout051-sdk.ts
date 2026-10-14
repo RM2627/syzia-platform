@@ -1,7 +1,7 @@
 import type { Page } from "@playwright/test";
 // Browser-only substitute for the external SDK. Never shipped in src or build.
 // It uses nested frames to exercise the secure-field layout; not MP homologation.
-export async function mockCheckoutSDK(page: Page) {
+export async function mockCheckoutSDK(page: Page, tokenDelay = 250) {
   await page.route("https://sdk.mercadopago.com/js/v2", (route) =>
     route.fulfill({
       contentType: "application/javascript",
@@ -20,9 +20,9 @@ window.MercadoPago=class {cardForm(o){
  for(const [key,options] of [['identificationType',['CPF','CNPJ']],['issuer',['Banco de teste']],['installments',['1']]]){
   const select=document.getElementById(o.form[key].id);select.innerHTML=options.map(x=>'<option>'+x+'</option>').join('');
  }
- const h=e=>{e.preventDefault();const done=o.callbacks.onFetching?.('cardToken');setTimeout(()=>{done?.();o.callbacks.onSubmit(e)},250)};
+ const h=e=>{e.preventDefault();const done=o.callbacks.onFetching?.('cardToken');setTimeout(()=>{done?.();o.callbacks.onSubmit(e)},${tokenDelay})};
  f.addEventListener('submit',h);queueMicrotask(()=>o.callbacks.onFormMounted());
- return {getCardFormData:()=>({token:'offline-browser-token-only'}),unmount:()=>{f.removeEventListener('submit',h);frames.forEach(x=>x.remove())}};
+ return {getCardFormData:()=>({token:'offline-browser-token-only',cardholderEmail:document.getElementById(o.form.cardholderEmail.id).value}),unmount:()=>{f.removeEventListener('submit',h);frames.forEach(x=>x.remove())}};
 }};`,
     }),
   );
@@ -47,7 +47,7 @@ export async function fillCheckout(page: Page) {
     .getByLabel("Documento do titular", { exact: true })
     .fill("52998224725");
   await page
-    .getByLabel("E-mail do titular", { exact: true })
+    .getByLabel("E-mail do pagador", { exact: true })
     .fill("titular@example.invalid");
-  await page.getByRole("checkbox", { name: /Autorizo a assinatura/ }).check();
+  await page.getByRole("checkbox", { name: /[Aa]utorizo a assinatura/ }).check();
 }

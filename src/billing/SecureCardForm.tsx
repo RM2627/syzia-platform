@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { billingApi, loadSDK } from "./checkout-api";
+import { normalizePayerEmail } from "../../shared/billing-payer-email.mjs";
 import {
   documentError,
   holderError,
@@ -10,11 +11,13 @@ export function SecureCardForm({
   onToken,
   busy,
   onPhase,
+  checkout,
 }: {
   amount: number;
-  onToken: (token: string) => Promise<void>;
+  onToken: (token: string, payerEmail: string) => Promise<void>;
   busy: boolean;
   onPhase: (phase: string) => void;
+  checkout: boolean;
 }) {
   const [ready, setReady] = useState(false),
     [error, setError] = useState("");
@@ -27,6 +30,10 @@ export function SecureCardForm({
     sending = useRef(false),
     blocked = useRef(busy);
   const fieldsErrors = useRef<Record<string, string>>({});
+  const [payerEmail, setPayerEmail] = useState("");
+  const emailTouched = useRef(false),
+    confirmedEmail = useRef<string | null>(null),
+    submittedEmail = useRef<string | null>(null);
   submit.current = onToken;
   phase.current = onPhase;
   blocked.current = busy;
@@ -49,16 +56,13 @@ export function SecureCardForm({
         input("identificationNumber").value,
       ),
     );
-    fieldError(
-      "cardholderEmail",
-      input("cardholderEmail").validity.valid && input("cardholderEmail").value
-        ? ""
-        : "Informe um e-mail válido.",
-    );
+    const email = normalizePayerEmail(input("cardholderEmail").value);
+    fieldError("cardholderEmail", email ? "" : "Informe um e-mail válido.");
     const consent = f.querySelector<HTMLInputElement>('[name="consent"]')!;
     fieldError(
       "consent",
-      consent.checked ? "" : "Autorize as condições para continuar.",
+      consent.checked && email && confirmedEmail.current === email
+        ? "" : "Confirme o e-mail e autorize as condições para continuar.",
     );
     const first = Object.entries(fieldsErrors.current).find(([, text]) => text);
     if (first) {
@@ -76,6 +80,12 @@ export function SecureCardForm({
       const config = await billingApi("config", {});
       await loadSDK();
       if (!live) return;
+      const emailInput = formElement?.querySelector<HTMLInputElement>(`#${id.current}-cardholderEmail`);
+      const suggestion = normalizePayerEmail(config.payer_email_suggestion);
+      if (emailInput && !emailTouched.current && !emailInput.value && suggestion) {
+        emailInput.value = suggestion;
+        setPayerEmail(suggestion);
+      }
       const fields = [
         "cardNumber",
         "expirationDate",
@@ -155,7 +165,13 @@ export function SecureCardForm({
             sending.current = true;
             setError("");
             try {
-              const token = form.getCardFormData().token;
+              const data = form.getCardFormData();
+              const token = data.token;
+              const email = normalizePayerEmail(data.cardholderEmail);
+              if (!email || email !== submittedEmail.current || email !== confirmedEmail.current) {
+                setError("O e-mail mudou durante a confirmação. Confira o e-mail e confirme novamente.");
+                return;
+              }
               if (
                 typeof token !== "string" ||
                 !/^[a-zA-Z0-9_-]{16,200}$/.test(token)
@@ -165,7 +181,7 @@ export function SecureCardForm({
                 );
                 return;
               }
-              await submit.current(token);
+              await submit.current(token, email);
             } catch {
               if (live)
                 setError(
@@ -173,6 +189,7 @@ export function SecureCardForm({
                 );
             } finally {
               sending.current = false;
+              submittedEmail.current = null;
               const hidden = formElement?.querySelector<HTMLInputElement>(
                 'input[name="MPHiddenInputToken"]',
               );
@@ -226,6 +243,8 @@ export function SecureCardForm({
         if (busy || tokenizing || sending.current || !localValidation()) {
           e.preventDefault();
           e.stopPropagation();
+        } else {
+          submittedEmail.current = confirmedEmail.current;
         }
       }}
       onSubmit={(e) => e.preventDefault()}
@@ -317,42 +336,60 @@ export function SecureCardForm({
         </div>
         <div className="mp-field">
           <label htmlFor={`${id.current}-cardholderEmail`}>
-            E-mail do titular
+            E-mail do pagador
           </label>
           <input
             {...common("cardholderEmail")}
             type="email"
             autoComplete="email"
+            maxLength={254}
+            readOnly={busy || tokenizing}
             required
-            onBlur={(e) =>
-              fieldError(
-                "cardholderEmail",
-                e.target.validity.valid && e.target.value
-                  ? ""
-                  : "Informe um e-mail válido.",
-              )
-            }
+            onChange={(e) => {
+              emailTouched.current = true;
+              setPayerEmail(e.target.value);
+              confirmedEmail.current = null;
+              const consent = root.current?.querySelector<HTMLInputElement>('[name="consent"]');
+              if (consent) consent.checked = false;
+            }}
+            onBlur={(e) => {
+              const email = normalizePayerEmail(e.target.value);
+              if (email) e.target.value = email;
+              setPayerEmail(e.target.value);
+              fieldError("cardholderEmail", email ? "" : "Informe um e-mail válido.");
+            }}
           />
           {errorText("cardholderEmail")}
           <span className="mp-hint">
-            Para a assinatura, usamos o e-mail da sua conta SYZIA.
+            {checkout
+              ? "Informe o e-mail do pagador no Mercado Pago. Ele pode ser diferente do seu acesso à SYZIA e não altera sua conta administrativa."
+              : "Usado no formulário seguro. Esta atualização do cartão não altera o pagador da assinatura existente."}
           </span>
+          {checkout && payerEmail && (
+            <span className="mp-hint" style={{ overflowWrap: "anywhere" }}>
+              E-mail para esta assinatura: <strong>{normalizePayerEmail(payerEmail) || payerEmail}</strong>
+            </span>
+          )}
         </div>
         <label className="mp-consent">
           <input
             {...common("consent")}
             name="consent"
             type="checkbox"
+            disabled={tokenizing}
             required
-            onChange={(e) =>
+            onChange={(e) => {
+              confirmedEmail.current = e.target.checked
+                ? normalizePayerEmail(root.current?.querySelector<HTMLInputElement>(`#${id.current}-cardholderEmail`)?.value)
+                : null;
               fieldError(
                 "consent",
-                e.target.checked ? "" : "Autorize as condições para continuar.",
-              )
-            }
+                confirmedEmail.current ? "" : "Confirme o e-mail e autorize as condições para continuar.",
+              );
+            }}
           />
           <span>
-            Autorizo a assinatura e as cobranças mensais nas condições
+            Confirmo o e-mail do pagador informado e autorizo a assinatura e as cobranças mensais nas condições
             apresentadas.
           </span>
         </label>

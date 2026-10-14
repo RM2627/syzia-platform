@@ -47,6 +47,8 @@ const messages: Record<string, string> = {
     "Confirme os dados de elegibilidade abaixo. Se já os confirmou, fale com a administração SYZIA.",
   billing_payment_method_required:
     "Confira o meio de pagamento para continuar.",
+  billing_payer_email_invalid:
+    "Confira e confirme o e-mail do pagador antes de continuar.",
   billing_provider_rejected:
     "O Mercado Pago não aceitou a solicitação. Não foi possível identificar o motivo com segurança.",
   billing_provider_invalid_request:
@@ -151,7 +153,7 @@ export function MercadoPagoBilling({ org }: { org: string }) {
   useEffect(() => {
     if (card) checkoutHeading.current?.focus();
   }, [card]);
-  async function command(action: string, plan?: any, token?: string) {
+  async function command(action: string, plan?: any, token?: string, payerEmail?: string) {
     if (
       lock.current ||
       unverified ||
@@ -168,7 +170,7 @@ export function MercadoPagoBilling({ org }: { org: string }) {
         organization_id: org,
         action,
         request_key: key.current,
-        ...(action === "checkout" ? { trial_expected: eligible } : {}),
+        ...(action === "checkout" ? { trial_expected: eligible, payer_email: payerEmail } : {}),
         ...(plan ? { plan_version_id: plan.version_id } : {}),
         ...(token ? { card_token: token } : {}),
       });
@@ -583,7 +585,8 @@ export function MercadoPagoBilling({ org }: { org: string }) {
                 amount={card.plan?.price_cents || s?.price_cents}
                 busy={busy}
                 onPhase={setPhase}
-                onToken={(token) => command(card.action, card.plan, token)}
+                checkout={card.action === "checkout"}
+                onToken={(token, payerEmail) => command(card.action, card.plan, token, payerEmail)}
               />
               {phase && <p role="status">{phase}</p>}
             </div>

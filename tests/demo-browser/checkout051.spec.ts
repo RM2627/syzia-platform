@@ -17,8 +17,8 @@ const catalog = [
     },
   },
 ];
-async function setup(page: any, overrides: any = {}) {
-  await mockCheckoutSDK(page);
+async function setup(page: any, overrides: any = {}, tokenDelay = 250) {
+  await mockCheckoutSDK(page, tokenDelay);
   await demoLogin(page, "admin@example.invalid");
   const ctx: any = await page.evaluate(async () =>
     (await import("/src/api.ts")).rpc("foundation_context"),
@@ -38,6 +38,9 @@ async function setup(page: any, overrides: any = {}) {
     r.fulfill({ json: state }),
   );
   await page.route("**/billing/status", (r: any) => r.fulfill({ json: state }));
+  await page.route("**/billing/config", (r: any) => r.fulfill({ json: {
+    public_key: "offline-public-key", payer_email_suggestion: "admin@example.invalid",
+  } }));
   await page.goto(`/painel/${org}/assinatura`);
   await expect(
     page.getByRole("heading", { name: "Sua assinatura", exact: true }),
@@ -176,7 +179,7 @@ test("051 UI validation: empty, name, document and SDK validity errors stay next
   expect(posts).toBe(0);
   await expect(page.getByText("MUST_NOT_BE_DISPLAYED")).toHaveCount(0);
 });
-test("051 UI one POST, token only, disabled CTA during processing, official confirmation", async ({
+test("051 UI one POST, token and confirmed payer email only, disabled CTA during processing, official confirmation", async ({
   page,
 }) => {
   const { state } = await setup(page);
@@ -218,12 +221,14 @@ test("051 UI one POST, token only, disabled CTA during processing, official conf
     "action",
     "card_token",
     "organization_id",
+    "payer_email",
     "plan_version_id",
     "request_key",
     "trial_expected",
   ]);
   expect(JSON.stringify(posts)).not.toContain("52998224725");
-  expect(JSON.stringify(posts)).not.toContain("titular@example.invalid");
+  expect(posts[0].payer_email).toBe("titular@example.invalid");
+  expect(JSON.stringify(posts)).not.toContain("admin@example.invalid");
   release();
   await expect(
     page.getByRole("region", { name: "Assinatura confirmada" }),
@@ -375,4 +380,70 @@ test("051 UI network failure with unavailable status never offers another create
     page.getByRole("button", { name: "Assinar Profissional" }),
   ).toHaveCount(0);
   expect(posts).toBe(1);
+});
+
+for (const width of [1440, 390])
+  test(`051 payer UI ${width}: suggested email is editable, changes require new confirmation, exact payer is sent`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 1000 });
+    const { state } = await setup(page);
+    await open(page);
+    const email = page.getByLabel("E-mail do pagador", { exact: true });
+    await expect(email).toHaveValue("admin@example.invalid");
+    await fillCheckout(page);
+    const consent = page.getByRole("checkbox", { name: /Confirmo o e-mail/ });
+    await expect(consent).toBeChecked();
+    await email.fill(" New.Payer+Trial@EXAMPLE.INVALID ");
+    await email.blur();
+    await expect(email).toHaveValue("New.Payer+Trial@example.invalid");
+    await expect(consent).not.toBeChecked();
+    await expect(page.getByText("E-mail para esta assinatura:")).toContainText("New.Payer+Trial@example.invalid");
+    const posts: any[] = [];
+    await page.route("**/billing/command", r => {
+      posts.push(r.request().postDataJSON());
+      state.subscription = { id: "fixture", state: "reconciliation", operation_pending: true };
+      return r.fulfill({ json: state });
+    });
+    await page.getByRole("button", { name: "Confirmar meio de pagamento" }).click();
+    await expect(page.getByText("Confirme o e-mail e autorize as condições para continuar.")).toBeVisible();
+    expect(posts).toHaveLength(0);
+    await consent.check();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBe(0);
+    await page.screenshot({ path: `reports/syzia-051/screenshots/payer-confirmed-${width}.png`, fullPage: true });
+    await page.getByRole("button", { name: "Confirmar meio de pagamento" }).click();
+    await expect.poll(() => posts.length).toBe(1);
+    expect(posts[0].payer_email).toBe("New.Payer+Trial@example.invalid");
+    expect(JSON.stringify(posts)).not.toMatch(/admin@example.invalid|52998224725|4111111111111111/);
+    const storage = await page.evaluate(() => JSON.stringify([Object.entries(localStorage), Object.entries(sessionStorage)]));
+    expect(storage).not.toContain("New.Payer+Trial@example.invalid");
+    await expect(page.getByRole("region", { name: "Assinatura confirmada" })).toHaveCount(0);
+  });
+
+test("051 payer UI invalid or missing email never submits or silently falls back to admin", async ({ page }) => {
+  await setup(page);
+  await open(page);
+  await fillCheckout(page);
+  let posts = 0;
+  await page.route("**/billing/command", r => { posts++; return r.fulfill({ json: {} }); });
+  for (const value of ["", "not-an-email", "a..b@example.invalid"]) {
+    await page.getByLabel("E-mail do pagador", { exact: true }).fill(value);
+    await page.getByRole("checkbox", { name: /Confirmo o e-mail/ }).check();
+    await page.getByRole("button", { name: "Confirmar meio de pagamento" }).click();
+    await expect(page.getByText("Informe um e-mail válido.", { exact: true })).toBeVisible();
+  }
+  expect(posts).toBe(0);
+});
+
+test("051 payer UI locks email while tokenizing and rejects a changed SDK/DOM identity before POST", async ({ page }) => {
+  await setup(page, {}, 1200);
+  await open(page);
+  await fillCheckout(page);
+  let posts = 0;
+  await page.route("**/billing/command", r => { posts++; return r.fulfill({ json: {} }); });
+  await page.getByRole("button", { name: "Confirmar meio de pagamento" }).click();
+  const email = page.getByLabel("E-mail do pagador", { exact: true });
+  await expect(email).toHaveAttribute("readonly", "");
+  // Simulate an SDK/script changing the field despite the UI lock.
+  await email.evaluate((e: HTMLInputElement) => { e.value = "unexpected@example.invalid"; });
+  await expect(page.getByRole("alert")).toHaveText("Revise os campos indicados antes de continuar.");
+  expect(posts).toBe(0);
 });

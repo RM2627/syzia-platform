@@ -1,0 +1,198 @@
+{
+  "reference_git_proven": false,
+  "note": "Hashes byte a byte. Equivalência LF/CRLF somente pelo verificador. Inventário e SHA256SUMS excluídos desta lista para evitar autorreferência; SHA256SUMS cobre o inventário e o hash externo cobre o ZIP inteiro.",
+  "files": [
+    {
+      "path": "docs/mp400-051/available-base-sha256.json",
+      "bytes": 213712,
+      "sha256": "fa68863bf8f8a2553987c84a76ed6ca4d8830315a27c11cec345406be33aba99",
+      "before_sha256": null,
+      "previous_optional_sha256": "fa68863bf8f8a2553987c84a76ed6ca4d8830315a27c11cec345406be33aba99",
+      "origin": "dependência original do diagnóstico anterior; adicionada se ausente na base"
+    },
+    {
+      "path": "docs/payer-email-051/APLICACAO-E-ROLLBACK.md",
+      "bytes": 4434,
+      "sha256": "5085f3d0f1c828636edb11f44917fc63b886976ad10b83eeb45953f8888ee19c",
+      "before_sha256": null,
+      "previous_optional_sha256": null,
+      "origin": "novo nesta correção"
+    },
+    {
+      "path": "docs/payer-email-051/DOCUMENTACAO-OFICIAL.md",
+      "bytes": 2546,
+      "sha256": "480d2ec339b265f707fe8d25a1307687c3467beac414d3dd52ebdd7300edbd19",
+      "before_sha256": null,
+      "previous_optional_sha256": null,
+      "origin": "novo nesta correção"
+    },
+    {
+      "path": "docs/payer-email-051/MATRIZ-E-RESULTADOS.md",
+      "bytes": 6240,
+      "sha256": "0526bc3380efbad31d382b74ad38de6e5c2eedf479807307b2acf742342c330a",
+      "before_sha256": null,
+      "previous_optional_sha256": null,
+      "origin": "novo nesta correção"
+    },
+    {
+      "path": "docs/payer-email-051/PENDENCIAS-EXTERNAS.md",
+      "bytes": 2971,
+      "sha256": "50aca12af1288372b0d337832b068edc2926adf0a5698afa2a4e5b524fa22ce3",
+      "before_sha256": null,
+      "previous_optional_sha256": null,
+      "origin": "novo nesta correção"
+    },
+    {
+      "path": "docs/payer-email-051/RELATORIO-EMAIL-PAGADOR-051.md",
+      "bytes": 8978,
+      "sha256": "b6c3f66b9b021ff650072c8810ddee6e52b2ddd9ba63159af3791c228a343457",
+      "before_sha256": null,
+      "previous_optional_sha256": null,
+      "origin": "novo nesta correção"
+    },
+    {
+      "path": "docs/payer-email-051/gate-final.json",
+      "bytes": 12437,
+      "sha256": "86f8f3bd883372528b219d8b013b101285e332ba76d74fdcdc6e4d368f6fb727",
+      "before_sha256": null,
+      "previous_optional_sha256": null,
+      "origin": "novo nesta correção"
+    },
+    {
+      "path": "docs/payer-email-051/integrity.json",
+      "bytes": 456114,
+      "sha256": "3fc4f257e75e85ab23e8f5bfc5281d3f7eae844c4dfe4e17297e674a1307081d",
+      "before_sha256": null,
+      "previous_optional_sha256": null,
+      "origin": "novo nesta correção"
+    },
+    {
+      "path": "docs/syzia-051/authorized-hashes.json",
+      "bytes": 5555,
+      "sha256": "9561d9c9dc1c12a82323339eb2ed3f442897005e33982baee84c04058ce78645",
+      "before_sha256": "1aa60678213893f5f49eda6106524193cf8e2a2d2b307f418001446dc724392d",
+      "previous_optional_sha256": null,
+      "origin": "base disponível de 924 arquivos"
+    },
+    {
+      "path": "scripts/mp400-051/verify-reference.mjs",
+      "bytes": 5034,
+      "sha256": "77d34e265c6f5e44cc43eb60e6ae4c3f2d043e854cc4c9ba85f3f1fbf119839a",
+      "before_sha256": null,
+      "previous_optional_sha256": "77d34e265c6f5e44cc43eb60e6ae4c3f2d043e854cc4c9ba85f3f1fbf119839a",
+      "origin": "dependência original do diagnóstico anterior; adicionada se ausente na base"
+    },
+    {
+      "path": "scripts/payer-email-051/verify.mjs",
+      "bytes": 2718,
+      "sha256": "bcbc2c6bcc5fd6b327f4ea56bd6e7ce8481354bfa54a00a0809505f1b7632e7b",
+      "before_sha256": null,
+      "previous_optional_sha256": null,
+      "origin": "novo nesta correção"
+    },
+    {
+      "path": "server/billing/subscriptions.mjs",
+      "bytes": 10420,
+      "sha256": "adb459319b618e2713f6b47d69e7a53809422e501ddba57b04b3f3c32ef3aa04",
+      "before_sha256": "a1ef1928eef19ff2b4afc462d7e74bdc5ab06e6324e58fcfcc778a1ce8f041c7",
+      "previous_optional_sha256": null,
+      "origin": "base disponível de 924 arquivos"
+    },
+    {
+      "path": "shared/billing-payer-email.d.mts",
+      "bytes": 68,
+      "sha256": "4d673f0d1b76c5138af72f360d165ef576ee5ee093d67926be76d297cbe03e38",
+      "before_sha256": null,
+      "previous_optional_sha256": null,
+      "origin": "novo nesta correção"
+    },
+    {
+      "path": "shared/billing-payer-email.mjs",
+      "bytes": 917,
+      "sha256": "9114f00b815a9b483c5c8a36f23567b10a4a483a92148c465765842deb38ab52",
+      "before_sha256": null,
+      "previous_optional_sha256": null,
+      "origin": "novo nesta correção"
+    },
+    {
+      "path": "src/billing/MercadoPago.tsx",
+      "bytes": 23385,
+      "sha256": "cdeec07de4728974d064580ceaa0d039d3847858714ac0e3b66aa2588151e708",
+      "before_sha256": "fb5cdf34d8ae974a1ae726b405ce5eedd4f85d273f7f0874d24095e0f1b025af",
+      "previous_optional_sha256": null,
+      "origin": "base disponível de 924 arquivos"
+    },
+    {
+      "path": "src/billing/SecureCardForm.tsx",
+      "bytes": 14698,
+      "sha256": "e14bf3b1326c07d8e668908a31e51877c975d3e302176bffef62ce853e1a0c51",
+      "before_sha256": "76693e32527016a2af6cb1bb5feaa7c6fdbb2de96cc988226dc359ccecfede22",
+      "previous_optional_sha256": null,
+      "origin": "base disponível de 924 arquivos"
+    },
+    {
+      "path": "tests/billing-047/fixture.mjs",
+      "bytes": 5185,
+      "sha256": "3a82e84ab18ae407a120814c6e0db1b37852fdf364941433c303155b884bf844",
+      "before_sha256": "78dc723edd7b82ee23d4bb3e3827cde49558a4d2b0f431388267e50980dd8614",
+      "previous_optional_sha256": null,
+      "origin": "base disponível de 924 arquivos"
+    },
+    {
+      "path": "tests/billing-047/lifecycle.test.mjs",
+      "bytes": 7050,
+      "sha256": "08430cf026edb871afce9fd35bb08813a73a2ba914fb7a34ff604381319b222f",
+      "before_sha256": "0ef01bc5017599506284b68d9abb0129c0a819615b733e56e31ecaf255b9c4cc",
+      "previous_optional_sha256": null,
+      "origin": "base disponível de 924 arquivos"
+    },
+    {
+      "path": "tests/demo-browser/checkout051.spec.ts",
+      "bytes": 16872,
+      "sha256": "e786d615b5d716923bcb172e3af1d952db32d4ef27c703fb683f32d80e37d9f2",
+      "before_sha256": "43a5dc790296adc0b3fbc4d034c95fecb6889679866d89f0af54316ee4c26f3c",
+      "previous_optional_sha256": null,
+      "origin": "base disponível de 924 arquivos"
+    },
+    {
+      "path": "tests/mp400-051/diagnostic.test.mjs",
+      "bytes": 14078,
+      "sha256": "6391de109c033fa63d00a3503679d73f79550ff6c96a566afebc8f6314453568",
+      "before_sha256": null,
+      "previous_optional_sha256": "8c049e451842a5c2391c5014d5da58a2518f6faff9c9ee3ff59c8cb447746194",
+      "origin": "teste revisado do diagnóstico anterior"
+    },
+    {
+      "path": "tests/support/checkout051-sdk.ts",
+      "bytes": 2993,
+      "sha256": "64d3ce384e6913041edba71ec2b3c8b2eeb49351d97fee26e8f8e7035ec78bd9",
+      "before_sha256": "ada9efc757aae4653b15f2cc1f980def8b4378dcf34a365f4a903500c67aea53",
+      "previous_optional_sha256": null,
+      "origin": "base disponível de 924 arquivos"
+    },
+    {
+      "path": "tests/syzia-048/unified.test.mjs",
+      "bytes": 9916,
+      "sha256": "b68639980f89713d946053eac78146c7022247ede16a906bbf57947d01fac3b3",
+      "before_sha256": "d74ae2864fa6721a566c5569453742885893c879a382fd520e23dad25af544bb",
+      "previous_optional_sha256": null,
+      "origin": "base disponível de 924 arquivos"
+    },
+    {
+      "path": "tests/syzia-051/financial.test.mjs",
+      "bytes": 11846,
+      "sha256": "41bf416a97d6ab3f7f521d57a7fa8f6e47609bce92b422d0794d56fdc1830d78",
+      "before_sha256": "481d41293148a5b17ae0897c8a60370b108e26a8106691bcf09abcde68f44481",
+      "previous_optional_sha256": null,
+      "origin": "base disponível de 924 arquivos"
+    },
+    {
+      "path": "tests/syzia-051/payer-email-cases.mjs",
+      "bytes": 11302,
+      "sha256": "a7b022e4e47d38a18ed7516ce95ba8b3cf6277320044c2db48f130754690828c",
+      "before_sha256": null,
+      "previous_optional_sha256": null,
+      "origin": "novo nesta correção"
+    }
+  ]
+}

@@ -66,7 +66,7 @@ test('047-32 Onboarding novo prepara empresa restrita; responsável/CPF históri
   assert.equal(done.state,'completed');assert.ok(done.organization_id);
   assert.equal((await c.asUser('adminA','selfservice_complete',args)).organization_id,done.organization_id);
   assert.equal((await c.asUser('adminA','billing_capabilities',{p_org:done.organization_id})).software,false);
-  const base={organization_id:done.organization_id,action:'checkout',plan_version_id:c.versions.essencial,request_key:randomUUID(),card_token:'offline-test-card-token',trial_expected:true};
+  const base={organization_id:done.organization_id,action:'checkout',plan_version_id:c.versions.essencial,request_key:randomUUID(),card_token:'offline-test-card-token',trial_expected:true,payer_email:'titular@example.invalid'};
   await assert.rejects(c.engine.user('command',base,'adminA'),/billing_trial_changed/);
   const next=await c.engine.user('command',{...base,request_key:randomUUID(),trial_expected:false},'adminA');
   assert.equal(next.subscription.state,'payment_pending');

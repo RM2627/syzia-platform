@@ -1,0 +1,407 @@
+{
+  "version": "051",
+  "engine": "Local PGlite + HTTP fixtures + Chromium; external homologation pending",
+  "startedAt": "2026-10-14T13:04:02.331Z",
+  "node": "v24.19.0",
+  "controlledFailure": false,
+  "status": "PASS",
+  "steps": [
+    {
+      "name": "checkout-financial-051",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--experimental-strip-types",
+        "--test",
+        "--test-concurrency=1",
+        "tests/syzia-051/financial.test.mjs",
+        "tests/syzia-051/fields.test.mjs",
+        "tests/syzia-051/upgrade.test.mjs",
+        "tests/syzia-051/integrity.test.mjs"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "durationMs": 10980,
+      "log": "reports/syzia-044/gate-checkout-financial-051.log"
+    },
+    {
+      "name": "legal-versioning-050",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--test",
+        "--test-concurrency=1",
+        "tests/legal-050/versioning.test.mjs",
+        "tests/legal-050/tooling.test.mjs"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "durationMs": 5179,
+      "log": "reports/syzia-044/gate-legal-versioning-050.log"
+    },
+    {
+      "name": "legal-historical-050",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "scripts/hotfix-050/legal-regression.mjs"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "durationMs": 3356,
+      "log": "reports/syzia-044/gate-legal-historical-050.log"
+    },
+    {
+      "name": "hotfix-050",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--experimental-strip-types",
+        "--test",
+        "--test-concurrency=1",
+        "tests/hotfix-050/notifications.test.mjs",
+        "tests/hotfix-050/integrity.test.mjs"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "durationMs": 13914,
+      "log": "reports/syzia-044/gate-hotfix-050.log"
+    },
+    {
+      "name": "hotfix-049",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--experimental-strip-types",
+        "--test",
+        "--test-concurrency=1",
+        "tests/hotfix-049/operation.test.mjs",
+        "tests/hotfix-049/messages.test.mjs",
+        "tests/hotfix-049/integrity.test.mjs"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "durationMs": 5552,
+      "log": "reports/syzia-044/gate-hotfix-049.log"
+    },
+    {
+      "name": "focused-049",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--experimental-strip-types",
+        "--test",
+        "--test-concurrency=1",
+        "tests/syzia-049/financial.test.mjs",
+        "tests/syzia-049/http.test.mjs",
+        "tests/syzia-049/operation.test.mjs",
+        "tests/syzia-049/ui-utils.test.mjs",
+        "tests/syzia-049/integrity.test.mjs",
+        "tests/syzia-049/upgrade.test.mjs"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "durationMs": 17424,
+      "log": "reports/syzia-044/gate-focused-049.log"
+    },
+    {
+      "name": "focused-048",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--test",
+        "--test-concurrency=1",
+        "tests/syzia-048/unified.test.mjs",
+        "tests/syzia-048/manual.test.mjs",
+        "tests/syzia-048/integrity.test.mjs"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "durationMs": 11816,
+      "log": "reports/syzia-044/gate-focused-048.log"
+    },
+    {
+      "name": "billing-047",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--test",
+        "--test-concurrency=1",
+        "tests/billing-047/edge-cases.test.mjs",
+        "tests/billing-047/gateway.test.mjs",
+        "tests/billing-047/lifecycle.test.mjs",
+        "tests/billing-047/subscriptions.test.mjs",
+        "tests/billing-047/upgrade.test.mjs",
+        "tests/billing-047/mp01.test.mjs"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "durationMs": 18535,
+      "log": "reports/syzia-044/gate-billing-047.log"
+    },
+    {
+      "name": "gate-contracts",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--test",
+        "tests/current-gate.test.mjs"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "durationMs": 486,
+      "log": "reports/syzia-044/gate-gate-contracts.log"
+    },
+    {
+      "name": "flexible-upgrade",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "tests/flexible-support-upgrade.test.mjs"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "durationMs": 4166,
+      "log": "reports/syzia-044/gate-flexible-upgrade.log"
+    },
+    {
+      "name": "flexible-support",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "scripts/billing-047/flexible-regression.mjs"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "durationMs": 7652,
+      "log": "reports/syzia-044/gate-flexible-support.log"
+    },
+    {
+      "name": "team-upgrade",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "tests/team-availability-upgrade.test.mjs"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "durationMs": 4057,
+      "log": "reports/syzia-044/gate-team-upgrade.log"
+    },
+    {
+      "name": "team-availability",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "tests/team-availability.test.mjs"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "durationMs": 7390,
+      "log": "reports/syzia-044/gate-team-availability.log"
+    },
+    {
+      "name": "ux001-security",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "tests/ux001-security.test.mjs"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "durationMs": 4173,
+      "log": "reports/syzia-044/gate-ux001-security.log"
+    },
+    {
+      "name": "focused",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "tests/syzia-044-sql.test.mjs"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "durationMs": 7595,
+      "log": "reports/syzia-044/gate-focused.log"
+    },
+    {
+      "name": "upgrade",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "tests/syzia-044-upgrade.test.mjs"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "durationMs": 4312,
+      "log": "reports/syzia-044/gate-upgrade.log"
+    },
+    {
+      "name": "regression-040-042",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "scripts/syzia-044/regression.mjs"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "durationMs": 25429,
+      "log": "reports/syzia-044/gate-regression-040-042.log"
+    },
+    {
+      "name": "gateways",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--experimental-strip-types",
+        "--test",
+        "tests/syzia-036-http.test.mjs",
+        "tests/syzia-035-server.test.mjs",
+        "tests/enterprise-access-server.test.mjs",
+        "tests/organization-activation-server.test.mjs",
+        "tests/syzia-034-utils.test.mjs",
+        "tests/syzia-media.test.mjs"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "durationMs": 481,
+      "log": "reports/syzia-044/gate-gateways.log"
+    },
+    {
+      "name": "build",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "scripts/inspect-browser-bundle.mjs"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "durationMs": 1209,
+      "log": "reports/syzia-044/gate-build.log"
+    },
+    {
+      "name": "browser",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "scripts/syzia-044/browser.mjs"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "durationMs": 298023,
+      "log": "reports/syzia-044/gate-browser.log"
+    },
+    {
+      "name": "team-browser",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "node_modules/@playwright/test/cli.js",
+        "test",
+        "--config=playwright.team-availability.config.ts"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "durationMs": 35538,
+      "log": "reports/syzia-044/gate-team-browser.log"
+    },
+    {
+      "name": "ux001-browser",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "node_modules/@playwright/test/cli.js",
+        "test",
+        "--config=playwright.ux001.config.ts"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "durationMs": 72094,
+      "log": "reports/syzia-044/gate-ux001-browser.log"
+    },
+    {
+      "name": "browser-hotfix-049",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "node_modules/@playwright/test/cli.js",
+        "test",
+        "--config=playwright.hotfix049.config.ts"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "durationMs": 38197,
+      "log": "reports/syzia-044/gate-browser-hotfix-049.log"
+    },
+    {
+      "name": "browser-049",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "node_modules/@playwright/test/cli.js",
+        "test",
+        "--config=playwright.syzia049.config.ts"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "durationMs": 29373,
+      "log": "reports/syzia-044/gate-browser-049.log"
+    },
+    {
+      "name": "browser-048",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "node_modules/@playwright/test/cli.js",
+        "test",
+        "--config=playwright.syzia048.config.ts"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "durationMs": 17826,
+      "log": "reports/syzia-044/gate-browser-048.log"
+    },
+    {
+      "name": "billing-browser",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "node_modules/@playwright/test/cli.js",
+        "test",
+        "--config=playwright.billing047.config.ts"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "durationMs": 13903,
+      "log": "reports/syzia-044/gate-billing-browser.log"
+    },
+    {
+      "name": "flexible-browser",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "node_modules/@playwright/test/cli.js",
+        "test",
+        "--config=playwright.flexible-support.config.ts"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "durationMs": 66966,
+      "log": "reports/syzia-044/gate-flexible-browser.log"
+    },
+    {
+      "name": "checkout-browser-051",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "node_modules/@playwright/test/cli.js",
+        "test",
+        "--config=playwright.syzia051.config.ts"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "durationMs": 64024,
+      "log": "reports/syzia-044/gate-checkout-browser-051.log"
+    },
+    {
+      "name": "browser-legal-050",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "node_modules/@playwright/test/cli.js",
+        "test",
+        "--config=playwright.legal050.config.ts"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "durationMs": 16541,
+      "log": "reports/syzia-044/gate-browser-legal-050.log"
+    },
+    {
+      "name": "browser-hotfix-050",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "node_modules/@playwright/test/cli.js",
+        "test",
+        "--config=playwright.hotfix050.config.ts"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "durationMs": 11257,
+      "log": "reports/syzia-044/gate-browser-hotfix-050.log"
+    }
+  ],
+  "finishedAt": "2026-10-14T13:17:39.783Z",
+  "notRun": []
+}

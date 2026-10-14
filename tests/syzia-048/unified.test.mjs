@@ -56,7 +56,7 @@ test('048-H03 upload/download sanitizado, anexo privado, ticket, mídia pública
  assert.equal((await fetch(base+'/company-media/m_'+'9'.repeat(24),{headers:{origin,authorization:'Bearer '+jwt}})).status,403);
 });
 test('048-H04 checkout simulado, duas abas, webhook sem Origin, duplicação e reconciliação',async()=>{
- const payload={organization_id:c.orgs.A,action:'checkout',request_key:randomUUID(),plan_version_id:c.versions.essencial,card_token:'offline-token-for-048-tests',trial_expected:true};
+ const payload={organization_id:c.orgs.A,action:'checkout',request_key:randomUUID(),plan_version_id:c.versions.essencial,card_token:'offline-token-for-048-tests',trial_expected:true,payer_email:'titular@example.invalid'};
  const result=await post('/billing/command',payload);assert.equal(result.status,200,await result.clone().text());assert.equal((await result.json()).subscription.state,'trialing');
  const both=await Promise.all([post('/billing/command',payload),post('/billing/command',payload)]);assert.ok(both.every(x=>x.status===200));
  const p=[...c.fake.subscriptions.values()][0],hook=JSON.stringify({type:'subscription_preapproval',data:{id:p.id},user_id:101});
