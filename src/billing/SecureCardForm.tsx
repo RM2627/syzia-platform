@@ -12,12 +12,14 @@ export function SecureCardForm({
   busy,
   onPhase,
   checkout,
+  eligible,
 }: {
   amount: number;
   onToken: (token: string, payerEmail: string) => Promise<void>;
   busy: boolean;
   onPhase: (phase: string) => void;
   checkout: boolean;
+  eligible: boolean;
 }) {
   const [ready, setReady] = useState(false),
     [error, setError] = useState("");
@@ -29,6 +31,8 @@ export function SecureCardForm({
     phase = useRef(onPhase),
     sending = useRef(false),
     blocked = useRef(busy);
+  const tokenize = useRef<(() => void) | null>(null),
+    requested = useRef(false);
   const fieldsErrors = useRef<Record<string, string>>({});
   const [payerEmail, setPayerEmail] = useState("");
   const emailTouched = useRef(false),
@@ -153,22 +157,24 @@ export function SecureCardForm({
               }
             };
           },
-          onSubmit: async (event: Event) => {
-            event.preventDefault();
-            if (
-              !live ||
-              sending.current ||
-              blocked.current ||
-              !localValidation()
-            )
+          onSubmit: (event?: Event) => event?.preventDefault(),
+          onCardTokenReceived: async (tokenError: unknown, received: { token?: string; id?: string } | undefined) => {
+            if (!live || !requested.current || sending.current || blocked.current) return;
+            requested.current = false;
+            if (tokenError || !localValidation()) {
+              setTokenizing(false);
+              phase.current("");
+              if (tokenError) setError("Não foi possível proteger os dados. Revise os campos e tente novamente.");
               return;
+            }
             sending.current = true;
             setError("");
             try {
               const data = form.getCardFormData();
-              const token = data.token;
-              const email = normalizePayerEmail(data.cardholderEmail);
-              if (!email || email !== submittedEmail.current || email !== confirmedEmail.current) {
+              const token = received?.token || received?.id || data.token;
+              const email = normalizePayerEmail(formElement?.querySelector<HTMLInputElement>(`#${id.current}-cardholderEmail`)?.value);
+              const sdkEmail = data.cardholderEmail == null ? email : normalizePayerEmail(data.cardholderEmail);
+              if (!email || sdkEmail !== email || email !== submittedEmail.current || email !== confirmedEmail.current) {
                 setError("O e-mail mudou durante a confirmação. Confira o e-mail e confirme novamente.");
                 return;
               }
@@ -189,6 +195,8 @@ export function SecureCardForm({
                 );
             } finally {
               sending.current = false;
+              setTokenizing(false);
+              phase.current("");
               submittedEmail.current = null;
               const hidden = formElement?.querySelector<HTMLInputElement>(
                 'input[name="MPHiddenInputToken"]',
@@ -198,6 +206,8 @@ export function SecureCardForm({
           },
           onError: () => {
             if (live) {
+              requested.current = false;
+              submittedEmail.current = null;
               setTokenizing(false);
               phase.current("");
               setError(
@@ -207,6 +217,29 @@ export function SecureCardForm({
           },
         },
       });
+      // One user action owns tokenization. Do not let a native submit invoke
+      // the SDK's automatic submit path as a second, independent operation.
+      tokenize.current = () => {
+        if (!live || requested.current || sending.current || blocked.current) return;
+        requested.current = true;
+        setTokenizing(true);
+        setError("");
+        phase.current("Protegendo os dados do cartão…");
+        try {
+          Promise.resolve(form.createCardToken()).catch(() => {
+            if (!live || !requested.current) return;
+            requested.current = false;
+            setTokenizing(false);
+            phase.current("");
+            setError("Não foi possível proteger os dados. Revise os campos e tente novamente.");
+          });
+        } catch {
+          requested.current = false;
+          setTokenizing(false);
+          phase.current("");
+          setError("Não foi possível proteger os dados. Revise os campos e tente novamente.");
+        }
+      };
     })().catch(() => {
       if (live)
         setError(
@@ -215,6 +248,8 @@ export function SecureCardForm({
     });
     return () => {
       live = false;
+      tokenize.current = null;
+      requested.current = false;
       try {
         form?.unmount?.();
       } catch {
@@ -240,12 +275,11 @@ export function SecureCardForm({
       className="mp-form"
       noValidate
       onSubmitCapture={(e) => {
-        if (busy || tokenizing || sending.current || !localValidation()) {
-          e.preventDefault();
-          e.stopPropagation();
-        } else {
-          submittedEmail.current = confirmedEmail.current;
-        }
+        e.preventDefault();
+        e.stopPropagation();
+        if (busy || tokenizing || requested.current || sending.current || !localValidation()) return;
+        submittedEmail.current = confirmedEmail.current;
+        tokenize.current?.();
       }}
       onSubmit={(e) => e.preventDefault()}
     >
@@ -389,8 +423,9 @@ export function SecureCardForm({
             }}
           />
           <span>
-            Confirmo o e-mail do pagador informado e autorizo a assinatura e as cobranças mensais nas condições
-            apresentadas.
+            {checkout
+              ? "Confirmo o e-mail do pagador informado e autorizo a assinatura e as cobranças mensais nas condições apresentadas."
+              : "Confirmo os dados e autorizo a atualização do cartão da assinatura existente, sem novo período grátis."}
           </span>
         </label>
         {errorText("consent")}
@@ -409,7 +444,7 @@ export function SecureCardForm({
           ? "Enviando solicitação…"
           : tokenizing
             ? "Protegendo os dados…"
-            : "Confirmar meio de pagamento"}
+            : !checkout ? "Atualizar cartão" : eligible ? "Iniciar meus 7 dias grátis" : "Confirmar assinatura mensal"}
       </button>
       <p className="mp-secure-note">
         Os dados do cartão são enviados diretamente ao Mercado Pago. A SYZIA não

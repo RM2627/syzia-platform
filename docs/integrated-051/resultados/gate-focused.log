@@ -1,0 +1,28 @@
+PASS A1-absent Pedido público absent exige aprovação
+PASS A1-sent Pedido público sent exige aprovação
+PASS A1-declined Pedido público declined exige aprovação
+PASS A1-approved Aprovação permite reserva; conflito mantém aprovação sem pagamento
+PASS A1-direct Contratação direta dispensa proposta e replay não duplica
+PASS A1-manual-whatsapp Manual legítimo whatsapp preservado
+PASS A1-manual-direct Manual legítimo direct preservado
+PASS A1-manual-referral Manual legítimo referral preservado
+PASS A1-manual-other Manual legítimo other preservado
+PASS A1-origin Origem editável não converte pedido público em manual
+PASS A1-legacy Wrapper privada legada e motor não contornam aprovação
+PASS A1-boundary Fronteira de escrita bloqueia reserva pública sem aprovação
+PASS A1-tenant Empresa B não agenda pedido A; grant revogado não reserva
+PASS A2-history Alterar configuração não altera reserva, revisão ou duração históricas
+PASS A2-buffer-0-30 Remarcação usa buffer vigente 0→30
+PASS A2-buffer-30-0 Remarcação usa buffer vigente 30→0
+PASS A2-conflict Conflito somente no buffer impede e preserva toda reserva
+PASS A2-horizon Remarcação revalida horizon atomicamente
+PASS A2-lead Remarcação revalida lead atomicamente
+PASS A2-grid Remarcação revalida grid atomicamente
+PASS A2-hours Remarcação revalida hours atomicamente
+PASS A3-second Parte 2 antes da Parte 1 negada sem mudar histórico
+PASS A3-first Parte 1 depois da Parte 2 negada
+PASS A3-middle Parte intermediária respeita ambas as vizinhas
+PASS A3-valid Remarcação válida mantém números e ordem no acompanhamento e Agenda
+PASS A2A3-replan Replanejamento usa buffer vigente e preserva substituídos, ordem e cancelamento
+PASS WORKSPACE-no-admin Super Admin configura empresa sem ADM sem membership e retorna à gestão global
+PASS SEC-grants Todas as tabelas preservam RLS/FORCE, DML fechado e novos helpers privados

@@ -1,0 +1,30 @@
+✔ L050-T01 safe configuration rejects CPF fields, residential addresses, markup, missing contacts and placeholders (3.502413ms)
+✔ L050-T02 changed prose/version or expected database snapshot invalidates approval hash (8.554359ms)
+✔ L050-T03 CLI uses private external files, never overwrites artifacts, logs no contact and blocks SQL without approval (377.460977ms)
+✔ L050-T04 inspection script and generated locks are explicit; no application credentials or network client (3.339556ms)
+✔ L050-T05 production finance, HMAC, all migrations and other modules remain intact except proven LF/CRLF (80.95594ms)
+✔ L050-T06 private output rejects project root, nested paths, linked ancestors and junctions (545.547847ms)
+✔ L050-T07 private inputs stay external and existing leaf links cannot be overwritten (458.382286ms)
+✔ L050-T08 Windows path guard covers both separators, drives, case, UNC and canonical links (2.18168ms)
+✔ L050-01 publication is two new rows; old content and acceptances preserved (21.10463ms)
+✔ L050-02 stale snapshot and repeated publication fail without new effects (8.121207ms)
+✔ L050-03 rollback before acceptance preserves added immutable rows and original acceptances (12.858581ms)
+✔ L050-04 later insertion failure rolls back both current flags and new documents (11.541947ms)
+✔ L050-05 unpublished versions cannot be accepted; prior access unchanged (11.917439ms)
+✔ L050-06 material revision requires renewed company acceptance and rejects old browser version (20.96098ms)
+✔ L050-07 employee denied; company A acceptance never clears company B (8.193746ms)
+✔ L050-08 public current read works; direct writes/private acceptances denied to public roles (6.511474ms)
+✔ L050-09 immutability denies retroactive body replacement and deletion (2.384866ms)
+✔ L050-10 rollback after acceptance and rollback over newer publication both refused (10.617892ms)
+✔ L050-11 wrong body fingerprint, schema fingerprint and reused acceptance group refused (14.081054ms)
+✔ L050-12 SQL literals remain data even with quotes, backslashes and dollar delimiters (13.100538ms)
+✔ L050-13 empty identification and unapproved personal disclosure block generation (2.063905ms)
+✔ L050-14 public copy preserved, explicit owner/legal review and exact review hash required (3.294715ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6274.53205

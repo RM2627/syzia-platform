@@ -1,3 +1,7 @@
+# Complemento integrado da SYZIA 051 — autorização atual
+
+Escopo em `docs/integrated-051/ESCOPO.md`: elegibilidade verificável, reconciliação sem recriação, checkout em uma ação e cartão da assinatura existente. Revisão adicional simplificada para superadministrador, sempre explícita e auditada. Base anterior entregue autorizada pelo proprietário; commit `6c33be2` não comprovado. Preservar 001–051 byte a byte e histórico jurídico/financeiro. Migration 052 somente incremental e local nesta rodada. Não fazer chamadas financeiras reais, SQL real, commit, push, deploy ou alterar serviços externos. Gate completo obrigatório; limitações externas permanecem pendentes. Entregar complemento incremental e parar.
+
 # SYZIA 051 — autorização atual
 
 Somente diagnóstico/recuperação financeira seguros e redesign do checkout. Escopo integral em `docs/syzia-051/request.md`. Preservar 001–050 byte a byte, HMAC, verificação estrita do trial, preços, elegibilidade, regras financeiras e complemento jurídico. Migration 051 incremental; nenhuma execução real. Gate cumulativo ampliado sem exclusão de etapas. Não inferir causa de cartão/comprador por HTTP genérico, não repetir POST incerto, não tratar retorno como confirmação. Sem deploy, push, dados reais, credenciais, cobranças ou serviços externos. Entregar incremental e parar.

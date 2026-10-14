@@ -1,0 +1,38 @@
+[WebServer] (node:3597) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[WebServer] (node:3610) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:3627) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 9 tests using 1 worker
+
+(node:3661) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 1:02:53 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  1 tests/demo-browser/flexible-support.spec.ts:54:3 › Global 1440: flexible without grid, scheduled grid, switch preserves settings (6.0s)
+[WebServer] 1:02:59 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"access_session","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 1:02:59 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"access_session","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  2 tests/demo-browser/flexible-support.spec.ts:54:3 › Global 390: flexible without grid, scheduled grid, switch preserves settings (5.3s)
+[WebServer] 1:03:04 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  3 tests/demo-browser/flexible-support.spec.ts:54:3 › Global 320: flexible without grid, scheduled grid, switch preserves settings (5.3s)
+[WebServer] 1:03:10 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 1:03:12 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"assisted_policy_mode_save","organization":null,"category":"authorization","reason":"access_denied","status":"42501"}
+  ✓  4 tests/demo-browser/flexible-support.spec.ts:141:3 › Company 1440: rules and consumption read-only; direct global URL and RPC denied (3.7s)
+[WebServer] 1:03:13 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 1:03:16 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"assisted_policy_mode_save","organization":null,"category":"authorization","reason":"access_denied","status":"42501"}
+  ✓  5 tests/demo-browser/flexible-support.spec.ts:141:3 › Company 390: rules and consumption read-only; direct global URL and RPC denied (3.7s)
+[WebServer] 1:03:17 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 1:03:20 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  6 tests/demo-browser/flexible-support.spec.ts:269:3 › Central 1440: unavailable cannot claim; available claims with immediate feedback (6.7s)
+[WebServer] 1:03:24 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  7 tests/demo-browser/flexible-support.spec.ts:269:3 › Central 390: unavailable cannot claim; available claims with immediate feedback (6.6s)
+[WebServer] 1:03:31 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 1:03:34 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"people_self","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 1:03:34 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"people_self","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 1:03:38 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"people_self","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  8 tests/demo-browser/flexible-support.spec.ts:305:3 › Consumer 1440: message persists with no shared staff online and no quota charged (11.1s)
+  ✓  9 tests/demo-browser/flexible-support.spec.ts:305:3 › Consumer 390: message persists with no shared staff online and no quota charged (11.5s)
+
+  9 passed (1.2m)

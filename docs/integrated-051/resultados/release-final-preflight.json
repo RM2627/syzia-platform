@@ -1,0 +1,10 @@
+{
+  "phase": "after",
+  "status": "PASS",
+  "exact": 954,
+  "lineEndings": 0,
+  "absent": 0,
+  "git_6c33be2_proven": false,
+  "reference": "last delivered payer-email base, explicitly authorized by owner",
+  "differences": []
+}

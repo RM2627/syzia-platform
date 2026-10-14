@@ -1,0 +1,32 @@
+✔ 048-I01 migrations 001–047, billing preservado com exceção explícita do adaptador MP-01 (18.556496ms)
+✔ 048-M01 upgrade sobre banco populado preserva todos os dados e RLS/FORCE RLS (5.093375ms)
+✔ 048-M02 empresa sem Manual publica página e conclui checklist mínimo (114.124924ms)
+✔ 048-M03 Manual parcial permanece rascunho e não impede publicação nem grants (80.631596ms)
+✔ 048-M04 funcionário próprio pode ser cadastrado e ter vínculo sem treinamento (54.365078ms)
+✔ 048-M05 atendimento próprio assume e responde sem Manual (268.408093ms)
+✔ 048-M06 solicitação, proposta por funcionário, aprovação e Agenda continuam sem Manual (249.329169ms)
+✔ 048-M07 autonomia salva limita descontos sem exigir publicação (96.142627ms)
+✔ 048-M08 retirada de grant e isolamento A/B continuam bloqueando (50.266786ms)
+✔ 048-M09 compartilhado sem Manual fica impedido; equipe própria opera no modo misto (62.067909ms)
+✔ 048-M10 Manual completo e suporte compartilhado mantêm exigências e autonomia (38.043687ms)
+✔ 048-M11 Comercial usa autonomia e horário explícito sem Manual (45.125212ms)
+✔ 048-M12 publicação ainda rejeita dados mínimos ausentes (57.549496ms)
+✔ 048-M13 nova empresa com zero versões de Manual publica com os dados mínimos (54.528292ms)
+✔ 048-M14 proposta da Central sem Manual registra auditoria com vínculo opcional (233.885918ms)
+✔ 048-H01 uma porta: health, plataforma, billing e mídia usam os handlers existentes (50.832085ms)
+✔ 048-H02 CORS exato, preflight e autenticação continuam por módulo (23.14484ms)
+✔ 048-H03 upload/download sanitizado, anexo privado, ticket, mídia pública e isolamento (27.529425ms)
+✔ 048-H04 checkout simulado, duas abas, webhook sem Origin, duplicação e reconciliação (242.280281ms)
+✔ 048-H05 erros e limites não vazam tokens, URLs nem corpo (14.194331ms)
+✔ 048-H06 reconciliador não sobrepõe execuções e para junto do servidor (0.495112ms)
+✔ 048-H07 encerramento drena requisição em andamento sem truncar resposta (3009.15031ms)
+✔ 048-H08 entrada de produção usa PORT, um Node, e responde a SIGTERM (169.167387ms)
+✔ 048-H09 ausência de credenciais e origem insegura falham antes de abrir listener (0.871627ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 13961.344881

@@ -139,26 +139,50 @@ export class MercadoPagoSubscriptions {
   }
 }
 
+// Static check names only: never include compared values or provider bodies.
+export function bindingCheck(condition, check, code = "billing_binding_mismatch") {
+  if (!condition) { const e = new BillingError(code, 502); e.validationCheck = check; throw e; }
+}
+export function verifyBinding(gateway, binding, p, linked = true) {
+  if (linked) bindingCheck(String(p.id) === binding.provider_id, "provider_id");
+  bindingCheck(String(p.external_reference) === binding.id, "external_reference");
+  bindingCheck(String(p.collector_id) === gateway.collectorId, "collector_id");
+  bindingCheck(String(p.application_id) === gateway.applicationId, "application_id");
+  bindingCheck(p.preapproval_plan_id === binding.provider_plan_id, "plan_id");
+  if (binding.provider_payer_id != null)
+    bindingCheck(String(p.payer_id) === binding.provider_payer_id, "payer_id");
+}
+
 export async function verifiedSnapshot(gateway, binding, preapproval) {
   const p = preapproval || await gateway.read(binding.provider_id);
   const a = p.auto_recurring;
   const allowedAmount = [binding.amount_cents, binding.target_amount].filter(x => x != null);
-  if (String(p.id) !== binding.provider_id || String(p.external_reference) !== binding.id ||
-    String(p.collector_id) !== gateway.collectorId || String(p.application_id) !== gateway.applicationId ||
-    p.preapproval_plan_id !== binding.provider_plan_id || !a || a.currency_id !== "BRL" ||
-    a.frequency !== 1 || a.frequency_type !== "months" || !allowedAmount.includes(cents(a.transaction_amount)) ||
-    !Number.isSafeInteger(p.version) || p.version < 0 || !["authorized", "pending", "paused", "cancelled", "canceled"].includes(p.status))
-    fail("billing_binding_mismatch", 502);
+  verifyBinding(gateway, binding, p);
+  bindingCheck(Boolean(a) && a.frequency === 1 && a.frequency_type === "months", "recurrence");
+  bindingCheck(a.currency_id === "BRL", "currency");
+  bindingCheck(allowedAmount.includes(cents(a.transaction_amount)), "amount");
+  bindingCheck(Number.isSafeInteger(p.version) && p.version >= 0, "version");
+  bindingCheck(["authorized", "pending", "paused", "cancelled", "canceled"].includes(p.status), "status");
+  bindingCheck(p.payer_id != null && /^[a-zA-Z0-9_-]{1,160}$/.test(String(p.payer_id)), "payer_id");
   const invoices = await gateway.invoices(p.id);
   const payments = [];
+  let lastFour = null;
   for (const f of invoices) {
-    if (String(f.preapproval_id) !== p.id || String(f.external_reference) !== binding.id || f.currency_id !== "BRL") fail("billing_binding_mismatch", 502);
+    bindingCheck(String(f.preapproval_id) === p.id, "invoice_subscription");
+    bindingCheck(String(f.external_reference) === binding.id, "invoice_reference");
+    bindingCheck(f.currency_id === "BRL", "invoice_currency");
     if (!f.payment?.id) continue; // A scheduled invoice is not payment confirmation.
     const payment = await gateway.payment(f.payment.id);
-    if (String(payment.id) !== String(f.payment.id) || String(payment.collector_id) !== gateway.collectorId ||
-      payment.currency_id !== "BRL" || cents(payment.transaction_amount) !== cents(f.transaction_amount) ||
-      (payment.external_reference != null && String(payment.external_reference) !== binding.id) ||
-      (payment.payer?.id != null && String(payment.payer.id) !== String(p.payer_id))) fail("billing_binding_mismatch", 502);
+    bindingCheck(String(payment.id) === String(f.payment.id), "payment_id");
+    bindingCheck(String(payment.collector_id) === gateway.collectorId, "payment_collector");
+    bindingCheck(payment.currency_id === "BRL", "payment_currency");
+    bindingCheck(cents(payment.transaction_amount) === cents(f.transaction_amount), "payment_amount");
+    bindingCheck(payment.external_reference == null || String(payment.external_reference) === binding.id, "payment_reference");
+    bindingCheck(payment.payer?.id == null || String(payment.payer.id) === String(p.payer_id), "payment_payer");
+    // Only the official payment's card explicitly matching the current subscription.
+    // The subscription API does not promise PAN suffixes; absence remains null.
+    if (p.card_id && String(payment.card?.id) === String(p.card_id) && /^\d{4}$/.test(payment.card?.last_four_digits || ""))
+      lastFour = payment.card.last_four_digits;
     const status = ({ approved: "paid", rejected: "failed", cancelled: "failed", pending: "pending", in_process: "pending", authorized: "pending", refunded: "reversed", charged_back: "reversed" })[payment.status];
     if (!status) fail("billing_response_invalid", 502);
     payments.push({ id: identifier(f.id), payment_id: identifier(payment.id), status,
@@ -167,13 +191,14 @@ export async function verifiedSnapshot(gateway, binding, preapproval) {
       period_end: monthAfter(f.debit_date) });
   }
   const created = iso(p.date_created), trialEnd = binding.trial_reserved ? new Date(Date.parse(created) + 7 * 86400000).toISOString() : null;
-  if (binding.trial_reserved && (!a.free_trial || a.free_trial.frequency !== 7 || a.free_trial.frequency_type !== "days")) fail("billing_trial_mismatch", 502);
-  if (!binding.trial_reserved && Number(a.free_trial?.frequency || 0) !== 0) fail("billing_trial_mismatch", 502);
+  bindingCheck(!binding.trial_reserved || (a.free_trial?.frequency === 7 && a.free_trial?.frequency_type === "days"), "trial_duration", "billing_trial_mismatch");
+  bindingCheck(binding.trial_reserved || Number(a.free_trial?.frequency || 0) === 0, "trial_duration", "billing_trial_mismatch");
+  if (binding.trial_recorded) bindingCheck(iso(binding.trial_start) === created && iso(binding.trial_end) === trialEnd, "trial_dates", "billing_trial_mismatch");
   if (binding.trial_reserved && !payments.some(x => x.status === "paid") && p.next_payment_date && Date.parse(iso(p.next_payment_date)) < Date.parse(trialEnd) - 60000)
-    fail("billing_trial_mismatch", 502);
+    bindingCheck(false, "first_charge", "billing_trial_mismatch");
   const state = ({ authorized: "authorized", pending: "pending", paused: "paused", canceled: "canceled", cancelled: "canceled" })[p.status];
   payments.sort((a, b) => a.id.localeCompare(b.id));
-  return { provider_id: p.id, version: p.version, modified_at: iso(p.last_modified), state,
+  return { provider_id: p.id, payer_reference: identifier(p.payer_id), method_last_four: lastFour, version: p.version, modified_at: iso(p.last_modified), state,
     card_reference: p.card_id ? identifier(p.card_id) : null,
     method_linked: Boolean(p.card_id && p.payment_method_id), method_label: /^[a-z0-9_ -]{1,40}$/i.test(p.payment_method_id || "") ? p.payment_method_id : null,
     trial_start: binding.trial_reserved ? created : null, trial_end: trialEnd,

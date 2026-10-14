@@ -5,7 +5,10 @@ import { readFile, readdir } from "node:fs/promises";
 test("050-I01 all 46 migrations, finance policies, HMAC adapter, lockfile and other product modules unchanged", async () => {
   const files = JSON.parse(await readFile("docs/hotfix-050/preserved-sha256.json", "utf8"));
   assert.equal(Object.keys(files).filter(x => x.startsWith("supabase/migrations/")).length, 46);
-  assert.equal((await readdir("supabase/migrations")).filter(x => x.endsWith(".sql") && x !== "202610130051_checkout_diagnostics.sql").length, 46);
+  assert.deepEqual((await readdir("supabase/migrations")).filter(x => x.endsWith(".sql")).sort(), [
+    ...Object.keys(files).filter(x => x.startsWith("supabase/migrations/")).map(x => x.slice("supabase/migrations/".length)),
+    "202610130051_checkout_diagnostics.sql", "202610140052_integrated_subscription_safety.sql",
+  ].sort());
   for (const [path, hash] of Object.entries(files)) assertHotfix051File(path, await readFile(path), hash);
 });
 test("050-I02 existing HMAC correction, legal persistence and acceptance stay authoritative", async () => {

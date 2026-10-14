@@ -1,0 +1,28 @@
+PASS E01 Inheritance by default; aggregate own members excludes global team 
+PASS E02 Custom two intervals; appointment fits first interval 
+PASS E03 Day without service denied atomically 
+PASS E04 Crossing lunch denied; second interval allowed 
+PASS E05 Duration plus buffer must fit and old reservation preserved 
+PASS E06 Company closed dominates employee open; employee closed dominates company open 
+PASS E07 Existing resource conflict remains and unassigned semantics preserved 
+PASS E08 Change availability warns without modifying future appointments 
+PASS E09 Date full-day block and interval block enforce timezone 
+PASS E10 Swap responsible denied atomically; removal allowed 
+PASS E11 Multi-period replan preserves each responsible and fails atomically 
+PASS E12 A cannot read B or edit B member; direct private tables denied 
+PASS E13 No grant, revoked actor and revoked target denied 
+PASS E14 Global identity cannot have company availability; stale edits denied 
+PASS E15 Overlapping and null intervals rejected server-side 
+PASS S01 Defaults unconfigured without invented quota; admin cannot edit global policy 
+PASS S02 Super Admin configures hours/timezone; outside status does not block consumer 
+PASS S03 Claim counts one; five messages do not multiply; returning/reclaim no double count 
+PASS S04 Warning/exhaustion restrict only new shared tickets; existing/company continue 
+PASS S05 Usage per company, tenant isolation and audit; no automatic invoice 
+PASS S06 Explicit provider-neutral cycle, idempotence and overlap rejection 
+PASS S07 Downgrade preserves consumption history and denies global staff 
+PASS S08 Exhausted unconfigured quota cannot be bypassed through transfer or direct RPC 
+PASS E16 Positive multi-period replan preserves assignments and planner filters closed employee 
+PASS S09 Consumer can reopen an assigned resolved ticket outside hours and at quota 
+PASS S10 Same ticket in a new cycle; old usage immutable and not carried into current count 
+PASS S11 Plan without Assistido denies shared activity and keeps history 
+PASS S12 Legacy mixed membership cannot bypass shared quota 

@@ -3,7 +3,7 @@ import { randomUUID } from "node:crypto";
 import { MercadoPagoSubscriptions } from "../../server/billing/mercado-pago.mjs";
 import { subscriptions } from "../../server/billing/subscriptions.mjs";
 import { fakeMercadoPago } from "./fake-provider.mjs";
-export async function fixture({ beforeUpgrade, afterUpgrade, checkoutDiagnostics = true } = {}) {
+export async function fixture({ beforeUpgrade, afterUpgrade, checkoutDiagnostics = true, integrated = checkoutDiagnostics, verifiedIdentity = true } = {}) {
   process.env.SYZIA_BILLING_CURRENT = "0";
   process.env.SYZIA_TEAM_CURRENT = "1"; process.env.SYZIA_FLEXIBLE_CURRENT = "1";
   const { consumerDB, users } = await import("../support/current-fixture.mjs");
@@ -12,6 +12,7 @@ export async function fixture({ beforeUpgrade, afterUpgrade, checkoutDiagnostics
   if (beforeUpgrade) await beforeUpgrade(c);
   await c.db.exec(await readFile("supabase/migrations/202610050047_mercado_pago_subscriptions.sql", "utf8"));
   if (checkoutDiagnostics) await c.db.exec(await readFile("supabase/migrations/202610130051_checkout_diagnostics.sql", "utf8"));
+  if (integrated) await c.db.exec(await readFile("supabase/migrations/202610140052_integrated_subscription_safety.sql", "utf8"));
   if (process.env.SYZIA_OPTIONAL_MANUAL_CURRENT === "1") await (await import("../../scripts/syzia-048/fixture.mjs")).upgradeOptionalManualFixture(c.db);
   if (afterUpgrade) await afterUpgrade(c);
   await c.db.exec("begin;update private.billing_runtime set mock_enabled=false;update organization_members set status='suspended'where role='colaborador_empresa'");
@@ -33,6 +34,10 @@ export async function fixture({ beforeUpgrade, afterUpgrade, checkoutDiagnostics
   for (const k of ["A", "B"]) {
     await c.as("admin" + k);
     await rpc("billing047_identify", { p_org: c.orgs[k], p_kind: "CPF", p_document: k === "A" ? "52998224725" : "11144477735" });
+  }
+  if (integrated && verifiedIdentity) {
+    await c.as("root");
+    for (const k of ["A", "B"]) await rpc("billing051_verify_identity", { p_org: c.orgs[k], p_type: "CPF", p_value: k === "A" ? "52998224725" : "11144477735", p_method: "document_checked", p_confirmed: true });
   }
   await c.db.exec("commit");
   // Serialize short SQL transactions; network operations remain outside the queue.

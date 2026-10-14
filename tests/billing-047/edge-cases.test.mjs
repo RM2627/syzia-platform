@@ -57,7 +57,13 @@ test("047-15 Meio de pagamento atualizado apenas pelo token e confirmação serv
 test("047-16 Cancelamento simultâneo é único; fim do período cancela provider e não concede novo trial", async () => {
   await Promise.all([c.command("cancel", null, "B"), c.command("cancel", null, "B")]);
   const b = await c.view("B"), bid = b.subscription.id;
-  await c.rawSQL("update private.billing047_contracts set trial_end=now()-interval '5 days',paid_until=now()-interval '1 second'where id=$1", [bid]);
+  // Advance the fictitious period consistently on both sides; a one-sided date
+  // mutation is now correctly rejected as an immutable trial mismatch.
+  const oldTrialStart = new Date(Date.now()-12*86400000).toISOString();
+  const oldTrialEnd = new Date(Date.parse(oldTrialStart)+7*86400000).toISOString();
+  const expiredProvider = [...c.fake.subscriptions.values()].find(x => x.external_reference === bid);
+  expiredProvider.date_created=oldTrialStart;expiredProvider.next_payment_date=oldTrialEnd;
+  await c.rawSQL("update private.billing047_contracts set trial_start=$2,trial_end=$3,paid_until=now()-interval '1 second'where id=$1", [bid,oldTrialStart,oldTrialEnd]);
   await c.engine.process(bid);
   assert.equal([...c.fake.subscriptions.values()].find(x => x.external_reference === bid).status, "canceled");
   // Historical approved invoice is already ended in this scenario too.

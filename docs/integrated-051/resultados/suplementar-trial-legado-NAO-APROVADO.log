@@ -1,0 +1,63 @@
+Execução suplementar inicial desta rodada, fora do gate vigente: 2 falhas. Jornada antiga de rota/ativação; não é resultado do gate final. Tentativas posteriores de adaptar a jornada inteira foram descartadas. Teste preservado, sem skip.
+
+[WebServer] (node:18) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[WebServer] (node:31) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:49) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:83) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/demo-browser/trial.spec.ts:5:1 › Trial demo: 15 dias, prazo explícito, preservação e sem poderes administrativos (1.3s)
+(node:161) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 12:31:49 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 12:31:50 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"analytics_platform","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 12:31:50 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"analytics_platform","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✘  2 tests/demo-browser/trial.spec.ts:34:1 › Trial demo: análise, exceção, verificação, extensão e política auditadas pela interface (1.0m)
+
+
+  1) tests/demo-browser/trial.spec.ts:5:1 › Trial demo: 15 dias, prazo explícito, preservação e sem poderes administrativos 
+
+    Error: expect(received).toBeTruthy()
+
+    Received: undefined
+
+      13 |     .click();
+      14 |   const org = p.url().match(/painel\/([^/]+)/)?.[1];
+    > 15 |   expect(org).toBeTruthy();
+         |               ^
+      16 |   await p.goto("/painel/" + org + "/assinatura");
+      17 |   const panel = p.getByRole("region", { name: "Período gratuito" });
+      18 |   await expect(panel.getByText("15", { exact: true })).toBeVisible();
+        at [WORKSPACE]/integrated051/work/tests/demo-browser/trial.spec.ts:15:15
+
+    Error Context: test-results-demo/trial-Trial-demo-15-dias-p-e3104-sem-poderes-administrativos/error-context.md
+
+  2) tests/demo-browser/trial.spec.ts:34:1 › Trial demo: análise, exceção, verificação, extensão e política auditadas pela interface 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: locator.fill: Test timeout of 60000ms exceeded.
+    Call log:
+      - waiting for getByLabel('Código da empresa', { exact: true })
+
+
+      65 |   await p.goto("/ativar-acesso");
+      66 |   await p
+    > 67 |     .getByLabel("Código da empresa", { exact: true })
+         |      ^
+      68 |     .fill(credentials.company_code);
+      69 |   await p.getByLabel("Usuário", { exact: true }).fill(credentials.username);
+      70 |   await p
+        at [WORKSPACE]/integrated051/work/tests/demo-browser/trial.spec.ts:67:6
+
+    Error Context: test-results-demo/trial-Trial-demo-análise-e-174c5-ca-auditadas-pela-interface/error-context.md
+
+  2 failed
+    tests/demo-browser/trial.spec.ts:5:1 › Trial demo: 15 dias, prazo explícito, preservação e sem poderes administrativos 
+    tests/demo-browser/trial.spec.ts:34:1 › Trial demo: análise, exceção, verificação, extensão e política auditadas pela interface 

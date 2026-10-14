@@ -1,0 +1,20 @@
+PASS F01 Unconfigured 045 becomes inactive flexible; active flexible accepts no weekly hours 
+PASS F02 Nobody online: eligible ticket enters unassigned queue; consumer message persists; zero units 
+PASS F03 Public page, FAQ, deterministic request and booking work while all shared staff offline 
+PASS F04 Own company can claim and reply while shared policy inactive; no shared consumption 
+PASS F05 Busy, pause and offline cannot claim a new shared ticket; denial is atomic 
+PASS F06 Available authorized assigned staff claims exactly one unit; five replies do not multiply 
+PASS F07 Transfer between available shared staff and reclaim do not multiply consumption 
+PASS F08 Transfer to unavailable shared recipient denied atomically without loss or quota change 
+PASS F09 Limit blocks new shared ticket; queue and consumer/own company remain usable 
+PASS F10 Already counted ticket continues at limit even with busy presence; no new unit 
+PASS F11 Scheduled hours preserved inside and outside window; consumers remain unaffected 
+PASS F12 Switching modes preserves weekly grid/timezone, consumption and audited history 
+PASS F13 Scheduled active requires grid; invalid mode/timezone and stale revision rejected 
+PASS F14 Business admin/direct RPC cannot change global mode, quota, or query other company usage 
+PASS F15 Shared assignment and grants revoked are revalidated; presence cannot override authorization 
+PASS F16 Suspended subscription cannot receive shared support; old consumption retained 
+PASS F17 Quota warning, cycle idempotence and immutable ledger remain intact across mode changes 
+PASS F18 Readiness only reflects available authorized staff assigned to this company 
+PASS F19 Queue and mode changes create no invoice and do not modify prices/trial 
+PASS F20 New functions reject anonymous access and support UI copy makes no continuous-service promise 

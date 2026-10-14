@@ -44,19 +44,9 @@ test("Trial demo: análise, exceção, verificação, extensão e política audi
     .getByRole("button", { name: "Registrar identidade verificada" })
     .click();
   const prior = p.getByRole("dialog");
-  await prior
-    .getByLabel("Identificador verificado", { exact: true })
-    .fill("BR:CPF:52998224725");
-  await prior
-    .getByLabel("Referência da verificação")
-    .fill("fixture-historico-trial-030");
-  await prior.getByLabel(/Confirmei a evidência/).check();
-  await prior
-    .getByLabel("Motivo administrativo")
-    .fill(
-      "Histórico fictício para validar reutilização do período de avaliação",
-    );
-  await prior.getByRole("button", { name: "Registrar decisão" }).click();
+  await prior.getByLabel("CPF conferido", { exact: true }).fill("52998224725");
+  await prior.getByLabel(/Confirmo que realizei a verificação/).check();
+  await prior.getByRole("button", { name: "Confirmar verificação" }).click();
   await expect(prior).toHaveCount(0);
   await p.goto("/admin/empresas");
   await p.getByLabel("Nome da empresa").fill("Trial fictício de revisão");
@@ -128,15 +118,9 @@ test("Trial demo: análise, exceção, verificação, extensão e política audi
     .getByRole("button", { name: "Registrar identidade verificada" })
     .click();
   d = p.getByRole("dialog");
-  await d
-    .getByLabel("Identificador verificado", { exact: true })
-    .fill("ZZ:DEMO:REVIEW12345");
-  await d.getByLabel("Referência da verificação").fill("fixture-manual-review");
-  await d.getByLabel(/Confirmei a evidência/).check();
-  await d
-    .getByLabel("Motivo administrativo")
-    .fill("Evidência de demonstração conferida manualmente");
-  await d.getByRole("button", { name: "Registrar decisão" }).click();
+  await d.getByLabel("CPF conferido", { exact: true }).fill("52998224725");
+  await d.getByLabel(/Confirmo que realizei a verificação/).check();
+  await d.getByRole("button", { name: "Confirmar verificação" }).click();
   await expect(d).toHaveCount(0);
   await p.getByRole("button", { name: "Estender teste" }).click();
   d = p.getByRole("dialog");
@@ -165,9 +149,9 @@ test("Trial demo: análise, exceção, verificação, extensão e política audi
   await p
     .getByText("Verificações e histórico administrativo", { exact: true })
     .click();
-  await expect(p.getByText(/fixture-manual-review/)).toBeVisible();
+  await expect(p.getByText(/Identidade verificada ·/).first()).toBeVisible();
   await expect(p.getByText(/Política de elegibilidade alterada/)).toBeVisible();
-  await expect(p.getByText("ZZ:DEMO:REVIEW12345", { exact: true })).toHaveCount(
+  await expect(p.getByText("52998224725", { exact: true })).toHaveCount(
     0,
   );
   await p.screenshot({

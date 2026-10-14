@@ -1,0 +1,36 @@
+[WebServer] (node:4127) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[WebServer] (node:4140) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:4158) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 21 tests using 1 worker
+
+(node:4192) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/demo-browser/checkout051.spec.ts:59:3 › 051 UI 1440: secure fields, summary, focus, no overflow or overlap (3.7s)
+  ✓   2 tests/demo-browser/checkout051.spec.ts:59:3 › 051 UI 768: secure fields, summary, focus, no overflow or overlap (3.7s)
+  ✓   3 tests/demo-browser/checkout051.spec.ts:59:3 › 051 UI 390: secure fields, summary, focus, no overflow or overlap (3.5s)
+  ✓   4 tests/demo-browser/checkout051.spec.ts:59:3 › 051 UI 320: secure fields, summary, focus, no overflow or overlap (3.4s)
+  ✓   5 tests/demo-browser/checkout051.spec.ts:142:1 › 051 UI validation: empty, name, document and SDK validity errors stay next to fields; no POST (3.9s)
+  ✓   6 tests/demo-browser/checkout051.spec.ts:182:1 › 051 UI one POST, token and confirmed payer email only, disabled CTA during processing, official confirmation (4.1s)
+  ✓   7 tests/demo-browser/checkout051.spec.ts:247:1 › 051 UI definitive refusal permits explicit recovery in same contract, never false success (4.1s)
+  ✓   8 tests/demo-browser/checkout051.spec.ts:290:1 › 051 UI uncertain result or failed follow-up blocks resubmission and success, including browser return (5.3s)
+  ✓   9 tests/demo-browser/checkout051.spec.ts:335:1 › 051 UI member mismatch and unverified eligibility prevent checkout without changing team (4.9s)
+[WebServer] 1:04:40 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"billing047_context","organization":"8db964e9-1c61-46bd-8b34-f5e028ee1858","category":"operation","reason":"unclassified","status":""}
+  ✓  10 tests/demo-browser/checkout051.spec.ts:358:1 › 051 UI network failure with unavailable status never offers another create (4.4s)
+  ✓  11 tests/demo-browser/checkout051.spec.ts:386:3 › 051 payer UI 1440: suggested email is editable, changes require new confirmation, exact payer is sent (4.5s)
+  ✓  12 tests/demo-browser/checkout051.spec.ts:386:3 › 051 payer UI 390: suggested email is editable, changes require new confirmation, exact payer is sent (4.4s)
+  ✓  13 tests/demo-browser/checkout051.spec.ts:421:1 › 051 payer UI invalid or missing email never submits or silently falls back to admin (4.1s)
+  ✓  14 tests/demo-browser/checkout051.spec.ts:436:1 › 051 payer UI locks email while tokenizing and rejects a changed SDK/DOM identity before POST (5.2s)
+  ✓  15 tests/demo-browser/checkout051.spec.ts:451:54 › INT-C SDK error: one action fails closed, no command or leaked SDK data (4.1s)
+  ✓  16 tests/demo-browser/checkout051.spec.ts:451:54 › INT-C SDK missing: one action fails closed, no command or leaked SDK data (4.2s)
+  ✓  17 tests/demo-browser/checkout051.spec.ts:460:1 › INT-C consumed trial: paid CTA and no free-period promise (4.2s)
+  ✓  18 tests/demo-browser/checkout051.spec.ts:470:32 › INT-D 1440: existing card update and history never claim an overdue invoice paid (4.4s)
+  ✓  19 tests/demo-browser/checkout051.spec.ts:470:32 › INT-D 390: existing card update and history never claim an overdue invoice paid (5.3s)
+  ✓  20 tests/demo-browser/checkout051.spec.ts:486:32 › INT-A 1440: superadmin verifies CPF in one simple audited form (3.7s)
+  ✓  21 tests/demo-browser/checkout051.spec.ts:486:32 › INT-A 390: superadmin verifies CPF in one simple audited form (3.5s)
+
+  21 passed (1.6m)

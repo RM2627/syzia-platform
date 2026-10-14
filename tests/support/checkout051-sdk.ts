@@ -1,7 +1,7 @@
 import type { Page } from "@playwright/test";
 // Browser-only substitute for the external SDK. Never shipped in src or build.
 // It uses nested frames to exercise the secure-field layout; not MP homologation.
-export async function mockCheckoutSDK(page: Page, tokenDelay = 250) {
+export async function mockCheckoutSDK(page: Page, tokenDelay = 250, outcome: "ok" | "error" | "missing" = "ok") {
   await page.route("https://sdk.mercadopago.com/js/v2", (route) =>
     route.fulfill({
       contentType: "application/javascript",
@@ -22,12 +22,12 @@ window.MercadoPago=class {cardForm(o){
  }
  const h=e=>{e.preventDefault();const done=o.callbacks.onFetching?.('cardToken');setTimeout(()=>{done?.();o.callbacks.onSubmit(e)},${tokenDelay})};
  f.addEventListener('submit',h);queueMicrotask(()=>o.callbacks.onFormMounted());
- return {getCardFormData:()=>({token:'offline-browser-token-only',cardholderEmail:document.getElementById(o.form.cardholderEmail.id).value}),unmount:()=>{f.removeEventListener('submit',h);frames.forEach(x=>x.remove())}};
+ return {createCardToken:()=>{const done=o.callbacks.onFetching?.('cardToken');setTimeout(()=>{done?.();o.callbacks.onCardTokenReceived(${outcome === 'error' ? JSON.stringify({message:'PRIVATE_SDK_ERROR_SHOULD_NEVER_LEAK'}) : 'null'},${outcome === 'ok' ? "{token:'offline-browser-token-only'}" : '{}'})},${tokenDelay})},getCardFormData:()=>({token:${outcome === 'ok' ? "'offline-browser-token-only'" : 'null'},cardholderEmail:document.getElementById(o.form.cardholderEmail.id).value}),unmount:()=>{f.removeEventListener('submit',h);frames.forEach(x=>x.remove())}};
 }};`,
     }),
   );
 }
-export async function fillCheckout(page: Page) {
+export async function fillCheckout(page: Page, method = false) {
   await page
     .frameLocator('iframe[title="Número do cartão"]')
     .getByRole("textbox")
@@ -49,5 +49,5 @@ export async function fillCheckout(page: Page) {
   await page
     .getByLabel("E-mail do pagador", { exact: true })
     .fill("titular@example.invalid");
-  await page.getByRole("checkbox", { name: /[Aa]utorizo a assinatura/ }).check();
+  await page.getByRole("checkbox", { name: method ? /autorizo a atualização/ : /[Aa]utorizo a assinatura/ }).check();
 }

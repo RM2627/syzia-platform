@@ -1,0 +1,549 @@
+{
+  "schema": 1,
+  "reference": "Last delivered payer-email base explicitly authorized by owner; commit 6c33be2 not proven",
+  "modified": 19,
+  "added": 58,
+  "historical_migrations_preserved": 47,
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "status": "modified",
+      "before_sha256": "1db24343361f9f71f23acf8dd5c508453717357038940e5e8f371b53484b4f2a",
+      "after_sha256": "0a30b829b3d2a072306c57de78cb5a4af5d5a014c38584a1e614182cb4a0c00a",
+      "bytes": 28766
+    },
+    {
+      "path": "docs/integrated-051/APLICACAO-E-ROLLBACK.md",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "97d3d8d8adc0514c01453434129f75fd39c57559472fe786c6e085ca23205df7",
+      "bytes": 5519
+    },
+    {
+      "path": "docs/integrated-051/DOCUMENTACAO-OFICIAL.md",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "c4fe85d058cc08ec0514ea30028e4b5af51cc68bc3d2baa44c3e23ebb042c6e8",
+      "bytes": 2583
+    },
+    {
+      "path": "docs/integrated-051/ESCOPO.md",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "59d7dc37a79af0b77ed0cd227b89563a5b7a04f739af7eb7ef6e9c8e49c6ac24",
+      "bytes": 14763
+    },
+    {
+      "path": "docs/integrated-051/MATRIZ-E-RESULTADOS.md",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "4cfb1219f3b6f546370025ad80ac4981b2cb24710612cf83743747fd57bac4f2",
+      "bytes": 8463
+    },
+    {
+      "path": "docs/integrated-051/PENDENCIAS-EXTERNAS.md",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "2001ea8790de80541d8033d2ffe085e98befb359ddb3334b3bacd1d9973a366f",
+      "bytes": 3738
+    },
+    {
+      "path": "docs/integrated-051/RELATORIO-ATUALIZACAO-INTEGRADA-051.md",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "661f241efa674d58dd33ab6e99accb85a980d532256ced9887fa16696eed7503",
+      "bytes": 9666
+    },
+    {
+      "path": "docs/integrated-051/ROLLBACK-052-ANTES-DO-USO.sql",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "b5e3b5ad6f3a020b9d9f2f53a15e97ee2d90a0dd5ac51937a2347e1976474018",
+      "bytes": 2173
+    },
+    {
+      "path": "docs/integrated-051/authorized-hashes.json",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "402e079c5fad4e2aa967e2d7bac2f951dd422f2a785e7d99f352c3494cd28dcf",
+      "bytes": 2463
+    },
+    {
+      "path": "docs/integrated-051/gate-final.json",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "2e952be9c25b937410475602d55125e5362be42d1234e9b4816b135f591e870e",
+      "bytes": 12438
+    },
+    {
+      "path": "docs/integrated-051/integrity.json",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "19e8711df5d39a12d09a60c36b4e9917a8fac20872437eb27b009c493e2e7061",
+      "bytes": 465842
+    },
+    {
+      "path": "docs/integrated-051/resultados/gate-billing-047.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "05f15303d0a3cd120bf0b63ee4062fb9a4e4582e47a3109420e617455bbaa928",
+      "bytes": 5315
+    },
+    {
+      "path": "docs/integrated-051/resultados/gate-billing-browser.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "146880068ad7dc6496849a93af73c7afa6543660ba70dfc1a90e2d1158e5ab5e",
+      "bytes": 1048
+    },
+    {
+      "path": "docs/integrated-051/resultados/gate-browser-048.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "329865cf24dd7b0844727f55dcf37be78a14ba527aee24e68b8fd5d38d07aa37",
+      "bytes": 1035
+    },
+    {
+      "path": "docs/integrated-051/resultados/gate-browser-049.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "ed64d24a12fcbcd30e3521c3b28f336365602d3f14b84c0413c930381fd81d6e",
+      "bytes": 1466
+    },
+    {
+      "path": "docs/integrated-051/resultados/gate-browser-hotfix-049.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "ebadccaf91140f7f02153b299b670089e834166b9c708834b2a9e0f8a862cb1e",
+      "bytes": 2055
+    },
+    {
+      "path": "docs/integrated-051/resultados/gate-browser-hotfix-050.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "2c563ca1ffcd046f2e101be6a59f43a0285ec29d7a72b04f6936c7993a2aeba2",
+      "bytes": 1710
+    },
+    {
+      "path": "docs/integrated-051/resultados/gate-browser-legal-050.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "e2a6c9dfcfd08c865b54dcf9c4ab5a78899bfdfc4467f7fd90a4f0df372999ee",
+      "bytes": 2753
+    },
+    {
+      "path": "docs/integrated-051/resultados/gate-browser.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "25c0ae2bd07fdca429a926146a6b8bc78b41204d82cc7818bf888fba67660a1d",
+      "bytes": 23368
+    },
+    {
+      "path": "docs/integrated-051/resultados/gate-build.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "5b6896635549fce8b6f5b16c33b86f3957d66fc3929f0d2727e2dbe603bf0cf0",
+      "bytes": 59
+    },
+    {
+      "path": "docs/integrated-051/resultados/gate-checkout-browser-051.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "b22e64f75114adda00223567f6802c17b0681e6d1929fd2e93ded7ca8fc85f2a",
+      "bytes": 4190
+    },
+    {
+      "path": "docs/integrated-051/resultados/gate-checkout-financial-051.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "64df4e6f11bce9494e20c7561489d3e7766046bb125129d7e37037ae58efbd31",
+      "bytes": 9168
+    },
+    {
+      "path": "docs/integrated-051/resultados/gate-flexible-browser.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "aa6108fb55675456eed8c8efd73a74019a8bf7ce1e9639d66c8ee9706e51211a",
+      "bytes": 5009
+    },
+    {
+      "path": "docs/integrated-051/resultados/gate-flexible-support.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "ec891dcc53f6e6ce4e53d3813d6dbfc8947da4c81c0118d233bf3dbdde8bd433",
+      "bytes": 1873
+    },
+    {
+      "path": "docs/integrated-051/resultados/gate-flexible-upgrade.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "5824e6c798d4835683a4372d9b2f6bcdb32c3c64fd8189449f0fa222cfc4976c",
+      "bytes": 89
+    },
+    {
+      "path": "docs/integrated-051/resultados/gate-focused-048.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "38b3ec015b8e08ac83a846462ef52728be14c738eee4ef557118adf1a3e7e949",
+      "bytes": 2370
+    },
+    {
+      "path": "docs/integrated-051/resultados/gate-focused-049.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "935813be6d9b68635663112455151d8a83ab5d065764a2ec22a5980b3b778628",
+      "bytes": 3747
+    },
+    {
+      "path": "docs/integrated-051/resultados/gate-focused.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "4ea185ef974f8a208c5074af92786964eba929b397b4a8f73518f49a1468de20",
+      "bytes": 1933
+    },
+    {
+      "path": "docs/integrated-051/resultados/gate-gate-contracts.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "5efb4694f5edc260fee539153b915bca2fa304c74aa5313e5b9404f27821a8cc",
+      "bytes": 1006
+    },
+    {
+      "path": "docs/integrated-051/resultados/gate-gateways.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "d7f1e4ae9147d7a4218ff30821ba583667e2f8df5d5dfc132fdfa37079260f6e",
+      "bytes": 5389
+    },
+    {
+      "path": "docs/integrated-051/resultados/gate-hotfix-049.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "77321ba500a5493da0e3c2180c75043801ae55f4982adc1925025aec73bbde4d",
+      "bytes": 1849
+    },
+    {
+      "path": "docs/integrated-051/resultados/gate-hotfix-050.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "fa44597f489ad41c426db7d7da5b79c59b34f625912c9689ba7d0cfac22054c3",
+      "bytes": 2228
+    },
+    {
+      "path": "docs/integrated-051/resultados/gate-legal-historical-050.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "8dd11c418612a6a0ba7168fb1f0145fbcadb019d5f6fa2429a75579840d2311b",
+      "bytes": 260
+    },
+    {
+      "path": "docs/integrated-051/resultados/gate-legal-versioning-050.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "a63f4f606d6bc81907fe806ec44716943a33042d8f541ebfee28a515d4e75354",
+      "bytes": 2437
+    },
+    {
+      "path": "docs/integrated-051/resultados/gate-regression-040-042.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "a58fec18c4f1f1904759bc0f5f7fc03e0000fa2c2c0eb925db5024002dd98aa7",
+      "bytes": 10112
+    },
+    {
+      "path": "docs/integrated-051/resultados/gate-team-availability.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "aa579dbe108a80feda7db2634c22d9a083153e28fae00f5f25f15f307a7bafdd",
+      "bytes": 2125
+    },
+    {
+      "path": "docs/integrated-051/resultados/gate-team-browser.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "6a16815929ed00a73abc55be3f8807c29c63638def4ccb3ba85c0866075f9e79",
+      "bytes": 3502
+    },
+    {
+      "path": "docs/integrated-051/resultados/gate-team-upgrade.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "9f2cf7e433571dee26ec5a7fb7924cc79f0f5e1d938be567bbc856c2118bfa5d",
+      "bytes": 83
+    },
+    {
+      "path": "docs/integrated-051/resultados/gate-upgrade.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "3b4ae66b3883dc36dc041a6272e15db860919197a79687485723a3062f33933d",
+      "bytes": 433
+    },
+    {
+      "path": "docs/integrated-051/resultados/gate-ux001-browser.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "079d7912eed89755f9a0e15b9825d670e10afe0b4319aabcfd604761a1a87fa9",
+      "bytes": 4718
+    },
+    {
+      "path": "docs/integrated-051/resultados/gate-ux001-security.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "414693285b30bbba3210fb34e349bdc0058e804bcb18dc9c9755639041086cf9",
+      "bytes": 438
+    },
+    {
+      "path": "docs/integrated-051/resultados/release-final-base-preflight.json",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "628875afcd5cf883eaf21e2cb276ac1a9ffaf670d9803d28491733aa0ae31245",
+      "bytes": 230
+    },
+    {
+      "path": "docs/integrated-051/resultados/release-final-build.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "2c7e04b9e581209c3cb97605673d1760f8f00be315c3f8f24ef701dfa95e5d85",
+      "bytes": 282
+    },
+    {
+      "path": "docs/integrated-051/resultados/release-final-eol.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "562061206d997dbfdd86af6f88c62b6be28f1d4487b360cde5adfba1caf9e025",
+      "bytes": 908
+    },
+    {
+      "path": "docs/integrated-051/resultados/release-final-focused.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "feb09e4d9aa11ede93455abd06a0968c5d0dc25b6bc3433516f4c58da08132af",
+      "bytes": 9405
+    },
+    {
+      "path": "docs/integrated-051/resultados/release-final-gate.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "7e6baf00a2451e4d529d7b2408b39eda831d7124d71c8d6b4f235340b1aa7a14",
+      "bytes": 1348
+    },
+    {
+      "path": "docs/integrated-051/resultados/release-final-lf.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "41717c3f6e62c440b5ddaa3908b3968864c16262f99a23c5b14520cec25f44fa",
+      "bytes": 10551
+    },
+    {
+      "path": "docs/integrated-051/resultados/release-final-npm-ci.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "0240aacd6f45ff59ee4efc39a621d21e020edcc4e51496a101b6c902e1026ef6",
+      "bytes": 124
+    },
+    {
+      "path": "docs/integrated-051/resultados/release-final-postflight.json",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "991e1ab3e8e72f50c1aaa880f80533b2033546c8ce8f972b67998633892f22be",
+      "bytes": 228
+    },
+    {
+      "path": "docs/integrated-051/resultados/release-final-preflight.json",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "991e1ab3e8e72f50c1aaa880f80533b2033546c8ce8f972b67998633892f22be",
+      "bytes": 228
+    },
+    {
+      "path": "docs/integrated-051/resultados/suplementar-trial-legado-NAO-APROVADO.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "b5438f855a2a4c02fa8edc45e45c0145f0bf4225c1198d006c601df6b971ae33",
+      "bytes": 4010
+    },
+    {
+      "path": "docs/integrated-051/security-anchors.json",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "7c9eb7728eda68bf5c829c90ce423015e917bc20c91ac8f7e5108e64d1bd6a63",
+      "bytes": 193
+    },
+    {
+      "path": "scripts/billing-047/browser-fixture.mjs",
+      "status": "modified",
+      "before_sha256": "f7138c9412a259aa36490cedbe6eddbb12614addb8d4e0af14c129eff866d500",
+      "after_sha256": "da7ad14e197f8dcf85061c74a26dd02920e3ab8473a70bb799e011678110b319",
+      "bytes": 2892
+    },
+    {
+      "path": "scripts/billing-047/fixture.mjs",
+      "status": "modified",
+      "before_sha256": "f46fd5eda24c06f5c23a768168859957b88597ec497fce69761aa61cc084709a",
+      "after_sha256": "f0829c40bc1d3c6706753b4c71038a49d63f59dda36fb65d8cb0e276cb8270ed",
+      "bytes": 1272
+    },
+    {
+      "path": "scripts/integrated-051/verify.mjs",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "4734541d7468dc4e6c3ecb273fe3d87799fb712429bf6ec19451c714d70557f1",
+      "bytes": 2442
+    },
+    {
+      "path": "server/billing/diagnostics.mjs",
+      "status": "modified",
+      "before_sha256": "67ef544bc260eba822e39c22a70ed5a3c8962bff27b96626ff34c73bf6a5447c",
+      "after_sha256": "9868ed61d5d3beb84f51f073d57768e83ab7a0afb8fe41d0e79baa1c69228aaf",
+      "bytes": 1894
+    },
+    {
+      "path": "server/billing/mercado-pago.mjs",
+      "status": "modified",
+      "before_sha256": "f4472e6e6726a86caa6b08a6bf0c649d1e1adecb92270b4221505f96c785f352",
+      "after_sha256": "21e97341fa3861a583c7e77a8f11d5a0185c5e7da637b3ba03a1dbc9e3b32fb2",
+      "bytes": 14178
+    },
+    {
+      "path": "server/billing/subscriptions.mjs",
+      "status": "modified",
+      "before_sha256": "adb459319b618e2713f6b47d69e7a53809422e501ddba57b04b3f3c32ef3aa04",
+      "after_sha256": "22a6d068dfc4f143328accca0cde4f5d26e367b55990bb789d3c264894580dfa",
+      "bytes": 11369
+    },
+    {
+      "path": "src/billing/MercadoPago.tsx",
+      "status": "modified",
+      "before_sha256": "cdeec07de4728974d064580ceaa0d039d3847858714ac0e3b66aa2588151e708",
+      "after_sha256": "3a16bccb275721d554f175a47be9d8e30df17e23184717e331cb93b2144bb711",
+      "bytes": 26068
+    },
+    {
+      "path": "src/billing/SecureCardForm.tsx",
+      "status": "modified",
+      "before_sha256": "e14bf3b1326c07d8e668908a31e51877c975d3e302176bffef62ce853e1a0c51",
+      "after_sha256": "95401a3806039e556e0272bed1a778011d91ba0bae6ebf7f900fde39158b55bd",
+      "bytes": 16843
+    },
+    {
+      "path": "src/billing/Trial.tsx",
+      "status": "modified",
+      "before_sha256": "2186d71b1b5bd7b1780a7d24ad8fb7d9ed90054ba9bf2c03325827c457001b09",
+      "after_sha256": "cbadca022f23800abca884b0ee18d862d5db9585115378459c8ef8ff76e089c3",
+      "bytes": 16819
+    },
+    {
+      "path": "supabase/migrations/202610140052_integrated_subscription_safety.sql",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "532d006189ad4100de0536bb4e2988bda69fb98b53bf965f5d25137dbe08ebbd",
+      "bytes": 15245
+    },
+    {
+      "path": "tests/billing-047/edge-cases.test.mjs",
+      "status": "modified",
+      "before_sha256": "f4f3063789e926923d20490ffe7a5a2c373d3e6bc650e075591b85695714b2ce",
+      "after_sha256": "059e3abb4f06429d5f57848f8e3dd8cd926133f470fe5699e9cf2caa62b7e6f5",
+      "bytes": 7568
+    },
+    {
+      "path": "tests/billing-047/fixture.mjs",
+      "status": "modified",
+      "before_sha256": "3a82e84ab18ae407a120814c6e0db1b37852fdf364941433c303155b884bf844",
+      "after_sha256": "094a453a7dae50ec68d4d2ba6c781d598921d403ad7386d6f6cbb4f8ad5fee05",
+      "bytes": 5653
+    },
+    {
+      "path": "tests/demo-browser/billing047.spec.ts",
+      "status": "modified",
+      "before_sha256": "cb21f4a8a73f1c0383a52193024a9bf5ea39afa79ff144fef800a3b7160ff042",
+      "after_sha256": "104a9306d9663804ad1f55d0bccb7d89be5bffa0b6e5a30c26a0545a7a119b48",
+      "bytes": 3560
+    },
+    {
+      "path": "tests/demo-browser/checkout051.spec.ts",
+      "status": "modified",
+      "before_sha256": "e786d615b5d716923bcb172e3af1d952db32d4ef27c703fb683f32d80e37d9f2",
+      "after_sha256": "e240775b42905452f0fe4b62623b00e6ae408c79d308799d311141c95c9d5774",
+      "bytes": 21407
+    },
+    {
+      "path": "tests/demo-browser/trial.spec.ts",
+      "status": "modified",
+      "before_sha256": "23fbd28fc508794ccbded6493c34600d29821d511334c36246ad27f44926956b",
+      "after_sha256": "66f938639e67c5df3512682472407c1fb1cd88d59e273b6a9208bcdd64033750",
+      "bytes": 7018
+    },
+    {
+      "path": "tests/hotfix-050/integrity.test.mjs",
+      "status": "modified",
+      "before_sha256": "8116f0999cf405b5044e85443536ac7c70e2426a94c3a646ebd2559cd98c98ea",
+      "after_sha256": "5795b76ff47c75248ca3ea2d5aa9a9f613f8adf04bf8bde366071dfa2aacf2a9",
+      "bytes": 2677
+    },
+    {
+      "path": "tests/integrated-051/integrity-cases.mjs",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "1172d48913a1c57383335b3ce1c6afab853662573b60cf77f6bbc4da367d1250",
+      "bytes": 2847
+    },
+    {
+      "path": "tests/integrated-051/method.test.mjs",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "4cab2a562b139317912f892e7f5c9ef5d06f73ce8abdffbc4d386bef3fa9d5f0",
+      "bytes": 5738
+    },
+    {
+      "path": "tests/integrated-051/reconciliation.test.mjs",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "23bbdc8c602b9f945850756633ac6e9f0af136989da5f2ce0178c2fe0f76e3c6",
+      "bytes": 5184
+    },
+    {
+      "path": "tests/integrated-051/trial.test.mjs",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "2ac9e7d7cdfffec1389ecee7d9cee7080cfbc2781d64dccf8bb5a59e991e55ce",
+      "bytes": 7524
+    },
+    {
+      "path": "tests/integrated-051/upgrade.test.mjs",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "0b7b689b84deeb3fb7f8a887caa5f82cd28f8ecaf4363f1102f902f5643c5386",
+      "bytes": 4073
+    },
+    {
+      "path": "tests/support/checkout051-sdk.ts",
+      "status": "modified",
+      "before_sha256": "64d3ce384e6913041edba71ec2b3c8b2eeb49351d97fee26e8f8e7035ec78bd9",
+      "after_sha256": "cf0e84b75dc7c4652debdccc06054d9955b596569dbbea43d553ff7d615330d2",
+      "bytes": 3435
+    },
+    {
+      "path": "tests/support/hotfix051-integrity.mjs",
+      "status": "modified",
+      "before_sha256": "e4d9b4d96176d74f719d2fba0236e1f6d52799a06e29c5eca85b8617ddcd31fd",
+      "after_sha256": "16c5175b53cf611504697c57c4eb6b33dd8694d4e47e3f7a809af75190fe7024",
+      "bytes": 1790
+    },
+    {
+      "path": "tests/syzia-051/financial.test.mjs",
+      "status": "modified",
+      "before_sha256": "41bf416a97d6ab3f7f521d57a7fa8f6e47609bce92b422d0794d56fdc1830d78",
+      "after_sha256": "0678ab1f985024131ff93981313992c6a342a502a33751ae69570768f14de387",
+      "bytes": 12078
+    },
+    {
+      "path": "tests/syzia-051/integrity.test.mjs",
+      "status": "modified",
+      "before_sha256": "1522d6e542d0693c8effb79b0d2a4a7fee4f552f045d0421ff12efead1ad90a7",
+      "after_sha256": "8065778d822d8e1a379045f3de27112a57961efb257a6038a232b2be080ccab3",
+      "bytes": 1852
+    }
+  ],
+  "self_reference_note": "This inventory is covered by SHA256SUMS.txt; SHA256SUMS.txt excludes only itself."
+}

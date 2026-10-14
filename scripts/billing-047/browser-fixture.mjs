@@ -13,9 +13,10 @@ export async function browserBillingFixture({ c, invoke, getName, user, serializ
     await c.db.exec("set local role service_role");
     await c.rpc("billing047_offer_set", { p_code: code, p_version: version, p_trial_plan: code + "-trial", p_paid_plan: code + "-paid" });
   }
-  // Fictitious identity already owned by the local fixture. No external verification.
-  await c.db.exec("reset role");
-  await c.db.query("insert into private.trial_identifiers(organization_id,kind,fingerprint,verified_by,evidence_ref)values($1,'business',private.trial_fingerprint('business','browser-047'),$2,'offline-browser-fixture')", [c.orgs.A, user('adminA').id]);
+  // Explicit fictitious superadmin review, only in the disposable test database.
+  // A typed identifier or an unaudited seed row is not trusted identity proof.
+  await c.as("root");
+  await c.rpc("billing051_verify_identity", {p_org:c.orgs.A,p_type:"CPF",p_value:"52998224725",p_method:"document_checked",p_confirmed:true});
   await c.db.exec("commit");
   const fake = fakeMercadoPago();
   let rejectFirst = process.env.DEMO_BILLING_047_REJECT_FIRST === "true";

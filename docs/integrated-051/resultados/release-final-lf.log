@@ -1,0 +1,132 @@
+{
+  "phase": "after",
+  "status": "PASS",
+  "exact": 118,
+  "lineEndings": 836,
+  "absent": 0,
+  "git_6c33be2_proven": false,
+  "reference": "last delivered payer-email base, explicitly authorized by owner",
+  "differences": []
+}
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> atendimento-compartilhado-fundacao@0.8.0 test:051
+> node --experimental-strip-types --test --test-concurrency=1 tests/syzia-051/*.test.mjs
+
+✔ 051-U name format accepts accents and apostrophes, rejects empty/control/markup (2.314358ms)
+✔ 051-U document validation checks both digits without storage or financial inference (0.525217ms)
+✔ 051-E01 payer normalization preserves local case and plus tags (1.656112ms)
+✔ 051-E02 invalid, absent, control, display-name and oversized emails fail closed (17.39092ms)
+▶ Integrated trial and simple superadmin review
+  ✔ INT-A01 typed CPF is not proof; automatic eligibility neither reserves nor grants without evidence (39.644493ms)
+  ✔ INT-A02 simplified verification requires superadmin, explicit confirmation and valid document (15.206565ms)
+  ✔ INT-A03 verified company alone does not satisfy required responsible identity (15.551201ms)
+  ✔ INT-A04 one explicit CPF review records company and responsible atomically, auto-eligible without manual trial grant (32.605225ms)
+  ✔ INT-A05 automatic seven-day grant follows official subscription and card, two tabs create one (83.343119ms)
+  ✔ INT-A06 card/email/plan/cancellation do not reset original dates, reservation, identity or grant (95.698933ms)
+  ✔ INT-A07 same responsible at another company cannot get another trial; deleting registry is denied (42.55982ms)
+  ✔ INT-A08 evidence/claims/history remain private; no raw document, email or credentials in new evidence (11.707031ms)
+✔ Integrated trial and simple superadmin review (7642.27096ms)
+▶ Integrated exceptional identity checks
+  ✔ INT-A09 explicit manual policy is not silently bypassed by valid evidence (40.158177ms)
+  ✔ INT-A10 conflicting identities stay exceptional even after superadmin records a second real review (31.077716ms)
+  ✔ INT-A11 phone proof is explicit, normalized and cannot stand in for a document review (26.718604ms)
+✔ Integrated exceptional identity checks (6701.535497ms)
+▶ Integrated reconciliation
+  ✔ INT-B01 subscription_linked followed by invalid version reproduces mismatch; diagnosis names only the check (103.801445ms)
+  ✔ INT-B02 valid existing official snapshot reconciles old uncertain contract with no POST and once-only trial (32.724845ms)
+  ✔ INT-B03 provider_id: mismatch blocks mutation and preserves history (15.023266ms)
+  ✔ INT-B03 external_reference: mismatch blocks mutation and preserves history (14.061912ms)
+  ✔ INT-B03 collector_id: mismatch blocks mutation and preserves history (14.678659ms)
+  ✔ INT-B03 application_id: mismatch blocks mutation and preserves history (14.486629ms)
+  ✔ INT-B03 plan_id: mismatch blocks mutation and preserves history (18.071364ms)
+  ✔ INT-B03 payer_id: mismatch blocks mutation and preserves history (15.700623ms)
+  ✔ INT-B03 recurrence: mismatch blocks mutation and preserves history (12.947918ms)
+  ✔ INT-B03 currency: mismatch blocks mutation and preserves history (15.527734ms)
+  ✔ INT-B03 amount: mismatch blocks mutation and preserves history (21.102447ms)
+  ✔ INT-B03 status: mismatch blocks mutation and preserves history (20.63173ms)
+  ✔ INT-B03 trial_duration: mismatch blocks mutation and preserves history (34.358869ms)
+  ✔ INT-B03 first_charge: mismatch blocks mutation and preserves history (17.610501ms)
+  ✔ INT-B03 trial_dates: mismatch blocks mutation and preserves history (21.384231ms)
+  ✔ INT-B04 invoice payer mismatch is identified; raw values never enter safe diagnosis (22.718569ms)
+  ✔ INT-B05 timeout after possible creation, empty/multiple search never repeats POST or grants access (73.913512ms)
+  ✔ INT-B06 leased work is pending, not a successful or financially confirmed reconciliation (21.712654ms)
+✔ Integrated reconciliation (4965.059291ms)
+▶ Integrated method
+  ✔ INT-D01 post-trial rejection yields grace and only verified tenant payment history (117.846659ms)
+  ✔ INT-D02 definitive card-update 400 permits new explicit attempt and preserves grace, trial and subscription (27.423153ms)
+  ✔ INT-D03 successful update is confirmed by PUT response plus GET, never settles failed invoice or resets trial (21.509071ms)
+  ✔ INT-D04 only official recovered payment restores active access; repeated webhook effects are idempotent (20.921671ms)
+  ✔ INT-D05 timeout after update recovers by reading existing card, no second PUT, POST or trial (66.642931ms)
+  ✔ INT-D06 timeout without observed change remains pending; new token cannot replay a possibly sent update (91.804606ms)
+  ✔ INT-D07 mismatched existing amount prevents card mutation; no unauthenticated or cross-tenant mutation (31.397277ms)
+✔ Integrated method (4278.202012ms)
+▶ Integrated upgrade
+  ✔ INT-M01 failed populated migration rolls back all columns/functions, contracts, reservations and legal history (63.856503ms)
+  ✔ INT-M02 upgrade over populated 051 preserves every historical row, permissions and pending contract (50.573932ms)
+  ✔ INT-M03 pre-use rollback is transactional, preserves history and original function access (35.384961ms)
+  ✔ INT-M04 reused historical reserved checkout waits for trusted proof, then recovers same contract (137.516951ms)
+  ✔ INT-M05 rollback after usage is blocked without deleting evidence, payments, trial or legal history (75.326276ms)
+✔ Integrated upgrade (4138.058709ms)
+✔ INT-I01 authorized new transitions preserve LF/CRLF and reject real changes to financial code (16.032966ms)
+✔ INT-I02 adding a historical migration to the new authorization manifest fails its independent pin (108.191003ms)
+✔ INT-I03 approved checkout CSS and summary are byte-identical to the delivered base (3.219499ms)
+✔ 051-E03 config suggests own administrative email but synthetic enterprise login is not suggested (7.273869ms)
+✔ 051-E04 missing or invalid payer is rejected before reserving a contract or contacting provider (29.035538ms)
+✔ 051-E05 payer cannot change tenant, actor, privileges, price or trial authority (26.382869ms)
+✔ 051-E06 same administrator/payer email creates only through confirmed official snapshot (78.258809ms)
+✔ 051-E07 a linked subscription never changes payer or creates again from stale checkout input (36.655757ms)
+✔ 051-E08 different payer reaches POST; definitive 400 retains contract/trial and no access (52.925359ms)
+✔ 051-E09 definitive rejection allows a confirmed new payer; two tabs share lease and cannot double create (72.791163ms)
+✔ 051-E10 uncertain attempt cannot change payer, restart trial or bypass reconciliation, even with empty search (65.425176ms)
+✔ 051-E11 changing payment method does not accept payer mutation; account and financial history hold no new email/token (33.363814ms)
+✔ 051-E12 HTTP failure and audit preserve correlation without email, document or token (39.628451ms)
+✔ 051-F HTTP 400: scoped safe diagnosis, no arbitrary body (0.850535ms)
+✔ 051-F HTTP 401: scoped safe diagnosis, no arbitrary body (0.407572ms)
+✔ 051-F HTTP 403: scoped safe diagnosis, no arbitrary body (0.421272ms)
+✔ 051-F HTTP 404: scoped safe diagnosis, no arbitrary body (0.285858ms)
+✔ 051-F HTTP 408: scoped safe diagnosis, no arbitrary body (0.34027ms)
+✔ 051-F HTTP 409: scoped safe diagnosis, no arbitrary body (0.252909ms)
+✔ 051-F HTTP 422: scoped safe diagnosis, no arbitrary body (0.311798ms)
+✔ 051-F HTTP 429: scoped safe diagnosis, no arbitrary body (0.525418ms)
+✔ 051-F HTTP 500: scoped safe diagnosis, no arbitrary body (0.235714ms)
+✔ 051-F HTTP 503: scoped safe diagnosis, no arbitrary body (0.211848ms)
+✔ 051-F HTTP 418: scoped safe diagnosis, no arbitrary body (0.151778ms)
+✔ 051-F endpoint plan 404 is unavailable, arbitrary error text does not imply card or buyer refusal (0.352168ms)
+✔ 051-F definitive refusal closes uncertainty, retains trial/history and grants no access (91.085101ms)
+✔ 051-F status and reconciler never repeat create after refusal; legacy contradictory state changes no history (59.33417ms)
+✔ 051-F safe manual retry in two tabs shares contract, lease, trial and one POST; leased context blocks CTA (83.57648ms)
+✔ 051-F timeout after external creation keeps uncertainty; official search recovers without another POST (58.924571ms)
+✔ 051-F empty full search never authorizes new POST; trial mismatch remains strict (34.882998ms)
+✔ 051-F duplicate webhook, tenant mismatch and unauthenticated failure RPC preserve authority (23.944858ms)
+✔ 051-F all search pages are inspected; truncated or invalid pages fail closed (0.968462ms)
+✔ 051-F HTTP audit allows numeric status and fixed stage only; request/response secrets absent (19.994218ms)
+✔ 051-I consolidated 050 preservation except authorized files and proven LF/CRLF; 46 old migrations intact (489.39618ms)
+✔ 051-I HMAC and verified snapshot preserved except LF/CRLF; credentials/runtime/legal unmodified (2.131096ms)
+✔ 051-M populated upgrade failure rolls back columns, function rename and all historical records (58.75513ms)
+✔ 051-M upgrade preserves rows, trial reservations, legal versions/acceptances and FORCE RLS (33.353379ms)
+✔ 051-M repeat upgrade fails transactionally without silent replacement (14.978881ms)
+ℹ tests 83
+ℹ suites 5
+ℹ pass 83
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 34276.738025
+✔ EOL-01 authorized text accepts only proven LF/CRLF equivalents in either direction (2.88139ms)
+✔ EOL-02 real content, spaces, tabs, empty lines and final newline remain significant (1.644946ms)
+✔ EOL-03 BOM, Unicode, invalid UTF-8, NUL and lone CR are never normalized away (1.04037ms)
+✔ EOL-04 binary and unlisted text paths retain byte-exact comparison (0.550295ms)
+✔ EOL-05 every historical migration rejects SQL/RLS changes despite EOL conversion (134.761986ms)
+✔ EOL-06 code, safe credential examples and plan/security settings reject content edits (2.418767ms)
+✔ EOL-07 false expected hashes and historical transition inputs cannot approve current content (1.196384ms)
+✔ EOL-08 adding paths to the authorization list is rejected by its independent anchor (122.824522ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 444.409264

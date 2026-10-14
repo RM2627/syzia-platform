@@ -26,14 +26,14 @@ test("047 navegador: três ofertas, retorno sem liberação, confirmação e can
   await expect(page.getByText(/Hoje: R\$\s*0,00/)).toHaveCount(0);
   await expect(page.getByText("Primeira cobrança", {exact:true})).toBeVisible();
   await fillCheckout(page);
-  await page.getByRole("button", { name: "Confirmar meio de pagamento", exact: true }).click();
+  await page.getByRole("button", { name: "Iniciar meus 7 dias grátis", exact: true }).click();
   await expect(page.getByText("O Mercado Pago não aceitou os dados da solicitação. Revise o formulário. Se o problema continuar, entre em contato com o suporte.")).toBeVisible();
   await page.reload();
   await page.getByRole("button", { name: "Continuar contratação Essencial", exact: true }).click();
   await expect(page.getByText("A confirmar", {exact:true})).toHaveCount(2);
   await expect(page.getByText(/Hoje: R\$\s*0,00/)).toHaveCount(0);
   await fillCheckout(page);
-  await page.getByRole("button", { name: "Confirmar meio de pagamento", exact: true }).click();
+  await page.getByRole("button", { name: "Iniciar meus 7 dias grátis", exact: true }).click();
   await expect(page.getByText("Em período grátis", {exact:true})).toBeVisible();
   await expect(page.getByText(/7 dias restantes de trial/)).toBeVisible();
   await page.screenshot({path:"reports/billing-047/screenshots/trial-confirmado.png",fullPage:true});

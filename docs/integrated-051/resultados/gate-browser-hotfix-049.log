@@ -1,0 +1,21 @@
+[WebServer] (node:2777) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[WebServer] (node:2790) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:2807) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:2841) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 1:01:16 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"operations_checklist_save","organization":"75b25591-c6b8-4ac7-a391-ca3bf8aba410","category":"operation","reason":"unclassified","status":"40001"}
+  ✓  1 tests/demo-browser/hotfix-049.spec.ts:6:1 › HF-B01 modelo no cadastro/edição, ordem, snapshot, extras e duas abas (7.9s)
+[WebServer] 1:01:18 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  2 tests/demo-browser/hotfix-049.spec.ts:86:1 › HF-B02 WhatsApp canônico, cópia e mesma página em outro navegador; terceiro sem acesso (6.1s)
+[WebServer] 1:01:24 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  3 tests/demo-browser/hotfix-049.spec.ts:150:1 › HF-B03 Home humana, contador, fallback sem ID, leitura e refresh (5.8s)
+  ✓  4 tests/demo-browser/hotfix-049.spec.ts:198:1 › HF-B04 prévias reais com dados fictícios e landing desktop/mobile/teclado/cadastro (13.2s)
+
+  4 passed (38.7s)

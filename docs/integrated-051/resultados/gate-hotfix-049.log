@@ -1,0 +1,25 @@
+✔ HF-I01 migrations até 049, lockfile Sharp e backend protegido intactos (30.08153ms)
+✔ HF-I02 prévias reais locais têm dimensões reservadas e tamanho limitado (4.677904ms)
+✔ HF-M01 mensagem canônica ignora referências técnicas, sem promessa de PDF/pagamento (13.192326ms)
+✔ HF-M02 mensagem manual contém só o acesso fornecido e explica vínculo; wa.me valida telefone (0.589293ms)
+✔ HF-C01 criar serviço e modelo atomicamente; reorder/editar/remover lógico e histórico (98.030589ms)
+✔ HF-C02 snapshot automático multisserviços, ordem e extras separados; status intacto (283.897013ms)
+✔ HF-C03 edição futura não muda cópia; refresh, retry do agendamento e duas abas não duplicam (209.374888ms)
+✔ HF-C04 sem modelo e agendamentos legados continuam manuais (133.348493ms)
+✔ HF-C05 autorização A/B, IDs adulterados, limite e transação sem serviço parcial (170.010292ms)
+✔ HF-C06 funcionários com grants; RLS/FORCE e ausência de acesso direto (77.061872ms)
+✔ HF-L01 link forte só da solicitação original; outra sessão legítima; reuso pela mesma sessão (132.366ms)
+✔ HF-L02 expirado/revogado/reemitido recusam, sem perder a sessão original (158.884946ms)
+✔ HF-L03 acesso de terceiro, somente leitura, suporte e tenant divergente recusados (173.46788ms)
+✔ HF-U01 metadados humanos, não lidas individuais e isolamento; sem telefone/conteúdo (109.405574ms)
+✔ HF-W01 contato só com consentimento/grants; reenvio não revela telefone por si (127.636987ms)
+✔ HF-C07 serviço removido da proposta não instancia; serviço acrescido usa fonte canônica (202.085767ms)
+✔ HF-C08 modelo vazio é opcional, p_key adulterada recusada; replay não cria novo serviço (41.958824ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6667.98454

@@ -1,0 +1,29 @@
+✔ 050-I01 all 46 migrations, finance policies, HMAC adapter, lockfile and other product modules unchanged (66.856282ms)
+✔ 050-I02 existing HMAC correction, legal persistence and acceptance stay authoritative (2.72807ms)
+✔ 050-I03 reviewed legal copy contains user information, no development report or invented contact (1.509783ms)
+✔ 050-N01 default disabled is explicit, not falsely missing credentials (3.113246ms)
+✔ 050-N02 observe requires explicit provider, real configuration and HMAC secret (0.296654ms)
+✔ 050-N03 all user commands, config, status, process and reconcile remain closed (0.604626ms)
+✔ 050-N04 HMAC absent/invalid and conflicting ID fail before any official query (35.193638ms)
+✔ 050-N05 simulator ID 123456 is not special-cased or falsely acknowledged (4.758273ms)
+✔ 050-N06 valid bound subscription validates then returns observed, never applied (34.680639ms)
+✔ 050-N07 duplicate and out-of-order hints, altered body and two requests have zero effects (36.074798ms)
+✔ 050-N08 signature cannot authorize another collector, app, plan or binding (26.610722ms)
+✔ 050-N09 unknown real resource is not imported, bound or granted a trial (39.209678ms)
+✔ 050-N10 payment and authorized invoice require official reads; approved cannot activate access (29.749927ms)
+✔ 050-N11 rejected payment and external cancellation do not run financial transitions (24.550774ms)
+✔ 050-N12 invalid trial date still fails; observation does not waive financial validation (3.296442ms)
+✔ 050-N13 unsupported/invalid/oversized payload does not receive artificial 200 (12.838095ms)
+✔ 050-N14 provider errors, invalid JSON and timeout remain errors and do not leak bodies (10001.987369ms)
+✔ 050-N15 HTTP CORS and methods preserved; body cannot turn observation into commerce (24.735559ms)
+✔ 050-N16 only GET provider calls and read-only RPC occurred; no secret in diagnostics (40.71595ms)
+✔ 050-N17 unified runtime never schedules reconciliation in observe (14.043867ms)
+✔ 050-N18 enabled commercial mode retains the existing engine and reconciler entry points (0.378117ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 14872.887813

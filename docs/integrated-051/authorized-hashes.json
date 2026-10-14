@@ -1,0 +1,50 @@
+{
+  "AGENTS.md": {
+    "before": "1db24343361f9f71f23acf8dd5c508453717357038940e5e8f371b53484b4f2a",
+    "after": "0a30b829b3d2a072306c57de78cb5a4af5d5a014c38584a1e614182cb4a0c00a"
+  },
+  "scripts/billing-047/fixture.mjs": {
+    "before": "f46fd5eda24c06f5c23a768168859957b88597ec497fce69761aa61cc084709a",
+    "after": "f0829c40bc1d3c6706753b4c71038a49d63f59dda36fb65d8cb0e276cb8270ed"
+  },
+  "scripts/billing-047/browser-fixture.mjs": {
+    "before": "f7138c9412a259aa36490cedbe6eddbb12614addb8d4e0af14c129eff866d500",
+    "after": "da7ad14e197f8dcf85061c74a26dd02920e3ab8473a70bb799e011678110b319"
+  },
+  "server/billing/subscriptions.mjs": {
+    "before": "adb459319b618e2713f6b47d69e7a53809422e501ddba57b04b3f3c32ef3aa04",
+    "after": "22a6d068dfc4f143328accca0cde4f5d26e367b55990bb789d3c264894580dfa"
+  },
+  "server/billing/mercado-pago.mjs": {
+    "before": "f4472e6e6726a86caa6b08a6bf0c649d1e1adecb92270b4221505f96c785f352",
+    "after": "21e97341fa3861a583c7e77a8f11d5a0185c5e7da637b3ba03a1dbc9e3b32fb2"
+  },
+  "tests/demo-browser/billing047.spec.ts": {
+    "before": "cb21f4a8a73f1c0383a52193024a9bf5ea39afa79ff144fef800a3b7160ff042",
+    "after": "104a9306d9663804ad1f55d0bccb7d89be5bffa0b6e5a30c26a0545a7a119b48"
+  },
+  "tests/demo-browser/trial.spec.ts": {
+    "before": "23fbd28fc508794ccbded6493c34600d29821d511334c36246ad27f44926956b",
+    "after": "66f938639e67c5df3512682472407c1fb1cd88d59e273b6a9208bcdd64033750"
+  },
+  "tests/hotfix-050/integrity.test.mjs": {
+    "before": "8116f0999cf405b5044e85443536ac7c70e2426a94c3a646ebd2559cd98c98ea",
+    "after": "5795b76ff47c75248ca3ea2d5aa9a9f613f8adf04bf8bde366071dfa2aacf2a9"
+  },
+  "tests/billing-047/fixture.mjs": {
+    "before": "3a82e84ab18ae407a120814c6e0db1b37852fdf364941433c303155b884bf844",
+    "after": "094a453a7dae50ec68d4d2ba6c781d598921d403ad7386d6f6cbb4f8ad5fee05"
+  },
+  "tests/billing-047/edge-cases.test.mjs": {
+    "before": "f4f3063789e926923d20490ffe7a5a2c373d3e6bc650e075591b85695714b2ce",
+    "after": "059e3abb4f06429d5f57848f8e3dd8cd926133f470fe5699e9cf2caa62b7e6f5"
+  },
+  "src/billing/MercadoPago.tsx": {
+    "before": "cdeec07de4728974d064580ceaa0d039d3847858714ac0e3b66aa2588151e708",
+    "after": "3a16bccb275721d554f175a47be9d8e30df17e23184717e331cb93b2144bb711"
+  },
+  "src/billing/Trial.tsx": {
+    "before": "2186d71b1b5bd7b1780a7d24ad8fb7d9ed90054ba9bf2c03325827c457001b09",
+    "after": "cbadca022f23800abca884b0ee18d862d5db9585115378459c8ef8ff76e089c3"
+  }
+}

@@ -27,6 +27,10 @@ const labels: Record<string, string> = {
   reconciliation: "Em conferência",
 };
 const messages: Record<string, string> = {
+  billing_binding_mismatch:
+    "Encontramos uma divergência na confirmação da assinatura. A solicitação existente será conferida; não envie outro pagamento.",
+  billing_trial_evidence_required:
+    "Precisamos concluir a verificação de identidade. A assinatura existente e a reserva do período grátis foram preservadas.",
   billing_credentials_missing:
     "A contratação está temporariamente indisponível. Tente novamente mais tarde.",
   billing_trial_changed:
@@ -99,7 +103,7 @@ export function MercadoPagoBilling({ org }: { org: string }) {
       setData(value);
       if (
         value.subscription &&
-        (value.subscription.checkout_retryable ||
+        (value.subscription.checkout_retryable || value.subscription.method_retryable ||
           (!value.subscription.operation_pending &&
             ["trialing", "active", "cancel_scheduled", "canceled"].includes(
               value.subscription.state,
@@ -178,7 +182,9 @@ export function MercadoPagoBilling({ org }: { org: string }) {
       setData(value);
       setUnverified(false);
       setNotice(
-        ["trialing", "active"].includes(value.subscription?.state) &&
+        action === "method" && !value.subscription?.operation_pending
+          ? "Cartão atualizado. Isso não confirma o pagamento de cobranças pendentes."
+          : ["trialing", "active"].includes(value.subscription?.state) &&
           !value.subscription.operation_pending
           ? "Assinatura confirmada. Confira as condições abaixo."
           : "Solicitação recebida. Acompanhe a confirmação abaixo.",
@@ -215,7 +221,7 @@ export function MercadoPagoBilling({ org }: { org: string }) {
     ? s.checkout_trial
     : data?.eligibility === "eligible";
   const eligibilityPending =
-    ["verification_required", "manual_policy"].includes(data?.eligibility) &&
+    ["verification_required", "manual_policy", "identity_conflict", "previous_review"].includes(data?.eligibility) &&
     !s;
   const pending =
     unverified ||
@@ -236,6 +242,7 @@ export function MercadoPagoBilling({ org }: { org: string }) {
       if (!plan) throw Error("billing_plan_unavailable");
       if (plan.member_limit != null && current.members > plan.member_limit)
         throw Error("billing_members_exceeded");
+      if (current.subscription && !current.subscription.checkout_retryable && current.subscription.state !== "canceled") throw Error("billing_existing_subscription");
       if (
         current.subscription?.operation_pending &&
         !current.subscription.checkout_retryable
@@ -333,9 +340,22 @@ export function MercadoPagoBilling({ org }: { org: string }) {
           <p>
             Meio de pagamento:{" "}
             {s.method
-              ? s.method + " · vinculado com segurança"
+              ? s.method + (s.method_last_four ? " · final " + s.method_last_four : " · vinculado com segurança")
               : "Aguardando vinculação"}
           </p>
+          {s.trial_start && s.trial_end && <p>Período grátis confirmado: {date(s.trial_start)} a {date(s.trial_end)}.</p>}
+          {Array.isArray(s.payments) && (
+            <details>
+              <summary>Histórico de cobranças</summary>
+              {s.payments.length === 0 ? <p>Nenhuma cobrança confirmada no histórico.</p> : (
+                <ul>{s.payments.map((p: any, i: number) => (
+                  <li key={i}>{date(p.debit_at)} · {money(p.amount_cents)} · {({ paid: "Paga", failed: "Não aprovada", pending: "Em processamento", reversed: "Revertida" } as Record<string, string>)[p.state] || "Em conferência"}{p.paid_at ? " · pagamento confirmado em " + date(p.paid_at) : ""}</li>
+                ))}</ul>
+              )}
+              {s.payments_count > s.payments.length && <p>Exibindo as 50 cobranças mais recentes. O histórico anterior foi preservado.</p>}
+            </details>
+          )}
+          {s.method_update_pending && <p role="status">Estamos confirmando a alteração do cartão na assinatura existente.</p>}
           {s.state === "grace_period" && (
             <p role="alert">
               Não conseguimos confirmar sua cobrança. Atualize sua forma de
@@ -371,9 +391,9 @@ export function MercadoPagoBilling({ org }: { org: string }) {
             <p role="status">Estamos confirmando sua solicitação…</p>
           )}
           <div className="mp-actions">
-            {s.method && !s.cancel_requested && (
+            {(s.can_update_method ?? Boolean(s.method && !s.cancel_requested)) && (
               <button
-                disabled={busy || s.operation_pending}
+                disabled={busy || pending || s.operation_pending}
                 onClick={() => {
                   key.current = crypto.randomUUID();
                   setCard({ action: "method" });
@@ -402,7 +422,7 @@ export function MercadoPagoBilling({ org }: { org: string }) {
         </section>
       )}
       {data &&
-        ["verification_required", "manual_policy"].includes(data.eligibility) &&
+        ["verification_required", "manual_policy", "identity_conflict", "previous_review"].includes(data.eligibility) &&
         !s && (
           <form
             className="ds-panel"
@@ -423,6 +443,10 @@ export function MercadoPagoBilling({ org }: { org: string }) {
             }}
           >
             <h2>Confirme a elegibilidade do período grátis</h2>
+            <p>{data.eligibility === "identity_conflict" || data.eligibility === "previous_review"
+              ? "Os dados precisam de uma análise excepcional. Entre em contato com a administração SYZIA."
+              : data.eligibility === "manual_policy" ? "A política atual exige análise da administração SYZIA."
+              : "Informe os dados para a conferência. Se já informou, falta comprovar a identidade; a administração SYZIA pode concluir essa verificação."}</p>
             <label>
               Tipo
               <select value={kind} onChange={(e) => setKind(e.target.value)}>
@@ -443,6 +467,7 @@ export function MercadoPagoBilling({ org }: { org: string }) {
             <button disabled={busy}>Conferir dados</button>
           </form>
         )}
+      {data && !s && ["previous_grant", "previous_identity"].includes(data.eligibility) && <p>Período grátis já utilizado ou reservado. A contratação disponível não inclui um novo trial.</p>}
       {data && !card && !pending && (
         <div className="mp-plans">
           {data.catalog.map((p: any) => (
@@ -586,6 +611,7 @@ export function MercadoPagoBilling({ org }: { org: string }) {
                 busy={busy}
                 onPhase={setPhase}
                 checkout={card.action === "checkout"}
+                eligible={Boolean(eligible)}
                 onToken={(token, payerEmail) => command(card.action, card.plan, token, payerEmail)}
               />
               {phase && <p role="status">{phase}</p>}

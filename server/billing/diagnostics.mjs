@@ -15,7 +15,9 @@ export function providerFailure(status, path, method) {
     providerStage, definitiveRejection: [400, 401, 403, 422].includes(status) };
 }
 export function safeDiagnostic(error) {
+  const checks = ["provider_id", "external_reference", "collector_id", "application_id", "plan_id", "recurrence", "currency", "amount", "version", "status", "payer_id", "invoice_subscription", "invoice_reference", "invoice_currency", "payment_id", "payment_collector", "payment_currency", "payment_amount", "payment_reference", "payment_payer", "trial_duration", "trial_dates", "first_charge", "snapshot", "local_history"];
   return {
+    ...(checks.includes(error?.validationCheck) ? { validation_check: error.validationCheck } : {}),
     ...(Number.isInteger(error?.providerStatus) && error.providerStatus >= 400 && error.providerStatus <= 599 ? { provider_status: error.providerStatus } : {}),
     ...(["create", "plan", "update", "lookup"].includes(error?.providerStage) ? { provider_stage: error.providerStage } : {}),
   };

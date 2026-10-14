@@ -17,8 +17,8 @@ const catalog = [
     },
   },
 ];
-async function setup(page: any, overrides: any = {}, tokenDelay = 250) {
-  await mockCheckoutSDK(page, tokenDelay);
+async function setup(page: any, overrides: any = {}, tokenDelay = 250, outcome: "ok" | "error" | "missing" = "ok") {
+  await mockCheckoutSDK(page, tokenDelay, outcome);
   await demoLogin(page, "admin@example.invalid");
   const ctx: any = await page.evaluate(async () =>
     (await import("/src/api.ts")).rpc("foundation_context"),
@@ -52,7 +52,7 @@ async function open(page: any) {
     .getByRole("button", { name: "Assinar Profissional", exact: true })
     .click();
   await expect(
-    page.getByRole("button", { name: "Confirmar meio de pagamento" }),
+    page.getByRole("button", { name: "Iniciar meus 7 dias grátis" }),
   ).toBeEnabled();
 }
 for (const width of [1440, 768, 390, 320])
@@ -123,10 +123,10 @@ for (const width of [1440, 768, 390, 320])
     await page.keyboard.press("Tab");
     await expect(page.getByLabel("Emissor do cartão")).toBeFocused();
     await page
-      .getByRole("button", { name: "Confirmar meio de pagamento" })
+      .getByRole("button", { name: "Iniciar meus 7 dias grátis" })
       .scrollIntoViewIfNeeded();
     await expect(
-      page.getByRole("button", { name: "Confirmar meio de pagamento" }),
+      page.getByRole("button", { name: "Iniciar meus 7 dias grátis" }),
     ).toBeInViewport();
     await page.emulateMedia({ reducedMotion: "reduce" });
     expect(
@@ -137,7 +137,7 @@ for (const width of [1440, 768, 390, 320])
     const ax = await page.locator(".mp-checkout").ariaSnapshot();
     expect(ax).toContain("Nome no cartão");
     expect(ax).toContain("Valor inicial");
-    expect(ax).toContain("Confirmar meio de pagamento");
+    expect(ax).toContain("Iniciar meus 7 dias grátis");
   });
 test("051 UI validation: empty, name, document and SDK validity errors stay next to fields; no POST", async ({
   page,
@@ -150,7 +150,7 @@ test("051 UI validation: empty, name, document and SDK validity errors stay next
   });
   await open(page);
   await page
-    .getByRole("button", { name: "Confirmar meio de pagamento" })
+    .getByRole("button", { name: "Iniciar meus 7 dias grátis" })
     .click();
   await expect(
     page.getByText("Informe o nome como aparece no cartão."),
@@ -163,7 +163,7 @@ test("051 UI validation: empty, name, document and SDK validity errors stay next
     .getByLabel("Documento do titular", { exact: true })
     .fill("00000000000");
   await page
-    .getByRole("button", { name: "Confirmar meio de pagamento" })
+    .getByRole("button", { name: "Iniciar meus 7 dias grátis" })
     .click();
   await expect(
     page.getByText("Confira os dígitos do documento."),
@@ -205,7 +205,7 @@ test("051 UI one POST, token and confirmed payer email only, disabled CTA during
   await open(page);
   await fillCheckout(page);
   await page
-    .getByRole("button", { name: "Confirmar meio de pagamento" })
+    .getByRole("button", { name: "Iniciar meus 7 dias grátis" })
     .click();
   await expect(
     page.getByRole("button", { name: "Protegendo os dados…", exact: true }),
@@ -269,7 +269,7 @@ test("051 UI definitive refusal permits explicit recovery in same contract, neve
   await open(page);
   await fillCheckout(page);
   await page
-    .getByRole("button", { name: "Confirmar meio de pagamento" })
+    .getByRole("button", { name: "Iniciar meus 7 dias grátis" })
     .click();
   await expect(
     page.getByText(/O Mercado Pago não aceitou os dados/),
@@ -307,7 +307,7 @@ test("051 UI uncertain result or failed follow-up blocks resubmission and succes
   await open(page);
   await fillCheckout(page);
   await page
-    .getByRole("button", { name: "Confirmar meio de pagamento" })
+    .getByRole("button", { name: "Iniciar meus 7 dias grátis" })
     .click();
   await expect(
     page.getByRole("heading", { name: "Estamos verificando a solicitação" }),
@@ -369,7 +369,7 @@ test("051 UI network failure with unavailable status never offers another create
     return r.abort();
   });
   await page
-    .getByRole("button", { name: "Confirmar meio de pagamento" })
+    .getByRole("button", { name: "Iniciar meus 7 dias grátis" })
     .click();
   await expect(
     page.getByRole("heading", { name: "Estamos verificando a solicitação" }),
@@ -403,13 +403,13 @@ for (const width of [1440, 390])
       state.subscription = { id: "fixture", state: "reconciliation", operation_pending: true };
       return r.fulfill({ json: state });
     });
-    await page.getByRole("button", { name: "Confirmar meio de pagamento" }).click();
+    await page.getByRole("button", { name: "Iniciar meus 7 dias grátis" }).click();
     await expect(page.getByText("Confirme o e-mail e autorize as condições para continuar.")).toBeVisible();
     expect(posts).toHaveLength(0);
     await consent.check();
     expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBe(0);
     await page.screenshot({ path: `reports/syzia-051/screenshots/payer-confirmed-${width}.png`, fullPage: true });
-    await page.getByRole("button", { name: "Confirmar meio de pagamento" }).click();
+    await page.getByRole("button", { name: "Iniciar meus 7 dias grátis" }).click();
     await expect.poll(() => posts.length).toBe(1);
     expect(posts[0].payer_email).toBe("New.Payer+Trial@example.invalid");
     expect(JSON.stringify(posts)).not.toMatch(/admin@example.invalid|52998224725|4111111111111111/);
@@ -427,7 +427,7 @@ test("051 payer UI invalid or missing email never submits or silently falls back
   for (const value of ["", "not-an-email", "a..b@example.invalid"]) {
     await page.getByLabel("E-mail do pagador", { exact: true }).fill(value);
     await page.getByRole("checkbox", { name: /Confirmo o e-mail/ }).check();
-    await page.getByRole("button", { name: "Confirmar meio de pagamento" }).click();
+    await page.getByRole("button", { name: "Iniciar meus 7 dias grátis" }).click();
     await expect(page.getByText("Informe um e-mail válido.", { exact: true })).toBeVisible();
   }
   expect(posts).toBe(0);
@@ -439,11 +439,59 @@ test("051 payer UI locks email while tokenizing and rejects a changed SDK/DOM id
   await fillCheckout(page);
   let posts = 0;
   await page.route("**/billing/command", r => { posts++; return r.fulfill({ json: {} }); });
-  await page.getByRole("button", { name: "Confirmar meio de pagamento" }).click();
+  await page.getByRole("button", { name: "Iniciar meus 7 dias grátis" }).click();
   const email = page.getByLabel("E-mail do pagador", { exact: true });
   await expect(email).toHaveAttribute("readonly", "");
   // Simulate an SDK/script changing the field despite the UI lock.
   await email.evaluate((e: HTMLInputElement) => { e.value = "unexpected@example.invalid"; });
   await expect(page.getByRole("alert")).toHaveText("Revise os campos indicados antes de continuar.");
   expect(posts).toBe(0);
+});
+
+for (const outcome of ["error", "missing"] as const) test(`INT-C SDK ${outcome}: one action fails closed, no command or leaked SDK data`,async({page})=>{
+ await setup(page,{},250,outcome);let commands=0;
+ await page.route("**/billing/command",r=>{commands++;return r.fulfill({json:{}})});
+ await open(page);await fillCheckout(page);
+ await page.getByRole("button",{name:"Iniciar meus 7 dias grátis"}).click();
+ await expect(page.getByRole("alert")).toContainText("Não foi possível proteger os dados");
+ expect(commands).toBe(0);await expect(page.getByText("PRIVATE_SDK_ERROR_SHOULD_NEVER_LEAK")).toHaveCount(0);
+ await expect(page.getByRole("button",{name:"Iniciar meus 7 dias grátis"})).toBeEnabled();
+});
+test("INT-C consumed trial: paid CTA and no free-period promise",async({page})=>{
+ await setup(page,{eligibility:"previous_identity"});
+ await page.getByRole("button",{name:"Assinar Profissional",exact:true}).click();
+ await expect(page.getByRole("button",{name:"Confirmar assinatura mensal"})).toBeEnabled();
+ await expect(page.getByRole("button",{name:"Iniciar meus 7 dias grátis"})).toHaveCount(0);
+ await expect(page.locator(".mp-summary")).not.toContainText("Elegível a 7 dias grátis");
+ let body:any;await page.route("**/billing/command",r=>{body=r.request().postDataJSON();return r.fulfill({status:400,json:{error:"billing_provider_invalid_request"}})});
+ await fillCheckout(page);await page.getByRole("button",{name:"Confirmar assinatura mensal"}).click();
+ await expect.poll(()=>body?.trial_expected).toBe(false);
+});
+for(const width of [1440,390]) test(`INT-D ${width}: existing card update and history never claim an overdue invoice paid`,async({page})=>{
+ await page.setViewportSize({width,height:1000});
+ const subscription={id:"existing",state:"grace_period",code:"profissional",price_cents:8990,method:"visa",method_last_four:"1111",can_update_method:true,operation_pending:false,trial_start:"2030-11-01T12:00:00Z",trial_end:"2030-11-08T12:00:00Z",payments:[{state:"failed",amount_cents:8990,debit_at:"2030-12-08T12:00:00Z"}],payments_count:1};
+ const {state}=await setup(page,{subscription,eligibility:"previous_grant"});
+ await expect(page.getByText(/visa · final 1111/)).toBeVisible();
+ await page.getByText("Histórico de cobranças",{exact:true}).click();
+ await expect(page.getByText(/Não aprovada/)).toBeVisible();
+ await page.getByRole("button",{name:"Atualizar meio de pagamento"}).click();
+ await fillCheckout(page,true);
+ let commands:any[]=[];await page.route("**/billing/command",r=>{commands.push(r.request().postDataJSON());return r.fulfill({json:state})});
+ await page.getByRole("button",{name:"Atualizar cartão",exact:true}).click();
+ await expect(page.getByText("Cartão atualizado. Isso não confirma o pagamento de cobranças pendentes.")).toBeVisible();
+ expect(commands).toHaveLength(1);expect(commands[0].action).toBe("method");expect(commands[0]).not.toHaveProperty("payer_email");expect(commands[0]).not.toHaveProperty("trial_expected");
+ await expect(page.getByText("Pagamento em regularização",{exact:true})).toBeVisible();
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+});
+for(const width of [1440,390]) test(`INT-A ${width}: superadmin verifies CPF in one simple audited form`,async({page})=>{
+ await page.setViewportSize({width,height:1000});await demoLogin(page,"root@example.invalid");await page.goto("/admin/assinaturas");
+ await page.getByLabel("Empresa da assinatura").selectOption({label:"Estúdio Horizonte"});
+ await page.getByRole("button",{name:"Registrar identidade verificada"}).click();const d=page.getByRole("dialog");
+ await expect(d.getByLabel("Referência da verificação")).toHaveCount(0);await expect(d.getByLabel("Motivo administrativo")).toHaveCount(0);
+ await d.getByLabel("CPF conferido",{exact:true}).fill("52998224725");
+ let requests:any[]=[];page.on("request",r=>{if(r.url().endsWith("/billing051_verify_identity"))requests.push(r.postDataJSON())});
+ await d.getByRole("button",{name:"Confirmar verificação"}).click();expect(requests).toHaveLength(0);
+ await d.getByLabel(/Confirmo que realizei a verificação/).check();await d.getByRole("button",{name:"Confirmar verificação"}).click();
+ await expect(d).toHaveCount(0);expect(requests).toHaveLength(1);expect(requests[0].p_confirmed).toBe(true);expect(requests[0].p_type).toBe("CPF");
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });

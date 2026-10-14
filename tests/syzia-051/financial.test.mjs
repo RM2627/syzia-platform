@@ -5,6 +5,11 @@ import { fixture } from "../billing-047/fixture.mjs";
 import { MercadoPagoSubscriptions } from "../../server/billing/mercado-pago.mjs";
 import { createBillingServer } from "../../server/billing/http.mjs";
 import "./payer-email-cases.mjs";
+import "../integrated-051/trial.test.mjs";
+import "../integrated-051/reconciliation.test.mjs";
+import "../integrated-051/method.test.mjs";
+import "../integrated-051/upgrade.test.mjs";
+import "../integrated-051/integrity-cases.mjs";
 const opts = {
   accessToken: "offline-051-only",
   collectorId: 101,

@@ -88,6 +88,7 @@ export function TrialPanel({
       "verify" | "policy" | "decision" | "extend" | null
     >(null),
     [request, setRequest] = useState<string | null>(null);
+  const [verificationType, setVerificationType] = useState("CPF");
   const [localError, setLocalError] = useState("");
   const pending = useRef<{
     signature: string;
@@ -109,13 +110,12 @@ export function TrialPanel({
     await run(async () => {
       try {
         if (action === "verify")
-          await rpc("billing_trial_verify", {
+          await rpc("billing051_verify_identity", {
             p_org: org,
-            p_kind: f.get("kind"),
+            p_type: verificationType,
             p_value: f.get("identifier"),
-            p_evidence: f.get("evidence"),
-            p_reason: f.get("reason"),
-            p_verified: f.has("verified"),
+            p_method: f.get("method"),
+            p_confirmed: f.has("verified"),
           });
         if (action === "policy" && policy)
           await rpc("billing_trial_policy_save", {
@@ -192,16 +192,16 @@ export function TrialPanel({
       ) : (
         <p>
           O prazo vem do plano escolhido. A concessão depende da elegibilidade
-          da empresa e da verificação de identidade. Nenhum meio de pagamento
-          real é necessário.
+          da empresa e da verificação de identidade. Na contratação com cartão,
+          o acesso depende também da confirmação da assinatura.
         </p>
       )}
       {!platform && <a href="#planos-disponiveis" className="button">Assinar agora · ver planos</a>}
       <p className="b-trial-explanation">
         Ao terminar sem uma assinatura ativa, novas operações sujeitas ao plano
         ficam bloqueadas. Seus dados e histórico são preservados; você pode
-        acessar a administração para contratar ou reativar. Não há cobrança
-        automática.
+        acessar a administração para contratar ou reativar. A renovação segue
+        as condições da assinatura confirmada.
       </p>
       {data.requests
         .filter((r) => r.state === "pending")
@@ -308,48 +308,36 @@ export function TrialPanel({
             )}
             {modal === "verify" && (
               <>
-                <p>
-                  Registre somente após conferir identidade e legitimidade.
-                  Digitar um telefone não prova posse; a comprovação externa
-                  fica sob responsabilidade do operador autorizado.
-                </p>
+                <p>Confira a identidade por um procedimento autorizado e registre o resultado. A SYZIA verifica automaticamente o histórico e a elegibilidade; esta ação não cria uma assinatura nem libera acesso pago.</p>
                 <label>
-                  Tipo de identificador
-                  <select name="kind">
-                    <option value="business">Empresa</option>
-                    <option value="responsible">Responsável</option>
-                    <option value="phone">Telefone verificado</option>
+                  O que você conferiu?
+                  <select value={verificationType} onChange={e => setVerificationType(e.target.value)}>
+                    <option value="CPF">CPF — responsável que atua como pessoa física</option>
+                    <option value="CNPJ">CNPJ — identificação da empresa</option>
+                    <option value="responsible">CPF — responsável por empresa com CNPJ</option>
+                    <option value="phone">Posse do telefone</option>
                   </select>
                 </label>
                 <label>
-                  Identificador verificado
-                  <input
-                    name="identifier"
-                    required
-                    maxLength={100}
-                    autoComplete="off"
-                    placeholder="PAÍS:TIPO:IDENTIFICADOR"
-                  />
+                  {verificationType === "phone" ? "Telefone com DDD" : verificationType === "CNPJ" ? "CNPJ conferido" : "CPF conferido"}
+                  <input name="identifier" required maxLength={25} inputMode="tel" autoComplete="off" />
                 </label>
-                <p className="muted">
-                  Empresa/responsável: PAÍS:TIPO:IDENTIFICADOR. Telefone:
-                  +código do país e número. O valor será convertido em hash
-                  privado, sem retenção do texto.
-                </p>
+                <p className="muted">{verificationType === "CPF"
+                  ? "Uma única conferência registra a pessoa física e o responsável. Não é necessário repetir o CPF em dois formulários."
+                  : verificationType === "CNPJ" ? "O responsável pela empresa deve ter seu CPF conferido separadamente."
+                  : "Informe apenas o dado que você realmente conferiu."} O valor será protegido por hash privado; não inclua documentos nos registros de observações.</p>
                 <label>
-                  Referência da verificação
-                  <input
-                    name="evidence"
-                    required
-                    minLength={5}
-                    maxLength={120}
-                    placeholder="Código interno, sem dados pessoais"
-                  />
+                  Como a verificação foi feita?
+                  <select name="method" key={verificationType}>
+                    {verificationType === "phone" ? <option value="verified_contact">Contato que confirmou a posse do telefone</option> : <>
+                      <option value="document_checked">Conferi documento e vínculo do responsável</option>
+                      <option value="in_person">Conferência presencial da identidade</option>
+                    </>}
+                  </select>
                 </label>
                 <label>
                   <input type="checkbox" name="verified" required />
-                  Confirmei a evidência por procedimento autorizado; não estou
-                  tratando valor informado como verificado.
+                  Confirmo que realizei a verificação indicada. Não estou apenas confirmando dados digitados pelo cliente.
                 </label>
               </>
             )}
@@ -364,7 +352,7 @@ export function TrialPanel({
                   Permitir concessão automática com evidência válida
                 </label>
                 <fieldset>
-                  <legend>Exigir pelo menos um identificador verificado</legend>
+                  <legend>Evidências exigidas na contratação com cartão</legend>
                   {[
                     ["business", "Empresa"],
                     ["responsible", "Responsável"],
@@ -440,6 +428,7 @@ export function TrialPanel({
                 </p>
               </>
             )}
+            {modal !== "verify" && (
             <label>
               Motivo administrativo
               <input
@@ -450,8 +439,9 @@ export function TrialPanel({
                 placeholder="Justificativa sem dados pessoais"
               />
             </label>
+            )}
             <button disabled={busy} type="submit">
-              {busy ? "Registrando…" : "Registrar decisão"}
+              {busy ? "Registrando…" : modal === "verify" ? "Confirmar verificação" : "Registrar decisão"}
             </button>
           </form>
         </Dialog>

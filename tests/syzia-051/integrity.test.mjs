@@ -17,18 +17,19 @@ test("051-I consolidated 050 preservation except authorized files and proven LF/
   assert.equal(
     (await readdir("supabase/migrations")).filter((p) => p.endsWith(".sql"))
       .length,
-    47,
+    48,
   );
 });
 test("051-I HMAC and verified snapshot preserved except LF/CRLF; credentials/runtime/legal unmodified", async () => {
   const source = await readFile("server/billing/mercado-pago.mjs", "utf8");
   const anchors = JSON.parse(
-    await readFile("docs/syzia-051/security-anchors.json", "utf8"),
+    await readFile("docs/integrated-051/security-anchors.json", "utf8"),
   );
   assertFileHash("server/billing/mercado-pago.mjs",
     Buffer.from(source.slice(source.indexOf("  notification(raw,")), "utf8"),
     anchors.notification_and_snapshot,
   );
+  assertFileHash("server/billing/mercado-pago.mjs", Buffer.from(source.slice(source.indexOf("  notification(raw,"), source.indexOf("// Static check names")), "utf8"), anchors.notification_only);
   const form = await readFile("src/billing/SecureCardForm.tsx", "utf8");
   assert.match(form, /iframe: true/);
   assert.doesNotMatch(form, /console\.|localStorage|sessionStorage|analytics/);
