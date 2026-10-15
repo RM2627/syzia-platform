@@ -1,0 +1,194 @@
+{
+  "supabase/migrations/202609180020_billing_limits.sql": {
+    "sha256": "8bc57de87861119d0d790c28deeb44e87a4b569b65c5437bb797f98745aba2df",
+    "bytes": 5796
+  },
+  "supabase/migrations/202609150005_company_commands.sql": {
+    "sha256": "b36503a00daa2cd64ba82a443334a31384e451ae97eaf06ec7b40fea1f5653ed",
+    "bytes": 25720
+  },
+  "supabase/migrations/202610030045_team_availability_assisted.sql": {
+    "sha256": "d64e85d2a34624f9ebe1151f1f04089c54d4940e14a9cf3c9b1cbff58bfff197",
+    "bytes": 33318
+  },
+  "supabase/migrations/202609160008_consumer_attachments.sql": {
+    "sha256": "66f66989d90940b66353eec0156ae34349db5a657ebc8b7b5edfdece1666cad6",
+    "bytes": 5297
+  },
+  "supabase/migrations/202609260042_operational_refinements.sql": {
+    "sha256": "f1b3fa5beffeca1e7fa33666223061721f30e018c6281a3e7565aadba0deef18",
+    "bytes": 121070
+  },
+  "supabase/migrations/202609160007_consumer_commands.sql": {
+    "sha256": "503b62c4f4675590f4cdb49fb8319ce4250941de3e6e35ae59a91213bd0cc306",
+    "bytes": 40947
+  },
+  "supabase/migrations/202609260040_post_homologation.sql": {
+    "sha256": "dd7785e654bea0ae00e3985dc6049214e223d98f36c6eed31a7dcfa1a89f5733",
+    "bytes": 65138
+  },
+  "supabase/migrations/202610110049_customer_operation.sql": {
+    "sha256": "4b55905664be3974a5d7cd2609b4d6df4a20f8ad037a156f8874d7725292da23",
+    "bytes": 59899
+  },
+  "supabase/migrations/202609180021_trial_eligibility.sql": {
+    "sha256": "201ebf09323b632e453521fa951e286acf1921d184ace121ecfebacd06c1ec1d",
+    "bytes": 29286
+  },
+  "supabase/migrations/202609180018_billing_schema.sql": {
+    "sha256": "71d5bf2cd290f8f3dfac13c88b724e735c3817b86d85d0e043da205594d9ca0d",
+    "bytes": 7642
+  },
+  "supabase/migrations/202609190026_enterprise_access.sql": {
+    "sha256": "67398fc2c423179f3bdd9df0cf5c09ddc83a7eae5647f87411bc1873afe6c501",
+    "bytes": 45284
+  },
+  "supabase/migrations/202610050047_mercado_pago_subscriptions.sql": {
+    "sha256": "bfc705de2cc953e501ea7bb5fd93f5fa1757497e867f152d49d88def0e10a16c",
+    "bytes": 33045
+  },
+  "supabase/migrations/202609200029_authorized_support.sql": {
+    "sha256": "1657a43f9cb1b9aa840ba446a1ca009e0974270002a18703bc26eaa5fb951691",
+    "bytes": 39141
+  },
+  "supabase/migrations/202609210030_business_finance_permissions.sql": {
+    "sha256": "661541d5e0b96afa1c0d6d60f6e837562a78bc9edccac2bea786bccc0dc3dd0e",
+    "bytes": 120431
+  },
+  "supabase/migrations/202609180023_daily_operations.sql": {
+    "sha256": "4004e4289e58ef7009cbe9c56cd1cbbd2baf445c012fbc2e6844feb579451f48",
+    "bytes": 28333
+  },
+  "supabase/migrations/202610030046_flexible_shared_support.sql": {
+    "sha256": "1b3d2da81502c438cd4dca4d35420c5697e7e4aaf28535dc12dc3b630164f145",
+    "bytes": 8359
+  },
+  "supabase/migrations/202609240033_acquisition_selfservice_finance.sql": {
+    "sha256": "5bf074eb3c10f02c24abec634a65383784a4c5ead6144ab459ad304476fc3f69",
+    "bytes": 48297
+  },
+  "supabase/migrations/202610140052_integrated_subscription_safety.sql": {
+    "sha256": "532d006189ad4100de0536bb4e2988bda69fb98b53bf965f5d25137dbe08ebbd",
+    "bytes": 15245
+  },
+  "supabase/migrations/202609180025_b2b_invitations.sql": {
+    "sha256": "8750a657fa4cd182b4b3448f7685b5a8e052a6a44c3b082fb7277f80fcfae944",
+    "bytes": 12301
+  },
+  "supabase/migrations/202609160014_commercial_schema.sql": {
+    "sha256": "49b1d11d1849030e4a20304c5919dd53dfe435f55b98183d3094da57c5f917fe",
+    "bytes": 10370
+  },
+  "supabase/migrations/202609250036_activation_links.sql": {
+    "sha256": "e6ace93127e9c4fdb9c895dbd2afd895d4d875bab1752e5e6f239e80035c6d55",
+    "bytes": 7125
+  },
+  "supabase/migrations/202609150002_authorization.sql": {
+    "sha256": "6cf0f1380f0dbf759c6a9342fbb9927d037417bc37cedc52f88bbc7e95e7fd13",
+    "bytes": 3914
+  },
+  "supabase/migrations/202609200028_company_workspace_authorization.sql": {
+    "sha256": "57af81461bc58f1a3320349d06e0869b69accc3ccf4f2340930d2194eab18f6f",
+    "bytes": 19103
+  },
+  "supabase/migrations/202609180019_billing_commands.sql": {
+    "sha256": "64dea840c2de9428df97df1382896a6372cf62d745d91ef5bfb1e173712481ad",
+    "bytes": 18541
+  },
+  "supabase/migrations/202609160013_central_integration.sql": {
+    "sha256": "ceeec88793b4c332427aad0256047ccbccf9969c0a6c0658be8ece50c18fea24",
+    "bytes": 27151
+  },
+  "supabase/migrations/202609220031_public_presence_experience.sql": {
+    "sha256": "da692a5437700956a74f0fcf857fa9a4ce3d10e22d5fcab3d0f22c34dbcc7133",
+    "bytes": 18130
+  },
+  "supabase/migrations/202609160016_commercial_commands.sql": {
+    "sha256": "ffd6ce5e69bfcf9ecfa9a553d68457d1e86e94a7a23fdbd044fd054090783a15",
+    "bytes": 22908
+  },
+  "supabase/migrations/202609180024_company_onboarding.sql": {
+    "sha256": "f03aefad5e802db47e3b5a1f782b257e9c00f331962850e70d1ff02b3b93c9de",
+    "bytes": 8662
+  },
+  "supabase/migrations/202609160009_consumer_presence.sql": {
+    "sha256": "fbe07b8e13c52b6165fac8f8a5d4414ac9f4dfa0e3fede0e9eb47ee227eaa47f",
+    "bytes": 38217
+  },
+  "supabase/migrations/202609160010_payment_preparation.sql": {
+    "sha256": "2b33d3b8fa6bbade947b914a1a61ef313db8f8646bd1a87aba56f214c6eb9229",
+    "bytes": 18734
+  },
+  "supabase/migrations/202609250038_multiservice_requests.sql": {
+    "sha256": "626977693319617882dbc1bfbec48119466f8f6c8e49947cf3fc8d85cad5ce39",
+    "bytes": 22324
+  },
+  "supabase/migrations/202609160011_central_schema.sql": {
+    "sha256": "960684b96d49eab32054d0a15d4a7f575e93cfeff0dd75ecca24a70afcc45bac",
+    "bytes": 9702
+  },
+  "supabase/migrations/202609150004_company_schema.sql": {
+    "sha256": "0539341e0d742c062db12a3a33425191bc089a12705a650358da96e8b2179dda",
+    "bytes": 20917
+  },
+  "supabase/migrations/202609260044_approved_audit_corrections.sql": {
+    "sha256": "faa0eb3271f38a6efb1b2173a7b16872d5d9b40c0fa28ec284193ad2e7d857cd",
+    "bytes": 14690
+  },
+  "supabase/migrations/202609170017_analytics.sql": {
+    "sha256": "dd0d993627921b52962bb11170d1d23032ca220991c23ee15e91d6d75a55b3d7",
+    "bytes": 12410
+  },
+  "supabase/migrations/202609150001_foundation.sql": {
+    "sha256": "4a52fd4f947b4c2328a75658d088fdeadd5e3448140528a691b6df61468bd302",
+    "bytes": 9309
+  },
+  "supabase/migrations/202609180022_operational_authorization.sql": {
+    "sha256": "91da7ea39fddbf139d1266c12fe0d7026a31c793b8f03508c9b4ef5e3ad68069",
+    "bytes": 18491
+  },
+  "supabase/migrations/202609220032_syzia_people_experience.sql": {
+    "sha256": "66260c1d21a24a8ffd1129bed34e5c8b18c4fd23aa0c53fc31cacc3b5e542e01",
+    "bytes": 24253
+  },
+  "supabase/migrations/202609200027_organization_activation.sql": {
+    "sha256": "4e6d31a48f65865ae9b0a8a2877d059d16bdd39e3c1afb79af4f003a0ec4188b",
+    "bytes": 14159
+  },
+  "supabase/migrations/202609250039_commercial_plans.sql": {
+    "sha256": "c976e3fed6d7bb19179427318dfb6644bc12950fae2bbc9998f9312dcc0b27ff",
+    "bytes": 29160
+  },
+  "supabase/migrations/202609160006_consumer_schema.sql": {
+    "sha256": "464758ff2c049cf98c98043418c1201349ddbb014e91fae681dda0d5ba184317",
+    "bytes": 28391
+  },
+  "supabase/migrations/202609160012_central_commands.sql": {
+    "sha256": "3309ff6727e27493dfcd237a0bb92b04407f24b959566fe0395b93651f442402",
+    "bytes": 22392
+  },
+  "supabase/migrations/202610110050_service_checklists_contact.sql": {
+    "sha256": "41acf9d6e9198416b58f51015c52706c2703ed1df7977f57a682e8e3f7969efe",
+    "bytes": 17909
+  },
+  "supabase/migrations/202609160015_commercial_engine.sql": {
+    "sha256": "c788ad03573d49bba8091cbc099c93628745ea4bc3a09fd4c04d9e513fbaf960",
+    "bytes": 15921
+  },
+  "supabase/migrations/202610130051_checkout_diagnostics.sql": {
+    "sha256": "e5dbecf2b2203958439aa308a20306d0beda84a5f4001074ebfba47e4042aee9",
+    "bytes": 3847
+  },
+  "supabase/migrations/202610090048_unified_backend_optional_manual.sql": {
+    "sha256": "e5eff2a749863bfa7469b04b88c6585c3948723448c55b593cfbd52469e3df3b",
+    "bytes": 24195
+  },
+  "supabase/migrations/202609260041_self_service_journeys.sql": {
+    "sha256": "ec64a7a0dbcbefb2ac4a8a39ac6127c251937138a22e27d86ae678ee08257f98",
+    "bytes": 98819
+  },
+  "supabase/migrations/202609150003_commands.sql": {
+    "sha256": "bef0101e08a484e543a5ab7bf93cdc0984f9a5af27e887932183c14e87890f16",
+    "bytes": 8851
+  }
+}

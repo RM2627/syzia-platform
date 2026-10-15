@@ -495,3 +495,29 @@ for(const width of [1440,390]) test(`INT-A ${width}: superadmin verifies CPF in 
  await expect(d).toHaveCount(0);expect(requests).toHaveLength(1);expect(requests[0].p_confirmed).toBe(true);expect(requests[0].p_type).toBe("CPF");
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
+
+for (const width of [1440, 390]) test(`052 UI ${width}: automatic eligibility, CPF correction and one checkout action`,async({page})=>{
+ await page.setViewportSize({width,height:1000});
+ const {state}=await setup(page,{eligibility:'verification_required'});
+ let identifies=0;await page.route('**/rest/v1/rpc/billing047_identify',r=>{identifies++;state.eligibility='eligible';return r.fulfill({json:null});});
+ await page.getByLabel('Documento',{exact:true}).fill('111.111.111-11');
+ await page.getByRole('button',{name:'Conferir dados',exact:true}).click();
+ await expect(page.getByText(/Confira os dígitos do CPF/)).toBeVisible();expect(identifies).toBe(0);
+ await page.getByLabel('Documento',{exact:true}).fill('529.982.247-25');
+ await page.getByRole('button',{name:'Conferir dados',exact:true}).click();
+ await expect(page.getByRole('button',{name:'Assinar Profissional',exact:true})).toBeEnabled();expect(identifies).toBe(1);
+ await expect(page.getByText(/falta comprovar a identidade/)).toHaveCount(0);
+ await open(page);await expect(page.getByRole('button',{name:'Iniciar meus 7 dias grátis',exact:true})).toHaveCount(1);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+});
+for (const width of [1440, 390]) test(`052 UI ${width}: linked financial mismatch is not an eligibility queue or a new checkout`,async({page})=>{
+ await page.setViewportSize({width,height:1000});
+ await setup(page,{eligibility:'eligible',subscription:{id:'historical',code:'profissional',state:'reconciliation',price_cents:8990,operation_pending:true,checkout_retryable:false,error_code:'billing_binding_mismatch',can_update_method:true}});
+ let commands=0;await page.route('**/billing/command',r=>{commands++;return r.fulfill({status:500,json:{error:'forbidden-fixture'}});});
+ await expect(page.getByText('Assinatura em conferência',{exact:true})).toBeVisible();
+ await expect(page.getByRole('heading',{name:'Confirme a elegibilidade do período grátis'})).toHaveCount(0);
+ await expect(page.getByRole('button',{name:'Assinar Profissional',exact:true})).toHaveCount(0);
+ await page.getByRole('button',{name:/Atualizar situação/}).click();
+ await expect(page.getByText('Assinatura em conferência',{exact:true})).toBeVisible();expect(commands).toBe(0);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+});

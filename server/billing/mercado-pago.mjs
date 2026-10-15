@@ -153,6 +153,14 @@ export function verifyBinding(gateway, binding, p, linked = true) {
     bindingCheck(String(p.payer_id) === binding.provider_payer_id, "payer_id");
 }
 
+// Some official preapproval responses omit this counter. Absence is distinct
+// from an explicitly invalid value; never synthesize a provider version.
+export function providerVersion(p) {
+  if (!Object.hasOwn(p, "version")) return undefined;
+  bindingCheck(Number.isSafeInteger(p.version) && p.version >= 0, "version");
+  return p.version;
+}
+
 export async function verifiedSnapshot(gateway, binding, preapproval) {
   const p = preapproval || await gateway.read(binding.provider_id);
   const a = p.auto_recurring;
@@ -161,7 +169,7 @@ export async function verifiedSnapshot(gateway, binding, preapproval) {
   bindingCheck(Boolean(a) && a.frequency === 1 && a.frequency_type === "months", "recurrence");
   bindingCheck(a.currency_id === "BRL", "currency");
   bindingCheck(allowedAmount.includes(cents(a.transaction_amount)), "amount");
-  bindingCheck(Number.isSafeInteger(p.version) && p.version >= 0, "version");
+  const version = providerVersion(p);
   bindingCheck(["authorized", "pending", "paused", "cancelled", "canceled"].includes(p.status), "status");
   bindingCheck(p.payer_id != null && /^[a-zA-Z0-9_-]{1,160}$/.test(String(p.payer_id)), "payer_id");
   const invoices = await gateway.invoices(p.id);
@@ -198,7 +206,7 @@ export async function verifiedSnapshot(gateway, binding, preapproval) {
     bindingCheck(false, "first_charge", "billing_trial_mismatch");
   const state = ({ authorized: "authorized", pending: "pending", paused: "paused", canceled: "canceled", cancelled: "canceled" })[p.status];
   payments.sort((a, b) => a.id.localeCompare(b.id));
-  return { provider_id: p.id, payer_reference: identifier(p.payer_id), method_last_four: lastFour, version: p.version, modified_at: iso(p.last_modified), state,
+  return { provider_id: p.id, payer_reference: identifier(p.payer_id), method_last_four: lastFour, ...(version === undefined ? {} : { version }), modified_at: iso(p.last_modified), state,
     card_reference: p.card_id ? identifier(p.card_id) : null,
     method_linked: Boolean(p.card_id && p.payment_method_id), method_label: /^[a-z0-9_ -]{1,40}$/i.test(p.payment_method_id || "") ? p.payment_method_id : null,
     trial_start: binding.trial_reserved ? created : null, trial_end: trialEnd,

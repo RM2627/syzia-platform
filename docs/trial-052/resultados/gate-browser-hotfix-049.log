@@ -1,0 +1,20 @@
+[WebServer] (node:2750) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[WebServer] (node:2763) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:2781) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:2815) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 9:13:22 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"operations_checklist_save","organization":"4cb4b330-718d-45ea-aeb2-00244813aa1b","category":"operation","reason":"unclassified","status":"40001"}
+  ✓  1 tests/demo-browser/hotfix-049.spec.ts:6:1 › HF-B01 modelo no cadastro/edição, ordem, snapshot, extras e duas abas (7.5s)
+  ✓  2 tests/demo-browser/hotfix-049.spec.ts:86:1 › HF-B02 WhatsApp canônico, cópia e mesma página em outro navegador; terceiro sem acesso (5.8s)
+[WebServer] 9:13:30 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  3 tests/demo-browser/hotfix-049.spec.ts:150:1 › HF-B03 Home humana, contador, fallback sem ID, leitura e refresh (5.6s)
+  ✓  4 tests/demo-browser/hotfix-049.spec.ts:198:1 › HF-B04 prévias reais com dados fictícios e landing desktop/mobile/teclado/cadastro (13.0s)
+
+  4 passed (37.6s)

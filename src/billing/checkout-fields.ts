@@ -1,10 +1,12 @@
 // Values stay inside the form/SDK. Only static error messages leave these helpers.
+import { normalizeCPF } from "../../shared/cpf.mjs";
 export function holderError(value: string) {
   return /^[\p{L}\p{M}][\p{L}\p{M} .'-]{1,119}$/u.test(value.trim())
     ? ""
     : "Informe o nome como aparece no cartão.";
 }
 export function documentError(type: string, value: string) {
+  if (type === "CPF") return normalizeCPF(value) ? "" : "Confira os dígitos do documento.";
   const n = value.replace(/[.\-/\s]/g, "");
   if (type !== "CPF" && type !== "CNPJ")
     return n.length >= 3 && n.length <= 20

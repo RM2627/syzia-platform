@@ -1,0 +1,65 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> atendimento-compartilhado-fundacao@0.8.0 test:current-gate
+> node scripts/syzia-044/current-gate.mjs
+
+RUN checkout-financial-051
+PASS checkout-financial-051
+RUN legal-versioning-050
+PASS legal-versioning-050
+RUN legal-historical-050
+PASS legal-historical-050
+RUN hotfix-050
+PASS hotfix-050
+RUN hotfix-049
+PASS hotfix-049
+RUN focused-049
+PASS focused-049
+RUN focused-048
+PASS focused-048
+RUN billing-047
+PASS billing-047
+RUN gate-contracts
+PASS gate-contracts
+RUN flexible-upgrade
+PASS flexible-upgrade
+RUN flexible-support
+PASS flexible-support
+RUN team-upgrade
+PASS team-upgrade
+RUN team-availability
+PASS team-availability
+RUN ux001-security
+PASS ux001-security
+RUN focused
+PASS focused
+RUN upgrade
+PASS upgrade
+RUN regression-040-042
+PASS regression-040-042
+RUN gateways
+PASS gateways
+RUN build
+PASS build
+RUN browser
+PASS browser
+RUN team-browser
+PASS team-browser
+RUN ux001-browser
+PASS ux001-browser
+RUN browser-hotfix-049
+PASS browser-hotfix-049
+RUN browser-049
+PASS browser-049
+RUN browser-048
+PASS browser-048
+RUN billing-browser
+PASS billing-browser
+RUN flexible-browser
+PASS flexible-browser
+RUN checkout-browser-051
+PASS checkout-browser-051
+RUN browser-legal-050
+PASS browser-legal-050
+RUN browser-hotfix-050
+PASS browser-hotfix-050

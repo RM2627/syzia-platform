@@ -1,0 +1,46 @@
+{
+  "AGENTS.md": {
+    "before": "0a30b829b3d2a072306c57de78cb5a4af5d5a014c38584a1e614182cb4a0c00a",
+    "after": "a9ca959fe199b7ced81b609af451a4123272193ae965e85e92d897d097240cfb"
+  },
+  "scripts/syzia-044/current-gate.mjs": {
+    "before": "d53b1050d9ac893fac872c5c9bb55a12541abd4312eaaea663416d911badb19f",
+    "after": "1a41e37722ecc8e679f50817044fa26c91ffbef4c0a5002fde845cbf4ba2705a"
+  },
+  "scripts/billing-047/fixture.mjs": {
+    "before": "f0829c40bc1d3c6706753b4c71038a49d63f59dda36fb65d8cb0e276cb8270ed",
+    "after": "386fea22b60de9bac9f0cf33cd086a6e6d4415c6aefa07fe99143a9bbe40f23f"
+  },
+  "server/billing/subscriptions.mjs": {
+    "before": "22a6d068dfc4f143328accca0cde4f5d26e367b55990bb789d3c264894580dfa",
+    "after": "4d9066ddb38b1a1f89d7e54a9ec6c7a482bf1f4f9e399e0d5ae6654e55bf0df4"
+  },
+  "server/billing/mercado-pago.mjs": {
+    "before": "21e97341fa3861a583c7e77a8f11d5a0185c5e7da637b3ba03a1dbc9e3b32fb2",
+    "after": "28fea5a154cdf29146bac7a003a4892cd3852220fc5a9a70855bb2db8f0ac1f4"
+  },
+  "tests/hotfix-050/integrity.test.mjs": {
+    "before": "5795b76ff47c75248ca3ea2d5aa9a9f613f8adf04bf8bde366071dfa2aacf2a9",
+    "after": "9a84148970b1c2151af1232ffd0f841cc3fbe6f9f9363ab3d61606f5a9f537a6"
+  },
+  "tests/billing-047/fixture.mjs": {
+    "before": "094a453a7dae50ec68d4d2ba6c781d598921d403ad7386d6f6cbb4f8ad5fee05",
+    "after": "de79f4b015919cadc044ef08d683b048be672cd6872508c89106c0ff5e68e7f7"
+  },
+  "tests/billing-047/edge-cases.test.mjs": {
+    "before": "059e3abb4f06429d5f57848f8e3dd8cd926133f470fe5699e9cf2caa62b7e6f5",
+    "after": "8e6f1f4a9d91bacdf96c54b13a599d8d93c294b9fcf423c923ff07dec30e5809"
+  },
+  "src/billing/MercadoPago.tsx": {
+    "before": "3a16bccb275721d554f175a47be9d8e30df17e23184717e331cb93b2144bb711",
+    "after": "52c70945df8954de985942dda621a30c7f3083d80438c1d98a236537aecda112"
+  },
+  "src/access/Verification.tsx": {
+    "before": "94daf4320899df00e3a37e748011b3fce46835b44edbb8984c127e919ceb5e1c",
+    "after": "647f26b6fa016db54c2a70c69a8d59ef1d16dad14f67b65090d00bb1f201c1de"
+  },
+  "src/acquisition/SelfService.tsx": {
+    "before": "2d428d47ea067294864e7d6fce49d9f86318bfea68c5d1b831ff8157eb862d22",
+    "after": "eed227b68ffafccd0f98822891eb341ec35ad74a185a54d436d1401669acb4a3"
+  }
+}

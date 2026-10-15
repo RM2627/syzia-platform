@@ -63,6 +63,9 @@ test("047-16 Cancelamento simultâneo é único; fim do período cancela provide
   const oldTrialEnd = new Date(Date.parse(oldTrialStart)+7*86400000).toISOString();
   const expiredProvider = [...c.fake.subscriptions.values()].find(x => x.external_reference === bid);
   expiredProvider.date_created=oldTrialStart;expiredProvider.next_payment_date=oldTrialEnd;
+  // The fixture changed subscription facts: advance its official change markers
+  // too. Keeping the previous snapshot markers is correctly rejected as stale.
+  expiredProvider.version++;expiredProvider.last_modified=new Date().toISOString();
   await c.rawSQL("update private.billing047_contracts set trial_start=$2,trial_end=$3,paid_until=now()-interval '1 second'where id=$1", [bid,oldTrialStart,oldTrialEnd]);
   await c.engine.process(bid);
   assert.equal([...c.fake.subscriptions.values()].find(x => x.external_reference === bid).status, "canceled");

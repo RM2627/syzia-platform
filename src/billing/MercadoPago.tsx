@@ -1,3 +1,4 @@
+import { normalizeCPF } from "../../shared/cpf.mjs";
 import { useEffect, useRef, useState } from "react";
 import { rpc } from "../api";
 import "./mercado-pago.css";
@@ -24,13 +25,15 @@ const labels: Record<string, string> = {
   cancel_scheduled: "Cancelamento programado",
   canceled: "Cancelada",
   restricted: "Operação paga restrita",
-  reconciliation: "Em conferência",
+  reconciliation: "Assinatura em conferência",
 };
 const messages: Record<string, string> = {
   billing_binding_mismatch:
     "Encontramos uma divergência na confirmação da assinatura. A solicitação existente será conferida; não envie outro pagamento.",
   billing_trial_evidence_required:
-    "Precisamos concluir a verificação de identidade. A assinatura existente e a reserva do período grátis foram preservadas.",
+    "Há uma pendência nos dados ou no histórico do período grátis. A assinatura existente e a reserva foram preservadas. Atualize a situação; se a pendência continuar, entre em contato com o suporte.",
+  billing_stale_snapshot:
+    "A confirmação recebida está desatualizada ou inconsistente. Sua assinatura permanece em conferência; atualize a situação sem contratar novamente.",
   billing_credentials_missing:
     "A contratação está temporariamente indisponível. Tente novamente mais tarde.",
   billing_trial_changed:
@@ -428,6 +431,8 @@ export function MercadoPagoBilling({ org }: { org: string }) {
             className="ds-panel"
             onSubmit={(e) => {
               e.preventDefault();
+              if (kind === "CPF" && !normalizeCPF(document)) { setError("Confira os dígitos do CPF. Use 11 dígitos ou a máscara 000.000.000-00."); return; }
+              setError("");
               setBusy(true);
               void rpc("billing047_identify", {
                 p_org: org,
@@ -446,7 +451,7 @@ export function MercadoPagoBilling({ org }: { org: string }) {
             <p>{data.eligibility === "identity_conflict" || data.eligibility === "previous_review"
               ? "Os dados precisam de uma análise excepcional. Entre em contato com a administração SYZIA."
               : data.eligibility === "manual_policy" ? "A política atual exige análise da administração SYZIA."
-              : "Informe os dados para a conferência. Se já informou, falta comprovar a identidade; a administração SYZIA pode concluir essa verificação."}</p>
+              : "Informe um documento válido para consultar automaticamente o histórico do período grátis. Isso não comprova a titularidade do documento."}</p>
             <label>
               Tipo
               <select value={kind} onChange={(e) => setKind(e.target.value)}>

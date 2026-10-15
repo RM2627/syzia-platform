@@ -1,0 +1,19 @@
+[WebServer] (node:3009) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[WebServer] (node:3022) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:3040) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:3074) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/demo-browser/syzia-049.spec.ts:166:1 › 049-B01 presença, PDF, imagens privadas, WhatsApp e checklist desktop/mobile (9.2s)
+  ✓  2 tests/demo-browser/syzia-049.spec.ts:284:1 › 049-B02 chat: Enter, Shift+Enter, autoscroll, novas recebidas, leitura individual e retry (6.1s)
+[WebServer] 9:14:11 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  3 tests/demo-browser/syzia-049.spec.ts:386:1 › 049-B03 IME, teclado móvel, download móvel e telefone amigável sem apagar inválido (5.5s)
+  ✓  4 tests/demo-browser/syzia-049.spec.ts:466:1 › 049-B04 polling pausa em aba oculta e não sobrepõe consulta pendente (3.0s)
+
+  4 passed (29.8s)

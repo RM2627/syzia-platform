@@ -1,0 +1,6 @@
+PASS ADM A lê A, não lê B nem recebe administração global 
+PASS Colaborador sem grant negado; conceder e revogar central.read revalida no servidor 
+PASS Vínculo empresarial revogado bloqueia ticket antes autorizado 
+PASS Equipe SYZIA atribuída lê A, não atribuída a B é negada 
+PASS Revogação da atribuição SYZIA nega nova leitura do ticket 
+PASS Não autenticado e consumidor não entram na Central por código de ticket 

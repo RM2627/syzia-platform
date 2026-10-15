@@ -1,0 +1,26 @@
+[WebServer] (node:4658) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[WebServer] (node:4671) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:4689) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 6 tests using 1 worker
+
+(node:4723) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/demo-browser/legal-050.spec.ts:4:3 › L050-B01 current database versions and navigation at 1440px (1.1s)
+  ✓  2 tests/demo-browser/legal-050.spec.ts:4:3 › L050-B01 current database versions and navigation at 390px (980ms)
+  ✓  3 tests/demo-browser/legal-050.spec.ts:4:3 › L050-B01 current database versions and navigation at 320px (947ms)
+[WebServer] 9:17:57 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"access_session","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:17:57 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:17:59 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"access_legal_accept","organization":null,"category":"operation","reason":"unclassified","status":"P0001"}
+  ✓  4 tests/demo-browser/legal-050.spec.ts:38:3 › L050-B02 stale version reload and new acceptance through existing RPC at 1440px (3.5s)
+[WebServer] 9:18:00 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"access_session","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:18:00 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"access_session","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:18:03 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"access_legal_accept","organization":null,"category":"operation","reason":"unclassified","status":"P0001"}
+  ✓  5 tests/demo-browser/legal-050.spec.ts:38:3 › L050-B02 stale version reload and new acceptance through existing RPC at 390px (3.3s)
+  ✓  6 tests/demo-browser/legal-050.spec.ts:155:1 › L050-B03 historical body is not silently rebranded (471ms)
+
+  6 passed (16.0s)

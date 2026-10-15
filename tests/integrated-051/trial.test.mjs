@@ -1,9 +1,10 @@
 import test, {describe, before, after} from 'node:test';
 import assert from 'node:assert/strict';
 import { fixture } from '../billing-047/fixture.mjs';
-describe('Integrated trial and simple superadmin review',()=>{
+// Historical 052 policy regression; current automatic policy has its own 053 suite.
+describe('Historical 052 trial and simple superadmin review',()=>{
 let c,initialCapabilities;
-before(async()=>{c=await fixture({verifiedIdentity:false});initialCapabilities=await c.asUser('adminA','billing_capabilities',{p_org:c.orgs.A});});
+before(async()=>{c=await fixture({automaticTrial:false,verifiedIdentity:false});initialCapabilities=await c.asUser('adminA','billing_capabilities',{p_org:c.orgs.A});});
 after(()=>c?.db.close());
 const verify=(org=c.orgs.A,type='CPF',value='52998224725',confirmed=true,actor='root')=>c.asUser(actor,'billing051_verify_identity',{p_org:org,p_type:type,p_value:value,p_method:type==='phone'?'verified_contact':'document_checked',p_confirmed:confirmed});
 test('INT-A01 typed CPF is not proof; automatic eligibility neither reserves nor grants without evidence',async()=>{
@@ -71,7 +72,7 @@ test('INT-A08 evidence/claims/history remain private; no raw document, email or 
 });
 
 describe('Integrated exceptional identity checks',()=>{
- let c;before(async()=>{c=await fixture();});after(()=>c?.db.close());
+ let c;before(async()=>{c=await fixture({automaticTrial:false});});after(()=>c?.db.close());
  test('INT-A09 explicit manual policy is not silently bypassed by valid evidence',async()=>{
   await c.rawSQL('update private.trial_policy set auto_enabled=false');
   assert.equal((await c.view()).eligibility,'manual_policy');

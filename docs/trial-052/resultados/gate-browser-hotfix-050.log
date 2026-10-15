@@ -1,0 +1,20 @@
+[WebServer] (node:4936) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[WebServer] (node:4949) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:4966) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 6 tests using 1 worker
+
+(node:5000) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/demo-browser/hotfix-050.spec.ts:12:3 › 050-L01 preview of reviewed text, links and no overflow at 1440px (991ms)
+  ✓  2 tests/demo-browser/hotfix-050.spec.ts:12:3 › 050-L01 preview of reviewed text, links and no overflow at 768px (945ms)
+  ✓  3 tests/demo-browser/hotfix-050.spec.ts:12:3 › 050-L01 preview of reviewed text, links and no overflow at 390px (973ms)
+  ✓  4 tests/demo-browser/hotfix-050.spec.ts:12:3 › 050-L01 preview of reviewed text, links and no overflow at 320px (961ms)
+  ✓  5 tests/demo-browser/hotfix-050.spec.ts:29:1 › 050-L02 database document is rendered as text, not executable markup or an invented version (464ms)
+  ✓  6 tests/demo-browser/hotfix-050.spec.ts:36:1 › 050-L03 public navigation handles database failure without secret or contract fallback (967ms)
+
+  6 passed (11.0s)

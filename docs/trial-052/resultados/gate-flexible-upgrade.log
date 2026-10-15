@@ -1,0 +1,1 @@
+PASS populated 045 → 046; 125 tables; only mode column and append-only migration audit

@@ -1,0 +1,15 @@
+{
+  status: 'PASS',
+  engine: 'PGlite local',
+  base: '042 populated → 044',
+  tablesCompared: 119,
+  existingColumnsCompared: 1170,
+  securityUnchanged: true,
+  allHistoricalRowsUnchanged: true,
+  transactionRollbackVerified: true,
+  legacyManual: {
+    before: { service_minutes: null, occupied: 75 },
+    after: { service_minutes: 75, buffer_minutes: 30, occupied: 105 },
+    proof: 'exact immutable command payload hash'
+  }
+}

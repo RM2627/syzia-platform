@@ -1,0 +1,47 @@
+{
+  "lf_converted_files": 834,
+  "preflight": {
+    "phase": "after",
+    "status": "PASS",
+    "exact": 181,
+    "lineEndings": 834,
+    "absent": 0,
+    "git_546a906_proven": false,
+    "reference": "last delivered integrated 051 base, explicitly authorized by owner",
+    "differences": []
+  },
+  "negative_cases": [
+    {
+      "path": "server/billing/mercado-pago.mjs",
+      "tamper_rejected": true
+    },
+    {
+      "path": "server/billing/subscriptions.mjs",
+      "tamper_rejected": true
+    },
+    {
+      "path": "shared/cpf.mjs",
+      "tamper_rejected": true
+    },
+    {
+      "path": "supabase/migrations/202610140052_integrated_subscription_safety.sql",
+      "tamper_rejected": true
+    },
+    {
+      "path": "supabase/migrations/202610140053_automatic_trial_optional_provider_version.sql",
+      "tamper_rejected": true
+    },
+    {
+      "path": ".env.server.example",
+      "tamper_rejected": true
+    },
+    {
+      "path": "assets/demo/auto-photo.png",
+      "tamper_rejected": true
+    },
+    {
+      "path": "docs/trial-052/integrity.json",
+      "tamper_rejected": true
+    }
+  ]
+}

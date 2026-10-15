@@ -1,4 +1,8 @@
-# Complemento integrado da SYZIA 051 — autorização atual
+# SYZIA 052 — autorização atual
+
+Trial automático por consistência cadastral e histórico; tratar ausência de version sem inventar contador nem dispensar validações financeiras. Base: última entrega integrada autorizada expressamente pelo proprietário, sem exigir confirmação do commit. Preservar byte a byte todas as migrations até 052; somente 053 incremental. Não alterar assinatura real nem repetir POST incerto. Testes locais, navegador, build e gate completo; ZIP incremental e relatórios separados. Sem Supabase/Render/Mercado Pago reais, credenciais, commit, push ou deploy. Parar após a entrega. A exigência histórica de prova documental para todo primeiro trial foi substituída por esta decisão explícita; revisão manual apenas para exceções justificadas.
+
+# Complemento integrado da SYZIA 051 — autorização histórica
 
 Escopo em `docs/integrated-051/ESCOPO.md`: elegibilidade verificável, reconciliação sem recriação, checkout em uma ação e cartão da assinatura existente. Revisão adicional simplificada para superadministrador, sempre explícita e auditada. Base anterior entregue autorizada pelo proprietário; commit `6c33be2` não comprovado. Preservar 001–051 byte a byte e histórico jurídico/financeiro. Migration 052 somente incremental e local nesta rodada. Não fazer chamadas financeiras reais, SQL real, commit, push, deploy ou alterar serviços externos. Gate completo obrigatório; limitações externas permanecem pendentes. Entregar complemento incremental e parar.
 

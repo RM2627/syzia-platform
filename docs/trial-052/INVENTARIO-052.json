@@ -1,0 +1,550 @@
+{
+  "schema": 1,
+  "reference": "Last delivered integrated 051 base, expressly authorized by owner; exact Git commit not proven",
+  "modified": 17,
+  "added": 62,
+  "historical_migrations_byte_preserved": 48,
+  "new_migration": "202610140053_automatic_trial_optional_provider_version.sql",
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "status": "modified",
+      "before_sha256": "0a30b829b3d2a072306c57de78cb5a4af5d5a014c38584a1e614182cb4a0c00a",
+      "after_sha256": "a9ca959fe199b7ced81b609af451a4123272193ae965e85e92d897d097240cfb",
+      "bytes": 29563
+    },
+    {
+      "path": "docs/trial-052/DOCUMENTACAO-E-ANTES-DEPOIS-052.md",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "f56936a29d58d10d2a4625b2eaf67a6b47f145d8f2ee00ba43da77071d4097e9",
+      "bytes": 4004
+    },
+    {
+      "path": "docs/trial-052/GATE-FINAL-052.json",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "da5010fac2a7ab3a494fe2e6ab7e5c31435aff3bdbb904ca3a15727cf0dd0bd5",
+      "bytes": 12439
+    },
+    {
+      "path": "docs/trial-052/GUIA-APLICACAO-E-ROLLBACK-052.md",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "788cc62584d9c584ea064ea052087312ed951d0779c4adbd96c7ff46693c15d4",
+      "bytes": 4937
+    },
+    {
+      "path": "docs/trial-052/MATRIZ-E-RESULTADOS-052.md",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "c28215ccd04c522f69da3e6cf29b59477356d6978e7b2dab069df24bc8d86a1c",
+      "bytes": 8433
+    },
+    {
+      "path": "docs/trial-052/PENDENCIAS-EXTERNAS-052.md",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "cdbc1330aabfdb1c160ef346635dcc7d0be9249083d897968aea347fe8be2b2d",
+      "bytes": 1930
+    },
+    {
+      "path": "docs/trial-052/RELATORIO-SYZIA-052.md",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "8a1f4fe3180d9cd8233bbc9aa00537b8709209b75cb5b73fbebd2301aa11dfa0",
+      "bytes": 7955
+    },
+    {
+      "path": "docs/trial-052/ROLLBACK-053-ANTES-DO-USO.sql",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "67f146671d131bcc4b230cac5f903495c4406b3247c6791b42fcee42f4f016ef",
+      "bytes": 2091
+    },
+    {
+      "path": "docs/trial-052/authorized-hashes.json",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "ea0462a478d1744cb6cee4c3106e73bb093ae405dccb1cd124d1aaa4f797205b",
+      "bytes": 2251
+    },
+    {
+      "path": "docs/trial-052/integrity.json",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "5735d6b5595be3283b3041fb12fe25be65886201187786fbed474961623df74d",
+      "bytes": 496853
+    },
+    {
+      "path": "docs/trial-052/migrations-001-052-sha256.json",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "7f3482753fa31493091ac941a08415973a7a8de57a97a6fd9e2e2a59b5ef4e1a",
+      "bytes": 8174
+    },
+    {
+      "path": "docs/trial-052/resultados/base-preflight.json",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "633bb03a24c756fc621400021d9aee0fbaa508f6f9db125714b0afc9ba093faf",
+      "bytes": 234
+    },
+    {
+      "path": "docs/trial-052/resultados/clean-build.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "e17bb3f5be57f4ffa91eb2b5ca48d375287505365a4143337c6cb4c2e345e758",
+      "bytes": 4035
+    },
+    {
+      "path": "docs/trial-052/resultados/clean-eol.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "68c4f8ee2c77fafa23c4dd1f27f2d2a540cc338f6d84ba958ec17f682c31de25",
+      "bytes": 909
+    },
+    {
+      "path": "docs/trial-052/resultados/clean-focused.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "f10939832c19bb8b9c4b25255b4a35c07211d86f4b96105458ac1c9221a565a3",
+      "bytes": 13799
+    },
+    {
+      "path": "docs/trial-052/resultados/clean-gate.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "7e6baf00a2451e4d529d7b2408b39eda831d7124d71c8d6b4f235340b1aa7a14",
+      "bytes": 1348
+    },
+    {
+      "path": "docs/trial-052/resultados/clean-npm-ci.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "98d5e96114385b18a1d65067c9426db01936e0f23169b9d229f166fe4ee90b67",
+      "bytes": 124
+    },
+    {
+      "path": "docs/trial-052/resultados/clean-postflight.json",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "34caed78c7dbb371164b20ea55d06eea7d7b9f26123afeacebff7955439eb9c8",
+      "bytes": 232
+    },
+    {
+      "path": "docs/trial-052/resultados/clean-preflight.json",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "34caed78c7dbb371164b20ea55d06eea7d7b9f26123afeacebff7955439eb9c8",
+      "bytes": 232
+    },
+    {
+      "path": "docs/trial-052/resultados/gate-billing-047.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "d8488d8ce2cd74e16a48f9b8f466f84c1d1dbb774b53a421770cef1046246717",
+      "bytes": 5301
+    },
+    {
+      "path": "docs/trial-052/resultados/gate-billing-browser.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/trial-052/resultados/gate-browser-048.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "bb666a9f098e03cb085314d828419969e24bacb36e09e085572ec3afdded4f6f",
+      "bytes": 1035
+    },
+    {
+      "path": "docs/trial-052/resultados/gate-browser-049.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "dade370bc005ddab875da9e5fa9ea29e4e304c3e5eafe5407cfb7bc0737444d5",
+      "bytes": 1651
+    },
+    {
+      "path": "docs/trial-052/resultados/gate-browser-hotfix-049.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "9728cf73084e53e6f3257932ecada2a375edcd3a9e31e397ea2cca1faa82119c",
+      "bytes": 1870
+    },
+    {
+      "path": "docs/trial-052/resultados/gate-browser-hotfix-050.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "bca93a01acdc81f98189de36ff2d59195a8e56c8e916981c7f1f75a9d82da31a",
+      "bytes": 1712
+    },
+    {
+      "path": "docs/trial-052/resultados/gate-browser-legal-050.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "f75db24f60fe05816e7d72b2e70a6ac6efd6ceb24591f0e871e9fdd12b83f6e4",
+      "bytes": 2759
+    },
+    {
+      "path": "docs/trial-052/resultados/gate-browser.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "6c63072a2f55c1802a356bc75eeb2e27e5045f2cf20e4c38576ce1b9967c06c3",
+      "bytes": 23809
+    },
+    {
+      "path": "docs/trial-052/resultados/gate-build.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "5b6896635549fce8b6f5b16c33b86f3957d66fc3929f0d2727e2dbe603bf0cf0",
+      "bytes": 59
+    },
+    {
+      "path": "docs/trial-052/resultados/gate-checkout-browser-051.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "275f09cd4786fdf2e54979eb856fd2a1df5ed852c71a0d0b67cb39cb345eff72",
+      "bytes": 4776
+    },
+    {
+      "path": "docs/trial-052/resultados/gate-checkout-financial-051.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "1949e15f86bd7deacb336f23ea282d07c82c7060119bf17d67531d9aa84cd6ee",
+      "bytes": 13557
+    },
+    {
+      "path": "docs/trial-052/resultados/gate-flexible-browser.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "eef2149cd76224401a0744bda11e4ce8ce3e29d527a9e8977ff67c235143fd35",
+      "bytes": 4268
+    },
+    {
+      "path": "docs/trial-052/resultados/gate-flexible-support.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "ec891dcc53f6e6ce4e53d3813d6dbfc8947da4c81c0118d233bf3dbdde8bd433",
+      "bytes": 1873
+    },
+    {
+      "path": "docs/trial-052/resultados/gate-flexible-upgrade.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "5824e6c798d4835683a4372d9b2f6bcdb32c3c64fd8189449f0fa222cfc4976c",
+      "bytes": 89
+    },
+    {
+      "path": "docs/trial-052/resultados/gate-focused-048.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "f48190ff449f6500cc4e16818cb14de483d05f9cbbcdd7e2fb7c4d1b53d6478b",
+      "bytes": 2367
+    },
+    {
+      "path": "docs/trial-052/resultados/gate-focused-049.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "327c7fc578275c4567d142b3aa397c53c39a490d8970f14e9cf183f893b4213c",
+      "bytes": 3742
+    },
+    {
+      "path": "docs/trial-052/resultados/gate-focused.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "4ea185ef974f8a208c5074af92786964eba929b397b4a8f73518f49a1468de20",
+      "bytes": 1933
+    },
+    {
+      "path": "docs/trial-052/resultados/gate-gate-contracts.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "f7f55a247b26ea0201c58961893abf0fbd62645e00c1c1f547519579208beb75",
+      "bytes": 1217
+    },
+    {
+      "path": "docs/trial-052/resultados/gate-gateways.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "c85238b9181adc951b9ce91086ee1606404a063c861869e1f8848838f0c077a0",
+      "bytes": 5399
+    },
+    {
+      "path": "docs/trial-052/resultados/gate-hotfix-049.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "74ab309c7b4b92936d557285fbefdf443bc90353e6143e29e7077f591039d0a7",
+      "bytes": 1853
+    },
+    {
+      "path": "docs/trial-052/resultados/gate-hotfix-050.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "59a07ddddf1ba03b104f1c3a4db9c7e875204e67b8cab6a960624cab9e54673d",
+      "bytes": 2223
+    },
+    {
+      "path": "docs/trial-052/resultados/gate-legal-historical-050.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "8dd11c418612a6a0ba7168fb1f0145fbcadb019d5f6fa2429a75579840d2311b",
+      "bytes": 260
+    },
+    {
+      "path": "docs/trial-052/resultados/gate-legal-versioning-050.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "25dce38e4780adaa8b030f69e43a521f021c0dbb685fd958637c60854ff3c0fd",
+      "bytes": 2438
+    },
+    {
+      "path": "docs/trial-052/resultados/gate-regression-040-042.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "a58fec18c4f1f1904759bc0f5f7fc03e0000fa2c2c0eb925db5024002dd98aa7",
+      "bytes": 10112
+    },
+    {
+      "path": "docs/trial-052/resultados/gate-team-availability.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "994dc0ab272499373f176aa56cfe7d9f70d8f95380b7aace53de6c2ac05b27ea",
+      "bytes": 2211
+    },
+    {
+      "path": "docs/trial-052/resultados/gate-team-browser.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "0198fbd60ffa4acf9f4a30c6fa2737daaa5fc040a4104df237786e91bfe2bbc4",
+      "bytes": 3317
+    },
+    {
+      "path": "docs/trial-052/resultados/gate-team-upgrade.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "9f2cf7e433571dee26ec5a7fb7924cc79f0f5e1d938be567bbc856c2118bfa5d",
+      "bytes": 83
+    },
+    {
+      "path": "docs/trial-052/resultados/gate-upgrade.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "3b4ae66b3883dc36dc041a6272e15db860919197a79687485723a3062f33933d",
+      "bytes": 433
+    },
+    {
+      "path": "docs/trial-052/resultados/gate-ux001-browser.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "f0d388ee09cfb8a164a49486ba80aadba83a3dd199ef801f010ac384c7fa53d1",
+      "bytes": 3636
+    },
+    {
+      "path": "docs/trial-052/resultados/gate-ux001-security.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "414693285b30bbba3210fb34e349bdc0058e804bcb18dc9c9755639041086cf9",
+      "bytes": 438
+    },
+    {
+      "path": "docs/trial-052/resultados/lf-eol.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "8af79af91514b13792bfb8667c7b48dd0149454ad7c10123bbb4bee6d45fbed9",
+      "bytes": 908
+    },
+    {
+      "path": "docs/trial-052/resultados/lf-focused.log",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "2e2ade4bb9cd51e2fea0e06c27805926be15c4ef5233e3ae7cd2df8cc2366085",
+      "bytes": 13797
+    },
+    {
+      "path": "docs/trial-052/resultados/lf-negative-validation.json",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "ca52d5a6db483e5db727b217a744b37ac2aed6dbfa3377dc2746160d83923399",
+      "bytes": 1109
+    },
+    {
+      "path": "docs/trial-052/security-anchors.json",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "eeaf366ce3d51e7dc4becee10151839344149eb7fcb5bc0a22a031337cc12f02",
+      "bytes": 193
+    },
+    {
+      "path": "scripts/billing-047/fixture.mjs",
+      "status": "modified",
+      "before_sha256": "f0829c40bc1d3c6706753b4c71038a49d63f59dda36fb65d8cb0e276cb8270ed",
+      "after_sha256": "386fea22b60de9bac9f0cf33cd086a6e6d4415c6aefa07fe99143a9bbe40f23f",
+      "bytes": 1395
+    },
+    {
+      "path": "scripts/syzia-044/current-gate.mjs",
+      "status": "modified",
+      "before_sha256": "d53b1050d9ac893fac872c5c9bb55a12541abd4312eaaea663416d911badb19f",
+      "after_sha256": "1a41e37722ecc8e679f50817044fa26c91ffbef4c0a5002fde845cbf4ba2705a",
+      "bytes": 6412
+    },
+    {
+      "path": "scripts/trial-052/verify.mjs",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "25affdf740ef859afef3dab4ad8362bc9a3af02c30af1e40bbc10ed8011fd01e",
+      "bytes": 2440
+    },
+    {
+      "path": "server/billing/mercado-pago.mjs",
+      "status": "modified",
+      "before_sha256": "21e97341fa3861a583c7e77a8f11d5a0185c5e7da637b3ba03a1dbc9e3b32fb2",
+      "after_sha256": "28fea5a154cdf29146bac7a003a4892cd3852220fc5a9a70855bb2db8f0ac1f4",
+      "bytes": 14509
+    },
+    {
+      "path": "server/billing/subscriptions.mjs",
+      "status": "modified",
+      "before_sha256": "22a6d068dfc4f143328accca0cde4f5d26e367b55990bb789d3c264894580dfa",
+      "after_sha256": "4d9066ddb38b1a1f89d7e54a9ec6c7a482bf1f4f9e399e0d5ae6654e55bf0df4",
+      "bytes": 12305
+    },
+    {
+      "path": "shared/cpf.d.mts",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "5980a9b69dc64cf01d3cbe45c2929056d74bedcb8db3ebf2bf0df850f6c781dc",
+      "bytes": 61
+    },
+    {
+      "path": "shared/cpf.mjs",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "e401a94131f34abd1c0c693eb36470280f04d2647da03321c725923a80d3ac7a",
+      "bytes": 670
+    },
+    {
+      "path": "src/access/Verification.tsx",
+      "status": "modified",
+      "before_sha256": "94daf4320899df00e3a37e748011b3fce46835b44edbb8984c127e919ceb5e1c",
+      "after_sha256": "647f26b6fa016db54c2a70c69a8d59ef1d16dad14f67b65090d00bb1f201c1de",
+      "bytes": 6166
+    },
+    {
+      "path": "src/acquisition/SelfService.tsx",
+      "status": "modified",
+      "before_sha256": "2d428d47ea067294864e7d6fce49d9f86318bfea68c5d1b831ff8157eb862d22",
+      "after_sha256": "eed227b68ffafccd0f98822891eb341ec35ad74a185a54d436d1401669acb4a3",
+      "bytes": 19227
+    },
+    {
+      "path": "src/billing/MercadoPago.tsx",
+      "status": "modified",
+      "before_sha256": "3a16bccb275721d554f175a47be9d8e30df17e23184717e331cb93b2144bb711",
+      "after_sha256": "52c70945df8954de985942dda621a30c7f3083d80438c1d98a236537aecda112",
+      "bytes": 26582
+    },
+    {
+      "path": "src/billing/checkout-fields.ts",
+      "status": "modified",
+      "before_sha256": "e540afeda42aa32d849463dd6690541c7dfc0952b98136bdf3b892bb0b2a06ec",
+      "after_sha256": "954e65305a7b62def4337b459b8894622dba4a76e8269f8b7cc3a7a49ee98348",
+      "bytes": 1577
+    },
+    {
+      "path": "supabase/migrations/202610140053_automatic_trial_optional_provider_version.sql",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "dd4fdb5dc21ce1a3c8d821c79831cdd13689691e558fcce642f733e391b82e0b",
+      "bytes": 12904
+    },
+    {
+      "path": "tests/billing-047/edge-cases.test.mjs",
+      "status": "modified",
+      "before_sha256": "059e3abb4f06429d5f57848f8e3dd8cd926133f470fe5699e9cf2caa62b7e6f5",
+      "after_sha256": "8e6f1f4a9d91bacdf96c54b13a599d8d93c294b9fcf423c923ff07dec30e5809",
+      "bytes": 7813
+    },
+    {
+      "path": "tests/billing-047/fixture.mjs",
+      "status": "modified",
+      "before_sha256": "094a453a7dae50ec68d4d2ba6c781d598921d403ad7386d6f6cbb4f8ad5fee05",
+      "after_sha256": "de79f4b015919cadc044ef08d683b048be672cd6872508c89106c0ff5e68e7f7",
+      "bytes": 5847
+    },
+    {
+      "path": "tests/demo-browser/checkout051.spec.ts",
+      "status": "modified",
+      "before_sha256": "e240775b42905452f0fe4b62623b00e6ae408c79d308799d311141c95c9d5774",
+      "after_sha256": "9857f46186a29fec6b422034f8de8c408645541ab8abca44a69cc7a334229966",
+      "bytes": 23796
+    },
+    {
+      "path": "tests/hotfix-050/integrity.test.mjs",
+      "status": "modified",
+      "before_sha256": "5795b76ff47c75248ca3ea2d5aa9a9f613f8adf04bf8bde366071dfa2aacf2a9",
+      "after_sha256": "9a84148970b1c2151af1232ffd0f841cc3fbe6f9f9363ab3d61606f5a9f537a6",
+      "bytes": 2739
+    },
+    {
+      "path": "tests/integrated-051/trial.test.mjs",
+      "status": "modified",
+      "before_sha256": "2ac9e7d7cdfffec1389ecee7d9cee7080cfbc2781d64dccf8bb5a59e991e55ce",
+      "after_sha256": "2beea3155b63fbba1cfe1ac2ac8414568f89bd4cc473262453ccdee1791ae96f",
+      "bytes": 7656
+    },
+    {
+      "path": "tests/support/hotfix051-integrity.mjs",
+      "status": "modified",
+      "before_sha256": "16c5175b53cf611504697c57c4eb6b33dd8694d4e47e3f7a809af75190fe7024",
+      "after_sha256": "40529d46327d68203aaa382454665ebd55be26db6e1561c902098bb0450feb87",
+      "bytes": 2422
+    },
+    {
+      "path": "tests/syzia-051/financial.test.mjs",
+      "status": "modified",
+      "before_sha256": "0678ab1f985024131ff93981313992c6a342a502a33751ae69570768f14de387",
+      "after_sha256": "d98d0bbe2f8a01ac8981a7083a75b26ebb820faeff11136760fa565f91dfd837",
+      "bytes": 12241
+    },
+    {
+      "path": "tests/syzia-051/integrity.test.mjs",
+      "status": "modified",
+      "before_sha256": "8065778d822d8e1a379045f3de27112a57961efb257a6038a232b2be080ccab3",
+      "after_sha256": "60a1edaeb0f67e8e0991d9c7ef12dcf9b531e1c409ba4277b3dab0a7708dd170",
+      "bytes": 1847
+    },
+    {
+      "path": "tests/trial-052/automatic.test.mjs",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "09197150ad2e092002c3098cb1ae2165b4d023689315e948a8c3cfcb2b4388ba",
+      "bytes": 11409
+    },
+    {
+      "path": "tests/trial-052/integrity.test.mjs",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "5f7855a9f983398429668b538fdbc623264b6213ef6b0af9f94831aedf1657bc",
+      "bytes": 1720
+    },
+    {
+      "path": "tests/trial-052/method.test.mjs",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "3cdbf515c15c030bdd348f99926f302203a7aadf5eb62de4e95f664934257149",
+      "bytes": 2660
+    },
+    {
+      "path": "tests/trial-052/upgrade.test.mjs",
+      "status": "added",
+      "before_sha256": null,
+      "after_sha256": "660588fefaba836e9c3d9ada9d2d440f98c4f72a12059e741b713b52c2bd8252",
+      "bytes": 7643
+    }
+  ],
+  "self_reference_note": "Inventory is covered by SHA256SUMS-052.txt; SHA256SUMS-052.txt excludes only itself."
+}

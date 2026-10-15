@@ -1,0 +1,130 @@
+PASS 01 Upgrade 039→040 preserva todas as linhas anteriores em banco populado
+PASS 02 Trial novo automático: 7 dias configurados, consentimento, sem pagamento, onboarding existente e idempotência
+PASS 03 Trial consumido por mesma identidade/documento não gera novo trial nem análise
+PASS 04 Fallback inconclusivo respeita política manual, sem ativar trial
+PASS 05 Empresa existente confirma documento e ativa trial automaticamente sem fatura
+PASS 06 Trial configurado usa duração efetiva sem nome nem preço hardcoded
+PASS 07 Homologação aplica, troca e remove sem tocar assinatura, trial, pagamento ou dados operacionais
+PASS 08 Homologação é exclusiva SuperAdmin, auditada, com concorrência e replay
+PASS 09 Matriz Essencial: capabilities por RPC/RLS e limites reais
+PASS 09 Matriz Profissional: capabilities por RPC/RLS e limites reais
+PASS 09 Matriz Equipe: capabilities por RPC/RLS e limites reais
+PASS 09 Matriz Assistido: capabilities por RPC/RLS e limites reais
+PASS 10 Limite de membro real bloqueia inclusão sem apagar membros no downgrade
+PASS 11 Destaque troca exclusivamente a apresentação, sem nova versão/capacidade/preço
+PASS 12 Sem grant colaborador não assume; grant explícito permite fila geral→Minha fila
+PASS 13 Revogação de grant em sessão aberta impede próxima resposta
+PASS 14 Presença ausente retorna causa específica sem falso unauthorized
+PASS 15 Upgrade/downgrade e human_support revogam compartilhado sem apagar operação
+PASS 16 Identidade publicada acompanha contexto seguro sem expor rascunho ou outro tenant
+PASS 17 Agenda pendente de proposta, aprovada libera, erro e dia sem horários distinguíveis por RPC
+PASS 18 Engines, tabelas de homologação e edição global não são acessíveis diretamente
+PASS 19 Atendente próprio: papel explícito e grants permitem assumir sem human_support
+PASS 20 Dois atendentes não assumem o mesmo ticket; transferência move a responsabilidade
+PASS 21 Equipe SYZIA provisionada globalmente sem membership; ADM não altera identidade nem credenciais
+PASS 22 Equipe SYZIA suspende, desativa e reativa sem criar membership ou reativar atribuições automaticamente
+PASS 23 Atribuições A e B são independentes; suspender A conserva B e nega A
+PASS 24 ADM ajusta grants locais da equipe sem ultrapassar teto global ou liberar financeiro irrestrito
+PASS 25 Clientes existem antes da proposta/claim e leitura requer clients.read
+PASS 26 Revogar sessão global invalida RPC subsequente sem logout do navegador
+PASS 27 Homologação restaura isenção legítima e conserva evidência de concessão
+PASS 28 Limites e dados sobrevivem à retirada de plano em empresa sem assinatura
+PASS 29 Fallback de empresa existente permite concessão manual e extensão auditadas
+PASS 30 Trial usado em empresa existente é conclusivo e mantém todos os identificadores
+PASS 31 Financeiro por RLS: acesso permitido vê registro; downgrade na sessão oculta sem apagar
+PASS 32 Reemissão de credencial global exclusiva SuperAdmin invalida hash/link e preserva histórico
+PASS 01 Upgrade populado 040→041 preserva todas as colunas e linhas anteriores
+PASS 02 Contratação direta: reserva sem atendente, proposta final ou pagamento
+PASS 03 Preço fixo + adicional: total e duração calculados e reservados
+PASS 04 A partir de vai direto ao atendente próprio elegível
+PASS 05 Sob consulta sem próprio autorizado é atribuído ao ADM
+PASS 06 Compartilhado não recebe nem abre ticket de avaliação por RPC ou RLS
+PASS 07 Compartilhado não altera preço por calculadora nem endpoint legado
+PASS 08 ADM e funcionário próprio autorizado montam proposta com grants
+PASS 09 Revogação de grant de orçamento impede próxima ação na mesma sessão
+PASS 10 Horário pretendido não ocupa agenda antes de aprovar
+PASS 11 Aprovação reserva horário desejado atomicamente com duração final
+PASS 12 Horário ocupado mantém proposta aprovada e permite novo horário
+PASS 13 Duração final maior que janela disponível pede nova escolha
+PASS 14 Multisserviço determinístico mantém pedido único e soma duração
+PASS 15 Multisserviço misto segue inteiro para empresa, com um ticket
+PASS 16 Foto obrigatória exige anexo privado do serviço correto; opcionais e recomendadas não bloqueiam
+PASS 17 Empresa pede foto; consumidor envia pelo acompanhamento sem tornar arquivo público
+PASS 18 Dúvida contextual cria somente rascunho e ticket, sem proposta ou reserva
+PASS 19 Continuar após ajuda reutiliza solicitação, oportunidade e ticket
+PASS 20 Calculadora: original, catálogo, adicional, item manual e desconto
+PASS 21 Desconto global em reais e por item são somados e auditados
+PASS 22 Desconto além da autonomia, negativo, decimal inválido e total negativo são negados
+PASS 23 Prévia não cria versão, e envio recalcula no servidor
+PASS 24 Versões enviadas são imutáveis; recusa e nova proposta conservam original
+PASS 25 Isolamento A/B em cálculo, serviços, fotos, rascunho e leitura
+PASS 26 Reserva atômica: conflito reverte envio e repetição não duplica appointment
+PASS 27 Agenda: remarcação e cancelamento mantêm histórico
+PASS 28 Perguntas condicionais, instrução, texto longo, quantidade e foto usam modelo existente
+PASS 29 Rascunho publicado e seleção antiga não aceitam preço ou catálogo obsoleto
+PASS 30 Roteamento não concede permissão a responsável pelo ticket
+PASS 31 Helpers privados novos não são RPCs e grants de tabelas continuam restritos
+PASS 32 Teto de desconto também bloqueia reduzir arbitrariamente item de catálogo fixo
+PASS 33 Endpoint legado não contorna fotos obrigatórias e anexo de outro serviço não satisfaz
+PASS 34 Publicação preserva política e rascunho não altera jornada já publicada
+PASS 35 Ajuda mantém idempotência, contexto e não revela rascunho a outro consumidor
+PASS 01 Upgrade populado 041→042 preserva linhas e colunas anteriores
+PASS 02 Identidade compartilhada com membership legado sai de accounts/legacy e não vaza credenciais
+PASS 03 ADM não edita/desativa acesso compartilhado por RPC
+PASS 04 Gateway service_role recusa reset e reemissão pelo ADM
+PASS 05 Vínculo empresarial não permite mudar papel global ou cadastro legado
+PASS 06 Super Admin preserva administração global e funcionário próprio mantém edição
+PASS 07 Permissões da Empresa A não alteram B
+PASS 08 Autonomia SIM + grants SIM permite preço fixo e agendar
+PASS 09 Autonomia SIM sem grant bloqueia
+PASS 10 Revogar autonomia bloqueia antes de nova publicação
+PASS 11 Autonomia ainda não publicada não amplia poderes
+PASS 12 Plano sem atendimento compartilhado bloqueia apesar de legado empresarial
+PASS 13 Vínculo revogado em sessão aberta não volta ao membership legado
+PASS 14 Faixa não é inferida de a partir de; faixa explícita publicada é permitida
+PASS 15 Desconto explícito dentro e fora do teto publicado/atual
+PASS 16 Compartilhado não usa calculadora variável mesmo com grants
+PASS 17 Encaixe e condições publicados continuam sujeitos a grants e capacidade
+PASS 18 Home é VOLATILE, carregamento normal e seções independentes
+PASS 19 Home mostra solicitação real e link para pedido
+PASS 20 Home mostra proposta aprovada aguardando agenda, preservando aprovação
+PASS 21 Home respeita isolamento e não expõe agenda sem grant
+PASS 22 Proposta fixa sem mudança aceita explicação vazia
+PASS 23 Mudança de preço exige explicação server-side
+PASS 24 Desconto, item extra e condição explícita exigem explicação
+PASS 25 Serviço contínuo de 10h não é dividido e informa does_not_fit
+PASS 26 Divisível de 10h gera combinação automática de 2 dias
+PASS 27 Combinação respeita bloqueios e buffer por período
+PASS 28 Todos os períodos reservados uma vez, um pedido e um cliente
+PASS 29 Conflito no segundo período recusa plano obsoleto sem reserva parcial
+PASS 30 Consumidor vê partes agrupadas e apenas o próprio pedido
+PASS 31 Agenda empresarial e ficha mostram períodos vinculados e histórico
+PASS 32 Remarcar um período preserva outro e duração
+PASS 33 Replanejamento integral substitui períodos juntos sem apagar histórico
+PASS 34 Conflito ao replanejar preserva todos os períodos anteriores
+PASS 35 Cancelamento integral não deixa órfãos
+PASS 36 Cancelamento empresarial integral mantém histórico de cada parte
+PASS 37 Máximo de períodos é respeitado sem plano parcial
+PASS 38 Multisserviço divisível distribui duração; item contínuo impede divisão
+PASS 39 Busca próximos horários compatíveis evita dia ocupado
+PASS 40 Proposta aprovada mantém horário desejado e congela modo de execução
+PASS 41 Aprovação não reserva combinação diferente da apresentada
+PASS 42 Concluir parte não conclui atendimento nem duplica valor realizado
+PASS 43 RPCs e RLS negam cross-tenant e helpers privados permanecem fechados
+PASS 44 Duração/partes adulteradas não reservam nem mudam total
+PASS 45 UI empresarial agenda pedido aprovado pelo mesmo contexto comercial
+PASS 46 Métricas e valor realizado contam uma contratação somente após a última parte
+PASS 47 Falha injetada na segunda gravação reverte primeira parte e submissão
+PASS Primeira entrada: estado não iniciado sem progresso fictício
+PASS Checklist acompanha informações persistidas e recomendações opcionais
+PASS 048: Manual opcional e prontidão compartilhada separada da configuração mínima
+PASS Retomada preserva etapa e usuário após nova sessão técnica
+PASS Anterior, próximo e concluir persistem sem reaparecer como convite
+PASS Pular persiste e refazer reinicia sem alterar checklist
+PASS Repetição do mesmo comando é idempotente; duas abas detectam revisão antiga
+PASS Frontend não conclui etapa antecipadamente nem altera tabela diretamente
+PASS Usuários sem gestão empresarial não consultam nem modificam A
+PASS Mesmo gestor em duas organizações mantém tutoriais separados
+PASS Dois gestores da mesma empresa não compartilham estado ou leitura direta
+PASS Revogação impede leitura e comando com sessão preexistente
+PASS RLS, FORCE RLS e auditoria do tutorial

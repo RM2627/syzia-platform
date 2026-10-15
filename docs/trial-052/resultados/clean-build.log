@@ -1,0 +1,62 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> atendimento-compartilhado-fundacao@0.8.0 build
+> tsc --noEmit && vite build
+
+vite v8.3.0 building client environment for production...
+transforming...
+✓ 350 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                               1.00 kB │ gzip:   0.53 kB
+dist/assets/support-copy-BIqzrjyj.css         0.54 kB │ gzip:   0.31 kB
+dist/assets/Availability-xaIx1wPx.css         0.87 kB │ gzip:   0.41 kB
+dist/assets/QuoteCalculator-BsDQ6mzK.css      1.43 kB │ gzip:   0.54 kB
+dist/assets/MessageThread-D7vLE1Fo.css        1.66 kB │ gzip:   0.70 kB
+dist/assets/CompanyPage-BbPKQ_hR.css          2.55 kB │ gzip:   0.83 kB
+dist/assets/RequestedItems-DnNFbDPd.css       3.34 kB │ gzip:   1.06 kB
+dist/assets/Company-B501goqZ.css              4.52 kB │ gzip:   1.42 kB
+dist/assets/Commercial-7ilpwaq0.css           5.06 kB │ gzip:   1.55 kB
+dist/assets/Billing-Rt1ZA8Y9.css              7.27 kB │ gzip:   2.17 kB
+dist/assets/Central-ChoFjsp9.css              7.53 kB │ gzip:   2.17 kB
+dist/assets/presence-editor-xQ7RrJ3F.css      9.18 kB │ gzip:   2.46 kB
+dist/assets/PublicSite-D5p08UBz.css          11.70 kB │ gzip:   3.22 kB
+dist/assets/index-14kXGTLt.css               12.82 kB │ gzip:   3.67 kB
+dist/assets/FoundationApp-D_5NjVQS.css       26.35 kB │ gzip:   6.38 kB
+dist/assets/consumer-Cunpyqv0.css            36.98 kB │ gzip:   8.18 kB
+dist/assets/cpf-XO_mWsFK.js                   0.37 kB │ gzip:   0.24 kB
+dist/assets/rolldown-runtime-hePW80VL.js      0.71 kB │ gzip:   0.42 kB
+dist/assets/Primitives-BWlswqQe.js            0.76 kB │ gzip:   0.36 kB
+dist/assets/Dialog-C29zyxXF.js                0.89 kB │ gzip:   0.51 kB
+dist/assets/model-BI4faQvh.js                 2.44 kB │ gzip:   1.20 kB
+dist/assets/navigation-C0zKnKta.js            3.33 kB │ gzip:   1.55 kB
+dist/assets/Admin-B9XD_saM.js                 5.09 kB │ gzip:   1.95 kB
+dist/assets/MessageThread-Bak7NrZr.js         5.96 kB │ gzip:   2.73 kB
+dist/assets/api-DBZ3qEGe.js                   6.38 kB │ gzip:   2.59 kB
+dist/assets/Permissions-Ly9a95eV.js           6.84 kB │ gzip:   2.82 kB
+dist/assets/presence-editor-A0xczQHR.js       7.37 kB │ gzip:   3.02 kB
+dist/assets/QuoteCalculator-jFgATpJI.js       9.18 kB │ gzip:   3.30 kB
+dist/assets/SelfService-j3LbthMI.js          11.10 kB │ gzip:   3.79 kB
+dist/assets/Analytics-CjHL7jfz.js            11.55 kB │ gzip:   4.00 kB
+dist/assets/Availability-BV6Bn8aq.js         14.15 kB │ gzip:   4.31 kB
+dist/assets/PublicSite-ScqkCHcU.js           22.04 kB │ gzip:   6.87 kB
+dist/assets/Commercial-BAydT4bS.js           23.21 kB │ gzip:   6.75 kB
+dist/assets/RequestedItems-mnyEhx0h.js       23.31 kB │ gzip:   8.15 kB
+dist/assets/CompanyPage-D04-Ud2w.js          26.16 kB │ gzip:   8.59 kB
+dist/assets/Operations-DHN_8a4u.js           32.57 kB │ gzip:   9.11 kB
+dist/assets/Central-BYaTWQL1.js              34.57 kB │ gzip:  10.31 kB
+dist/assets/support-copy-CJT0iTEP.js         43.52 kB │ gzip:  12.09 kB
+dist/assets/Company-Bd67eHe7.js              45.81 kB │ gzip:  13.44 kB
+dist/assets/Consumer-D2saPBXm.js             51.86 kB │ gzip:  15.76 kB
+dist/assets/Billing-DIfkq2M3.js              75.18 kB │ gzip:  21.69 kB
+dist/assets/FoundationApp-CvErnZ2p.js        97.23 kB │ gzip:  25.87 kB
+dist/assets/Captcha-JVC6Mqb7.js             229.55 kB │ gzip:  60.33 kB
+dist/assets/index-D9rzgHjV.js               262.92 kB │ gzip:  83.78 kB
+dist/assets/render-CBKRL81V.js            1,135.27 kB │ gzip: 506.86 kB
+
+✓ built in 357ms
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.

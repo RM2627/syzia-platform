@@ -1,0 +1,34 @@
+[WebServer] (node:3575) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[WebServer] (node:3588) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:3606) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 9 tests using 1 worker
+
+(node:3640) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 9:14:59 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"access_session","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:14:59 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  1 tests/demo-browser/flexible-support.spec.ts:54:3 › Global 1440: flexible without grid, scheduled grid, switch preserves settings (5.7s)
+[WebServer] 9:15:04 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"access_session","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  2 tests/demo-browser/flexible-support.spec.ts:54:3 › Global 390: flexible without grid, scheduled grid, switch preserves settings (5.2s)
+[WebServer] 9:15:10 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"access_session","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:15:10 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"access_session","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  3 tests/demo-browser/flexible-support.spec.ts:54:3 › Global 320: flexible without grid, scheduled grid, switch preserves settings (5.2s)
+[WebServer] 9:15:17 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"assisted_policy_mode_save","organization":null,"category":"authorization","reason":"access_denied","status":"42501"}
+  ✓  4 tests/demo-browser/flexible-support.spec.ts:141:3 › Company 1440: rules and consumption read-only; direct global URL and RPC denied (3.9s)
+[WebServer] 9:15:21 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"assisted_policy_mode_save","organization":null,"category":"authorization","reason":"access_denied","status":"42501"}
+  ✓  5 tests/demo-browser/flexible-support.spec.ts:141:3 › Company 390: rules and consumption read-only; direct global URL and RPC denied (3.6s)
+[WebServer] 9:15:26 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  6 tests/demo-browser/flexible-support.spec.ts:269:3 › Central 1440: unavailable cannot claim; available claims with immediate feedback (6.9s)
+  ✓  7 tests/demo-browser/flexible-support.spec.ts:269:3 › Central 390: unavailable cannot claim; available claims with immediate feedback (6.5s)
+[WebServer] 9:15:36 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:15:40 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"people_self","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:15:40 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"people_self","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  8 tests/demo-browser/flexible-support.spec.ts:305:3 › Consumer 1440: message persists with no shared staff online and no quota charged (11.3s)
+  ✓  9 tests/demo-browser/flexible-support.spec.ts:305:3 › Consumer 390: message persists with no shared staff online and no quota charged (11.5s)
+
+  9 passed (1.2m)

@@ -1,0 +1,31 @@
+[WebServer] (node:2304) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[WebServer] (node:2317) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:2335) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 10 tests using 1 worker
+
+(node:2369) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/demo-browser/ux001.spec.ts:61:3 › UX001 empresarial 1440: filtro, troca, histórico, URL direta, reload e limpar seleção (8.4s)
+  ✓   2 tests/demo-browser/ux001.spec.ts:61:3 › UX001 empresarial 390: filtro, troca, histórico, URL direta, reload e limpar seleção (7.9s)
+  ✓   3 tests/demo-browser/ux001.spec.ts:61:3 › UX001 empresarial 320: filtro, troca, histórico, URL direta, reload e limpar seleção (7.8s)
+  ✓   4 tests/demo-browser/ux001.spec.ts:148:1 › UX001 Home, notificações, Pendências, Comercial e alternância determinística (5.4s)
+  ✓   5 tests/demo-browser/ux001.spec.ts:217:1 › UX001 Central e Comercial globais continuam globais; fila preservada (5.2s)
+[WebServer] 9:12:45 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:12:47 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"central_context","organization":null,"category":"authorization","reason":"permission_denied","status":"42501"}
+[WebServer] 9:12:47 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"central_context","organization":null,"category":"authorization","reason":"permission_denied","status":"42501"}
+  ✓   6 tests/demo-browser/ux001.spec.ts:245:1 › UX001 URL de B em painel de A e usuário sem grant são negados (6.7s)
+[WebServer] 9:12:55 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"central_context","organization":null,"category":"authorization","reason":"permission_denied","status":"42501"}
+[WebServer] 9:12:55 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"central_context","organization":null,"category":"authorization","reason":"permission_denied","status":"42501"}
+  ✓   7 tests/demo-browser/ux001.spec.ts:287:1 › UX001 Equipe SYZIA atribuída opera global; não atribuída permanece negada (6.0s)
+  ✓   8 tests/demo-browser/ux001.spec.ts:312:1 › UX001 URL copiada sem sessão não abre conteúdo empresarial (727ms)
+[WebServer] 9:12:59 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:13:04 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"central_queue","organization":"e2bcdbd6-3935-4fd6-9917-200aad2bbe69","category":"operation","reason":"unclassified","status":""}
+  ✓   9 tests/demo-browser/ux001.spec.ts:322:1 › UX001 duas empresas autorizadas: ticket B não aparece no painel A; filtros limpos em B (9.8s)
+  ✓  10 tests/demo-browser/ux001.spec.ts:388:1 › UX001 notificação de decisão abre e troca ticket dentro de Pendências (3.5s)
+
+  10 passed (1.2m)

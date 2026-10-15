@@ -1,4 +1,4 @@
-import { BillingError, fail, identifier, verifiedSnapshot, verifyBinding } from "./mercado-pago.mjs";
+import { BillingError, fail, identifier, iso, providerVersion, verifiedSnapshot, verifyBinding } from "./mercado-pago.mjs";
 import { normalizePayerEmail } from "../../shared/billing-payer-email.mjs";
 const UUID = /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i;
 export function exactBody(body, required, optional = []) {
@@ -46,6 +46,8 @@ export function subscriptions({ gateway, service, asUser, auth }) {
       // Validate the tenant / merchant / immutable reference before ANY provider mutation.
       verifyBinding(gateway, b, p);
       let snapshot = await verifiedSnapshot(gateway, b, p);
+      if (Object.hasOwn(b, "provider_modified_at"))
+        await sql("validate_snapshot", id, { ...snapshot, lease });
       const checkedResource = p;
       let operationDone = b.operation_state === "done" || b.operation === "checkout";
       const end = Math.max(Date.parse(b.paid_until) || 0, Date.parse(b.trial_end) || 0);
@@ -74,10 +76,22 @@ export function subscriptions({ gateway, service, asUser, auth }) {
           }
           if (b.operation === "method") {
             verifyBinding(gateway, b, updated);
-            if (!updated.card_id || !Number.isSafeInteger(updated.version)) fail("billing_response_invalid", 502);
+            if (!updated.card_id) fail("billing_response_invalid", 502);
+            identifier(updated.card_id);
+            providerVersion(updated);
+            iso(updated.last_modified);
           }
           p = await gateway.read(b.provider_id);
-          methodAcknowledged = b.operation === "method" && Boolean(p.card_id && String(p.card_id) === String(updated.card_id) && p.version >= updated.version);
+          if (b.operation === "method") {
+            const readVersion = providerVersion(p), updatedVersion = providerVersion(updated);
+            // The same official card must be visible on the following GET. A
+            // counter, when present on both responses, remains an extra guard.
+            // Older timestamps never acknowledge a later update. An uncertain
+            // PUT is still never resent; recovery uses the existing card change.
+            methodAcknowledged = Boolean(p.card_id && String(p.card_id) === String(updated.card_id) &&
+              Date.parse(iso(p.last_modified)) >= Date.parse(iso(updated.last_modified)) &&
+              (readVersion === undefined || updatedVersion === undefined || readVersion >= updatedVersion));
+          }
 
         }
         operationDone = b.operation === "method" ? Boolean(confirmed || methodAcknowledged) : b.operation === "cancel" ? ["paused", "canceled", "cancelled"].includes(p.status)
@@ -87,12 +101,14 @@ export function subscriptions({ gateway, service, asUser, auth }) {
       return await sql("apply", id, { ...snapshot, lease, operation_done: operationDone, source });
     } catch (e) {
       const code = e instanceof BillingError ? e.code : /^billing_[a-z_]{1,70}$/.test(e?.message || "") ? e.message : "billing_reconciliation_required";
+      const check = e instanceof BillingError ? e.validationCheck ?? null : code === "billing_binding_mismatch" ? "local_history" : code === "billing_stale_snapshot" ? "snapshot" : null;
       await sql("failure", id, { lease, code,
         http_status: e instanceof BillingError ? e.providerStatus ?? null : null,
         stage: e instanceof BillingError ? e.providerStage ?? null : null,
-        check: e instanceof BillingError ? e.validationCheck ?? null : code === "billing_binding_mismatch" ? "local_history" : null,
+        check,
       }).catch(() => {});
       const safe = new BillingError(code, e instanceof BillingError ? e.status : 503);
+      safe.validationCheck = check;
       if (e instanceof BillingError) {
         safe.providerStatus = e.providerStatus;
         safe.providerStage = e.providerStage;

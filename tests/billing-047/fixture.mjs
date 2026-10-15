@@ -3,7 +3,7 @@ import { randomUUID } from "node:crypto";
 import { MercadoPagoSubscriptions } from "../../server/billing/mercado-pago.mjs";
 import { subscriptions } from "../../server/billing/subscriptions.mjs";
 import { fakeMercadoPago } from "./fake-provider.mjs";
-export async function fixture({ beforeUpgrade, afterUpgrade, checkoutDiagnostics = true, integrated = checkoutDiagnostics, verifiedIdentity = true } = {}) {
+export async function fixture({ beforeUpgrade, afterUpgrade, checkoutDiagnostics = true, integrated = checkoutDiagnostics, automaticTrial = integrated, verifiedIdentity = true } = {}) {
   process.env.SYZIA_BILLING_CURRENT = "0";
   process.env.SYZIA_TEAM_CURRENT = "1"; process.env.SYZIA_FLEXIBLE_CURRENT = "1";
   const { consumerDB, users } = await import("../support/current-fixture.mjs");
@@ -13,12 +13,14 @@ export async function fixture({ beforeUpgrade, afterUpgrade, checkoutDiagnostics
   await c.db.exec(await readFile("supabase/migrations/202610050047_mercado_pago_subscriptions.sql", "utf8"));
   if (checkoutDiagnostics) await c.db.exec(await readFile("supabase/migrations/202610130051_checkout_diagnostics.sql", "utf8"));
   if (integrated) await c.db.exec(await readFile("supabase/migrations/202610140052_integrated_subscription_safety.sql", "utf8"));
+  if (automaticTrial) await c.db.exec(await readFile("supabase/migrations/202610140053_automatic_trial_optional_provider_version.sql", "utf8"));
   if (process.env.SYZIA_OPTIONAL_MANUAL_CURRENT === "1") await (await import("../../scripts/syzia-048/fixture.mjs")).upgradeOptionalManualFixture(c.db);
   if (afterUpgrade) await afterUpgrade(c);
   await c.db.exec("begin;update private.billing_runtime set mock_enabled=false;update organization_members set status='suspended'where role='colaborador_empresa'");
   const rpc = async (name, args = {}) => {
     const { rows: [meta] } = await c.db.query("select proargnames,proargtypes::oid[] types from pg_proc where pronamespace='public'::regnamespace and proname=$1", [name]);
-    return c.scalar(`select public.${name}(${meta.proargnames.map((n, i) => `${n}=>$${i + 1}`).join(",")})`, meta.proargnames.map((n, i) => meta.types[i] === 3802 ? JSON.stringify(args[n] ?? null) : args[n] ?? null));
+    const names = meta.proargnames || [];
+    return c.scalar(`select public.${name}(${names.map((n, i) => `${n}=>$${i + 1}`).join(",")})`, names.map((n, i) => meta.types[i] === 3802 ? JSON.stringify(args[n] ?? null) : args[n] ?? null));
   };
   const versions = {};
   for (const [code, name, price, members, full] of [["essencial", "Essencial", 4990, 1, false], ["profissional", "Profissional", 8990, 3, true], ["equipe", "Equipe", 14990, 8, true]]) {

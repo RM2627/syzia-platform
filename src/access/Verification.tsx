@@ -1,3 +1,4 @@
+import { normalizeCPF } from "../../shared/cpf.mjs";
 import { useFinancialCommand } from "../finance/useFinancialCommand";
 import { useEffect, useState, type FormEvent } from "react";
 import { rpc, errorMessage } from "../api";
@@ -27,6 +28,10 @@ export function VerificationGate({
   }, [org, canAccept]);
   async function submit(e: FormEvent) {
     e.preventDefault();
+    if (kind === "CPF" && !normalizeCPF(document)) {
+      setError("Confira os dígitos do CPF. Use 11 dígitos ou a máscara 000.000.000-00.");
+      return;
+    }
     setBusy(true);
     setError("");
     try {

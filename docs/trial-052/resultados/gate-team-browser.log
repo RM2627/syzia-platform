@@ -1,0 +1,29 @@
+[WebServer] (node:2027) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[WebServer] (node:2040) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:2058) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 8 tests using 1 worker
+
+(node:2092) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/demo-browser/team-availability.spec.ts:28:3 › Employee availability 1440: weekly editor, save, reload, aggregate requests (3.8s)
+[WebServer] 9:11:34 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  2 tests/demo-browser/team-availability.spec.ts:28:3 › Employee availability 390: weekly editor, save, reload, aggregate requests (3.5s)
+[WebServer] 9:11:38 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  3 tests/demo-browser/team-availability.spec.ts:28:3 › Employee availability 320: weekly editor, save, reload, aggregate requests (3.4s)
+[WebServer] 9:11:41 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  4 tests/demo-browser/team-availability.spec.ts:106:3 › Super Admin policy 1440: configured hours, quota and audit (3.2s)
+[WebServer] 9:11:45 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:11:45 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"analytics_platform","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  5 tests/demo-browser/team-availability.spec.ts:106:3 › Super Admin policy 390: configured hours, quota and audit (3.1s)
+[WebServer] 9:11:50 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"assisted_admin_context","organization":null,"category":"authorization","reason":"access_denied","status":"42501"}
+  ✓  6 tests/demo-browser/team-availability.spec.ts:139:1 › Business admin: read-only usage and direct global RPC denial (3.7s)
+[WebServer] 9:11:52 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  7 tests/demo-browser/team-availability.spec.ts:173:3 › Agenda 1440: assign responsible in existing appointment and preserve period (3.5s)
+  ✓  8 tests/demo-browser/team-availability.spec.ts:173:3 › Agenda 390: assign responsible in existing appointment and preserve period (3.3s)
+
+  8 passed (36.7s)

@@ -78,7 +78,7 @@ const steps = controlled
   ? [["controlled-failure", [node, "-e", "process.exit(42)"]]]
   : suites;
 const report = {
-  version: "051",
+  version: "052",
   engine:
     "Local PGlite + HTTP fixtures + Chromium; external homologation pending",
   startedAt: new Date().toISOString(),

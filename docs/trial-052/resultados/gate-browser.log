@@ -1,0 +1,195 @@
+[WebServer] (node:981) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[WebServer] (node:994) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:1012) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 30 tests using 1 worker
+
+(node:1049) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS UI-001 Painel Home 1440px
+PASS UI-002 Painel agenda 1440px
+PASS UI-003 Painel novo-agendamento 1440px
+PASS UI-004 Painel atendimento 1440px
+PASS UI-005 Painel orcamentos 1440px
+PASS UI-006 Painel clientes 1440px
+PASS UI-007 Painel pendencias 1440px
+PASS UI-008 Painel comercial 1440px
+PASS UI-009 Painel financeiro 1440px
+PASS UI-010 Painel metricas 1440px
+PASS UI-011 Painel operacao 1440px
+PASS UI-012 Painel acessos 1440px
+PASS UI-013 Painel pagina 1440px
+PASS UI-014 Painel configuracao 1440px
+PASS UI-015 Painel servicos 1440px
+PASS UI-016 Painel manual 1440px
+PASS UI-017 Painel faq 1440px
+PASS UI-018 Painel respostas 1440px
+PASS UI-019 Painel regras 1440px
+PASS UI-020 Painel autonomia 1440px
+PASS UI-021 Painel prontidao 1440px
+PASS UI-022 Painel assinatura 1440px
+PASS UI-023 Painel consumidor 1440px
+PASS UI-024 Painel permissoes 1440px
+PASS UI-025 Painel suporte 1440px
+PASS UI-026 Painel legal 1440px
+PASS UI-027 Painel Home 390px
+PASS UI-028 Painel agenda 390px
+PASS UI-029 Painel novo-agendamento 390px
+PASS UI-030 Painel atendimento 390px
+PASS UI-031 Painel orcamentos 390px
+PASS UI-032 Painel clientes 390px
+PASS UI-033 Painel pendencias 390px
+PASS UI-034 Painel comercial 390px
+PASS UI-035 Painel financeiro 390px
+PASS UI-036 Painel metricas 390px
+PASS UI-037 Painel operacao 390px
+PASS UI-038 Painel acessos 390px
+PASS UI-039 Painel pagina 390px
+PASS UI-040 Painel configuracao 390px
+PASS UI-041 Painel servicos 390px
+PASS UI-042 Painel manual 390px
+PASS UI-043 Painel faq 390px
+PASS UI-044 Painel respostas 390px
+PASS UI-045 Painel regras 390px
+PASS UI-046 Painel autonomia 390px
+PASS UI-047 Painel prontidao 390px
+PASS UI-048 Painel assinatura 390px
+PASS UI-049 Painel consumidor 390px
+PASS UI-050 Painel permissoes 390px
+PASS UI-051 Painel suporte 390px
+PASS UI-052 Painel legal 390px
+PASS UI-053 Teclado, foco e redução de movimento na Home
+PASS UI-054 Página pública dark 1440px
+PASS UI-055 Página pública dark 390px
+PASS UI-056 Página pública light 1440px
+PASS UI-057 Página pública light 390px
+PASS UI-058 Pedido: modal por teclado, fechamento e retorno de foco
+[WebServer] 9:08:12 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"access_session","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:08:12 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"access_session","organization":null,"category":"operation","reason":"unclassified","status":""}
+PASS UI-059 Administração /app 1440px
+PASS UI-060 Administração /admin/empresas 1440px
+PASS UI-061 Administração /admin/pessoas 1440px
+PASS UI-062 Administração /admin/equipe 1440px
+PASS UI-063 Administração /admin/auditoria 1440px
+PASS UI-064 Administração /admin/metricas 1440px
+PASS UI-065 Administração /admin/assinaturas 1440px
+PASS UI-066 Administração /admin/cobranca 1440px
+PASS UI-067 Administração /admin/aquisicao 1440px
+PASS UI-068 Administração /app 390px
+PASS UI-069 Administração /admin/empresas 390px
+PASS UI-070 Administração /admin/pessoas 390px
+PASS UI-071 Administração /admin/equipe 390px
+PASS UI-072 Administração /admin/auditoria 390px
+PASS UI-073 Administração /admin/metricas 390px
+PASS UI-074 Administração /admin/assinaturas 390px
+PASS UI-075 Administração /admin/cobranca 390px
+PASS UI-076 Administração /admin/aquisicao 390px
+PASS UI-077 URL direta empresarial de outra organização
+PASS UI-078 Login atual [EMAIL-FICTICIO-OMITIDO]
+PASS UI-079 URL de Financeiro sem grants gerenciais [EMAIL-FICTICIO-OMITIDO]
+PASS UI-080 Login atual [EMAIL-FICTICIO-OMITIDO]
+PASS UI-081 URL de Financeiro sem grants gerenciais [EMAIL-FICTICIO-OMITIDO]
+PASS UI-082 Logout encerra navegação protegida
+  ✓   1 tests/demo-browser/current-navigation.spec.ts:101:1 › Regressão vigente: navegação, desktop/mobile, temas, roles e acessibilidade básica (2.2m)
+[WebServer] 9:08:45 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓   2 tests/demo-browser/current-session.spec.ts:7:1 › Inatividade: polling não renova, aviso aos 29 minutos e logout aos 30 (3.1s)
+[WebServer] 9:08:48 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"access_session","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:08:48 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓   3 tests/demo-browser/current-session.spec.ts:21:1 › Sessão compartilhada: logout em uma aba limpa a outra e mantém somente empresa lembrada (2.5s)
+[WebServer] 9:08:50 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"access_session","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:08:50 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"access_session","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓   4 tests/demo-browser/current-session.spec.ts:39:1 › Aviso permite continuar; teclado/toque contam, refresh e polling não (2.3s)
+[WebServer] 9:08:55 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:08:55 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"support_context","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:08:55 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"access_session","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:08:55 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"permissions_context","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:08:55 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"onboarding_context","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"operation","reason":"unclassified","status":""}
+  ✓   5 tests/demo-browser/current-session.spec.ts:71:1 › Rascunho empresarial persiste no foco e se encerra no logout/troca de identidade (4.9s)
+[WebServer] 9:08:58 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:09:12 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"company_context","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:09:13 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"company_service_save_with_checklist","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"operation","reason":"unclassified","status":""}
+  ✓   6 tests/demo-browser/current-syzia-033-media.temporary.spec.ts:28:1 › Jornada desktop: categoria, imagens, identidade, catálogo, prévia e publicação (16.8s)
+[WebServer] 9:09:15 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:09:22 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"company_context","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"operation","reason":"unclassified","status":""}
+  ✓   7 tests/demo-browser/current-syzia-033-media.temporary.spec.ts:292:1 › Portfólio: três formatos, fotos, ordem, edição, ocultação e exclusão; pagamentos (8.9s)
+[WebServer] 9:09:24 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓   8 tests/demo-browser/current-syzia-034-media.temporary.spec.ts:90:1 › Logo em três proporções, capa aceita retrato, enquadramento, preview/publicação/recarga e gateway parado (17.1s)
+[WebServer] 9:09:41 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:09:45 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"company_service_relations","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:09:45 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"company_service_checklist","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:09:45 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"company_service_relations","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"operation","reason":"unclassified","status":""}
+  ✓   9 tests/demo-browser/current-syzia-034-media.temporary.spec.ts:240:1 › Serviço usa enquadramento 3:2 e o mesmo arquivo na prévia e publicação (8.1s)
+  ✓  10 tests/demo-browser/current-syzia-034-media.temporary.spec.ts:289:1 › Portfólio preserva foto única, comparação equivalente e galeria ampliada (7.9s)
+[WebServer] 9:09:57 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  11 tests/demo-browser/current-syzia-036.temporary.spec.ts:29:3 › Empresa: falha Auth, retomada, três cópias, reemissão e ativação (6.2s)
+[WebServer] 9:10:03 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  12 tests/demo-browser/current-syzia-036.temporary.spec.ts:218:1 › Login mostra somente identidade/senha e encaminha uma empresa, múltiplas, equipe global e Super Admin (2.8s)
+  ✓  13 tests/demo-browser/current-syzia-036.temporary.spec.ts:263:1 › Primeiro acesso sem link orienta recuperação; login e ativação cabem no celular (953ms)
+[WebServer] 9:10:07 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"access_session","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:10:07 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"access_session","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  14 tests/demo-browser/current-syzia-040.temporary.spec.ts:125:1 › 01 Planos configurados: 7 dias grátis, destaque exclusivo, foco e reduz movimento (2.0s)
+[WebServer] 9:10:09 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"access_session","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:10:10 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:10:13 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"operations_home_section","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:10:13 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"operations_home_section","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:10:13 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"operations_home_section","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:10:16 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"operations_home_section","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:10:16 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"operations_home_section","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:10:16 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"operations_home_section","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:10:16 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"operations_home_section","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:10:18 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"central_unread","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:10:18 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"operations_home_section","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:10:18 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"operations_home_section","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:10:18 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"operations_home_section","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:10:18 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"operations_home_section","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:10:19 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"operations_home_section","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:10:19 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"operations_home_section","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:10:19 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"operations_home_section","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:10:19 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"operations_home_section","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"operation","reason":"unclassified","status":""}
+  ✓  15 tests/demo-browser/current-syzia-040.temporary.spec.ts:157:1 › 02 Homologação pelo SuperAdmin e quatro planos por UI/rotas na sessão do ADM real (11.0s)
+[WebServer] 9:10:20 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"access_session","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:10:20 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"access_session","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  16 tests/demo-browser/current-syzia-040.temporary.spec.ts:243:1 › 03 Equipe SYZIA: provisionar, editar identidade, reemitir, suspender e separar vínculos (3.6s)
+[WebServer] 9:10:23 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  17 tests/demo-browser/current-syzia-040.temporary.spec.ts:301:1 › 04 Consumidor: marca publicada escura/clara, proposta pendente oculta agenda e privacidade (3.5s)
+  ✓  18 tests/demo-browser/current-syzia-040.temporary.spec.ts:348:1 › 06 FAQ: altura de conteúdo, sinal aberto, mobile FAQ→horários→ajuda sem overflow (1.5s)
+[WebServer] 9:10:28 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"access_session","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:10:28 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"access_session","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  19 tests/demo-browser/current-syzia-040.temporary.spec.ts:377:1 › 07 Trial self-service: cadastro, confirmação sem pagamento e entrada no onboarding existente (4.4s)
+[WebServer] 9:10:33 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  20 tests/demo-browser/current-syzia-040.temporary.spec.ts:462:1 › 08 Manual da Central em português e busca por label ou chave (2.7s)
+[WebServer] 9:10:36 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  21 tests/demo-browser/current-syzia-040.temporary.spec.ts:493:1 › 09 Colaborador sem grants: Clientes explica falta de permissão e Assumir fica desabilitado (4.1s)
+[WebServer] 9:10:42 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"operations_checklist","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"operation","reason":"unclassified","status":""}
+  ✓  22 tests/demo-browser/current-syzia-042.temporary.spec.ts:153:1 › 01 Home carrega trabalho do dia, amanhã, links e ações existentes (3.0s)
+[WebServer] 9:10:44 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"operations_home_section","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"authorization","reason":"access_denied","status":"42501"}
+[WebServer] 9:10:44 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"operations_home_section","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"authorization","reason":"access_denied","status":"42501"}
+[WebServer] 9:10:46 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"operations_home_section","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:10:46 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"operations_home_section","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"operation","reason":"unclassified","status":""}
+  ✓  23 tests/demo-browser/current-syzia-042.temporary.spec.ts:191:1 › 02 Falha de um bloco mantém demais; retry repete somente bloco; autorização distinta de rede (3.8s)
+[WebServer] 9:10:46 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  24 tests/demo-browser/current-syzia-042.temporary.spec.ts:241:1 › 03 Equipe SYZIA separada, sem controles globais; permissões locais abrem pessoa (2.8s)
+[WebServer] 9:10:50 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  25 tests/demo-browser/current-syzia-042.temporary.spec.ts:273:1 › 04 Serviço contínuo de 6h30 sem janela explica e busca próximos horários (4.9s)
+  ✓  26 tests/demo-browser/current-syzia-042.temporary.spec.ts:303:1 › 05 Divisível reserva 2 períodos; consumidor e Agenda mostram mesma execução; remarcação e cancelamento (5.7s)
+[WebServer] 9:11:04 AM [vite] (client) [console.error] Encountered two children with the same key, `r_10c3dc226327b5c489b7c452`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+[WebServer] 9:11:04 AM [vite] (client) [console.error] Encountered two children with the same key, `r_10c3dc226327b5c489b7c452`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+[WebServer] 9:11:04 AM [vite] (client) [console.error] Encountered two children with the same key, `r_10c3dc226327b5c489b7c452`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+[WebServer] 9:11:04 AM [vite] (client) [console.error] Encountered two children with the same key, `r_10c3dc226327b5c489b7c452`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+  ✓  27 tests/demo-browser/current-syzia-042.temporary.spec.ts:377:1 › 06 Calculadora explica bloqueio, exibe duração, prévia e após aprovação remove texto obsoleto (7.6s)
+[WebServer] 9:11:11 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"commercial_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:11:11 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"commercial_list","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:11:11 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"commercial_list","organization":null,"category":"operation","reason":"unclassified","status":""}
+  ✓  28 tests/demo-browser/current-syzia-042.temporary.spec.ts:462:1 › 07 Estados vazios localizados e link de retorno abre oportunidade correta (4.7s)
+[WebServer] 9:11:12 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:11:15 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"operations_schedule","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"operation","reason":"booking_requires_approved_quote","status":"22023"}
+  ✓  29 tests/demo-browser/syzia-044.spec.ts:12:1 › 044 HTTP: pedido sob avaliação rejeita comando empresarial com causa de aprovação (3.8s)
+[WebServer] 9:11:16 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"foundation_context","organization":null,"category":"operation","reason":"unclassified","status":""}
+[WebServer] 9:11:20 AM [vite] (client) [console.warn] SYZIA diagnostic {"operation":"operations_appointment_act","organization":"e7110a7e-1482-472b-a47c-22c493e911cf","category":"operation","reason":"execution_part_order_conflict","status":"22023"}
+  ✓  30 tests/demo-browser/syzia-044.spec.ts:73:1 › 044 ficha: buffer vigente, ordem protegida e mensagem de replanejamento (5.1s)
+
+  30 passed (5.0m)

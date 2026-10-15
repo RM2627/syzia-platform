@@ -4,6 +4,7 @@ export async function upgradeBillingFixture(db) {
   await db.exec(await readFile("supabase/migrations/202610050047_mercado_pago_subscriptions.sql", "utf8"));
   await db.exec(await readFile("supabase/migrations/202610130051_checkout_diagnostics.sql", "utf8"));
   await db.exec(await readFile("supabase/migrations/202610140052_integrated_subscription_safety.sql", "utf8"));
+  await db.exec(await readFile("supabase/migrations/202610140053_automatic_trial_optional_provider_version.sql", "utf8"));
   if (process.env.SYZIA_OPTIONAL_MANUAL_CURRENT === "1") await (await import("../syzia-048/fixture.mjs")).upgradeOptionalManualFixture(db);
 }
 // Adapter for the historical fixture RPC name allowlist. Preserves original tests.

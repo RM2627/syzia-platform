@@ -10,6 +10,10 @@ import "../integrated-051/reconciliation.test.mjs";
 import "../integrated-051/method.test.mjs";
 import "../integrated-051/upgrade.test.mjs";
 import "../integrated-051/integrity-cases.mjs";
+import "../trial-052/automatic.test.mjs";
+import "../trial-052/upgrade.test.mjs";
+import "../trial-052/method.test.mjs";
+import "../trial-052/integrity.test.mjs";
 const opts = {
   accessToken: "offline-051-only",
   collectorId: 101,

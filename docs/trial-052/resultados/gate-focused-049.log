@@ -1,0 +1,43 @@
+✔ 049-F HMAC subscription_preapproval: query/body/assinatura íntegros, rejeição de adulteração e ausência (3.010722ms)
+✔ 049-F HMAC subscription_authorized_payment: query/body/assinatura íntegros, rejeição de adulteração e ausência (0.28023ms)
+✔ 049-F HMAC payment: query/body/assinatura íntegros, rejeição de adulteração e ausência (0.303414ms)
+✔ 049-F04 três recursos são consultados; webhook repetido não duplica e retorno não substitui consulta (141.219649ms)
+✔ 049-F05 harness desligado por padrão e sem importação de configuração real (65.92533ms)
+✔ 049-H01 drenagem portátil via stop(): resposta completa, socket fechado, processo termina (3183.431422ms)
+✔ 049-S04 cadastro server-side emite/consome/libera nonce e preserva confirmação de email (3.159568ms)
+✔ 049-S05 falha do Auth limpa autorização temporária; erro público não inclui senha ou nonce (0.794231ms)
+✔ 049-I01 44 migrations anteriores, entrada unificada e núcleo financeiro preservado, exceto adaptador MP-01 autorizado (20.77074ms)
+✔ 049-I02 lockfile atualizado explicitamente para dependências PDF (1.969604ms)
+✔ 049-O01 presença é idempotente e não altera proposta, cobrança ou agendamento (155.215411ms)
+✔ 049-O02 presença não atravessa consumidor nem empresa (95.420215ms)
+✔ 049-O03 remarcação invalida presença atual, mantém histórico e exige revisão nova (96.928865ms)
+✔ 049-O04 cancelado/concluído/passado não confirma presença; comprovante cancelado negado (106.35448ms)
+✔ 049-D01 PDFs autorizados distinguem estimativa de agendamento confirmado; preço canônico (84.730304ms)
+✔ 049-D02 documento privado isolado A/B, consumidor/funcionário sem grants e referência adulterada (124.10422ms)
+✔ 049-D03 proposta final/desconto/versões/aprovação mantêm valores e estados reais (164.596314ms)
+✔ 049-D04 solicitação ainda não agendada não produz comprovante (96.734934ms)
+✔ 049-C01 checklist vazio, persistência, múltiplos itens e auditoria sem mudança de status (114.073217ms)
+✔ 049-C02 duas abas e retry: idempotência, conflito de revisão e remoção lógica (91.595472ms)
+✔ 049-C03 grants próprios, leitura sem edição, compartilhado e isolamento (145.685871ms)
+✔ 049-C04 concluído/cancelado preserva checklist e impede alteração (83.313782ms)
+✔ 049-U01 contagem individual, mensagem própria excluída e refresh persistente (92.111296ms)
+✔ 049-U02 abas fora de ordem nunca retrocedem cursor; acesso A/B negado (75.526001ms)
+✔ 049-T01 telefone canônico aceita máscaras BR/internacional e rejeita DDD/texto/incompleto (9.009401ms)
+✔ 049-T02 RPC de criação valida telefone; contato legado não cria ação autorizada (95.318932ms)
+✔ 049-S01 RLS e FORCE RLS nas novas tabelas; cliente não lê dados privados (3.341057ms)
+✔ 049-S02 Auth hook nega bypass, aceita nonce emitido pelo servidor uma única vez (4.579984ms)
+✔ 049-S03 Auth hook vincula email/username, expira, cliente não emite autorização (6.120532ms)
+✔ 049-D05 imagens originais: ticket privado de uso único, vínculo e grants preservados (140.991942ms)
+✔ 049-S06 hook preserva funcionário reservado com metadata privilegiada (17.587151ms)
+✔ 049-X01 singular/plural/zero/ilimitado sem alteração de preço (0.902202ms)
+✔ 049-T03 telefone e WhatsApp: máscara, BR, internacional, inválidos e texto seguro (0.499759ms)
+✔ 049-D06 PDF multipágina: acentos, longos, desconto, branding/fallback, metadados e impressão (477.272347ms)
+✔ 049-G01 migration em banco populado preserva registros 048, RLS e mensagens imutáveis (295.519452ms)
+ℹ tests 35
+ℹ suites 0
+ℹ pass 35
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 17495.191063

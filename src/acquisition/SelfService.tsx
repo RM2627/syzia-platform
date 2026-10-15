@@ -1,3 +1,4 @@
+import { normalizeCPF } from "../../shared/cpf.mjs";
 import { PasswordInput } from "../ui/PasswordInput";
 import { useEffect, useRef, useState } from "react";
 import { Captcha, captchaConfigured } from "../Captcha";
@@ -320,6 +321,7 @@ export function SelfService() {
                 e.preventDefault();
                 const f = new FormData(e.currentTarget);
                 void run(async () => {
+                  if (f.get("kind") === "CPF" && !normalizeCPF(f.get("document"))) throw Error("document_invalid");
                   const d = await rpc<any>("selfservice_save", {
                     p_id: draft?.id || null,
                     p_revision: draft?.revision || 0,

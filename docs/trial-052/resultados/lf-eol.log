@@ -1,0 +1,16 @@
+✔ EOL-01 authorized text accepts only proven LF/CRLF equivalents in either direction (1.59952ms)
+✔ EOL-02 real content, spaces, tabs, empty lines and final newline remain significant (1.135905ms)
+✔ EOL-03 BOM, Unicode, invalid UTF-8, NUL and lone CR are never normalized away (0.617256ms)
+✔ EOL-04 binary and unlisted text paths retain byte-exact comparison (0.394392ms)
+✔ EOL-05 every historical migration rejects SQL/RLS changes despite EOL conversion (73.106812ms)
+✔ EOL-06 code, safe credential examples and plan/security settings reject content edits (2.520803ms)
+✔ EOL-07 false expected hashes and historical transition inputs cannot approve current content (0.803756ms)
+✔ EOL-08 adding paths to the authorization list is rejected by its independent anchor (66.903969ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 236.330409
