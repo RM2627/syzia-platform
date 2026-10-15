@@ -105,7 +105,7 @@ export class MercadoPagoSubscriptions {
   async search(path, query) {
     let offset = 0, all = [];
     do {
-      const r = await this.request(path + "?" + new URLSearchParams({ ...query, offset: String(offset), limit: "50" }));
+      const r = await this.request(path + "?" + new URLSearchParams({ ...query, offset: String(offset), limit: path === "/authorized_payments/search" ? "10" : "50" }));
       if (!Array.isArray(r.results) || !Number.isSafeInteger(r.paging?.total) || r.paging.total < 0) fail("billing_response_invalid", 502);
       all.push(...r.results); offset += r.results.length;
       if (offset >= r.paging.total) return all;
