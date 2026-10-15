@@ -11,6 +11,13 @@ import {
   suggestSlug,
 } from "../access/EnterpriseAccess";
 import { SiteFrame, usePlans, brl } from "./PublicSite";
+function failedConfirmation() {
+  const url = new URL(window.location.href);
+  const fragment = new URLSearchParams(url.hash.slice(1));
+  return ["error", "error_code", "error_description"].some(
+    key => url.searchParams.has(key) || fragment.has(key),
+  );
+}
 export function SelfService() {
   const [params] = useSearchParams(),
     { plans, loading } = usePlans();
@@ -20,7 +27,9 @@ export function SelfService() {
     [draft, setDraft] = useState<any>(null),
     [ready, setReady] = useState(false),
     [busy, setBusy] = useState(false),
-    [error, setError] = useState(""),
+    [error, setError] = useState(() => failedConfirmation()
+      ? "Este link de confirmação é inválido, expirou ou já foi utilizado. Use o link mais recente ou entre para verificar sua conta. Se precisar de ajuda, escreva para syziaoficial@gmail.com."
+      : ""),
     [notice, setNotice] = useState(""),
     [name, setName] = useState(""),
     [username, setUsername] = useState(""),
@@ -91,6 +100,13 @@ export function SelfService() {
   }
 
   useEffect(() => {
+    if (failedConfirmation()) {
+      const url = new URL(window.location.href);
+      url.hash = "";
+      for (const key of ["error", "error_code", "error_description"])
+        url.searchParams.delete(key);
+      window.history.replaceState(window.history.state, "", url.pathname + url.search);
+    }
     let live = true;
     supabase?.auth.getSession().then(({ data }) => {
       if (live)
@@ -182,7 +198,7 @@ export function SelfService() {
                     await restore(x.data.session);
                   } else
                     setNotice(
-                      "Confira seu e-mail para confirmar a identidade. Depois, volte a este cadastro ou entre para retomar.",
+                      "Se o cadastro puder continuar, você receberá instruções no e-mail informado. Se já tem conta, entre para retomar; se necessário, use Esqueci minha senha.",
                     );
                 });
               }}

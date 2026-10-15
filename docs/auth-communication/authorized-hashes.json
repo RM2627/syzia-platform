@@ -1,0 +1,30 @@
+{
+  "server/enterprise-access.mjs": {
+    "before": "8b57fe86ad4066673861bf9d254816bd012e36bd59b2c91148fcd4715dd70d90",
+    "after": "342246956df4bc344da46b9d06ac602c19d7f5f76ed7e874c2c45f844e31f70a"
+  },
+  "src/FoundationApp.tsx": {
+    "before": "65aeb788ec1487f9bc0f69660f874950cfa40e2134fd5777215faa11ad96fa3b",
+    "after": "0b811e0b5846f2d339165e6dba88828566defb65728adb51af9a73bf47625376"
+  },
+  "src/access/EnterpriseAccess.tsx": {
+    "before": "7b48da3411cdc8e01f9de8b742cc7336e1e6b56070ec3df9a4c451a9a3009e16",
+    "after": "c812c2ef4d69b17b54a2698cdf612afb93ea9da4f85013ec40196b85faa8961b"
+  },
+  "src/acquisition/SelfService.tsx": {
+    "before": "eed227b68ffafccd0f98822891eb341ec35ad74a185a54d436d1401669acb4a3",
+    "after": "d92bcb7d4d15b6e2110d8dd88f2b47b1f3bbb4a11ccb37450761d99675d8cd99"
+  },
+  "src/main.tsx": {
+    "before": "d5687f1fbcbc98634dd201c782b841b91097f00ae54f547c8e68b0d2cd92a59d",
+    "after": "595e03364b6937e7f2c7cdd3b5f7c83a191fe52123824b099326017980ee8314"
+  },
+  "src/operations/Operations.tsx": {
+    "before": "341147fe96906c3fce501cd254174028fcf4059f761d4378700e51b2eb5ef46c",
+    "after": "4772324052768c0e2bbb0e946cf90d31b33656e960b1e7368bc9a9193d639da8"
+  },
+  "tests/syzia-033-server.test.mjs": {
+    "before": "321f7395f870707247fe7a3d504a6d5c4349a4e6958e7415675c8a1d747c99af",
+    "after": "97e5431e74b3ff9a828b92df464dab6e0c0ef64eadbef94969f1d569fb9ed4e3"
+  }
+}

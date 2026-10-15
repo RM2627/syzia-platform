@@ -284,7 +284,7 @@ export function enterpriseAccess({
       )
         fail("access_invalid");
       if (await service("access_identity_exists", { p_email: email }))
-        fail("existing_identity_requires_login");
+        return { confirmation_required: true }; // Neutral response; never create a duplicate identity.
       if (!signUp) fail("access_unavailable");
       const authorization = randomBytes(32).toString("hex");
       await service("access_signup_authorize", { p_email: email, p_username: clean(body.username), p_hash: digest(authorization) });

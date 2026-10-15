@@ -19,7 +19,7 @@ test('INT-I01 authorized new transitions preserve LF/CRLF and reject real change
 test('INT-I02 adding a historical migration to the new authorization manifest fails its independent pin',async()=>{
  const dir=await mkdtemp(join(tmpdir(),'syzia-integrated-integrity-'));
  try{
-  for(const path of ['tests/support/hotfix051-integrity.mjs','tests/support/portable-integrity.mjs','docs/syzia-051/integrity-text-paths.json','docs/syzia-051/authorized-hashes.json','docs/syzia-051/reconciliation-b30c991.json','docs/integrated-051/authorized-hashes.json']){
+  for(const path of ['tests/support/hotfix051-integrity.mjs','tests/support/portable-integrity.mjs','tests/support/auth-communication-integrity.mjs','docs/auth-communication/authorized-hashes.json','docs/syzia-051/integrity-text-paths.json','docs/syzia-051/authorized-hashes.json','docs/syzia-051/reconciliation-b30c991.json','docs/integrated-051/authorized-hashes.json']){
    await mkdir(dirname(join(dir,path)),{recursive:true});await writeFile(join(dir,path),await readFile(path));
   }
   const p=join(dir,'docs/integrated-051/authorized-hashes.json');const content=JSON.parse(await readFile(p,'utf8'));

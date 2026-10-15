@@ -1,4 +1,5 @@
 import { AttendanceBadge, BookingExtras, RequestContact, UnreadSummary } from "./BookingExtras";
+import { NotificationLink } from "./NotificationLink";
 import { DocumentButton } from "../documents/DocumentButton";
 import { ExecutionBooking } from "./ExecutionBooking";
 import { duration, Periods } from "../scheduling/ExecutionSchedule";
@@ -354,13 +355,13 @@ function Daily({ org }: { org: string }) {
             <h2>Últimas atualizações</h2>
             <HomeBlock s={updates}>
               {updates.data?.notifications.map((n: Data) => (
-                <Link className="op-attention" to={n.href} key={n.id}>
+                <NotificationLink org={org} notification={n as { id: string; href: string; read: boolean }} key={n.id}>
                   <strong>
                     {n.title}
                     {!n.read ? " •" : ""}
                   </strong>
                   <p>{date(n.created_at)}</p>
-                </Link>
+                </NotificationLink>
               ))}
               {updates.data?.notifications.length === 0 && (
                 <p>Novos horários e decisões aparecerão aqui.</p>

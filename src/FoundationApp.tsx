@@ -1241,14 +1241,6 @@ export default function Application() {
             }
           />
           <Route
-            path="/recuperar-acesso"
-            element={<AdministrativeRecovery />}
-          />
-          <Route
-            path="/atualizar-senha"
-            element={<AdministrativeRecovery legacy />}
-          />
-          <Route
             path="/aceitar-convite"
             element={<AdministrativeRecovery legacy />}
           />

@@ -19,7 +19,7 @@ export const accessMessages: Record<string, string> = {
   identity_context_required:
     "Não foi possível entrar por essa identidade. Confira os dados. Se estiver usando um nome de usuário, tente seu e-mail de contato.",
   existing_identity_requires_login:
-    "Já existe uma identidade com esse e-mail. Entre para retomar ou criar outra empresa com a mesma conta.",
+    "Confira as instruções no seu e-mail. Se já tem conta, entre para retomar; se necessário, recupere sua senha.",
   billing_provider_not_configured:
     "A etapa de pagamento ainda está em preparação. Seu cadastro foi salvo para retomada.",
   selfservice_quote_expired:
@@ -232,7 +232,7 @@ export function EnterpriseLogin() {
         </p>
       )}
       <nav className="auth-links">
-        <Link to="/recuperar-acesso">Recuperar acesso</Link>
+        <Link to="/recuperar-acesso">Esqueci minha senha</Link>
         <Link to="/ativar-acesso">Primeiro acesso</Link>
       </nav>
     </AccessFrame>

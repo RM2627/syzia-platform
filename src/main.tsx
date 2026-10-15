@@ -17,6 +17,8 @@ const Register = lazy(() =>
   import("./acquisition/SelfService").then((m) => ({ default: m.SelfService })),
 );
 const Foundation = lazy(() => import("./FoundationApp"));
+const RecoveryRequest = lazy(() => import("./access/PasswordRecovery").then(m => ({ default: m.RequestPasswordRecovery })));
+const RecoveryUpdate = lazy(() => import("./access/PasswordRecovery").then(m => ({ default: m.UpdatePassword })));
 const PublicCompany = lazy(() =>
   import("./consumer/Consumer").then((m) => ({ default: m.PublicCompany })),
 );
@@ -51,6 +53,8 @@ createRoot(document.getElementById("root")!).render(
           <Route path="/empresa/:slug" element={<PublicCompany />} />
           <Route path="/minhas-solicitacoes" element={<MyRequests />} />
           <Route path="/acompanhar/:code" element={<Tracking />} />
+          <Route path="/recuperar-acesso" element={<RecoveryRequest />} />
+          <Route path="/atualizar-senha" element={<RecoveryUpdate />} />
           <Route path="*" element={<Foundation />} />
         </Routes>
       </Suspense>

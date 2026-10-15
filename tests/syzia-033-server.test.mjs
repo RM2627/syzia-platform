@@ -25,7 +25,7 @@ function fixture(contexts) {
     };
   const service = async (name, args) => {
     calls.push([name, args]);
-    if (name === "access_rate") return true;
+    if (["access_rate", "access_signup_authorize", "access_signup_release"].includes(name)) return true;
     if (name === "access_identity_lookup")
       return state.lookup
         ? {
@@ -158,10 +158,9 @@ test("Existing e-mail never creates another Auth identity; signup uses the owner
       captcha: "test-captcha",
     };
   f.state.exists = true;
-  await assert.rejects(
-    f.run("/access/signup", b),
-    (e) => e.code === "existing_identity_requires_login",
-  );
+  assert.deepEqual(await f.run("/access/signup", b), {
+    confirmation_required: true,
+  });
   assert.ok(!f.calls.some((x) => x[0] === "signUp"));
   f.state.exists = false;
   assert.deepEqual(await f.run("/access/signup", b), {

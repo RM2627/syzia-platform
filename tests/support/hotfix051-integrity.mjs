@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
 import {assertFileHash} from './portable-integrity.mjs';
+import {authCommunicationExpectedHash} from './auth-communication-integrity.mjs';
 const integratedText=readFileSync(new URL('../../docs/integrated-051/authorized-hashes.json',import.meta.url),'utf8').replaceAll('\r\n','\n');
 assert.equal(createHash('sha256').update(integratedText).digest('hex'),'402e079c5fad4e2aa967e2d7bac2f951dd422f2a785e7d99f352c3494cd28dcf','integrated authorization manifest changed');
 const integrated=JSON.parse(integratedText);
@@ -29,5 +30,5 @@ export function hotfix051ExpectedHash(path,historical){
  assert.equal(reference,change.before,'051 unexpected historical input: '+path);return pageHash(path,nextHash(path,change.after));
 }
 export function assertHotfix051File(path,bytes,historical){
- return assertFileHash(path,bytes,hotfix051ExpectedHash(path,historical));
+ return assertFileHash(path,bytes,authCommunicationExpectedHash(path,hotfix051ExpectedHash(path,historical)));
 }
