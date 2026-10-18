@@ -1,5 +1,7 @@
 // One HTTP listener; existing handlers own their authentication, CORS and bodies.
 import http from "node:http";
+import { createCommercialHandler } from "./commercial/http.mjs";
+import { commercialRuntime } from "./commercial/runtime.mjs";
 import { randomUUID } from "node:crypto";
 import { pathToFileURL } from "node:url";
 import { createPlatformHandler, platformRuntime } from "./platform.mjs";
@@ -8,11 +10,12 @@ import { createBillingHandler } from "./billing/http.mjs";
 import { billingRuntime } from "./billing/runtime.mjs";
 
 const safeLog = record => console.log(JSON.stringify(record));
-export function createUnifiedServer({ platform, attachments, billing, log = safeLog }) {
+export function createUnifiedServer({ platform, attachments, billing, commercial, log = safeLog }) {
   const handlers = {
     platform: createPlatformHandler({ ...platform, log }),
     attachments: createAttachmentHandler({ ...attachments, log }),
     billing: createBillingHandler({ ...billing, log }),
+    commercial: commercial ? createCommercialHandler({ ...commercial, log }) : null,
   };
   let stopping = false;
   const server = http.createServer({ requestTimeout: 60000, headersTimeout: 15000, keepAliveTimeout: 5000, maxHeaderSize: 16384 }, async (req, res) => {
@@ -26,7 +29,7 @@ export function createUnifiedServer({ platform, attachments, billing, log = safe
     try {
       // Never rewrite a path/body/token or proxy a request to another listener.
       const path = new URL(req.url, "http://local.invalid").pathname;
-      const handler = path.startsWith("/billing/") ? handlers.billing
+      const handler = path.startsWith("/demonstration-media/") ? commercial?.media : /^\/(commercial|demonstrations)\//.test(path) ? handlers.commercial : path.startsWith("/billing/") ? handlers.billing
         : /^\/(attachments|company-media|media)(\/|$)/.test(path) ? handlers.attachments
         : /^\/(access|invitations)(\/|$)/.test(path) ? handlers.platform : null;
       if (!handler) return reply(404, { error: "not_found" });
@@ -86,7 +89,8 @@ export async function startUnified({ env = process.env, runtime, log = safeLog, 
   const interval = Number(env.BILLING_RECONCILE_INTERVAL_SECONDS || 300);
   if (!Number.isInteger(interval) || interval < 60 || interval > 86400) throw Error("api_reconcile_interval_invalid");
   const deps = runtime || unifiedRuntime(env);
-  const server = createUnifiedServer({ ...deps, log });
+  const commercial = deps.commercial || (!runtime ? await commercialRuntime(env) : null);
+  const server = createUnifiedServer({ ...deps, commercial, log });
   await new Promise((resolve, reject) => {
     server.once("error", reject);
     server.listen(port, env.HOST || "0.0.0.0", () => { server.off("error", reject); resolve(); });
@@ -105,6 +109,7 @@ export async function startUnified({ env = process.env, runtime, log = safeLog, 
     ]);
     clearTimeout(deadline);
     if (forced) server.closeAllConnections();
+    await commercial?.close?.();
     if (signals) { process.off("SIGTERM", signal); process.off("SIGINT", signal); }
     log({ event: "api_stopped", forced });
     return { forced };

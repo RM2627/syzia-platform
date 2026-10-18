@@ -1,3 +1,4 @@
+import {commercialApi} from "../platform-commercial/api";
 import { normalizeCPF } from "../../shared/cpf.mjs";
 import { PasswordInput } from "../ui/PasswordInput";
 import { useEffect, useRef, useState } from "react";
@@ -18,7 +19,7 @@ function failedConfirmation() {
     key => url.searchParams.has(key) || fragment.has(key),
   );
 }
-export function SelfService() {
+export function SelfService({ identityOnly=false, onIdentityReady, activation }: {identityOnly?:boolean;onIdentityReady?:()=>void;activation?:{id:string;snapshot:string;company:string}}={}) {
   const [params] = useSearchParams(),
     { plans, loading } = usePlans();
   const [captcha, setCaptcha] = useState("");
@@ -34,7 +35,7 @@ export function SelfService() {
     [name, setName] = useState(""),
     [username, setUsername] = useState(""),
     [edited, setEdited] = useState(false),
-    [company, setCompany] = useState(""),
+    [company, setCompany] = useState(activation?.company || ""),
     [slug, setSlug] = useState(""),
     [slugEdited, setSlugEdited] = useState(false),
     [plan, setPlan] = useState(params.get("plano") || ""),
@@ -88,13 +89,16 @@ export function SelfService() {
         throw e;
       }
     }
-    const d = await rpc<any>("selfservice_context");
+    if (identityOnly) { setReady(true); return; }
+    const found = await rpc<any>("selfservice_context");
+    const d = activation && found?.state === "completed" ? null : found;
     setDraft(d);
     if (d) {
       setCompany(d.name);
       setSlug(d.slug);
       setSlugEdited(true);
       setPlan(d.plan.id);
+      if (activation) setEditing(true);
     }
     setReady(true);
   }
@@ -318,7 +322,7 @@ export function SelfService() {
               </label>
               <button disabled={busy}>Salvar identidade</button>
             </form>
-          ) : draft?.state === "completed" ? (
+          ) : identityOnly ? (<><h2>Identidade preparada</h2><button onClick={onIdentityReady}>Voltar ao convite de ativação</button></>) : draft?.state === "completed" ? (
             <>
               <h2>Empresa preparada.</h2>
               <p>A configuração inicial continua no ambiente da sua empresa.</p>
@@ -509,8 +513,8 @@ export function SelfService() {
                       e.preventDefault();
                       void run(async () =>
                         setDraft(
-                          await rpc("selfservice_complete", {
-                            p_id: draft.id,
+                          await (activation ? (args:unknown)=>commercialApi("activate",args) : (args:Record<string,unknown>)=>rpc("selfservice_complete",args))({
+                            ...(activation ? {p_id:activation.id,p_snapshot:activation.snapshot,p_draft:draft.id,p_reviewed:true} : {p_id:draft.id}),
                             p_revision: draft.revision,
                             p_consent: true,
                             p_conditions: choices.some((p) => p.billing047)

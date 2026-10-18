@@ -1,0 +1,15 @@
+/* Layout adapters share PublicCompany and every existing service/request control. */
+.template-picker [role="group"]{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:12px}
+.template-picker button{display:grid;text-align:left;gap:8px;padding:18px;white-space:normal}
+.template-picker button[aria-pressed="true"]{outline:2px solid var(--accent,#6c4dff);outline-offset:2px}
+.template-picker button span{font-weight:400;font-size:.85rem}
+.consumer[data-template="modern"] .c-hero{border-radius:24px;background:var(--brand-soft);padding:clamp(24px,5vw,64px);margin-top:24px}
+.consumer[data-template="modern"] .c-section-nav{border-bottom:1px solid var(--c-line)}
+.consumer[data-template="minimal"] .c-hero{grid-template-columns:1fr;max-width:860px;text-align:left}
+.consumer[data-template="minimal"] .c-hero-art{display:none}
+.consumer[data-template="minimal"] .c-hero h1{font-size:clamp(2rem,4vw,3.2rem);max-width:24ch}
+.consumer[data-template="minimal"] .c-service{box-shadow:none;border-radius:8px}
+.consumer[data-template="catalog"] .c-services{grid-template-columns:repeat(2,minmax(0,1fr))}
+.consumer[data-template="catalog"] .c-hero{padding-top:32px;padding-bottom:32px}
+.consumer[data-template="catalog"] .c-hero h1{font-size:clamp(1.8rem,3vw,3rem)}
+@media(max-width:600px){.consumer[data-template="catalog"] .c-services{grid-template-columns:1fr}.consumer[data-template="modern"] .c-hero{margin-left:12px;margin-right:12px;width:auto}}

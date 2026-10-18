@@ -1,0 +1,438 @@
+{
+  "source_commit": "4b33f423982e6d3703935ae2f18a738c0496b72e",
+  "source_archive_sha256": "a12d73e79fb4d6546044518f3a3eee514c012b93b448b294fdf8e4e940c1cd42",
+  "transitions": {
+    ".env.example": {
+      "before": [
+        "aea83966a76621ff9e4116288b7583c606983c68dcf50ffcb228bef17261ddc3",
+        "f2b7ec42e2f2d0e45c09e49fce61e46ed93b10118d11ef19e01e0b128bc95eec"
+      ],
+      "after": "e3107af36348a834c58118eab36d5dc0417ea12b8ba42a597db0a34f1f24ef69",
+      "text": true
+    },
+    ".env.server.example": {
+      "before": [
+        "55b70df2df2b065436f21ee86c432e02da42d7e09f24d7cfec6f2fab007490f4",
+        "c6d086096484055f93a309de072429578373320510278801e7a14f2f1a4c543f"
+      ],
+      "after": "e1f72df51f9589a237f9378ed42ff5640711302cf93c05f7697d39d2177b9858",
+      "text": true
+    },
+    ".gitignore": {
+      "before": [
+        "5461878b99a9cbd2dc7315cdd549a41dd5adb52a0c0b87f3bba78ced3504c010",
+        "97c1ae64f4e856a8d182b3549428e80b05213eb96e56cef21cf4901b7e89348c"
+      ],
+      "after": "74729ba65a916b2712a3171449656d9326a70fca174ab1a9b3a9309a5aa77eca",
+      "text": true
+    },
+    "package-lock.json": {
+      "before": [
+        "257bad08f139f4c43c42d404226b8d8f1d00860a4b118e5c5379a7c6409a13a4",
+        "6bfa2009466e2f08daef7654327874ffe8f47efad9d37b9589e39789b989f1a5"
+      ],
+      "after": "2698702a34da4bc4a8fdf5c965a7ef9bde0e63808d6f61a54c29cb0be413277d",
+      "text": true
+    },
+    "package.json": {
+      "before": [
+        "54828651b47f24a18bc0e88471f67649101d71233ba016ba2ca840896d4d1f2b",
+        "658644aa87dfccbeed1544878955e36713c10a58078e2043c648922b192dc491"
+      ],
+      "after": "88497356c72b9172ee0425ebfa3a0ff7c8415434d7b44b7045a465b4504fa89c",
+      "text": true
+    },
+    "public/brand/syzia/syzia-horizontal-dark.png": {
+      "before": [
+        "3cd9ac5c877fd67ea153a253d4854a133be7a87244244eaf03317274ee960c79"
+      ],
+      "after": "11b30a808aa345c8e17bb1899ea19f6fbd18c49faa88f4decb59e94e2b2ec3c9",
+      "text": false
+    },
+    "public/brand/syzia/syzia-horizontal-light.png": {
+      "before": [
+        "896a71ab13af4e6a8a53365fa2731323eefc33e208794831b6ec90b04df10f72"
+      ],
+      "after": "ca210b5f8e8a9210792ada77ac1bba495511d559abded8476b6758deab432d0c",
+      "text": false
+    },
+    "public/brand/syzia/syzia-logo-dark.png": {
+      "before": [
+        "9e61fddc6feab1fff80d29c4ba692a67c2ab0bfd4e242827d93201e45ef7c15c"
+      ],
+      "after": "075c6439e7f4366332d27a1f89390786526ed470b3ac876edf012bf55859f28f",
+      "text": false
+    },
+    "public/brand/syzia/syzia-logo-light.png": {
+      "before": [
+        "f2314db56005d26ec71365512be35d3588e3858d9539d0f16804fafce27d7408"
+      ],
+      "after": "cef00a9ecee1b778038d7798dd22ed6e7c100f0af5214d900eeeec39022f2c71",
+      "text": false
+    },
+    "public/brand/syzia/syzia-symbol-dark.png": {
+      "before": [
+        "488ad62eb1ee0954468f2a3de057495594761cef6880e09970544fabf552d65e"
+      ],
+      "after": "1171b40f81151cbeb337623895d3d00d17642ea95beb7b11c41f6d42c0dc0eb4",
+      "text": false
+    },
+    "public/brand/syzia/syzia-symbol-light.png": {
+      "before": [
+        "66f0ab399ef0e777e58795e591e919a391f4c6591ac730902b0619732031efef"
+      ],
+      "after": "c5306961326f01a67a88e858de914a80d250a446baf56520db0d524bda77f680",
+      "text": false
+    },
+    "scripts/syzia-044/current-gate.mjs": {
+      "before": [
+        "1a41e37722ecc8e679f50817044fa26c91ffbef4c0a5002fde845cbf4ba2705a",
+        "3478b6870f3bddac01dc606f33e04cd601fd836303cb02ed48460c885d09c5e7"
+      ],
+      "after": "f5ea543d394240a68cba2cdb742500b45dfcf619f5efae9353745d626d223c2e",
+      "text": true
+    },
+    "server/access-mail.mjs": {
+      "before": [
+        "b7e6e0e3ad73608c936ed2eebe2fdd104d0e1db7269fbe573aafc4a9e921dc21",
+        "e32386066fbfbd174c1c9d78c4dfb2d8b2a7e770831337528dcc1669c006d526"
+      ],
+      "after": "12e704e9cea5e86d87e10cb9e49e6ff07db53e4943d6d99d6a3c46884aa35f8b",
+      "text": true
+    },
+    "server/unified.mjs": {
+      "before": [
+        "87e89010c952f74b2ee8d3596881328e55c9a111fdcfb0bc3bff221661620066",
+        "e577d2cad2e7c82384606e9bf4535edb5908e017a72bc2f9d68ae138f4932a0c"
+      ],
+      "after": "04a774df0f28b233989318332e0cde36e5914638a5a1fbc7ba40604d69547c3a",
+      "text": true
+    },
+    "src/Captcha.tsx": {
+      "before": [
+        "840b3ef713a5cb6b2dd79ba3a335e6c66cd815efc323c5f9143fc2a26a475b4a",
+        "b4e346e514cfcad888351481f89203019874963e50dfe95d19101ac5844f2525"
+      ],
+      "after": "c001612df3c9adf261599d3e428cfe693da95abe15178b53c3ef76eb376d04e1",
+      "text": true
+    },
+    "src/FoundationApp.tsx": {
+      "before": [
+        "2ec87f1561a1c2eaf4bca2e0644aed9fefd1b6506143628cf13306cffbfca438",
+        "98121d57f15f5539b9844cd08d2ce8ec6ec7235eb106cb72d750b49434b82b11"
+      ],
+      "after": "6b169120cfcc2add0ad41126cd869a8cde1069de1979e295dcf0d638c99d573c",
+      "text": true
+    },
+    "src/access/PeopleAccess.tsx": {
+      "before": [
+        "02e517b2c6370340513b18e8707c4d0fd8c4d94333b41f8d227d37c6343964ad",
+        "2b85d3c2827eeb72de921c8627d808bc37994420685b0be28b6de62c9916c0e6"
+      ],
+      "after": "482b123942f5cbd57f6d1f74e18aa464815a9cf7a27438ef9e6129a403e02543",
+      "text": true
+    },
+    "src/acquisition/SelfService.tsx": {
+      "before": [
+        "28d0833c62c36215e145600c24522b1eb0eb845a0dd35c7a90060bad968c61eb",
+        "d92bcb7d4d15b6e2110d8dd88f2b47b1f3bbb4a11ccb37450761d99675d8cd99"
+      ],
+      "after": "d46c4b513a09a3fb5a9169316ed77f9fcaeaf7b39a7ea9011d052b78692db965",
+      "text": true
+    },
+    "src/api.ts": {
+      "before": [
+        "1017d38481a9b4bfa956d8ce468128b531f90d911aa0ea0f86878b9b5816e5d7",
+        "74aa522d0c1cac8567ef42dcdcaf043a0be2868503cec3b4df6726e11618bdeb"
+      ],
+      "after": "ad37ba42efaca902c578787391f11acb64ed45b78457307e9788ce7271e2f200",
+      "text": true
+    },
+    "src/consumer/CompanyPage.tsx": {
+      "before": [
+        "557c634ed87cca9b7c3e39813e66e632634f19e90af370d62941d5bea853b1e5",
+        "acd554c09a57858a7adfc7ad7e6f2f3b5eb77585d554fa904415b91d16b91bc5"
+      ],
+      "after": "542f9a006072b401c1b55bb47162a324a16f4f2e6ee22585beebf996648738cf",
+      "text": true
+    },
+    "src/consumer/Consumer.tsx": {
+      "before": [
+        "37a281c4d46c5a8e1eacbb26557481155ff401c1321935298a578d8716e4be6e",
+        "48b48be978214bb291c241e9625e83bcfcc5855c8b3ef0e074fa037aa4e3fbbc"
+      ],
+      "after": "c77d1936f29d864effcaa23ad01fd3679d824265f86cf2f7d2795ee1fd6ae2f9",
+      "text": true
+    },
+    "src/consumer/api.ts": {
+      "before": [
+        "1238ea76b92c813a159899b832247d67d57c62356e49b435c5fcd7c460bce182",
+        "7627b09a051cc1dd7391486e6fcdd0e4854ca664cc921a7cb3b6badca564cf40"
+      ],
+      "after": "75d96d37292215534edbfd7bf689d3983ea59cef06493da3fca1471bf28a9255",
+      "text": true
+    },
+    "src/main.tsx": {
+      "before": [
+        "595e03364b6937e7f2c7cdd3b5f7c83a191fe52123824b099326017980ee8314",
+        "e859b834b8bb006c27e68aab2f8c17ccfeadb31b55658de9ee3d1e8d2c762845"
+      ],
+      "after": "78ed9b550be184ac4caae05b02f785495071f98b528b301cfc317320dd74fa5c",
+      "text": true
+    },
+    "src/workspace/Workspace.tsx": {
+      "before": [
+        "026bf189864b8a253f92098e45406cea3bd0572baea9103798c38c7d9225a747",
+        "281529510b05f1922df7f4e85fecf9729798c84cd2ca45881fd0ac6f96bb60a4"
+      ],
+      "after": "04602ebef1588dea3a25e99d6a933ee5f441fdf5a305fce1b76b003458f90c0c",
+      "text": true
+    },
+    "tests/demo-browser/syzia-049.spec.ts": {
+      "before": [
+        "26be5de323456766c7a26f7d15984aee657e7cbfabecd89be5fdddbbcf658054",
+        "2f4797c99e40f4c6758a0a56888da67e58829f121d56b7cecf0aaae0b4f201e6"
+      ],
+      "after": "01fdb69dce4c7405f6433fadabcad435024a0b48d51713e7b926e813069efeec",
+      "text": true
+    },
+    "tests/hotfix-050/integrity.test.mjs": {
+      "before": [
+        "9a84148970b1c2151af1232ffd0f841cc3fbe6f9f9363ab3d61606f5a9f537a6",
+        "c6d6011553d858cd47aaa26d76c2d751e1080393cb1113c95bec7b40dc0dc4a6"
+      ],
+      "after": "5a7b6a23fa5e3677a79a94c146ce3fe3da68c2d16df79d1f6397d5965cc69240",
+      "text": true
+    },
+    "tests/integrated-051/integrity-cases.mjs": {
+      "before": [
+        "416ed53cfe2aea07dca9c311c8e4466339452b24c26c7a03312b075c08f3450a",
+        "ea29818d468d413be55d79a28cc903359e0c134f3392c6c2bc52c1dddea71153"
+      ],
+      "after": "d304a0b67b83319e2f181426acd7e69156fbb441baed2b2b3a162c7b40091af8",
+      "text": true
+    },
+    "tests/support/hotfix051-integrity.mjs": {
+      "before": [
+        "e20711c535af8405a4ddf45d66755b653c3b1eb0f5a01363157de522fb5e7710",
+        "f39061d3a2229dc9b47f06d26525febf214d91fbc6471780a5a3af0772435040"
+      ],
+      "after": "8d55ec1008d7ab55b7f39d064edd3d762fb2262cbf7cfe4528a41915be8e4495",
+      "text": true
+    },
+    "tests/syzia-049/ui-utils.test.mjs": {
+      "before": [
+        "3e5daa186a469b839816593bf6c974b98b9227484d7ad07f30960aa7c3cba228",
+        "c946807a52fe015b38c92498dc0a94d8e7cf1153e64045dc380cff09c5f6d937"
+      ],
+      "after": "9355b045c188a10b4be1ecc6c257c16c561c164618d1c496d6b77c9039344a77",
+      "text": true
+    },
+    "tests/syzia-051/integrity.test.mjs": {
+      "before": [
+        "60a1edaeb0f67e8e0991d9c7ef12dcf9b531e1c409ba4277b3dab0a7708dd170",
+        "e9286159e278bf6f27594b9b5dde76f3de8530e2ef8cfd7baca4f5501123f056"
+      ],
+      "after": "79a1b26abe52f5eac4e848c27e85d0423f121120ef1ae4f91250b9a561c92a1b",
+      "text": true
+    },
+    "tests/ux-modernization/integrity.test.mjs": {
+      "before": [
+        "7a5d97af3030ab2efa973bab49293f8fae9954483160c29149ebc5b7f3e60dfb",
+        "87e441493a9d66dfdd4d6c34861bfe8ba8094cb200fe25da8e9099ba2737c136"
+      ],
+      "after": "6f4b9331e79b7cee20eeb1cb14bc698df53da3d1b2a22b5df4a0364e85af534d",
+      "text": true
+    },
+    "vite.config.ts": {
+      "before": [
+        "841d165dc8155f9fb7bf41bd7b4849e70ba015f14c5a96213b31dc065b139e03",
+        "8932dc1241854713b99595f73d6d34fbad863b0bbd94ceed4608730ae87f0ec1"
+      ],
+      "after": "cdb201e5555beee2762a4028940fbb1497f1e71ac7b1c0d82c9a867cae6ad4f1",
+      "text": true
+    }
+  },
+  "added": {
+    ".env.demo.example": {
+      "sha256": "d31538ce35540715be74d960efce4fa3a29434ed5a5c7eccdba8d4268b0e272a",
+      "text": true
+    },
+    "demo.html": {
+      "sha256": "b88265a0d0be00dbe4268501cac550051d5c10cd688c151c488a59964425ed77",
+      "text": true
+    },
+    "scripts/commercial/bootstrap-demo.mjs": {
+      "sha256": "48548d67fec65e43b494d44e6769bc7fac2fa8eb7e1f302b6783dd319902a975",
+      "text": true
+    },
+    "scripts/commercial/build-demo.mjs": {
+      "sha256": "cc526226cfe3134ff106d470dd8bb8e5a2d9b6b910ea16ff70c44928cd1c2fb7",
+      "text": true
+    },
+    "scripts/commercial/check-demo-build.mjs": {
+      "sha256": "f72095317e27336d9da1c8770ee21d7e827a17ec1238b26042b05a8fd41abd5c",
+      "text": true
+    },
+    "scripts/commercial/native-local.mjs": {
+      "sha256": "1e9ab18b6d3dd554766f36a6225aaaa72dccae3cb8cd52887cee6ddcccc264cd",
+      "text": true
+    },
+    "scripts/commercial/regression-local.mjs": {
+      "sha256": "ad3f7201d4edf340d5c3714fd8bb9727f9cf587a3e8c98db7a38a7c4d33119f7",
+      "text": true
+    },
+    "server/commercial/bootstrap-schema.sql": {
+      "sha256": "926d84ae9e5e5f03d12fcb3d4b281254686f357ae2d2ae9cdef2cd999ff60185",
+      "text": true
+    },
+    "server/commercial/configuration.mjs": {
+      "sha256": "74904754a96f51242bc7b4bc7082316a2f2941da79ff477c1b5ba0b2fcf2754d",
+      "text": true
+    },
+    "server/commercial/controller.mjs": {
+      "sha256": "fb57da7fcf743e68d669aac19a5eca72403c091f5bff041db12dbf7d5fdc1a97",
+      "text": true
+    },
+    "server/commercial/crypto.mjs": {
+      "sha256": "9dfc902e1720a1d8f6962f9e3b37036c14fea08ad8c869eafa9a208d1e3b60e6",
+      "text": true
+    },
+    "server/commercial/demo-rpcs.mjs": {
+      "sha256": "bff57a66e072cd05be1951ec44a9a7e74a4f6efa08f8a9254dff260594844f6e",
+      "text": true
+    },
+    "server/commercial/demo-schema.sql": {
+      "sha256": "75a3eca57d560996de6321c942dcadbb829b927db57c9b8d3bd9b3c22b26a8e1",
+      "text": true
+    },
+    "server/commercial/demo-store.mjs": {
+      "sha256": "e328805f721749ec3e9cff61fba63a5dc7b5f2581fd80e5e7e40c78057eee75e",
+      "text": true
+    },
+    "server/commercial/http.mjs": {
+      "sha256": "093045f857ff6a4ec4ffa6486a50e9ea229a84e63f4342a55e2c607bd79d8e1f",
+      "text": true
+    },
+    "server/commercial/links.mjs": {
+      "sha256": "2f41120333b24685d2a47dca8b9e95d49860d9043d955a2d1b1e8de1b2694fb9",
+      "text": true
+    },
+    "server/commercial/mail.mjs": {
+      "sha256": "e8117ecdf6b8567853ec30e6ea32698a9b96ff96013d6f2343fe77a511097b39",
+      "text": true
+    },
+    "server/commercial/media.mjs": {
+      "sha256": "296da7d466389c7a1862e8f02ae76a2b6b4e85c19b331b3537b6d4c456ffb41e",
+      "text": true
+    },
+    "server/commercial/promote-assets.mjs": {
+      "sha256": "da357f18a33bd64104ab523782377f84883342a468693c84841660a18c76bcdb",
+      "text": true
+    },
+    "server/commercial/runtime.mjs": {
+      "sha256": "d22ef88f5a64c286a10f612a26ad12372bfa1c4152941ebedd3ebe6a9d578bc3",
+      "text": true
+    },
+    "src/consumer/TemplatePicker.tsx": {
+      "sha256": "ce38b3d184ed2d5786a82e8f60ced7a90c797740722d60dd19c2444a319ccdd5",
+      "text": true
+    },
+    "src/consumer/templates.css": {
+      "sha256": "0ca2154c3e4291c2a8163f7a46430be06cea0472dd9c549c13f2b17da79ac020",
+      "text": true
+    },
+    "src/demo/DemoApp.tsx": {
+      "sha256": "afd3e1c4e4320e7f47a2421abd610a647c16e01cb3d1db10b37a449a09819595",
+      "text": true
+    },
+    "src/demo/demo.css": {
+      "sha256": "6cf3793fe9e873b4b0dc70ad4b1a3940841c8a75ff1b5cbeffbc31e039f1c114",
+      "text": true
+    },
+    "src/demo/main.tsx": {
+      "sha256": "ad898abc04ebc9dbe501868508e2e8695052cc348a16c0008128ed2d3cf33198",
+      "text": true
+    },
+    "src/demo/transport.ts": {
+      "sha256": "9e5f52377362c24490678b599306e91e5758d11b988605da480dcc99c08605a2",
+      "text": true
+    },
+    "src/platform-commercial/Activation.tsx": {
+      "sha256": "92f31fb199ad50d4813f0e007d8916b7edd70c902abb406a1e3cb9c33940ccbc",
+      "text": true
+    },
+    "src/platform-commercial/ConfigurationReview.tsx": {
+      "sha256": "dc80e57766f56b897856db27c0ac7f0dc273be22a62e352739104dbdf73ba4fc",
+      "text": true
+    },
+    "src/platform-commercial/CopyLink.tsx": {
+      "sha256": "ec72e65f1326b71e3a360da495b6d57401d919d5e7d956e0735a2fb3d0e0a34a",
+      "text": true
+    },
+    "src/platform-commercial/Interested.tsx": {
+      "sha256": "aef8d0be84b1ff45a27eca559c3f0faa4b9b9cca42c2b7a153073ad4a49ac387",
+      "text": true
+    },
+    "src/platform-commercial/Management.tsx": {
+      "sha256": "68594e38c127100e1324c760445747c80e3321ffc7938502325a4a8631c85b09",
+      "text": true
+    },
+    "src/platform-commercial/PreparedCompany.tsx": {
+      "sha256": "e9c23a677ab28e8a5ba88b0f3c89e58e96e2f953c815fe9801b27bd83d3781e7",
+      "text": true
+    },
+    "src/platform-commercial/api.ts": {
+      "sha256": "a98b470c0478adce4d53bed40da273ec0ea4530ed55035a33feabc2ec5bd5af4",
+      "text": true
+    },
+    "src/platform-commercial/commercial-management.css": {
+      "sha256": "92ece9764d824f4b5ffa176d40ff5f620631053b8af7998e40af4eedda4e8483",
+      "text": true
+    },
+    "src/platform-commercial/policy.ts": {
+      "sha256": "ad5a32b40c167f6bb714f20147dfb4803d296f69ed31f87963b96f59e51a518d",
+      "text": true
+    },
+    "supabase/migrations/202610180054_commercial_preparation.sql": {
+      "sha256": "e2aaf3367ba5d6f1e840b99fc88c3d4dd86ee5f03bcc34767b91d005443d4654",
+      "text": true
+    },
+    "tests/commercial-implementation/control.test.mjs": {
+      "sha256": "e7c68c7f922a2c2510d1f40fa7bfd54694d12017016cee5b9b5dd8bb3259afa7",
+      "text": true
+    },
+    "tests/commercial-implementation/demo-fixture.mjs": {
+      "sha256": "10534a4892a02cc1d0964dc08d21dd862e71cc29a1e9ca607599df998bd4e287",
+      "text": true
+    },
+    "tests/commercial-implementation/demos.test.mjs": {
+      "sha256": "7266dfeaa90106d53c2e69249193f0dab29637304288d3fea5b27eb7bde3c305",
+      "text": true
+    },
+    "tests/commercial-implementation/integrity.test.mjs": {
+      "sha256": "713f504e4935da2c43f403de5b0999ff9cd1184e68c587a42586f6e294ea5804",
+      "text": true
+    },
+    "tests/commercial-implementation/links.test.mjs": {
+      "sha256": "cefed22dccec05a43739911e472b62554a10697555056a7d1ed9c79c005813cc",
+      "text": true
+    },
+    "tests/commercial-implementation/preparation.test.mjs": {
+      "sha256": "bb0642feababdfcb42b53e60180645fbe9cef0c93de3ae21d5e974d8c30f2886",
+      "text": true
+    },
+    "tests/commercial-implementation/rollback.test.mjs": {
+      "sha256": "63805568137e6fb4c65f6b938d811bf3ec6dd10a28147be198d93c6f6e0b54e1",
+      "text": true
+    },
+    "tests/commercial-implementation/transport.test.mjs": {
+      "sha256": "bda2654aea6e311fcaac61dc2ceaf84b18da6c21d2067f468ffb4904e031774f",
+      "text": true
+    },
+    "tests/commercial-implementation/ui-contracts.test.mjs": {
+      "sha256": "c9d092bddbf29d9e8262ef2565fc642c16512d2413f30ca7017bd48ecc3b5c82",
+      "text": true
+    }
+  }
+}

@@ -1,6 +1,10 @@
+import { PreparedCompany } from "./platform-commercial/PreparedCompany";
+import { Management } from "./platform-commercial/Management";
 import { Workspace, WorkspaceGroup } from "./workspace/Workspace";
 import { globalIdentityLabel, companyIdentityLabel } from "./workspace/identity";
 import { ProviderStatus } from "./billing/ProviderStatus";
+import { Interested } from "./platform-commercial/Interested";
+import { canSeeCommercial } from "./platform-commercial/policy";
 import { Acquisition } from "./acquisition/Acquisition";
 import { ContextChooser } from "./access/ContextChooser";
 import { accessApi, companyEntryPath } from "./access/EnterpriseAccess";
@@ -410,6 +414,15 @@ function Shell({ children }: { children: ReactNode }) {
             access?.identity?.permissions.some((p) =>
               p.startsWith("acquisition."),
             )) && <NavLink to="/admin/aquisicao" title="Aquisição" aria-label="Aquisição">Aquisição</NavLink>}
+          {import.meta.env.VITE_COMMERCIAL_PREPARATION_ENABLED === "true" && canSeeCommercial(access) && (
+            <WorkspaceGroup id="commercial-management" label="Gestão Comercial" icon="chart">
+              <NavLink to="/admin/comercial/interessados" title="Interessados" aria-label="Interessados">Interessados</NavLink>
+              <NavLink to="/admin/comercial/demonstracoes">Demonstrações</NavLink>
+              <NavLink to="/admin/comercial/templates">Templates</NavLink>
+              <NavLink to="/admin/comercial/convites">Convites</NavLink>
+              <NavLink to="/admin/comercial/ativacoes">Ativações</NavLink>
+            </WorkspaceGroup>
+          )}
           <NavLink to="/escolher-empresa" title="Trocar contexto" aria-label="Trocar contexto">Trocar contexto</NavLink>
           <NavLink to="/central" title="Atendimento humano" aria-label="Atendimento humano">Atendimento humano</NavLink>
           <NavLink to="/comercial" title="Comercial e retornos" aria-label="Comercial e retornos">Comercial e retornos</NavLink>
@@ -464,7 +477,8 @@ function Shell({ children }: { children: ReactNode }) {
                           </p>
                         }
                       >
-                        {children}
+                        {tenantManager && tenant && import.meta.env.VITE_COMMERCIAL_PREPARATION_ENABLED === "true" && <PreparedCompany org={tenant.id}/>}
+      {children}
                       </Suspense>
                     </PermissionRoute>
                   </CompanyExperience>
@@ -490,7 +504,8 @@ function Shell({ children }: { children: ReactNode }) {
                       </p>
                     }
                   >
-                    {children}
+                    {tenantManager && tenant && import.meta.env.VITE_COMMERCIAL_PREPARATION_ENABLED === "true" && <PreparedCompany org={tenant.id}/>}
+      {children}
                   </Suspense>
                 </PermissionRoute>
               </CompanyExperience>
@@ -605,6 +620,7 @@ function useAction() {
   }
   return { busy, message, failed, act };
 }
+function CommercialAccess({children}:{children:React.ReactNode}){const{access}=useContext(Auth);return canSeeCommercial(access)?<>{children}</>:<section><h1>Acesso não autorizado</h1><p>Esta área é exclusiva da administração comercial da plataforma.</p></section>;}
 function ProfilePage() {
   const { access } = useContext(Auth),
     a = useAction();
@@ -1102,6 +1118,7 @@ export default function Application() {
               </Protected>
             }
           />
+          {import.meta.env.VITE_COMMERCIAL_PREPARATION_ENABLED === "true" && <><Route path="/admin/comercial/interessados" element={<Protected><CommercialAccess><Interested /></CommercialAccess></Protected>} /><Route path="/admin/comercial/:section" element={<Protected><CommercialAccess><Management /></CommercialAccess></Protected>} /></>}
           <Route
             path="/admin/aquisicao"
             element={

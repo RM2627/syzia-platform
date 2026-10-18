@@ -9,6 +9,7 @@ import { PagePublication } from "./PagePublication";
 import "./consumer.css";
 import "./company-page.css";
 import "./presence-editor.css";
+import { TemplatePicker } from "./TemplatePicker";
 export function CompanyPage({ org }: { org: Organization }) {
   const { can } = usePermissions(),
     full = [
@@ -216,6 +217,12 @@ export function CompanyPage({ org }: { org: Organization }) {
           {notice}
         </p>
       )}
+      {draft && <TemplatePicker value={draft.preview?.template || "current"} disabled={!can("page.manage") || busy} onSelect={async (template) => {
+        setBusy(true);setError("");try {
+          await rpc("company_page_template_set", {p_org: org.id,p_template: template,p_revision: draft.template_revision || 0});
+          setReviewed("");setPreview(null);await load();setNotice("Template salvo no rascunho. Confira a prévia e publique quando estiver pronto.");
+        }catch(e){setError(message(e));}finally{setBusy(false);}
+      }} />}
       <section className="page-share" aria-label="Compartilhar página">
         <div className="page-share-actions">
           <a

@@ -74,8 +74,8 @@ test("049-D06 PDF multipágina: acentos, longos, desconto, branding/fallback, me
   const pdf = await PDFDocument.load(bytes);
   assert.ok(pdf.getPageCount() > 2);
   assert.equal(pdf.getAuthor(), d.company.name);
-  await mkdir("reports/syzia-049/documents", { recursive: true });
-  await writeFile("reports/syzia-049/documents/orcamento-ficticio.pdf", bytes);
+  await mkdir("reports/commercial-054/regenerated-049/documents", { recursive: true });
+  await writeFile("reports/commercial-054/regenerated-049/documents/orcamento-ficticio.pdf", bytes);
   const receipt = {
     ...d,
     kind: "appointment",
@@ -90,7 +90,7 @@ test("049-D06 PDF multipágina: acentos, longos, desconto, branding/fallback, me
     },
   };
   await writeFile(
-    "reports/syzia-049/documents/agendamento-ficticio.pdf",
+    "reports/commercial-054/regenerated-049/documents/agendamento-ficticio.pdf",
     await renderDocument(
       receipt,
       new Uint8Array(await readFile("public/fonts/DejaVuSans.ttf")),

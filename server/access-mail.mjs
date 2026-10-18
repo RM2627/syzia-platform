@@ -37,6 +37,7 @@ export function instructionMessage(value, origin) {
 export function createAccessMailer(
   env,
   createTransport = nodemailer.createTransport,
+  renderMessage = instructionMessage,
 ) {
   if (env.ACCESS_MAIL_ENABLED !== "true")
     return async () => {
@@ -71,7 +72,7 @@ export function createAccessMailer(
     disableUrlAccess: true,
   });
   return async (value) => {
-    const message = instructionMessage(value, env.PLATFORM_APP_ORIGIN);
+    const message = renderMessage(value, env.PLATFORM_APP_ORIGIN);
     const result = await transport.sendMail({
       ...message,
       from: env.ACCESS_MAIL_FROM,

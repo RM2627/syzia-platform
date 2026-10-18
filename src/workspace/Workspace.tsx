@@ -188,7 +188,7 @@ export function Workspace({
   }, []);
   useEffect(() => {
     setOpened(false);
-    if (location.pathname.startsWith("/admin/")) setGroup("platform");
+    if (location.pathname.startsWith("/admin/")) setGroup(location.pathname.startsWith("/admin/comercial/") ? "commercial-management" : "platform");
   }, [location.pathname, location.search]);
   useEffect(() => {
     if (!opened || !mobile) return;

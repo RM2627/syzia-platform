@@ -1,0 +1,40 @@
+.demo-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 0.65rem 1rem;
+  background: #d9f2ef;
+  color: #124744;
+  border-bottom: 1px solid #acd9d2;
+  position: relative;
+  z-index: 70;
+  font-size: 0.85rem;
+}
+.demo-bar strong {
+  font-size: 0.9rem;
+}
+.demo-bar a {
+  color: inherit;
+  font-weight: 650;
+}
+.demo-bar button {
+  font-size: 0.8rem;
+  padding: 0.35rem 0.6rem;
+}
+.demo-entry {
+  max-width: 44rem;
+  margin: 10vh auto;
+  padding: 1.5rem;
+}
+.demo-bar + .ux-workspace {
+  min-height: calc(100dvh - 4rem);
+}
+@media (max-width: 600px) {
+  .demo-bar {
+    gap: 0.4rem;
+  }
+  .demo-bar span {
+    flex-basis: 100%;
+  }
+}

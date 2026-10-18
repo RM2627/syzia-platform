@@ -50,6 +50,7 @@ import {
   type Service,
 } from "./api";
 import "./consumer.css";
+import "./templates.css";
 import { Captcha, captchaConfigured } from "../Captcha";
 const days = [
   "Domingo",
@@ -107,6 +108,7 @@ function Frame({
   slug,
   media = mediaUrl,
   preview = false,
+  template = "current",
 }: {
   children: React.ReactNode;
   name?: string;
@@ -114,10 +116,12 @@ function Frame({
   slug?: string;
   media?: typeof mediaUrl;
   preview?: boolean;
+  template?: Company["template"];
 }) {
   return (
     <div
       className="consumer c-custom-brand"
+      data-template={["modern", "minimal", "catalog"].includes(template || "") ? template : "current"}
       style={brandStyle(branding?.primary_color, branding?.theme)}
     >
       {import.meta.env.VITE_LOCAL_DEMO === "true" && (
@@ -258,6 +262,7 @@ export function PublicCompany({
   return (
     <Frame
       name={company?.name}
+      template={company?.template}
       branding={company?.branding}
       slug={company?.slug}
       media={resolveMedia}

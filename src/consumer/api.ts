@@ -1,6 +1,7 @@
+import { demoBuild, demoConsumerClient, demoAPI } from "../demo/transport";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { configured } from "../api";
-export const consumerClient = configured
+export const consumerClient = demoBuild ? demoConsumerClient : configured
   ? createClient(
       import.meta.env.VITE_SUPABASE_URL,
       import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
@@ -14,7 +15,7 @@ export const consumerClient = configured
       },
     )
   : null;
-export const gateway = import.meta.env.VITE_ATTACHMENT_GATEWAY_URL || "";
+export const gateway = demoBuild ? demoAPI + "/demonstration-media" : import.meta.env.VITE_ATTACHMENT_GATEWAY_URL || "";
 export async function crpc<T = any>(
   name: string,
   args: Record<string, unknown> = {},
@@ -258,6 +259,7 @@ export const mediaUrl = (code: string | null | undefined) =>
     ? gateway + "/media/" + code
     : undefined;
 export type Company = {
+  template?: "current" | "modern" | "minimal" | "catalog";
   relations?: {
     source: string;
     target: string;

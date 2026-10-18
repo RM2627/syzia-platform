@@ -18,6 +18,9 @@ const roles: Record<string, string> = {
   super_admin: "Super Admin SYZIA",
 };
 const grants: Record<string, string> = {
+  "commercial.read": "Consultar Gestão Comercial (carteira própria)",
+  "commercial.manage": "Gerenciar interessados e preparações (carteira própria)",
+  "commercial.send": "Enviar convites comerciais autorizados",
   "people.read": "Consultar pessoas",
   "companies.read": "Consultar cadastro das empresas",
   "acquisition.read": "Consultar aquisição SYZIA",

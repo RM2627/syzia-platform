@@ -180,7 +180,7 @@ test("049-B01 presença, PDF, imagens privadas, WhatsApp e checklist desktop/mob
   await expect(
     page.getByText(/Presença confirmada pelo cliente/).first(),
   ).toBeVisible();
-  await mkdir("reports/syzia-049/documents", { recursive: true });
+  await mkdir("reports/commercial-054/regenerated-049/documents", { recursive: true });
   for (const [label, file] of [
     ["Baixar orçamento em PDF", "orcamento-browser.pdf"],
     ["Baixar comprovante", "comprovante-browser.pdf"],
@@ -191,9 +191,9 @@ test("049-B01 presença, PDF, imagens privadas, WhatsApp e checklist desktop/mob
       .first()
       .click();
     const download = await pending;
-    await download.saveAs("reports/syzia-049/documents/" + file);
+    await download.saveAs("reports/commercial-054/regenerated-049/documents/" + file);
     const pdf = await PDFDocument.load(
-      await readFile("reports/syzia-049/documents/" + file),
+      await readFile("reports/commercial-054/regenerated-049/documents/" + file),
     );
     expect(pdf.getAuthor()).toContain("MS Auto");
     expect(
@@ -274,7 +274,7 @@ test("049-B01 presença, PDF, imagens privadas, WhatsApp e checklist desktop/mob
     .click();
   await (
     await mobile
-  ).saveAs("reports/syzia-049/documents/comprovante-mobile.pdf");
+  ).saveAs("reports/commercial-054/regenerated-049/documents/comprovante-mobile.pdf");
   await page.screenshot({
     path: "reports/syzia-049/screenshots/consumidor-320.png",
     fullPage: true,
@@ -428,7 +428,7 @@ test("049-B03 IME, teclado móvel, download móvel e telefone amigável sem apag
       .click();
     await (
       await download
-    ).saveAs("reports/syzia-049/documents/comprovante-touch.pdf");
+    ).saveAs("reports/commercial-054/regenerated-049/documents/comprovante-touch.pdf");
   } finally {
     await ctx.close();
   }

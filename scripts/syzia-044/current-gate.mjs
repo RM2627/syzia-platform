@@ -8,12 +8,16 @@ process.env.SYZIA_BILLING_CURRENT = "1";
 process.env.SYZIA_OPTIONAL_MANUAL_CURRENT = "1";
 process.env.SYZIA_OPERATION_CURRENT = "1";
 const controlled = process.argv.includes("--inject-failure");
-if (!controlled) await (await import("../billing-047/browser-runtime.mjs")).prepareGateBrowser();
+const localNonBrowser = process.argv.includes("--local-nonbrowser");
+if (!controlled && !localNonBrowser) await (await import("../billing-047/browser-runtime.mjs")).prepareGateBrowser();
 const out = "reports/syzia-044";
 await mk(out, { recursive: true });
 await mk("reports/team-availability", { recursive: true });
 const node = process.execPath;
 export const suites = [
+ ["commercial-054",[node,"--experimental-strip-types","--test","--test-concurrency=1","tests/commercial-implementation/control.test.mjs","tests/commercial-implementation/demos.test.mjs","tests/commercial-implementation/links.test.mjs","tests/commercial-implementation/preparation.test.mjs","tests/commercial-implementation/rollback.test.mjs","tests/commercial-implementation/transport.test.mjs","tests/commercial-implementation/ui-contracts.test.mjs","tests/commercial-implementation/integrity.test.mjs"]],
+ ["commercial-054-regression",[node,"scripts/commercial/regression-local.mjs"]],
+ ["commercial-054-demo-build",[node,"scripts/commercial/check-demo-build.mjs"]],
  ["checkout-financial-051",[node,"--experimental-strip-types","--test","--test-concurrency=1","tests/syzia-051/financial.test.mjs","tests/syzia-051/fields.test.mjs","tests/syzia-051/upgrade.test.mjs","tests/syzia-051/integrity.test.mjs"]],
  ["legal-versioning-050",[node,"--test","--test-concurrency=1","tests/legal-050/versioning.test.mjs","tests/legal-050/tooling.test.mjs"]],
  ["legal-historical-050",[node,"scripts/hotfix-050/legal-regression.mjs"]],
@@ -76,9 +80,10 @@ export const suites = [
 ];
 const steps = controlled
   ? [["controlled-failure", [node, "-e", "process.exit(42)"]]]
-  : suites;
+  : localNonBrowser ? suites.filter(([name])=>!name.includes("browser")) : suites;
 const report = {
-  version: "052",
+  version: "054",
+  localNonBrowser,
   engine:
     "Local PGlite + HTTP fixtures + Chromium; external homologation pending",
   startedAt: new Date().toISOString(),
@@ -121,11 +126,11 @@ report.finishedAt = new Date().toISOString();
 report.status =
   report.steps.length === steps.length &&
   report.steps.every((s) => s.status === "PASS")
-    ? "PASS"
+    ? (localNonBrowser && !controlled ? "INCOMPLETE" : "PASS")
     : "FAIL";
-report.notRun = steps.slice(report.steps.length).map((s) => s[0]);
+report.notRun = [...steps.slice(report.steps.length).map((s) => s[0]),...(localNonBrowser&&!controlled?suites.filter(([name])=>name.includes("browser")).map(([name])=>name):[])];
 await write(
   `${out}/${controlled ? "gate-controlled-failure" : "current-gate"}.json`,
   JSON.stringify(report, null, 2),
 );
-if (report.status !== "PASS") process.exitCode = 1;
+if (report.status !== "PASS") process.exitCode = report.status==="INCOMPLETE"?2:1;

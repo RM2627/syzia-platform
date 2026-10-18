@@ -1,0 +1,107 @@
+.commercial-management {
+  max-width: 1280px;
+  margin-inline: auto;
+}
+.commercial-stage-counts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin-block: 24px;
+}
+.commercial-stage-counts button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  text-align: left;
+  white-space: normal;
+}
+.commercial-stage-counts strong {
+  font-size: 1.5rem;
+}
+.commercial-stage-counts button[aria-pressed="true"] {
+  outline: 2px solid #6c4dff;
+  outline-offset: 2px;
+}
+.commercial-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 16px;
+}
+.commercial-contact-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 16px;
+}
+.commercial-management p {
+  overflow-wrap: anywhere;
+}
+.commercial-management form + form {
+  border-top: 1px solid var(--line, #dadbe5);
+  margin-top: 24px;
+  padding-top: 20px;
+}
+.commercial-management textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+.commercial-management [role="alert"] {
+  scroll-margin-top: 100px;
+}
+.commercial-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 21rem), 1fr));
+  gap: 1rem;
+}
+.commercial-cards .card {
+  min-width: 0;
+}
+.commercial-cards p {
+  overflow-wrap: anywhere;
+}
+.commercial-table {
+  overflow: auto;
+}
+.commercial-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.commercial-table th,
+.commercial-table td {
+  text-align: left;
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--border, #dbe3e7);
+}
+.template-example-cover {
+  height: 4rem;
+  background: linear-gradient(120deg, #116f73, #a2ddd5);
+  border-radius: 0.6rem;
+}
+.template-minimal .template-example-cover {
+  height: 0.4rem;
+  background: #116f73;
+}
+.template-example-services {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.4rem;
+  margin: 1rem 0;
+}
+.template-example-services span {
+  border: 1px solid #dbe3e7;
+  border-radius: 0.4rem;
+  padding: 0.5rem;
+}
+.template-catalog .template-example-services {
+  grid-template-columns: 1fr;
+}
+.commercial-management blockquote {
+  border-left: 3px solid #2e8c86;
+  padding-left: 1rem;
+  margin-left: 0;
+}
+.commercial-management button:focus-visible,
+.commercial-management a:focus-visible {
+  outline: 3px solid #377fba;
+  outline-offset: 3px;
+}

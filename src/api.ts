@@ -1,3 +1,4 @@
+import { demoBuild, demoCompanyClient, demoRPC } from "./demo/transport";
 import { createClient } from "@supabase/supabase-js";
 export type Status = "active" | "suspended";
 export type Profile = { id: string; display_name: string; status: Status };
@@ -71,8 +72,8 @@ function configValid() {
     return false;
   }
 }
-export const configured = configValid();
-export const supabase = configured
+export const configured = demoBuild || configValid();
+export const supabase = demoBuild ? demoCompanyClient : configured
   ? createClient(url, key, {
       auth: {
         flowType: "pkce",
@@ -90,6 +91,7 @@ export async function rpc<T = void>(
   name: string,
   params?: Record<string, unknown>,
 ): Promise<T> {
+  if (demoBuild) return demoRPC<T>("company", name, params);
   if (!supabase) throw new Error("backend_unavailable");
   const { data, error } = await supabase.rpc(name, params);
   if (error) {

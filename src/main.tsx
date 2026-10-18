@@ -16,6 +16,8 @@ const Contact = lazy(() =>
 const Register = lazy(() =>
   import("./acquisition/SelfService").then((m) => ({ default: m.SelfService })),
 );
+const ActivateCompany = lazy(() => import("./platform-commercial/Activation").then(m=>({default:m.ActivateCompany})));
+const Unsubscribe = lazy(() => import("./platform-commercial/Activation").then(m=>({default:m.Unsubscribe})));
 const Foundation = lazy(() => import("./FoundationApp"));
 const RecoveryRequest = lazy(() => import("./access/PasswordRecovery").then(m => ({ default: m.RequestPasswordRecovery })));
 const RecoveryUpdate = lazy(() => import("./access/PasswordRecovery").then(m => ({ default: m.UpdatePassword })));
@@ -50,6 +52,8 @@ createRoot(document.getElementById("root")!).render(
           <Route path="/planos" element={<Plans />} />
           <Route path="/contato" element={<Contact />} />
           <Route path="/cadastrar" element={<Register />} />
+          <Route path="/ativar-empresa" element={<ActivateCompany />} />
+          <Route path="/convites/descadastrar" element={<Unsubscribe />} />
           <Route path="/empresa/:slug" element={<PublicCompany />} />
           <Route path="/minhas-solicitacoes" element={<MyRequests />} />
           <Route path="/acompanhar/:code" element={<Tracking />} />

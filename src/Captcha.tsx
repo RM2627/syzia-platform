@@ -1,5 +1,6 @@
+import { demoBuild } from "./demo/transport";
 import { useEffect, useRef, useState } from "react";
-export const captchaConfigured = Boolean(
+export const captchaConfigured = !demoBuild && Boolean(
   import.meta.env.VITE_TURNSTILE_SITE_KEY,
 );
 type Turnstile = {

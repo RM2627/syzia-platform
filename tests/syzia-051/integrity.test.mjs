@@ -17,7 +17,7 @@ test("051-I consolidated 050 preservation except authorized files and proven LF/
   assert.equal(
     (await readdir("supabase/migrations")).filter((p) => p.endsWith(".sql"))
       .length,
-    49,
+    50,
   );
 });
 test("051-I HMAC and verified snapshot preserved except LF/CRLF; credentials/runtime/legal unmodified", async () => {
