@@ -1,3 +1,4 @@
+import { CompanyNavigation } from "../workspace/Workspace";
 import { usePermissions, sectionAction } from "../permissions/Permissions";
 import React, {
   useCallback,
@@ -188,45 +189,8 @@ export function CompanyExperience({
     show = section === "" || section === "ajuda";
   return (
     <div className="op-experience">
-      <nav className="op-nav" aria-label="Navegação da empresa">
-        {[
-          ["", "Início"],
-          ["pagina", "Página da empresa"],
-          ["agenda", "Agenda"],
-          ["clientes", "Clientes"],
-          ["orcamentos", "Orçamentos"],
-          ["comercial", "Comercial"],
-          ["pendencias", "Pendências"],
-          ["atendimento", "Atendimento"],
-          ["metricas", "Métricas"],
-          ["financeiro", "Financeiro"],
-          ["configuracao", "Configurações"],
-          ["assinatura", "Plano e assinatura"],
-          ["acessos", "Pessoas e acessos"],
-          ["suporte", "Suporte SYZIA"],
-          ["ajuda", "Ajuda"],
-        ]
-          .filter(([p]) =>
-            p === "financeiro"
-              ? can("analytics.financial") ||
-                Object.keys(permissions?.actions || {}).some(
-                  (a) => a.startsWith("finance.") && can(a),
-                )
-              : p === "pagina"
-                ? can("page.read") || can("portfolio.read")
-                : can(sectionAction[p] || "settings.read"),
-          )
-          .map(([p, label]) => (
-            <NavLink
-              key={p}
-              end
-              to={base + (p ? "/" + p : "")}
-              data-tour={p || "home"}
-            >
-              {label}
-            </NavLink>
-          ))}
-      </nav>
+      <CompanyNavigation org={org} />
+      {section === "" && children}
       {error && (
         <p role="alert" className="notice error">
           {error}{" "}
@@ -351,9 +315,7 @@ export function CompanyExperience({
             ))}
           </div>
         </section>
-      ) : (
-        children
-      )}
+      ) : section !== "" ? children : null}
       {data?.guide.status === "in_progress" && (
         <section className="op-tour" role="region" aria-label="Tutorial guiado">
           <span className="eyebrow">PASSO {data.guide.step + 1} DE 5</span>

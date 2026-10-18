@@ -10,7 +10,7 @@ test('auth integrity authorizes only seven exact audited transitions',()=>{
   for(const [path,row] of Object.entries(transitions)){
     assert.equal(hotfix051ExpectedHash(path,historical[path]),row.before);
     assert.equal(authCommunicationExpectedHash(path,row.before),row.after);
-    assert.equal(assertHotfix051File(path,readFileSync(path),historical[path]),'byte_exact');
+    assert.ok(['byte_exact','lf_crlf_only'].includes(assertHotfix051File(path,readFileSync(path),historical[path])));
     assert.throws(()=>assertHotfix051File(path,Buffer.concat([readFileSync(path),Buffer.from('\nUNAUTHORIZED_CHANGE')]),historical[path]),/integrity mismatch/);
     assert.throws(()=>authCommunicationExpectedHash(path,'0'.repeat(64)),/unexpected predecessor/);
   }

@@ -1,3 +1,5 @@
+import { Workspace, WorkspaceGroup } from "./workspace/Workspace";
+import { globalIdentityLabel, companyIdentityLabel } from "./workspace/identity";
 import { ProviderStatus } from "./billing/ProviderStatus";
 import { Acquisition } from "./acquisition/Acquisition";
 import { ContextChooser } from "./access/ContextChooser";
@@ -297,11 +299,11 @@ function Field({ label, children }: { label: string; children: ReactNode }) {
     </label>
   );
 }
-function PublicFrame({ children }: { children: ReactNode }) {
+function PublicFrame({ children, accessState = false }: { children: ReactNode; accessState?: boolean }) {
   return (
-    <main className="public">
+    <main className={accessState ? "public ux-access-state" : "public"}>
       <div className="brand">
-        <Brand />
+        <Brand theme={accessState ? "light" : "dark"} />
       </div>
       {children}
       <p className="footnote">
@@ -320,14 +322,14 @@ function Protected({
   const { session, access, loading, error, refresh, logout } = useContext(Auth);
   if (loading)
     return (
-      <PublicFrame>
+      <PublicFrame accessState>
         <Notice>Verificando seu acesso…</Notice>
       </PublicFrame>
     );
   if (!session) return <Navigate to="/entrar" replace />;
   if (!access)
     return (
-      <PublicFrame>
+      <PublicFrame accessState>
         <div className="card">
           <h1>Acesso indisponível</h1>
           <Notice kind="error">
@@ -375,7 +377,6 @@ function Shell({ children }: { children: ReactNode }) {
       ? null
       : session?.user.email) ||
     "Minha conta";
-  const [menuOpen, setMenuOpen] = useState(false);
   const currentLocation = useLocation();
   const tenantId = currentLocation.pathname.match(/^\/painel\/([^/]+)/)?.[1];
   const tenant = access?.organizations.find((o) => o.id === tenantId);
@@ -389,88 +390,33 @@ function Shell({ children }: { children: ReactNode }) {
           m.role === "admin_empresa" &&
           m.status === "active",
       ));
-  useEffect(() => setMenuOpen(false), [currentLocation.pathname]);
   return (
-    <div className="app-shell">
-      <aside>
-        <Link to="/app" className="brand">
-          <Brand />
-        </Link>
-        <button
-          className="mobile-menu"
-          aria-expanded={menuOpen}
-          aria-controls="workspace-navigation"
-          onClick={() => setMenuOpen((v) => !v)}
-        >
-          {menuOpen ? "Fechar menu" : "Menu ☰"}
-        </button>
-        <nav
-          id="workspace-navigation"
-          className="shell-nav-menu"
-          data-open={menuOpen}
-          aria-label="Navegação principal"
-        >
-          <NavLink to="/app" end>
+    <Workspace accountName={accountName} role={globalIdentityLabel(access)} company={tenant?.name} logout={() => void logout()} globalNavigation={<>
+          <NavLink to="/app" end title="Minhas empresas" aria-label="Minhas empresas">
             Minhas empresas
           </NavLink>
           {access?.roles.includes("super_admin") && (
-            <>
-              <NavLink to="/admin/empresas">Empresas</NavLink>
-              <NavLink to="/admin/equipe">Equipe SYZIA</NavLink>
-              <NavLink to="/admin/pessoas">Pessoas e acessos</NavLink>
-              <NavLink to="/admin/auditoria">Auditoria</NavLink>
-              <NavLink to="/admin/metricas">Métricas da plataforma</NavLink>
-              <NavLink to="/admin/assinaturas">Planos e assinaturas</NavLink>
-              <NavLink to="/admin/cobranca">Cobrança</NavLink>
-            </>
+            <WorkspaceGroup id="platform" label="Plataforma SYZIA">
+              <NavLink to="/admin/empresas" title="Empresas" aria-label="Empresas">Empresas</NavLink>
+              <NavLink to="/admin/equipe" title="Equipe SYZIA" aria-label="Equipe SYZIA">Equipe SYZIA</NavLink>
+              <NavLink to="/admin/pessoas" title="Pessoas e acessos" aria-label="Pessoas e acessos">Pessoas e acessos</NavLink>
+              <NavLink to="/admin/auditoria" title="Auditoria" aria-label="Auditoria">Auditoria</NavLink>
+              <NavLink to="/admin/metricas" title="Métricas da plataforma" aria-label="Métricas da plataforma">Métricas da plataforma</NavLink>
+              <NavLink to="/admin/assinaturas" title="Planos e assinaturas" aria-label="Planos e assinaturas">Planos e assinaturas</NavLink>
+              <NavLink to="/admin/cobranca" title="Cobrança" aria-label="Cobrança">Cobrança</NavLink>
+            </WorkspaceGroup>
           )}
           {(globalAdmin ||
             access?.identity?.permissions.some((p) =>
               p.startsWith("acquisition."),
-            )) && <NavLink to="/admin/aquisicao">Aquisição</NavLink>}
-          <NavLink to="/escolher-empresa">Trocar contexto</NavLink>
-          <NavLink to="/central">Atendimento humano</NavLink>
-          <NavLink to="/comercial">Comercial e retornos</NavLink>
+            )) && <NavLink to="/admin/aquisicao" title="Aquisição" aria-label="Aquisição">Aquisição</NavLink>}
+          <NavLink to="/escolher-empresa" title="Trocar contexto" aria-label="Trocar contexto">Trocar contexto</NavLink>
+          <NavLink to="/central" title="Atendimento humano" aria-label="Atendimento humano">Atendimento humano</NavLink>
+          <NavLink to="/comercial" title="Comercial e retornos" aria-label="Comercial e retornos">Comercial e retornos</NavLink>
           {!globalAdmin && access?.identity?.kind === "syzia_staff" && (
-            <NavLink to="/operacao-syzia">Minha operação</NavLink>
+            <NavLink to="/operacao-syzia" title="Minha operação" aria-label="Minha operação">Minha operação</NavLink>
           )}
-          <NavLink to="/perfil">Meu perfil</NavLink>
-        </nav>
-        <div className="sidebar-bottom">
-          <strong>{accountName}</strong>
-          <button onClick={() => void logout()}>Sair</button>
-        </div>
-      </aside>
-      <main className="workspace">
-        <header className="topline v-account-header">
-          <span className="v-workspace-caption">{platformBrand.slogan}</span>
-          <div className="v-account" aria-label="Usuário conectado">
-            <span className="v-avatar" aria-hidden="true">
-              {accountName
-                .split(/\s+/)
-                .slice(0, 2)
-                .map((n) => n[0])
-                .join("")
-                .toUpperCase()}
-            </span>
-            <span>
-              <strong>{accountName}</strong>
-              <small>
-                {globalAdmin
-                  ? "Super Admin"
-                  : tenantManager
-                    ? "Administrador"
-                    : access?.roles.includes("atendente")
-                      ? "Atendente"
-                      : "Colaborador"}
-              </small>
-              <small>
-                {access?.organizations.find((o) => o.id === tenantId)?.name ||
-                  "Selecione uma empresa"}
-              </small>
-            </span>
-          </div>
-        </header>
+    </>}>
         {tenant && globalAdmin && (
           <section
             className="v-tenant-context"
@@ -553,8 +499,7 @@ function Shell({ children }: { children: ReactNode }) {
         ) : (
           children
         )}
-      </main>
-    </div>
+    </Workspace>
   );
 }
 function Home() {
@@ -607,6 +552,7 @@ function Home() {
             </span>
             <h2>{o.name}</h2>
             <span className="muted">{o.slug}</span>
+            <div className="ux-company-role">{companyIdentityLabel(access, o.id)}</div>
             <p>
               {opening === o.id ? (
                 <span role="status">Abrindo empresa…</span>

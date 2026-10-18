@@ -1,3 +1,4 @@
+import { companyNavigation as nav, expectCompanyNavigation, clickCompanyNavigation } from "../support/workspace-navigation";
 import { test, expect } from "../support/demo-test";
 import { demoLogin } from "../support/demo-login";
 import type { Page } from "@playwright/test";
@@ -29,8 +30,6 @@ async function company(
   const c: any = await rpc(p, "foundation_context");
   return c.organizations.find((o: any) => o.slug === slug).id;
 }
-const nav = (p: Page) =>
-  p.getByRole("navigation", { name: "Navegação da empresa" });
 const tab = (p: Page) => p.locator(".central > .h-tabs .selected");
 const detail = (p: Page) =>
   p.getByRole("region", { name: "Atendimento selecionado" });
@@ -83,7 +82,7 @@ for (const width of [1440, 390, 320])
     await expect(
       detail(page).getByRole("heading", { name: one.name, exact: true }),
     ).toBeVisible();
-    await expect(nav(page)).toBeVisible();
+    await expectCompanyNavigation(page);
     await expect(page).toHaveURL(
       new RegExp(`/painel/${org}/atendimento\\?ticket=`),
     );
@@ -136,13 +135,13 @@ for (const width of [1440, 390, 320])
     await expect(
       detail(page).getByRole("heading", { name: two.name, exact: true }),
     ).toBeVisible();
-    await expect(nav(page)).toBeVisible();
+    await expectCompanyNavigation(page);
     const direct = await context.newPage();
     await direct.goto(url);
     await expect(
       detail(direct).getByRole("heading", { name: two.name, exact: true }),
     ).toBeVisible();
-    await expect(nav(direct)).toBeVisible();
+    await expectCompanyNavigation(direct);
     await direct.close();
   });
 test("UX001 Home, notificações, Pendências, Comercial e alternância determinística", async ({
@@ -161,10 +160,8 @@ test("UX001 Home, notificações, Pendências, Comercial e alternância determin
   expect(await attention.getAttribute("href")).toContain(base + "/");
   await attention.click();
   await expect(detail(page)).toBeVisible();
-  await expect(nav(page)).toBeVisible();
-  await nav(page)
-    .getByRole("link", { name: "Pendências", exact: true })
-    .click();
+  await expectCompanyNavigation(page);
+  await clickCompanyNavigation(page, "Pendências");
   await expect(tab(page)).toHaveText("Aguardando empresa");
   await page.getByRole("button", { name: "Todos", exact: true }).click();
   await page
@@ -178,18 +175,14 @@ test("UX001 Home, notificações, Pendências, Comercial e alternância determin
     page.getByLabel("Buscar cliente, empresa ou ticket", { exact: true }),
   ).toHaveValue("Ana");
   await expect(detail(page)).toBeVisible();
-  await nav(page)
-    .getByRole("link", { name: "Atendimento", exact: true })
-    .click();
+  await clickCompanyNavigation(page, "Atendimento");
   await expect(tab(page)).toHaveText("Minha fila");
   await expect(
     page.getByLabel("Buscar cliente, empresa ou ticket", { exact: true }),
   ).toHaveValue("");
-  await nav(page)
-    .getByRole("link", { name: "Pendências", exact: true })
-    .click();
+  await clickCompanyNavigation(page, "Pendências");
   await expect(tab(page)).toHaveText("Aguardando empresa");
-  await nav(page).getByRole("link", { name: "Comercial", exact: true }).click();
+  await clickCompanyNavigation(page, "Comercial");
   await expect(page.locator("a.co-opportunity").first()).toBeVisible();
   await page.locator("a.co-opportunity").first().click();
   await expect(page).toHaveURL(new RegExp(base + "/comercial\\?op="));
@@ -198,7 +191,7 @@ test("UX001 Home, notificações, Pendências, Comercial e alternância determin
     .click();
   await expect(page).toHaveURL(new RegExp(base + "/atendimento\\?ticket="));
   await expect(detail(page)).toBeVisible();
-  await expect(nav(page)).toBeVisible();
+  await expectCompanyNavigation(page);
   await page.goBack();
   await page
     .getByRole("link", { name: "Respostas rápidas autorizadas ↗", exact: true })
@@ -208,7 +201,7 @@ test("UX001 Home, notificações, Pendências, Comercial e alternância determin
     "Respostas",
   );
   await shots(page, "company-origins");
-  await nav(page).getByRole("link", { name: "Clientes", exact: true }).click();
+  await clickCompanyNavigation(page, "Clientes");
   await expect(
     page.getByRole("heading", { name: "Clientes", exact: true }),
   ).toBeVisible();
@@ -417,7 +410,7 @@ test("UX001 notificação de decisão abre e troca ticket dentro de Pendências"
   );
   await notification.click();
   await expect(detail(page)).toBeVisible();
-  await expect(nav(page)).toBeVisible();
+  await expectCompanyNavigation(page);
   await expect(tab(page)).toHaveText("Aguardando empresa");
   await shots(page, "notification-pending");
 });

@@ -123,7 +123,7 @@ async function proposal(page: Page, org: string, code: string) {
     .first()
     .fill("150");
   await page
-    .getByLabel("Explicação da proposta para o cliente", { exact: true })
+    .getByRole("textbox", { name: /^Explicação da proposta para o cliente(?: \*| \(opcional\))?$/ })
     .fill("Valor final confirmado após avaliação.");
   await page
     .getByRole("button", { name: "Visualizar como cliente", exact: true })
@@ -353,6 +353,8 @@ test("05 Navegação global possui uma entrada Equipe SYZIA; operação antiga p
   page,
 }) => {
   await demoLogin(page, "root@example.invalid");
+  const platformMenu = page.getByRole("button", { name: "Plataforma SYZIA", exact: true });
+  if (await platformMenu.getAttribute("aria-expanded") === "false") await platformMenu.click();
   await expect(
     page
       .getByRole("navigation", { name: "Navegação principal" })

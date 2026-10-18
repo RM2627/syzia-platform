@@ -235,7 +235,7 @@ function Daily({ org }: { org: string }) {
       (a) => dayOf(a.starts_at) === add(d.today, 1) && a.state !== "cancelled",
     );
   return (
-    <>
+    <div className="ux-home">
       <header className="op-head">
         <div>
           <span className="eyebrow">
@@ -250,25 +250,7 @@ function Daily({ org }: { org: string }) {
           </HomeBlock>
         </div>
       </header>
-      {can("central.read") && <UnreadSummary org={org}/>}
-      <div className="op-quick">
-        {edit("agenda.manage") && (
-          <Link className="primary" to={base + "/novo-agendamento"}>
-            + Novo agendamento
-          </Link>
-        )}
-        {edit("clients.manage") && (
-          <Link className="button" to={base + "/clientes?novo=1"}>
-            + Novo cliente
-          </Link>
-        )}
-        {edit("quotes.manage") && can("quotes.values") && (
-          <Link className="button" to={base + "/novo-orcamento"}>
-            + Novo orçamento
-          </Link>
-        )}
-      </div>
-      <div className="op-grid">
+      <div className="ux-home-primary">
         <div>
           <section className="card" aria-label="Agenda de hoje">
             <h2>Agenda de hoje</h2>
@@ -324,7 +306,7 @@ function Daily({ org }: { org: string }) {
         <div>
           <section className="card" aria-label="Precisa da sua atenção">
             <h2>Precisa da sua atenção</h2>
-            <HomeBlock s={attention}>
+            <div className="ux-attention-list"><HomeBlock s={attention}>
               {tasks.slice(0, showAll ? tasks.length : 8).map((x: Data) => (
                 <Link key={x.id} className="op-attention" to={x.href}>
                   <strong>
@@ -346,8 +328,32 @@ function Daily({ org }: { org: string }) {
                   Nenhuma tarefa aguardando sua ação neste momento.
                 </p>
               )}
-            </HomeBlock>
+            </HomeBlock></div>
           </section>
+          <section className="card" aria-label="Ações rápidas"><h2>Ações rápidas</h2>
+      <div className="op-quick">
+        {edit("agenda.manage") && (
+          <Link className="primary" to={base + "/novo-agendamento"}>
+            + Novo agendamento
+          </Link>
+        )}
+        {edit("clients.manage") && (
+          <Link className="button" to={base + "/clientes?novo=1"}>
+            + Novo cliente
+          </Link>
+        )}
+        {edit("quotes.manage") && can("quotes.values") && (
+          <Link className="button" to={base + "/novo-orcamento"}>
+            + Novo orçamento
+          </Link>
+        )}
+      </div>
+          </section>
+        </div>
+      </div>
+      <div className="ux-home-secondary"><div>
+      {can("central.read") && <UnreadSummary org={org}/>}
+      </div><div>
           <section
             className="card op-notifications"
             aria-label="Últimas atualizações"
@@ -367,10 +373,8 @@ function Daily({ org }: { org: string }) {
                 <p>Novos horários e decisões aparecerão aqui.</p>
               )}
             </HomeBlock>
-          </section>
-        </div>
-      </div>
-    </>
+          </section>      </div></div>
+    </div>
   );
 }
 function Agenda({ org }: { org: string }) {
@@ -1459,7 +1463,7 @@ function QuoteEditor({ org, code }: { org: string; code: string }) {
   return (
     <>
       <Link to={"/painel/" + org + "/orcamentos"}>← Orçamentos</Link>
-      <h1>Proposta para {d.name}</h1><RequestContact key={code} org={org} request={code} version={can("quotes.values") ? (d.versions.find((v:any)=>v.code===d.current_version) || d.versions.at(-1)) : undefined}/>
+      <h1>Proposta para {d.name}</h1><RequestContact key={"contact:" + code} org={org} request={code} version={can("quotes.values") ? (d.versions.find((v:any)=>v.code===d.current_version) || d.versions.at(-1)) : undefined}/>
       <details>
         <summary>Ver pedido original</summary>
         <RequestedItems data={d} />
@@ -1472,7 +1476,7 @@ function QuoteEditor({ org, code }: { org: string; code: string }) {
       can("quotes.values") &&
       permissions?.role !== "shared_attendant" &&
       ["submitted", "under_review", "quoted", "declined"].includes(d.state) ? (
-        <QuoteCalculator key={code} org={org} request={d} onSent={s.reload} />
+        <QuoteCalculator key={"calculator:" + code} org={org} request={d} onSent={s.reload} />
       ) : (
         <p>
           A montagem da proposta depende da permissão da empresa e da etapa do

@@ -30,5 +30,22 @@ export function hotfix051ExpectedHash(path,historical){
  assert.equal(reference,change.before,'051 unexpected historical input: '+path);return pageHash(path,nextHash(path,change.after));
 }
 export function assertHotfix051File(path,bytes,historical){
- return assertFileHash(path,bytes,authCommunicationExpectedHash(path,hotfix051ExpectedHash(path,historical)));
+ return assertFileHash(path,bytes,uxModernizationExpectedHash(path,authCommunicationExpectedHash(path,hotfix051ExpectedHash(path,historical))));
+}
+
+// Additive UI authorization; all historical manifests and predecessors stay pinned.
+const uiPaths=new Set(["src/FoundationApp.tsx","src/operations/Onboarding.tsx","src/operations/Operations.tsx","tests/demo-browser/syzia-041.spec.ts","tests/demo-browser/current-navigation.spec.ts","tests/demo-browser/ux001.spec.ts"]);
+const uiNewPaths=["src/workspace/identity.ts","src/workspace/navigation.ts","src/workspace/Workspace.tsx","src/workspace/workspace.css"];
+function uiTextHash(bytes,expected,path){
+ if(createHash('sha256').update(bytes).digest('hex')===expected)return;
+ const text=bytes.toString('utf8');assert.ok(Buffer.from(text).equals(bytes)&&!/[\x00-\x08\x0b\x0c\x0e-\x1f]/.test(text),'invalid UI text: '+path);
+ const lf=text.replaceAll('\r\n','\n');assert.ok(!lf.includes('\r'),'lone CR: '+path);assert.equal(createHash('sha256').update(lf).digest('hex'),expected,'integrity mismatch: '+path);
+}
+export function uxModernizationExpectedHash(path,expected){
+ const bytes=readFileSync(new URL('../../docs/ux-modernization/authorized-hashes.json',import.meta.url));uiTextHash(bytes,'09244079967732c16d5aec09465af549aff6fee7640e36510e2b94931089e9b3','UI authorization manifest');const manifest=JSON.parse(bytes.toString('utf8'));
+ assert.equal(manifest.source_commit,'758aaf99d03287c4cff0cc1015fa33866a2adec3');
+ assert.deepEqual(Object.keys(manifest.added),uiNewPaths,'unexpected new UI sources');
+ for(const [p,hash] of Object.entries(manifest.added))uiTextHash(readFileSync(new URL('../../'+p,import.meta.url)),hash,p);
+ for(const p of Object.keys(manifest.transitions))assert.ok(uiPaths.has(p),'unauthorized UI path: '+p);
+ const row=manifest.transitions[path];if(!row)return expected;assert.equal(expected,row.before,'UI unexpected predecessor: '+path);return row.after;
 }

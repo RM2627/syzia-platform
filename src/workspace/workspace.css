@@ -1,0 +1,488 @@
+/* Scoped presentation only. No public-company, checkout or authorization rules. */
+.app-shell.ux-workspace {
+  --ux-sidebar: 248px;
+  display: grid;
+  grid-template-columns: var(--ux-sidebar) minmax(0, 1fr);
+  min-height: 100dvh;
+  background: #f6f7fb;
+  color: #202032;
+}
+.app-shell.ux-workspace[data-collapsed="true"] {
+  --ux-sidebar: 80px;
+}
+.ux-workspace .ux-sidebar {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: #0b0b14;
+  color: #f4f5ff;
+  padding: 16px 12px;
+  border: 0;
+  z-index: 30;
+  overflow: hidden;
+}
+.ux-sidebar-top {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 70px;
+  margin-bottom: 18px;
+}
+.ux-sidebar .brand {
+  min-width: 0;
+  flex: 1;
+  margin: 0;
+}
+.ux-sidebar .v-wordmark {
+  width: 148px;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+.ux-sidebar .v-brand {
+  display: block;
+}
+.ux-sidebar button {
+  color: #e5defe;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+.ux-sidebar .ux-collapse,
+.ux-sidebar .ux-close {
+  width: 36px;
+  min-height: 40px;
+  padding: 6px;
+  flex: none;
+}
+.ux-sidebar-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #666078 transparent;
+}
+.ux-sidebar nav {
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+.ux-sidebar :is(a, .ux-group-toggle) {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: #e1ddec;
+  font-size: 14px;
+  line-height: 1.4;
+  text-decoration: none;
+  text-align: left;
+  font-weight: 500;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.ux-sidebar :is(a, .ux-group-toggle):hover {
+  background: #252231;
+  color: white;
+}
+.ux-sidebar a[aria-current="page"],
+.ux-sidebar a.active {
+  background: #32245d;
+  color: #ede5ff;
+  box-shadow: inset 3px 0 #b7a1ff;
+}
+.ux-sidebar .ux-group-links {
+  padding: 0 0 8px 16px;
+}
+.ux-sidebar [hidden] {
+  display: none !important;
+}
+.ux-sidebar .ux-group-links a {
+  font-size: 13px;
+}
+.ux-nav-group {
+  margin: 4px 0;
+  padding: 0;
+  border: 0;
+}
+.ux-chevron {
+  margin-left: auto;
+  font-size: 18px;
+}
+.ux-sidebar svg {
+  flex: none;
+}
+.ux-global-nav {
+  border-top: 1px solid #34303f;
+  margin-top: 18px !important;
+  padding-top: 12px !important;
+}
+.ux-global-nav > a:before {
+  content: "·";
+  font-size: 24px;
+  line-height: 1;
+  width: 20px;
+  flex: none;
+  text-align: center;
+}
+.ux-sidebar-bottom {
+  padding-top: 12px;
+  flex: none;
+  border-top: 1px solid #34303f;
+  margin-top: 12px;
+}
+.ux-sidebar-bottom a {
+  font-size: 12px !important;
+}
+.ux-sidebar-bottom button {
+  min-height: 44px;
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+}
+.ux-main.workspace {
+  min-width: 0;
+  width: 100%;
+  margin: 0;
+  padding: 22px 30px 40px;
+  background: #f6f7fb;
+  color: #202032;
+}
+.ux-header {
+  margin: 0 0 28px;
+  padding: 0 0 18px;
+  border-bottom: 1px solid #e3e2ed;
+  gap: 12px;
+  min-height: 70px;
+}
+.ux-header .v-account {
+  margin-left: auto;
+}
+.ux-header .v-account small {
+  display: block;
+  color: #606276;
+  overflow-wrap: anywhere;
+}
+.ux-header .v-account strong {
+  color: #202032;
+}
+.ux-role-host:not(:empty) + .ux-role-fallback {
+  display: none;
+}
+.ux-workspace .eyebrow {
+  color: #6a568d;
+}
+.ux-workspace .primary {
+  background: #6c4dff;
+  color: #fff;
+  border-color: #6c4dff;
+}
+.ux-workspace .card {
+  border-color: #e5e3ef;
+  box-shadow: 0 3px 14px #201e3510;
+}
+.ux-workspace :is(a, button, input, select, textarea):focus-visible {
+  outline: 3px solid #8c71ff;
+  outline-offset: 3px;
+}
+.ux-skip {
+  position: fixed;
+  top: 8px;
+  left: 12px;
+  transform: translateY(-200%);
+  z-index: 100;
+  padding: 12px;
+  background: #fff;
+  color: #342554;
+}
+.ux-skip:focus {
+  transform: none;
+}
+.ux-menu-trigger,
+.ux-close {
+  display: none;
+}
+.ux-backdrop {
+  display: none;
+}
+.ux-workspace[data-collapsed="true"] .ux-nav-label,
+.ux-workspace[data-collapsed="true"] .ux-chevron,
+.ux-workspace[data-collapsed="true"] .ux-group-links {
+  display: none;
+}
+.ux-workspace[data-collapsed="true"] .ux-sidebar-top {
+  flex-direction: column;
+  gap: 8px;
+}
+.ux-workspace[data-collapsed="true"] .ux-sidebar .brand {
+  flex: none;
+}
+.ux-workspace[data-collapsed="true"] .ux-sidebar .v-wordmark {
+  width: 54px;
+}
+.ux-workspace[data-collapsed="true"] .ux-collapse {
+  transform: rotate(180deg);
+}
+.ux-workspace[data-collapsed="true"] .ux-global-nav > a {
+  font-size: 0;
+  min-height: 44px;
+}
+.ux-workspace[data-collapsed="true"] .ux-global-nav > a:before {
+  font-size: 24px;
+}
+.ux-workspace[data-collapsed="true"] .ux-sidebar-bottom a {
+  justify-content: center;
+}
+.public.ux-access-state {
+  background: #f6f7fb;
+  color: #202032;
+  min-height: 100dvh;
+  max-width: none;
+  padding: 48px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 24px;
+}
+.public.ux-access-state:before {
+  display: none;
+}
+.public.ux-access-state > .brand {
+  margin: 0;
+}
+.public.ux-access-state .v-wordmark {
+  width: 216px;
+  height: 98px;
+}
+.public.ux-access-state .notice {
+  color: #30234e;
+  background: #ece7fa;
+  border: 1px solid #cfc4e9;
+  max-width: 560px;
+  width: 100%;
+  line-height: 1.6;
+}
+.public.ux-access-state .card {
+  width: min(100%, 560px);
+}
+.public.ux-access-state .footnote {
+  color: #606276;
+}
+.ux-home .op-head {
+  margin-bottom: 24px;
+}
+.ux-home .op-head h1 {
+  font-size: clamp(26px, 2.8vw, 34px);
+  letter-spacing: -0.7px;
+}
+.ux-home .op-head p {
+  color: #606276;
+}
+.ux-home .ux-home-primary {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.ux-home .ux-home-secondary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+  margin-top: 24px;
+}
+.ux-home :is(.ux-home-primary, .ux-home-secondary) > div {
+  min-width: 0;
+}
+.ux-home .card {
+  padding: 22px;
+  border-radius: 14px;
+  margin-bottom: 20px;
+}
+.ux-home .card h2 {
+  font-size: 18px;
+  line-height: 1.35;
+  margin-top: 0;
+}
+.ux-home .op-next {
+  background: #eee9ff;
+  border: 1px solid #daceff;
+  border-radius: 10px;
+  padding: 16px;
+}
+.ux-home .op-next :is(a, span) {
+  color: #503996;
+}
+.ux-home .op-quick {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+}
+.ux-home .op-quick a {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ux-home .op-attention {
+  border-radius: 9px;
+  border: 1px solid #e3deed;
+  padding: 14px;
+  margin-bottom: 10px;
+}
+.ux-home .op-attention p {
+  margin: 6px 0;
+  font-size: 13px;
+}
+.ux-home .ux-attention-list,
+.ux-home .op-notifications {
+  max-height: 480px;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.ux-home .op-empty {
+  color: #606276;
+  background: #f6f7fb;
+  padding: 18px;
+  border-radius: 8px;
+}
+.ux-company-role {
+  font-size: 13px;
+  color: #5c477d;
+  margin-top: 12px;
+}
+@media (max-width: 1100px) {
+  .ux-main.workspace {
+    padding: 20px;
+  }
+  .ux-header .v-workspace-caption {
+    display: none;
+  }
+  .ux-home .ux-home-primary {
+    gap: 16px;
+  }
+  .ux-home .card {
+    padding: 18px;
+  }
+}
+@media (max-width: 849px) {
+  .app-shell.ux-workspace {
+    display: block;
+  }
+  .ux-main.workspace {
+    padding: 18px;
+    min-height: 100dvh;
+  }
+  .ux-workspace .ux-sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: min(300px, calc(100vw - 24px));
+    height: 100dvh;
+    z-index: 60;
+    display: none;
+  }
+  .ux-workspace .ux-sidebar[data-open="true"] {
+    display: flex;
+  }
+  .ux-sidebar-top {
+    margin-bottom: 12px;
+  }
+  .ux-collapse {
+    display: none;
+  }
+  .ux-sidebar .ux-close {
+    display: block;
+  }
+  .ux-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100dvh;
+    background: #0b0b1499;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    z-index: 59;
+  }
+  .ux-menu-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    flex: none;
+    background: white;
+    color: #342554;
+    border: 1px solid #ddd6ef;
+    border-radius: 10px;
+  }
+  .ux-header {
+    margin-bottom: 22px;
+    padding-bottom: 16px;
+  }
+  .ux-header .v-account {
+    min-width: 0;
+  }
+  .ux-header .v-avatar {
+    display: none;
+  }
+  .ux-header .v-account > span {
+    min-width: 0;
+  }
+  .ux-header .v-account strong {
+    font-size: 13px;
+  }
+  .ux-header .v-account small {
+    font-size: 12px;
+  }
+  .ux-home .ux-home-primary,
+  .ux-home .ux-home-secondary {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .ux-home .ux-home-secondary {
+    margin-top: 0;
+  }
+  .ux-home .card {
+    padding: 18px;
+  }
+  .ux-home .op-head {
+    margin-bottom: 18px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ux-workspace *,
+  .ux-access-state * {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.ux-home .op-next h3, .ux-home .op-next p { color:#30234e; }
+.ux-home .unread-summary { max-height:480px; overflow:auto; overscroll-behavior:contain; }
+.ux-home .unread-summary a { display:block; padding:10px 0; border-bottom:1px solid #e5e3ef; }
+.ux-home .op-next h3 { margin:10px 0 6px; }
+.ux-home .op-day-list + a { display:inline-block; padding:12px 0; }
+.app-shell.ux-workspace .ux-main { max-width:none; }
+.ux-sidebar .ux-global-nav > a[href="/app"]:before { content:"▦"; }
+.ux-sidebar .ux-global-nav > a[href="/escolher-empresa"]:before { content:"⇄"; }
+.ux-sidebar .ux-global-nav > a[href="/central"]:before { content:"◉"; }
+.ux-sidebar .ux-global-nav > a[href="/comercial"]:before { content:"↗"; }
+
+.app-shell.ux-workspace .ux-sidebar :is(a.active,a[aria-current=page]) { background:#32245d; color:#ede5ff; box-shadow:inset 3px 0 #b7a1ff; }
+.app-shell.ux-workspace .ux-sidebar .ux-group-toggle { background:transparent; }
+.app-shell.ux-workspace .ux-sidebar .ux-group-toggle:hover { background:#252231; }
+.app-shell.ux-workspace .ux-home .op-quick > a.button { background:#fff; color:#503996; border:1px solid #daceff; }

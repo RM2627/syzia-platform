@@ -1,0 +1,36 @@
+{
+  "source_commit": "758aaf99d03287c4cff0cc1015fa33866a2adec3",
+  "source_zip_sha256": "5f15a578a27ded9df33b1e930f16560fbd8f69200d659e81149dfbb4fa47cf5d",
+  "transitions": {
+    "src/FoundationApp.tsx": {
+      "before": "0b811e0b5846f2d339165e6dba88828566defb65728adb51af9a73bf47625376",
+      "after": "98121d57f15f5539b9844cd08d2ce8ec6ec7235eb106cb72d750b49434b82b11"
+    },
+    "src/operations/Onboarding.tsx": {
+      "before": "6d2b4bd85231a119d1e2e99b2feb8e4d23a7e580f92ab120b82d8d8876facddf",
+      "after": "09a11fa41d26e8ee1bba2d29d4ef23b32e646184b3ab679c5d1d3956bd7fd515"
+    },
+    "src/operations/Operations.tsx": {
+      "before": "4772324052768c0e2bbb0e946cf90d31b33656e960b1e7368bc9a9193d639da8",
+      "after": "1d865addf3afd54348b54d48ce39e7d659e23bb3b18b5583dbe098b2395db840"
+    },
+    "tests/demo-browser/syzia-041.spec.ts": {
+      "before": "b2696ac9be9f262af2605eb362af74c44e8961411cbe38cbf0afe88a4d55c587",
+      "after": "6970209a99d4e3781d586b3bc41eff8dd57f1c67921d6cf9230800c576d7b339"
+    },
+    "tests/demo-browser/current-navigation.spec.ts": {
+      "before": "ea0520b3f4a6bfa546834028f4a7c5c9f65471fe40b9d321c6509240057f5612",
+      "after": "29882f23903f9efe4a5f121ebef481cf2e58a41f6765b64b642e650c39a8a6cf"
+    },
+    "tests/demo-browser/ux001.spec.ts": {
+      "before": "2971956b276d6b00f7a7e7322309ee246e9cd811e7fe75a63c0ce078e0201bf3",
+      "after": "2522917345e0d9f823825e78e5cef8a5597db8ce3278a393602a2ae08940a38c"
+    }
+  },
+  "added": {
+    "src/workspace/identity.ts": "0cd63b5d6c162a350874b1bc39b2d638454d7eeade920fc9840c40c3145a4ad6",
+    "src/workspace/navigation.ts": "9569903a60a9a0b080ee9cde8c04d987e91fff6803e4edb9338d40dac49cacb1",
+    "src/workspace/Workspace.tsx": "281529510b05f1922df7f4e85fecf9729798c84cd2ca45881fd0ac6f96bb60a4",
+    "src/workspace/workspace.css": "ee757b74258e2337c566ee98885cb30fc0e6d4bda0e89f92b40088365409fd07"
+  }
+}

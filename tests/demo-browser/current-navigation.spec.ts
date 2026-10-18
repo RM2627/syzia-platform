@@ -1,3 +1,4 @@
+import { openWorkspaceMenu } from "../support/workspace-navigation";
 import { test, expect, Page } from "@playwright/test";
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -326,6 +327,7 @@ test("Regressão vigente: navegação, desktop/mobile, temas, roles e acessibili
     "Super Admin",
     async () => {
       await r.goto("/app");
+      await openWorkspaceMenu(r);
       await r.getByRole("button", { name: "Sair", exact: true }).click();
       await r.goto("/admin/empresas");
       await expect(
