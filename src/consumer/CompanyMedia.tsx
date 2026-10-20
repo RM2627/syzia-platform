@@ -1,3 +1,4 @@
+import { commercialMediaFetch } from '../demo/editor-bridge';
 import { ImageFraming } from "./ImageFraming";
 import { useEffect, useId, useState } from "react";
 import { rpc, supabase } from "../api";
@@ -29,7 +30,7 @@ export async function uploadCompanyImage(
       p_key: crypto.randomUUID(),
     },
   );
-  const response = await fetch(gateway + "/company-media/" + reserved.code, {
+  const response = await commercialMediaFetch(gateway + "/company-media/" + reserved.code, {
     method: "POST",
     headers: {
       Authorization: await authorization(),
@@ -211,7 +212,7 @@ export function ImageUpload({
               setBusy(true);
               setError("");
               try {
-                const response = await fetch(
+                const response = await commercialMediaFetch(
                   gateway + "/company-media/" + value,
                   { headers: { Authorization: await authorization() } },
                 ).catch(() => {

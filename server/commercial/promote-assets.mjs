@@ -17,8 +17,9 @@ export function assetPromoter({ store, storage }) {
         "image/webp": "webp",
       }[media.mime];
       if (!ext) throw Error("commercial_media_invalid");
-      // Preserve the reviewed path; only authorized assets of this source are copied.
-      const path = media.object_path;
+      if(!/^[a-f0-9-]{36}$/.test(definition.organization_id || '') ||
+        !/^[a-f0-9-]{36}$/.test(definition.claim_id || '')) throw Error('commercial_media_invalid');
+      const path = definition.organization_id + '/commercial/' + definition.claim_id + '/' + media.sha256 + '.' + ext;
       const bucket = storage.from("company-media");
       const r = await bucket.upload(path, bytes, {
         contentType: media.mime,

@@ -1,3 +1,4 @@
+import {commercial055ExpectedHash,assertCommercial055File}from './commercial055-integrity.mjs';
 // Additive, explicit 054 authorization over the supplied 4b33f42 archive.
 // Historical manifests remain unchanged. Only enumerated text permits paired CRLF/LF.
 import assert from "node:assert/strict";
@@ -52,12 +53,13 @@ assert.equal(sha(baseText), "edc60eff8d304cc0386152391be8446ff24b29bffb66b4df051
 export const commercialBase = JSON.parse(baseText);
 export function commercialExpectedHash(path, expected) {
   const r = commercialManifest.transitions[path];
-  if (!r) return expected;
+  if (!r) return commercial055ExpectedHash(path,expected);
   assert.ok(r.before.includes(expected), "054 unexpected predecessor: " + path);
-  return r.after;
+  return commercial055ExpectedHash(path,r.after);
 }
 export function assertCommercialFile(path, bytes, expected, expectedLF) {
   const r = commercialManifest.transitions[path];
+  if(assertCommercial055File(path,bytes,r?r.after:expected))return;
   if (r) {
     const h = commercialExpectedHash(path, expected);
     if (r.text) assert.equal(sha(lf(bytes)), h, "integrity mismatch: " + path);
@@ -77,6 +79,7 @@ export function verifyCommercialSources() {
     );
   for (const [path, r] of Object.entries(commercialManifest.added)) {
     const bytes = readFileSync(new URL(path, root));
+    if(assertCommercial055File(path,bytes,r.sha256))continue;
     assert.equal(
       sha(r.text ? lf(bytes) : bytes),
       r.sha256,

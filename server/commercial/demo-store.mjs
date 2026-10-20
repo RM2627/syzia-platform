@@ -1,6 +1,7 @@
 import { randomUUID, randomBytes, createHash } from "node:crypto";
 import { validateDemoRPC, DENIED_ACTIONS } from "./demo-rpcs.mjs";
 import { validateConfiguration } from "./configuration.mjs";
+import { demonstrationProfile } from "./demo-profile.mjs";
 const hash = (s) => createHash("sha256").update(s).digest("hex");
 const scalar = async (c, sql, args = []) =>
   Object.values((await c.query(sql, args)).rows[0] || {})[0];
@@ -17,7 +18,7 @@ export function createDemoStore(
       await c.query("set local lock_timeout='3s'");
       const identity = await scalar(
         c,
-        "select purpose from demo_private.identity where singleton",
+        "select purpose from demo_private.identity where singleton and schema_version=55",
       );
       if (identity !== "syzia-commercial-demo-054")
         throw Error("demo_database_required");
@@ -93,6 +94,7 @@ export function createDemoStore(
         )
       ).rows[0];
       if (old) {
+        await c.query('update public.organizations set name=$2 where id=$1',[old.organization_id,definition.name]);
         await c.query(
           "update demo_private.instances set expires_at=$2 where id=$1",
           [old.id, new Date(Date.now() + sessionMinutes * 60000)],
@@ -114,7 +116,7 @@ export function createDemoStore(
       org = randomUUID(),
       manager = await createPerson(c, "Responsável demonstrativo"),
       consumer = await createPerson(c, "Visitante demonstrativo", true);
-    const plan = definition.plan;
+    const plan = definition.plan || demonstrationProfile;
     if (!plan?.id || plan.human_support) throw Error("demo_plan_invalid");
     // Mirror the immutable approved plan, without creating a subscription or trial.
     const planId = plan.plan_id;
@@ -170,7 +172,7 @@ export function createDemoStore(
       for (const media of config.tables.company_media || []) {
         const object = (
           await c.query(
-            "select o.bytes,o.mime from company_media m join demo_private.instances i on i.organization_id=m.organization_id join demo_private.objects o on o.bucket='company-media'and o.path=m.object_path where i.source_id=$1 and i.kind='editor'and m.id=$2 and m.object_path=$3 and m.sha256=$4 and m.state='ready'",
+            "select bytes,mime from demo_private.frozen_media where source_id=$1 and media_id=$2 and object_path=$3 and sha256=$4 union all select o.bytes,o.mime from company_media m join demo_private.instances i on i.organization_id=m.organization_id join demo_private.objects o on o.bucket='company-media'and o.path=m.object_path where i.source_id=$1 and i.kind='editor'and m.id=$2 and m.object_path=$3 and m.sha256=$4 and m.state='ready' limit 1",
             [definition.id, media.id, media.object_path, media.sha256],
           )
         ).rows[0];
@@ -258,6 +260,27 @@ export function createDemoStore(
   return {
     transaction,
     call,
+    async freeze(sourceId, configuration) {
+      return transaction(async c => {
+        for(const media of validateConfiguration(configuration).tables.company_media || []) {
+          const item=(await c.query("select o.bytes,o.mime from company_media m join demo_private.instances i on i.organization_id=m.organization_id join demo_private.objects o on o.bucket='company-media'and o.path=m.object_path where i.source_id=$1 and i.kind='editor'and m.id=$2 and m.object_path=$3 and m.sha256=$4 and m.state='ready'",[sourceId,media.id,media.object_path,media.sha256])).rows[0];
+          if(!item || hash(Buffer.from(item.bytes))!==media.sha256 || item.mime!==media.mime)throw Error('commercial_media_invalid');
+          const exists=await scalar(c,"select exists(select 1 from demo_private.frozen_media where source_id=$1 and media_id=$2 and object_path=$3 and sha256=$4)",[sourceId,media.id,media.object_path,media.sha256]);
+          if(!exists) {
+            const size=Number(await scalar(c,"select coalesce(sum(octet_length(bytes)),0)from demo_private.frozen_media"));
+            if(size+item.bytes.length>128*1024*1024)throw Error('demo_capacity_reached');
+            await c.query("insert into demo_private.frozen_media(source_id,media_id,object_path,sha256,mime,bytes)values($1,$2,$3,$4,$5,$6)",[sourceId,media.id,media.object_path,media.sha256,item.mime,item.bytes]);
+          }
+        }
+      });
+    },
+    async cleanup() {
+      return transaction(async c => {
+        await c.query("delete from demo_private.sessions where expires_at<clock_timestamp() or revoked_at is not null");
+        await c.query("delete from demo_private.objects o using demo_private.instances i where i.kind='visitor'and i.expires_at<clock_timestamp()and o.path like i.organization_id::text||'/%'");
+        await c.query("update public.organizations o set status='suspended'from demo_private.instances i where i.organization_id=o.id and i.kind='visitor'and i.expires_at<clock_timestamp()and o.status='active'");
+      });
+    },
     async begin(definition, kind = "visitor", actor = null) {
       return transaction(async (c) => {
         const i = await instance(c, definition, kind);
@@ -284,7 +307,7 @@ export function createDemoStore(
           organization: {
             id: i.organization_id,
             name: definition.name,
-            slug: "d-" + i.id,
+            slug: definition.slug,
             status: "active",
           },
           source_id: definition.id,
@@ -344,7 +367,7 @@ export function createDemoStore(
         return result;
       });
     },
-    async export(token, definition) {
+    async export(token, definition, {requireReady = true} = {}) {
       return transaction(async (c) => {
         const s = await resolve(c, token, definition);
         if (s.kind !== "editor") throw Error("demo_operation_denied");
@@ -353,7 +376,7 @@ export function createDemoStore(
           p_org: s.organization_id,
           p_show_prices: true,
         });
-        if (!d.ready) throw Error("demo_configuration_not_ready");
+        if (requireReady && !d.ready) throw Error("demo_configuration_not_ready");
         await c.query("reset role");
         return validateConfiguration(
           await scalar(c, "select private.commercial_config_export($1)", [
@@ -454,7 +477,7 @@ export function createDemoStore(
       return transaction(async (c) => {
         const item = (
           await c.query(
-            "select o.bytes,o.mime from company_media m join demo_private.instances i on i.organization_id=m.organization_id join demo_private.objects o on o.bucket='company-media'and o.path=m.object_path where i.source_id=$1 and i.kind='editor'and m.id=$2 and m.object_path=$3 and m.sha256=$4 and m.state='ready'",
+            "select bytes,mime from demo_private.frozen_media where source_id=$1 and media_id=$2 and object_path=$3 and sha256=$4 union all select o.bytes,o.mime from company_media m join demo_private.instances i on i.organization_id=m.organization_id join demo_private.objects o on o.bucket='company-media'and o.path=m.object_path where i.source_id=$1 and i.kind='editor'and m.id=$2 and m.object_path=$3 and m.sha256=$4 and m.state='ready' limit 1",
             [sourceId, media.id, media.object_path, media.sha256],
           )
         ).rows[0];

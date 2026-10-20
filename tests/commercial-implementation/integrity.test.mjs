@@ -18,7 +18,7 @@ test("I054-01 complete 1090-file baseline, additive sources and all 49 historica
   );
   assert.equal(
     readdirSync("supabase/migrations").filter((p) => p.endsWith(".sql")).length,
-    50,
+    51,
   );
   verifyCommercialSources();
 });

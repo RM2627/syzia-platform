@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import {embeddedEditor,editorRequest} from './editor-bridge';
 export const demoBuild = import.meta.env.VITE_APP_REALM === "demo";
 export const demoOrigin = import.meta.env.VITE_COMMERCIAL_DEMO_ORIGIN || "";
 export const demoAPI = import.meta.env.VITE_COMMERCIAL_API_URL || "";
@@ -34,6 +35,7 @@ export async function demoCall<T = any>(
 ): Promise<T> {
   if (!demoBuild || window.location.origin !== demoOrigin || !demoAPI)
     throw Error("demo_origin_not_configured");
+  if(embeddedEditor)return editorRequest<T>(path,body);
   const r = await fetch(demoAPI + "/demonstrations/" + path, {
     method: "POST",
     headers: {

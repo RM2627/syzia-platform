@@ -1,0 +1,9 @@
+{
+  "environment": "HTTP local loopback; PGlite; Auth/Storage simulados",
+  "tests": [
+    {
+      "name": "Upload, download, isolamento, ticket único e envio com anexo",
+      "status": "PASS"
+    }
+  ]
+}

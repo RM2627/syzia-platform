@@ -1,3 +1,4 @@
+import { commercialMediaFetch } from '../demo/editor-bridge';
 // Share only requests that are still in flight. No resolved image or URL is
 // cached, and each caller owns/revokes its own object URL.
 const pending = new Map<string, Promise<Blob>>();
@@ -9,7 +10,7 @@ export function companyImageBytes(
   const key = JSON.stringify([url, authorization, scope]);
   const existing = pending.get(key);
   if (existing) return existing;
-  const request = fetch(url, {
+  const request = commercialMediaFetch(url, {
     headers: { Authorization: authorization },
   }).then(async (response) => {
     if (!response.ok) throw Error("image_unavailable");

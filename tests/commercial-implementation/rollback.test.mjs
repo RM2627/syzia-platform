@@ -7,7 +7,7 @@ test("M01 incremental DDL failure rolls back new tables, grants and optional-pho
   try {
     await db.exec(await readFile("tests/auth-fixture.sql", "utf8"));
     const files = (await readdir("supabase/migrations"))
-      .filter((x) => x.endsWith(".sql") && !x.includes("0054_"))
+      .filter((x) => x.endsWith(".sql") && x < "202610180054_")
       .sort();
     assert.equal(files.length, 49);
     for (const f of files)

@@ -38,3 +38,9 @@
     flex-basis: 100%;
   }
 }
+
+/* Editor tabs are local to the embedded preparation, not the workspace sidebar. */
+.demo-editor-tabs { flex-direction: row; justify-content: flex-start; }
+.demo-editor-tabs a { width: auto; flex: 0 1 auto; padding: .5rem .75rem; border-radius: .5rem; text-decoration: none; }
+.demo-editor-tabs a[aria-current="page"] { background: #124744; color: #fff; }
+.demo-editor-tabs a:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }

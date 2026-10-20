@@ -8,7 +8,13 @@ import { secretBox, digest } from "../../server/commercial/crypto.mjs";
 let c, ctl, lead, d, claim, draft, org, activation, config;
 const sent = [];
 let mailFailure = false;
-const rpc = (name, args = {}, who = "root") => c.asUser(who, name, args),
+const rpc = async (name,args={},who='root') => {
+  if(name==='commercial_demo_publish') {
+    const reviewed=await c.asUser(who,'commercial_demo_draft',{...args,p_review:true});
+    args={...args,p_revision:reviewed.revision};
+  }
+  return c.asUser(who,name,args);
+},
   service = (action, data = {}) =>
     c.service("commercial_service", { p_action: action, p_data: data });
 const authorize = (purpose) =>
@@ -30,6 +36,7 @@ before(async () => {
       "utf8",
     ),
   );
+  await c.db.exec(await readFile("supabase/migrations/202610200055_commercial_versions.sql","utf8"));
   ctl = commercialController({
     asUser: c.asUser,
     service: c.service,
@@ -68,7 +75,7 @@ before(async () => {
       p_lead: lead,
       p_name: "Aurora Interiores",
       p_slug: "aurora-interiores",
-      p_plan: c.versions.profissional,
+      p_plan: null,
       p_expires: new Date(Date.now() + 86400000 * 14).toISOString(),
     })
   ).id;
@@ -101,7 +108,7 @@ test("A01 published prep does not create organization or billing record", async 
 });
 test("M01 no link or delivery without purpose authorization", async () => {
   await assert.rejects(
-    ctl.operator("invite", { id: d.id, purpose: "demonstration" }, "root"),
+    ctl.operator("invite", { id: d.id, lead_id:lead, purpose: "demonstration" }, "root"),
     /not_authorized/,
   );
   await authorize("demonstration");
@@ -110,12 +117,12 @@ test("M01 no link or delivery without purpose authorization", async () => {
 test("M02 per-recipient links contain no identity/admin credential and sealed token is absent from UI projection", async () => {
   const a = await ctl.operator(
       "invite",
-      { id: d.id, purpose: "demonstration" },
+      { id: d.id, lead_id:lead, purpose: "demonstration" },
       "root",
     ),
     b = await ctl.operator(
       "invite",
-      { id: d.id, purpose: "demonstration" },
+      { id: d.id, lead_id:lead, purpose: "demonstration" },
       "root",
     );
   assert.notEqual(a.url, b.url);
@@ -129,7 +136,7 @@ test("M02 per-recipient links contain no identity/admin credential and sealed to
 test("M03 preview never sends; changed selection and missing confirmation are rejected", async () => {
   const p = await ctl.operator(
     "preview",
-    { demo_ids: [d.id], purpose: "demonstration" },
+    { recipients: [{demo_id:d.id,lead_id:lead}], purpose: "demonstration" },
     "root",
   );
   assert.equal(sent.length, 0);
@@ -163,7 +170,7 @@ test("M03 preview never sends; changed selection and missing confirmation are re
 test("M04 two tabs submit one explicit authorization; SMTP invoked only once", async () => {
   const p = await ctl.operator(
       "preview",
-      { demo_ids: [d.id], purpose: "demonstration" },
+      { recipients: [{demo_id:d.id,lead_id:lead}], purpose: "demonstration" },
       "root",
     ),
     body = { id: p.id, hash: p.hash, items: p.items, confirmed: true };
@@ -187,14 +194,14 @@ test("M05 recent delivery, duplicate IDs and tenant administrators cannot bypass
   await assert.rejects(
     ctl.operator(
       "preview",
-      { demo_ids: [d.id, d.id], purpose: "demonstration" },
+      { recipients: [{demo_id:d.id,lead_id:lead},{demo_id:d.id,lead_id:lead}], purpose: "demonstration" },
       "root",
     ),
     /batch_invalid/,
   );
   const p = await ctl.operator(
     "preview",
-    { demo_ids: [d.id], purpose: "demonstration" },
+    { recipients: [{demo_id:d.id,lead_id:lead}], purpose: "demonstration" },
     "root",
   );
   await assert.rejects(
@@ -208,7 +215,7 @@ test("M05 recent delivery, duplicate IDs and tenant administrators cannot bypass
   await assert.rejects(
     ctl.operator(
       "preview",
-      { demo_ids: [d.id], purpose: "demonstration" },
+      { recipients: [{demo_id:d.id,lead_id:lead}], purpose: "demonstration" },
       "adminA",
     ),
     /access_denied/,
@@ -218,7 +225,7 @@ test("M06 timeout is uncertain, preserved, never automatically resent", async ()
   mailFailure = true;
   const p = await ctl.operator(
       "preview",
-      { demo_ids: [d.id], purpose: "activation" },
+      { recipients: [{demo_id:d.id,lead_id:lead}], purpose: "activation" },
       "root",
     ),
     body = { id: p.id, hash: p.hash, items: p.items, confirmed: true };
@@ -239,7 +246,7 @@ test("M06 timeout is uncertain, preserved, never automatically resent", async ()
 test("A02 possession of invitation does not assign ownership or approve relationship", async () => {
   activation = await ctl.operator(
     "invite",
-    { id: d.id, purpose: "activation" },
+    { id: d.id, lead_id:lead, purpose: "activation" },
     "root",
   );
   const secret = new URLSearchParams(new URL(activation.url).hash.slice(1)).get(
@@ -460,11 +467,23 @@ test("A06b existing checkout with simulated provider confirms access; import nev
       [org],
     )
   ).rows[0].n;
-  const done = await rpc(
-    "commercial_import_finalize",
-    { p_org: org },
-    "adminA",
-  );
+  assert.equal((await c.rawSQL('select count(*)::int n from services where organization_id=$1',[org])).rows[0].n,0);
+  const originalSettings=(await c.rawSQL('select description from company_settings where organization_id=$1',[org])).rows[0];
+  await c.rawSQL('insert into company_settings(organization_id,description)values($1,$2)on conflict(organization_id)do update set description=excluded.description',[org,'Configuração alterada pelo responsável enquanto aguardava']);
+  await assert.rejects(ctl.operator('materialize',{organization_id:org},'adminA'),/commercial_destination_changed/);
+  assert.equal((await c.rawSQL('select description from company_settings where organization_id=$1',[org])).rows[0].description,'Configuração alterada pelo responsável enquanto aguardava');
+  if(originalSettings)await c.rawSQL('update company_settings set description=$2 where organization_id=$1',[org,originalSettings.description]);else await c.rawSQL('delete from company_settings where organization_id=$1',[org]);
+  await c.rawSQL("create function public.fixture055_fail_import()returns trigger language plpgsql as $$begin if new.organization_id::text=TG_ARGV[0]then raise exception 'fixture055_partial_failure';end if;return new;end;$$");
+  await c.rawSQL("create trigger fixture055_fail_import after insert on services for each row execute function public.fixture055_fail_import('"+org+"')");
+  await assert.rejects(ctl.operator('materialize',{organization_id:org},'adminA'),/fixture055_partial_failure/);
+  assert.equal((await c.rawSQL('select count(*)::int n from services where organization_id=$1',[org])).rows[0].n,0);
+  assert.equal((await c.rawSQL('select state from private.commercial_materializations where organization_id=$1',[org])).rows[0].state,'pending');
+  await c.rawSQL('drop trigger fixture055_fail_import on services');
+  await c.rawSQL('drop function public.fixture055_fail_import()');
+  const results=await Promise.all([ctl.operator('materialize',{organization_id:org},'adminA'),ctl.operator('materialize',{organization_id:org},'adminA')]);
+  const done=results.find(r=>r.activated);assert.ok(done);assert.ok(results.some(r=>r.reused));
+  assert.equal((await c.rawSQL('select count(*)::int n from private.billing047_contracts where organization_id=$1',[org])).rows[0].n,1);
+
   assert.equal(done.activated, true);
   assert.equal(
     (await rpc("billing_capabilities", { p_org: org }, "adminA")).software,
@@ -584,7 +603,7 @@ test("M07 unsubscribe is explicit and applies to all future invitations to the a
   );
   await ctl.visitor("unsubscribe", { invitation: secret, confirmed: true });
   await assert.rejects(
-    ctl.operator("invite", { id: d.id, purpose: "activation" }, "root"),
+    ctl.operator("invite", { id: d.id, lead_id:lead, purpose: "activation" }, "root"),
     /not_authorized/,
   );
 });
@@ -634,7 +653,7 @@ test("A09 snapshot revision/revocation requires a new relationship review; email
     p_lead: newLead,
     p_name: "Casa Horizonte",
     p_slug: "casa-horizonte",
-    p_plan: c.versions.profissional,
+    p_plan: null,
     p_expires: new Date(Date.now() + 86400000 * 2).toISOString(),
   });
   await rpc("commercial_demo_publish", {
@@ -645,7 +664,7 @@ test("A09 snapshot revision/revocation requires a new relationship review; email
   const current = await rpc("commercial_demo_edit_context", { p_id: a.id });
   const i = await ctl.operator(
       "invite",
-      { id: a.id, purpose: "activation" },
+      { id: a.id, lead_id:newLead, purpose: "activation" },
       "root",
     ),
     h = digest(

@@ -1,4 +1,4 @@
-import {commercialApi} from "../platform-commercial/api";
+import {commercialApi,commercialError} from "../platform-commercial/api";
 import { normalizeCPF } from "../../shared/cpf.mjs";
 import { PasswordInput } from "../ui/PasswordInput";
 import { useEffect, useRef, useState } from "react";
@@ -135,7 +135,7 @@ export function SelfService({ identityOnly=false, onIdentityReady, activation }:
       await fn();
     } catch (e) {
       setError(
-        (e as any)?.message in
+        (e as Error)?.message?.startsWith("commercial_") ? commercialError(e) : (e as any)?.message in
           {
             document_invalid: 1,
             trial_review_required: 1,

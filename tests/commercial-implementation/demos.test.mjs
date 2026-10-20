@@ -8,7 +8,13 @@ import { randomUUID } from "node:crypto";
 import { fixture } from "../billing-047/fixture.mjs";
 import { demoFixture } from "./demo-fixture.mjs";
 let c, x, lead, d, editor, visitor, configuration, second;
-const m = (name, args) => c.asUser("root", name, args);
+const m = async(name,args)=>{
+ if(name==='commercial_demo_publish'){
+  await x.store.freeze(d.id,args.p_config);
+  const a=await c.asUser('root','commercial_demo_draft',{...args,p_review:true});args={...args,p_revision:a.revision};
+ }
+ return c.asUser('root',name,args);
+};
 const manage = () => m("commercial_management", {});
 before(async () => {
   process.env.SYZIA_OPTIONAL_MANUAL_CURRENT = "1";
@@ -20,6 +26,7 @@ before(async () => {
       "utf8",
     ),
   );
+  await c.db.exec(await readFile("supabase/migrations/202610200055_commercial_versions.sql","utf8"));
   x = await demoFixture();
   lead = (
     await m("commercial_contact_save", {
@@ -41,7 +48,7 @@ before(async () => {
     p_lead: lead,
     p_name: "Aurora Interiores",
     p_slug: "aurora-interiores",
-    p_plan: c.versions.profissional,
+    p_plan: null,
     p_expires: new Date(Date.now() + 86400000 * 14).toISOString(),
   });
   d = await m("commercial_demo_edit_context", { p_id: r.id });
@@ -159,7 +166,7 @@ test("D02b uploads/downloads use existing sanitizer and gateway rules in the dem
   );
   const handler = createDemoMediaHandler({
     store: x.store,
-    origins: { publicOrigin: "https://demo.example.invalid" },
+    origins: { publicOrigin: "https://demo.example.invalid", appOrigin:"https://app.example.invalid" },
     controller: {
       demoDefinition: async (token) => {
         if (token !== editor.token) throw Error("demo_session_expired");
@@ -177,7 +184,8 @@ test("D02b uploads/downloads use existing sanitizer and gateway rules in the dem
         "/demonstration-media/company-media/" +
         reserved.code,
       headers = {
-        Origin: "https://demo.example.invalid",
+        Origin: "https://app.example.invalid",
+        "X-Commercial-Authorization":"Bearer original-admin-session",
         Authorization: "Bearer " + editor.token + ".company",
       };
     const up = await fetch(url, {
@@ -236,8 +244,12 @@ test("D04 publishing invalidates editor sessions from the previous generation", 
     /session_expired/,
   ));
 test("D05 two visitors use isolated company instances and the same public-page RPC", async () => {
+  // New visitors must survive removal of the editor's mutable media objects.
+  assert.ok((await x.db.query('select count(*)::int n from demo_private.frozen_media')).rows[0].n>0);
+  await x.db.query("delete from demo_private.objects where path like $1",[editor.organization.id+'/%']);
   [visitor, second] = await Promise.all([x.store.begin(d), x.store.begin(d)]);
   assert.notEqual(visitor.organization.id, second.organization.id);
+  assert.equal(visitor.organization.slug,d.slug);
   const p = await x.store.rpc(
     visitor.token,
     d,
@@ -342,7 +354,7 @@ test("D07 separate consumer and company views track the SAME direct-acceptance r
     }),
   );
 });
-test("D08 real plan limits are enforced for fictitious team creation", async () => {
+test("D08 bounded demonstration profile enforces eight members without selecting a commercial plan", async () => {
   await x.store.team(visitor.token, d, {
     name: "Lia Andrade",
     role: "colaborador_empresa",
@@ -351,6 +363,7 @@ test("D08 real plan limits are enforced for fictitious team creation", async () 
     name: "Caio Freitas",
     role: "colaborador_empresa",
   });
+  for(const name of ['Nina Rocha','Bruno Lima','Clara Alves','Pedro Luz','Rosa Maia'])await x.store.team(visitor.token,d,{name,role:'colaborador_empresa'});
   await assert.rejects(
     x.store.team(visitor.token, d, {
       name: "Rita Alves",
@@ -358,7 +371,7 @@ test("D08 real plan limits are enforced for fictitious team creation", async () 
     }),
     /limit/,
   );
-  assert.equal((await x.store.team(visitor.token, d)).length, 3);
+  assert.equal((await x.store.team(visitor.token, d)).length, 8);
 });
 test("D09 demos never create real or fictitious subscriptions, invoices or billing contracts", async () => {
   for (const table of [
@@ -379,4 +392,12 @@ test("D10 explicit session end immediately rejects subsequent operations", async
     }),
     /session_expired/,
   );
+});
+test('D11 expiry cleanup invalidates sessions and suspends visitors without deleting published media',async()=>{
+ await x.db.query("update demo_private.sessions set expires_at=clock_timestamp()-interval '1 minute'where instance_id in(select id from demo_private.instances where organization_id=$1)",[second.organization.id]);
+ await x.db.query("update demo_private.instances set expires_at=clock_timestamp()-interval '1 minute'where organization_id=$1",[second.organization.id]);
+ await x.store.cleanup();
+ await assert.rejects(x.store.rpc(second.token,d,'company','company_context',{p_org:second.organization.id}),/session_expired/);
+ assert.equal((await x.db.query('select status from organizations where id=$1',[second.organization.id])).rows[0].status,'suspended');
+ assert.ok((await x.db.query('select count(*)::int n from demo_private.frozen_media')).rows[0].n>0);
 });

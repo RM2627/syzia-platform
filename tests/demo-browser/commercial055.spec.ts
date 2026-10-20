@@ -1,0 +1,74 @@
+import {test,expect}from'@playwright/test';
+import {mkdir}from'node:fs/promises';
+test('055 browser: create, configure, save, resume, review, publish; desktop and mobile',async({page,context})=>{
+ await mkdir('reports/syzia-055/ui',{recursive:true});
+ const failures:string[]=[];page.on('pageerror',e=>failures.push(e.message));
+ await page.goto('/entrar');
+ await page.getByLabel('E-mail ou usuário',{exact:true}).fill('root@example.invalid');
+ await page.getByLabel('Senha',{exact:true}).fill('FictitiousPassword123!');
+ await page.getByRole('button',{name:'Entrar',exact:true}).click();
+ await page.waitForURL(/\/(admin|app|escolher-empresa)/);
+ await page.goto('/admin/comercial/demonstracoes');
+ await expect(page.getByRole('heading',{name:'Demonstrações',exact:true})).toBeVisible();
+ await page.getByRole('button',{name:'Preparar demonstração',exact:true}).click();
+ await expect(page.getByRole('combobox',{name:'Plano demonstrado'})).toHaveCount(0);
+ await page.getByLabel('Nome da empresa demonstrativa').fill('Ateliê Aurora');
+ await page.getByRole('button',{name:'Salvar preparação',exact:true}).click();
+ await expect(page.getByRole('heading',{name:'Ateliê Aurora',exact:true})).toBeVisible();
+ await page.getByRole('button',{name:'Abrir configurador real'}).click();
+ const iframe=page.frameLocator('iframe[title="Configuração da empresa demonstrativa"]');
+ await expect(iframe.getByRole('link',{name:'Página pública',exact:true})).toBeVisible();
+ const frame=page.frames().find(f=>f.url().includes('127.0.0.1:5174'))!;
+ const configured=await frame.evaluate(async()=>{
+  const {demoRPC,getDemoSession}=await import('/src/demo/transport.ts');
+  const org=getDemoSession()!.organization.id;
+  let c:any=await demoRPC('company','company_context',{p_org:org});
+  await demoRPC('company','company_save',{p_org:org,p_entity:'settings',p_id:null,p_expected_revision:c.settings.revision,p_data:{description:'Ajustes, peças sob medida e cuidado em cada acabamento.',service_regions:'Atendimento com horário combinado',payment_methods:'Conforme condições de cada serviço',business_hours:Array.from({length:7},(_,day)=>({day,open:'08:00',close:'18:00'}))}});
+  c=await demoRPC('company','company_context',{p_org:org});
+  await demoRPC('company','company_save',{p_org:org,p_entity:'service',p_id:null,p_expected_revision:c.settings.revision,p_data:{name:'Ajuste de barra',description:'Acabamento e ajuste de comprimento para peças do dia a dia.',price_mode:'fixed',price_cents:4500,duration_minutes:30,active:true,quotes_allowed:true,direct_booking:true,contract_mode:'immediate',execution_mode:'continuous',availability:'Com horário combinado'}});
+  await demoRPC('company','consumer_schedule_config',{p_org:org,p_expected_revision:0,p_rules:{active:true,lead_minutes:30,horizon_days:30,step_minutes:30,buffer_minutes:0,cancel_minutes:120}});
+  return org;
+ });
+ await iframe.getByRole('link',{name:'Página pública',exact:true}).click();
+ await expect(iframe.getByRole('heading',{name:'Página da empresa',exact:true})).toBeVisible();
+ await expect(iframe.getByText('Carregando identidade e trabalhos...', {exact:true})).toHaveCount(0);
+ await expect(iframe.getByRole('button',{name:'Visualizar como cliente',exact:true}).first()).toBeVisible();
+ await page.setViewportSize({width:1440,height:1000});
+ await page.screenshot({path:'reports/syzia-055/ui/01-configuracao-desktop.png',fullPage:true});
+ await iframe.getByRole('button',{name:'Visualizar como cliente',exact:true}).first().click();
+ await expect(iframe.getByLabel('Prévia do rascunho',{exact:true})).toBeVisible();
+ await page.screenshot({path:'reports/syzia-055/ui/01b-previa-desktop.png',fullPage:true});
+ for(const width of [390,360]) {
+  await page.setViewportSize({width,height:844});
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1);
+  expect(await frame.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1);
+  await page.screenshot({path:`reports/syzia-055/ui/01c-editor-${width}.png`,fullPage:true});
+ }
+ await page.setViewportSize({width:1440,height:1000});
+ await page.getByRole('button',{name:'Salvar rascunho',exact:true}).click();
+ await expect(page.getByRole('status')).toContainText('Rascunho salvo');
+ await page.getByRole('button',{name:'Voltar às demonstrações'}).click();
+ await page.getByRole('button',{name:'Abrir configurador real'}).click();
+ await expect(iframe.getByRole('link',{name:'Página pública',exact:true})).toBeVisible();
+ await page.getByRole('button',{name:'Revisar configuração',exact:true}).click();
+ await expect(page.getByRole('heading',{name:'Revisão da versão'})).toBeVisible();
+ await page.locator('summary').filter({hasText:/^Serviços \(1\)$/}).click();
+ await expect(page.getByText(/Nome:\s*Ajuste de barra/)).toBeVisible();
+ await page.getByRole('checkbox',{name:/Revisei a configuração/}).check();
+ await page.screenshot({path:'reports/syzia-055/ui/02-revisao-desktop.png',fullPage:true});
+ await page.getByRole('button',{name:'Publicar demonstração'}).click();
+ await expect(page.getByRole('heading',{name:'Demonstrações',exact:true})).toBeVisible();
+ const visitor=await context.newPage();await visitor.goto('http://127.0.0.1:5174/atelie-aurora');
+ await expect(visitor.getByRole('heading',{name:/^Ateliê Aurora/,level:1})).toBeVisible();
+ await expect(visitor.getByText('Ajuste de barra',{exact:true}).first()).toBeVisible();
+ for(const width of [1440,390,360]) {
+  await visitor.setViewportSize({width,height:width===1440?1000:844});
+  expect(await visitor.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1);
+  await visitor.screenshot({path:`reports/syzia-055/ui/03-publica-${width}.png`,fullPage:true});
+ }
+ await visitor.keyboard.press('Tab');expect(await visitor.evaluate(()=>document.activeElement?.tagName)).not.toBe('BODY');
+ await page.setViewportSize({width:390,height:844});
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1);
+ await page.screenshot({path:'reports/syzia-055/ui/04-gestao-mobile.png',fullPage:true});
+ expect(configured).toMatch(/^[a-f0-9-]{36}$/);expect(failures).toEqual([]);
+});

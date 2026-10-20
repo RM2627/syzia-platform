@@ -41,6 +41,13 @@ export async function invitationApi(path: string, body: unknown) {
 export const commercialError = (e: unknown) =>
   (
     ({
+      commercial_destination_changed:'A configuração desta empresa foi alterada durante a ativação. A importação foi interrompida para preservar seus dados. Solicite uma revisão à SYZIA.',
+      commercial_plan_incompatible:'O plano escolhido não comporta a configuração preparada. Escolha um plano compatível ou solicite uma revisão, sem perder os dados.',
+      commercial_plan_selected_at_activation:'O plano é escolhido pelo responsável durante a ativação.',
+      commercial_configuration_reference_invalid:'Há uma referência inválida na configuração. Revise os serviços e as imagens.',
+      commercial_slug_taken:'Este endereço já está reservado. Salve sem informar um endereço para gerar outro.',
+      commercial_slug_invalid:'Este endereço não pode ser utilizado.',
+      commercial_contact_not_linked:'Vincule o interessado à demonstração antes de gerar o convite.',
       access_denied: "Seu acesso não permite esta ação.",
       session_required: "Entre novamente para continuar.",
       commercial_contact_not_authorized:

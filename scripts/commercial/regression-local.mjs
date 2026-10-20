@@ -17,6 +17,7 @@ try {
       "utf8",
     ),
   );
+  await h.db.exec(await readFile("supabase/migrations/202610200055_commercial_versions.sql","utf8"));
   await mkdir("reports/syzia-044", { recursive: true });
   await import("../../tests/syzia-044-sql.test.mjs");
 } catch (e) {

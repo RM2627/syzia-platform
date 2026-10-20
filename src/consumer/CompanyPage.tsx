@@ -1,3 +1,4 @@
+import { commercialMediaFetch } from '../demo/editor-bridge';
 import { usePermissions } from "../permissions/Permissions";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -92,7 +93,7 @@ export function CompanyPage({ org }: { org: Organization }) {
       for (let i = 0; i < images.length; i += 4) {
         const batch = await Promise.allSettled(
           images.slice(i, i + 4).map(async (code) => {
-            const r = await fetch(gateway + "/company-media/" + code, {
+            const r = await commercialMediaFetch(gateway + "/company-media/" + code, {
               headers: { Authorization: "Bearer " + auth.access_token },
             });
             if (!r.ok) throw Error("attachment_access_denied");

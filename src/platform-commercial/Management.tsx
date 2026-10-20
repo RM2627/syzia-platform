@@ -1,3 +1,4 @@
+import {PreparationEditor} from './PreparationEditor';
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { rpc } from "../api";
@@ -13,6 +14,8 @@ export function Management() {
     [notice, setNotice] = useState(""),
     [busy, setBusy] = useState(false),
     [edit, setEdit] = useState<any>(null),
+    [editor,setEditor]=useState<any>(null),
+    [leadSelection,setLeadSelection]=useState<Record<string,string>>({}),
     [filter, setFilter] = useState(""),
     [purpose, setPurpose] = useState("demonstration"),
     [selected, setSelected] = useState<string[]>([]),
@@ -28,6 +31,7 @@ export function Management() {
     setNotice("");
     setPreview(null);
     setSelected([]);
+    setEditor(null);
   }, [section]);
   async function act(fn: () => Promise<void>) {
     setBusy(true);
@@ -51,7 +55,9 @@ export function Management() {
         </p>
       </section>
     );
-  const demos = data.demos.filter((d: any) => {
+  if(editor)return <PreparationEditor definition={editor} onClose={()=>{setEditor(null);void load();}}/>;
+  const listed = section === "convites" ? data.demos.flatMap((d:any)=>(data.links||[]).filter((l:any)=>l.demo_id===d.id).map((l:any)=>({...d,demo_id:d.id,id:d.id+":"+l.lead_id,lead_id:l.lead_id}))) : data.demos;
+  const demos = listed.filter((d: any) => {
     const c = data.contacts.find((c: any) => c.id === d.lead_id);
     return [d.name, c?.name, c?.email]
       .join(" ")
@@ -75,7 +81,8 @@ export function Management() {
   };
   async function makePreview(ids = selected) {
     await act(async () => {
-      const p = await commercialApi("preview", { demo_ids: ids, purpose });
+      const recipients=ids.map(id=>{const d=eligible.find((x:any)=>x.id===id);if(!d)throw Error('commercial_contact_not_authorized');return {demo_id:d.demo_id,lead_id:d.lead_id};});
+      const p = await commercialApi("preview", { recipients, purpose });
       setPreview(p);
     });
   }
@@ -139,7 +146,7 @@ export function Management() {
                     name: "",
                     slug: "",
                     lead_id: "",
-                    plan_version_id: data.plans[0]?.id,
+                    plan_version_id: null,
                     expires_at: new Date(
                       Date.now() + 14 * 86400000,
                     ).toISOString(),
@@ -161,10 +168,10 @@ export function Management() {
                     p_id: edit.id || null,
                     p_revision: edit.revision || 0,
                     p_key: key.current,
-                    p_lead: f.get("lead"),
+                    p_lead: null,
                     p_name: f.get("name"),
-                    p_slug: f.get("slug"),
-                    p_plan: f.get("plan"),
+                    p_slug: edit.slug || null,
+                    p_plan: null,
                     p_expires: new Date(String(f.get("expires"))).toISOString(),
                   });
                   setEdit(null);
@@ -177,25 +184,6 @@ export function Management() {
               <h2>{edit.id ? "Revisar preparação" : "Nova demonstração"}</h2>
               <div className="commercial-fields">
                 <label>
-                  Interessado
-                  <select
-                    name="lead"
-                    required
-                    defaultValue={edit.lead_id}
-                    disabled={!!edit.id}
-                  >
-                    {!edit.lead_id && <option value="">Selecione</option>}
-                    {data.contacts.map((c: any) => (
-                      <option key={c.id} value={c.id}>
-                        {c.company} · {c.name}
-                      </option>
-                    ))}
-                  </select>
-                  {edit.id && (
-                    <input type="hidden" name="lead" value={edit.lead_id} />
-                  )}
-                </label>
-                <label>
                   Nome da empresa demonstrativa
                   <input
                     name="name"
@@ -205,29 +193,7 @@ export function Management() {
                     defaultValue={edit.name}
                   />
                 </label>
-                <label>
-                  Endereço exclusivo
-                  <input
-                    name="slug"
-                    required
-                    pattern="[a-z0-9][a-z0-9-]{1,78}[a-z0-9]"
-                    defaultValue={edit.slug}
-                  />
-                </label>
-                <label>
-                  Plano demonstrado
-                  <select
-                    name="plan"
-                    required
-                    defaultValue={edit.plan_version_id}
-                  >
-                    {data.plans.map((p: any) => (
-                      <option key={p.id} value={p.id}>
-                        {p.name}
-                      </option>
-                    ))}
-                  </select>
-                </label>
+                <p>O endereço exclusivo é gerado e reservado ao salvar. Interessados podem ser vinculados depois. O plano será escolhido na ativação.</p>
                 <label>
                   Disponível até
                   <input
@@ -245,8 +211,7 @@ export function Management() {
               </div>
               {edit.id && (
                 <p>
-                  Revisar dados ou regenerar o endereço invalida os acessos
-                  anteriores e exige disponibilizar novamente a configuração.
+                  As alterações ficam em rascunho até a revisão e publicação. O endereço é preservado.
                 </p>
               )}
               <button disabled={busy}>Salvar preparação</button>
@@ -264,6 +229,7 @@ export function Management() {
                     (
                       {
                         draft: "Em preparação",
+                        ready:"Revisada",suspended:"Suspensa",expired:"Expirada",archived:"Arquivada",
                         available: "Disponível",
                         revoked: "Acesso revogado",
                       } as any
@@ -272,6 +238,9 @@ export function Management() {
                   · até {new Date(d.expires_at).toLocaleDateString("pt-BR")}
                 </p>
                 <p>/{d.slug}</p>
+                {d.state==='available'&&import.meta.env.VITE_COMMERCIAL_DEMO_ORIGIN&&<CopyLink url={(import.meta.env.VITE_COMMERCIAL_DEMO_ORIGIN||'').replace(/\/$/,'')+'/'+d.slug}/>}
+                {data.can_manage&&<label>Interessado para vincular ou convidar<select value={leadSelection[d.id]||''} onChange={e=>{const id=e.target.value;setLeadSelection(x=>({...x,[d.id]:id}));if(id)void act(async()=>{await rpc('commercial_demo_link',{p_demo:d.id,p_lead:id});});}}><option value="">Selecione quando necessário</option>{data.contacts.map((c:any)=><option key={c.id} value={c.id}>{c.company} · {c.name}</option>)}</select></label>}
+                <p>{(data.links||[]).filter((l:any)=>l.demo_id===d.id).length} interessado(s) vinculado(s)</p>
                 <div className="button-row">
                   {data.can_manage && (
                     <>
@@ -282,10 +251,7 @@ export function Management() {
                             const r = await commercialApi("editor", {
                               id: d.id,
                             });
-                            setLink(r.url);
-                            setNotice(
-                              "Acesso temporário de preparação gerado. Abra somente para configurar esta demonstração.",
-                            );
+                            setEditor(r);
                           })
                         }
                       >
@@ -297,10 +263,10 @@ export function Management() {
                           setEdit(d);
                         }}
                       >
-                        Revisar / regenerar endereço
+                        Editar dados da preparação
                       </button>
                       <button
-                        disabled={busy || d.state === "revoked"}
+                        disabled={busy || ["revoked","suspended"].includes(d.state)}
                         onClick={() =>
                           void act(async () => {
                             await rpc("commercial_demo_revoke", {
@@ -317,11 +283,12 @@ export function Management() {
                   )}
                   {data.can_manage && d.state === "available" && (
                     <button
-                      disabled={busy}
+                      disabled={busy || !leadSelection[d.id]}
                       onClick={() =>
                         void act(async () => {
                           const r = await commercialApi("invite", {
                             id: d.id,
+                            lead_id: leadSelection[d.id],
                             purpose: "demonstration",
                           });
                           setLink(r.url);
@@ -614,6 +581,7 @@ export function Management() {
                       requested: "Aguardando análise",
                       approved: "Vínculo aprovado",
                       rejected: "Vínculo não aprovado",
+                      prepared: "Aguardando confirmação financeira",
                       materialized: "Configuração vinculada à empresa",
                     } as any
                   )[q.state]
@@ -633,7 +601,7 @@ export function Management() {
                   </ul>
                 </details>
               )}
-              {data.is_root && q.state !== "materialized" && (
+              {data.is_root && !q.organization_id && (
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();

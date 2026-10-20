@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
 import { rpc } from "../api";
+import {commercialApi,commercialError} from "./api";
+async function finalize(org:string){
+  const r=await rpc<any>("commercial_import_finalize",{p_org:org});
+  if(!r?.pending)return r;
+  try{return await commercialApi("materialize",{organization_id:org});}
+  catch(e){return {...r,confirmation_error:commercialError(e)};}
+}
 import { Link, useLocation } from "react-router-dom";
 export function PreparedCompany({ org }: { org: string }) {
   const [state, setState] = useState<any>(null),
@@ -10,7 +17,7 @@ export function PreparedCompany({ org }: { org: string }) {
     setBusy(true);
     setError("");
     try {
-      setState(await rpc("commercial_import_finalize", { p_org: org }));
+      setState(await finalize(org));
     } catch {
       setError(
         "Não foi possível verificar a configuração preparada. Tente novamente.",
@@ -21,7 +28,7 @@ export function PreparedCompany({ org }: { org: string }) {
   }
   useEffect(() => {
     let live = true;
-    void rpc("commercial_import_finalize", { p_org: org })
+    void finalize(org)
       .then((x) => {
         if (live) setState(x);
       })
@@ -55,7 +62,7 @@ export function PreparedCompany({ org }: { org: string }) {
       ) : (
         <Link to={"/painel/" + org + "/configuracao"}>Conferir catálogo</Link>
       )}
-      {error && <p role="alert">{error}</p>}
+      {(error||state.confirmation_error) && <p role="alert">{error||state.confirmation_error}</p>}
     </aside>
   );
 }

@@ -39,11 +39,12 @@ export function eligibleContact(
       authorized: boolean;
       expires_at: string;
     }[];
-  },
+  } | null | undefined,
   purpose: string,
   now = Date.now(),
 ) {
-  return (
+  return Boolean(
+    contact &&
     !contact.suppressed &&
     !["not_interested", "archived"].includes(contact.stage) &&
     contact.authorizations.some(

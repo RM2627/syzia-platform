@@ -320,7 +320,10 @@ const demoAccess = enterpriseAccess({
   },
 });
 const billingFixture = process.env.DEMO_BILLING_047 === "true" ? await (await import("./billing-047/browser-fixture.mjs")).browserBillingFixture({c,invoke,getName,user,serialize: fn=>{const job=queue.then(fn,fn);queue=job.catch(()=>{});return job;}}) : null;
+const commercialFixture=process.env.DEMO_TEST_MODE==='true'&&process.env.DEMO_COMMERCIAL_055==='true'?await(await import('./commercial/browser-fixture-055.mjs')).commercialBrowserFixture({c,invoke,getName,user,serialize:fn=>{const job=queue.then(fn,fn);queue=job.catch(()=>{});return job;}}):null;
 const server = http.createServer(async (req, res) => {
+  if(commercialFixture&&/^\/(commercial|demonstrations|demonstration-media)\//.test(req.url||''))return commercialFixture.handle(req,res);
+
   const origin = req.headers.origin;
   if (
     origin &&
@@ -720,6 +723,7 @@ server.listen(54321, "127.0.0.1", () => {
         VITE_LOCAL_DEMO: "true",
         VITE_PLATFORM_API_URL: "http://127.0.0.1:54321",
         VITE_BILLING_API_URL: "http://127.0.0.1:54321",
+        ...(commercialFixture?{VITE_COMMERCIAL_PREPARATION_ENABLED:"true",VITE_COMMERCIAL_API_URL:"http://127.0.0.1:54321",VITE_COMMERCIAL_DEMO_ORIGIN:"http://127.0.0.1:5174"}:{}),
       },
     },
   );
@@ -733,6 +737,7 @@ server.listen(54321, "127.0.0.1", () => {
     child.kill();
     server.close();
     await queue;
+    if(commercialFixture)await commercialFixture.close();
     await c.db.close();
     process.exit();
   };

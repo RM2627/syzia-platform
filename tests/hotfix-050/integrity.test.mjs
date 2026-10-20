@@ -7,7 +7,7 @@ test("050-I01 all 46 migrations, finance policies, HMAC adapter, lockfile and ot
   assert.equal(Object.keys(files).filter(x => x.startsWith("supabase/migrations/")).length, 46);
   assert.deepEqual((await readdir("supabase/migrations")).filter(x => x.endsWith(".sql")).sort(), [
     ...Object.keys(files).filter(x => x.startsWith("supabase/migrations/")).map(x => x.slice("supabase/migrations/".length)),
-    "202610130051_checkout_diagnostics.sql", "202610140052_integrated_subscription_safety.sql", "202610140053_automatic_trial_optional_provider_version.sql", "202610180054_commercial_preparation.sql",
+    "202610130051_checkout_diagnostics.sql", "202610140052_integrated_subscription_safety.sql", "202610140053_automatic_trial_optional_provider_version.sql", "202610180054_commercial_preparation.sql", "202610200055_commercial_versions.sql",
   ].sort());
   for (const [path, hash] of Object.entries(files)) assertHotfix051File(path, await readFile(path), hash);
 });

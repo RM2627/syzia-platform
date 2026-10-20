@@ -1,6 +1,8 @@
+import {embeddedEditor} from './editor-bridge';
 import { lazy, useEffect, useState, type FormEvent } from "react";
 import {
   Link,
+  NavLink,
   Route,
   Routes,
   useLocation,
@@ -85,7 +87,7 @@ function DemoTeam() {
     <section>
       <h1>Equipe da demonstração</h1>
       <p>
-        Cadastre profissionais fictícios. Os limites do plano e as permissões
+        Cadastre profissionais fictícios. Os limites demonstrativos e as permissões
         operacionais continuam sendo aplicados.
       </p>
       {error && <p role="alert">{error}</p>}
@@ -180,7 +182,7 @@ function bootstrap() {
     const previous = storedDemoSession(),
       parts = window.location.pathname.split("/"),
       requested = parts[1] === "empresa" ? parts[2] : parts[1];
-    if (editor) return demoCall<DemoSession>("restore", {}, editor);
+    if (editor) {if(!embeddedEditor)throw Error("demo_operation_denied");return demoCall<DemoSession>("restore", {}, editor);}
     if (
       previous &&
       (["painel", "acompanhar", "minhas-solicitacoes"].includes(requested) ||
@@ -243,19 +245,6 @@ export function DemoApp() {
     );
   const panel = location.pathname.startsWith("/painel/");
   const publicLink = "/" + session.slug;
-  async function publish() {
-    setBusy(true);
-    try {
-      await demoCall("publish");
-      setNotice(
-        "Configuração disponibilizada. Abra novamente pelo painel comercial para continuar editando.",
-      );
-    } catch (e) {
-      setError(demoMessage(e));
-    } finally {
-      setBusy(false);
-    }
-  }
   const banner = (
     <div className="demo-bar">
       <strong>
@@ -263,15 +252,10 @@ export function DemoApp() {
           ? "Preparação da demonstração"
           : "Demonstração interativa"}
       </strong>
-      <span>Dados fictícios · sem efeitos externos</span>
+      <span>Dados fictícios · sem efeitos externos. Os recursos disponíveis variam conforme o plano contratado.</span>
       <Link to={panel ? publicLink : "/painel/" + session.organization.id}>
         {panel ? "Ver página pública" : "Conhecer o painel"}
       </Link>
-      {session.kind === "editor" && (
-        <button disabled={busy} onClick={() => void publish()}>
-          Disponibilizar configuração revisada
-        </button>
-      )}
       <button
         onClick={() =>
           void demoCall("end").finally(() => {
@@ -285,6 +269,12 @@ export function DemoApp() {
       </button>
     </div>
   );
+  if(embeddedEditor) return <><nav className="demo-bar demo-editor-tabs" aria-label="Configuração demonstrativa">
+    <NavLink to={"/painel/"+session.organization.id+"/configuracao"}>Configuração</NavLink>
+    <NavLink to={"/painel/"+session.organization.id+"/pagina"}>Página pública</NavLink>
+    <NavLink to={"/painel/"+session.organization.id+"/consumidor"}>Solicitações</NavLink>
+    <NavLink to={"/painel/"+session.organization.id+"/agenda"}>Agenda</NavLink>
+  </nav><Routes><Route path="/painel/:orgId/:section?" element={<CompanyView session={session}/>}/><Route path="/:slug" element={<PublicCompany/>}/></Routes></>;
   return (
     <>
       {banner}

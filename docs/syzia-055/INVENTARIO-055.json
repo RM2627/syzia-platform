@@ -1,0 +1,345 @@
+{
+  "base_commit": "61fa6d2f745128f7763850e64060fd818c7bf74f",
+  "historical_migrations_unchanged": 50,
+  "lockfile_unchanged": true,
+  "note": "Raw SHA-256. This manifest excludes itself; the outer release manifest covers it. Historical authorizations remain intact.",
+  "files": [
+    {
+      "path": ".env.demo.example",
+      "action": "modified",
+      "before_sha256": "d31538ce35540715be74d960efce4fa3a29434ed5a5c7eccdba8d4268b0e272a",
+      "after_sha256": "413d64be114080acdc18bb883d6c45ad133cf5fa591c2bb59ca7ed5dabe8c4b2"
+    },
+    {
+      "path": "SYZIA-055-ESTADO-FINAL.md",
+      "action": "added",
+      "after_sha256": "b26931a1dfb3a0bf539a013914dd2ecb66c636a283bb6badc3fee561d07ddbeb"
+    },
+    {
+      "path": "docs/syzia-055/ARQUITETURA-E-FLUXOS.md",
+      "action": "added",
+      "after_sha256": "1daa88cc84ee41119b88c26660907d113e35a17bb79ccd45f080b51fb0fcac59"
+    },
+    {
+      "path": "docs/syzia-055/AUDITORIA.md",
+      "action": "added",
+      "after_sha256": "a0c52b529569ba1d4e4f6fb57627e4be89500b7d8fbd64e9402b3dc36c114141"
+    },
+    {
+      "path": "docs/syzia-055/GUIA-INTEGRACAO-SYZIA-055.md",
+      "action": "added",
+      "after_sha256": "3907933cee03b8d560bb42a6e91437393087a75208f8d1ff8761f7f11b405174"
+    },
+    {
+      "path": "docs/syzia-055/MATRIZ-TESTES-SYZIA-055.md",
+      "action": "added",
+      "after_sha256": "bb084db26606617eccadd7571ed2122a360136c956cfa421ee3ff9a75b523d04"
+    },
+    {
+      "path": "docs/syzia-055/PENDENCIAS-HOMOLOGACAO-055.md",
+      "action": "added",
+      "after_sha256": "258be15f00d8973f62f95c651001958653559bcc99b94fc7804834b8353b9ccf"
+    },
+    {
+      "path": "docs/syzia-055/RELATORIO-SYZIA-055.md",
+      "action": "added",
+      "after_sha256": "8644948519993ea11668238490c7a6587017cde4906fe8263e163770181f9303"
+    },
+    {
+      "path": "docs/syzia-055/RESULTADO-GATE-055.md",
+      "action": "added",
+      "after_sha256": "34d99c1c2ccbf2b4ac9b165f394adf71e7f50c8c8ed3dc5f87295244aeb62c61"
+    },
+    {
+      "path": "docs/syzia-055/RESULTADOS-055.json",
+      "action": "added",
+      "after_sha256": "d1b6fa9039022c55b3f2126268d2452d18985b09734116dcc2ed7ee748164937"
+    },
+    {
+      "path": "docs/syzia-055/authorized-hashes.json",
+      "action": "added",
+      "after_sha256": "25ad38e7ef5e6fc239d9e5e045643fd0535d60e4d497a80bbfbda67d0e3bde26"
+    },
+    {
+      "path": "docs/syzia-055/base-61fa6d2.json",
+      "action": "added",
+      "after_sha256": "d88d73d8ceb2fe1e6d187e062324201562af79e7cb33b4798aa6ac2ef0d3b288"
+    },
+    {
+      "path": "package.json",
+      "action": "modified",
+      "before_sha256": "88497356c72b9172ee0425ebfa3a0ff7c8415434d7b44b7045a465b4504fa89c",
+      "after_sha256": "f9ee46cf9e489112652dddcaed88bd48153e999c2811593963f3ff3e482787c2"
+    },
+    {
+      "path": "playwright.commercial055.config.ts",
+      "action": "added",
+      "after_sha256": "ce9b1f687284f389e622b2e9ff942e7b0b1215f3e6211a3fdabb00cdda8ae28f"
+    },
+    {
+      "path": "scripts/commercial/bootstrap-demo.mjs",
+      "action": "modified",
+      "before_sha256": "48548d67fec65e43b494d44e6769bc7fac2fa8eb7e1f302b6783dd319902a975",
+      "after_sha256": "26f28911c9ebfa1f2869f2dedb147bce4e184fa2f27aeec64ed67af3cfad6ad6"
+    },
+    {
+      "path": "scripts/commercial/browser-fixture-055.mjs",
+      "action": "added",
+      "after_sha256": "615bf76b0089fba7caa318cfcbc6f635b6b60f1bfae131c686c3fb20f8f030fb"
+    },
+    {
+      "path": "scripts/commercial/check-demo-build.mjs",
+      "action": "modified",
+      "before_sha256": "f72095317e27336d9da1c8770ee21d7e827a17ec1238b26042b05a8fd41abd5c",
+      "after_sha256": "42cdfb508ecbe04b2ae745e2eafb4c98eabd9ad7fd24540b89cf960ddfb19741"
+    },
+    {
+      "path": "scripts/commercial/regression-local.mjs",
+      "action": "modified",
+      "before_sha256": "ad3f7201d4edf340d5c3714fd8bb9727f9cf587a3e8c98db7a38a7c4d33119f7",
+      "after_sha256": "c47b9f5651d7b2d251b419771a9eb7cedb08e996a9869462be93e35f7bc293b5"
+    },
+    {
+      "path": "scripts/dev-consumer-demo.mjs",
+      "action": "modified",
+      "before_sha256": "491ed596a8e948d99fdd1314344b4ad3ef02bffba86af22e0ce154615fec9af9",
+      "after_sha256": "c309c5d741def10284801df2ca5245565e0eba37958c4e926c5060bdb671a43b"
+    },
+    {
+      "path": "scripts/syzia-044/current-gate.mjs",
+      "action": "modified",
+      "before_sha256": "f5ea543d394240a68cba2cdb742500b45dfcf619f5efae9353745d626d223c2e",
+      "after_sha256": "1deccafe548aafc56fdff42419ab04c65b6d67393d0d86e34cfebcf87c3285a6"
+    },
+    {
+      "path": "server/commercial/controller.mjs",
+      "action": "modified",
+      "before_sha256": "fb57da7fcf743e68d669aac19a5eca72403c091f5bff041db12dbf7d5fdc1a97",
+      "after_sha256": "cad04c86d1eb5766eabb30d4b5fc0ce0bb0089fe66ad1497cd450835e3839350"
+    },
+    {
+      "path": "server/commercial/demo-profile.mjs",
+      "action": "added",
+      "after_sha256": "10b7dae5125d8d5e2f3e427e97f22bf99ec9e7268d88c02545afd2ea60920e76"
+    },
+    {
+      "path": "server/commercial/demo-store.mjs",
+      "action": "modified",
+      "before_sha256": "e328805f721749ec3e9cff61fba63a5dc7b5f2581fd80e5e7e40c78057eee75e",
+      "after_sha256": "6b5eee56b56dd3df5413691bc85fb1bda329a413a17c531345fbce5065e4fd27"
+    },
+    {
+      "path": "server/commercial/demo-upgrade-055.sql",
+      "action": "added",
+      "after_sha256": "87018297f56ba0038a8b2311faa4559ce9c2d33b747f7ce949486d65926b15cd"
+    },
+    {
+      "path": "server/commercial/media.mjs",
+      "action": "modified",
+      "before_sha256": "296da7d466389c7a1862e8f02ae76a2b6b4e85c19b331b3537b6d4c456ffb41e",
+      "after_sha256": "ec9bdab7aa8a600f4989d3550d31c82a1f3dc16a58e8f40599d143afae0d9176"
+    },
+    {
+      "path": "server/commercial/promote-assets.mjs",
+      "action": "modified",
+      "before_sha256": "da357f18a33bd64104ab523782377f84883342a468693c84841660a18c76bcdb",
+      "after_sha256": "83bc3f2b32786439abf48cfc3be5f83d2643bdb709d89afeaa4c3ccad0ed0025"
+    },
+    {
+      "path": "server/commercial/runtime.mjs",
+      "action": "modified",
+      "before_sha256": "d22ef88f5a64c286a10f612a26ad12372bfa1c4152941ebedd3ebe6a9d578bc3",
+      "after_sha256": "b3803478d09384642ead49cd68c9b709ad1c595008c1a0a59f9ad5059c257bb9"
+    },
+    {
+      "path": "src/acquisition/SelfService.tsx",
+      "action": "modified",
+      "before_sha256": "d46c4b513a09a3fb5a9169316ed77f9fcaeaf7b39a7ea9011d052b78692db965",
+      "after_sha256": "93d72fde90785c6e8c45064039b057602340644637434372cbbb95f4db519a45"
+    },
+    {
+      "path": "src/consumer/CompanyMedia.tsx",
+      "action": "modified",
+      "before_sha256": "3e47fc743950791c3a8aefb8661fa2137f7678eb5841e97039e36cda09ab9675",
+      "after_sha256": "0170109aafb5dbfdd97a83825e113a4322be55d5a021b6dd79d62aad8a26d1bd"
+    },
+    {
+      "path": "src/consumer/CompanyPage.tsx",
+      "action": "modified",
+      "before_sha256": "542f9a006072b401c1b55bb47162a324a16f4f2e6ee22585beebf996648738cf",
+      "after_sha256": "a8b4cd386197c63ff3c1473bac042e4d5a7c6bb28123b762d97be2d753b4c625"
+    },
+    {
+      "path": "src/consumer/api.ts",
+      "action": "modified",
+      "before_sha256": "75d96d37292215534edbfd7bf689d3983ea59cef06493da3fca1471bf28a9255",
+      "after_sha256": "5d5c482ebe09176f43e91d6477966c72fa224624b00772a10ec9db0d7734106e"
+    },
+    {
+      "path": "src/consumer/company-image-request.ts",
+      "action": "modified",
+      "before_sha256": "b799929d7dd6259b59f1ef839aac74396238ac6307899ce43ad236362d4874b1",
+      "after_sha256": "1f0883e6125e47c00759c248ea50de82aebdbb39c93371c03ebfed8ecb15ed2f"
+    },
+    {
+      "path": "src/demo/DemoApp.tsx",
+      "action": "modified",
+      "before_sha256": "afd3e1c4e4320e7f47a2421abd610a647c16e01cb3d1db10b37a449a09819595",
+      "after_sha256": "cc7f2c27258b8eecdef64a4016513b49039ee384ee4b64918f3b5791e892d15f"
+    },
+    {
+      "path": "src/demo/demo.css",
+      "action": "modified",
+      "before_sha256": "6cf3793fe9e873b4b0dc70ad4b1a3940841c8a75ff1b5cbeffbc31e039f1c114",
+      "after_sha256": "6bca99f16ddc244b21677aa14ebf7590b41cd2dbcec918a3507a8ddfc04fa803"
+    },
+    {
+      "path": "src/demo/editor-bridge.ts",
+      "action": "added",
+      "after_sha256": "6a34b075435551a1f342cb31ad668c94922dd0e7e3dc4e6a0da50c887b7e7c2b"
+    },
+    {
+      "path": "src/demo/transport.ts",
+      "action": "modified",
+      "before_sha256": "9e5f52377362c24490678b599306e91e5758d11b988605da480dcc99c08605a2",
+      "after_sha256": "aa142e1857af6eadd16154277390dc2ffa6a3b2be5d4dfc742378dcb5a6ac053"
+    },
+    {
+      "path": "src/platform-commercial/Activation.tsx",
+      "action": "modified",
+      "before_sha256": "92f31fb199ad50d4813f0e007d8916b7edd70c902abb406a1e3cb9c33940ccbc",
+      "after_sha256": "f289f401dec3e9e1a1ec4ebab17e3705616f8bcc7b46f6143f648ec80864aa63"
+    },
+    {
+      "path": "src/platform-commercial/Management.tsx",
+      "action": "modified",
+      "before_sha256": "68594e38c127100e1324c760445747c80e3321ffc7938502325a4a8631c85b09",
+      "after_sha256": "bf4d4bdf5dac0f630b776aa76993cb2274686b5bfc39cde358d18d08f79f478a"
+    },
+    {
+      "path": "src/platform-commercial/PreparationEditor.tsx",
+      "action": "added",
+      "after_sha256": "af13161c4a47d5eb67e415d520f2de00713af54f4de457217f588ff17363781a"
+    },
+    {
+      "path": "src/platform-commercial/PreparedCompany.tsx",
+      "action": "modified",
+      "before_sha256": "e9c23a677ab28e8a5ba88b0f3c89e58e96e2f953c815fe9801b27bd83d3781e7",
+      "after_sha256": "a2b0ea7df1d188737b5fade809d36cfd520f9dfda0febb6669f337989ed641a6"
+    },
+    {
+      "path": "src/platform-commercial/api.ts",
+      "action": "modified",
+      "before_sha256": "a98b470c0478adce4d53bed40da273ec0ea4530ed55035a33feabc2ec5bd5af4",
+      "after_sha256": "94749a1f5c07ee5f09fa83790e30e234643a4fc6528249b0d207e786d49cc429"
+    },
+    {
+      "path": "src/platform-commercial/policy.ts",
+      "action": "modified",
+      "before_sha256": "ad5a32b40c167f6bb714f20147dfb4803d296f69ed31f87963b96f59e51a518d",
+      "after_sha256": "5fadaafea64d0119f219a500600af676ed574b03ddbe55481bb7b146acba87bc"
+    },
+    {
+      "path": "supabase/migrations/202610200055_commercial_versions.sql",
+      "action": "added",
+      "after_sha256": "1c6a611bccf95d3e0fae40f7906e73d187497b54446b7c4104de8c461f9f5295"
+    },
+    {
+      "path": "tests/commercial-055/foundation.test.mjs",
+      "action": "added",
+      "after_sha256": "c4442abdccb1d43e5239bd794557c545b1d7f59cb0c22fa09df1b1a2b2f6702a"
+    },
+    {
+      "path": "tests/commercial-055/integrity.test.mjs",
+      "action": "added",
+      "after_sha256": "12a6e71875d39b624f5a497fffb2e707257324906932a15d75dc31c03c06af9a"
+    },
+    {
+      "path": "tests/commercial-055/upgrade.test.mjs",
+      "action": "added",
+      "after_sha256": "93612ce87f0d485a6940ea789982548a8e42c84bb12ad874fdff1030f7380a53"
+    },
+    {
+      "path": "tests/commercial-implementation/control.test.mjs",
+      "action": "modified",
+      "before_sha256": "e7c68c7f922a2c2510d1f40fa7bfd54694d12017016cee5b9b5dd8bb3259afa7",
+      "after_sha256": "f018e6bb099adec1bbc0a6c56b07398e9c2e8f0b8d1cfa71ee8a3c4f5ae2ba22"
+    },
+    {
+      "path": "tests/commercial-implementation/demos.test.mjs",
+      "action": "modified",
+      "before_sha256": "7266dfeaa90106d53c2e69249193f0dab29637304288d3fea5b27eb7bde3c305",
+      "after_sha256": "529407a3c4726e24443bcc3e5e7df9eabd0c450206fcb99ebe34160213fa558f"
+    },
+    {
+      "path": "tests/commercial-implementation/integrity.test.mjs",
+      "action": "modified",
+      "before_sha256": "713f504e4935da2c43f403de5b0999ff9cd1184e68c587a42586f6e294ea5804",
+      "after_sha256": "c1909eb1385cd3e644b7a428408382aa985e63eb500e555b8bfc73b85c2df04b"
+    },
+    {
+      "path": "tests/commercial-implementation/rollback.test.mjs",
+      "action": "modified",
+      "before_sha256": "63805568137e6fb4c65f6b938d811bf3ec6dd10a28147be198d93c6f6e0b54e1",
+      "after_sha256": "8a4bf42d4ced240b06640d5914ad455aaea9b265e7e5ac4fa7af0b115020516d"
+    },
+    {
+      "path": "tests/commercial-implementation/transport.test.mjs",
+      "action": "modified",
+      "before_sha256": "bda2654aea6e311fcaac61dc2ceaf84b18da6c21d2067f468ffb4904e031774f",
+      "after_sha256": "f45203f141d66e5d7cc61830b9b793373361f06dcfc583a690c86842704ff36e"
+    },
+    {
+      "path": "tests/commercial-implementation/ui-contracts.test.mjs",
+      "action": "modified",
+      "before_sha256": "c9d092bddbf29d9e8262ef2565fc642c16512d2413f30ca7017bd48ecc3b5c82",
+      "after_sha256": "6efd52cbf9a2a9f5e7c25bd7578532e89c690a4619e26f072eaee08a0fd701a9"
+    },
+    {
+      "path": "tests/demo-browser/commercial055.spec.ts",
+      "action": "added",
+      "after_sha256": "3e906a1f79533c177ea2bbaa0e693e6bd94844ad8b47125ef5bbce8083ef0fa5"
+    },
+    {
+      "path": "tests/demo-browser/flexible-support.spec.ts",
+      "action": "modified",
+      "before_sha256": "dedf0144112c7672a7c77c0381e4db25b261be50cb82eb8f0749b4a68032f6d3",
+      "after_sha256": "99b3797a347da5fcecfa9a4c956a0fa02f037451a422a455c90ba3b8001a1a38"
+    },
+    {
+      "path": "tests/hotfix-050/integrity.test.mjs",
+      "action": "modified",
+      "before_sha256": "5a7b6a23fa5e3677a79a94c146ce3fe3da68c2d16df79d1f6397d5965cc69240",
+      "after_sha256": "6305ed884ffd71759903c00ade95ccf5dbf6a70987231e7218490ee514b687df"
+    },
+    {
+      "path": "tests/integrated-051/integrity-cases.mjs",
+      "action": "modified",
+      "before_sha256": "d304a0b67b83319e2f181426acd7e69156fbb441baed2b2b3a162c7b40091af8",
+      "after_sha256": "104db1489061b86c9238be4c4350ea8dac00fb7b0a07e2bb607edd052b3c56bf"
+    },
+    {
+      "path": "tests/support/commercial-integrity.mjs",
+      "action": "modified",
+      "before_sha256": "364ab0ad3ad1ff2dcc4f16458b3e36a37b17f0599a3e510ce5494b88ff2e5243",
+      "after_sha256": "66823137019766b7f6014c8e8dcce5e194ec830f06cea927e73169b89143b9c4"
+    },
+    {
+      "path": "tests/support/commercial055-integrity.mjs",
+      "action": "added",
+      "after_sha256": "96bd306074ad0ee576acc2c46633f7a2c053617c52f596f508032d4be892e760"
+    },
+    {
+      "path": "tests/syzia-051/integrity.test.mjs",
+      "action": "modified",
+      "before_sha256": "79a1b26abe52f5eac4e848c27e85d0423f121120ef1ae4f91250b9a561c92a1b",
+      "after_sha256": "51e2a658cc687a16ebf8dd9b6131daa076ed5d096967fb5ad0653cdc1fdffd68"
+    },
+    {
+      "path": "vite.config.ts",
+      "action": "modified",
+      "before_sha256": "cdb201e5555beee2762a4028940fbb1497f1e71ac7b1c0d82c9a867cae6ad4f1",
+      "after_sha256": "2d2e9e99ae5a39afee853ca691d303f628209bfef16ec717ade1b40ef905f983"
+    }
+  ]
+}

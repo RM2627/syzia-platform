@@ -4,6 +4,7 @@ import { readFile } from "node:fs/promises";
 import sharp from "sharp";
 import {
   canSeeCommercial,
+  eligibleContact,
   manualStages,
 } from "../../src/platform-commercial/policy.ts";
 const access = (roles = [], kind = "person", permissions = []) => ({
@@ -76,4 +77,9 @@ test("UI04 templates reuse PublicCompany; no duplicated request/checkout impleme
   assert.match(source, /template=\{company\?\.template\}/);
   assert.match(source, /consumer_create_multi_request/);
   assert.match(source, /consumer_complete_execution/);
+});
+
+test('UI055 preparation without an interested contact never becomes an eligible email recipient',()=>{
+  assert.equal(eligibleContact(undefined,'demonstration'),false);
+  assert.equal(eligibleContact(null,'activation'),false);
 });

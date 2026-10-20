@@ -1,3 +1,4 @@
+import { commercialMediaFetch } from '../demo/editor-bridge';
 import { demoBuild, demoConsumerClient, demoAPI } from "../demo/transport";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { configured } from "../api";
@@ -60,7 +61,7 @@ export async function upload(
       p_key: key,
     },
   );
-  const r = await fetch(gateway + "/attachments/" + f.code, {
+  const r = await commercialMediaFetch(gateway + "/attachments/" + f.code, {
     method: "POST",
     headers: {
       Authorization: "Bearer " + (await jwt()),
@@ -81,7 +82,7 @@ export async function download(
     p_code: code,
   });
   if (error) throw error;
-  const r = await fetch(gateway + "/attachments/" + code, {
+  const r = await commercialMediaFetch(gateway + "/attachments/" + code, {
     headers: {
       Authorization: "Bearer " + (await jwt(client)),
       "X-Download-Ticket": t.ticket,

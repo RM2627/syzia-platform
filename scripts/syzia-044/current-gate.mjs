@@ -15,6 +15,7 @@ await mk(out, { recursive: true });
 await mk("reports/team-availability", { recursive: true });
 const node = process.execPath;
 export const suites = [
+ ["commercial-055",[node,"--test","--test-concurrency=1","tests/commercial-055/foundation.test.mjs","tests/commercial-055/upgrade.test.mjs","tests/commercial-055/integrity.test.mjs"]],
  ["commercial-054",[node,"--experimental-strip-types","--test","--test-concurrency=1","tests/commercial-implementation/control.test.mjs","tests/commercial-implementation/demos.test.mjs","tests/commercial-implementation/links.test.mjs","tests/commercial-implementation/preparation.test.mjs","tests/commercial-implementation/rollback.test.mjs","tests/commercial-implementation/transport.test.mjs","tests/commercial-implementation/ui-contracts.test.mjs","tests/commercial-implementation/integrity.test.mjs"]],
  ["commercial-054-regression",[node,"scripts/commercial/regression-local.mjs"]],
  ["commercial-054-demo-build",[node,"scripts/commercial/check-demo-build.mjs"]],
@@ -76,13 +77,14 @@ export const suites = [
   ["flexible-browser", [node, "node_modules/@playwright/test/cli.js", "test", "--config=playwright.flexible-support.config.ts"]],
   ["checkout-browser-051",[node,"node_modules/@playwright/test/cli.js","test","--config=playwright.syzia051.config.ts"]],
   ["browser-legal-050",[node,"node_modules/@playwright/test/cli.js","test","--config=playwright.legal050.config.ts"]],
+  ["commercial-browser-055",[node,"node_modules/@playwright/test/cli.js","test","--config=playwright.commercial055.config.ts"]],
   ["browser-hotfix-050", [node, "node_modules/@playwright/test/cli.js", "test", "--config=playwright.hotfix050.config.ts"]],
 ];
 const steps = controlled
   ? [["controlled-failure", [node, "-e", "process.exit(42)"]]]
   : localNonBrowser ? suites.filter(([name])=>!name.includes("browser")) : suites;
 const report = {
-  version: "054",
+  version: "055",
   localNonBrowser,
   engine:
     "Local PGlite + HTTP fixtures + Chromium; external homologation pending",

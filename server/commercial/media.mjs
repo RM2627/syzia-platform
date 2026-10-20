@@ -45,7 +45,8 @@ export function createDemoMediaHandler({
         );
         if (!bearer) return fail();
         token = bearer[1];
-        const { d } = await controller.demoDefinition(token);
+        const operatorToken=(req.headers['x-commercial-authorization']||'').match(/^Bearer ([^\s]+)$/)?.[1];
+        const { d } = await controller.demoDefinition(token,operatorToken);
         session = await store.mediaContext(token, d);
         person =
           bearer[2] === "company" ? session.manager_id : session.consumer_id;
@@ -112,10 +113,13 @@ export function createDemoMediaHandler({
       const handler = createAttachmentHandler({
         server,
         verifier,
-        origin: origins.publicOrigin,
+        origin: session?.kind==='editor' || req.headers.origin===origins.appOrigin ? origins.appOrigin : origins.publicOrigin,
         log,
       });
       req.url = req.url.slice("/demonstration-media".length);
+      if(req.method==='OPTIONS'&&req.headers.origin===origins.appOrigin) {
+        res.writeHead(204,{'Access-Control-Allow-Origin':origins.appOrigin,'Access-Control-Allow-Headers':'Authorization,Content-Type,X-Download-Ticket,X-Commercial-Authorization','Access-Control-Allow-Methods':'GET,POST,DELETE,OPTIONS','Vary':'Origin'});res.end();return;
+      }
       await handler(req, res);
     } catch {
       fail();

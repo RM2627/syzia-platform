@@ -15,6 +15,7 @@ export async function bootstrapDemo(db) {
     .sort())
     await db.exec(await readFile("supabase/migrations/" + f, "utf8"));
   await db.exec(await readFile("server/commercial/demo-schema.sql", "utf8"));
+  await db.exec(await readFile("server/commercial/demo-upgrade-055.sql", "utf8"));
 }
 if (
   process.argv[1] &&

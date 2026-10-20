@@ -115,6 +115,15 @@ export async function commercialRuntime(env = process.env) {
     inviteDays,
     promoteAssets: assetPromoter({ store, storage: client.storage }),
   });
+  let recovery = null;
+  const timer = setInterval(() => {
+    if(recovery) return;
+    recovery=(async()=>{
+      const results=await controller.reconcile();await store.cleanup();
+      if(results.some(x=>x.error))console.warn(JSON.stringify({event:'commercial_reconciliation_pending'}));
+    })().catch(()=>console.warn(JSON.stringify({event:'commercial_reconciliation_unavailable'}))).finally(()=>{recovery=null;});
+  },60000);
+  timer.unref();
   return {
     controller,
     origins,
@@ -126,6 +135,8 @@ export async function commercialRuntime(env = process.env) {
         service("commercial_service", { p_action: "demo", p_data: { id } }),
     }),
     close: async () => {
+      clearInterval(timer);
+      if(recovery)await recovery;
       await controller.close();
       await store.close();
     },

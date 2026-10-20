@@ -292,8 +292,11 @@ for (const width of [1440, 390])
       .getByRole("combobox", { name: "Minha presença", exact: true })
       .selectOption("available");
     await expect(claim).toBeEnabled();
+    // Disabled is immediate UI feedback, not proof that the command committed.
+    const completed = page.waitForResponse(r => r.url().endsWith('/rest/v1/rpc/central_act') && r.request().method()==='POST' && r.request().postDataJSON()?.p_action==='claim');
     await claim.click();
     await expect(claim).toBeDisabled();
+    expect((await completed).ok()).toBe(true);
     const ctx: any = await rpc(page, "central_context", { p_code: t.code });
     expect(ctx.ticket.assignee_id).toBe(ctx.me);
     expect(ctx.shared_support.counted).toBe(true);

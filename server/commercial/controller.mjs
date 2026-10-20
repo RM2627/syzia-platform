@@ -33,7 +33,7 @@ export function commercialController({
     if (!actor?.id) throw Error("session_required");
     return actor;
   };
-  async function invitation(token, demoId, purpose) {
+  async function invitation(token, demoId, purpose, leadId) {
     const d = await asUser(token, "commercial_demo_edit_context", {
       p_id: demoId,
     });
@@ -45,7 +45,8 @@ export function commercialController({
           new Date(d.expires_at).getTime(),
         ),
       ).toISOString();
-    const i = await asUser(token, "commercial_invite_prepare", {
+    const i = await asUser(token, "commercial_invite_for_contact", {
+      p_lead: leadId,
       p_demo: demoId,
       p_purpose: purpose,
       p_id: id,
@@ -62,22 +63,37 @@ export function commercialController({
       purpose === "activation" ? origins.appOrigin : origins.publicOrigin,
     );
     link.hash = new URLSearchParams({ convite: secret }).toString();
-    return { ...i, lead_id: d.lead_id, url: link.href, secret };
+    return { ...i, lead_id: i.lead_id, url: link.href, secret };
   }
-  async function demoDefinition(token) {
+  async function demoDefinition(token, operatorToken) {
     const s = await store.session(token);
     if (!s) throw Error("demo_session_expired");
-    return s.kind === "editor"
-      ? {
-          s,
-          d: await service("commercial_editor_service", {
-            p_demo: s.source_id,
-            p_actor: s.actor_id,
-          }),
-        }
-      : { s, d: await svc("demo", { id: s.source_id }) };
+    if(s.kind === "editor") {
+      const actor = await user(operatorToken);
+      if(actor.id !== s.actor_id) throw Error("access_denied");
+      const d = await asUser(operatorToken, "commercial_demo_edit_context", {p_id:s.source_id});
+      return {s,d};
+    }
+    return {s,d:await svc("demo",{id:s.source_id})};
   }
+  const materialize = async (organizationId) => {
+    const q=await service("commercial_materialization_service",{p_action:"context",p_org:organizationId,p_assets:{}});
+    if(!q.ready)return q;
+    const cfg=await promoteAssets(q.configuration,{id:q.demo_id,organization_id:organizationId,claim_id:q.claim_id,version_id:q.version_id});
+    const paths=Object.fromEntries((cfg.tables.company_media||[]).map(m=>[m.id,m.object_path]));
+    return service("commercial_materialization_service",{p_action:"complete",p_org:organizationId,p_assets:paths});
+  };
+
   return {
+    async reconcile() {
+      const rows=await service("commercial_materialization_service",{p_action:"pending",p_org:null,p_assets:{}});
+      const results=[];
+      for(const row of rows) {
+        try { results.push({organization_id:row.organization_id,result:await materialize(row.organization_id)}); }
+        catch { results.push({organization_id:row.organization_id,error:"commercial_materialization_pending"}); }
+      }
+      return results;
+    },
     async drain() {
       await Promise.allSettled([...pending]);
     },
@@ -97,24 +113,6 @@ export function commercialController({
           "p_conditions",
           "p_reviewed",
         ]);
-        const q = await asUser(token, "commercial_claim_context", {
-          p_id: body.p_id,
-        });
-        if (q.state !== "materialized") {
-          if (
-            q.state !== "approved" ||
-            q.stale ||
-            body.p_snapshot !== q.snapshot_hash ||
-            body.p_reviewed !== true ||
-            body.p_consent !== true
-          )
-            throw Error("commercial_review_required");
-          await promoteAssets(q.configuration, { id: q.demo_id });
-          await svc("assets_ready", {
-            claim_id: q.id,
-            snapshot: q.snapshot_hash,
-          });
-        }
         return asUser(token, "commercial_claim_complete", body);
       }
       if (path === "editor") {
@@ -124,52 +122,62 @@ export function commercialController({
         });
         const a = await user(token);
         const s = await store.begin(d, "editor", a.id);
-        const link = new URL("/" + d.slug, origins.publicOrigin);
-        link.hash = new URLSearchParams({ editor: s.token }).toString();
-        return { url: link.href, expires_at: s.expires_at };
+        return {session:s, revision:d.revision, url: new URL("/"+d.slug,origins.publicOrigin).href};
       }
-      if (path === "publish") {
-        exact(body, ["id", "revision", "session"]);
-        const d = await asUser(token, "commercial_demo_edit_context", {
-          p_id: body.id,
-        });
-        const s = await store.session(body.session);
-        const a = await user(token);
-        if (
-          !s ||
-          s.source_id !== d.id ||
-          s.actor_id !== a.id ||
-          s.kind !== "editor"
-        )
-          throw Error("access_denied");
-        const cfg = await store.export(body.session, d);
-        return asUser(token, "commercial_demo_publish", {
-          p_id: d.id,
-          p_revision: body.revision,
-          p_config: cfg,
-        });
+      if (path === "editor-action") {
+        exact(body,["session","path","body"]);
+        const {s,d}=await demoDefinition(body.session,token);
+        if(s.kind!=="editor")throw Error("access_denied");
+        const data=body.body||{};
+        if(body.path==="restore")return store.restore(body.session,d);
+        if(body.path==="rpc") {
+          exact(data,["perspective","name","args"]);
+          if(!["company","consumer"].includes(data.perspective))throw Error("commercial_invalid");
+          return store.rpc(body.session,d,data.perspective,data.name,data.args||{});
+        }
+        if(body.path==="team") {exact(data,["person"]);return store.team(body.session,d,data.person);}
+        if(body.path==="end") {await store.end(body.session);return {ended:true};}
+        throw Error("demo_operation_denied");
+      }
+      if (["save","review","publish"].includes(path)) {
+        exact(body,["id","revision","session"]);
+        const {s,d}=await demoDefinition(body.session,token);
+        if(s.kind!=="editor"||d.id!==body.id)throw Error("access_denied");
+        const cfg=await store.export(body.session,d,{requireReady:path!=="save"});
+        if(path==="publish") {
+          await store.freeze(d.id,cfg);
+          return asUser(token,"commercial_demo_publish",{p_id:d.id,p_revision:body.revision,p_config:cfg});
+        }
+        return asUser(token,"commercial_demo_draft",{p_id:d.id,p_revision:body.revision,p_config:cfg,p_review:path==="review"});
+      }
+      if(path==="materialize") {
+        exact(body,["organization_id"]);
+        await asUser(token,"commercial_materialization_context",{p_org:body.organization_id});
+        return materialize(body.organization_id);
       }
       if (path === "invite") {
-        exact(body, ["id", "purpose"]);
-        const { secret, ...i } = await invitation(token, body.id, body.purpose);
+        exact(body, ["id", "purpose", "lead_id"]);
+        const { secret, ...i } = await invitation(token, body.id, body.purpose,body.lead_id);
         return i;
       }
       if (path === "preview") {
-        exact(body, ["demo_ids", "purpose"]);
+        exact(body, ["recipients", "purpose"]);
         if (!box) throw Error("commercial_encryption_required");
         if (
-          !Array.isArray(body.demo_ids) ||
-          body.demo_ids.length < 1 ||
-          body.demo_ids.length > maxBatch ||
-          new Set(body.demo_ids).size !== body.demo_ids.length
+          !Array.isArray(body.recipients) ||
+          body.recipients.length < 1 ||
+          body.recipients.length > maxBatch ||
+          new Set(body.recipients.map(x=>x.demo_id+":"+x.lead_id)).size !== body.recipients.length
         )
           throw Error("commercial_batch_invalid");
         const context = await asUser(token, "commercial_management", {});
         if (!context.can_send) throw Error("access_denied");
         const items = [],
           recipients = [];
-        for (const id of body.demo_ids) {
-          const i = await invitation(token, id, body.purpose);
+        for (const recipient of body.recipients) {
+          exact(recipient,["demo_id","lead_id"]);
+          const id=recipient.demo_id;
+          const i = await invitation(token, id, body.purpose,recipient.lead_id);
           const lead = context.contacts.find((l) => l.id === i.lead_id);
           if (!lead) throw Error("access_denied");
           if (
@@ -222,7 +230,7 @@ export function commercialController({
               const secret = box.open(sealed.sealed);
               if (secret.id !== delivery.invite_id)
                 throw Error("commercial_delivery_unavailable");
-              const e = await svc("mail_begin", { id: delivery.id });
+              const e = await asUser(token,"commercial_mail_begin", { p_id: delivery.id });
               if (e.cancelled) {
                 results.push({ id: delivery.id, state: "cancelled" });
                 continue;
@@ -312,18 +320,6 @@ export function commercialController({
       if (path === "team") {
         exact(body, ["person"]);
         return store.team(token, d, body.person);
-      }
-      if (path === "publish") {
-        exact(body, []);
-        if (s.kind !== "editor") throw Error("access_denied");
-        const config = await store.export(token, d);
-        return service("commercial_editor_publish", {
-          p_demo: d.id,
-          p_actor: s.actor_id,
-          p_generation: d.generation,
-          p_revision: d.revision,
-          p_config: config,
-        });
       }
       if (path === "end") {
         await store.end(token);

@@ -196,6 +196,7 @@ export function ActivateCompany() {
                     requested: "Solicitação em análise",
                     approved: "Vínculo aprovado",
                     rejected: "Não foi possível aprovar o vínculo",
+                    prepared: "Empresa preparada para contratação",
                     materialized: "Configuração vinculada",
                   } as any
                 )[claim.state]
@@ -210,10 +211,10 @@ export function ActivateCompany() {
             {claim.state === "rejected" && (
               <p>Entre em contato com a SYZIA para esclarecer seu vínculo.</p>
             )}
-            {claim.stale && (
+            {claim.stale && !claim.organization_id && (
               <p>A preparação mudou. Uma nova aprovação será necessária.</p>
             )}
-            {claim.state === "materialized" ? (
+            {["prepared","materialized"].includes(claim.state) ? (
               <Link to={"/painel/" + claim.organization_id + "/assinatura"}>
                 Continuar na empresa preparada
               </Link>
@@ -232,7 +233,7 @@ export function ActivateCompany() {
                 <ConfigurationReview configuration={claim.configuration} />
                 <p>
                   Template: {claim.configuration?.template}. A configuração será
-                  importada como rascunho, sem publicação automática. Clientes,
+                  importada após a confirmação válida da assinatura, sem publicação automática. Clientes,
                   equipe, atendimentos, reservas e histórico demonstrativo não
                   serão transferidos.
                 </p>

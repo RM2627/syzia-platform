@@ -1,7 +1,7 @@
 {
   "name": "atendimento-compartilhado-fundacao",
   "version": "0.8.0",
-  "description": "SYZIA — produto cumulativo com identidades independentes e experiência empresarial",
+  "description": "SYZIA \u2014 produto cumulativo com identidades independentes e experi\u00eancia empresarial",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "tsc --noEmit && vite build",
@@ -148,7 +148,9 @@
     "demo:dev": "vite --mode demo --host 127.0.0.1",
     "demo:initialize": "node scripts/commercial/bootstrap-demo.mjs",
     "test:commercial:054": "node --experimental-strip-types --test --test-concurrency=1 tests/commercial-implementation/*.test.mjs",
-    "test:commercial:regression": "node scripts/commercial/regression-local.mjs"
+    "test:commercial:regression": "node scripts/commercial/regression-local.mjs",
+    "test:commercial:055": "node --test --test-concurrency=1 tests/commercial-055/*.test.mjs",
+    "test:commercial:055:browser": "playwright test --config=playwright.commercial055.config.ts"
   },
   "keywords": [],
   "author": "",

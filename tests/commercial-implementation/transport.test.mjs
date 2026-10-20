@@ -235,9 +235,9 @@ test("X02 approved image promotion verifies hash and MIME before touching operat
         ],
       },
     };
-  const r = await promote(config, { id: "demo-id" });
+  const r = await promote(config, { id: "demo-id", organization_id:"05500000-0000-4000-8000-000000000001",claim_id:"05500000-0000-4000-8000-000000000002" });
   assert.equal(uploads, 1);
-  assert.equal(r.tables.company_media[0].object_path, "private/path");
+  assert.equal(r.tables.company_media[0].object_path, "05500000-0000-4000-8000-000000000001/commercial/05500000-0000-4000-8000-000000000002/"+hash+".png");
   assert.equal(config.tables.company_media[0].object_path, "private/path");
   await assert.rejects(
     promote(
