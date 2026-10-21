@@ -469,7 +469,19 @@ export function createDemoStore(
           [args.p_code],
         );
         if (org !== session.organization_id) throw Error("demo_scope_denied");
-        await c.query("set local role service_role");
+        // The Neon connection owner cannot SET ROLE service_role. The media
+        // RPCs are SECURITY DEFINER and enforce their own tenant authorization.
+        // Bind the verified demo actor to this transaction before invoking them.
+        const actor = args.p_user;
+        if (name !== "consumer_gateway_public_media") {
+          if (actor !== session.manager_id && actor !== session.consumer_id)
+            throw Error("demo_scope_denied");
+          if (name.endsWith("company_media") && actor !== session.manager_id)
+            throw Error("demo_scope_denied");
+          await c.query("select set_config('request.jwt.claims',$1,true)", [
+            JSON.stringify({ sub: actor, is_anonymous: actor === session.consumer_id }),
+          ]);
+        }
         return call(c, name, args);
       });
     },
