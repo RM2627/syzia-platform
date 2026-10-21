@@ -1,0 +1,95 @@
+{
+  "source_commit": "ba6546816a0dc1cf1fb6e9333851974b6fea1674",
+  "base_manifest_sha256": "30cb99d09f2608fb92d0a13a6f8d766e14cb669b3fcefcfb691602bb75cdb040",
+  "transitions": {
+    "scripts/commercial/browser-fixture-055.mjs": {
+      "before": [
+        "615bf76b0089fba7caa318cfcbc6f635b6b60f1bfae131c686c3fb20f8f030fb"
+      ],
+      "after": "f5c35b07cfe6686b6e9a1d6a05d385474a587d60c0afebdb9d2149080d18ef85",
+      "text": true
+    },
+    "src/access/EnterpriseAccess.tsx": {
+      "before": [
+        "2b93fc67a74ae704c18c54490e7d84d8b488002babf21144a6c1fe7f29b801d8"
+      ],
+      "after": "11d18d56620c793f71a4c7534235f447229d18fcece99f453091a661885ac49e",
+      "text": true
+    },
+    "src/platform-commercial/Activation.tsx": {
+      "before": [
+        "f289f401dec3e9e1a1ec4ebab17e3705616f8bcc7b46f6143f648ec80864aa63"
+      ],
+      "after": "9a84d1ecdc0910c15d500393a35d58f803ae50bd845ca4d23dccecc8d553cc4d",
+      "text": true
+    },
+    "src/platform-commercial/Interested.tsx": {
+      "before": [
+        "aef8d0be84b1ff45a27eca559c3f0faa4b9b9cca42c2b7a153073ad4a49ac387"
+      ],
+      "after": "d6155c72c16f785b84ab5f96b0533606fd5d5ea9d10a67c95eef0460bd900d89",
+      "text": true
+    },
+    "src/platform-commercial/Management.tsx": {
+      "before": [
+        "bf4d4bdf5dac0f630b776aa76993cb2274686b5bfc39cde358d18d08f79f478a"
+      ],
+      "after": "03321a03a002ee0d9ed450d7051a5c84d8b831559acd21a8311da606a6c9aab9",
+      "text": true
+    },
+    "src/platform-commercial/policy.ts": {
+      "before": [
+        "5fadaafea64d0119f219a500600af676ed574b03ddbe55481bb7b146acba87bc"
+      ],
+      "after": "751c758c9d2c25e8a399f4b65d12c80ae903016b537117ddb24ce11956c62221",
+      "text": true
+    },
+    "tests/commercial-055/integrity.test.mjs": {
+      "before": [
+        "12a6e71875d39b624f5a497fffb2e707257324906932a15d75dc31c03c06af9a"
+      ],
+      "after": "4684bd79ea03a64e8fb676d8f413fd6eef1a3971f871f10ed5e51a4b64c8537c",
+      "text": true
+    },
+    "tests/commercial-implementation/control.test.mjs": {
+      "before": [
+        "f018e6bb099adec1bbc0a6c56b07398e9c2e8f0b8d1cfa71ee8a3c4f5ae2ba22"
+      ],
+      "after": "b66367e374bf8e41670ae0ca014f11c8efad360876ce0c19b5402044c0514f65",
+      "text": true
+    },
+    "tests/support/commercial055-integrity.mjs": {
+      "before": [
+        "9a57745f09465b5f64f9fe5d0e368dc0d8682b4f51a2f6db07823246e0a534df"
+      ],
+      "after": "d4919cef8482fe41031f4cae001b933d7a75f4273dcc7110e986040ccac44152",
+      "text": true
+    }
+  },
+  "added": {
+    "src/platform-commercial/InvitationPreparation.tsx": {
+      "text": true,
+      "sha256": "45d8677e2a4aa7836f0e07486705464958d22da788b76129b968e58975e8338e"
+    },
+    "supabase/migrations/202610210056_commercial_preregistration.sql": {
+      "text": true,
+      "sha256": "809e0962427d0eb0f24e6fe4adc010e007fcb22da79e51fe3fdbabfd1f745cbd"
+    },
+    "playwright.commercial056.config.ts": {
+      "text": true,
+      "sha256": "b61562bd686e361599a8e5a17c82e29948688f4a6b463635377c1dcbea5e071b"
+    },
+    "tests/demo-browser/commercial056.spec.ts": {
+      "text": true,
+      "sha256": "b33a277f1c05731e832970fd884102b27843ccea0320fc268a967f1b542c5038"
+    },
+    "tests/commercial-056/preregistration.test.mjs": {
+      "text": true,
+      "sha256": "e0b9f63143e1f23828a23744881e2102b9875954089a90da8b8f92f680438bcc"
+    },
+    "tests/commercial-056/integrity.test.mjs": {
+      "text": true,
+      "sha256": "fd49bf50870ea7318667195d98b0e17512d49837629c548af6adb5b374edd3a9"
+    }
+  }
+}

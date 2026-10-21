@@ -1,3 +1,4 @@
+import {commercial056ExpectedHash,assertCommercial056File} from './commercial056-integrity.mjs';
 // Explicit additive 055 transitions. Repository representation checks only:
 // never normalize financial snapshots, HMAC, tokens, legal content or asset bytes.
 import assert from 'node:assert/strict';
@@ -24,11 +25,11 @@ const baselineText=lf(readFileSync(new URL('docs/syzia-055/base-61fa6d2.json',ro
 assert.equal(sha(baselineText),'d88d73d8ceb2fe1e6d187e062324201562af79e7cb33b4798aa6ac2ef0d3b288','055 provenance changed');
 export const commercial055Base=JSON.parse(baselineText);
 export function commercial055ExpectedHash(path,expected){
- const r=commercial055Manifest.transitions[path];if(!r)return expected;
- assert.ok(r.before.includes(expected),'055 unexpected predecessor: '+path);return hf01.transitions[path]?.after||r.after;
+ const r=commercial055Manifest.transitions[path];if(!r)return commercial056ExpectedHash(path,expected);
+ assert.ok(r.before.includes(expected),'055 unexpected predecessor: '+path);return commercial056ExpectedHash(path,hf01.transitions[path]?.after||r.after);
 }
 export function assertCommercial055File(path,bytes,expected){
- const r=commercial055Manifest.transitions[path];if(!r)return false;
+ const r=commercial055Manifest.transitions[path];if(!r)return assertCommercial056File(path,bytes,expected);
  const h=commercial055ExpectedHash(path,expected);assert.equal(sha(r.text?lf(bytes):bytes),h,'integrity mismatch: '+path);return true;
 }
 export function verifyCommercial055(){
@@ -38,7 +39,7 @@ export function verifyCommercial055(){
   if(sha(b)!==r.sha256){assert.ok(r.sha256_lf,'byte-exact mismatch: '+p);assert.equal(sha(lf(b)),r.sha256_lf,'integrity mismatch: '+p);}
  }
  for(const [p,r]of Object.entries(commercial055Manifest.added)){
-  const b=readFileSync(new URL(p,root));assert.equal(sha(r.text?lf(b):b),r.sha256,'055 new source mismatch: '+p);
+  const b=readFileSync(new URL(p,root));if(assertCommercial056File(p,b,r.sha256))continue;assert.equal(sha(r.text?lf(b):b),r.sha256,'055 new source mismatch: '+p);
  }
  for(const [p,r]of Object.entries(hf01.added)){
   const b=readFileSync(new URL(p,root));assert.equal(sha(r.text?lf(b):b),r.sha256,'HF01 new source mismatch: '+p);

@@ -32,6 +32,7 @@ export const manualStages = [
 ];
 export function eligibleContact(
   contact: {
+    email?: string | null;
     stage: string;
     suppressed: boolean;
     authorizations: {
@@ -45,6 +46,7 @@ export function eligibleContact(
 ) {
   return Boolean(
     contact &&
+    Boolean(contact.email && /^[^\s@<>,;:()\[\]\\"]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(contact.email)) &&
     !contact.suppressed &&
     !["not_interested", "archived"].includes(contact.stage) &&
     contact.authorizations.some(

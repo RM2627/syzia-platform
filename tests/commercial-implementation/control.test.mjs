@@ -37,6 +37,7 @@ before(async () => {
     ),
   );
   await c.db.exec(await readFile("supabase/migrations/202610200055_commercial_versions.sql","utf8"));
+  await c.db.exec(await readFile("supabase/migrations/202610210056_commercial_preregistration.sql", "utf8"));
   ctl = commercialController({
     asUser: c.asUser,
     service: c.service,

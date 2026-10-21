@@ -1,3 +1,4 @@
+import { InvitationPreparation } from "./InvitationPreparation";
 import {PreparationEditor} from './PreparationEditor';
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
@@ -32,8 +33,10 @@ export function Management() {
     setPreview(null);
     setSelected([]);
     setEditor(null);
+    setLink("");
   }, [section]);
   async function act(fn: () => Promise<void>) {
+    if (busy) return;
     setBusy(true);
     setError("");
     setNotice("");
@@ -73,6 +76,12 @@ export function Management() {
         purpose,
       ),
   );
+  const recipientEmails = new Set<string>();
+  const uniqueEligible = eligible.filter((d: any) => {
+    const email = data.contacts.find((c: any) => c.id === d.lead_id).email.toLowerCase();
+    if (recipientEmails.has(email)) return false;
+    recipientEmails.add(email); return true;
+  });
   const titles: Record<string, string> = {
     demonstracoes: "Demonstrações",
     templates: "Biblioteca de templates",
@@ -239,7 +248,7 @@ export function Management() {
                 </p>
                 <p>/{d.slug}</p>
                 {d.state==='available'&&import.meta.env.VITE_COMMERCIAL_DEMO_ORIGIN&&<CopyLink url={(import.meta.env.VITE_COMMERCIAL_DEMO_ORIGIN||'').replace(/\/$/,'')+'/'+d.slug}/>}
-                {data.can_manage&&<label>Interessado para vincular ou convidar<select value={leadSelection[d.id]||''} onChange={e=>{const id=e.target.value;setLeadSelection(x=>({...x,[d.id]:id}));if(id)void act(async()=>{await rpc('commercial_demo_link',{p_demo:d.id,p_lead:id});});}}><option value="">Selecione quando necessário</option>{data.contacts.map((c:any)=><option key={c.id} value={c.id}>{c.company} · {c.name}</option>)}</select></label>}
+                {data.can_manage&&<label>Interessado para vincular ou convidar<select value={leadSelection[d.id]||''} onChange={e=>{const id=e.target.value;setLeadSelection(x=>({...x,[d.id]:id}));if(id)void act(async()=>{await rpc('commercial_demo_link',{p_demo:d.id,p_lead:id});});}}><option value="">Selecione quando necessário</option>{data.contacts.map((c:any)=><option key={c.id} value={c.id}>{c.company || c.name}{c.company ? ` · ${c.name}` : ""}</option>)}</select></label>}
                 <p>{(data.links||[]).filter((l:any)=>l.demo_id===d.id).length} interessado(s) vinculado(s)</p>
                 <div className="button-row">
                   {data.can_manage && (
@@ -339,7 +348,7 @@ export function Management() {
       {section === "convites" && (
         <>
           <p>
-            Selecione os interessados autorizados. Cada convite utiliza seu
+            Os interessados vinculados às demonstrações aparecem aqui, mesmo com dados pendentes. Vincular não gera nem envia convites. Selecione os interessados autorizados. Cada convite utiliza seu
             próprio link e nenhum destinatário vê o endereço dos demais.
           </p>
           <div className="commercial-fields">
@@ -349,6 +358,7 @@ export function Management() {
                 value={purpose}
                 onChange={(e) => {
                   setPurpose(e.target.value);
+                  setLink("");
                   setSelected([]);
                   setPreview(null);
                 }}
@@ -363,6 +373,7 @@ export function Management() {
                 value={filter}
                 onChange={(e) => {
                   setFilter(e.target.value);
+                  setSelected([]);
                   setPreview(null);
                 }}
               />
@@ -372,23 +383,11 @@ export function Management() {
             <button
               disabled={!data.can_send || busy}
               onClick={() => {
-                const emails = new Set();
-                setSelected(
-                  eligible
-                    .filter((d: any) => {
-                      const email = data.contacts
-                        .find((c: any) => c.id === d.lead_id)
-                        .email.toLowerCase();
-                      if (emails.has(email)) return false;
-                      emails.add(email);
-                      return true;
-                    })
-                    .map((d: any) => d.id),
-                );
+                setSelected(uniqueEligible.map((d: any) => d.id));
                 setPreview(null);
               }}
             >
-              Selecionar todos os elegíveis desta lista ({eligible.length})
+              Selecionar todos os elegíveis desta lista ({uniqueEligible.length})
             </button>
             <button
               onClick={() => {
@@ -406,36 +405,47 @@ export function Management() {
             </button>
           </div>
           <div className="commercial-cards">
-            {eligible.map((d: any) => {
+            {demos.map((d: any) => {
               const c = data.contacts.find((c: any) => c.id === d.lead_id);
+              const ready = eligible.some((x: any) => x.id === d.id);
+              const duplicate = selected.some(id => {
+                const row = demos.find((x: any) => x.id === id);
+                const other = data.contacts.find((x: any) => x.id === row?.lead_id);
+                return id !== d.id && c?.email && other?.email?.toLowerCase() === c.email.toLowerCase();
+              });
+              const previous = data.invites.filter((i: any) => i.demo_id === d.demo_id && i.lead_id === d.lead_id && i.purpose === purpose);
               return (
-                <article className="card" key={d.id}>
+                <article className="card" key={d.id} aria-label={`${d.name} · ${c.name}`}>
                   <label>
-                    <input
-                      type="checkbox"
-                      checked={selected.includes(d.id)}
-                      onChange={(e) => {
-                        setSelected(
-                          e.target.checked
-                            ? [...selected, d.id]
-                            : selected.filter((x) => x !== d.id),
-                        );
-                        setPreview(null);
-                      }}
-                    />
+                    <input type="checkbox" checked={selected.includes(d.id)} disabled={!data.can_send || busy || !ready || !!duplicate}
+                      onChange={e => { setSelected(e.target.checked ? [...selected, d.id] : selected.filter(x => x !== d.id)); setPreview(null); }} />
                     {d.name} · {c.name}
                   </label>
-                  <p>{c.email}</p>
-                  <button
-                    disabled={!data.can_send || busy}
-                    onClick={() => void makePreview([d.id])}
-                  >
-                    Revisar envio individual
-                  </button>
+                  <p>{c.email || "E-mail ainda não informado"}</p>
+                  <p>{d.published_version_id ? "Convites vinculados à versão publicada atual." : "Demonstração ainda sem versão publicada."}</p>
+                  <p>{previous.length} convite(s) anterior(es) para esta finalidade. Consulte os estados no histórico abaixo.</p>
+                  {!ready && <p role="status">{c.suppressed ? "Este endereço está descadastrado para comunicações comerciais." :
+                    !c.email ? "Inclua o e-mail e registre a autorização antes de preparar o convite." :
+                    d.state !== "available" || new Date(d.expires_at).getTime() <= Date.now() ? "A demonstração precisa estar publicada e dentro da validade." :
+                    purpose === "activation" && !["wants_trial", "activation_sent", "registration_started"].includes(c.stage) ? "Registre o interesse real em testar e a autorização para ativação." :
+                    ["not_interested", "archived"].includes(c.stage) ? "A etapa atual impede convites. Revise o cadastro apenas se houver um novo contato real." :
+                    "Falta autorização vigente para esta finalidade."}</p>}
+                  {duplicate && <p>Este endereço já está selecionado em outro vínculo.</p>}
+                  <div className="button-row">
+                    <button disabled={!data.can_manage || busy || !ready} onClick={() => void act(async () => {
+                      const r = await commercialApi("invite", { id: d.demo_id, lead_id: d.lead_id, purpose });
+                      setLink(r.url); setNotice(`Link individual gerado para ${c.name}. Nenhum e-mail foi enviado.`);
+                    })}>Gerar link individual</button>
+                    <button disabled={!data.can_send || busy || !ready} onClick={() => void makePreview([d.id])}>Revisar envio individual</button>
+                  </div>
+                  {data.can_manage && <InvitationPreparation key={c.id + ":" + c.revision + ":" + purpose} contact={c} purpose={purpose} busy={busy} act={async fn => {
+                    await act(async () => { await fn(); setPreview(null); setSelected([]); setLink(""); setNotice("Contato atualizado. Confira a elegibilidade antes de continuar."); });
+                  }} />}
                 </article>
               );
             })}
           </div>
+          {!demos.length && <p>Nenhum interessado vinculado no filtro atual. Vincule-o na aba Demonstrações.</p>}
           {!eligible.length && (
             <p>Nenhum contato elegível para esta finalidade no filtro atual.</p>
           )}
@@ -455,7 +465,7 @@ export function Management() {
                       onClick={() => {
                         const ids = preview.recipients
                           .filter((x: any) => x.lead_id !== r.lead_id)
-                          .map((x: any) => x.demo_id);
+                          .map((x: any) => x.demo_id + ":" + x.lead_id);
                         if (ids.length) void makePreview(ids);
                         else setPreview(null);
                       }}
@@ -476,6 +486,7 @@ export function Management() {
                       confirmed: true,
                     });
                     setPreview(null);
+                    setSelected([]);
                     setNotice(
                       `${r.deliveries.length} envio(s) autorizado(s). O processamento ocorre individualmente; atualize o histórico para conferir os resultados.`,
                     );
@@ -515,7 +526,7 @@ export function Management() {
                     <td>
                       {
                         data.contacts.find((c: any) => c.id === d.lead_id)
-                          ?.company
+                          ?.name
                       }
                     </td>
                     <td>{new Date(d.created_at).toLocaleString("pt-BR")}</td>
@@ -543,11 +554,11 @@ export function Management() {
           {data.invites.map((i: any) => (
             <div className="card" key={i.id}>
               <p>
-                {data.contacts.find((c: any) => c.id === i.lead_id)?.company} ·{" "}
+                {data.contacts.find((c: any) => c.id === i.lead_id)?.name} ·{" "}
                 {i.purpose === "activation" ? "Ativação" : "Demonstração"} ·{" "}
                 {i.revoked_at
                   ? "Revogado"
-                  : new Date(i.expires_at).toLocaleString("pt-BR")}
+                  : new Date(i.expires_at).getTime() <= Date.now() ? "Expirado" : "Válido até " + new Date(i.expires_at).toLocaleString("pt-BR")}
               </p>
               <button
                 disabled={busy || !!i.revoked_at}

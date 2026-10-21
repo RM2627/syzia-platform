@@ -80,6 +80,11 @@ export function ActivateCompany() {
     [reviewed, setReviewed] = useState(false),
     [continueSetup, setContinueSetup] = useState(false);
   async function load() {
+    setError("");
+    setInvitation(undefined);
+    setClaim(undefined);
+    setReviewed(false);
+    setContinueSetup(false);
     const i = await invitationApi("invite", { invitation: token });
     if (i.purpose !== "activation") throw Error("commercial_invite_invalid");
     setInvitation(i);
@@ -97,11 +102,11 @@ export function ActivateCompany() {
         identityOnly
         onIdentityReady={() => {
           setIdentity(false);
-          void load();
+          void load().catch((e) => setError(commercialError(e)));
         }}
       />
     );
-  if (continueSetup && claim?.state === "approved" && reviewed)
+  if (continueSetup && claim?.state === "approved" && !claim.stale && reviewed)
     return (
       <SelfService
         activation={{
@@ -131,7 +136,7 @@ export function ActivateCompany() {
             <button onClick={() => setIdentity(true)}>
               Criar identidade pela SYZIA
             </button>
-            <Link to="/entrar">Já tenho conta · Entrar</Link>
+            <Link to="/entrar?retorno=convite-comercial">Já tenho conta · Entrar</Link>
             <p>
               Depois de entrar ou confirmar seu e-mail, retorne a este convite
               para continuar.

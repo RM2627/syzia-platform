@@ -6,12 +6,12 @@ type Contact = {
   id: string;
   revision: number;
   name: string;
-  company: string;
+  company: string | null;
   segment: string;
   instagram: string;
-  email: string;
+  email: string | null;
   phone: string | null;
-  first_contact: string;
+  first_contact: string | null;
   stage: string;
   display_stage?: string;
   notes: string;
@@ -33,7 +33,7 @@ const empty = {
   instagram: "",
   email: "",
   phone: "",
-  first_contact: new Date().toISOString().slice(0, 10),
+  first_contact: "",
   stage: "prospect",
   notes: "",
 };
@@ -163,7 +163,7 @@ export function Interested() {
           <div className="commercial-contact-list">
             {contacts.map((c) => (
               <article className="card" key={c.id}>
-                <h2>{c.company}</h2>
+                <h2>{c.company || c.name}</h2>
                 <p>
                   {c.name} · {c.segment || "Segmento não informado"}
                 </p>
@@ -269,13 +269,19 @@ export function Interested() {
             }}
           >
             <div className="commercial-fields">
+              <label>Nome do interessado ou da empresa<input name="name" required minLength={2} maxLength={120} defaultValue={editing.name || ""} /></label>
+              <label>E-mail (opcional)<input name="email" type="email" maxLength={254} defaultValue={editing.email || ""} /></label>
+            </div>
+            <p>Você pode completar os dados e preparar os convites depois. Salvar não registra interesse nem autoriza envios.</p>
+            <details><summary>Informações complementares (opcional)</summary>
+            <div className="commercial-fields">
               {(
                 [
-                  ["name", "Responsável", "text", 120],
+
                   ["company", "Empresa", "text", 160],
                   ["segment", "Segmento", "text", 120],
                   ["instagram", "Instagram", "text", 31],
-                  ["email", "E-mail de contato", "email", 254],
+
                   ["phone", "WhatsApp (opcional)", "tel", 40],
                   ["first_contact", "Primeiro contato", "date", 20],
                 ] as const
@@ -286,12 +292,7 @@ export function Interested() {
                     name={id}
                     type={type}
                     defaultValue={String(editing[id] || "")}
-                    required={[
-                      "name",
-                      "company",
-                      "email",
-                      "first_contact",
-                    ].includes(id)}
+
                     maxLength={max}
                     pattern={
                       id === "instagram" ? "@[A-Za-z0-9._]{1,30}" : undefined
@@ -337,6 +338,7 @@ export function Interested() {
               Não registre documentos, senhas ou dados financeiros nas
               observações.
             </p>
+            </details>
             <div className="button-row">
               <button disabled={busy}>Salvar cadastro</button>
               <button
@@ -350,6 +352,7 @@ export function Interested() {
           </form>
           {editing.id && (
             <>
+              <details><summary>Registrar contato ou resposta (opcional)</summary>
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
@@ -378,60 +381,8 @@ export function Interested() {
                 </label>
                 <button disabled={busy}>Adicionar ao histórico</button>
               </form>
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  const f = new FormData(e.currentTarget);
-                  void act(async () => {
-                    await rpc("commercial_contact_authorize", {
-                      p_id: editing.id,
-                      p_purpose: f.get("purpose"),
-                      p_authorized: f.get("authorized") === "on",
-                      p_notice: f.get("notice"),
-                      p_evidence: f.get("evidence"),
-                      p_expires: new Date(
-                        String(f.get("expires")),
-                      ).toISOString(),
-                    });
-                    setNotice(
-                      "Autorização registrada para a finalidade informada.",
-                    );
-                  });
-                }}
-              >
-                <h3>Autorização de contato</h3>
-                <label>
-                  Finalidade
-                  <select name="purpose">
-                    <option value="demonstration">
-                      Convite de demonstração
-                    </option>
-                    <option value="activation">Convite de ativação</option>
-                  </select>
-                </label>
-                <label>
-                  Versão do aviso informado
-                  <input name="notice" required maxLength={80} />
-                </label>
-                <label>
-                  Evidência da autorização
-                  <textarea
-                    name="evidence"
-                    required
-                    minLength={10}
-                    maxLength={500}
-                  />
-                </label>
-                <label>
-                  Válida até
-                  <input name="expires" type="datetime-local" required />
-                </label>
-                <label>
-                  <input type="checkbox" name="authorized" /> O contato
-                  autorizou esta finalidade
-                </label>
-                <button disabled={busy}>Registrar autorização</button>
-              </form>
+              </details>
+              <p>A autorização para convites é registrada na aba Convites, antes de gerar links ou preparar envios.</p>
               <details>
                 <summary>Descadastramento de comunicações</summary>
                 <p>
@@ -440,7 +391,7 @@ export function Interested() {
                   comunicações essenciais do serviço.
                 </p>
                 <button
-                  disabled={busy}
+                  disabled={busy || !editing.email}
                   onClick={() =>
                     void act(async () => {
                       await rpc("commercial_contact_suppress", {

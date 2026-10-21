@@ -179,7 +179,9 @@ export function EnterpriseLogin() {
       });
       const result = await supabase!.auth.setSession(data.session);
       if (result.error) throw result.error;
-      if (
+      if (!data.identity_setup_required && new URLSearchParams(location.search).get("retorno") === "convite-comercial" && sessionStorage.getItem("syzia-commercial-invitation"))
+        window.location.assign("/ativar-empresa");
+      else if (
         data.identity_setup_required ||
         new URLSearchParams(location.search).get("retorno") === "cadastro"
       )
