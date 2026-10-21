@@ -1,3 +1,4 @@
+import {hf056Expected,assertHF056File} from './commercial056-hf01-integrity.mjs';
 // 056 is an additive, path-specific transition from the official Git source.
 // This never accepts an arbitrary predecessor or normalizes runtime data.
 import assert from 'node:assert/strict';
@@ -11,11 +12,11 @@ assert.equal(sha056(text),'8b1aa78b422c178ccd7d29000ea9b76aa159faa84fb2745789f9e
 export const commercial056=JSON.parse(text);
 assert.equal(commercial056.source_commit,'ba6546816a0dc1cf1fb6e9333851974b6fea1674');
 export function commercial056ExpectedHash(path,expected){
- const r=commercial056.transitions[path];if(!r)return expected;
- assert.ok(r.before.includes(expected),'056 unexpected predecessor: '+path);return r.after;
+ const r=commercial056.transitions[path];if(!r)return hf056Expected(path,expected);
+ assert.ok(r.before.includes(expected),'056 unexpected predecessor: '+path);return hf056Expected(path,r.after);
 }
 export function assertCommercial056File(path,bytes,expected){
- const r=commercial056.transitions[path];if(!r)return false;
+ const r=commercial056.transitions[path];if(!r)return assertHF056File(path,bytes,expected);
  const h=commercial056ExpectedHash(path,expected);
  assert.equal(sha056(r.text?lf056(bytes):bytes),h,'056 integrity mismatch: '+path);return true;
 }

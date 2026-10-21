@@ -1,3 +1,4 @@
+import {assertHF056File} from '../support/commercial056-hf01-integrity.mjs';
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -62,12 +63,14 @@ test("056-I02 authorized source rejects mutations, wrong predecessors and lone C
   }
 });
 test("056-I03 new migration, component and tests are pinned; no billing/backend service transition", () => {
-  for (const [p, r] of Object.entries(commercial056.added))
+  for (const [p, r] of Object.entries(commercial056.added)) {
+    if(assertHF056File(p,readFileSync(p),r.sha256))continue;
     assert.equal(
       sha056(r.text ? lf056(readFileSync(p)) : readFileSync(p)),
       r.sha256,
       p,
     );
+  }
   for (const p of Object.keys(commercial056.transitions))
     assert.doesNotMatch(p, /^(server\/|src\/billing\/|supabase\/migrations\/)/);
 });

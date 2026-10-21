@@ -96,13 +96,12 @@ export function Management() {
     });
   }
   return (
-    <div className="commercial-management">
+    <div className={"commercial-management" + (section === "convites" ? " commercial-invitations" : "")}>
       <header>
         <p className="eyebrow">GESTÃO COMERCIAL</p>
         <h1>{titles[section] || "Gestão Comercial"}</h1>
         <p>
-          Preparação e relacionamento comercial, separados da operação das
-          empresas assinantes.
+          {section === "convites" ? "Escolha os destinatários e compartilhe cada experiência com um link exclusivo." : "Preparação e relacionamento comercial, separados da operação das empresas assinantes."}
         </p>
       </header>
       {error && (
@@ -115,7 +114,7 @@ export function Management() {
           {notice}
         </p>
       )}
-      <div className="commercial-metrics">
+      {section !== "convites" && <div className="commercial-metrics">
         <article>
           <strong>{data.contacts.length}</strong>
           <span>Interessados na carteira</span>
@@ -136,7 +135,7 @@ export function Management() {
           </strong>
           <span>Assinantes com período pago confirmado</span>
         </article>
-      </div>
+      </div>}
       {section === "demonstracoes" && (
         <>
           <div className="button-row">
@@ -347,10 +346,7 @@ export function Management() {
       )}
       {section === "convites" && (
         <>
-          <p>
-            Os interessados vinculados às demonstrações aparecem aqui, mesmo com dados pendentes. Vincular não gera nem envia convites. Selecione os interessados autorizados. Cada convite utiliza seu
-            próprio link e nenhum destinatário vê o endereço dos demais.
-          </p>
+          <p className="invitation-guidance">Cadastro e seleção não autorizam contato. Só os destinatários elegíveis podem receber links ou e-mails.</p>
           <div className="commercial-fields">
             <label>
               Finalidade
@@ -379,9 +375,9 @@ export function Management() {
               />
             </label>
           </div>
-          <div className="button-row">
+          <div className="button-row invitation-toolbar" aria-label="Seleção de destinatários">
             <button
-              disabled={!data.can_send || busy}
+              disabled={!data.can_send || busy || !uniqueEligible.length}
               onClick={() => {
                 setSelected(uniqueEligible.map((d: any) => d.id));
                 setPreview(null);
@@ -390,6 +386,7 @@ export function Management() {
               Selecionar todos os elegíveis desta lista ({uniqueEligible.length})
             </button>
             <button
+              disabled={busy || !selected.length}
               onClick={() => {
                 setSelected([]);
                 setPreview(null);
@@ -401,7 +398,7 @@ export function Management() {
               disabled={!data.can_send || busy || !selected.length}
               onClick={() => void makePreview()}
             >
-              Revisar {selected.length} destinatários
+              Enviar selecionados ({selected.length})
             </button>
           </div>
           <div className="commercial-cards">
@@ -416,30 +413,30 @@ export function Management() {
               const previous = data.invites.filter((i: any) => i.demo_id === d.demo_id && i.lead_id === d.lead_id && i.purpose === purpose);
               return (
                 <article className="card" key={d.id} aria-label={`${d.name} · ${c.name}`}>
-                  <label>
+                  <label className="invitation-recipient">
                     <input type="checkbox" checked={selected.includes(d.id)} disabled={!data.can_send || busy || !ready || !!duplicate}
                       onChange={e => { setSelected(e.target.checked ? [...selected, d.id] : selected.filter(x => x !== d.id)); setPreview(null); }} />
-                    {d.name} · {c.name}
+                    <span><strong>{c.name}</strong><span className="invitation-company">{d.name}</span></span>
                   </label>
-                  <p>{c.email || "E-mail ainda não informado"}</p>
-                  <p>{d.published_version_id ? "Convites vinculados à versão publicada atual." : "Demonstração ainda sem versão publicada."}</p>
-                  <p>{previous.length} convite(s) anterior(es) para esta finalidade. Consulte os estados no histórico abaixo.</p>
-                  {!ready && <p role="status">{c.suppressed ? "Este endereço está descadastrado para comunicações comerciais." :
-                    !c.email ? "Inclua o e-mail e registre a autorização antes de preparar o convite." :
+                  {c.email && <p className="invitation-address">{c.email}</p>}
+                  <small className="invitation-meta">{previous.length} convite(s) anterior(es) · {d.published_version_id ? "Versão publicada" : "Sem versão publicada"}</small>
+                  <p className={"invitation-status" + (ready ? " is-ready" : "")}>{ready ? "Elegível para " + (purpose === "activation" ? "ativação" : "demonstração") : "Convite indisponível"}</p>
+                  {!ready && <p className="invitation-reason">{c.suppressed ? "Este endereço está descadastrado para comunicações comerciais." :
+                    !c.email ? "Adicione o e-mail. O cadastro do endereço não autoriza o envio." :
                     d.state !== "available" || new Date(d.expires_at).getTime() <= Date.now() ? "A demonstração precisa estar publicada e dentro da validade." :
-                    purpose === "activation" && !["wants_trial", "activation_sent", "registration_started"].includes(c.stage) ? "Registre o interesse real em testar e a autorização para ativação." :
+                    purpose === "activation" && !["wants_trial", "activation_sent", "registration_started"].includes(c.stage) ? "O interesse em testar ainda não está registrado. Atualize a etapa em Interessados apenas se essa manifestação tiver sido recebida." :
                     ["not_interested", "archived"].includes(c.stage) ? "A etapa atual impede convites. Revise o cadastro apenas se houver um novo contato real." :
-                    "Falta autorização vigente para esta finalidade."}</p>}
+                    "Sem autorização vigente registrada para esta finalidade. Novas autorizações não são registradas nesta tela; links e envios permanecem bloqueados até existir um registro válido."}</p>}
                   {duplicate && <p>Este endereço já está selecionado em outro vínculo.</p>}
                   <div className="button-row">
                     <button disabled={!data.can_manage || busy || !ready} onClick={() => void act(async () => {
                       const r = await commercialApi("invite", { id: d.demo_id, lead_id: d.lead_id, purpose });
                       setLink(r.url); setNotice(`Link individual gerado para ${c.name}. Nenhum e-mail foi enviado.`);
                     })}>Gerar link individual</button>
-                    <button disabled={!data.can_send || busy || !ready} onClick={() => void makePreview([d.id])}>Revisar envio individual</button>
+                    <button disabled={!data.can_send || busy || !ready} onClick={() => void makePreview([d.id])}>Enviar por e-mail</button>
                   </div>
-                  {data.can_manage && <InvitationPreparation key={c.id + ":" + c.revision + ":" + purpose} contact={c} purpose={purpose} busy={busy} act={async fn => {
-                    await act(async () => { await fn(); setPreview(null); setSelected([]); setLink(""); setNotice("Contato atualizado. Confira a elegibilidade antes de continuar."); });
+                  {data.can_manage && <InvitationPreparation key={c.id + ":" + c.revision + ":" + purpose} contact={c} busy={busy} act={async fn => {
+                    await act(async () => { await fn(); setPreview(null); setSelected([]); setLink(""); setNotice("E-mail adicionado. A autorização de contato continua sendo necessária."); });
                   }} />}
                 </article>
               );
@@ -500,7 +497,8 @@ export function Management() {
               </button>
             </section>
           )}
-          <h2>Histórico individual de envios</h2>
+          <details className="invitation-history">
+          <summary>Histórico de envios ({data.deliveries.length})</summary>
           <button
             disabled={busy}
             onClick={() =>
@@ -515,7 +513,7 @@ export function Management() {
             <table>
               <thead>
                 <tr>
-                  <th>Empresa</th>
+                  <th>Interessado</th>
                   <th>Data</th>
                   <th>Resultado</th>
                 </tr>
@@ -550,7 +548,10 @@ export function Management() {
               </tbody>
             </table>
           </div>
-          <h2>Convites emitidos</h2>
+          {!data.deliveries.length && <p>Nenhum envio registrado.</p>}
+          </details>
+          <details className="invitation-history">
+          <summary>Convites emitidos ({data.invites.length})</summary>
           {data.invites.map((i: any) => (
             <div className="card" key={i.id}>
               <p>
@@ -561,7 +562,7 @@ export function Management() {
                   : new Date(i.expires_at).getTime() <= Date.now() ? "Expirado" : "Válido até " + new Date(i.expires_at).toLocaleString("pt-BR")}
               </p>
               <button
-                disabled={busy || !!i.revoked_at}
+                disabled={!data.can_manage || busy || !!i.revoked_at}
                 onClick={() =>
                   void act(async () => {
                     await rpc("commercial_invite_revoke", { p_id: i.id });
@@ -572,6 +573,8 @@ export function Management() {
               </button>
             </div>
           ))}
+          {!data.invites.length && <p>Nenhum convite emitido.</p>}
+          </details>
         </>
       )}
       {section === "ativacoes" && (

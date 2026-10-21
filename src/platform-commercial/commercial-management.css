@@ -105,3 +105,122 @@
   outline: 3px solid #377fba;
   outline-offset: 3px;
 }
+
+/* 056-HF01: invitation-only layout; other commercial screens stay unchanged. */
+.commercial-invitations {
+  max-width: 1120px;
+}
+.commercial-invitations > header {
+  margin-bottom: 1.25rem;
+}
+.commercial-invitations .invitation-guidance {
+  font-size: .875rem;
+  margin: 0 0 1rem;
+}
+.commercial-invitations .commercial-fields {
+  grid-template-columns: minmax(180px, 1fr) minmax(220px, 2fr);
+  align-items: end;
+}
+.commercial-invitations .invitation-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem;
+  margin: 1rem 0;
+}
+.commercial-invitations .commercial-cards {
+  margin-bottom: 1.5rem;
+  align-items: stretch;
+}
+.commercial-invitations .commercial-cards > .card {
+  display: flex;
+  flex-direction: column;
+  gap: .65rem;
+  padding: 1.1rem;
+  margin: 0;
+}
+.commercial-invitations .commercial-cards p {
+  margin: 0;
+}
+.commercial-invitations .invitation-recipient {
+  display: flex;
+  align-items: flex-start;
+  gap: .65rem;
+  line-height: 1.4;
+}
+.commercial-invitations .invitation-recipient input[type="checkbox"] {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex: 0 0 1.1rem;
+  margin: .15rem 0 0;
+}
+.commercial-invitations .invitation-company {
+  display: block;
+  font-size: .875rem;
+  font-weight: 400;
+  margin-top: .15rem;
+}
+.commercial-invitations .invitation-meta,
+.commercial-invitations .invitation-reason {
+  font-size: .82rem;
+  line-height: 1.5;
+}
+.commercial-invitations .invitation-status {
+  align-self: flex-start;
+  border: 1px solid var(--line, #cfd8e3);
+  border-radius: .5rem;
+  padding: .2rem .5rem;
+  font-size: .8rem;
+  font-weight: 600;
+}
+.commercial-invitations .invitation-status.is-ready {
+  color: #14524c;
+  background: #e8f6f1;
+  border-color: #add8c8;
+}
+.commercial-invitations .commercial-cards .button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-top: auto;
+  padding-top: .4rem;
+}
+.commercial-invitations .invitation-email {
+  border-top: 1px solid var(--line, #cfd8e3);
+  padding-top: .75rem;
+  display: grid;
+  gap: .5rem;
+}
+.commercial-invitations .invitation-history {
+  border-top: 1px solid var(--line, #cfd8e3);
+  padding: 1rem 0;
+}
+.commercial-invitations summary {
+  cursor: pointer;
+  font-weight: 600;
+  margin-bottom: .75rem;
+}
+.commercial-invitations :is(input, select, summary):focus-visible {
+  outline: 3px solid #377fba;
+  outline-offset: 3px;
+}
+.commercial-invitations button {
+  white-space: normal;
+  min-height: 40px;
+}
+@media (max-width: 600px) {
+  .commercial-invitations .commercial-fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .commercial-invitations .invitation-toolbar,
+  .commercial-invitations .commercial-cards .button-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .commercial-invitations .commercial-table {
+    font-size: .82rem;
+  }
+  .commercial-invitations .commercial-table :is(th, td) {
+    padding: .5rem .3rem;
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "source_commit": "8f061f0002e4a7d7db54927628382686a1cb90f3",
+  "transitions": {
+    "src/platform-commercial/InvitationPreparation.tsx": {
+      "before": [
+        "45d8677e2a4aa7836f0e07486705464958d22da788b76129b968e58975e8338e"
+      ],
+      "after": "c69cd4d088a6f0fce0722997da8196b662a48b48eef0113ead54da0727ad200b",
+      "text": true
+    },
+    "src/platform-commercial/Management.tsx": {
+      "before": [
+        "03321a03a002ee0d9ed450d7051a5c84d8b831559acd21a8311da606a6c9aab9"
+      ],
+      "after": "71977f9b0b09381195bb626043ad2a2da480d302bc52407e8ed3d2bfc1ef438e",
+      "text": true
+    },
+    "src/platform-commercial/commercial-management.css": {
+      "before": [
+        "92ece9764d824f4b5ffa176d40ff5f620631053b8af7998e40af4eedda4e8483"
+      ],
+      "after": "58eef457cffd8af9ae824825ca7a4076712ead0a4fa82413c8d05290f02391f9",
+      "text": true
+    },
+    "tests/commercial-056/integrity.test.mjs": {
+      "before": [
+        "fd49bf50870ea7318667195d98b0e17512d49837629c548af6adb5b374edd3a9"
+      ],
+      "after": "082081fd47387b1d7aaa51191474a798c22f36cf515f69babab9be567601fe37",
+      "text": true
+    },
+    "tests/demo-browser/commercial056.spec.ts": {
+      "before": [
+        "b33a277f1c05731e832970fd884102b27843ccea0320fc268a967f1b542c5038"
+      ],
+      "after": "59bbd282b55b95a61875fd635886b2d3c1a0a4fc9768ffbb02d44d3b6f225149",
+      "text": true
+    },
+    "tests/support/commercial056-integrity.mjs": {
+      "before": [
+        "c90589582fb56324bc623439a0343001fb690ce6fd3a1d5c9dbfbeceaf87a144"
+      ],
+      "after": "e7749231ba75b7a11df65222dbe2008fbaaabe3622be25e243ab1069dc289456",
+      "text": true
+    }
+  }
+}
