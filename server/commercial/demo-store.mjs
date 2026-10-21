@@ -378,11 +378,28 @@ export function createDemoStore(
         });
         if (requireReady && !d.ready) throw Error("demo_configuration_not_ready");
         await c.query("reset role");
-        return validateConfiguration(
+        const configuration = validateConfiguration(
           await scalar(c, "select private.commercial_config_export($1)", [
             s.organization_id,
           ]),
         );
+        const tables = configuration.tables;
+        const referenced = new Set();
+        for (const branding of tables.company_branding || []) {
+          if (branding.logo_id) referenced.add(branding.logo_id);
+          if (branding.cover_id) referenced.add(branding.cover_id);
+        }
+        for (const item of tables.portfolio_items || [])
+          for (const id of item.media_ids || []) referenced.add(id);
+        for (const service of tables.services || [])
+          if (service.image_media_id) referenced.add(service.image_media_id);
+        const media = tables.company_media || [];
+        if (media.some((item) => item.state !== "ready" && referenced.has(item.id)))
+          throw Error("commercial_media_not_ready");
+        return {
+          ...configuration,
+          tables: { ...tables, company_media: media.filter((item) => item.state === "ready") },
+        };
       });
     },
     async team(token, definition, data) {
