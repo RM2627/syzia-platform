@@ -49,7 +49,30 @@ export function subscriptions({ gateway, service, asUser, auth }) {
       if (Object.hasOwn(b, "provider_modified_at"))
         await sql("validate_snapshot", id, { ...snapshot, lease });
       const checkedResource = p;
-      let operationDone = b.operation_state === "done" || b.operation === "checkout";
+      // HF02: incomplete changes must never generate a zero-price PUT.
+      const invalidChangeTarget =
+        b.operation === "change" &&
+        b.operation_state !== "done" &&
+        (!Number.isSafeInteger(b.target_amount) ||
+          ![4990, 8990, 14990].includes(b.target_amount) ||
+          !b.target_version ||
+          !b.target_code);
+
+      if (invalidChangeTarget) {
+        // No provider mutation. Recovery requires correlated audit, payment,
+        // lease and a freshly verified provider snapshot in one SQL transaction.
+        if (b.operation_state === "uncertain" && b.target_version == null &&
+            b.target_amount == null && b.target_code == null &&
+            b.target_requested_at == null && b.target_effective_at == null) {
+          return service("billing056_recover_completed_change", {
+            p_id: id, p_lease: lease, p_snapshot: snapshot,
+          });
+        }
+        fail("billing_reconciliation_required", 503);
+      }
+
+      let operationDone =
+        b.operation_state === "done" || b.operation === "checkout";
       const end = Math.max(Date.parse(b.paid_until) || 0, Date.parse(b.trial_end) || 0);
       const cancelDue = b.cancel_requested && end > 0 && end <= Date.now();
       if (cancelDue && !["canceled", "cancelled"].includes(p.status)) {
