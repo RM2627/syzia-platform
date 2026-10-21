@@ -6,6 +6,26 @@ import { createDemoStore } from "./demo-store.mjs";
 import { commercialController } from "./controller.mjs";
 import { createCommercialMailer } from "./mail.mjs";
 import { secretBox } from "./crypto.mjs";
+
+// Only fixed classifications are logged; never messages, details or identifiers.
+const recoveryCodes = new Set([
+  "42702", "42501", "42P01", "42883", "PGRST202", "PGRST301",
+  "57014", "55P03", "08006", "28P01", "ECONNREFUSED", "ETIMEDOUT",
+]);
+export async function commercialRecoveryCycle({ controller, store, log = (r) => console.warn(JSON.stringify(r)) }) {
+  try {
+    const results = await controller.reconcile();
+    if (results.some((x) => x.error)) log({ event: "commercial_reconciliation_pending", stage: "materialization_reconcile" });
+  } catch (error) {
+    log({ event: "commercial_reconciliation_unavailable", stage: "materialization_reconcile", code: recoveryCodes.has(error?.code) ? error.code : "unclassified" });
+  }
+  // Cleanup is independent; a failed operational RPC must not starve demo expiry.
+  try {
+    await store.cleanup();
+  } catch (error) {
+    log({ event: "commercial_reconciliation_unavailable", stage: "demo_cleanup", code: recoveryCodes.has(error?.code) ? error.code : "unclassified" });
+  }
+}
 export async function commercialRuntime(env = process.env) {
   if (env.COMMERCIAL_ENABLED !== "true") return null;
   const origins = demoOrigins(env);
@@ -118,10 +138,7 @@ export async function commercialRuntime(env = process.env) {
   let recovery = null;
   const timer = setInterval(() => {
     if(recovery) return;
-    recovery=(async()=>{
-      const results=await controller.reconcile();await store.cleanup();
-      if(results.some(x=>x.error))console.warn(JSON.stringify({event:'commercial_reconciliation_pending'}));
-    })().catch(()=>console.warn(JSON.stringify({event:'commercial_reconciliation_unavailable'}))).finally(()=>{recovery=null;});
+    recovery=commercialRecoveryCycle({controller,store}).finally(()=>{recovery=null;});
   },60000);
   timer.unref();
   return {

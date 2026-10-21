@@ -1,0 +1,30 @@
+{
+  "source_commit": "ac0aa2ac0cb869beb412a994d20323712df9936d",
+  "scope": "HF01: media diagnostics and independent recovery diagnostics; no media authorization changes",
+  "transitions": {
+    "server/commercial/media.mjs": {
+      "before": "ec9bdab7aa8a600f4989d3550d31c82a1f3dc16a58e8f40599d143afae0d9176",
+      "after": "0a5f2a8822c4dd7661b4cd2789b3b1bfcadbbc11f5a82545c998ddb0022d52e0",
+      "text": true
+    },
+    "server/commercial/runtime.mjs": {
+      "before": "b3803478d09384642ead49cd68c9b709ad1c595008c1a0a59f9ad5059c257bb9",
+      "after": "cd210217a89ef1277f7156f300e065f6faa686bcb6fa73bc7c41f1277f2ecc84",
+      "text": true
+    }
+  },
+  "added": {
+    "scripts/commercial/hf01-reconciliation.sql": {
+      "sha256": "fa81bac6515573ffba6a5e4d079409dce13c670e1ae429fb7654ca8d14126027",
+      "text": true
+    },
+    "scripts/commercial/hf01-reconciliation-rollback.sql": {
+      "sha256": "6ad67798591cf04ae0395ce62739439df98733b29ce0a4938a036c17bc36c821",
+      "text": true
+    },
+    "tests/commercial-055/hf01.test.mjs": {
+      "sha256": "08130da53dbb5dc43f7076cc15b16a2bf46c6b0ce885534b5151372b0a04b479",
+      "text": true
+    }
+  }
+}

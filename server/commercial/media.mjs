@@ -1,10 +1,11 @@
 import { createAttachmentHandler } from "../attachments.mjs";
+import { safeDiagnostic } from "../diagnostics.mjs";
 export function createDemoMediaHandler({
   store,
   controller,
   origins,
   resolvePublic,
-  log = () => {},
+  log = (record) => console.warn(JSON.stringify(record)),
 }) {
   const limits = new Map();
   return async (req, res) => {
@@ -121,7 +122,8 @@ export function createDemoMediaHandler({
         res.writeHead(204,{'Access-Control-Allow-Origin':origins.appOrigin,'Access-Control-Allow-Headers':'Authorization,Content-Type,X-Download-Ticket,X-Commercial-Authorization','Access-Control-Allow-Methods':'GET,POST,DELETE,OPTIONS','Vary':'Origin'});res.end();return;
       }
       await handler(req, res);
-    } catch {
+    } catch (error) {
+      log(safeDiagnostic(error, "demo_media_context", 403));
       fail();
     }
   };
