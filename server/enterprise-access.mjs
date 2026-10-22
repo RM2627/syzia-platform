@@ -530,15 +530,19 @@ export function enterpriseAccess({
         p_name: clean(body.name || user.user_metadata?.display_name, 120),
         p_username: clean(body.username || user.user_metadata?.syzia_username),
       });
-      if (
-        !(await service("access_register_session", {
-          p_user: user.id,
-          p_session: sessionClaim(token),
-          p_account: account.id,
-          p_generation: account.generation,
-        }))
-      )
-        fail("access_denied");
+      const sessionId = sessionClaim(token);
+      const registered = await service("access_register_session", {
+        p_user: user.id,
+        p_session: sessionId,
+        p_account: account.id,
+        p_generation: account.generation,
+      });
+      if (!registered && !(await service("access_complete_personal_session", {
+        p_user: user.id,
+        p_session: sessionId,
+        p_account: account.id,
+        p_generation: account.generation,
+      }))) fail("access_denied");
       return { registered: true };
     }
     if (path === "/access/contexts") {
