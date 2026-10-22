@@ -8,6 +8,32 @@ import { CopyLink } from "./CopyLink";
 import { eligibleContact } from "./policy";
 import { pageTemplates } from "../consumer/TemplatePicker";
 import "./commercial-management.css";
+// Record explicit administrator attestation; no free-text evidence field.
+function ContactAuthorization({ contact, purpose, busy, onSaved }: {
+  contact: any; purpose: string; busy: boolean; onSaved: (fn: () => Promise<void>) => Promise<void>;
+}) {
+  const [confirmed, setConfirmed] = useState(false);
+  if (!contact?.email || contact.suppressed) return null;
+  return (
+    <form className="sy-form-card" onSubmit={e => {
+      e.preventDefault();
+      if (!confirmed) return;
+      void onSaved(async () => {
+        await rpc("commercial_contact_authorize", {
+          p_id: contact.id, p_purpose: purpose, p_authorized: true,
+          p_notice: "commercial-v1", p_evidence: "Declaracao do operador: confirmou autorizacao de contato",
+          p_expires: new Date(Date.now() + 30 * 86400000).toISOString(),
+        });
+        setConfirmed(false);
+      });
+    }}>
+      <strong>Registrar autorização de contato</strong>
+      <p>Registre apenas uma autorização realmente concedida para {purpose === "activation" ? "ativação" : "demonstração"}, ao endereço exibido acima.</p>
+      <label><input type="checkbox" checked={confirmed} onChange={e => setConfirmed(e.target.checked)} /> Confirmo que recebi autorização expressa deste destinatário para esta finalidade.</label>
+      <button type="submit" disabled={busy || !confirmed}>Registrar autorização</button>
+    </form>
+  );
+}
 export function Management() {
   const { section = "demonstracoes" } = useParams();
   const [data, setData] = useState<any>(),
@@ -426,7 +452,7 @@ export function Management() {
                     d.state !== "available" || new Date(d.expires_at).getTime() <= Date.now() ? "A demonstração precisa estar publicada e dentro da validade." :
                     purpose === "activation" && !["wants_trial", "activation_sent", "registration_started"].includes(c.stage) ? "O interesse em testar ainda não está registrado. Atualize a etapa em Interessados apenas se essa manifestação tiver sido recebida." :
                     ["not_interested", "archived"].includes(c.stage) ? "A etapa atual impede convites. Revise o cadastro apenas se houver um novo contato real." :
-                    "Sem autorização vigente registrada para esta finalidade. Novas autorizações não são registradas nesta tela; links e envios permanecem bloqueados até existir um registro válido."}</p>}
+                    "Sem autorização vigente registrada para esta finalidade. Confirme abaixo a autorização expressa recebida para esta finalidade antes de gerar links ou enviar e-mails."}</p>}
                   {duplicate && <p>Este endereço já está selecionado em outro vínculo.</p>}
                   <div className="button-row">
                     <button disabled={!data.can_manage || busy || !ready} onClick={() => void act(async () => {
@@ -435,6 +461,7 @@ export function Management() {
                     })}>Gerar link individual</button>
                     <button disabled={!data.can_send || busy || !ready} onClick={() => void makePreview([d.id])}>Enviar por e-mail</button>
                   </div>
+                  {data.can_manage && !ready && c.email && !c.suppressed && d.state === "available" && new Date(d.expires_at).getTime() > Date.now() && !["not_interested", "archived"].includes(c.stage) && (purpose !== "activation" || ["wants_trial", "activation_sent", "registration_started"].includes(c.stage)) && <ContactAuthorization key={c.id + ":" + purpose + ":authorization"} contact={c} purpose={purpose} busy={busy} onSaved={fn => act(async () => { await fn(); setPreview(null); setSelected([]); setLink(""); setNotice("Autorização registrada para a finalidade selecionada."); })} />}
                   {data.can_manage && <InvitationPreparation key={c.id + ":" + c.revision + ":" + purpose} contact={c} busy={busy} act={async fn => {
                     await act(async () => { await fn(); setPreview(null); setSelected([]); setLink(""); setNotice("E-mail adicionado. A autorização de contato continua sendo necessária."); });
                   }} />}
