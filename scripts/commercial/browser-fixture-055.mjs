@@ -12,7 +12,7 @@ export async function commercialBrowserFixture({c,invoke,getName,user,serialize}
  for(const n of ['202610180054_commercial_preparation.sql','202610200055_commercial_versions.sql'])await c.db.exec(await readFile('supabase/migrations/'+n,'utf8'));
  const is056=process.env.DEMO_COMMERCIAL_056==='true';
  if(is056)await c.db.exec(await readFile('supabase/migrations/202610210056_commercial_preregistration.sql','utf8'));
- if(process.env.DEMO_COMMERCIAL_057==='true')for(const f of ['202610210057_billing_completed_change_recovery.sql','202610220058_invitation_activation.sql'])await c.db.exec(await readFile('supabase/migrations/'+f,'utf8'));
+ if(process.env.DEMO_COMMERCIAL_057==='true')for(const f of ['202610210057_billing_completed_change_recovery.sql','202610220058_invitation_activation.sql','202610220059_personal_session_completion.sql'])await c.db.exec(await readFile('supabase/migrations/'+f,'utf8'));
  const demo=await demoFixture();
  const service=(name,args)=>serialize(()=>invoke(name,args));
  const origins={appOrigin:'http://127.0.0.1:5173',publicOrigin:'http://127.0.0.1:5174'};
