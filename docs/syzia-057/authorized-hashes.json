@@ -1,0 +1,31 @@
+{
+  "base_commit": "33e04ca8ba14be73e7050ae84c5299410d5c7011",
+  "modified": {
+    "scripts/commercial/browser-fixture-055.mjs": {
+      "before": "f5c35b07cfe6686b6e9a1d6a05d385474a587d60c0afebdb9d2149080d18ef85",
+      "after": "0fadea8fb32bf88b6ad1d6eaedbaedc82ce513949c33ee91fc07e2a732e68d91"
+    },
+    "src/acquisition/SelfService.tsx": {
+      "before": "93d72fde90785c6e8c45064039b057602340644637434372cbbb95f4db519a45",
+      "after": "b62f7740b44d04ac7b9294842662f50aa5eb313f5ab24cab2d4af7ce61ad4e2c"
+    },
+    "src/platform-commercial/Activation.tsx": {
+      "before": "9a84d1ecdc0910c15d500393a35d58f803ae50bd845ca4d23dccecc8d553cc4d",
+      "after": "ab1e0af1bf41672e269aafdcb6ec73e7039421befa356934f4dd2833c97628a6"
+    },
+    "src/platform-commercial/Management.tsx": {
+      "before": "71977f9b0b09381195bb626043ad2a2da480d302bc52407e8ed3d2bfc1ef438e",
+      "after": "b2a5a5ae80cc6b29d967c771a53fb29fa639865b8e5a2df846bc5bcbe5ea0601"
+    },
+    "src/platform-commercial/api.ts": {
+      "before": "94749a1f5c07ee5f09fa83790e30e234643a4fc6528249b0d207e786d49cc429",
+      "after": "35004e83e607d9dec6d4163e80e58444f0d09fd914b3f48eeb955afa759f3089"
+    }
+  },
+  "added": {
+    "supabase/migrations/202610220058_invitation_activation.sql": "23fa30d69c6a9e1bb4111597bf2e949093622e4caaee065bccdfdc34674c454d",
+    "tests/commercial-057/activation.test.mjs": "3c3c71df640276e78e13a058cd05ad66255b890541eedb55d7607e995a3aee7b",
+    "tests/demo-browser/commercial057.spec.ts": "80eeca431392cfe178c59f04f63b9efc1afc1fad8b80ba05a491802a26943455",
+    "playwright.commercial057.config.ts": "622887bec6d118a9f148d4d17ce7074787b27b934b9b3ad3456b56f910b6fa38"
+  }
+}

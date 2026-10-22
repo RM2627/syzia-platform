@@ -20,6 +20,7 @@ function failedConfirmation() {
   );
 }
 export function SelfService({ identityOnly=false, onIdentityReady, activation }: {identityOnly?:boolean;onIdentityReady?:()=>void;activation?:{id:string;snapshot:string;company:string}}={}) {
+  const invitationReturn = identityOnly || (!activation && !!sessionStorage.getItem("syzia-commercial-invitation"));
   const [params] = useSearchParams(),
     { plans, loading } = usePlans();
   const [captcha, setCaptcha] = useState("");
@@ -89,7 +90,7 @@ export function SelfService({ identityOnly=false, onIdentityReady, activation }:
         throw e;
       }
     }
-    if (identityOnly) { setReady(true); return; }
+    if (invitationReturn) { setReady(true); return; }
     const found = await rpc<any>("selfservice_context");
     const d = activation && found?.state === "completed" ? null : found;
     setDraft(d);
@@ -157,6 +158,7 @@ export function SelfService({ identityOnly=false, onIdentityReady, activation }:
     );
     if (!a) throw Error("access_denied");
     await accessApi("/access/context", { account_id: a.id });
+    if (activation) sessionStorage.removeItem("syzia-commercial-invitation");
     window.location.assign(
       "/painel/" +
         draft.organization_id +
@@ -278,7 +280,7 @@ export function SelfService({ identityOnly=false, onIdentityReady, activation }:
               >
                 Criar identidade
               </button>
-              <Link to="/entrar?retorno=cadastro">
+              <Link to={invitationReturn ? "/entrar?retorno=convite-comercial" : "/entrar?retorno=cadastro"}>
                 Já tenho conta · Entrar e retomar
               </Link>
             </form>
@@ -322,7 +324,7 @@ export function SelfService({ identityOnly=false, onIdentityReady, activation }:
               </label>
               <button disabled={busy}>Salvar identidade</button>
             </form>
-          ) : identityOnly ? (<><h2>Identidade preparada</h2><button onClick={onIdentityReady}>Voltar ao convite de ativação</button></>) : draft?.state === "completed" ? (
+          ) : invitationReturn ? (<><h2>Identidade preparada</h2><button onClick={onIdentityReady || (() => window.location.assign("/ativar-empresa"))}>Voltar ao convite de ativação</button></>) : draft?.state === "completed" ? (
             <>
               <h2>Empresa preparada.</h2>
               <p>A configuração inicial continua no ambiente da sua empresa.</p>

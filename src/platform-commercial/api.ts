@@ -41,6 +41,10 @@ export async function invitationApi(path: string, body: unknown) {
 export const commercialError = (e: unknown) =>
   (
     ({
+      commercial_email_confirmation_required: "Confirme o e-mail da sua conta antes de continuar pelo convite.",
+      commercial_recipient_mismatch: "Entre com a conta do e-mail que recebeu este convite. Esta conta não é a destinatária autorizada.",
+      commercial_claim_conflict: "Este convite já está vinculado a outra identidade. Solicite um novo convite à SYZIA.",
+      commercial_activation_rejected: "Esta ativação foi recusada anteriormente. Entre em contato com a SYZIA para verificar o convite.",
       commercial_destination_changed:'A configuração desta empresa foi alterada durante a ativação. A importação foi interrompida para preservar seus dados. Solicite uma revisão à SYZIA.',
       commercial_plan_incompatible:'O plano escolhido não comporta a configuração preparada. Escolha um plano compatível ou solicite uma revisão, sem perder os dados.',
       commercial_plan_selected_at_activation:'O plano é escolhido pelo responsável durante a ativação.',
@@ -65,7 +69,7 @@ export const commercialError = (e: unknown) =>
       commercial_revision_conflict:
         "A configuração mudou. Atualize a página e revise novamente.",
       commercial_review_required:
-        "A configuração ou a aprovação mudou. Solicite uma nova análise.",
+        "Confira novamente a configuração e a validade do convite antes de continuar.",
       commercial_review_stale:
         "A demonstração mudou ou expirou. Revise a preparação antes de aprovar.",
       commercial_already_activated:

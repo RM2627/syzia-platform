@@ -580,9 +580,7 @@ export function Management() {
       {section === "ativacoes" && (
         <>
           <p>
-            O vínculo é aprovado exclusivamente pelo Super Admin. Receber o
-            convite ou controlar o e-mail não comprova propriedade. A
-            confirmação financeira continua no checkout existente.
+            O convite de ativação autoriza seu destinatário confirmado a continuar sem aprovação administrativa. A liberação da empresa depende da confirmação financeira no checkout existente. Análises anteriores permanecem no histórico.
           </p>
           {data.claims.map((q: any) => (
             <article className="card" key={q.id}>
@@ -601,7 +599,8 @@ export function Management() {
                   )[q.state]
                 }
               </p>
-              <blockquote>{q.statement}</blockquote>
+              {q.statement && <blockquote>{q.statement}</blockquote>}
+              {q.authorization_method === "verified_invitation" && <p>Destinatário confirmado pelo convite. Sem análise administrativa adicional.</p>}
               {q.reviews?.length > 0 && (
                 <details>
                   <summary>Histórico das análises ({q.reviews.length})</summary>
@@ -615,7 +614,7 @@ export function Management() {
                   </ul>
                 </details>
               )}
-              {data.is_root && !q.organization_id && (
+              {data.is_root && !q.organization_id && q.authorization_method !== "verified_invitation" && (
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();

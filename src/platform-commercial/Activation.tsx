@@ -90,8 +90,13 @@ export function ActivateCompany() {
     setInvitation(i);
     const s = (await supabase?.auth.getSession())?.data.session;
     setSession(s || null);
-    const id = sessionStorage.getItem("syzia-commercial-claim:" + i.id);
-    if (id && s) setClaim(await rpc("commercial_claim_context", { p_id: id }));
+    if (s) {
+      const q = await rpc<any>("commercial_claim_request", {
+        p_hash: await sha(token), p_statement: null,
+      });
+      sessionStorage.setItem("syzia-commercial-claim:" + i.id, q.id);
+      setClaim(await rpc("commercial_claim_context", { p_id: q.id }));
+    }
   }
   useEffect(() => {
     void load().catch((e) => setError(commercialError(e)));
@@ -125,14 +130,13 @@ export function ActivateCompany() {
             : "Ativação vinculada"}
         </h1>
         <p>
-          Confira a configuração preparada antes de continuar. O convite não
-          concede propriedade nem inicia cobrança ou período gratuito.
+          Este convite autoriza o destinatário a iniciar a ativação. Entre com a conta do e-mail que recebeu o convite e confira a configuração preparada. A liberação depende da confirmação da assinatura.
         </p>
         {error && <p role="alert">{error}</p>}
         {!invitation && !error && <p role="status">Conferindo convite…</p>}
         {invitation && !session && (
           <div className="sy-form-card">
-            <h2>Identifique-se para solicitar a ativação</h2>
+            <h2>Identifique-se para continuar</h2>
             <button onClick={() => setIdentity(true)}>
               Criar identidade pela SYZIA
             </button>
@@ -151,46 +155,15 @@ export function ActivateCompany() {
           </div>
         )}
         {invitation && session && !claim && (
-          <form
-            className="sy-form-card"
-            onSubmit={(e) => {
-              e.preventDefault();
-              const f = new FormData(e.currentTarget);
+          <div className="sy-form-card">
+            <p>Use a conta com o e-mail destinatário confirmado. Se a identidade estiver incompleta, conclua o cadastro para continuar.</p>
+            <button disabled={busy} onClick={() => setIdentity(true)}>Conferir minha identidade</button>
+            <Link to="/entrar?retorno=convite-comercial">Entrar com outra conta</Link>
+            <button disabled={busy} onClick={() => {
               setBusy(true);
-              void sha(token)
-                .then((p_hash) =>
-                  rpc<any>("commercial_claim_request", {
-                    p_hash,
-                    p_statement: f.get("statement"),
-                  }),
-                )
-                .then(async (q) => {
-                  sessionStorage.setItem(
-                    "syzia-commercial-claim:" + invitation.id,
-                    q.id,
-                  );
-                  await load();
-                })
-                .catch((e) => setError(commercialError(e)))
-                .finally(() => setBusy(false));
-            }}
-          >
-            <h2>Comprove seu vínculo</h2>
-            <label>
-              Informe sua relação com a empresa e como ela pode ser confirmada
-              <textarea
-                name="statement"
-                minLength={20}
-                maxLength={1000}
-                required
-              />
-            </label>
-            <p>
-              Não inclua CPF completo, senhas, documentos ou outros dados
-              sensíveis. A análise será feita pelo Super Admin.
-            </p>
-            <button disabled={busy}>Solicitar análise do vínculo</button>
-          </form>
+              void load().catch(e => setError(commercialError(e))).finally(() => setBusy(false));
+            }}>Já confirmei · Continuar</button>
+          </div>
         )}
         {claim && (
           <div className="sy-form-card">
@@ -198,9 +171,9 @@ export function ActivateCompany() {
               {
                 (
                   {
-                    requested: "Solicitação em análise",
-                    approved: "Vínculo aprovado",
-                    rejected: "Não foi possível aprovar o vínculo",
+                    requested: "Confirme sua identidade para continuar",
+                    approved: "Convite verificado",
+                    rejected: "Ativação indisponível",
                     prepared: "Empresa preparada para contratação",
                     materialized: "Configuração vinculada",
                   } as any
@@ -209,15 +182,14 @@ export function ActivateCompany() {
             </h2>
             {claim.state === "requested" && (
               <p>
-                O Super Admin precisa confirmar seu vínculo antes da criação da
-                empresa.
+                Atualize o convite após confirmar a identidade destinatária.
               </p>
             )}
             {claim.state === "rejected" && (
-              <p>Entre em contato com a SYZIA para esclarecer seu vínculo.</p>
+              <p>Entre em contato com a SYZIA para verificar este convite.</p>
             )}
             {claim.stale && !claim.organization_id && (
-              <p>A preparação mudou. Uma nova aprovação será necessária.</p>
+              <p>O convite ou a preparação não está mais disponível. Solicite um convite válido.</p>
             )}
             {["prepared","materialized"].includes(claim.state) ? (
               <Link to={"/painel/" + claim.organization_id + "/assinatura"}>
@@ -229,7 +201,7 @@ export function ActivateCompany() {
                   void load().catch((e) => setError(commercialError(e)))
                 }
               >
-                Atualizar análise
+                Atualizar convite
               </button>
             )}
             {claim.state === "approved" && !claim.stale && (
