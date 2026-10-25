@@ -417,6 +417,7 @@ function Shell({ children }: { children: ReactNode }) {
           {import.meta.env.VITE_COMMERCIAL_PREPARATION_ENABLED === "true" && canSeeCommercial(access) && (
             <WorkspaceGroup id="commercial-management" label="Gestão Comercial" icon="chart">
               <NavLink to="/admin/comercial/interessados" title="Interessados" aria-label="Interessados">Interessados</NavLink>
+              <NavLink to="/admin/comercial/studio">Demo Studio</NavLink>
               <NavLink to="/admin/comercial/demonstracoes">Demonstrações</NavLink>
               <NavLink to="/admin/comercial/templates">Templates</NavLink>
               <NavLink to="/admin/comercial/convites">Convites</NavLink>

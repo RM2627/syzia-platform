@@ -1,3 +1,4 @@
+import {studio060Expected,assertStudio060File} from './studio060-integrity.mjs';
 // Additive HF01; historical authorization documents remain byte-identical.
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -9,10 +10,10 @@ assert.equal(sha(text),'a9930e4f3cbfd283b85e741acb0ffd24c889f33e17dc1c50fe55ad26
 export const hf056=JSON.parse(text);
 assert.equal(hf056.source_commit,'8f061f0002e4a7d7db54927628382686a1cb90f3');
 export function hf056Expected(path,expected){
- const r=hf056.transitions[path];if(!r)return expected;
- assert.ok(r.before.includes(expected),'056-HF01 unexpected predecessor: '+path);return r.after;
+ const r=hf056.transitions[path];if(!r)return studio060Expected(path,expected);
+ assert.ok(r.before.includes(expected),'056-HF01 unexpected predecessor: '+path);return studio060Expected(path,r.after);
 }
 export function assertHF056File(path,bytes,expected){
- const r=hf056.transitions[path];if(!r)return false;
+ const r=hf056.transitions[path];if(!r)return assertStudio060File(path,bytes,expected);
  assert.equal(sha(r.text?lf(bytes):bytes),hf056Expected(path,expected),'056-HF01 integrity mismatch: '+path);return true;
 }

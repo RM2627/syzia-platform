@@ -15,7 +15,7 @@ export function ImageFraming({
   save: (file: File) => Promise<void>;
   close: () => void;
 }) {
-  const [source] = useState(() => URL.createObjectURL(blob));
+  const [source, setSource] = useState("");
   const [size, setSize] = useState({ width: 0, height: 0 });
   const [zoom, setZoom] = useState(1),
     [x, setX] = useState(0.5),
@@ -26,8 +26,14 @@ export function ImageFraming({
   const drag = useRef<{ px: number; py: number; x: number; y: number } | null>(
     null,
   );
-  useEffect(() => () => URL.revokeObjectURL(source), [source]);
-  const rect = framingRect(size.width, size.height, ratio, zoom, x, y);
+  useEffect(() => {
+    const url = URL.createObjectURL(blob);
+    setSize({width: 0, height: 0});
+    setSource(url);
+    return () => URL.revokeObjectURL(url);
+  }, [blob]);
+  const effectiveRatio = ratio > 0 ? ratio : (size.width / size.height || 1);
+  const rect = framingRect(size.width, size.height, effectiveRatio, zoom, x, y);
   const ready = size.width > 0 && size.height > 0;
   async function commit() {
     if (!img.current || !ready) return;
@@ -35,8 +41,8 @@ export function ImageFraming({
     setError("");
     try {
       const canvas = document.createElement("canvas");
-      canvas.width = Math.max(1, Math.min(1600, Math.round(rect.width)));
-      canvas.height = Math.max(1, Math.round(canvas.width / ratio));
+      canvas.width = Math.max(1, Math.min(1600, Math.round(rect.width), Math.round(1600 * effectiveRatio)));
+      canvas.height = Math.max(1, Math.round(canvas.width / effectiveRatio));
       const ctx = canvas.getContext("2d");
       if (!ctx) throw Error();
       ctx.drawImage(
@@ -81,7 +87,7 @@ export function ImageFraming({
       </p>
       <div
         className="media-crop-stage"
-        style={{ aspectRatio: ratio, width: `min(100%, ${ratio * 34}vh)` }}
+        style={{ aspectRatio: effectiveRatio, width: `min(100%, ${effectiveRatio * 34}vh)` }}
         aria-label="Prévia do enquadramento"
         onPointerDown={(e) => {
           if (!ready || busy) return;
@@ -128,7 +134,7 @@ export function ImageFraming({
       >
         <img
           ref={img}
-          src={source}
+          src={source || undefined}
           alt={"Enquadramento de " + title}
           draggable={false}
           onLoad={(e) =>

@@ -1,0 +1,86 @@
+{
+  "source_commit": "a5354a934f7052471bfdd89223f1f62b3a7610b8",
+  "scope": "SYZIA 060 Demo Studio, links de demonstração, SMTP, imagens e PDFs; sem alterações financeiras",
+  "transitions": {
+    "package.json": {
+      "before": "f9ee46cf9e489112652dddcaed88bd48153e999c2811593963f3ff3e482787c2",
+      "after": "e1fc998429cbfcf0924c908316de0dbc7a2eeabfb9cf5d1f998baffeb883efd4",
+      "text": true
+    },
+    "server/access-mail.mjs": {
+      "before": "12e704e9cea5e86d87e10cb9e49e6ff07db53e4943d6d99d6a3c46884aa35f8b",
+      "after": "722cd2699714225d97593b83a07da2fc586a21e53f088b658d2372347a68eca1",
+      "text": true
+    },
+    "server/commercial/controller.mjs": {
+      "before": "cad04c86d1eb5766eabb30d4b5fc0ce0bb0089fe66ad1497cd450835e3839350",
+      "after": "61c960c4ae02947627d53e7944f7e5784571ee43ca1468d559129eb59ac47655",
+      "text": true
+    },
+    "server/commercial/demo-store.mjs": {
+      "before": "fcadbe457c6a2dd94ef0865929f46446c02880d8d416cb2bdfa97d8063781c3f",
+      "after": "498fc697491e8bce9449d45306fa1834a9a524d108c261a16425eed2a48d609d",
+      "text": true
+    },
+    "server/commercial/http.mjs": {
+      "before": "093045f857ff6a4ec4ffa6486a50e9ea229a84e63f4342a55e2c607bd79d8e1f",
+      "after": "b72b6594633417752d278449cd9cd4ceffb0b07d5d8427ae47d3f779473501ad",
+      "text": true
+    },
+    "server/commercial/mail.mjs": {
+      "before": "e8117ecdf6b8567853ec30e6ea32698a9b96ff96013d6f2343fe77a511097b39",
+      "after": "8cece425a24f77dacb488242a20418d1737fb7cd2ccba90680c8bf0c077955a0",
+      "text": true
+    },
+    "server/commercial/runtime.mjs": {
+      "before": "cd210217a89ef1277f7156f300e065f6faa686bcb6fa73bc7c41f1277f2ecc84",
+      "after": "386fec1097b96744d55d5b1e4c55635bd31bb6758cbc5370a45d146db233df47",
+      "text": true
+    },
+    "src/FoundationApp.tsx": {
+      "before": "6b169120cfcc2add0ad41126cd869a8cde1069de1979e295dcf0d638c99d573c",
+      "after": "89a3d85aaa682328061481e7dbd781fa99b08e0106a1d8176d22747c3155fd4c",
+      "text": true
+    },
+    "src/consumer/CompanyMedia.tsx": {
+      "before": "0170109aafb5dbfdd97a83825e113a4322be55d5a021b6dd79d62aad8a26d1bd",
+      "after": "b953b9a0648d009d48e524b67196b6eebbbdbaf497ba38f5c36c7744b42b80c5",
+      "text": true
+    },
+    "src/consumer/ImageFraming.tsx": {
+      "before": "0d24ca396204fcafcf8d2426207f4129b61dd9eef9ebc35c6f40b8183ed72b2b",
+      "after": "4fb9421a2cd70f8988b9af92f14b83a30c0a76e1745316700947f1f4e6e099b5",
+      "text": true
+    },
+    "src/consumer/PortfolioEditor.tsx": {
+      "before": "7f5f76d53776f239c142de429be39074f89b19f182a464192c13e9e627487bd7",
+      "after": "1db5f0dbf9f87d69a43a7feb0dc4f9c6c11efb372f48a3629c548136d25a8d33",
+      "text": true
+    },
+    "src/documents/render.ts": {
+      "before": "982b032637d4f6cf4effc8b4ef60e3d932fe09a528698fa5e51f179d2744c4da",
+      "after": "30c104439990cc755e883a2f2e1ad707b0e671c5a76abc4e89a1f54f3e55a1f8",
+      "text": true
+    },
+    "src/platform-commercial/Management.tsx": {
+      "before": "e541b492cafbe74ba0652c6d3110b49437e17f4abcb42a27c285e2c682087a48",
+      "after": "f8b6e091723f23e687bb21bc486cc38d88c31e61643d45841cd7fa6bed8784ec",
+      "text": true
+    },
+    "src/platform-commercial/api.ts": {
+      "before": "35004e83e607d9dec6d4163e80e58444f0d09fd914b3f48eeb955afa759f3089",
+      "after": "9525cf5c065160aa1bb19d8f2b9ef3cbcb5b122b7cfacb575140139c5dee0fa4",
+      "text": true
+    },
+    "src/platform-commercial/policy.ts": {
+      "before": "751c758c9d2c25e8a399f4b65d12c80ae903016b537117ddb24ce11956c62221",
+      "after": "3259ee524a471563862827bf5c5be54ef376cda54bc17e0cd46f676b5e18d556",
+      "text": true
+    },
+    "tests/support/commercial056-hf01-integrity.mjs": {
+      "before": "85cb12ea780c0e6dcf4f4aab496f2e4b5e2279896c49356ee3351a5426af6ab6",
+      "after": "202db2eae21f92479912185e5e80258547213cdb31e857ae64c73ba8d2dbed3a",
+      "text": true
+    }
+  }
+}

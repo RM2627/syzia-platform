@@ -1,3 +1,4 @@
+import {studioController} from "../studio/controller.mjs";
 import { assetPromoter } from "./promote-assets.mjs";
 import { createDemoMediaHandler } from "./media.mjs";
 import { createClient } from "@supabase/supabase-js";
@@ -125,6 +126,7 @@ export async function commercialRuntime(env = process.env) {
   const controller = commercialController({
     asUser,
     service,
+    studio: studioController({asUser,service,storage:client.storage,store}),
     auth,
     store,
     sendMail: createCommercialMailer(env),

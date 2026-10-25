@@ -3,6 +3,7 @@ import { rpc } from "../api";
 import { message } from "./api";
 import { Dialog } from "../ui/Dialog";
 import { CompanyImage, ImageUpload, uploadCompanyImage } from "./CompanyMedia";
+import { ImageFraming } from "./ImageFraming";
 import { SortableList } from "./SortableList";
 type Work = {
   code?: string;
@@ -30,6 +31,7 @@ export function PortfolioEditor({
   onOrderDirty?: (dirty: boolean) => void;
 }) {
   const galleryInput = useId();
+  const [galleryFiles, setGalleryFiles] = useState<File[]>([]);
   const [item, setItem] = useState<Work | null>(null),
     [busy, setBusy] = useState(false),
     [uploading, setUploading] = useState(false),
@@ -303,7 +305,7 @@ export function PortfolioEditor({
               </p>
             )}
             <fieldset
-              disabled={busy || !editable}
+              disabled={busy || !editable || galleryFiles.length > 0}
               className="form-reset portfolio-editor-fields"
             >
               <label>
@@ -433,52 +435,23 @@ export function PortfolioEditor({
                           );
                           return;
                         }
-                        setUploading(true);
+                        if(files.some(file=>file.size>5242880||!["image/jpeg","image/png","image/webp"].includes(file.type))){setError("Use JPG, PNG ou WebP de até 5 MB por foto.");return;}
                         setError("");
-                        const added: string[] = [];
-                        try {
-                          for (const file of files)
-                            added.push(await uploadCompanyImage(org, file));
-                        } catch (err) {
-                          setError(message(err));
-                        } finally {
-                          setItem((current) =>
-                            current
-                              ? {
-                                  ...current,
-                                  images: [...current.images, ...added],
-                                }
-                              : current,
-                          );
-                          setUploading(false);
-                        }
+                        setGalleryFiles(files);
+                        setUploading(true);
                       }}
                     />
                   </div>
                   <small>
-                    Até 4 fotos por trabalho · JPG, PNG ou WebP · 5 MB por foto.
+                    Até 4 fotos por trabalho · JPG, PNG ou WebP · 5 MB por foto. Confira o enquadramento de cada foto; cancelar pula somente a foto atual.
                   </small>
                   {uploading && <p role="status">Enviando fotos…</p>}
                   <div className="gallery-draft">
                     {item.images.map((code, i) => (
                       <div className="gallery-thumb" key={code}>
-                        <button
-                          className="photo-preview-button"
-                          type="button"
-                          aria-label={"Visualizar foto " + (i + 1)}
-                          onClick={() =>
-                            setViewing({
-                              code,
-                              alt: "Foto " + (i + 1) + " do trabalho",
-                            })
-                          }
-                        >
-                          <CompanyImage
-                            org={org}
-                            code={code}
-                            alt={"Foto " + (i + 1) + " do trabalho"}
-                          />
-                        </button>
+                        <ImageUpload org={org} title={"Foto " + (i + 1) + " do portfólio"} value={code}
+                          onChange={value => value ? image(i, value) : setItem(current => current ? {...current, images: current.images.filter((_, n) => n !== i)} : current)}
+                          onBusy={setUploading} disabled={uploading}/>
                         <div className="editor-actions">
                           <button
                             type="button"
@@ -572,6 +545,10 @@ export function PortfolioEditor({
           </form>
         </Dialog>
       )}
+      {galleryFiles.length>0 && <ImageFraming key={galleryFiles[0].name+galleryFiles.length}
+        title="Foto da galeria" blob={galleryFiles[0]} ratio={0}
+        save={async file=>{const code=await uploadCompanyImage(org,file);setItem(current=>current?{...current,images:[...current.images,code]}:current);}}
+        close={()=>{setGalleryFiles(files=>files.slice(1));setUploading(galleryFiles.length>1);}}/>}
       {viewing && (
         <Dialog
           title={viewing.alt}

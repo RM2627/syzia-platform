@@ -274,6 +274,19 @@ export function createDemoStore(
         }
       });
     },
+    async stageStudioAssets(sourceId, assets) {
+      return transaction(async c => {
+        await c.query("select pg_advisory_xact_lock(734921554)");
+        for(const {metadata:m,bytes} of assets) {
+          if(hash(bytes)!==m.sha256)throw Error('commercial_media_invalid');
+          const old=await scalar(c,"select exists(select 1 from demo_private.frozen_media where source_id=$1 and media_id=$2 and object_path=$3 and sha256=$4)",[sourceId,m.id,m.object_path,m.sha256]);
+          if(old)continue;
+          const size=Number(await scalar(c,"select coalesce(sum(octet_length(bytes)),0)from demo_private.frozen_media"));
+          if(size+bytes.length>128*1024*1024)throw Error('demo_capacity_reached');
+          await c.query("insert into demo_private.frozen_media(source_id,media_id,object_path,sha256,mime,bytes)values($1,$2,$3,$4,$5,$6)",[sourceId,m.id,m.object_path,m.sha256,m.mime,bytes]);
+        }
+      });
+    },
     async cleanup() {
       return transaction(async c => {
         await c.query("delete from demo_private.sessions where expires_at<clock_timestamp() or revoked_at is not null");

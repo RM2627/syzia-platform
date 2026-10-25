@@ -150,7 +150,10 @@
     "test:commercial:054": "node --experimental-strip-types --test --test-concurrency=1 tests/commercial-implementation/*.test.mjs",
     "test:commercial:regression": "node scripts/commercial/regression-local.mjs",
     "test:commercial:055": "node --test --test-concurrency=1 tests/commercial-055/*.test.mjs",
-    "test:commercial:055:browser": "playwright test --config=playwright.commercial055.config.ts"
+    "test:commercial:055:browser": "playwright test --config=playwright.commercial055.config.ts",
+    "test:060": "node --experimental-strip-types --test --test-concurrency=1 tests/syzia-060/*.test.mjs",
+    "test:060:browser": "node scripts/syzia-060/browser.mjs",
+    "samples:060": "node --experimental-strip-types scripts/syzia-060/pdf-samples.mjs"
   },
   "keywords": [],
   "author": "",

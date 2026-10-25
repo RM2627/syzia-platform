@@ -59,7 +59,7 @@ export function createCommercialHandler({
       const chunks = [];
       for await (const chunk of req) {
         size += chunk.length;
-        if (size > 2 * 1024 * 1024) {
+        if (size > (operator && path === "studio-upload" ? 7 : 2) * 1024 * 1024) {
           send(413, { error: "commercial_payload_too_large" });
           req.resume();
           return;

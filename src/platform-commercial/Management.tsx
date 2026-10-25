@@ -1,11 +1,12 @@
+const Studio = lazy(() => import("../studio/Studio").then(m => ({default:m.Studio})));
 import { InvitationPreparation } from "./InvitationPreparation";
 import {PreparationEditor} from './PreparationEditor';
-import { useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { rpc } from "../api";
 import { commercialApi, commercialError } from "./api";
 import { CopyLink } from "./CopyLink";
-import { eligibleContact } from "./policy";
+import { eligibleContact, eligibleDemoLink } from "./policy";
 import { pageTemplates } from "../consumer/TemplatePicker";
 import "./commercial-management.css";
 // Record explicit administrator attestation; no free-text evidence field.
@@ -84,6 +85,7 @@ export function Management() {
         </p>
       </section>
     );
+  if(section === "studio") return <Suspense fallback={<p role="status">Abrindo Demo Studio…</p>}><Studio/></Suspense>;
   if(editor)return <PreparationEditor definition={editor} onClose={()=>{setEditor(null);void load();}}/>;
   const listed = section === "convites" ? data.demos.flatMap((d:any)=>(data.links||[]).filter((l:any)=>l.demo_id===d.id).map((l:any)=>({...d,demo_id:d.id,id:d.id+":"+l.lead_id,lead_id:l.lead_id}))) : data.demos;
   const demos = listed.filter((d: any) => {
@@ -372,7 +374,7 @@ export function Management() {
       )}
       {section === "convites" && (
         <>
-          <p className="invitation-guidance">Cadastro e seleção não autorizam contato. Só os destinatários elegíveis podem receber links ou e-mails.</p>
+          <p className="invitation-guidance">Links de demonstração podem ser compartilhados pelo canal combinado, sem e-mail. Envio por e-mail exige endereço e autorização vigentes; ativação mantém a vinculação segura da identidade.</p>
           <div className="commercial-fields">
             <label>
               Finalidade
@@ -430,6 +432,7 @@ export function Management() {
           <div className="commercial-cards">
             {demos.map((d: any) => {
               const c = data.contacts.find((c: any) => c.id === d.lead_id);
+              const linkReady = purpose === "demonstration" ? eligibleDemoLink(c, d) : eligible.some((x: any) => x.id === d.id);
               const ready = eligible.some((x: any) => x.id === d.id);
               const duplicate = selected.some(id => {
                 const row = demos.find((x: any) => x.id === id);
@@ -446,16 +449,16 @@ export function Management() {
                   </label>
                   {c.email && <p className="invitation-address">{c.email}</p>}
                   <small className="invitation-meta">{previous.length} convite(s) anterior(es) · {d.published_version_id ? "Versão publicada" : "Sem versão publicada"}</small>
-                  <p className={"invitation-status" + (ready ? " is-ready" : "")}>{ready ? "Elegível para " + (purpose === "activation" ? "ativação" : "demonstração") : "Convite indisponível"}</p>
+                  <p className={"invitation-status" + (ready ? " is-ready" : "")}>{ready ? "Elegível para " + (purpose === "activation" ? "ativação" : "demonstração") : linkReady ? "Link individual disponível · envio por e-mail pendente" : "Convite indisponível"}</p>
                   {!ready && <p className="invitation-reason">{c.suppressed ? "Este endereço está descadastrado para comunicações comerciais." :
-                    !c.email ? "Adicione o e-mail. O cadastro do endereço não autoriza o envio." :
+                    !c.email ? (linkReady ? "O link pode ser compartilhado sem e-mail. Para enviar por e-mail, inclua o endereço e registre a autorização recebida." : "Adicione o e-mail. O cadastro do endereço não autoriza o envio.") :
                     d.state !== "available" || new Date(d.expires_at).getTime() <= Date.now() ? "A demonstração precisa estar publicada e dentro da validade." :
                     purpose === "activation" && !["wants_trial", "activation_sent", "registration_started"].includes(c.stage) ? "O interesse em testar ainda não está registrado. Atualize a etapa em Interessados apenas se essa manifestação tiver sido recebida." :
                     ["not_interested", "archived"].includes(c.stage) ? "A etapa atual impede convites. Revise o cadastro apenas se houver um novo contato real." :
-                    "Sem autorização vigente registrada para esta finalidade. Confirme abaixo a autorização expressa recebida para esta finalidade antes de gerar links ou enviar e-mails."}</p>}
+                    (purpose === "demonstration" ? "O envio por e-mail exige autorização vigente. Registre apenas uma manifestação efetivamente recebida. O link individual tem elegibilidade própria." : "Sem autorização vigente para ativação. Registre a manifestação efetivamente recebida antes de gerar ou enviar esse convite.")}</p>}
                   {duplicate && <p>Este endereço já está selecionado em outro vínculo.</p>}
                   <div className="button-row">
-                    <button disabled={!data.can_manage || busy || !ready} onClick={() => void act(async () => {
+                    <button disabled={!data.can_manage || busy || !linkReady} onClick={() => void act(async () => {
                       const r = await commercialApi("invite", { id: d.demo_id, lead_id: d.lead_id, purpose });
                       setLink(r.url); setNotice(`Link individual gerado para ${c.name}. Nenhum e-mail foi enviado.`);
                     })}>Gerar link individual</button>
@@ -569,6 +572,7 @@ export function Management() {
                           } as any
                         )[d.state]
                       }
+                      {d.error_code && <small>{({email_not_configured:"Envio não configurado.",email_authentication_failed:"O provedor recusou a autenticação. Solicite a conferência da configuração.",email_recipient_or_sender_rejected:"O provedor recusou remetente ou destinatário. Confira o domínio e o endereço.",email_rate_limited:"Limite temporário do provedor. Aguarde antes de tentar novamente.",email_temporary_failure:"Falha de rede ou tempo esgotado. Confira o resultado antes de reenviar.",email_delivery_failed:"O provedor não confirmou o envio."} as Record<string,string>)[d.error_code] || "Confira a configuração e o resultado do provedor."}</small>}
                     </td>
                   </tr>
                 ))}

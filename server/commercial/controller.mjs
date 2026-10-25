@@ -23,6 +23,7 @@ export function commercialController({
   maxBatch = 25,
   inviteDays = 7,
   promoteAssets = async (c) => c,
+  studio,
 }) {
   const pending = new Set();
   let closing = false;
@@ -102,7 +103,8 @@ export function commercialController({
       await Promise.allSettled([...pending]);
     },
     async operator(path, body, token) {
-      await user(token);
+      const operatorActor=await user(token);
+      if (path.startsWith("studio") && studio) return studio(path, body, token, operatorActor);
       if (path === "activate") {
         exact(body, [
           "p_id",
@@ -177,6 +179,8 @@ export function commercialController({
         for (const recipient of body.recipients) {
           exact(recipient,["demo_id","lead_id"]);
           const id=recipient.demo_id;
+          const contactRow=context.contacts.find(l=>l.id===recipient.lead_id);
+          if(!contactRow?.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactRow.email))throw Error('commercial_contact_not_authorized');
           const i = await invitation(token, id, body.purpose,recipient.lead_id);
           const lead = context.contacts.find((l) => l.id === i.lead_id);
           if (!lead) throw Error("access_denied");
@@ -253,6 +257,7 @@ export function commercialController({
               }).toString();
               await sendMail({
                 ...e,
+                delivery_id: delivery.id,
                 link: url.href,
                 unsubscribe: unsubscribe.href,
                 contact,
@@ -261,7 +266,7 @@ export function commercialController({
               code = "";
             } catch (error) {
               code = deliveryError(error);
-              state = ["email_not_configured", "email_rate_limited"].includes(
+              state = ["email_not_configured", "email_rate_limited", "email_authentication_failed", "email_recipient_or_sender_rejected"].includes(
                 code,
               )
                 ? "failed"

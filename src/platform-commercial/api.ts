@@ -41,6 +41,14 @@ export async function invitationApi(path: string, body: unknown) {
 export const commercialError = (e: unknown) =>
   (
     ({
+      commercial_studio_locked: "Esta preparação já foi aprovada. Continue em Demonstrações ou duplique para preparar outra versão.",
+      commercial_storage_unavailable: "Não foi possível acessar as imagens. O rascunho foi preservado; tente novamente.",
+      commercial_media_invalid: "Imagem inválida. Envie JPG, PNG ou WebP de até 5 MB.",
+      commercial_export_too_large: "Esta página excede o limite de captura. Exporte cada seção separadamente.",
+      commercial_export_empty: "Esta seção ainda não possui conteúdo para exportar.",
+      commercial_media_limit: "Limite de 40 imagens por preparação atingido. Revise as imagens antes de continuar.",
+      commercial_studio_not_found: "Rascunho indisponível ou excluído.",
+      commercial_configuration_not_ready: "Revise a apresentação e cadastre ao menos um serviço antes de aprovar.",
       commercial_email_confirmation_required: "Confirme o e-mail da sua conta antes de continuar pelo convite.",
       commercial_recipient_mismatch: "Entre com a conta do e-mail que recebeu este convite. Esta conta não é a destinatária autorizada.",
       commercial_claim_conflict: "Este convite já está vinculado a outra identidade. Solicite um novo convite à SYZIA.",

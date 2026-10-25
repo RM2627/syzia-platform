@@ -61,3 +61,8 @@ export function eligibleContact(
       ))
   );
 }
+
+export function eligibleDemoLink(contact: any, demo: any, now = Date.now()) {
+  return Boolean(contact && !contact.suppressed && !["not_interested", "archived"].includes(contact.stage)
+    && demo.state === "available" && demo.published_version_id && new Date(demo.expires_at).getTime() > now);
+}

@@ -2,6 +2,8 @@ import nodemailer from "nodemailer";
 const mailError = (code) => Object.assign(new Error(code), { code });
 export function deliveryError(error) {
   if (error?.code === "email_not_configured") return "email_not_configured";
+  if ([530, 534, 535].includes(error?.responseCode) || error?.code === "EAUTH") return "email_authentication_failed";
+  if ([550, 551, 553, 554].includes(error?.responseCode)) return "email_recipient_or_sender_rejected";
   if ([421, 450, 451, 452].includes(error?.responseCode))
     return "email_rate_limited";
   if (["ETIMEDOUT", "ECONNECTION", "ECONNRESET", "EDNS"].includes(error?.code))
@@ -48,7 +50,7 @@ export function createAccessMailer(
     !env.ACCESS_SMTP_HOST ||
     !env.ACCESS_SMTP_USER ||
     !env.ACCESS_SMTP_PASSWORD ||
-    !env.ACCESS_MAIL_FROM ||
+    !env.ACCESS_MAIL_FROM || /[\r\n]/.test(env.ACCESS_MAIL_FROM) ||
     ![465, 587].includes(port)
   )
     return async () => {
@@ -76,6 +78,7 @@ export function createAccessMailer(
     const result = await transport.sendMail({
       ...message,
       from: env.ACCESS_MAIL_FROM,
+      ...(env.ACCESS_SMTP_HOST === "smtp.resend.com" && /^[a-f0-9-]{36}$/.test(value.delivery_id || "") ? {headers: { ...message.headers, "Resend-Idempotency-Key": "commercial/" + value.delivery_id }} : {}),
     });
     if (!result.accepted?.length || result.rejected?.length)
       throw mailError("email_delivery_failed");

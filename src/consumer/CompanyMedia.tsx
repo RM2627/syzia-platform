@@ -133,7 +133,7 @@ export function ImageUpload({
       : /serviço/i.test(title)
         ? "service"
         : "portfolio";
-  const ratio = kind === "cover" ? 4 / 3 : 3 / 2;
+  const ratio = kind === "cover" ? 4 / 3 : kind === "service" ? 3 / 2 : 0;
   const [crop, setCrop] = useState<Blob | null>(null);
   const id = useId(),
     [busy, setBusy] = useState(false),
@@ -204,7 +204,7 @@ export function ImageUpload({
             }
           }}
         />
-        {value && (kind === "cover" || kind === "service") && (
+        {value && (
           <button
             type="button"
             disabled={disabled || busy}

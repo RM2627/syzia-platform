@@ -1,0 +1,1319 @@
+[
+  {
+    "id": "pet",
+    "name": "Estética animal / banho e tosa",
+    "model": {
+      "format": "syzia-config-054",
+      "template": "current",
+      "tables": {
+        "company_settings": [
+          {
+            "description": "Conheça os serviços e encontre a opção adequada à sua necessidade. As condições serão revisadas com o responsável antes da publicação.",
+            "public_phone": "",
+            "public_email": "",
+            "public_address": "",
+            "service_regions": "",
+            "payment_methods": "",
+            "business_hours": [],
+            "human_hours": []
+          }
+        ],
+        "service_categories": [
+          {
+            "id": "556b6a25-5adf-5369-89e0-be4d009caee0",
+            "name": "Cuidados de higiene",
+            "position": 0,
+            "active": true
+          },
+          {
+            "id": "e4d6d749-965c-5fdb-90e2-796b3ea49b14",
+            "name": "Banho e tosa",
+            "position": 1,
+            "active": true
+          }
+        ],
+        "services": [
+          {
+            "id": "b820347e-3c7e-5849-8338-7ea2489844c2",
+            "name": "Banho e cuidados",
+            "category": "Cuidados de higiene",
+            "category_id": "556b6a25-5adf-5369-89e0-be4d009caee0",
+            "description": "Apresentação inicial de banho e cuidados. Revise o escopo e as condições antes de compartilhar.",
+            "price_mode": "quote",
+            "price_cents": null,
+            "duration_minutes": null,
+            "active": true,
+            "quotes_allowed": true,
+            "direct_booking": false,
+            "contract_mode": "evaluation",
+            "photo_policy": "none",
+            "execution_mode": "continuous",
+            "execution_max_periods": null
+          },
+          {
+            "id": "30d2cf47-dfbe-569c-aab0-24dd073eeb0b",
+            "name": "Tosa personalizada",
+            "category": "Banho e tosa",
+            "category_id": "e4d6d749-965c-5fdb-90e2-796b3ea49b14",
+            "description": "Apresentação inicial de tosa personalizada. Revise o escopo e as condições antes de compartilhar.",
+            "price_mode": "quote",
+            "price_cents": null,
+            "duration_minutes": null,
+            "active": true,
+            "quotes_allowed": true,
+            "direct_booking": false,
+            "contract_mode": "evaluation",
+            "photo_policy": "none",
+            "execution_mode": "continuous",
+            "execution_max_periods": null
+          }
+        ],
+        "faqs": [
+          {
+            "id": "d060e309-ee76-5f91-8bc4-891febb75695",
+            "question": "Como conhecer as opções de atendimento?",
+            "answer": "Explore os serviços apresentados. Valores, duração e disponibilidade serão informados após a revisão da configuração.",
+            "active": true,
+            "position": 0
+          }
+        ],
+        "company_branding": [
+          {
+            "primary_color": "#186b6a",
+            "theme": "light",
+            "category_order": ["Cuidados de higiene", "Banho e tosa"],
+            "service_order": [],
+            "logo_id": null,
+            "cover_id": null
+          }
+        ],
+        "portfolio_items": [],
+        "company_media": []
+      }
+    }
+  },
+  {
+    "id": "automotiva",
+    "name": "Estética automotiva",
+    "model": {
+      "format": "syzia-config-054",
+      "template": "current",
+      "tables": {
+        "company_settings": [
+          {
+            "description": "Conheça os serviços e encontre a opção adequada à sua necessidade. As condições serão revisadas com o responsável antes da publicação.",
+            "public_phone": "",
+            "public_email": "",
+            "public_address": "",
+            "service_regions": "",
+            "payment_methods": "",
+            "business_hours": [],
+            "human_hours": []
+          }
+        ],
+        "service_categories": [
+          {
+            "id": "b6ad6a02-709c-5652-b4ea-28449b771cb8",
+            "name": "Conservação",
+            "position": 0,
+            "active": true
+          },
+          {
+            "id": "9da4f0c2-68ea-5ebf-a785-1a1dd92c4293",
+            "name": "Acabamento",
+            "position": 1,
+            "active": true
+          }
+        ],
+        "services": [
+          {
+            "id": "6448c325-2305-593e-bbc2-0dc0d5b40816",
+            "name": "Limpeza detalhada",
+            "category": "Conservação",
+            "category_id": "b6ad6a02-709c-5652-b4ea-28449b771cb8",
+            "description": "Apresentação inicial de limpeza detalhada. Revise o escopo e as condições antes de compartilhar.",
+            "price_mode": "quote",
+            "price_cents": null,
+            "duration_minutes": null,
+            "active": true,
+            "quotes_allowed": true,
+            "direct_booking": false,
+            "contract_mode": "evaluation",
+            "photo_policy": "none",
+            "execution_mode": "continuous",
+            "execution_max_periods": null
+          },
+          {
+            "id": "4c0c4568-9eab-51a9-9b34-ebaf0f11cbfd",
+            "name": "Tratamento da pintura",
+            "category": "Acabamento",
+            "category_id": "9da4f0c2-68ea-5ebf-a785-1a1dd92c4293",
+            "description": "Apresentação inicial de tratamento da pintura. Revise o escopo e as condições antes de compartilhar.",
+            "price_mode": "quote",
+            "price_cents": null,
+            "duration_minutes": null,
+            "active": true,
+            "quotes_allowed": true,
+            "direct_booking": false,
+            "contract_mode": "evaluation",
+            "photo_policy": "none",
+            "execution_mode": "continuous",
+            "execution_max_periods": null
+          }
+        ],
+        "faqs": [
+          {
+            "id": "8ae29740-1526-5788-8aed-a8962f0d7d87",
+            "question": "Como conhecer as opções de atendimento?",
+            "answer": "Explore os serviços apresentados. Valores, duração e disponibilidade serão informados após a revisão da configuração.",
+            "active": true,
+            "position": 0
+          }
+        ],
+        "company_branding": [
+          {
+            "primary_color": "#186b6a",
+            "theme": "light",
+            "category_order": ["Conservação", "Acabamento"],
+            "service_order": [],
+            "logo_id": null,
+            "cover_id": null
+          }
+        ],
+        "portfolio_items": [],
+        "company_media": []
+      }
+    }
+  },
+  {
+    "id": "estofados",
+    "name": "Limpeza de estofados",
+    "model": {
+      "format": "syzia-config-054",
+      "template": "current",
+      "tables": {
+        "company_settings": [
+          {
+            "description": "Conheça os serviços e encontre a opção adequada à sua necessidade. As condições serão revisadas com o responsável antes da publicação.",
+            "public_phone": "",
+            "public_email": "",
+            "public_address": "",
+            "service_regions": "",
+            "payment_methods": "",
+            "business_hours": [],
+            "human_hours": []
+          }
+        ],
+        "service_categories": [
+          {
+            "id": "ffde3c7d-18af-505b-b817-6b770deb1945",
+            "name": "Higienização",
+            "position": 0,
+            "active": true
+          }
+        ],
+        "services": [
+          {
+            "id": "388ecb18-f5ce-560f-9b58-147801f2c116",
+            "name": "Higienização de sofá",
+            "category": "Higienização",
+            "category_id": "ffde3c7d-18af-505b-b817-6b770deb1945",
+            "description": "Apresentação inicial de higienização de sofá. Revise o escopo e as condições antes de compartilhar.",
+            "price_mode": "quote",
+            "price_cents": null,
+            "duration_minutes": null,
+            "active": true,
+            "quotes_allowed": true,
+            "direct_booking": false,
+            "contract_mode": "evaluation",
+            "photo_policy": "none",
+            "execution_mode": "continuous",
+            "execution_max_periods": null
+          },
+          {
+            "id": "34dc6696-db55-5255-a20e-5fde8a1ebd4a",
+            "name": "Higienização de poltronas",
+            "category": "Higienização",
+            "category_id": "ffde3c7d-18af-505b-b817-6b770deb1945",
+            "description": "Apresentação inicial de higienização de poltronas. Revise o escopo e as condições antes de compartilhar.",
+            "price_mode": "quote",
+            "price_cents": null,
+            "duration_minutes": null,
+            "active": true,
+            "quotes_allowed": true,
+            "direct_booking": false,
+            "contract_mode": "evaluation",
+            "photo_policy": "none",
+            "execution_mode": "continuous",
+            "execution_max_periods": null
+          }
+        ],
+        "faqs": [
+          {
+            "id": "54cbe0e6-e0c9-53e1-b370-b9df5bcd582d",
+            "question": "Como conhecer as opções de atendimento?",
+            "answer": "Explore os serviços apresentados. Valores, duração e disponibilidade serão informados após a revisão da configuração.",
+            "active": true,
+            "position": 0
+          }
+        ],
+        "company_branding": [
+          {
+            "primary_color": "#186b6a",
+            "theme": "light",
+            "category_order": ["Higienização"],
+            "service_order": [],
+            "logo_id": null,
+            "cover_id": null
+          }
+        ],
+        "portfolio_items": [],
+        "company_media": []
+      }
+    }
+  },
+  {
+    "id": "nutricao",
+    "name": "Nutrição",
+    "model": {
+      "format": "syzia-config-054",
+      "template": "current",
+      "tables": {
+        "company_settings": [
+          {
+            "description": "Conheça os serviços e encontre a opção adequada à sua necessidade. As condições serão revisadas com o responsável antes da publicação.",
+            "public_phone": "",
+            "public_email": "",
+            "public_address": "",
+            "service_regions": "",
+            "payment_methods": "",
+            "business_hours": [],
+            "human_hours": []
+          }
+        ],
+        "service_categories": [
+          {
+            "id": "5d4fec24-1901-53e1-ba73-44722623cd09",
+            "name": "Consultas",
+            "position": 0,
+            "active": true
+          }
+        ],
+        "services": [
+          {
+            "id": "50ea2b9d-7f0d-5f0e-96df-2711ae589981",
+            "name": "Consulta nutricional",
+            "category": "Consultas",
+            "category_id": "5d4fec24-1901-53e1-ba73-44722623cd09",
+            "description": "Apresentação inicial de consulta nutricional. Revise o escopo e as condições antes de compartilhar.",
+            "price_mode": "quote",
+            "price_cents": null,
+            "duration_minutes": null,
+            "active": true,
+            "quotes_allowed": true,
+            "direct_booking": false,
+            "contract_mode": "evaluation",
+            "photo_policy": "none",
+            "execution_mode": "continuous",
+            "execution_max_periods": null
+          },
+          {
+            "id": "b8e7f93a-81a1-57b4-b4eb-7dea15586599",
+            "name": "Acompanhamento nutricional",
+            "category": "Consultas",
+            "category_id": "5d4fec24-1901-53e1-ba73-44722623cd09",
+            "description": "Apresentação inicial de acompanhamento nutricional. Revise o escopo e as condições antes de compartilhar.",
+            "price_mode": "quote",
+            "price_cents": null,
+            "duration_minutes": null,
+            "active": true,
+            "quotes_allowed": true,
+            "direct_booking": false,
+            "contract_mode": "evaluation",
+            "photo_policy": "none",
+            "execution_mode": "continuous",
+            "execution_max_periods": null
+          }
+        ],
+        "faqs": [
+          {
+            "id": "d2961d2b-5a14-5001-8cc4-0bb89be3064d",
+            "question": "Como conhecer as opções de atendimento?",
+            "answer": "Explore os serviços apresentados. Valores, duração e disponibilidade serão informados após a revisão da configuração.",
+            "active": true,
+            "position": 0
+          }
+        ],
+        "company_branding": [
+          {
+            "primary_color": "#186b6a",
+            "theme": "light",
+            "category_order": ["Consultas"],
+            "service_order": [],
+            "logo_id": null,
+            "cover_id": null
+          }
+        ],
+        "portfolio_items": [],
+        "company_media": []
+      }
+    }
+  },
+  {
+    "id": "barbearia",
+    "name": "Barbearia",
+    "model": {
+      "format": "syzia-config-054",
+      "template": "current",
+      "tables": {
+        "company_settings": [
+          {
+            "description": "Conheça os serviços e encontre a opção adequada à sua necessidade. As condições serão revisadas com o responsável antes da publicação.",
+            "public_phone": "",
+            "public_email": "",
+            "public_address": "",
+            "service_regions": "",
+            "payment_methods": "",
+            "business_hours": [],
+            "human_hours": []
+          }
+        ],
+        "service_categories": [
+          {
+            "id": "f95dce95-9d13-5b62-a5e1-2f7451ac78a1",
+            "name": "Cabelo e barba",
+            "position": 0,
+            "active": true
+          }
+        ],
+        "services": [
+          {
+            "id": "8dc25269-d325-5ad9-ac21-60072c87c69f",
+            "name": "Corte de cabelo",
+            "category": "Cabelo e barba",
+            "category_id": "f95dce95-9d13-5b62-a5e1-2f7451ac78a1",
+            "description": "Apresentação inicial de corte de cabelo. Revise o escopo e as condições antes de compartilhar.",
+            "price_mode": "quote",
+            "price_cents": null,
+            "duration_minutes": null,
+            "active": true,
+            "quotes_allowed": true,
+            "direct_booking": false,
+            "contract_mode": "evaluation",
+            "photo_policy": "none",
+            "execution_mode": "continuous",
+            "execution_max_periods": null
+          },
+          {
+            "id": "9a8ccb29-fe8f-5589-9306-12f00526ea29",
+            "name": "Cuidado da barba",
+            "category": "Cabelo e barba",
+            "category_id": "f95dce95-9d13-5b62-a5e1-2f7451ac78a1",
+            "description": "Apresentação inicial de cuidado da barba. Revise o escopo e as condições antes de compartilhar.",
+            "price_mode": "quote",
+            "price_cents": null,
+            "duration_minutes": null,
+            "active": true,
+            "quotes_allowed": true,
+            "direct_booking": false,
+            "contract_mode": "evaluation",
+            "photo_policy": "none",
+            "execution_mode": "continuous",
+            "execution_max_periods": null
+          }
+        ],
+        "faqs": [
+          {
+            "id": "5e89c15f-0cf8-50c2-a24b-bc55280258ab",
+            "question": "Como conhecer as opções de atendimento?",
+            "answer": "Explore os serviços apresentados. Valores, duração e disponibilidade serão informados após a revisão da configuração.",
+            "active": true,
+            "position": 0
+          }
+        ],
+        "company_branding": [
+          {
+            "primary_color": "#186b6a",
+            "theme": "light",
+            "category_order": ["Cabelo e barba"],
+            "service_order": [],
+            "logo_id": null,
+            "cover_id": null
+          }
+        ],
+        "portfolio_items": [],
+        "company_media": []
+      }
+    }
+  },
+  {
+    "id": "salao",
+    "name": "Salão de beleza",
+    "model": {
+      "format": "syzia-config-054",
+      "template": "current",
+      "tables": {
+        "company_settings": [
+          {
+            "description": "Conheça os serviços e encontre a opção adequada à sua necessidade. As condições serão revisadas com o responsável antes da publicação.",
+            "public_phone": "",
+            "public_email": "",
+            "public_address": "",
+            "service_regions": "",
+            "payment_methods": "",
+            "business_hours": [],
+            "human_hours": []
+          }
+        ],
+        "service_categories": [
+          {
+            "id": "6559045f-7ff7-5650-a031-8e29f5b9cd5e",
+            "name": "Cabelo",
+            "position": 0,
+            "active": true
+          }
+        ],
+        "services": [
+          {
+            "id": "20168a9d-1164-5538-bbd1-12fb0d241f30",
+            "name": "Corte e finalização",
+            "category": "Cabelo",
+            "category_id": "6559045f-7ff7-5650-a031-8e29f5b9cd5e",
+            "description": "Apresentação inicial de corte e finalização. Revise o escopo e as condições antes de compartilhar.",
+            "price_mode": "quote",
+            "price_cents": null,
+            "duration_minutes": null,
+            "active": true,
+            "quotes_allowed": true,
+            "direct_booking": false,
+            "contract_mode": "evaluation",
+            "photo_policy": "none",
+            "execution_mode": "continuous",
+            "execution_max_periods": null
+          },
+          {
+            "id": "2e767565-b2cc-56f9-9d5b-3261de1e2861",
+            "name": "Tratamento capilar",
+            "category": "Cabelo",
+            "category_id": "6559045f-7ff7-5650-a031-8e29f5b9cd5e",
+            "description": "Apresentação inicial de tratamento capilar. Revise o escopo e as condições antes de compartilhar.",
+            "price_mode": "quote",
+            "price_cents": null,
+            "duration_minutes": null,
+            "active": true,
+            "quotes_allowed": true,
+            "direct_booking": false,
+            "contract_mode": "evaluation",
+            "photo_policy": "none",
+            "execution_mode": "continuous",
+            "execution_max_periods": null
+          }
+        ],
+        "faqs": [
+          {
+            "id": "4409ed69-378d-531b-9cfe-6266387e1092",
+            "question": "Como conhecer as opções de atendimento?",
+            "answer": "Explore os serviços apresentados. Valores, duração e disponibilidade serão informados após a revisão da configuração.",
+            "active": true,
+            "position": 0
+          }
+        ],
+        "company_branding": [
+          {
+            "primary_color": "#186b6a",
+            "theme": "light",
+            "category_order": ["Cabelo"],
+            "service_order": [],
+            "logo_id": null,
+            "cover_id": null
+          }
+        ],
+        "portfolio_items": [],
+        "company_media": []
+      }
+    }
+  },
+  {
+    "id": "unhas",
+    "name": "Manicure / nail designer",
+    "model": {
+      "format": "syzia-config-054",
+      "template": "current",
+      "tables": {
+        "company_settings": [
+          {
+            "description": "Conheça os serviços e encontre a opção adequada à sua necessidade. As condições serão revisadas com o responsável antes da publicação.",
+            "public_phone": "",
+            "public_email": "",
+            "public_address": "",
+            "service_regions": "",
+            "payment_methods": "",
+            "business_hours": [],
+            "human_hours": []
+          }
+        ],
+        "service_categories": [
+          {
+            "id": "c6873e8c-783a-515e-8a27-ad51e58cb33f",
+            "name": "Unhas",
+            "position": 0,
+            "active": true
+          }
+        ],
+        "services": [
+          {
+            "id": "99108dee-6d1b-590a-9aed-276f03a70c95",
+            "name": "Manicure",
+            "category": "Unhas",
+            "category_id": "c6873e8c-783a-515e-8a27-ad51e58cb33f",
+            "description": "Apresentação inicial de manicure. Revise o escopo e as condições antes de compartilhar.",
+            "price_mode": "quote",
+            "price_cents": null,
+            "duration_minutes": null,
+            "active": true,
+            "quotes_allowed": true,
+            "direct_booking": false,
+            "contract_mode": "evaluation",
+            "photo_policy": "none",
+            "execution_mode": "continuous",
+            "execution_max_periods": null
+          },
+          {
+            "id": "133277f2-622c-55d9-871e-21b0659a719b",
+            "name": "Design de unhas",
+            "category": "Unhas",
+            "category_id": "c6873e8c-783a-515e-8a27-ad51e58cb33f",
+            "description": "Apresentação inicial de design de unhas. Revise o escopo e as condições antes de compartilhar.",
+            "price_mode": "quote",
+            "price_cents": null,
+            "duration_minutes": null,
+            "active": true,
+            "quotes_allowed": true,
+            "direct_booking": false,
+            "contract_mode": "evaluation",
+            "photo_policy": "none",
+            "execution_mode": "continuous",
+            "execution_max_periods": null
+          }
+        ],
+        "faqs": [
+          {
+            "id": "f2c95ac0-ab51-5971-bf5d-1b3c757a440f",
+            "question": "Como conhecer as opções de atendimento?",
+            "answer": "Explore os serviços apresentados. Valores, duração e disponibilidade serão informados após a revisão da configuração.",
+            "active": true,
+            "position": 0
+          }
+        ],
+        "company_branding": [
+          {
+            "primary_color": "#186b6a",
+            "theme": "light",
+            "category_order": ["Unhas"],
+            "service_order": [],
+            "logo_id": null,
+            "cover_id": null
+          }
+        ],
+        "portfolio_items": [],
+        "company_media": []
+      }
+    }
+  },
+  {
+    "id": "sobrancelhas",
+    "name": "Sobrancelhas",
+    "model": {
+      "format": "syzia-config-054",
+      "template": "current",
+      "tables": {
+        "company_settings": [
+          {
+            "description": "Conheça os serviços e encontre a opção adequada à sua necessidade. As condições serão revisadas com o responsável antes da publicação.",
+            "public_phone": "",
+            "public_email": "",
+            "public_address": "",
+            "service_regions": "",
+            "payment_methods": "",
+            "business_hours": [],
+            "human_hours": []
+          }
+        ],
+        "service_categories": [
+          {
+            "id": "b3cb90f4-c8d8-5480-a44f-afa967eb56c3",
+            "name": "Design",
+            "position": 0,
+            "active": true
+          }
+        ],
+        "services": [
+          {
+            "id": "b1d33f68-e0bc-5a71-beec-b7d9e1f5b95c",
+            "name": "Design de sobrancelhas",
+            "category": "Design",
+            "category_id": "b3cb90f4-c8d8-5480-a44f-afa967eb56c3",
+            "description": "Apresentação inicial de design de sobrancelhas. Revise o escopo e as condições antes de compartilhar.",
+            "price_mode": "quote",
+            "price_cents": null,
+            "duration_minutes": null,
+            "active": true,
+            "quotes_allowed": true,
+            "direct_booking": false,
+            "contract_mode": "evaluation",
+            "photo_policy": "none",
+            "execution_mode": "continuous",
+            "execution_max_periods": null
+          },
+          {
+            "id": "0d10b6f8-914d-528b-a574-cd58388b485c",
+            "name": "Manutenção de design",
+            "category": "Design",
+            "category_id": "b3cb90f4-c8d8-5480-a44f-afa967eb56c3",
+            "description": "Apresentação inicial de manutenção de design. Revise o escopo e as condições antes de compartilhar.",
+            "price_mode": "quote",
+            "price_cents": null,
+            "duration_minutes": null,
+            "active": true,
+            "quotes_allowed": true,
+            "direct_booking": false,
+            "contract_mode": "evaluation",
+            "photo_policy": "none",
+            "execution_mode": "continuous",
+            "execution_max_periods": null
+          }
+        ],
+        "faqs": [
+          {
+            "id": "0ad19dc0-e6aa-5ed7-a14d-8b1b40fa8c90",
+            "question": "Como conhecer as opções de atendimento?",
+            "answer": "Explore os serviços apresentados. Valores, duração e disponibilidade serão informados após a revisão da configuração.",
+            "active": true,
+            "position": 0
+          }
+        ],
+        "company_branding": [
+          {
+            "primary_color": "#186b6a",
+            "theme": "light",
+            "category_order": ["Design"],
+            "service_order": [],
+            "logo_id": null,
+            "cover_id": null
+          }
+        ],
+        "portfolio_items": [],
+        "company_media": []
+      }
+    }
+  },
+  {
+    "id": "cilios",
+    "name": "Cílios",
+    "model": {
+      "format": "syzia-config-054",
+      "template": "current",
+      "tables": {
+        "company_settings": [
+          {
+            "description": "Conheça os serviços e encontre a opção adequada à sua necessidade. As condições serão revisadas com o responsável antes da publicação.",
+            "public_phone": "",
+            "public_email": "",
+            "public_address": "",
+            "service_regions": "",
+            "payment_methods": "",
+            "business_hours": [],
+            "human_hours": []
+          }
+        ],
+        "service_categories": [
+          {
+            "id": "7fdc1e31-9c09-5c84-a16d-73fbdfe9b360",
+            "name": "Olhar",
+            "position": 0,
+            "active": true
+          }
+        ],
+        "services": [
+          {
+            "id": "caad2cb4-a749-54c9-b79b-b1cba7435670",
+            "name": "Extensão de cílios",
+            "category": "Olhar",
+            "category_id": "7fdc1e31-9c09-5c84-a16d-73fbdfe9b360",
+            "description": "Apresentação inicial de extensão de cílios. Revise o escopo e as condições antes de compartilhar.",
+            "price_mode": "quote",
+            "price_cents": null,
+            "duration_minutes": null,
+            "active": true,
+            "quotes_allowed": true,
+            "direct_booking": false,
+            "contract_mode": "evaluation",
+            "photo_policy": "none",
+            "execution_mode": "continuous",
+            "execution_max_periods": null
+          },
+          {
+            "id": "9dae1e5f-0adf-5e94-9a3f-dab45ec64dd6",
+            "name": "Manutenção de cílios",
+            "category": "Olhar",
+            "category_id": "7fdc1e31-9c09-5c84-a16d-73fbdfe9b360",
+            "description": "Apresentação inicial de manutenção de cílios. Revise o escopo e as condições antes de compartilhar.",
+            "price_mode": "quote",
+            "price_cents": null,
+            "duration_minutes": null,
+            "active": true,
+            "quotes_allowed": true,
+            "direct_booking": false,
+            "contract_mode": "evaluation",
+            "photo_policy": "none",
+            "execution_mode": "continuous",
+            "execution_max_periods": null
+          }
+        ],
+        "faqs": [
+          {
+            "id": "85d1bbc3-133c-5955-9fcf-8c78872e67d5",
+            "question": "Como conhecer as opções de atendimento?",
+            "answer": "Explore os serviços apresentados. Valores, duração e disponibilidade serão informados após a revisão da configuração.",
+            "active": true,
+            "position": 0
+          }
+        ],
+        "company_branding": [
+          {
+            "primary_color": "#186b6a",
+            "theme": "light",
+            "category_order": ["Olhar"],
+            "service_order": [],
+            "logo_id": null,
+            "cover_id": null
+          }
+        ],
+        "portfolio_items": [],
+        "company_media": []
+      }
+    }
+  },
+  {
+    "id": "fotografia",
+    "name": "Fotografia",
+    "model": {
+      "format": "syzia-config-054",
+      "template": "current",
+      "tables": {
+        "company_settings": [
+          {
+            "description": "Conheça os serviços e encontre a opção adequada à sua necessidade. As condições serão revisadas com o responsável antes da publicação.",
+            "public_phone": "",
+            "public_email": "",
+            "public_address": "",
+            "service_regions": "",
+            "payment_methods": "",
+            "business_hours": [],
+            "human_hours": []
+          }
+        ],
+        "service_categories": [
+          {
+            "id": "48da1fef-49e0-5b7d-83be-29b376efcd8b",
+            "name": "Ensaios",
+            "position": 0,
+            "active": true
+          }
+        ],
+        "services": [
+          {
+            "id": "8d41fcb2-d2a2-5da1-bea0-b02b2a081a3b",
+            "name": "Ensaio individual",
+            "category": "Ensaios",
+            "category_id": "48da1fef-49e0-5b7d-83be-29b376efcd8b",
+            "description": "Apresentação inicial de ensaio individual. Revise o escopo e as condições antes de compartilhar.",
+            "price_mode": "quote",
+            "price_cents": null,
+            "duration_minutes": null,
+            "active": true,
+            "quotes_allowed": true,
+            "direct_booking": false,
+            "contract_mode": "evaluation",
+            "photo_policy": "none",
+            "execution_mode": "continuous",
+            "execution_max_periods": null
+          },
+          {
+            "id": "07926c6e-afd3-5e1e-9212-3d6ed73760c7",
+            "name": "Fotografia para marcas",
+            "category": "Ensaios",
+            "category_id": "48da1fef-49e0-5b7d-83be-29b376efcd8b",
+            "description": "Apresentação inicial de fotografia para marcas. Revise o escopo e as condições antes de compartilhar.",
+            "price_mode": "quote",
+            "price_cents": null,
+            "duration_minutes": null,
+            "active": true,
+            "quotes_allowed": true,
+            "direct_booking": false,
+            "contract_mode": "evaluation",
+            "photo_policy": "none",
+            "execution_mode": "continuous",
+            "execution_max_periods": null
+          }
+        ],
+        "faqs": [
+          {
+            "id": "629b1287-b9ad-5f51-ab59-651fe6c8119c",
+            "question": "Como conhecer as opções de atendimento?",
+            "answer": "Explore os serviços apresentados. Valores, duração e disponibilidade serão informados após a revisão da configuração.",
+            "active": true,
+            "position": 0
+          }
+        ],
+        "company_branding": [
+          {
+            "primary_color": "#186b6a",
+            "theme": "light",
+            "category_order": ["Ensaios"],
+            "service_order": [],
+            "logo_id": null,
+            "cover_id": null
+          }
+        ],
+        "portfolio_items": [],
+        "company_media": []
+      }
+    }
+  },
+  {
+    "id": "personal",
+    "name": "Personal trainer",
+    "model": {
+      "format": "syzia-config-054",
+      "template": "current",
+      "tables": {
+        "company_settings": [
+          {
+            "description": "Conheça os serviços e encontre a opção adequada à sua necessidade. As condições serão revisadas com o responsável antes da publicação.",
+            "public_phone": "",
+            "public_email": "",
+            "public_address": "",
+            "service_regions": "",
+            "payment_methods": "",
+            "business_hours": [],
+            "human_hours": []
+          }
+        ],
+        "service_categories": [
+          {
+            "id": "8f445692-8101-5a29-926e-59242cb565b5",
+            "name": "Orientação de exercícios",
+            "position": 0,
+            "active": true
+          }
+        ],
+        "services": [
+          {
+            "id": "dcc1a134-9981-5bff-b61d-ca4dcac091c8",
+            "name": "Sessão de treinamento",
+            "category": "Orientação de exercícios",
+            "category_id": "8f445692-8101-5a29-926e-59242cb565b5",
+            "description": "Apresentação inicial de sessão de treinamento. Revise o escopo e as condições antes de compartilhar.",
+            "price_mode": "quote",
+            "price_cents": null,
+            "duration_minutes": null,
+            "active": true,
+            "quotes_allowed": true,
+            "direct_booking": false,
+            "contract_mode": "evaluation",
+            "photo_policy": "none",
+            "execution_mode": "continuous",
+            "execution_max_periods": null
+          },
+          {
+            "id": "ce193a3e-3455-527c-a22e-d7f2543392f3",
+            "name": "Planejamento de exercícios",
+            "category": "Orientação de exercícios",
+            "category_id": "8f445692-8101-5a29-926e-59242cb565b5",
+            "description": "Apresentação inicial de planejamento de exercícios. Revise o escopo e as condições antes de compartilhar.",
+            "price_mode": "quote",
+            "price_cents": null,
+            "duration_minutes": null,
+            "active": true,
+            "quotes_allowed": true,
+            "direct_booking": false,
+            "contract_mode": "evaluation",
+            "photo_policy": "none",
+            "execution_mode": "continuous",
+            "execution_max_periods": null
+          }
+        ],
+        "faqs": [
+          {
+            "id": "a04091e7-9b2d-51a6-8492-bc6386f2231f",
+            "question": "Como conhecer as opções de atendimento?",
+            "answer": "Explore os serviços apresentados. Valores, duração e disponibilidade serão informados após a revisão da configuração.",
+            "active": true,
+            "position": 0
+          }
+        ],
+        "company_branding": [
+          {
+            "primary_color": "#186b6a",
+            "theme": "light",
+            "category_order": ["Orientação de exercícios"],
+            "service_order": [],
+            "logo_id": null,
+            "cover_id": null
+          }
+        ],
+        "portfolio_items": [],
+        "company_media": []
+      }
+    }
+  },
+  {
+    "id": "manutencao",
+    "name": "Manutenção residencial",
+    "model": {
+      "format": "syzia-config-054",
+      "template": "current",
+      "tables": {
+        "company_settings": [
+          {
+            "description": "Conheça os serviços e encontre a opção adequada à sua necessidade. As condições serão revisadas com o responsável antes da publicação.",
+            "public_phone": "",
+            "public_email": "",
+            "public_address": "",
+            "service_regions": "",
+            "payment_methods": "",
+            "business_hours": [],
+            "human_hours": []
+          }
+        ],
+        "service_categories": [
+          {
+            "id": "67737c0a-f364-58ab-ad99-d481d39d65d2",
+            "name": "Manutenção",
+            "position": 0,
+            "active": true
+          }
+        ],
+        "services": [
+          {
+            "id": "0224310a-4d0c-5821-9c35-8ae8fa8179cd",
+            "name": "Avaliação de reparo",
+            "category": "Manutenção",
+            "category_id": "67737c0a-f364-58ab-ad99-d481d39d65d2",
+            "description": "Apresentação inicial de avaliação de reparo. Revise o escopo e as condições antes de compartilhar.",
+            "price_mode": "quote",
+            "price_cents": null,
+            "duration_minutes": null,
+            "active": true,
+            "quotes_allowed": true,
+            "direct_booking": false,
+            "contract_mode": "evaluation",
+            "photo_policy": "none",
+            "execution_mode": "continuous",
+            "execution_max_periods": null
+          },
+          {
+            "id": "29b26fee-80d8-54db-99f8-8208bc05abe4",
+            "name": "Manutenção preventiva",
+            "category": "Manutenção",
+            "category_id": "67737c0a-f364-58ab-ad99-d481d39d65d2",
+            "description": "Apresentação inicial de manutenção preventiva. Revise o escopo e as condições antes de compartilhar.",
+            "price_mode": "quote",
+            "price_cents": null,
+            "duration_minutes": null,
+            "active": true,
+            "quotes_allowed": true,
+            "direct_booking": false,
+            "contract_mode": "evaluation",
+            "photo_policy": "none",
+            "execution_mode": "continuous",
+            "execution_max_periods": null
+          }
+        ],
+        "faqs": [
+          {
+            "id": "81a59858-88e6-54f1-9175-c6e50338aed1",
+            "question": "Como conhecer as opções de atendimento?",
+            "answer": "Explore os serviços apresentados. Valores, duração e disponibilidade serão informados após a revisão da configuração.",
+            "active": true,
+            "position": 0
+          }
+        ],
+        "company_branding": [
+          {
+            "primary_color": "#186b6a",
+            "theme": "light",
+            "category_order": ["Manutenção"],
+            "service_order": [],
+            "logo_id": null,
+            "cover_id": null
+          }
+        ],
+        "portfolio_items": [],
+        "company_media": []
+      }
+    }
+  },
+  {
+    "id": "assistencia",
+    "name": "Assistência técnica",
+    "model": {
+      "format": "syzia-config-054",
+      "template": "current",
+      "tables": {
+        "company_settings": [
+          {
+            "description": "Conheça os serviços e encontre a opção adequada à sua necessidade. As condições serão revisadas com o responsável antes da publicação.",
+            "public_phone": "",
+            "public_email": "",
+            "public_address": "",
+            "service_regions": "",
+            "payment_methods": "",
+            "business_hours": [],
+            "human_hours": []
+          }
+        ],
+        "service_categories": [
+          {
+            "id": "eebc6429-029e-52c8-bf31-8341fb90b891",
+            "name": "Equipamentos",
+            "position": 0,
+            "active": true
+          }
+        ],
+        "services": [
+          {
+            "id": "07f5a90e-a140-52bd-b2ca-8933305dbd47",
+            "name": "Diagnóstico técnico",
+            "category": "Equipamentos",
+            "category_id": "eebc6429-029e-52c8-bf31-8341fb90b891",
+            "description": "Apresentação inicial de diagnóstico técnico. Revise o escopo e as condições antes de compartilhar.",
+            "price_mode": "quote",
+            "price_cents": null,
+            "duration_minutes": null,
+            "active": true,
+            "quotes_allowed": true,
+            "direct_booking": false,
+            "contract_mode": "evaluation",
+            "photo_policy": "none",
+            "execution_mode": "continuous",
+            "execution_max_periods": null
+          },
+          {
+            "id": "cb767cf2-0f82-5ddf-9aa0-cb14a9467034",
+            "name": "Reparo sob avaliação",
+            "category": "Equipamentos",
+            "category_id": "eebc6429-029e-52c8-bf31-8341fb90b891",
+            "description": "Apresentação inicial de reparo sob avaliação. Revise o escopo e as condições antes de compartilhar.",
+            "price_mode": "quote",
+            "price_cents": null,
+            "duration_minutes": null,
+            "active": true,
+            "quotes_allowed": true,
+            "direct_booking": false,
+            "contract_mode": "evaluation",
+            "photo_policy": "none",
+            "execution_mode": "continuous",
+            "execution_max_periods": null
+          }
+        ],
+        "faqs": [
+          {
+            "id": "b37db7bb-2104-58ec-a94e-660d6e080c20",
+            "question": "Como conhecer as opções de atendimento?",
+            "answer": "Explore os serviços apresentados. Valores, duração e disponibilidade serão informados após a revisão da configuração.",
+            "active": true,
+            "position": 0
+          }
+        ],
+        "company_branding": [
+          {
+            "primary_color": "#186b6a",
+            "theme": "light",
+            "category_order": ["Equipamentos"],
+            "service_order": [],
+            "logo_id": null,
+            "cover_id": null
+          }
+        ],
+        "portfolio_items": [],
+        "company_media": []
+      }
+    }
+  },
+  {
+    "id": "consultoria",
+    "name": "Consultorias",
+    "model": {
+      "format": "syzia-config-054",
+      "template": "current",
+      "tables": {
+        "company_settings": [
+          {
+            "description": "Conheça os serviços e encontre a opção adequada à sua necessidade. As condições serão revisadas com o responsável antes da publicação.",
+            "public_phone": "",
+            "public_email": "",
+            "public_address": "",
+            "service_regions": "",
+            "payment_methods": "",
+            "business_hours": [],
+            "human_hours": []
+          }
+        ],
+        "service_categories": [
+          {
+            "id": "b272dd4b-e5a0-59ee-bfa2-f171ceabec41",
+            "name": "Consultoria",
+            "position": 0,
+            "active": true
+          }
+        ],
+        "services": [
+          {
+            "id": "e1ebaecf-87aa-5384-89cc-997dcfaecd33",
+            "name": "Conversa de diagnóstico",
+            "category": "Consultoria",
+            "category_id": "b272dd4b-e5a0-59ee-bfa2-f171ceabec41",
+            "description": "Apresentação inicial de conversa de diagnóstico. Revise o escopo e as condições antes de compartilhar.",
+            "price_mode": "quote",
+            "price_cents": null,
+            "duration_minutes": null,
+            "active": true,
+            "quotes_allowed": true,
+            "direct_booking": false,
+            "contract_mode": "evaluation",
+            "photo_policy": "none",
+            "execution_mode": "continuous",
+            "execution_max_periods": null
+          },
+          {
+            "id": "51f7c7a6-4fa1-53a4-a39b-bd699e0b70aa",
+            "name": "Consultoria personalizada",
+            "category": "Consultoria",
+            "category_id": "b272dd4b-e5a0-59ee-bfa2-f171ceabec41",
+            "description": "Apresentação inicial de consultoria personalizada. Revise o escopo e as condições antes de compartilhar.",
+            "price_mode": "quote",
+            "price_cents": null,
+            "duration_minutes": null,
+            "active": true,
+            "quotes_allowed": true,
+            "direct_booking": false,
+            "contract_mode": "evaluation",
+            "photo_policy": "none",
+            "execution_mode": "continuous",
+            "execution_max_periods": null
+          }
+        ],
+        "faqs": [
+          {
+            "id": "5b2314a7-885f-5da6-a679-0b81d9dd1926",
+            "question": "Como conhecer as opções de atendimento?",
+            "answer": "Explore os serviços apresentados. Valores, duração e disponibilidade serão informados após a revisão da configuração.",
+            "active": true,
+            "position": 0
+          }
+        ],
+        "company_branding": [
+          {
+            "primary_color": "#186b6a",
+            "theme": "light",
+            "category_order": ["Consultoria"],
+            "service_order": [],
+            "logo_id": null,
+            "cover_id": null
+          }
+        ],
+        "portfolio_items": [],
+        "company_media": []
+      }
+    }
+  },
+  {
+    "id": "outros",
+    "name": "Outros serviços",
+    "model": {
+      "format": "syzia-config-054",
+      "template": "current",
+      "tables": {
+        "company_settings": [
+          {
+            "description": "Conheça os serviços e encontre a opção adequada à sua necessidade. As condições serão revisadas com o responsável antes da publicação.",
+            "public_phone": "",
+            "public_email": "",
+            "public_address": "",
+            "service_regions": "",
+            "payment_methods": "",
+            "business_hours": [],
+            "human_hours": []
+          }
+        ],
+        "service_categories": [
+          {
+            "id": "003079a5-f2f6-53e9-b13e-257f0f1d0dca",
+            "name": "Serviços",
+            "position": 0,
+            "active": true
+          }
+        ],
+        "services": [
+          {
+            "id": "f4ee904a-4eb8-5305-8387-4d3b583e834d",
+            "name": "Serviço personalizado",
+            "category": "Serviços",
+            "category_id": "003079a5-f2f6-53e9-b13e-257f0f1d0dca",
+            "description": "Apresentação inicial de serviço personalizado. Revise o escopo e as condições antes de compartilhar.",
+            "price_mode": "quote",
+            "price_cents": null,
+            "duration_minutes": null,
+            "active": true,
+            "quotes_allowed": true,
+            "direct_booking": false,
+            "contract_mode": "evaluation",
+            "photo_policy": "none",
+            "execution_mode": "continuous",
+            "execution_max_periods": null
+          },
+          {
+            "id": "b61aa7fe-ff66-5fc2-b8b1-a607f7d12bee",
+            "name": "Avaliação inicial",
+            "category": "Serviços",
+            "category_id": "003079a5-f2f6-53e9-b13e-257f0f1d0dca",
+            "description": "Apresentação inicial de avaliação inicial. Revise o escopo e as condições antes de compartilhar.",
+            "price_mode": "quote",
+            "price_cents": null,
+            "duration_minutes": null,
+            "active": true,
+            "quotes_allowed": true,
+            "direct_booking": false,
+            "contract_mode": "evaluation",
+            "photo_policy": "none",
+            "execution_mode": "continuous",
+            "execution_max_periods": null
+          }
+        ],
+        "faqs": [
+          {
+            "id": "521593e9-5404-575a-baa7-0aabb3ac41d5",
+            "question": "Como conhecer as opções de atendimento?",
+            "answer": "Explore os serviços apresentados. Valores, duração e disponibilidade serão informados após a revisão da configuração.",
+            "active": true,
+            "position": 0
+          }
+        ],
+        "company_branding": [
+          {
+            "primary_color": "#186b6a",
+            "theme": "light",
+            "category_order": ["Serviços"],
+            "service_order": [],
+            "logo_id": null,
+            "cover_id": null
+          }
+        ],
+        "portfolio_items": [],
+        "company_media": []
+      }
+    }
+  }
+]

@@ -40,7 +40,7 @@ export function invitationMessage(value) {
     ? "Sua configuração está pronta para revisão"
     : "Conheça a experiência preparada para " + value.company;
   const body = activation
-    ? "Revise as configurações preparadas, entre com sua identidade e solicite a comprovação do vínculo. Após aprovação, você poderá escolher o plano e continuar pelo checkout oficial. Este convite não inicia assinatura ou período grátis."
+    ? "Entre com a identidade autorizada para este convite, confirme seu e-mail quando necessário e revise as configurações preparadas. Escolha o plano e continue pelo checkout oficial. A liberação depende das validações de identidade, elegibilidade e confirmação financeira. O link sozinho não inicia assinatura ou período grátis."
     : "A SYZIA conecta a página pública, os serviços, o atendimento e a agenda. Explore a apresentação preparada e conheça o painel por dentro. Este é um ambiente demonstrativo, com dados fictícios e sem cobranças ou operações reais.";
   const action = activation ? "Revisar preparação" : "Explorar demonstração";
   const footer = `Convite válido até ${new Date(value.expires_at).toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" })}. Dúvidas ou interesse: ${value.contact}.`;
