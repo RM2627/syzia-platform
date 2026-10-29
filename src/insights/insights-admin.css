@@ -1,0 +1,157 @@
+.insights-admin {
+  max-width: 1240px;
+  margin: auto;
+}
+.ia-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+.ia-heading h1 {
+  margin: 8px 0;
+}
+.ia-toolbar {
+  display: flex;
+  align-items: end;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 16px 0;
+}
+.ia-toolbar label {
+  flex: 1;
+  min-width: 150px;
+}
+.ia-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin: 24px 0;
+}
+.ia-metrics .card {
+  display: flex;
+  flex-direction: column;
+}
+.ia-metrics strong {
+  font-size: 32px;
+}
+.ia-list {
+  display: grid;
+  gap: 14px;
+}
+.ia-list article {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+.ia-list h2 {
+  margin: 7px 0;
+  font-size: 22px;
+}
+.ia-list p,
+.ia-list span {
+  font-size: 14px;
+}
+.ia-editor {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 290px;
+  gap: 24px;
+}
+.ia-editor label {
+  display: block;
+  margin-bottom: 16px;
+}
+.ia-editor label input:not([type="checkbox"]),
+.ia-editor label select,
+.ia-editor label textarea,
+.ia-block > textarea {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+}
+.ia-editor input[type="checkbox"] {
+  margin-right: 8px;
+}
+.ia-editor aside .card {
+  margin-bottom: 18px;
+}
+.ia-editor aside button {
+  margin-bottom: 12px;
+}
+.ia-block {
+  border: 1px solid var(--border, #ded8ec);
+  border-radius: 10px;
+  padding: 16px;
+  margin: 18px 0;
+  background: var(--surface, #f9f7ff);
+}
+.ia-preview {
+  max-width: 780px;
+  margin: auto;
+}
+.ia-preview > span {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+}
+.ia-preview h1 {
+  font-size: 36px;
+}
+.ia-preview h2 {
+  margin-top: 35px;
+}
+.ia-table {
+  overflow: auto;
+}
+.ia-table td,
+.ia-table th {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+@media (max-width: 900px) {
+  .ia-editor {
+    grid-template-columns: 1fr;
+  }
+  .ia-metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .ia-heading,
+  .ia-list article {
+    align-items: start;
+    flex-direction: column;
+  }
+}
+@media (max-width: 420px) {
+  .ia-toolbar {
+    gap: 8px;
+  }
+  .ia-block {
+    padding: 10px;
+  }
+  .ia-heading h1 {
+    font-size: 28px;
+  }
+}
+
+.ia-media {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 18px;
+}
+.ia-media button {
+  margin: 6px;
+}
+
+/* Keep the editorial side panel legible inside the existing dark workspace. */
+.ia-editor > aside {
+  color: #202032;
+  background: transparent;
+}
+.ia-editor > aside .card {
+  color: #202032;
+  background: #fff;
+}
+.ia-editor > aside p {
+  color: #5b566e;
+}

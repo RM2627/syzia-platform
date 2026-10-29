@@ -1,0 +1,358 @@
+[
+  {
+    "title": "Como organizar os agendamentos de uma pequena operação de serviços",
+    "slug": "organizar-agendamentos-pequeno-negocio",
+    "summary": "Uma agenda útil começa antes da escolha do horário. Defina duração, intervalos e responsabilidades para reduzir desencontros sem prometer disponibilidade que não existe.",
+    "category": "Agendamentos e atendimento",
+    "author": "Equipe SYZIA",
+    "tags": [
+      "Serviços",
+      "Organização"
+    ],
+    "cover": "",
+    "seo_title": "Como organizar os agendamentos de uma pequena operação de serviços",
+    "seo_description": "Uma agenda útil começa antes da escolha do horário. Defina duração, intervalos e responsabilidades para reduzir desencontros sem prometer disponibilidade que não existe.",
+    "featured": false,
+    "kind": "article",
+    "toc": true,
+    "blocks": [
+      {
+        "type": "heading",
+        "text": "Comece pela capacidade real"
+      },
+      {
+        "type": "paragraph",
+        "text": "Uma agenda cheia nem sempre representa uma rotina bem organizada. Quando dois atendimentos disputam a mesma pessoa, o mesmo equipamento ou o tempo de deslocamento, o atraso deixa de ser exceção. Antes de abrir horários, descreva como o trabalho acontece: quem executa cada serviço, quais recursos são necessários e quanto tempo fica indisponível entre um cliente e outro."
+      },
+      {
+        "type": "paragraph",
+        "text": "Imagine uma profissional que atende em domicílio. Uma sessão de uma hora não ocupa apenas aquela hora: pode exigir preparação, trajeto e organização dos materiais. O intervalo deve refletir essa rotina. Já em um espaço com duas pessoas trabalhando, a capacidade depende da disponibilidade de cada uma, e não apenas do horário de funcionamento."
+      },
+      {
+        "type": "heading",
+        "text": "Separe pedido, confirmação e execução"
+      },
+      {
+        "type": "paragraph",
+        "text": "Uma solicitação recebida ainda pode precisar de avaliação. Registre claramente quando o horário foi apenas indicado pelo cliente e quando foi confirmado. Essa distinção evita que a equipe organize o dia com base em uma expectativa que ninguém validou."
+      },
+      {
+        "type": "list",
+        "text": "Defina a duração de referência de cada serviço.\nReserve tempo para preparação e intervalos quando necessário.\nConfira quem está disponível para executar o atendimento.\nExplique ao cliente o estado atual da solicitação.\nRegistre alterações no mesmo atendimento, mantendo o histórico."
+      },
+      {
+        "type": "heading",
+        "text": "Faça uma revisão curta no início do dia"
+      },
+      {
+        "type": "paragraph",
+        "text": "Confira os atendimentos confirmados, as informações que faltam e os pedidos que ainda dependem de resposta. Se houver uma mudança, atualize o registro e comunique a pessoa envolvida. Uma informação espalhada em mensagens e anotações pode passar despercebida; a revisão deve partir de uma referência comum."
+      },
+      {
+        "type": "callout",
+        "text": "Exemplo prático: em um serviço com várias peças, aumentar a quantidade pode ampliar o tempo de execução. Em outros casos, a duração é compartilhada. Defina a regra adequada antes de oferecer um horário."
+      },
+      {
+        "type": "heading",
+        "text": "Use uma rotina que a equipe consiga manter"
+      },
+      {
+        "type": "paragraph",
+        "text": "O melhor processo é aquele que continua funcionando em dias movimentados. Comece com poucos campos essenciais: serviço, responsável, data, duração e situação. Amplie os detalhes apenas quando eles ajudarem a tomar decisões. A SYZIA reúne apresentação de serviços, solicitações e agenda conforme a configuração da empresa; as confirmações seguem as regras e a disponibilidade definidas."
+      },
+      {
+        "type": "cta",
+        "text": "Conheça a SYZIA e converse sobre sua rotina de atendimento",
+        "url": "/contato"
+      }
+    ]
+  },
+  {
+    "title": "O que um orçamento profissional de serviços precisa explicar",
+    "slug": "orcamento-profissional-servicos",
+    "summary": "Um orçamento ajuda o cliente a entender o que será feito, quanto custa e quais condições precisa considerar. A clareza do documento reduz dúvidas antes da aprovação.",
+    "category": "Orçamentos e precificação",
+    "author": "Equipe SYZIA",
+    "tags": [
+      "Serviços",
+      "Organização"
+    ],
+    "cover": "",
+    "seo_title": "O que um orçamento profissional de serviços precisa explicar",
+    "seo_description": "Um orçamento ajuda o cliente a entender o que será feito, quanto custa e quais condições precisa considerar. A clareza do documento reduz dúvidas antes da aprovação.",
+    "featured": false,
+    "kind": "article",
+    "toc": true,
+    "blocks": [
+      {
+        "type": "heading",
+        "text": "Descreva o resultado e os limites do serviço"
+      },
+      {
+        "type": "paragraph",
+        "text": "Um título como “manutenção” pode significar coisas diferentes para quem solicita e para quem executa. Explique o escopo com palavras concretas: quais atividades estão incluídas, quais materiais são previstos e quais situações exigiriam uma nova avaliação. Evite usar uma observação genérica para esconder uma condição que muda a decisão do cliente."
+      },
+      {
+        "type": "paragraph",
+        "text": "Em uma limpeza de estofados, por exemplo, é útil identificar o tipo e a quantidade das peças. O preço pode depender de características que ainda precisam ser conferidas. Quando isso acontecer, apresente o valor como estimativa ou aguarde a avaliação; não mostre uma certeza que o serviço ainda não permite."
+      },
+      {
+        "type": "heading",
+        "text": "Organize os itens antes de enviar"
+      },
+      {
+        "type": "table",
+        "text": "Informação | Pergunta que deve responder\nEscopo | O que está incluído?\nQuantidade | Quantas unidades serão atendidas?\nValor | Qual é o preço por item e o total?\nCondições | O que depende de avaliação ou confirmação?\nValidade | Até quando a proposta pode ser aceita?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Se houver um adicional, apresente-o separadamente. Quando existir desconto, deixe visível a diferença entre o subtotal e o total final. Isso facilita a comparação e preserva o entendimento do que foi acordado. Condições de pagamento devem corresponder ao que a empresa realmente oferece."
+      },
+      {
+        "type": "heading",
+        "text": "Registre a aprovação da versão correta"
+      },
+      {
+        "type": "paragraph",
+        "text": "Uma proposta pode mudar depois de uma conversa. Ao revisar quantidade, escopo ou valor, mantenha a versão anterior no histórico e envie a nova versão para aprovação. Não interprete uma mensagem sobre disponibilidade como aceite automático de todas as condições financeiras."
+      },
+      {
+        "type": "callout",
+        "text": "Nem todo serviço precisa de orçamento manual. Serviços com preço e condições definidos podem seguir por aceite direto, quando essa modalidade estiver configurada. Reserve a avaliação para o que realmente depende dela."
+      },
+      {
+        "type": "heading",
+        "text": "Prepare a continuidade do atendimento"
+      },
+      {
+        "type": "paragraph",
+        "text": "Depois da aprovação, a equipe deve encontrar os mesmos itens e condições no registro que acompanhará a execução. A agenda ainda precisa respeitar disponibilidade e duração. Organizar essas informações em conjunto ajuda a evitar a redigitação de dados e a perda do contexto do cliente."
+      },
+      {
+        "type": "paragraph",
+        "text": "Na SYZIA, o serviço pode seguir pela modalidade adequada à configuração da empresa. A proposta é uma alternativa para situações que exigem avaliação, enquanto o atendimento continua associado ao registro correspondente. Antes de escolher uma ferramenta, observe se o processo permite consultar o pedido original e a versão aprovada."
+      },
+      {
+        "type": "cta",
+        "text": "Veja como a SYZIA pode apoiar sua organização comercial",
+        "url": "/contato"
+      }
+    ]
+  },
+  {
+    "title": "Como montar um portfólio digital que ajude o cliente a decidir",
+    "slug": "portfolio-digital-confianca",
+    "summary": "Um portfólio não precisa reunir tudo o que você já fez. Ele precisa mostrar trabalhos relevantes, com contexto suficiente para que o cliente reconheça o serviço de que necessita.",
+    "category": "Presença digital e portfólio",
+    "author": "Equipe SYZIA",
+    "tags": [
+      "Serviços",
+      "Apresentação profissional"
+    ],
+    "cover": "",
+    "seo_title": "Como montar um portfólio digital que ajude o cliente a decidir",
+    "seo_description": "Um portfólio não precisa reunir tudo o que você já fez. Ele precisa mostrar trabalhos relevantes, com contexto suficiente para que o cliente reconheça o serviço de que necessita.",
+    "featured": false,
+    "kind": "article",
+    "toc": true,
+    "blocks": [
+      {
+        "type": "heading",
+        "text": "Escolha exemplos que representem o trabalho atual"
+      },
+      {
+        "type": "paragraph",
+        "text": "Comece pelos serviços que você oferece hoje. Selecione imagens claras e variadas, evitando repetir muitos registros do mesmo trabalho. Uma sequência curta e coerente costuma ser mais fácil de explorar do que uma galeria sem organização. A escolha deve respeitar autorizações de uso e a privacidade das pessoas envolvidas."
+      },
+      {
+        "type": "paragraph",
+        "text": "Um profissional de marcenaria pode apresentar um móvel instalado, um detalhe do acabamento e uma visão do espaço. Cada imagem responde a uma dúvida diferente. Fotografar apenas de longe pode esconder o cuidado da execução; mostrar apenas detalhes pode dificultar a compreensão do conjunto."
+      },
+      {
+        "type": "heading",
+        "text": "Explique o que a imagem não conta"
+      },
+      {
+        "type": "paragraph",
+        "text": "Acrescente um título e uma descrição objetiva. Informe o tipo de serviço e as características relevantes, sem divulgar endereço residencial, contato ou dados de clientes. Se uma fotografia mostra uma condição específica, deixe isso claro para não criar uma expectativa de resultado idêntico em todas as situações."
+      },
+      {
+        "type": "list",
+        "text": "Use títulos que identifiquem o serviço apresentado.\nDescreva materiais, etapas ou contexto quando forem relevantes.\nEvite imagens desfocadas ou com textos ilegíveis.\nConfira a autorização para publicar pessoas, ambientes e marcas.\nEscreva um texto alternativo que descreva a informação principal da imagem."
+      },
+      {
+        "type": "heading",
+        "text": "Aproxime o portfólio do catálogo"
+      },
+      {
+        "type": "paragraph",
+        "text": "O visitante pode gostar de uma imagem e ainda não saber qual serviço escolher. Organize o portfólio próximo das informações do catálogo, com nomes consistentes. Se o trabalho mostrado depende de avaliação, explique essa condição. Se há uma opção com escopo e preço definidos, apresente as condições correspondentes."
+      },
+      {
+        "type": "callout",
+        "text": "Revise também pelo celular. Observe se o assunto principal aparece sem ampliar a imagem e se a legenda continua legível. Fotos muito pesadas podem atrapalhar a navegação, especialmente em conexões móveis."
+      },
+      {
+        "type": "heading",
+        "text": "Mantenha a identidade visual sem esconder o trabalho"
+      },
+      {
+        "type": "paragraph",
+        "text": "Cores, logo e apresentação ajudam a reconhecer a marca, mas não devem competir com o conteúdo. Use a identidade de forma consistente e dê espaço para os serviços. Na página empresarial da SYZIA, a apresentação e o portfólio podem compor uma experiência alinhada à identidade visual da empresa, conforme os recursos configurados."
+      },
+      {
+        "type": "paragraph",
+        "text": "Faça uma revisão periódica: retire exemplos que já não representam sua oferta e substitua imagens quando houver uma versão mais clara. Um portfólio útil permanece atual e ajuda a iniciar uma conversa com expectativas mais bem definidas."
+      },
+      {
+        "type": "cta",
+        "text": "Conheça a apresentação de serviços na SYZIA",
+        "url": "/contato"
+      }
+    ]
+  },
+  {
+    "title": "Como organizar solicitações que chegam pelo WhatsApp",
+    "slug": "organizar-solicitacoes-whatsapp",
+    "summary": "Mensagens ajudam a iniciar conversas, mas não substituem o registro do que foi solicitado. Organize informações essenciais para dar continuidade ao atendimento com clareza.",
+    "category": "Gestão de serviços",
+    "author": "Equipe SYZIA",
+    "tags": [
+      "Serviços",
+      "Organização"
+    ],
+    "cover": "",
+    "seo_title": "Como organizar solicitações que chegam pelo WhatsApp",
+    "seo_description": "Mensagens ajudam a iniciar conversas, mas não substituem o registro do que foi solicitado. Organize informações essenciais para dar continuidade ao atendimento com clareza.",
+    "featured": false,
+    "kind": "article",
+    "toc": true,
+    "blocks": [
+      {
+        "type": "heading",
+        "text": "Transforme a conversa em um registro compreensível"
+      },
+      {
+        "type": "paragraph",
+        "text": "O cliente pode enviar a necessidade em várias mensagens, intercaladas com fotos e perguntas. Antes de avançar, reúna os dados que realmente definem o pedido: serviço, quantidade quando aplicável, condições relevantes e preferência de atendimento. Confirme o entendimento em linguagem simples, sem exigir novamente tudo o que já foi informado."
+      },
+      {
+        "type": "paragraph",
+        "text": "Uma solicitação de limpeza pode começar com “quanto fica?”. A resposta depende do que será atendido e das condições do serviço. Uma pergunta objetiva ajuda mais do que uma lista extensa e automática. Depois de obter a informação, registre-a no atendimento correspondente para que outra pessoa autorizada consiga continuar o trabalho."
+      },
+      {
+        "type": "heading",
+        "text": "Dê um próximo passo para cada solicitação"
+      },
+      {
+        "type": "list",
+        "text": "Recebida: ainda precisa ser organizada.\nAguardando informação: falta um dado específico do cliente.\nEm avaliação: a equipe precisa revisar as condições.\nProposta enviada: existe uma versão aguardando decisão.\nConfirmada: o que foi aceito deve estar claramente registrado."
+      },
+      {
+        "type": "paragraph",
+        "text": "Esses exemplos ajudam a pensar o processo; use os estados efetivamente disponíveis na ferramenta adotada. O importante é conseguir identificar a próxima ação e seu responsável. Uma mensagem lida não significa proposta aprovada, e uma resposta rápida não garante que o atendimento foi concluído."
+      },
+      {
+        "type": "heading",
+        "text": "Evite espalhar decisões por vários lugares"
+      },
+      {
+        "type": "paragraph",
+        "text": "Se a quantidade mudar ou uma condição for negociada, atualize o registro e mantenha o histórico. Não deixe uma alteração importante apenas em uma conversa privada com um funcionário. Compartilhe o contexto com quem possui autorização para atender, respeitando os limites de acesso e a finalidade dos dados."
+      },
+      {
+        "type": "callout",
+        "text": "Cada canal tem uma função. Use a conversa para esclarecer o pedido e mantenha as decisões no registro de atendimento. Isso ajuda a equipe a localizar o contexto quando precisar continuar o trabalho."
+      },
+      {
+        "type": "heading",
+        "text": "Use a página de serviços para antecipar dúvidas"
+      },
+      {
+        "type": "paragraph",
+        "text": "Uma apresentação com descrições, imagens e condições claras pode ajudar o cliente a reconhecer o serviço antes de iniciar a conversa. Em vez de repetir a mesma explicação em cada mensagem, mantenha as informações básicas atualizadas e acessíveis. Quando o caso exigir avaliação, a equipe pode concentrar a conversa nas particularidades do pedido."
+      },
+      {
+        "type": "paragraph",
+        "text": "Na SYZIA, página pública, solicitações e ferramentas de organização fazem parte da mesma jornada, conforme a configuração e o plano. Conhecer essa continuidade ajuda a avaliar se a plataforma combina com a rotina da equipe, sem presumir automações ou integrações externas."
+      },
+      {
+        "type": "cta",
+        "text": "Converse com a SYZIA sobre a organização dos seus atendimentos",
+        "url": "/contato"
+      }
+    ]
+  },
+  {
+    "title": "Como apresentar seus serviços online com mais clareza",
+    "slug": "apresentacao-online-prestador-servicos",
+    "summary": "Uma página profissional deve ajudar o visitante a entender quem atende, o que é oferecido e como dar o próximo passo. Identidade visual e informações claras trabalham juntas.",
+    "category": "Presença digital e portfólio",
+    "author": "Equipe SYZIA",
+    "tags": [
+      "Serviços",
+      "Apresentação profissional"
+    ],
+    "cover": "",
+    "seo_title": "Como apresentar seus serviços online com mais clareza",
+    "seo_description": "Uma página profissional deve ajudar o visitante a entender quem atende, o que é oferecido e como dar o próximo passo. Identidade visual e informações claras trabalham juntas.",
+    "featured": false,
+    "kind": "article",
+    "toc": true,
+    "blocks": [
+      {
+        "type": "heading",
+        "text": "Responda às dúvidas que vêm antes do contato"
+      },
+      {
+        "type": "paragraph",
+        "text": "Quem chega à sua página pode não conhecer sua marca. Apresente os serviços com nomes fáceis de reconhecer, uma descrição breve e condições relevantes. Quando houver preço definido, explique a unidade e o que está incluído. Quando o valor depender de avaliação, informe isso de forma direta."
+      },
+      {
+        "type": "paragraph",
+        "text": "Uma assistência técnica, por exemplo, pode oferecer uma avaliação inicial e serviços cujo valor depende do diagnóstico. Misturar tudo em um único botão dificulta o entendimento. Separar as opções ajuda o cliente a iniciar a jornada adequada, sem criar a expectativa de um preço ou prazo que ainda não pode ser confirmado."
+      },
+      {
+        "type": "heading",
+        "text": "Faça a identidade visual trabalhar a favor da leitura"
+      },
+      {
+        "type": "paragraph",
+        "text": "Use o logo com proporção correta e escolha imagens que representem os serviços. Mantenha contraste entre texto e fundo. Cores personalizadas ajudam a reconhecer a empresa, mas títulos e botões precisam continuar legíveis no celular. Evite inserir informações essenciais apenas dentro de uma imagem."
+      },
+      {
+        "type": "list",
+        "text": "Apresentação breve e coerente com os serviços oferecidos.\nCatálogo organizado, com descrições e condições.\nImagens e portfólio autorizados e atuais.\nInformações públicas de atendimento revisadas.\nUm próximo passo claro para cada modalidade de serviço."
+      },
+      {
+        "type": "heading",
+        "text": "Escolha a jornada adequada ao serviço"
+      },
+      {
+        "type": "paragraph",
+        "text": "Nem todos os atendimentos precisam começar com uma proposta manual. Um serviço com preço, duração e condições definidos pode admitir aceite direto quando essa modalidade estiver habilitada. Já um trabalho personalizado pode exigir avaliação e orçamento. A página deve deixar essas alternativas compreensíveis, sem prometer agendamento ou pagamento automático."
+      },
+      {
+        "type": "heading",
+        "text": "Revise a experiência completa pelo celular"
+      },
+      {
+        "type": "paragraph",
+        "text": "Abra a página como um visitante: encontre um serviço, confira as informações e observe como avançar. Veja se os botões estão acessíveis, se as imagens carregam e se há alguma dúvida que só um funcionário conseguiria esclarecer. Corrija primeiro os pontos que impedem a compreensão ou a continuidade da solicitação."
+      },
+      {
+        "type": "callout",
+        "text": "Uma boa apresentação não termina no primeiro clique. A equipe precisa encontrar a solicitação e continuar o atendimento com as informações fornecidas pelo cliente."
+      },
+      {
+        "type": "paragraph",
+        "text": "A SYZIA permite personalizar a identidade visual da página empresarial e conecta a apresentação de serviços à organização dos atendimentos, de acordo com as configurações e capacidades disponíveis. Essa continuidade pode ser explorada em uma demonstração antes de decidir como a plataforma se encaixa na operação."
+      },
+      {
+        "type": "cta",
+        "text": "Conheça a SYZIA e solicite uma demonstração",
+        "url": "/contato"
+      }
+    ]
+  }
+]

@@ -1073,6 +1073,11 @@ const priceFields: Descriptor[] = [
   },
 ];
 const serviceFields: Descriptor[] = [
+  { key: "quantity_enabled", label: "Permitir escolher quantidade", type: "checkbox" },
+  { key: "quantity_min", label: "Quantidade mínima (1–100)", type: "number", max: 100 },
+  { key: "quantity_max", label: "Quantidade máxima (1–100)", type: "number", max: 100 },
+  { key: "quantity_unit", label: "Unidade (ex.: peça, sessão)", max: 40 },
+  { key: "quantity_duration", label: "Duração ao aumentar a quantidade", type: "select", options: [["fixed", "Duração fixa"], ["proportional", "Duração proporcional ao serviço"], ["manual", "Confirmar com a equipe"]] },
   {
     key: "execution_mode",
     label: "Execução do serviço",
@@ -1207,6 +1212,7 @@ function Catalog() {
               direct_booking: false,
               contract_mode: "immediate",
               photo_policy: "none",
+              quantity_enabled: false, quantity_min: 1, quantity_max: 1, quantity_unit: "unidade", quantity_duration: "fixed",
             }}
           />
         </section>

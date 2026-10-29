@@ -99,8 +99,14 @@ export function QuoteCalculator({
         Number.isFinite(i.quantity) &&
         i.quantity > 0,
     );
+  const durationByUnit = (item: Item) => {
+    const policy = item.kind === "original"
+      ? request.requested_items?.find((r: any) => r.priced_items?.[0]?.position === item.position)
+      : item.kind === "service" ? catalog?.services?.find((s: any) => s.code === item.code) : undefined;
+    return !policy?.quantity_enabled || !["fixed", "manual"].includes(policy.quantity_duration);
+  };
   const totalMinutes = items.reduce(
-    (n, i) => n + i.quantity * i.duration_minutes,
+    (n, i) => n + (durationByUnit(i) ? i.quantity : 1) * i.duration_minutes,
     0,
   );
   const explanationRequired =
@@ -252,7 +258,7 @@ export function QuoteCalculator({
                 />
               </label>
               <label>
-                Duração por unidade (min)
+                {durationByUnit(i) ? "Duração por unidade (min)" : "Duração total deste serviço (min)"}
                 <input
                   aria-label={"Duração de " + i.name}
                   type="number"

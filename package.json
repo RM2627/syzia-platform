@@ -153,7 +153,12 @@
     "test:commercial:055:browser": "playwright test --config=playwright.commercial055.config.ts",
     "test:060": "node --experimental-strip-types --test --test-concurrency=1 tests/syzia-060/*.test.mjs",
     "test:060:browser": "node scripts/syzia-060/browser.mjs",
-    "samples:060": "node --experimental-strip-types scripts/syzia-060/pdf-samples.mjs"
+    "samples:060": "node --experimental-strip-types scripts/syzia-060/pdf-samples.mjs",
+    "test:061": "node --test --test-concurrency=1 tests/syzia-061/*.test.mjs",
+    "test:061:browser": "node scripts/syzia-061/browser.mjs",
+    "insights:import-drafts": "node scripts/insights/import-drafts.mjs",
+    "billing:production-preflight": "node scripts/billing-061/preflight.mjs",
+    "billing:production-configure": "node scripts/billing-061/configure-production.mjs"
   },
   "keywords": [],
   "author": "",

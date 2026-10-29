@@ -4,13 +4,18 @@ export type RequestItem = {
   addons: string[];
   answers: Record<string, unknown>;
   notes: string;
+  quantity?: number;
 };
-export const emptyItem = (service: string): RequestItem => ({
+export const emptyItem = (service: string, quantity?: number): RequestItem => ({
+  ...(quantity === undefined ? {} : { quantity }),
   service,
   addons: [],
   answers: {},
   notes: "",
 });
+export function initialQuantity(service?: Service) {
+  return service?.quantity_enabled ? service.quantity_min || 1 : undefined;
+}
 export function relationIssue(
   company: Company,
   selected: string[],
@@ -54,7 +59,7 @@ export function selectedPrices(services: Service[], selection: RequestItem[]) {
   return selection.flatMap((item) => {
     const s = services.find((x) => x.code === item.service);
     return s
-      ? [s, ...s.addons.filter((a) => item.addons.includes(a.code))]
+      ? [{ ...s, quantity: item.quantity ?? 1 }, ...s.addons.filter((a) => item.addons.includes(a.code))]
       : [];
   });
 }

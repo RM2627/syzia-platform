@@ -4,8 +4,8 @@ const UUID = /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i;
 export function exactBody(body, required, optional = []) {
   if (!body || typeof body !== "object" || Array.isArray(body) || required.some(k => !(k in body)) || Object.keys(body).some(k => ![...required, ...optional].includes(k))) fail("billing_payload_invalid", 400);
 }
-export function subscriptions({ gateway, service, asUser, auth }) {
-  const sql = (action, id, data = {}) => service("billing047_service", { p_action: action, p_id: id, p_data: data });
+export function subscriptions({ gateway, service, asUser, auth, environment = "legacy" }) {
+  const sql = (action, id, data = {}) => service("billing047_service", { p_action: action, p_id: id, p_data: environment === "legacy" ? data : { ...data, environment, runtime_collector_id: gateway?.collectorId, runtime_application_id: gateway?.applicationId } });
   const ready = () => { if (!gateway) fail("billing_credentials_missing", 503); };
   async function process(id, { token, email, source = "reconciliation" } = {}) {
     ready();
@@ -179,6 +179,16 @@ export function subscriptions({ gateway, service, asUser, auth }) {
     ready();
     const hint = gateway.notification(raw, headers, query);
     if (!hint) return { accepted: true };
+    if (environment !== "legacy") {
+      // Unbound event IDs cannot cause production credentials to query legacy/test
+      // resources. Reconciliation starts from our environment-scoped contracts.
+      if (hint.type === "subscription_preapproval") {
+        const known = await sql("lookup", null, { provider_id: hint.id });
+        if (known) { await process(known.id, { source: "webhook" }); return { accepted: true }; }
+      }
+      await sql("queue_notification", null, { kind: hint.type, resource_id: hint.id });
+      return { accepted: true, reconciliation_pending: true };
+    }
     if (hint.type === "payment") {
       const payment = await gateway.payment(hint.id);
       if (String(payment.collector_id) !== gateway.collectorId) fail("billing_binding_mismatch", 400);

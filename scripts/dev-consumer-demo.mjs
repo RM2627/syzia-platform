@@ -67,6 +67,13 @@ await (await import("./flexible-support/fixture.mjs")).upgradeFlexibleFixture(c.
 process.env.SYZIA_OPTIONAL_MANUAL_CURRENT = "1";
 process.env.SYZIA_OPERATION_CURRENT = "1";
 await (await import("./billing-047/fixture.mjs")).upgradeBillingFixture(c.db);
+// Keep this disposable browser fixture at the same schema as the current UI.
+// Historical assertions are unchanged; no remote database is involved.
+// The historical commercial harness owns its separate schema upgrade path.
+if (process.env.DEMO_COMMERCIAL_055 !== "true") for (const migration of (await (await import("node:fs/promises")).readdir("supabase/migrations"))
+  .filter(name => /^202610(18|20|21|22|25|28)00(54|55|56|57|58|59|60|61|62|63|64)_/.test(name)).sort()) {
+  await c.db.exec(await (await import("node:fs/promises")).readFile("supabase/migrations/" + migration, "utf8"));
+}
 if (process.env.DEMO_NO_MANUAL_048 === "true") await (await import("./syzia-048/fixture.mjs")).seedNoManualBrowser(c);
 (await import("./billing-047/fixture.mjs")).attachBillingRPC(c);
 (await import("./syzia-049/fixture.mjs")).attachOperationRPC(c);

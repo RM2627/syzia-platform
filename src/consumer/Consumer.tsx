@@ -18,6 +18,7 @@ import {
 import { QuoteSummary } from "./QuoteSummary";
 import {
   emptyItem,
+  initialQuantity,
   relationIssue,
   selectedPrices,
   priceBreakdown,
@@ -754,7 +755,7 @@ function RequestWizard({
     dialog = useRef<HTMLDialogElement>(null),
     [step, setStep] = useState(0),
     [selection, setSelection] = useState<RequestItem[]>(
-      initialSelection.map(emptyItem),
+      initialSelection.map(code => emptyItem(code, initialQuantity(company.services.find(s => s.code === code)))),
     ),
     [name, setName] = useState(""),
     [phone, setPhone] = useState(""),
@@ -814,6 +815,7 @@ function RequestWizard({
             addons: i.addons || [],
             answers: i.answers || {},
             notes: i.notes || "",
+            ...(company.services.find(s => s.code === i.service)?.quantity_enabled ? { quantity: i.quantity ?? initialQuantity(company.services.find(s => s.code === i.service)) } : {}),
           })),
         );
         setName(d.name);
@@ -860,11 +862,12 @@ function RequestWizard({
         s &&
         (s.contract_mode === "immediate" ||
           (!s.contract_mode && s.direct_booking)) &&
-        s.duration_minutes
+        (!s.quantity_enabled || s.quantity_duration !== "manual") && s.duration_minutes
       );
     });
   const updateItem = (code: string, patch: Partial<RequestItem>) => {
     setDesired("");
+    setDesiredPeriods([]);
     setSelection((prev) =>
       prev.map((i) => (i.service === code ? { ...i, ...patch } : i)),
     );
@@ -890,7 +893,7 @@ function RequestWizard({
       setError("Selecione até 10 serviços por pedido.");
       return;
     }
-    const next = [...selection, emptyItem(code)];
+    const next = [...selection, emptyItem(code, initialQuantity(company.services.find(s => s.code === code)))];
     setSelection(next);
     onSelectionChange(next.map((i) => i.service));
   }
@@ -1084,6 +1087,13 @@ function RequestWizard({
                     aria-label={service.name}
                   >
                     <h3>{service.name}</h3>
+                    {service.quantity_enabled && (step === 1 ? <div className="c-quantity" role="group" aria-label={`Quantidade de ${service.name}`}>
+                      <button type="button" aria-label="Diminuir quantidade" disabled={(item.quantity ?? 1) <= (service.quantity_min || 1)} onClick={() => updateItem(item.service, { quantity: (item.quantity ?? 1) - 1 })}>−</button>
+                      <label>Quantidade ({service.quantity_unit || "unidade"})<input type="number" inputMode="numeric" min={service.quantity_min || 1} max={service.quantity_max || 1} step="1" required value={item.quantity ?? 1} onChange={e => updateItem(item.service, { quantity: Number(e.target.value) })} /></label>
+                      <button type="button" aria-label="Aumentar quantidade" disabled={(item.quantity ?? 1) >= (service.quantity_max || 1)} onClick={() => updateItem(item.service, { quantity: (item.quantity ?? 1) + 1 })}>+</button>
+                      <small>{service.price_cents == null ? "Valor sob consulta para a quantidade informada." : `${service.price_mode === "from" ? "A partir de " : ""}${money(service.price_cents)} por ${service.quantity_unit || "unidade"} · ${money(service.price_cents * (item.quantity ?? 1))} para o serviço`}</small>
+                      <small>Adicionais são aplicados uma vez por serviço selecionado.{service.quantity_duration === "manual" ? " A duração será confirmada pela equipe." : ""}</small>
+                    </div> : <p>{item.quantity ?? 1} × {service.quantity_unit || "unidade"}</p>)}
                     <p>{service.description}</p>
                     {service.availability && <p>{service.availability}</p>}
                     <h4>Adicionais de {service.name}</h4>
@@ -1400,6 +1410,7 @@ function RequestWizard({
                 return (
                   <section className="c-order-item" key={item.service}>
                     <h3>{service.name}</h3>
+                    {service.quantity_enabled && <p>{item.quantity ?? 1} × {service.quantity_unit || "unidade"}</p>}
                     <p>{service.availability}</p>
                     <p>
                       Adicionais:{" "}

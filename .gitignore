@@ -36,3 +36,8 @@ test-results-*/
 # Isolated demo reproducible build and example without secrets.
 dist-demo/
 !.env.demo.example
+
+# SYZIA 061: local outputs, owner mappings and transient editorial sessions.
+.work-061/
+*.billing-private.json
+*.insights-private.json

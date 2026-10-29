@@ -242,6 +242,11 @@ export type Question = {
   options: string[];
 };
 export type Service = Addon & {
+  quantity_enabled?: boolean;
+  quantity_min?: number;
+  quantity_max?: number;
+  quantity_unit?: string;
+  quantity_duration?: "fixed" | "proportional" | "manual";
   category: string;
   description: string;
   image_url: string;

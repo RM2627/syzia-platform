@@ -11,7 +11,7 @@ export const CONFIG_FIELDS = Object.freeze({
   company_media:
     "id public_code object_path mime size_bytes state sha256 width height",
   services:
-    "id name category description image_url price_mode price_cents duration_minutes availability notes active quotes_allowed direct_booking category_id image_media_id contract_mode photo_policy photo_instructions execution_mode execution_max_periods price_max_cents",
+    "id name category description image_url price_mode price_cents duration_minutes availability notes active quotes_allowed direct_booking category_id image_media_id contract_mode photo_policy photo_instructions execution_mode execution_max_periods price_max_cents quantity_enabled quantity_min quantity_max quantity_unit quantity_duration",
   service_addons:
     "id service_id name price_mode price_cents duration_minutes active",
   service_intake_fields:

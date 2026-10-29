@@ -11,6 +11,10 @@ export function billingRuntime(env = process.env, { createClientImpl = createCli
   const observe = notificationMode === "observe";
   if (observe && (env.BILLING_PROVIDER !== "mercado_pago" || !env.MERCADO_PAGO_WEBHOOK_SECRET))
     fail("billing_configuration_invalid", 503);
+  const environment = env.BILLING_ENVIRONMENT || "legacy";
+  if (!["legacy", "sandbox", "production"].includes(environment)) fail("billing_configuration_invalid", 503);
+  if (environment === "production" && (enabled || observe) && (env.MERCADO_PAGO_NOTIFICATION_AUTH !== "hmac" || !env.MERCADO_PAGO_WEBHOOK_SECRET || env.MERCADO_PAGO_PRODUCTION_ACCOUNT_CONFIRMED !== "true")) fail("billing_configuration_invalid", 503);
+  if (environment !== "legacy" && observe) fail("billing_environment_observation_requires_review", 503);
   const options = { auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false } };
   const client = createClientImpl(env.SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY, options);
   const service = async (name, args) => { const { data, error } = await client.rpc(name, args); if (error) throw error; return data; };
@@ -37,5 +41,5 @@ export function billingRuntime(env = process.env, { createClientImpl = createCli
     return { billing: { user: disabled, process: disabled, reconcile: disabled,
       webhook: observe ? notificationObserver({ gateway, service }) : disabled }, gateway: null, service };
   }
-  return { billing: subscriptions({ gateway, service, asUser, auth }), gateway, service };
+  return { billing: subscriptions({ gateway, service, asUser, auth, environment }), gateway, service };
 }
