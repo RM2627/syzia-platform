@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { rpc, supabase } from "../api";
+import { ArticleImporter } from "./ArticleImporter";
 import "./insights-admin.css";
 type Block = {
   type: string;
@@ -79,6 +80,8 @@ const labels: Record<string, string> = {
   archived: "Arquivado",
 };
 export function InsightsAdmin() {
+  const [importing, setImporting] = useState(false);
+  const importButton = useRef<HTMLButtonElement>(null);
   const [access, setAccess] = useState<boolean | null>(null),
     [posts, setPosts] = useState<Post[]>([]),
     [media, setMedia] = useState<{ id: string; alt: string }[]>([]),
@@ -317,6 +320,7 @@ export function InsightsAdmin() {
             ].map(([value, label]) => (
               <button
                 key={value}
+                disabled={busy}
                 aria-pressed={tab === value}
                 onClick={() => {
                   setTab(value);
@@ -367,7 +371,11 @@ export function InsightsAdmin() {
                 <button disabled={busy} onClick={() => void create()}>
                   Novo artigo
                 </button>
+                <button ref={importButton} disabled={busy || importing} onClick={() => setImporting(true)}>
+                  Importar artigos
+                </button>
               </div>
+              {importing && <ArticleImporter call={call} onBusy={setBusy} onImported={load} onClose={() => { setImporting(false); requestAnimationFrame(() => importButton.current?.focus()); }} />}
               <div className="ia-list">
                 {posts
                   .filter(
@@ -387,8 +395,9 @@ export function InsightsAdmin() {
                         </p>
                       </div>
                       <div className="ia-toolbar">
-                        <button onClick={() => void open(p)}>Editar</button>
+                        <button disabled={busy} onClick={() => void open(p)}>Editar</button>
                         <button
+                          disabled={busy}
                           onClick={() =>
                             void create({
                               ...p.draft,
