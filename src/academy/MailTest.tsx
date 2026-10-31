@@ -5,6 +5,11 @@ import { academyError } from "./api";
 export function MailDiagnostic({ value }: { value: any }) {
   if (!value)
     return <small>Esta tentativa não possui diagnóstico detalhado.</small>;
+  if (value.transport === "https_resend") {
+    const labels: Record<string,string> = {configuration:"Configuração HTTPS",prepare:"Preparação da mensagem",dns:"DNS",connection:"Conexão HTTPS antes do envio",tls:"Validação TLS",request:"Requisição enviada — resultado não confirmado",response:"Resposta HTTPS",authentication:"Autenticação da API",authorization:"Permissão, remetente ou destinatário",validation:"Validação da solicitação",rate_limit:"Limite do provedor",provider:"Indisponibilidade do provedor",idempotency:"Conflito ou operação em andamento",accepted:"Aceitação HTTPS"};
+    const descriptions: Record<string,string> = {accepted:"Aceito pelo Resend — não comprova entrega na caixa de entrada",definitive:"Falha definitiva nesta tentativa",temporary:"Falha temporária sem aceitação confirmada",uncertain:"Resultado incerto — não reenviar sem verificar no provedor"};
+    return <div className="aa-note"><p>{descriptions[value.category] || "Resultado não identificado"}</p><small>HTTPS Resend · {labels[value.stage] || "Etapa não identificada"}{value.http_status ? ` · HTTP ${value.http_status}` : ""}{value.network_code !== "NONE" ? ` · ${value.network_code}` : ""}{value.provider_code !== "NONE" ? ` · ${value.provider_code}` : ""}</small>{value.provider_id && <p><small>Identificador Resend: {value.provider_id}</small></p>}</div>;
+  }
   const stages: Record<string, string> = {
     prepare: "Preparação da mensagem",
     configuration: "Configuração",

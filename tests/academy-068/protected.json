@@ -1,0 +1,11 @@
+{
+  "server/access-mail.mjs": "722cd2699714225d97593b83a07da2fc586a21e53f088b658d2372347a68eca1",
+  "server/commercial/mail.mjs": "8cece425a24f77dacb488242a20418d1737fb7cd2ccba90680c8bf0c077955a0",
+  "src/academy/Academy.tsx": "91494df5d48938708a2d8510b4c65b8c8b84552334b88fa312e5d623e4ea8873",
+  "src/academy/academy.css": "3d6e149a1362fd15cd87a9bbc75d223894838a6dbdf92b3a6ca03331e8ba73b8",
+  "src/academy/ThemeToggle.tsx": "a36434e7c6e25046d3e202afe02415c69e8b4ecbe0b830374362214511212dbd",
+  "academy/index.html": "a6369a3634b13c17eeaab3a4f4727ed9ff66eab90edb0940bf2d627ee3ab7cbf",
+  "academy/public/academy-theme.js": "c7f06e1775b43d8ca0eb80e302a084fad31a9dd86d9a44e55461349f8b7bd268",
+  "supabase/migrations/202610310066_academy.sql": "bdf4ad4d0df87d7ff6b3de8ddb7865072b8bd1342ce3585d30d83456a073db00",
+  "supabase/migrations/202610310067_academy_mail_diagnostics.sql": "7215c4dc9b75f9ee2b92242af26af7772d3b4bda301e79fb985428a35ee5f970"
+}

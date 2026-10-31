@@ -1,5 +1,7 @@
 import { createAccessMailer, deliveryError } from "../access-mail.mjs";
 import nodemailer from "nodemailer";
+import { createResendHttpsMailer } from "./resend-https.mjs";
+import { academyMailReady } from "./mail-config.mjs";
 import { diagnosed } from "./mail-diagnostics.mjs";
 import { email } from "./validation.mjs";
 import { readFileSync } from "node:fs";
@@ -65,7 +67,9 @@ export function message(v) {
     html: `<!doctype html><html lang="pt-BR"><body style="margin:0;background:#f4f5ff;color:#20202e;font:16px/1.65 Arial,sans-serif"><main style="max-width:560px;margin:24px auto;padding:32px;background:white;border-radius:20px"><img src="cid:syzia-academy" width="180" alt="SYZIA — Onde tudo se alinha"><p style="color:#6c4dff">ACADEMY · APRENDER PARA APLICAR</p><h1 style="font-size:26px">${escape(title)}</h1><p style="white-space:pre-line">${escape(body)}</p><p><a href="${escape(v.link)}" style="display:inline-block;padding:14px 22px;background:#6041df;color:white;border-radius:8px">${v.kind === "confirm" ? "Confirmar inscrição" : "Acessar a Academy"}</a></p><p>Gratuito. Sem cartão e sem obrigação de contratar a SYZIA.</p><hr><p><a href="${escape(v.preferences)}">Preferências e descadastro</a><br>Contato: ${escape(v.contact)}</p></main></body></html>`,
   };
 }
-export function academyMailer(env, transport = nodemailer.createTransport) {
+export function academyMailer(env, transport = nodemailer.createTransport, httpsOptions) {
+  if (env.ACADEMY_MAIL_TRANSPORT === "https_resend") return createResendHttpsMailer(env, message, httpsOptions);
+  if (env.ACADEMY_MAIL_TRANSPORT !== "smtp" || !academyMailReady(env)) return async () => { throw Object.assign(Error("email_not_configured"), {code:"email_not_configured"}); };
   const observedTransport = (options) => {
     const actual = transport(options);
     return {

@@ -9,6 +9,7 @@ import {
 } from "../../server/academy/mail-diagnostics.mjs";
 const env = {
   ACADEMY_MAIL_ENABLED: "true",
+      ACADEMY_MAIL_TRANSPORT: "smtp",
   COMMERCIAL_MAIL_ENABLED: "true",
   ACCESS_MAIL_ENABLED: "true",
   ACCESS_SMTP_HOST: "smtp.resend.com",

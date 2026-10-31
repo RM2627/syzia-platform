@@ -1,3 +1,4 @@
+import { sanitizeHttpsDiagnostic } from "./resend-diagnostics.mjs";
 // Allowlisted metadata only. Never return error.message, response, command, address or cause.
 const codes = new Set([
   "EAUTH",
@@ -125,7 +126,7 @@ export function diagnosed(error, phase) {
     academyDiagnostic: mailDiagnostic(error, phase),
   });
 }
-export const acceptedDiagnostic = () => ({
+export const acceptedDiagnostic = (result) => result?.diagnostic?.transport === "https_resend" ? sanitizeHttpsDiagnostic(result.diagnostic) : ({
   status: "accepted",
   error_code: "",
   category: "accepted",
@@ -137,6 +138,7 @@ export function safeDiagnostic(error) {
   // Only our wrapper creates this object. Still rebuild from enums before persisting/logging.
   const d = error?.academyDiagnostic;
   if (!d) return mailDiagnostic(error);
+  if (d.transport === "https_resend") return sanitizeHttpsDiagnostic(d);
   const stages = [
     "prepare",
     "configuration",

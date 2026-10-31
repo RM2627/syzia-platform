@@ -16,6 +16,7 @@ test("067-R real HTTP/runtime routing, active root authorization, SMTP stub and 
     {
       ACADEMY_ENABLED: "true",
       ACADEMY_MAIL_ENABLED: "true",
+      ACADEMY_MAIL_TRANSPORT: "smtp",
       ACCESS_MAIL_ENABLED: "true",
       ACADEMY_SECRET: "ab".repeat(32),
       ACADEMY_PUBLIC_ORIGIN: "http://127.0.0.1:5197",

@@ -1,5 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import { academyController } from "./controller.mjs";
+import { academyMailReady } from "./mail-config.mjs";
 import { academyMailer } from "./mail.mjs";
 import { createAcademyHandler } from "./http.mjs";
 function exact(v, production) {
@@ -21,6 +22,7 @@ export function academyRuntime(
   {
     createClientImpl = createClient,
     transport,
+    httpsOptions,
     log = (r) => console.log(JSON.stringify(r)),
   } = {},
 ) {
@@ -103,18 +105,12 @@ export function academyRuntime(
     monthlyLimit > 30000
   )
     throw Error("academy_configuration");
-  const mailEnabled =
-    env.ACADEMY_MAIL_ENABLED === "true" &&
-    env.ACCESS_MAIL_ENABLED === "true" &&
-    !!env.ACCESS_SMTP_HOST &&
-    !!env.ACCESS_SMTP_USER &&
-    !!env.ACCESS_SMTP_PASSWORD &&
-    !!env.ACCESS_MAIL_FROM;
+  const mailEnabled = academyMailReady(env);
   const controller = academyController({
     service,
     asUser,
     storage,
-    send: academyMailer(env, transport),
+    send: academyMailer(env, transport, httpsOptions),
     origin,
     secret: env.ACADEMY_SECRET,
     mailEnabled,

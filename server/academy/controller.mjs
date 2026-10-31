@@ -50,7 +50,7 @@ export function academyController({
   }
   async function drain(campaign) {
     if (!mailEnabled) return { processed: 0, disabled: true };
-    // No automatic retry after a possible SMTP acceptance. The DB claims enforce limits across processes.
+    // No automatic retry after a possible provider acceptance. The DB claims enforce limits across processes.
     const task = Promise.resolve(active)
       .catch(() => {})
       .then(async () => {
@@ -86,7 +86,8 @@ export function academyController({
       } catch (e) {
         throw diagnosed(e, "prepare");
       }
-      await send({ ...value, delivery_id: d.id });
+      const result = await send({ ...value, delivery_id: d.id });
+      diagnostic = acceptedDiagnostic(result);
     } catch (e) {
       diagnostic = safeDiagnostic(e);
     }
