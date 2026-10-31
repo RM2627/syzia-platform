@@ -1,3 +1,4 @@
+import { AcademyAdmin } from "./academy/AcademyAdmin";
 import { InsightsAdmin, InsightsNav } from "./insights/InsightsAdmin";
 import { PreparedCompany } from "./platform-commercial/PreparedCompany";
 import { Management } from "./platform-commercial/Management";
@@ -426,6 +427,7 @@ function Shell({ children }: { children: ReactNode }) {
             </WorkspaceGroup>
           )}
           {import.meta.env.VITE_INSIGHTS_ENABLED === "true" && <InsightsNav />}
+          {globalAdmin && import.meta.env.VITE_ACADEMY_ENABLED === "true" && <NavLink to="/admin/academy" title="SYZIA Academy">SYZIA Academy</NavLink>}
           <NavLink to="/escolher-empresa" title="Trocar contexto" aria-label="Trocar contexto">Trocar contexto</NavLink>
           <NavLink to="/central" title="Atendimento humano" aria-label="Atendimento humano">Atendimento humano</NavLink>
           <NavLink to="/comercial" title="Comercial e retornos" aria-label="Comercial e retornos">Comercial e retornos</NavLink>
@@ -1121,6 +1123,7 @@ export default function Application() {
               </Protected>
             }
           />
+          {import.meta.env.VITE_ACADEMY_ENABLED === "true" && <Route path="/admin/academy" element={<Protected admin><AcademyAdmin /></Protected>} />}
           {import.meta.env.VITE_INSIGHTS_ENABLED === "true" && <Route path="/admin/insights" element={<Protected><InsightsAdmin /></Protected>} />}
           {import.meta.env.VITE_COMMERCIAL_PREPARATION_ENABLED === "true" && <><Route path="/admin/comercial/interessados" element={<Protected><CommercialAccess><Interested /></CommercialAccess></Protected>} /><Route path="/admin/comercial/:section" element={<Protected><CommercialAccess><Management /></CommercialAccess></Protected>} /></>}
           <Route

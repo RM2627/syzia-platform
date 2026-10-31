@@ -41,3 +41,6 @@ dist-demo/
 .work-061/
 *.billing-private.json
 *.insights-private.json
+
+# 066 public configuration template; filled .env.* files remain ignored.
+!.env.academy.example

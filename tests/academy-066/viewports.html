@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Academy — verificação responsiva local</title>
+    <style>
+      body {
+        margin: 12px;
+        font: 14px system-ui;
+        background: #ddd;
+      }
+      header {
+        display: flex;
+        gap: 10px;
+        margin: 12px 0;
+      }
+      iframe {
+        display: block;
+        border: 1px solid #bbb;
+        height: 1100px;
+        background: white;
+      }
+      button {
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <button data-size="360">360 px</button
+      ><button data-size="390">390 px</button
+      ><button data-size="1440">1440 px</button
+      ><button id="public">Página pública</button
+      ><button id="admin">Gestão administrativa</button>
+    </header>
+    <iframe title="Academy responsiva" width="390" src="/"></iframe>
+    <script>
+      const f = document.querySelector("iframe");
+      document
+        .querySelectorAll("[data-size]")
+        .forEach((b) => (b.onclick = () => (f.width = b.dataset.size)));
+      document.querySelector("#public").onclick = () => (f.src = "/");
+      document.querySelector("#admin").onclick = () =>
+        (f.src = "/admin/academy");
+    </script>
+  </body>
+</html>
