@@ -3,6 +3,7 @@ import { academyApi, academyError, academyRoot, studentDownload } from "./api";
 import { platformBrand } from "../brand/platform";
 import type { CourseDocument, Lesson, Material } from "./types";
 import "./academy.css";
+import { ThemeToggle, useAcademyTheme } from "./ThemeToggle";
 const topics = [
   [
     "01",
@@ -53,6 +54,7 @@ export function Video({ id, title }: { id: string; title: string }) {
   );
 }
 export function Academy() {
+  const { theme, toggle } = useAcademyTheme();
   const [config, setConfig] = useState<any>(null),
     [error, setError] = useState(""),
     [message, setMessage] = useState(""),
@@ -174,7 +176,11 @@ export function Academy() {
           aria-label="SYZIA Academy — início"
         >
           <img
-            src={platformBrand.logoLight}
+            src={
+              theme === "dark"
+                ? platformBrand.logoDark
+                : platformBrand.logoLight
+            }
             alt="SYZIA — Onde tudo se alinha"
             width="216"
             height="98"
@@ -186,6 +192,7 @@ export function Academy() {
           <button className="ac-link" onClick={() => navigate("/aulas")}>
             Área do aluno <span aria-hidden="true">↗</span>
           </button>
+          <ThemeToggle theme={theme} toggle={toggle} />
         </nav>
       </header>
       <main id="conteudo">
@@ -849,7 +856,11 @@ export function Academy() {
       <footer className="ac-footer">
         <div className="ac-brand">
           <img
-            src={platformBrand.logoLight}
+            src={
+              theme === "dark"
+                ? platformBrand.logoDark
+                : platformBrand.logoLight
+            }
             alt="SYZIA — Onde tudo se alinha"
             width="216"
             height="98"

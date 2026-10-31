@@ -45,14 +45,24 @@ export function academyRuntime(
     if (r.error) throw r.error;
     return r.data;
   };
-  const service = (a, d) => rpc(client, "academy_service", a, d);
+  const service = (a, d) =>
+    rpc(
+      client,
+      a === "delivery_finish" || a.startsWith("mail_test_")
+        ? "academy_mail_service"
+        : "academy_service",
+      a,
+      d,
+    );
   const asUser = (token, a, d) =>
     rpc(
       createClientImpl(env.SUPABASE_URL, env.SUPABASE_PUBLISHABLE_KEY, {
         ...options,
         global: { headers: { Authorization: "Bearer " + token } },
       }),
-      "academy_admin",
+      a === "overview" || a.startsWith("mail_test_")
+        ? "academy_mail_admin"
+        : "academy_admin",
       a,
       d,
     );
@@ -111,6 +121,7 @@ export function academyRuntime(
     dailyLimit,
     monthlyLimit,
     mailIntervalMs: 1000,
+    log,
   });
   return {
     handler: createAcademyHandler({

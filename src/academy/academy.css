@@ -696,3 +696,110 @@
   padding: 14px;
   max-width: 100%;
 }
+
+/* Academy-only theme. Existing light palette remains authoritative. */
+.academy .ac-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  flex-shrink: 0;
+}
+html[data-academy-theme="dark"] .academy {
+  --purple: #c4adff;
+  --ink: #f2eff9;
+  --muted: #c0b8d0;
+  --paper: #111018;
+  --line: #494151;
+  color-scheme: dark;
+}
+html[data-academy-theme="dark"] .academy button,
+html[data-academy-theme="dark"] .ac-form,
+html[data-academy-theme="dark"] .ac-pill,
+html[data-academy-theme="dark"] .ac-skip {
+  background: #211d2c;
+  color: var(--ink);
+  border-color: var(--line);
+}
+html[data-academy-theme="dark"] .ac-header .ac-link {
+  background: none;
+}
+html[data-academy-theme="dark"] .academy .ac-primary {
+  background: #754ee5;
+  color: #fff;
+}
+html[data-academy-theme="dark"] .academy :focus-visible {
+  outline-color: #c9b8ff;
+}
+html[data-academy-theme="dark"] .ac-brand > span {
+  color: #c9b8ff;
+  border-color: var(--line);
+}
+html[data-academy-theme="dark"] .ac-roadmap {
+  background: #29213f;
+  border-color: #58446f;
+}
+html[data-academy-theme="dark"] .ac-orbit,
+html[data-academy-theme="dark"] .ac-orbit:before {
+  border-color: #79649d;
+}
+html[data-academy-theme="dark"] .ac-orbit-center,
+html[data-academy-theme="dark"] .ac-benefits span,
+html[data-academy-theme="dark"] .ac-program li > span {
+  color: #c9b8ff;
+}
+html[data-academy-theme="dark"] .ac-benefits article,
+html[data-academy-theme="dark"] .ac-program li,
+html[data-academy-theme="dark"] .ac-roadmap-footer {
+  border-color: #584b6b;
+}
+html[data-academy-theme="dark"] .ac-roadmap-footer i {
+  background: #c9b8ff;
+}
+html[data-academy-theme="dark"] .ac-program,
+html[data-academy-theme="dark"] .ac-classroom aside,
+html[data-academy-theme="dark"] .ac-video-placeholder {
+  background: #211c2e;
+}
+html[data-academy-theme="dark"] .ac-form input:not([type="checkbox"]),
+html[data-academy-theme="dark"] .ac-form select,
+html[data-academy-theme="dark"] .ac-form textarea {
+  background: #14111d;
+  border-color: #81738f;
+  color: var(--ink);
+}
+html[data-academy-theme="dark"] .ac-form ::placeholder {
+  color: #b3a9c2;
+  opacity: 1;
+}
+html[data-academy-theme="dark"] .ac-check input {
+  accent-color: #a88aff;
+}
+html[data-academy-theme="dark"] .ac-feedback {
+  background: #3c2229;
+  border-color: #ff9d93;
+  color: #ffe4e0;
+}
+html[data-academy-theme="dark"] .ac-feedback.success {
+  background: #18362b;
+  border-color: #79dca8;
+  color: #d5f9e4;
+}
+html[data-academy-theme="dark"] .ac-classroom aside button[aria-current] {
+  background: #3f315c;
+  border-color: #c9b8ff;
+}
+html[data-academy-theme="dark"] .ac-video {
+  background: #09070e;
+}
+@media (max-width: 600px) {
+  .ac-header {
+    flex-wrap: wrap;
+  }
+  .ac-header nav {
+    margin-left: auto;
+    gap: 16px;
+  }
+}

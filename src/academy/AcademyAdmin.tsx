@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import type { AcademyCall, Course, Material } from "./types";
 import { academyAdmin, academyFile } from "./admin-api";
 import { academyError } from "./api";
+import { MailTest, MailDiagnostic } from "./MailTest";
 import { CourseEditor } from "./CourseEditor";
 import { academyTerms, academyPrivacy } from "./legal-drafts";
 import "./admin.css";
@@ -559,6 +560,11 @@ export function AcademyAdmin({ call = academyAdmin }: { call?: AcademyCall }) {
       {section === 5 && (
         <>
           <h2>Comunicações</h2>
+          <MailTest
+            call={call}
+            refresh={load}
+            tests={overview?.mail_tests || []}
+          />
           <p>
             O lançamento usa apenas inscrições confirmadas com avisos
             autorizados. Cada lote tem até 25 destinatários, sem expor e-mails
@@ -581,7 +587,7 @@ export function AcademyAdmin({ call = academyAdmin }: { call?: AcademyCall }) {
                   await call("mail_process", { confirmed: true });
                   await load();
                   setNotice(
-                    "Fila de confirmações e acessos processada. Confira os resultados.",
+                    "Processamento solicitado. Atualize os resultados para acompanhar as tentativas.",
                   );
                 })
               }
@@ -674,7 +680,7 @@ export function AcademyAdmin({ call = academyAdmin }: { call?: AcademyCall }) {
                         pending: "Na fila",
                         sending: "Em processamento",
                         accepted: "Aceito pelo provedor",
-                        failed: "Recusado pelo provedor",
+                        failed: "Falha no envio",
                         uncertain: "Resultado incerto — conferir no provedor",
                         skipped: "Ignorado por expiração ou elegibilidade",
                       } as any
@@ -683,6 +689,8 @@ export function AcademyAdmin({ call = academyAdmin }: { call?: AcademyCall }) {
                   · {new Date(d.created_at).toLocaleString("pt-BR")}
                 </p>
                 {d.error_code && <small>{d.error_code}</small>}
+                <small>Identificador: {d.id}</small>
+                <MailDiagnostic value={d.diagnostic} />
               </div>
               {d.status === "pending" && d.campaign_id && (
                 <button

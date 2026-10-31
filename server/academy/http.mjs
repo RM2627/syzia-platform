@@ -134,6 +134,17 @@ export function createAcademyHandler({
       }
       if (path === "logout" || path === "delete_student") setSession("");
       reply(200, r);
+      if (admin && r?.mail_test_id)
+        setImmediate(() =>
+          controller
+            .processTest(r.mail_test_id)
+            .catch(() =>
+              log({
+                event: "academy_mail_test_pending",
+                code: "academy_unavailable",
+              }),
+            ),
+        );
       if (
         path === "subscribe" ||
         path === "login" ||
@@ -141,14 +152,12 @@ export function createAcademyHandler({
         r?.process_mail
       )
         setImmediate(() =>
-          controller
-            .drain(r?.campaign_id)
-            .catch(() =>
-              log({
-                event: "academy_mail_pending",
-                code: "academy_unavailable",
-              }),
-            ),
+          controller.drain(r?.campaign_id).catch(() =>
+            log({
+              event: "academy_mail_pending",
+              code: "academy_unavailable",
+            }),
+          ),
         );
     } catch (e) {
       const code = known.has(e?.message) ? e.message : "academy_unavailable",

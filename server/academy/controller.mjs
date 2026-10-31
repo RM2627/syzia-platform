@@ -8,7 +8,12 @@ import {
   cryptoBox,
   validToken,
 } from "./validation.mjs";
-import { deliveryError, message } from "./mail.mjs";
+import { message } from "./mail.mjs";
+import {
+  acceptedDiagnostic,
+  diagnosed,
+  safeDiagnostic,
+} from "./mail-diagnostics.mjs";
 import sharp from "sharp";
 import { PDFDocument, PDFDict, PDFName, PDFArray } from "pdf-lib";
 const generic = {
@@ -28,9 +33,16 @@ export function academyController({
   monthlyLimit = 2400,
   now = () => Date.now(),
   mailIntervalMs = 0,
+  log = () => {},
 }) {
   const box = cryptoBox(secret);
   let active;
+  const testTasks = new Set();
+  const report = (value) => {
+    try {
+      log(value);
+    } catch {}
+  };
   const link = (path, value) => new URL(path, origin).href + "#token=" + value;
   async function rate(key, limit = 10, seconds = 3600) {
     const r = await service("rate", { key: box.key(key), limit, seconds });
@@ -39,49 +51,80 @@ export function academyController({
   async function drain(campaign) {
     if (!mailEnabled) return { processed: 0, disabled: true };
     // No automatic retry after a possible SMTP acceptance. The DB claims enforce limits across processes.
-    if (active) await active;
-    const task = (async () => {
-      let n = 0;
-      while (n < 25) {
-        const d = await service("delivery_claim", {
-          campaign_id: campaign || null,
-          daily_limit: dailyLimit,
-          monthly_limit: monthlyLimit,
-        });
-        if (!d) break;
-        let status = "accepted",
-          code = "";
-        try {
-          if (mailIntervalMs)
-            await new Promise((r) => setTimeout(r, mailIntervalMs));
-          const value = box.open(d.payload);
-          await send({ ...value, delivery_id: d.id });
-        } catch (e) {
-          code = deliveryError(e);
-          status = [
-            "email_authentication_failed",
-            "email_recipient_or_sender_rejected",
-            "email_rate_limited",
-            "email_not_configured",
-          ].includes(code)
-            ? "failed"
-            : "uncertain";
+    const task = Promise.resolve(active)
+      .catch(() => {})
+      .then(async () => {
+        let n = 0;
+        while (n < 25) {
+          const d = await service("delivery_claim", {
+            campaign_id: campaign || null,
+            daily_limit: dailyLimit,
+            monthly_limit: monthlyLimit,
+          });
+          if (!d) break;
+          await deliver(d, "delivery_finish");
+          n++;
         }
-        await service("delivery_finish", {
-          id: d.id,
-          status,
-          error_code: code,
-        });
-        n++;
-      }
-      return { processed: n };
-    })();
+        return { processed: n };
+      });
     active = task;
     try {
       return await task;
     } finally {
       if (active === task) active = null;
     }
+  }
+  async function deliver(d, finishAction) {
+    const started = Date.now();
+    let diagnostic = acceptedDiagnostic();
+    try {
+      if (mailIntervalMs)
+        await new Promise((r) => setTimeout(r, mailIntervalMs));
+      let value;
+      try {
+        value = box.open(d.payload);
+      } catch (e) {
+        throw diagnosed(e, "prepare");
+      }
+      await send({ ...value, delivery_id: d.id });
+    } catch (e) {
+      diagnostic = safeDiagnostic(e);
+    }
+    report({
+      event: "academy_mail_result",
+      delivery_id: d.id,
+      kind: finishAction === "mail_test_finish" ? "test" : "subscription_mail",
+      ...diagnostic,
+      elapsed_ms: Math.min(3600000, Date.now() - started),
+    });
+    try {
+      await service(finishAction, {
+        id: d.id,
+        status: diagnostic.status,
+        error_code: diagnostic.error_code,
+        diagnostic,
+      });
+    } catch {
+      // Do not resend. Keep the claimed row for uncertain recovery; continue with independent messages.
+      report({
+        event: "academy_mail_persistence_pending",
+        delivery_id: d.id,
+        code: "academy_unavailable",
+      });
+    }
+  }
+  function processTest(id) {
+    const task = (async () => {
+      if (!mailEnabled) return { disabled: true };
+      const d = await service("mail_test_claim", { id });
+      if (d) await deliver(d, "mail_test_finish");
+    })();
+    testTasks.add(task);
+    task.then(
+      () => testTasks.delete(task),
+      () => testTasks.delete(task),
+    );
+    return task;
   }
   async function publicAction(action, data = {}, session = "", ip = "local") {
     if (action === "config")
@@ -191,6 +234,29 @@ export function academyController({
     if (!jwt) fail("access_denied", 401);
     const access = await asUser(jwt, "access", {});
     if (!access.allowed) fail("access_denied", 403);
+    if (action === "mail_test_preview") {
+      if (!mailEnabled) fail("academy_mail_unavailable", 503);
+      if (data.authorized !== true) fail("academy_confirmation_required");
+      const recipient = email(data.email),
+        value = { kind: "test", email: recipient };
+      const preview = await asUser(jwt, action, {
+        recipient_key: box.key("test:" + recipient),
+        encrypted: box.seal(value),
+        authorized: true,
+      });
+      const rendered = message(value);
+      return {
+        ...preview,
+        recipient,
+        subject: rendered.subject,
+        text: rendered.text,
+      };
+    }
+    if (action === "mail_test_confirm") {
+      if (!mailEnabled) fail("academy_mail_unavailable", 503);
+      if (data.confirmed !== true) fail("academy_confirmation_required");
+      return asUser(jwt, action, { id: data.id, confirmed: true });
+    }
     if (action === "launch_preview") {
       if (!mailEnabled) fail("academy_mail_unavailable", 503);
       const p = await asUser(jwt, action, data);
@@ -378,8 +444,9 @@ export function academyController({
     admin,
     file,
     drain,
+    processTest,
     close: async () => {
-      await active;
+      await Promise.allSettled([active, ...testTasks]);
     },
   };
 }
