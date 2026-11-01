@@ -1,5 +1,6 @@
 import { BillingError, fail, identifier, iso, providerVersion, verifiedSnapshot, verifyBinding } from "./mercado-pago.mjs";
 import { normalizePayerEmail } from "../../shared/billing-payer-email.mjs";
+import { safeDiagnostic } from "./diagnostics.mjs";
 const UUID = /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i;
 export function exactBody(body, required, optional = []) {
   if (!body || typeof body !== "object" || Array.isArray(body) || required.some(k => !(k in body)) || Object.keys(body).some(k => ![...required, ...optional].includes(k))) fail("billing_payload_invalid", 400);
@@ -136,6 +137,9 @@ export function subscriptions({ gateway, service, asUser, auth, environment = "l
         safe.providerStatus = e.providerStatus;
         safe.providerStage = e.providerStage;
         safe.validationCheck = e.validationCheck;
+        const diagnostic = safeDiagnostic(e);
+        safe.providerDiagnostic = diagnostic.provider_diagnostic;
+        safe.providerReason = diagnostic.provider_reason;
       }
       throw safe;
     }
