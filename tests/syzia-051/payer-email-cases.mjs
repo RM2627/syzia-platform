@@ -80,7 +80,7 @@ test("051-E06 same administrator/payer email creates only through confirmed offi
   const result = await c.command("checkout", "profissional", "A", { payer_email: "adminA@example.invalid" });
   assert.equal(creates.at(-1).body.payer_email, "adminA@example.invalid");
   assert.equal(result.subscription.state, "trialing");
-  assert.deepEqual(Object.keys(creates.at(-1).body).sort(), ["back_url", "card_token_id", "external_reference", "notification_url", "payer_email", "preapproval_plan_id", "reason", "status"]);
+  assert.deepEqual(Object.keys(creates.at(-1).body).sort(), ["back_url", "card_token_id", "external_reference", "payer_email", "preapproval_plan_id", "reason", "status"]);
   assert.equal(creates.at(-1).body.preapproval_plan_id, "profissional-trial");
   assert.equal(creates.at(-1).body.status, "authorized");
   assert.deepEqual(await identitySnapshot(), identities);

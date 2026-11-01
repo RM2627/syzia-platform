@@ -38,7 +38,7 @@ for (const code of ["essencial", "profissional", "equipe"]) {
       preapproval_plan_id: b.provider_plan_id, external_reference: b.id,
       payer_email: "test-buyer@example.invalid", card_token_id: cardToken, status: "authorized",
       reason: "SYZIA " + code, back_url: options.appOrigin + "/painel/" + b.organization_id + "/assinatura?retorno=1",
-      notification_url: options.notificationUrl,
+
     });
     assert.equal(result.auto_recurring.transaction_amount * 100, b.amount_cents);
     assert.deepEqual(result.auto_recurring.free_trial, { frequency: 7, frequency_type: "days" });

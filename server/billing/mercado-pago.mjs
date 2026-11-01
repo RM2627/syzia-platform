@@ -95,9 +95,7 @@ export class MercadoPagoSubscriptions {
       payer_email: email, card_token_id: cardToken, status: "authorized",
       reason: "SYZIA " + binding.code,
       back_url: this.appOrigin + "/painel/" + binding.organization_id + "/assinatura?retorno=1",
-      // MP-01 remains unverified: the published preapproval contract does not
-      // establish delivery through this field. See docs/billing-mp01/README.md.
-      notification_url: this.notificationUrl,
+
     }, binding.id);
   }
   read(id) { return this.request("/preapproval/" + identifier(id)); }

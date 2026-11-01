@@ -215,7 +215,7 @@ test("diagnostic survives subscription wrapping into HTTP audit; financial contr
     assert.equal((await c.asUser("adminA", "billing_capabilities", { p_org: c.orgs.A })).software, false);
     assert.equal(posts.length, 1);
     assert.equal(posts[0].payer_email, "different-buyer@example.invalid");
-    assert.equal(posts[0].notification_url, c.gateway.notificationUrl);
+    assert.equal(Object.hasOwn(posts[0], 'notification_url'), false);
     await c.engine.reconcile();
     assert.equal(posts.length, 1);
   } finally {
