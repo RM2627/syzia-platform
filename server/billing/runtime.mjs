@@ -25,6 +25,7 @@ export function billingRuntime(env = process.env, { createClientImpl = createCli
   };
   const gateway = enabled || observe ? new MercadoPagoSubscriptions({
     accessToken: env.MERCADO_PAGO_ACCESS_TOKEN, publicKey: env.MERCADO_PAGO_PUBLIC_KEY,
+    supportCase56983: env.MERCADO_PAGO_WCS_56983_ENABLED === "true",
     collectorId: env.MERCADO_PAGO_COLLECTOR_ID, applicationId: env.MERCADO_PAGO_APPLICATION_ID,
     appOrigin: env.PLATFORM_APP_ORIGIN, notificationUrl: env.MERCADO_PAGO_NOTIFICATION_URL,
     notificationAuth: observe ? "hmac" : env.MERCADO_PAGO_NOTIFICATION_AUTH || "resource_lookup", webhookSecret: env.MERCADO_PAGO_WEBHOOK_SECRET,

@@ -1,6 +1,7 @@
 // SaaS subscriptions only. Raw card fields never enter this adapter.
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { providerFailure, readPreapprovalDiagnostic } from "./diagnostics.mjs";
+import { capturePreapprovalSupport } from "./support-wcs56983.mjs";
 const ID = /^[a-zA-Z0-9_-]{1,160}$/;
 export const commercialPrices = Object.freeze({ essencial: 4990, profissional: 8990, equipe: 14990 });
 export class BillingError extends Error {
@@ -33,7 +34,7 @@ export function validateOffer(offer) {
 }
 export class MercadoPagoSubscriptions {
   constructor({ accessToken, collectorId, applicationId, notificationUrl, appOrigin, publicKey,
-    webhookSecret = "", notificationAuth = "resource_lookup", fetchImpl = globalThis.fetch, timeoutMs = 10000 }) {
+    webhookSecret = "", notificationAuth = "resource_lookup", fetchImpl = globalThis.fetch, timeoutMs = 10000, supportCase56983 = false }) {
     if (!accessToken || !collectorId || !applicationId || !notificationUrl || !appOrigin || !publicKey)
       fail("billing_credentials_missing", 503);
     const callback = new URL(notificationUrl), app = new URL(appOrigin);
@@ -42,7 +43,7 @@ export class MercadoPagoSubscriptions {
     if (!["resource_lookup", "hmac"].includes(notificationAuth) || (notificationAuth === "hmac" && !webhookSecret))
       fail("billing_configuration_invalid", 503);
     Object.assign(this, { accessToken, collectorId: String(collectorId), applicationId: String(applicationId),
-      notificationUrl: callback.href, appOrigin: app.origin, publicKey, webhookSecret, notificationAuth, fetchImpl, timeoutMs });
+      notificationUrl: callback.href, appOrigin: app.origin, publicKey, webhookSecret, notificationAuth, fetchImpl, timeoutMs, supportCase56983: supportCase56983 === true });
   }
   async request(path, method = "GET", body, key) {
     // Fixed origin, no redirects, no provider message/body in exceptions or logs.
@@ -60,8 +61,10 @@ export class MercadoPagoSubscriptions {
         Object.assign(error, diagnostic);
         // Only create 400/422 bodies are inspected, with bounded reading and
         // closed diagnostic labels. No raw provider text leaves the classifier.
-        if (path === "/preapproval" && method === "POST" && [400, 422].includes(r.status))
+        if (path === "/preapproval" && method === "POST" && [400, 422].includes(r.status)) {
+          if (this.supportCase56983) capturePreapprovalSupport(error, r, body);
           Object.assign(error, await readPreapprovalDiagnostic(r, controller.signal));
+        }
         else await r.body?.cancel().catch(() => {});
         throw error;
       }
