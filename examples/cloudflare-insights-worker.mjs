@@ -23,11 +23,33 @@ export default {
     const headers = new Headers(request.headers);
     headers.delete("host");
     // No HTML cache: unpublish/scheduled publications become visible immediately.
-    return fetch(target, {
+    const upstream = await fetch(target, {
       method: request.method,
       headers,
       body: ["GET", "HEAD"].includes(request.method) ? undefined : request.body,
       redirect: "manual",
     });
+    // Keep the Node backend unchanged. Only extend its audited public HTML CSP.
+    // An unexpected/multiple policy is preserved, never replaced permissively.
+    const auditedCSP =
+      "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'";
+    if (
+      incoming.hostname !== "usesyzia.com.br" ||
+      !["GET", "HEAD"].includes(request.method) ||
+      incoming.pathname.startsWith("/blog/api/") ||
+      upstream.status !== 200 ||
+      !/^text\/html(?:;|$)/i.test(upstream.headers.get("Content-Type") || "") ||
+      upstream.headers.get("Content-Security-Policy") !== auditedCSP
+    )
+      return upstream;
+    const response = new Response(upstream.body, upstream);
+    response.headers.set(
+      "Content-Security-Policy",
+      auditedCSP
+        .replace("script-src 'self'", "script-src 'self' https://static.cloudflareinsights.com")
+        .replace("connect-src 'self'", "connect-src 'self' https://cloudflareinsights.com"),
+    );
+    // Cloudflare already injects the beacon. Do not inject another script.
+    return response;
   },
 };

@@ -44,7 +44,7 @@ export default defineConfig(({ mode }) => {
           await writeFile(out + "/_redirects", "/* /index.html 200\n");
           await writeFile(
             out + "/_headers",
-            `/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: no-referrer\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' ${u.origin} blob:; connect-src 'self' ${u.origin}; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'\n`,
+            `/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: no-referrer\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n  Content-Security-Policy: default-src 'self'; script-src 'self' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' ${u.origin} blob:; connect-src 'self' ${u.origin} https://cloudflareinsights.com; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'\n`,
           );
         },
         configureServer(s) {
