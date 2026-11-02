@@ -1,4 +1,5 @@
 // Server-only entry point. Importing the handler in local tests never starts an external connection.
+import { registrationTransport } from "./signup-recovery.mjs";
 import { createAccessMailer } from "./access-mail.mjs";
 import http from "node:http";
 import { enterpriseAccess, safeAccessError } from "./enterprise-access.mjs";
@@ -47,7 +48,7 @@ export function createPlatformHandler({
     if (
       req.method !== "POST" ||
       !(access
-        ? /^\/access\/(login|global-login|identity-login|contexts|context|signup|contact|selfservice-register|selfservice-payment|verify|activate|provision|person|resume|reset|resend|create-organization)$/.test(
+        ? /^\/access\/(login|global-login|identity-login|contexts|context|signup|signup-confirmation|signup-status|contact|selfservice-register|selfservice-payment|verify|activate|provision|person|resume|reset|resend|create-organization)$/.test(
             req.url,
           )
         : req.url === "/invitations/send")
@@ -190,18 +191,7 @@ export function platformRuntime(env = process.env) {
       createClient(env.SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY, {
         auth: authOptions,
       }).auth.signInWithPassword(credentials),
-    signUp: (credentials) =>
-      createClient(
-        env.SUPABASE_URL,
-        env.SUPABASE_PUBLISHABLE_KEY || env.SUPABASE_SERVICE_ROLE_KEY,
-        { auth: authOptions },
-      ).auth.signUp({
-        ...credentials,
-        options: {
-          ...credentials.options,
-          emailRedirectTo: origin + "/cadastrar",
-        },
-      }),
+    ...registrationTransport(createClient,env,origin),
   });
   return {
     origin,

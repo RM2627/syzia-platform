@@ -1,3 +1,4 @@
+import {savedActivation} from "./registration-core";
 import { PasswordInput } from "../ui/PasswordInput";
 import { accessInstructions, firstAccessLink } from "./access-instructions";
 import { ExistingPersonLink } from "./PeopleAccess";
@@ -39,6 +40,11 @@ export const accessMessages: Record<string, string> = {
     "Esta empresa possui acessos ou histórico que precisam ser preservados. Utilize Desativar.",
   shared_identity_requires_superadmin:
     "Este acesso antigo pertence a mais de uma empresa. Solicite a preparação ou recuperação à administração SYZIA.",
+  signup_confirmation_uncertain: "Não foi possível confirmar o envio. Seu cadastro pode ter sido iniciado; use as opções de confirmação ou entrada.",
+  signup_configuration_unavailable: "O envio da confirmação não está disponível agora. Tente mais tarde ou fale com a SYZIA.",
+  registration_invitation_invalid: "Confira o convite e utilize o e-mail destinatário.",
+  access_signup_in_progress: "Já existe uma solicitação em andamento. Aguarde e use as opções de confirmação ou entrada.",
+  email_confirmation_required: "Confirme seu e-mail antes de continuar.",
   access_denied: "Não foi possível entrar com os dados informados.",
   access_invalid:
     "Confira os campos. A senha precisa ter entre 12 e 128 caracteres e a confirmação deve coincidir.",
@@ -173,13 +179,14 @@ export function EnterpriseLogin() {
     const f = new FormData(e.currentTarget);
     try {
       const data = await accessApi("/access/identity-login", {
+        invitation:["cadastro","convite-comercial"].includes(new URLSearchParams(location.search).get("retorno") || "") ? savedActivation(sessionStorage)||undefined : undefined,
         identifier: f.get("identifier"),
         password: f.get("password"),
         captcha,
       });
       const result = await supabase!.auth.setSession(data.session);
       if (result.error) throw result.error;
-      if (!data.identity_setup_required && new URLSearchParams(location.search).get("retorno") === "convite-comercial" && sessionStorage.getItem("syzia-commercial-invitation"))
+      if (!data.identity_setup_required && new URLSearchParams(location.search).get("retorno") === "convite-comercial")
         window.location.assign("/ativar-empresa");
       else if (
         data.identity_setup_required ||
@@ -235,6 +242,7 @@ export function EnterpriseLogin() {
       )}
       <nav className="auth-links">
         <Link to="/recuperar-acesso">Esqueci minha senha</Link>
+        <Link to="/confirmar-email">Confirmar meu e-mail ou reenviar</Link>
         <Link to="/ativar-acesso">Primeiro acesso</Link>
       </nav>
     </AccessFrame>

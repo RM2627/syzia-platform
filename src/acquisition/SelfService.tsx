@@ -1,3 +1,5 @@
+import {ConfirmationPanel,hasRegistrationCallback} from "../access/SignupConfirmation";
+import {pendingRegistration,savedActivation} from "../access/registration-core";
 import {commercialApi,commercialError} from "../platform-commercial/api";
 import { normalizeCPF } from "../../shared/cpf.mjs";
 import { PasswordInput } from "../ui/PasswordInput";
@@ -20,7 +22,12 @@ function failedConfirmation() {
   );
 }
 export function SelfService({ identityOnly=false, onIdentityReady, activation }: {identityOnly?:boolean;onIdentityReady?:()=>void;activation?:{id:string;snapshot:string;company:string}}={}) {
-  const invitationReturn = identityOnly || (!activation && !!sessionStorage.getItem("syzia-commercial-invitation"));
+  const [remoteInvitation,setRemoteInvitation]=useState(false);
+  const invitationReturn = identityOnly || (!activation && (!!savedActivation(sessionStorage)||remoteInvitation));
+  const [pending,setPending]=useState(()=>pendingRegistration(localStorage)||failedConfirmation()||hasRegistrationCallback);
+  const [pendingEmail,setPendingEmail]=useState('');
+  const [identityVerified,setIdentityVerified]=useState(false);
+  const [missing,setMissing]=useState({name:true,username:true});
   const [params] = useSearchParams(),
     { plans, loading } = usePlans();
   const [captcha, setCaptcha] = useState("");
@@ -52,43 +59,25 @@ export function SelfService({ identityOnly=false, onIdentityReady, activation }:
     if (!slugEdited) setSlug(suggestSlug(company));
   }, [company, slugEdited]);
   async function restore(s: any) {
-    setSession(s);
+    setSession(s);setIdentityVerified(false);setError('');
     if (!s) {
       setReady(true);
       return;
     }
-    let contexts: any = null;
-    try {
-      contexts = await accessApi("/access/contexts", {});
-    } catch {}
-    if (
-      !contexts ||
-      (!contexts.global && !contexts.personal && !contexts.companies.length)
-    ) {
-      if (
-        !s.user.user_metadata?.display_name ||
-        !s.user.user_metadata?.syzia_username
-      ) {
-        setIdentitySetup(true);
-        setReady(true);
-        return;
-      }
-      try {
-        await accessApi("/access/selfservice-register", {
-          name: s.user.user_metadata.display_name,
-          username: s.user.user_metadata.syzia_username,
-        });
-      } catch (e) {
-        if ((e as any)?.message === "username_conflict") {
-          setName(s.user.user_metadata.display_name);
-          setUsername(s.user.user_metadata.syzia_username);
-          setIdentitySetup(true);
-          setError(accessMessage(e));
-          setReady(true);
-          return;
-        }
-        throw e;
-      }
+    // Verify the identity server-side; do not treat every failed context read as a missing profile.
+    const profile = await accessApi('/access/signup-status',{});
+    setNotice('E-mail confirmado. Continue seu cadastro com a mesma identidade.');
+    if(!profile.registered) {
+      setName(profile.name || '');setUsername(profile.username || '');setEdited(!!profile.username);
+      setMissing({name:profile.missing_name,username:profile.missing_username});
+      if(profile.missing_name||profile.missing_username) {setIdentitySetup(true);setReady(true);return;}
+      try {await accessApi('/access/selfservice-register',{name:profile.name,username:profile.username});}
+      catch(e){if((e as Error).message==='username_conflict'){setMissing({name:false,username:true});setIdentitySetup(true);setError(accessMessage(e));setReady(true);return;}throw e;}
+    }
+    setIdentityVerified(true);setIdentitySetup(false);pendingRegistration(localStorage,false);setPending(false);
+    if(!activation){
+      const invitations=await rpc<any[]>('commercial_activation_pending');
+      if(invitations.length){setRemoteInvitation(true);setReady(true);return;}
     }
     if (invitationReturn) { setReady(true); return; }
     const found = await rpc<any>("selfservice_context");
@@ -183,6 +172,8 @@ export function SelfService({ identityOnly=false, onIdentityReady, activation }:
         <div className="sy-form-card">
           {!ready ? (
             <p role="status">Recuperando seu cadastro…</p>
+          ) : !session && pending ? (
+            <ConfirmationPanel initialEmail={pendingEmail} initialError={error} onReady={restore}/>
           ) : !session ? (
             <form
               key="signup"
@@ -190,22 +181,26 @@ export function SelfService({ identityOnly=false, onIdentityReady, activation }:
                 e.preventDefault();
                 const f = new FormData(e.currentTarget);
                 void run(async () => {
-                  const r = await accessApi("/access/signup", {
+                  setPendingEmail(String(f.get('email')||''));
+                  let r;
+                  try { r = await accessApi("/access/signup", {
+                    invitation:savedActivation(sessionStorage)||undefined,
                     name,
                     username,
                     email: f.get("email"),
                     password: f.get("password"),
                     confirmation: f.get("confirmation"),
                     captcha,
-                  });
+                  }); }catch(e){
+                    if(['signup_confirmation_uncertain','signup_configuration_unavailable','access_signup_in_progress','access_unavailable'].includes((e as Error).message)){
+                      pendingRegistration(localStorage,true);setPending(true);setError(accessMessage(e));return;
+                    }throw e;
+                  }
                   if (r.session) {
                     const x = await supabase!.auth.setSession(r.session);
                     if (x.error) throw x.error;
                     await restore(x.data.session);
-                  } else
-                    setNotice(
-                      "Se o cadastro puder continuar, você receberá instruções no e-mail informado. Se já tem conta, entre para retomar; se necessário, use Esqueci minha senha.",
-                    );
+                  } else {pendingRegistration(localStorage,true);setPending(true);}
                 });
               }}
             >
@@ -284,6 +279,8 @@ export function SelfService({ identityOnly=false, onIdentityReady, activation }:
                 Já tenho conta · Entrar e retomar
               </Link>
             </form>
+          ) : !identityVerified && !identitySetup ? (
+            <><h2>Retomar identidade</h2><p>Precisamos verificar sua sessão antes de continuar. Seus dados e a preparação foram preservados.</p><button disabled={busy} onClick={()=>void run(()=>restore(session))}>Verificar novamente</button><Link to="/entrar?retorno=cadastro">Entrar e continuar</Link></>
           ) : identitySetup ? (
             <form
               key="identity"
@@ -300,8 +297,8 @@ export function SelfService({ identityOnly=false, onIdentityReady, activation }:
               }}
             >
               <h2>Complete sua identidade</h2>
-              <p>Sua conta existente será preservada.</p>
-              <label>
+              <p>Sua conta existente será preservada. Complete somente os dados que faltam.</p>
+              {missing.name && <label>
                 Nome completo
                 <input
                   required
@@ -310,8 +307,8 @@ export function SelfService({ identityOnly=false, onIdentityReady, activation }:
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
-              </label>
-              <label>
+              </label>}
+              {missing.username && <label>
                 Username
                 <input
                   required
@@ -321,7 +318,7 @@ export function SelfService({ identityOnly=false, onIdentityReady, activation }:
                     setEdited(true);
                   }}
                 />
-              </label>
+              </label>}
               <button disabled={busy}>Salvar identidade</button>
             </form>
           ) : invitationReturn ? (<><h2>Identidade preparada</h2><button onClick={onIdentityReady || (() => window.location.assign("/ativar-empresa"))}>Voltar ao convite de ativação</button></>) : draft?.state === "completed" ? (
@@ -547,7 +544,7 @@ export function SelfService({ identityOnly=false, onIdentityReady, activation }:
               </button>
             </>
           )}
-          {error && (
+          {error && !(pending && !session) && (
             <p role="alert" className="notice error">
               {error}
             </p>

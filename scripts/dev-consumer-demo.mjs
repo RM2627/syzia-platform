@@ -71,7 +71,7 @@ await (await import("./billing-047/fixture.mjs")).upgradeBillingFixture(c.db);
 // Historical assertions are unchanged; no remote database is involved.
 // The historical commercial harness owns its separate schema upgrade path.
 if (process.env.DEMO_COMMERCIAL_055 !== "true") for (const migration of (await (await import("node:fs/promises")).readdir("supabase/migrations"))
-  .filter(name => /^202610(18|20|21|22|25|28)00(54|55|56|57|58|59|60|61|62|63|64)_/.test(name)).sort()) {
+  .filter(name => /^202610(18|20|21|22|25|28)00(54|55|56|57|58|59|60|61|62|63|64)_/.test(name) || name === "202611020070_registration_recovery.sql").sort()) {
   await c.db.exec(await (await import("node:fs/promises")).readFile("supabase/migrations/" + migration, "utf8"));
 }
 if (process.env.DEMO_NO_MANUAL_048 === "true") await (await import("./syzia-048/fixture.mjs")).seedNoManualBrowser(c);

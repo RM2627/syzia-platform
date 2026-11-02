@@ -19,6 +19,7 @@ const Register = lazy(() =>
 const ActivateCompany = lazy(() => import("./platform-commercial/Activation").then(m=>({default:m.ActivateCompany})));
 const Unsubscribe = lazy(() => import("./platform-commercial/Activation").then(m=>({default:m.Unsubscribe})));
 const Foundation = lazy(() => import("./FoundationApp"));
+const SignupConfirmation = lazy(() => import("./access/SignupConfirmation").then(m=>({default:m.SignupConfirmation})));
 const RecoveryRequest = lazy(() => import("./access/PasswordRecovery").then(m => ({ default: m.RequestPasswordRecovery })));
 const RecoveryUpdate = lazy(() => import("./access/PasswordRecovery").then(m => ({ default: m.UpdatePassword })));
 const PublicCompany = lazy(() =>
@@ -51,6 +52,7 @@ createRoot(document.getElementById("root")!).render(
           <Route path="/" element={<Site />} />
           <Route path="/planos" element={<Plans />} />
           <Route path="/contato" element={<Contact />} />
+          <Route path="/confirmar-email" element={<SignupConfirmation />} />
           <Route path="/cadastrar" element={<Register />} />
           <Route path="/ativar-empresa" element={<ActivateCompany />} />
           <Route path="/convites/descadastrar" element={<Unsubscribe />} />

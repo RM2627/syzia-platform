@@ -1,8 +1,12 @@
+import {signupFailure, neutralSignupError} from './signup-recovery.mjs';
 import { deliveryError } from "./access-mail.mjs";
 import { createHash, randomBytes } from "node:crypto";
 export const digest = (value) =>
   createHash("sha256").update(value).digest("hex");
 export const accessErrors = new Set([
+  "signup_confirmation_uncertain",
+  "signup_configuration_unavailable",
+  "registration_invitation_invalid",
   "access_denied",
   "slug_conflict",
   "slug_invalid",
@@ -105,7 +109,7 @@ export function safeAccessError(error) {
       "delivery_rate_limited",
     ].includes(code)
       ? 429
-      : code === "access_unavailable" || code === "activation_uncertain"
+      : ["access_unavailable","activation_uncertain","signup_confirmation_uncertain","signup_configuration_unavailable"].includes(code)
         ? 503
         : 400,
   };
@@ -149,6 +153,7 @@ export function authDiagnostic(error) {
     "session_expired",
     "session_not_found",
     "refresh_token_not_found",
+    "captcha_failed", "signup_disabled", "hook_timeout", "hook_timeout_after_retry",
   ]);
   const reason = allowed.has(error?.code)
     ? error.code
@@ -185,6 +190,7 @@ export function enterpriseAccess({
   auth,
   signIn,
   signUp,
+  resendSignup,
   paymentAdapter,
   sendInstructions = async () => {
     throw Object.assign(Error("email_not_configured"), {
@@ -216,6 +222,11 @@ export function enterpriseAccess({
       }))
     )
       fail("access_rate_limited");
+  };
+  const rememberInvitation = async (body, email) => {
+    if (!body.invitation) return;
+    if (typeof body.invitation !== 'string' || !/^[A-Za-z0-9_-]{43}$/.test(body.invitation)) fail('registration_invitation_invalid');
+    await service('access_activation_remember', {p_hash:digest(body.invitation),p_email:email});
   };
   const deliver = async (id, user, code, rotate = false) => {
     const activation_link = proof();
@@ -268,6 +279,20 @@ export function enterpriseAccess({
         p_interest: clean(body.interest, 1000),
       });
     }
+    if (path === "/access/signup-confirmation") {
+      const email = clean(body.email,254).toLowerCase();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) fail('access_invalid');
+      await rate('confirmation-ip:' + ip,5);
+      await rate('confirmation-email:' + email,5);
+      if (!(await service('access_rate',{p_key:digest('confirmation-cooldown:' + email),p_limit:1,p_seconds:60}))) fail('delivery_cooldown');
+      await rememberInvitation(body,email);
+      if (!resendSignup) fail('signup_configuration_unavailable');
+      let result;
+      try {result=await resendSignup({type:'signup',email,options:{captchaToken:clean(body.captcha,4096)}});}
+      catch(error){throw Object.assign(Error(signupFailure(error)),{diagnostic:error});}
+      if(result.error && !neutralSignupError(result.error)) throw Object.assign(Error(signupFailure(result.error)),{diagnostic:result.error});
+      return {confirmation_required:true};
+    }
     if (path === "/access/signup") {
       await rate("signup:" + ip, 5);
       const email = clean(body.email, 254).toLowerCase();
@@ -283,6 +308,8 @@ export function enterpriseAccess({
         clean(body.name, 120).length < 3
       )
         fail("access_invalid");
+      if (clean(body.username).includes("..") || clean(body.username).endsWith(".")) fail("access_invalid");
+      await rememberInvitation(body,email);
       if (await service("access_identity_exists", { p_email: email }))
         return { confirmation_required: true }; // Neutral response; never create a duplicate identity.
       if (!signUp) fail("access_unavailable");
@@ -300,15 +327,16 @@ export function enterpriseAccess({
             syzia_signup_authorization: authorization,
           },
         },
-      }); } finally {
+      }); } catch(error) {
+        throw Object.assign(Error(signupFailure(error)),{diagnostic:error});
+      } finally {
         // Only the digest crosses the service RPC. Never expose/log the nonce.
         await service("access_signup_release", { p_hash: digest(authorization) }).catch(() => {});
       }
-      if (result.error)
-        throw Object.assign(Error("access_unavailable"), {
-          code: "access_unavailable",
-          diagnostic: result.error,
-        });
+      if (result.error) {
+        if(neutralSignupError(result.error)) return {confirmation_required:true};
+        throw Object.assign(Error(signupFailure(result.error)), {diagnostic:result.error});
+      }
       return result.data?.session
         ? {
             session: {
@@ -343,6 +371,7 @@ export function enterpriseAccess({
             lookup.operation)
       )
         fail("access_denied");
+      await rememberInvitation(body,verified.email);
       const contexts = await service("access_identity_contexts", {
         p_user: verified.id,
       });
@@ -524,6 +553,16 @@ export function enterpriseAccess({
       return { activated: true };
     }
     const user = await actor(token);
+    if (path === "/access/signup-status") {
+      if (!user.email_confirmed_at) fail('email_confirmation_required');
+      const profile = await service('access_registration_profile',{p_user:user.id});
+      const contexts = await service('access_identity_contexts',{p_user:user.id});
+      const existing = !!(contexts.global || contexts.personal || contexts.companies.length);
+      // Existing accounts must keep their registered enterprise session. A signup
+      // callback cannot enroll an arbitrary older Auth JWT into a newer generation.
+      if(existing) await asUser(token,'access_session',{p_activity:false,p_logout:false});
+      return {...profile,registered:existing,confirmed:true};
+    }
     if (path === "/access/selfservice-register") {
       const account = await service("access_selfservice_identity", {
         p_user: user.id,

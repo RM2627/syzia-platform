@@ -78,13 +78,27 @@ export function ActivateCompany() {
     [error, setError] = useState(""),
     [busy, setBusy] = useState(false),
     [reviewed, setReviewed] = useState(false),
-    [continueSetup, setContinueSetup] = useState(false);
-  async function load() {
+    [continueSetup, setContinueSetup] = useState(false),
+    [returns,setReturns]=useState<any[]>([]);
+  async function load(selected?:string) {
     setError("");
     setInvitation(undefined);
     setClaim(undefined);
     setReviewed(false);
     setContinueSetup(false);
+    const current = (await supabase?.auth.getSession())?.data.session;
+    setSession(current || null);
+    if(!token) {
+      if(!current)return;
+      const choices=await rpc<any[]>('commercial_activation_pending');
+      setReturns(choices);
+      const item=selected?choices.find(x=>x.id===selected):choices.length===1?choices[0]:null;
+      if(item){
+        const restored=await rpc('commercial_activation_resume',{p_invite:item.id});
+        setInvitation({...item,purpose:'activation'});setClaim(restored);
+      }
+      return;
+    }
     const i = await invitationApi("invite", { invitation: token });
     if (i.purpose !== "activation") throw Error("commercial_invite_invalid");
     setInvitation(i);
@@ -133,7 +147,10 @@ export function ActivateCompany() {
           Este convite autoriza o destinatário a iniciar a ativação. Entre com a conta do e-mail que recebeu o convite e confira a configuração preparada. A liberação depende da confirmação da assinatura.
         </p>
         {error && <p role="alert">{error}</p>}
-        {!invitation && !error && <p role="status">Conferindo convite…</p>}
+        {error && token && session && <button onClick={()=>{sessionStorage.removeItem('syzia-commercial-invitation');window.location.assign('/ativar-empresa');}}>Recuperar preparações da minha identidade</button>}
+        {!invitation && !error && token && <p role="status">Conferindo convite…</p>}
+        {!token && !invitation && session===null && <div className="sy-form-card"><h2>Retome sua demonstração</h2><p>Entre com a identidade destinatária confirmada para recuperar a preparação iniciada, inclusive em outro aparelho.</p><Link to="/entrar?retorno=convite-comercial">Entrar e continuar</Link><Link to="/confirmar-email">Confirmar meu e-mail ou reenviar</Link></div>}
+        {!token && !invitation && session && <div className="sy-form-card"><h2>Preparações vinculadas à sua identidade</h2>{returns.length?returns.map(x=><button key={x.id} onClick={()=>void load(x.id).catch(e=>setError(commercialError(e)))}>Continuar {x.company}</button>):<p>Nenhuma preparação válida foi encontrada. Abra o convite original; ele pode ter expirado ou sido revogado.</p>}</div>}
         {invitation && !session && (
           <div className="sy-form-card">
             <h2>Identifique-se para continuar</h2>

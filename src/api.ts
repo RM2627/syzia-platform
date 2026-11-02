@@ -79,9 +79,9 @@ export const supabase = demoBuild ? demoCompanyClient : configured
         flowType: "pkce",
         persistSession: true,
         autoRefreshToken: true,
-        // Password routes validate their own callback after explicit recipient confirmation.
+        // Password and signup routes validate their own callback after explicit recipient confirmation.
         // Avoid auto-consumption and never confuse a stored session with a fresh email proof.
-        detectSessionInUrl: !["/aceitar-convite", "/atualizar-senha"].includes(
+        detectSessionInUrl: !["/aceitar-convite", "/atualizar-senha", "/confirmar-email", "/cadastrar"].includes(
           window.location.pathname,
         ),
       },
