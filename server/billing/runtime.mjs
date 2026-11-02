@@ -1,3 +1,4 @@
+import { onlineBilling } from './stripe/runtime.mjs';
 import { createClient } from "@supabase/supabase-js";
 import { MercadoPagoSubscriptions, fail } from "./mercado-pago.mjs";
 import { subscriptions } from "./subscriptions.mjs";
@@ -39,8 +40,9 @@ export function billingRuntime(env = process.env, { createClientImpl = createCli
   if (!enabled) {
     const disabled = async () => fail("billing_disabled", 503);
     // No subscriptions engine, leases, reconciliation or user commands in observe.
-    return { billing: { user: disabled, process: disabled, reconcile: disabled,
-      webhook: observe ? notificationObserver({ gateway, service }) : disabled }, gateway: null, service };
+    const mp = { user: disabled, process: disabled, reconcile: disabled,
+      webhook: observe ? notificationObserver({ gateway, service }) : disabled };
+    return { billing: onlineBilling({env, mp, service, asUser, auth, fetchImpl}), gateway: null, service };
   }
-  return { billing: subscriptions({ gateway, service, asUser, auth, environment }), gateway, service };
+  return { billing: onlineBilling({env, mp: subscriptions({ gateway, service, asUser, auth, environment }), service, asUser, auth, fetchImpl}), gateway, service };
 }

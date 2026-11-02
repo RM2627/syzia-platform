@@ -1,4 +1,5 @@
-import { MercadoPagoBilling } from "./MercadoPago";
+import { StripeConnectivity } from "./StripeConnectivity";
+import { SubscriptionCheckout } from "./SubscriptionCheckout";
 import { supportBenefit, supportDescription, supportPlanDescription } from "../availability/support-copy";
 import { AssistedPolicy } from "../availability/Availability";
 import { Capabilities } from "./Capabilities";
@@ -326,7 +327,7 @@ export function Billing({
           : "smooth",
       });
   }, [confirmation]);
-  if (!platform && scope && data && !data.mock_enabled && !internal && !(data as any).homologation) return <MercadoPagoBilling org={scope} />;
+  if (!platform && scope && data && !data.mock_enabled && !internal && !(data as any).homologation) return <SubscriptionCheckout org={scope} />;
   const sub = data?.subscription,
     plans = platform ? overview?.plans : data?.catalog;
   return (
@@ -356,6 +357,7 @@ export function Billing({
           após a integração do provedor de cobrança.
         </span>
       </div>
+      {platform && <StripeConnectivity />}
       <AssistedPolicy platform={platform} org={scope} />
       {platform && scope && overview && (
         <Homologation

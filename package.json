@@ -162,7 +162,9 @@
     "academy:dev": "vite --config vite.academy.config.ts --mode academy",
     "academy:build": "tsc --noEmit && vite build --config vite.academy.config.ts --mode academy",
     "test:academy": "node --test --test-concurrency=1 tests/academy-066/*.test.mjs",
-    "test:academy:browser": "node tests/academy-066/browser.mjs"
+    "test:academy:browser": "node tests/academy-066/browser.mjs",
+    "test:stripe:online": "node --test --test-concurrency=1 tests/stripe-online/*.test.mjs",
+    "test:stripe:online:browser": "playwright test --config=playwright.stripe-online.config.ts"
   },
   "keywords": [],
   "author": "",

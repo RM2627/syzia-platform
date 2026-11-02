@@ -63,7 +63,7 @@ export function unifiedRuntime(env = process.env) {
     platform: platformRuntime({ ...env, PLATFORM_APP_ORIGIN: origin }),
     attachments: attachmentRuntime({ ...env, CONSUMER_ORIGIN: consumerOrigin }),
     billing: { origin, billing: runtime.billing },
-    reconcile: env.MERCADO_PAGO_ENABLED === "true" ? () => runtime.billing.reconcile() : null,
+    reconcile: (env.MERCADO_PAGO_ENABLED === "true" || env.STRIPE_ENABLED === "true") ? () => runtime.billing.reconcile() : null,
   };
 }
 
