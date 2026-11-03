@@ -30,7 +30,7 @@ export function onlineBilling({env,mp,service,asUser,auth,fetchImpl}){
         exactBody(body,['organization_id']);ensure(UUID.test(body.organization_id),'payload_invalid',400);await authorize(token);
         const result=await asUser(token,'billing069_context',{p_org:body.organization_id});
         // Existing contracts are selected by persisted provider, never by a browser flag.
-        return {...result,catalog:catalogView(result.catalog),checkout_mode:result.checkout_mode===mode?mode:'disabled',stripe_available:!!stripe};
+        return {...result,catalog:catalogView(result.catalog),checkout_mode:result.checkout_mode===mode?mode:'disabled',stripe_available:!!stripe,stripe_operations_available:!!gateway?.cfg.operationsEnabled};
       }
       if(path==='stripe/preflight'){
         exactBody(body,[]);await authorize(token);

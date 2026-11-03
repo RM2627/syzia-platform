@@ -329,7 +329,7 @@ export function Billing({
           : "smooth",
       });
   }, [confirmation]);
-  if (!platform && scope && data && !data.mock_enabled && !internal && !(data as any).homologation) return <SubscriptionCheckout org={scope} />;
+  if (!platform && scope && data && !data.mock_enabled && !internal && !(data as any).homologation) return <SubscriptionCheckout key={scope} org={scope} prepared={data.subscription?.state === 'pending'} />;
   const sub = data?.subscription,
     plans = platform ? overview?.plans.filter(p=>!managedCatalog.includes(p.id)) : data?.catalog;
   return (
