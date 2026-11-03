@@ -1,0 +1,29 @@
+✔ default remains closed; enabling general scope does not turn on checkout or confirmation (2190.493451ms)
+✔ restricted scope preserves allowlist; general scope admits other organizations; rollback restores restriction (12.101356ms)
+✔ null entries fail closed and neither null organization nor invalid environment opens scope (9.135748ms)
+✔ general Sandbox cannot be enabled in production; existing production predicate remains independent (12.323025ms)
+✔ administrative RPC is service-only; anonymous/authenticated cannot toggle or update private runtime (10.30384ms)
+✔ null administrative setting rejected; audit contains only transitions, not identifiers; transaction rollback (12.554614ms)
+✔ four exact historical guards replaced, no other function content changed; 071 wrappers preserved (2.69883ms)
+✔ structural rollback restores all four exact previous expressions without deleting contract or audit data (2.689316ms)
+✔ actual SQL guards: matrix covers context, preparation, start, apply, mode, confirmation and environment mismatch (111.973758ms)
+✔ frontend and controller consume the same computed scope; general mode reaches existing preparation without granting access (12.740414ms)
+✔ stale frontend authorization cannot bypass current database preparation scope (7.430507ms)
+✔ general scope preserves authentication, organization boundary and strict command payload (4.615681ms)
+✔ eligibility and existing contract blockers are not replaced by general scope (11.29797ms)
+✔ Render acquisition and operations switches remain required even with general Sandbox scope (6.263837ms)
+✔ financial verification requires a real local contract, not a prepared signup or return flag (1.898073ms)
+✔ catalog stays visible to allowed members outside test allowlist; backend still refuses checkout before provider/write (2.675339ms)
+✔ display uses official totals; monthly equivalent never changes the billed amount (17.761181ms)
+✔ checkout requires every backend gate and no existing contract (0.247814ms)
+✔ management is conservative and never invents a change-modality command (0.213061ms)
+✔ backend status determines labels; only explicit preparation/trial confirmation changes presentation (0.208735ms)
+✔ redirect is constrained to official HTTPS checkout and malformed URLs never throw (0.786967ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2877.681485
