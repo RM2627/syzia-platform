@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { rpc } from "../api";
 import {commercialApi,commercialError} from "./api";
+import './prepared-company.css';
 async function finalize(org:string){
   const r=await rpc<any>("commercial_import_finalize",{p_org:org});
   if(!r?.pending)return r;
@@ -8,38 +9,25 @@ async function finalize(org:string){
   catch(e){return {...r,confirmation_error:commercialError(e)};}
 }
 import { Link, useLocation } from "react-router-dom";
-export function PreparedCompany({ org }: { org: string }) {
-  const [state, setState] = useState<any>(null),
-    [busy, setBusy] = useState(false),
-    [error, setError] = useState("");
+export function PreparedCompany({ org, refreshKey = 0 }: { org: string; refreshKey?: number }) {
+  const [result, setResult] = useState<{org: string; value: any} | null>(null);
   const location = useLocation();
-  async function refresh() {
-    setBusy(true);
-    setError("");
-    try {
-      setState(await finalize(org));
-    } catch {
-      setError(
-        "Não foi possível verificar a configuração preparada. Tente novamente.",
-      );
-    } finally {
-      setBusy(false);
-    }
-  }
+  const state = result?.org === org ? result.value : null;
+  const onSubscription = location.pathname === `/painel/${org}/assinatura`;
   useEffect(() => {
     let live = true;
     void finalize(org)
       .then((x) => {
-        if (live) setState(x);
+        if (live) setResult({org, value:x});
       })
       .catch(() => {});
     return () => {
       live = false;
     };
-  }, [org, location.pathname]);
+  }, [org, location.pathname, refreshKey]);
   if (!state?.pending && !state?.activated) return null;
   return (
-    <aside className="notice">
+    <section className="prepared-company" aria-label="Configuração preparada">
       <strong>
         {state.activated
           ? "Catálogo preparado habilitado"
@@ -50,19 +38,12 @@ export function PreparedCompany({ org }: { org: string }) {
           ? "A assinatura foi confirmada. Abra a configuração para conferir o catálogo. A página continua sem publicação automática."
           : "O catálogo preparado será habilitado depois da confirmação válida da assinatura. A página continua sem publicação automática."}
       </p>
-      {state.pending ? (
-        <>
-          <Link to={"/painel/" + org + "/assinatura"}>
-            Continuar contratação
-          </Link>{" "}
-          <button disabled={busy} onClick={() => void refresh()}>
-            Verificar confirmação
-          </button>
-        </>
+      {state.pending ? !onSubscription && (
+        <Link to={"/painel/" + org + "/assinatura"}>Ver modalidades e assinatura</Link>
       ) : (
         <Link to={"/painel/" + org + "/configuracao"}>Conferir catálogo</Link>
       )}
-      {(error||state.confirmation_error) && <p role="alert">{error||state.confirmation_error}</p>}
-    </aside>
+      {state.confirmation_error && <p role="alert">{state.confirmation_error}</p>}
+    </section>
   );
 }

@@ -2,7 +2,8 @@ import {useEffect, useRef, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {billingApi} from './checkout-api';
 import {MercadoPagoBilling} from './MercadoPago';
-import {canStartCheckout, checkoutURL, confirmedDate, managementAction, modalityNames, money, subscriptionState, type CheckoutContext} from './subscription-view';
+import {canStartCheckout, checkoutURL, confirmationPending, confirmedDate, managementAction, modalityNames, money, subscriptionState, type CheckoutContext} from './subscription-view';
+import {PreparedCompany} from '../platform-commercial/PreparedCompany';
 import './stripe-checkout.css';
 
 function Icon({kind}: {kind: 'shield' | 'refresh' | 'check'}) {
@@ -18,20 +19,28 @@ export function SubscriptionCheckout({org, prepared = false}: {org: string; prep
 function SubscriptionView({org, prepared}: {org: string; prepared: boolean}) {
   const [data, setData] = useState<CheckoutContext | null>(null), [busy, setBusy] = useState(true), [error, setError] = useState('');
   const [accepted, setAccepted] = useState(false), [selected, setSelected] = useState(''), [mustRefresh, setMustRefresh] = useState(false);
+  const [preparationRevision, setPreparationRevision] = useState(0);
   const alive = useRef(true), inFlight = useRef(false), generation = useRef(0);
   const commandKey = useRef<{action: string; offer?: string; key: string} | null>(null);
   async function refresh() {
     if (inFlight.current) return;
     const n = ++generation.current; inFlight.current = true; setBusy(true); setError('');
+    let selector: CheckoutContext | null = null;
     try {
-      const selector = await billingApi('checkout', {organization_id: org});
+      const response = await billingApi('checkout', {organization_id: org});
       if (!alive.current || n !== generation.current) return;
-      const status = selector.provider === 'stripe' ? await billingApi('stripe/status', {organization_id: org}) : {};
-      const value = {...selector, ...status, catalog: selector.catalog, checkout_mode: selector.checkout_mode};
+      if (!Array.isArray(response.catalog)) throw Error('catalog_invalid');
+      selector = response;
+      const status = response.provider === 'stripe' ? await billingApi('stripe/status', {organization_id: org}) : {};
+      const value = {...response, ...status, catalog: response.catalog, checkout_mode: response.checkout_mode};
       if (!Array.isArray(value.catalog)) throw Error('catalog_invalid');
-      if (alive.current && n === generation.current) { setData(value); setMustRefresh(false); }
+      if (alive.current && n === generation.current) { setData(value); setMustRefresh(false); setPreparationRevision(x => x + 1); }
     } catch {
-      if (alive.current && n === generation.current) { setData(null); setMustRefresh(true); setError('Não foi possível consultar a assinatura. Atualize o status para tentar novamente.'); }
+      if (alive.current && n === generation.current) {
+        // Preserve only the current authorized selector when reconciliation fails.
+        // The catalog remains visible; all financial actions stay blocked until a successful refresh.
+        setData(selector); setMustRefresh(true); setError('Não foi possível atualizar a assinatura. Atualize o status para tentar novamente.');
+      }
     } finally { if (alive.current && n === generation.current) { inFlight.current = false; setBusy(false); } }
   }
   useEffect(() => {
@@ -63,7 +72,7 @@ function SubscriptionView({org, prepared}: {org: string; prepared: boolean}) {
     } finally { if (alive.current) { inFlight.current = false; setBusy(false); } }
   }
 
-  if (data?.provider === 'mercado_pago' || (!data?.provider && data?.checkout_mode === 'internal')) return <MercadoPagoBilling key={org} org={org}/>;
+  if (data?.provider === 'mercado_pago' || (!data?.provider && data?.checkout_mode === 'internal')) return <>{import.meta.env.VITE_COMMERCIAL_PREPARATION_ENABLED === 'true' && <PreparedCompany org={org}/>}<MercadoPagoBilling key={org} org={org}/></>;
   const sub = data?.subscription || null, eligible = data?.eligibility === 'eligible';
   const canStart = canStartCheckout(data) && !mustRefresh, action = managementAction(data);
   const state = subscriptionState(sub, prepared), chosen = data?.catalog.find(o => o.code === selected);
@@ -72,9 +81,9 @@ function SubscriptionView({org, prepared}: {org: string; prepared: boolean}) {
     && ['payment_pending', 'reconciliation'].includes(sub.state) && !!checkoutURL(sub.checkout_url);
 
   return <section className="stripe-checkout" aria-labelledby="stripe-title" aria-busy={busy}>
-    <header className="sc-heading"><div><p className="sc-eyebrow">ADMINISTRAÇÃO</p><h1 id="stripe-title">Plano e assinatura</h1><p>Confira sua assinatura e escolha como organizar a contratação.</p></div>
-      <button type="button" className="sc-button sc-secondary" onClick={() => void refresh()} disabled={busy}><Icon kind="refresh"/>Atualizar status</button></header>
-    {data?.environment === 'test' && <p className="sc-notice sc-test"><span className="sc-dot"/>Ambiente de teste · Disponível apenas para organizações autorizadas.</p>}
+    <header className="sc-heading"><div><p className="sc-eyebrow">ADMINISTRAÇÃO</p><h1 id="stripe-title">Plano e assinatura</h1><p>Escolha sua modalidade e gerencie sua assinatura da SYZIA.</p></div>
+      <button type="button" className="sc-button sc-secondary" onClick={() => void refresh()} disabled={busy}><Icon kind="refresh"/>{confirmationPending(sub) ? 'Verificar confirmação' : 'Atualizar status'}</button></header>
+    {data?.environment === 'test' && <p className="sc-notice sc-test"><span className="sc-dot"/>Ambiente de teste · Contratação somente para organizações autorizadas.</p>}
     {error && <div role="alert" className="sc-notice sc-error"><strong>Não foi possível confirmar a operação.</strong><span>{error}</span></div>}
     {!data && !error && <div className="sc-current sc-loading" role="status">Consultando sua assinatura…</div>}
     {data && <>
@@ -86,6 +95,8 @@ function SubscriptionView({org, prepared}: {org: string; prepared: boolean}) {
           <div><dt>Próxima cobrança</dt><dd>{sub.cancel_requested || sub.state === 'canceled' ? 'Sem renovação programada' : nextCharge || 'Ainda não confirmada'}</dd></div>
         </dl>}
         {sub?.pending && <p className="sc-inline-note" role="status">Há uma operação em conferência. As informações serão atualizadas após confirmação oficial.</p>}
+        {mustRefresh && <p className="sc-inline-note">Situação ainda não atualizada. Nenhuma nova confirmação financeira foi obtida nesta consulta.</p>}
+        {import.meta.env.VITE_COMMERCIAL_PREPARATION_ENABLED === 'true' && <PreparedCompany org={org} refreshKey={preparationRevision}/>}
       </section>
       {!sub && !canStart && <p role="status" className="sc-notice sc-warning">Contratação temporariamente indisponível. As modalidades abaixo são para consulta; nenhum trial ou cobrança será iniciado.</p>}
       <section className="sc-commercial" aria-labelledby="sc-product-title">

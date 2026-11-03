@@ -509,7 +509,7 @@ function Shell({ children }: { children: ReactNode }) {
                       </p>
                     }
                   >
-                    {tenantManager && tenant && import.meta.env.VITE_COMMERCIAL_PREPARATION_ENABLED === "true" && <PreparedCompany org={tenant.id}/>}
+                    {tenantManager && tenant && !currentLocation.pathname.endsWith("/assinatura") && import.meta.env.VITE_COMMERCIAL_PREPARATION_ENABLED === "true" && <PreparedCompany org={tenant.id}/>}
       {children}
                   </Suspense>
                 </PermissionRoute>

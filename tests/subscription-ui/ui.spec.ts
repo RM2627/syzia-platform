@@ -69,7 +69,7 @@ test('subscription states and dates remain backend-derived; unsupported actions 
   ['reconciliation','Confirmação em andamento',{pending:true,access_until:null,next_charge:null}],
   ['active','Cancelamento programado',{cancel_requested:true}],['canceled','Assinatura cancelada',{}],
   ['unknown','Aguardando validação',{}]
- ]as const){s.value.subscription=subscription(raw,extra);await page.getByRole('button',{name:'Atualizar status'}).click();await expect(page.getByRole('heading',{name:label,exact:true})).toBeVisible();if(['payment_pending','reconciliation','canceled','unknown'].includes(raw))await expect(page.getByRole('button',{name:'Cancelar renovação'})).toHaveCount(0);}
+ ]as const){s.value.subscription=subscription(raw,extra);await page.getByRole('button',{name:/^(Atualizar status|Verificar confirmação)$/}).click();await expect(page.getByRole('heading',{name:label,exact:true})).toBeVisible();if(['payment_pending','reconciliation','canceled','unknown'].includes(raw))await expect(page.getByRole('button',{name:'Cancelar renovação'})).toHaveCount(0);}
  await expect(page.getByRole('button',{name:/alterar|mudar modalidade/i})).toHaveCount(0);expect(commands(s)).toHaveLength(0);
 });
 test('cancel/resume retain existing commands, explicit confirmation and organization binding',async({page})=>{

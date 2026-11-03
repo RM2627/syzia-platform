@@ -1,4 +1,5 @@
 import { CommercialCatalog } from './CommercialCatalog';
+import { PreparedCompany } from '../platform-commercial/PreparedCompany';
 import { StripeConnectivity } from "./StripeConnectivity";
 import { SubscriptionCheckout } from "./SubscriptionCheckout";
 import { supportBenefit, supportDescription, supportPlanDescription } from "../availability/support-copy";
@@ -334,6 +335,7 @@ export function Billing({
     plans = platform ? overview?.plans.filter(p=>!managedCatalog.includes(p.id)) : data?.catalog;
   return (
     <div className="billing">
+      {!platform && data && scope && import.meta.env.VITE_COMMERCIAL_PREPARATION_ENABLED === 'true' && <PreparedCompany key={scope} org={scope}/>}
       <div className="b-heading">
         <div>
           <p className="eyebrow">

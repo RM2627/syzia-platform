@@ -28,6 +28,10 @@ export function canStartCheckout(data: CheckoutContext | null) {
   return !!data && data.checkout_mode === 'stripe' && data.stripe_available === true && data.confirmation_enabled === true && data.test_allowed === true
     && ['eligible', 'previous_identity', 'previous_grant'].includes(data.eligibility) && !data.subscription;
 }
+export function confirmationPending(s: Subscription | null) {
+  // A prepared commercial configuration or a return URL is not a financial operation.
+  return !!s?.id && (s.pending === true || ['payment_pending', 'reconciliation'].includes(s.state));
+}
 export function managementAction(data: CheckoutContext | null, now = Date.now()): 'cancel' | 'resume' | null {
   const s = data?.subscription;
   // Read-only runtime signal is separate from new-sales availability; SQL still authorizes every command.
