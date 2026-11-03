@@ -1,3 +1,4 @@
+import { CommercialCatalog } from './CommercialCatalog';
 import { StripeConnectivity } from "./StripeConnectivity";
 import { SubscriptionCheckout } from "./SubscriptionCheckout";
 import { supportBenefit, supportDescription, supportPlanDescription } from "../availability/support-copy";
@@ -192,6 +193,7 @@ export function Billing({
   quota_semantics?: number;
   platform?: boolean;
 }) {
+  const [managedCatalog,setManagedCatalog]=useState<string[]>([]);
   const [data, setData] = useState<Context | null>(null),
     [overview, setOverview] = useState<Overview | null>(null),
     [selected, setSelected] = useState(
@@ -329,7 +331,7 @@ export function Billing({
   }, [confirmation]);
   if (!platform && scope && data && !data.mock_enabled && !internal && !(data as any).homologation) return <SubscriptionCheckout org={scope} />;
   const sub = data?.subscription,
-    plans = platform ? overview?.plans : data?.catalog;
+    plans = platform ? overview?.plans.filter(p=>!managedCatalog.includes(p.id)) : data?.catalog;
   return (
     <div className="billing">
       <div className="b-heading">
@@ -357,7 +359,7 @@ export function Billing({
           após a integração do provedor de cobrança.
         </span>
       </div>
-      {platform && <StripeConnectivity />}
+      {platform && <><CommercialCatalog onLoaded={setManagedCatalog}/><StripeConnectivity /></>}
       <AssistedPolicy platform={platform} org={scope} />
       {platform && scope && overview && (
         <Homologation

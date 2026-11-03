@@ -66,3 +66,8 @@ export function eligibleDemoLink(contact: any, demo: any, now = Date.now()) {
   return Boolean(contact && !contact.suppressed && !["not_interested", "archived"].includes(contact.stage)
     && demo.state === "available" && demo.published_version_id && new Date(demo.expires_at).getTime() > now);
 }
+
+// Link issuance without a preassigned address is separate from permission to email.
+export function eligibleActivationLink(contact:any,demo:any,now=Date.now()) {
+  return !contact?.email && eligibleDemoLink(contact,demo,now) && ['wants_trial','activation_sent','registration_started'].includes(contact.stage);
+}

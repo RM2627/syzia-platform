@@ -1,3 +1,4 @@
+import { billingApi } from '../billing/checkout-api';
 import { ProductPreviews } from "./ProductPreviews";
 import { memberLimitLabel } from "../billing/plan-copy";
 import {
@@ -20,10 +21,11 @@ export function usePlans() {
     [loading, setLoading] = useState(true),
     [failed, setFailed] = useState(false);
   useEffect(() => {
-    rpc<any[]>("acquisition_plans")
-      .then(setPlans)
-      .catch(() => setFailed(true))
-      .finally(() => setLoading(false));
+    let live=true,sequence=0;
+    const refresh=()=>{const n=++sequence;void billingApi('catalog',{}).then(rows=>{if(!Array.isArray(rows))throw Error('catalog_invalid');if(live&&n===sequence){setPlans(rows);setFailed(false);}}).catch(()=>{if(live&&n===sequence){setPlans([]);setFailed(true);}}).finally(()=>{if(live&&n===sequence)setLoading(false);});};
+    const visible=()=>{if(document.visibilityState==='visible')refresh();};
+    refresh();window.addEventListener('focus',refresh);document.addEventListener('visibilitychange',visible);
+    return()=>{live=false;window.removeEventListener('focus',refresh);document.removeEventListener('visibilitychange',visible);};
   }, []);
   return { plans, loading, failed };
 }
@@ -487,6 +489,8 @@ function FAQ({ offer }: { offer: ReturnType<typeof usePlans> }) {
             ? "Consultando as condições publicadas…"
             : offer.failed
               ? "Não foi possível consultar as ofertas agora. Fale com a SYZIA para conferir as condições disponíveis."
+              : trial.length && trial.every(p=>p.checkout_available===false)
+                ? "As modalidades preveem sete dias gratuitos para clientes elegíveis, com cartão vinculado. A contratação está temporariamente indisponível; nenhum período gratuito é iniciado pelo cadastro."
               : trial.length
                 ? "Há avaliação nas ofertas publicadas: " +
                   trial
@@ -528,15 +532,16 @@ function PlanList({ offer }: { offer: ReturnType<typeof usePlans> }) {
               {p.featured && (
                 <span className="sy-featured-badge">{p.featured_label}</span>
               )}
-              <h3>{p.name}</h3>
+              <h3>{p.product_name || p.name}</h3>
+              {p.modality && <p><b>{p.modality}</b></p>}
               <p>{p.description}</p>
               {p.version.human_support && <p>{supportPlanDescription}</p>}
               {p.trial_eligible && p.version.trial_days > 0 && (
                 <div className="sy-trial-offer">
                   <strong>{p.version.trial_days} dias grátis</strong>
                   <small>
-                    {p.billing047
-                      ? `Depois, ${brl(p.version.price_cents)}/mês. Para empresas elegíveis, com meio de pagamento vinculado.`
+                    {(p.billing047 || p.provider==='stripe')
+                      ? `Depois, ${brl(p.version.price_cents)} a cada ${p.version.interval_months} mês(es). Para empresas elegíveis, com meio de pagamento vinculado.`
                       : "Para empresas elegíveis, após confirmação dos dados."}
                   </small>
                 </div>
@@ -547,6 +552,9 @@ function PlanList({ offer }: { offer: ReturnType<typeof usePlans> }) {
                   ? "/mês"
                   : `a cada ${p.version.interval_months} meses`}
               </span>
+              {p.saving_cents>0 && <p>Economize {brl(p.saving_cents)} ({Number(p.discount_percent).toLocaleString('pt-BR')}%) em relação ao mensal no mesmo período.</p>}
+              {p.provider==='stripe' && <p>Pagamento integral do período. {p.version.service_limit} serviços ativos · {p.version.request_limit} solicitações por mês.</p>}
+              {p.checkout_available===false && <p role="status">Contratação temporariamente indisponível. Você pode conhecer as modalidades.</p>}
               <ul>
                 <li>Página pública, serviços e portfólio</li>
                 <li>Atendimento, orçamento e agenda</li>
@@ -570,7 +578,7 @@ function PlanList({ offer }: { offer: ReturnType<typeof usePlans> }) {
                 className="sy-button sy-primary"
                 to={p.self_service ? "/cadastrar?plano=" + p.id : "/contato"}
               >
-                {p.self_service ? "Escolher plano" : "Consultar este plano"}
+                {p.checkout_available===false ? "Conhecer e preparar cadastro" : p.self_service ? "Escolher modalidade" : "Consultar oferta"}
               </Link>
             </article>
           ))}
@@ -584,8 +592,8 @@ export function PublicPlans() {
     <SiteFrame title="Planos — SYZIA">
       <section className="sy-section sy-page-head">
         <p className="sy-kicker">SUA PRÓXIMA ETAPA</p>
-        <h1>Planos para organizar a operação.</h1>
-        <p>Condições e recursos das versões comercialmente publicadas.</p>
+        <h1>SYZIA Completa. Três modalidades.</h1>
+        <p>As mesmas funcionalidades de software, com limites de uso transparentes.</p>
         <PlanCards />
       </section>
     </SiteFrame>

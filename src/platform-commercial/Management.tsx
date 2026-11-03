@@ -6,7 +6,7 @@ import { Link, useParams } from "react-router-dom";
 import { rpc } from "../api";
 import { commercialApi, commercialError } from "./api";
 import { CopyLink } from "./CopyLink";
-import { eligibleContact, eligibleDemoLink } from "./policy";
+import { eligibleContact, eligibleDemoLink, eligibleActivationLink } from "./policy";
 import { pageTemplates } from "../consumer/TemplatePicker";
 import "./commercial-management.css";
 // Record explicit administrator attestation; no free-text evidence field.
@@ -432,7 +432,7 @@ export function Management() {
           <div className="commercial-cards">
             {demos.map((d: any) => {
               const c = data.contacts.find((c: any) => c.id === d.lead_id);
-              const linkReady = purpose === "demonstration" ? eligibleDemoLink(c, d) : eligible.some((x: any) => x.id === d.id);
+              const linkReady = purpose === "demonstration" ? eligibleDemoLink(c, d) : eligibleActivationLink(c,d) || eligible.some((x: any) => x.id === d.id);
               const ready = eligible.some((x: any) => x.id === d.id);
               const duplicate = selected.some(id => {
                 const row = demos.find((x: any) => x.id === id);
@@ -459,6 +459,7 @@ export function Management() {
                   {duplicate && <p>Este endereço já está selecionado em outro vínculo.</p>}
                   <div className="button-row">
                     <button disabled={!data.can_manage || busy || !linkReady} onClick={() => void act(async () => {
+                      if(purpose==='activation'&&!c.email&&!window.confirm('Este link é individual. A primeira identidade com e-mail confirmado que utilizá-lo ficará vinculada à preparação. Compartilhe somente com o responsável autorizado. Gerar convite?'))return;
                       const r = await commercialApi("invite", { id: d.demo_id, lead_id: d.lead_id, purpose });
                       setLink(r.url); setNotice(`Link individual gerado para ${c.name}. Nenhum e-mail foi enviado.`);
                     })}>Gerar link individual</button>

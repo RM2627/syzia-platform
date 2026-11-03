@@ -140,6 +140,9 @@ export function SelfService({ identityOnly=false, onIdentityReady, activation }:
     }
   }
   const choices = plans.filter((p) => p.self_service);
+  const selectedOffer=plans.find(p=>p.id===(draft?.plan.id||plan));
+  const hosted=selectedOffer?.provider==='stripe';
+  const financial=hosted||choices.some(p=>p.billing047);
   async function enterCompany() {
     const c = await accessApi("/access/contexts", {});
     const a = c.companies.find(
@@ -151,7 +154,7 @@ export function SelfService({ identityOnly=false, onIdentityReady, activation }:
     window.location.assign(
       "/painel/" +
         draft.organization_id +
-        (choices.some((p) => p.billing047) ? "/assinatura" : ""),
+        (financial ? "/assinatura" : ""),
     );
   }
   return (
@@ -421,7 +424,7 @@ export function SelfService({ identityOnly=false, onIdentityReady, activation }:
                 representa consulta governamental.
               </p>
               <label>
-                Plano
+                Modalidade
                 <select
                   required
                   value={plan}
@@ -438,6 +441,7 @@ export function SelfService({ identityOnly=false, onIdentityReady, activation }:
                   ))}
                 </select>
               </label>
+              {plans.some(p=>p.checkout_available===false) && <p role="status">As modalidades estão disponíveis para consulta. A contratação está temporariamente bloqueada; salvar o cadastro não inicia assinatura nem período gratuito.</p>}
               {!loading && !choices.length && (
                 <p>
                   Nenhum plano está disponível para cadastro online agora.{" "}
@@ -464,9 +468,9 @@ export function SelfService({ identityOnly=false, onIdentityReady, activation }:
                   ? "/mês"
                   : `a cada ${draft.plan.interval_months} meses`}
               </p>
-              {["review", "ineligible"].includes(draft.state) &&
+              {!selectedOffer || (hosted && !selectedOffer.checkout_available) ? <p role="status">Sua preparação foi salva. A contratação está temporariamente indisponível. Nenhuma assinatura ou período gratuito foi iniciado.</p> : ["review", "ineligible"].includes(draft.state) &&
               !(
-                choices.some((p) => p.billing047) &&
+                financial &&
                 ["previous_identity", "previous_grant"].includes(
                   draft.eligibility,
                 )
@@ -489,7 +493,7 @@ export function SelfService({ identityOnly=false, onIdentityReady, activation }:
                     {["previous_identity", "previous_grant"].includes(
                       draft.eligibility,
                     ) ? (
-                      "O período gratuito já foi utilizado. A próxima etapa mostrará a contratação mensal sem novo trial."
+                      "O período gratuito já foi utilizado. A próxima etapa mostrará a modalidade escolhida sem novo trial."
                     ) : (
                       <>
                         <strong>{draft.plan.trial_days} dias grátis</strong> a
@@ -503,7 +507,7 @@ export function SelfService({ identityOnly=false, onIdentityReady, activation }:
                     {draft.plan.interval_months === 1
                       ? "/mês"
                       : ` a cada ${draft.plan.interval_months} meses`}{" "}
-                    {choices.some((p) => p.billing047)
+                    {financial
                       ? "com meio de pagamento vinculado desde o início. Sua assinatura e eventual período gratuito serão confirmados na próxima etapa."
                       : "na contratação após o período gratuito. Esta confirmação não registra pagamento."}
                   </p>
@@ -516,7 +520,7 @@ export function SelfService({ identityOnly=false, onIdentityReady, activation }:
                             ...(activation ? {p_id:activation.id,p_snapshot:activation.snapshot,p_draft:draft.id,p_reviewed:true} : {p_id:draft.id}),
                             p_revision: draft.revision,
                             p_consent: true,
-                            p_conditions: choices.some((p) => p.billing047)
+                            p_conditions: hosted ? 'stripe-completa-1' : financial
                               ? "billing-047"
                               : "selfservice-040",
                           }),
@@ -532,7 +536,7 @@ export function SelfService({ identityOnly=false, onIdentityReady, activation }:
                       </span>
                     </label>
                     <button className="sy-button sy-primary" disabled={busy}>
-                      {choices.some((p) => p.billing047)
+                      {financial
                         ? "Preparar empresa e vincular meio de pagamento"
                         : "Ativar período grátis e preparar empresa"}
                     </button>

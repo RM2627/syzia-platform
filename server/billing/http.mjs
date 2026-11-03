@@ -14,7 +14,7 @@ export function createBillingHandler({ origin, billing, log = entry => console.w
     if (!hook && req.headers.origin !== origin) return send(403, { error: "origin_denied" });
     if (!hook) { res.setHeader("Access-Control-Allow-Origin", origin); res.setHeader("Vary", "Origin"); res.setHeader("Access-Control-Allow-Headers", "Authorization,Content-Type"); res.setHeader("Access-Control-Allow-Methods", "POST,OPTIONS"); }
     if (req.method === "OPTIONS" && !hook) return send(204, {});
-    if (req.method !== "POST" || !/^\/billing\/(config|command|status|checkout|notifications|stripe\/(?:command|status|preflight|notifications))$/.test(url.pathname)) return send(404, { error: "not_found" });
+    if (req.method !== "POST" || !/^\/billing\/(config|catalog|command|status|checkout|notifications|stripe\/(?:command|status|preflight|notifications))$/.test(url.pathname)) return send(404, { error: "not_found" });
     const now = Date.now(), key = req.socket.remoteAddress;
     for (const [k, v] of limits) if (v.until <= now) limits.delete(k);
     const rate = limits.get(key) || { count: 0, until: now + 60000 }; rate.count++; limits.set(key, rate);

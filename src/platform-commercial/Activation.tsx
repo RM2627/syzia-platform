@@ -144,7 +144,7 @@ export function ActivateCompany() {
             : "Ativação vinculada"}
         </h1>
         <p>
-          Este convite autoriza o destinatário a iniciar a ativação. Entre com a conta do e-mail que recebeu o convite e confira a configuração preparada. A liberação depende da confirmação da assinatura.
+          {invitation?.recipient_mode==='confirmed_signup' ? 'Este convite individual permite informar seu e-mail no cadastro. Confirme sua identidade para vincular a preparação; depois disso, outra conta não poderá assumir o convite.' : 'Este convite autoriza o destinatário a iniciar a ativação. Use a identidade do e-mail destinatário e confira a configuração preparada.'} A liberação depende da confirmação da assinatura.
         </p>
         {error && <p role="alert">{error}</p>}
         {error && token && session && <button onClick={()=>{sessionStorage.removeItem('syzia-commercial-invitation');window.location.assign('/ativar-empresa');}}>Recuperar preparações da minha identidade</button>}

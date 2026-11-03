@@ -18,14 +18,19 @@ export function onlineBilling({env,mp,service,asUser,auth,fetchImpl}){
   }
   ensure(mode!=='stripe'||stripe&&gateway.cfg.operationsEnabled,'checkout_configuration_invalid',503);
   const authorize=async token=>{const actor=await auth(token);ensure(actor?.id&&!actor.is_anonymous,'access_denied',403);await asUser(token,'access_session',{p_activity:false,p_logout:false});};
+  const catalogView = rows => (Array.isArray(rows)?rows:[]).map(offer=>({...offer,checkout_available:offer.checkout_available===true&&mode==='stripe'&&!!gateway?.cfg.operationsEnabled}));
   return {
     ...mp,
     async user(path,body,token){
+      if(path==='catalog'){
+        exactBody(body,[]);
+        return catalogView(await service('acquisition_plans',{}));
+      }
       if(path==='checkout'){
         exactBody(body,['organization_id']);ensure(UUID.test(body.organization_id),'payload_invalid',400);await authorize(token);
         const result=await asUser(token,'billing069_context',{p_org:body.organization_id});
         // Existing contracts are selected by persisted provider, never by a browser flag.
-        return {...result,checkout_mode:result.checkout_mode===mode?mode:'disabled',stripe_available:!!stripe};
+        return {...result,catalog:catalogView(result.catalog),checkout_mode:result.checkout_mode===mode?mode:'disabled',stripe_available:!!stripe};
       }
       if(path==='stripe/preflight'){
         exactBody(body,[]);await authorize(token);
